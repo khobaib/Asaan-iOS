@@ -182,6 +182,13 @@
     }
 }
 
+
+-(IBAction)Skip:(id)sender{
+    InviteFriendsViewController *paytmentInfo=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Signup3"];
+    [self.navigationController pushViewController:paytmentInfo animated:YES];
+}
+
+
 -(void)addCardToServer:(STPCard *)card token:(NSString *)token{
 
     //PFObject *card=[PFObject objectWithClassName:@""];

@@ -1093,6 +1093,20 @@
                                                 <rect key="frame" x="20" y="102" width="261" height="38"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                             </view>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pfC-L1-ey9">
+                                                <rect key="frame" x="20" y="357" width="68" height="42"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.92549019610000005" green="0.72941176470000002" blue="0.062745098040000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal">
+                                                    <string key="title" base64-UTF8="YES">
+EFNraXA
+</string>
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="Skip:" destination="epe-cz-sTJ" eventType="touchUpInside" id="mJf-UQ-UaA"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         <constraints>
