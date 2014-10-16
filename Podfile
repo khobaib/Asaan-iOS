@@ -3,6 +3,7 @@
 
 target "Asaan" do
 pod 'SDWebImage', '~>3.6'
+pod 'AFNetworking', '~> 2.0'
 
 end
 

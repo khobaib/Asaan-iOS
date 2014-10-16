@@ -52,6 +52,8 @@
 }
 
 -(void)fetchRestrurant{
+    
+    /*
     PFQuery *query = [PFQuery queryWithClassName:@"Store"];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -65,7 +67,7 @@
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
-    }];
+    }];*/
 }
 
 -(void)goToLocation{
