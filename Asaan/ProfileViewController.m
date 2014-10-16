@@ -9,7 +9,7 @@
 #import "ProfileViewController.h"
 #import "Stripe.h"
 #import "ResturantListViewController.h"
-
+#import "UIImageView+WebCache.h"
 @interface ProfileViewController ()
 
 @end
@@ -40,6 +40,21 @@
     if(user[@"phone"]){
         self.phoneLable.text=user[@"phone"];
     }
+    PFFile *file=user[@"picture"];
+    if(file!=nil){
+        [file getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
+            if (!error) {
+                self.profileImage.image = [UIImage imageWithData:imageData];
+            }
+        }];
+    }
+    NSString *str=user[@"profilePhotoUrl"];
+    NSLog(@"log %@",str);
+    if(str!=nil){
+        [self.profileImage sd_setImageWithURL:[NSURL URLWithString:str]];
+    }
+    
+    
 }
 - (void)didReceiveMemoryWarning
 {

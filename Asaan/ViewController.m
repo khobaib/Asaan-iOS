@@ -82,7 +82,7 @@ static NSString * const kClientId = @"622430232205-vjs2qkqr73saoov2vacspnctvig7n
         } else if (user.isNew) {
             NSLog(@"User signed up and logged in through Facebook!");
             
-            NSLog(@"%@",[user description]);
+          
             hud.hidden=YES;
             [self _loadData];
             
@@ -105,6 +105,8 @@ static NSString * const kClientId = @"622430232205-vjs2qkqr73saoov2vacspnctvig7n
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.labelText = @"Please Wait";
     
+
+    
     FBRequest *request = [FBRequest requestForMe];
     [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
         
@@ -115,11 +117,11 @@ static NSString * const kClientId = @"622430232205-vjs2qkqr73saoov2vacspnctvig7n
             
             [dateFormatter setDateFormat:@"dd/MM/YYYY"];
             PFUser *user=[PFUser currentUser];
-            NSLog(@"%@",userData);
 
             user[@"firstName"]=userData[@"first_name"];
 
             user[@"lastName"]=userData[@"last_name"];
+            user[@"profilePhotoUrl"]=[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large", userData[@"id"]];
           
             NSLog(@" birthday %@",userData[@"birthday"]);
             
@@ -127,8 +129,8 @@ static NSString * const kClientId = @"622430232205-vjs2qkqr73saoov2vacspnctvig7n
            
             NSLog(@"log");
             user.email=userData[@"email"];
-            NSLog(@"%@",user);
 
+            
             [user saveInBackgroundWithBlock:^(BOOL complete,NSError *error){
                 
                 ProfileViewController *acv=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"profile"];
@@ -256,6 +258,8 @@ static NSString * const kClientId = @"622430232205-vjs2qkqr73saoov2vacspnctvig7n
     NSLog(@"%@",person.ETag);
     user[@"firstName"]=person.name.givenName;
     user[@"lastName"]=person.name.familyName;
+    
+    user[@"profilePhotoUrl"]=[[person.image.url componentsSeparatedByString:@"?"]objectAtIndex:0];
     
     [user signUpInBackgroundWithBlock:^(BOOL issuccess,NSError *error){
         hud.hidden=YES;

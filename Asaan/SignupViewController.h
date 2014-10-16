@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SignupViewController : UIViewController<UITextFieldDelegate>{
+@interface SignupViewController : UIViewController<UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>{
     UIDatePicker *birthdayPicker;
+    
+    UIImage *image;
 }
 
 @property IBOutlet UITextField *birthdate;
@@ -18,5 +20,7 @@
 @property IBOutlet UITextField *email;
 @property IBOutlet UITextField *password;
 @property IBOutlet UITextField *phoneno;
+
+@property IBOutlet UIImageView *imageView;
 
 @end

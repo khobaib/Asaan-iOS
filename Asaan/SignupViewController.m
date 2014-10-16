@@ -82,13 +82,35 @@
 }
 
 
+- (IBAction)takePhoto:(UIButton *)sender {
+    
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    
+    [self presentViewController:picker animated:YES completion:NULL];
+    
+}
+
+                         
+  - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+                             
+        UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+        self.imageView.image = chosenImage;
+      image=chosenImage;
+                             
+        [picker dismissViewControllerAnimated:YES completion:NULL];
+                             
+}
+
 
 -(void)nextPressed:(id)sender{
     
-    PaymentInfo *paytmentInfo=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Signup2"];
-    [self.navigationController pushViewController:paytmentInfo animated:YES];
+  //  PaymentInfo *paytmentInfo=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Signup2"];
+    //[self.navigationController pushViewController:paytmentInfo animated:YES];
     
-    return;
+   // return;
     
     
     NSString *firstName=self.firstName.text;
@@ -114,6 +136,12 @@
     user[@"birthDate"]=birthdayPicker.date;
     user[@"firstName"]=firstName;
     user[@"lastName"]=lastName;
+    if(image!=nil){
+        NSData *imageData = UIImagePNGRepresentation(image);
+        NSString *name=[NSString stringWithFormat:@"%@.png",user.username];
+        PFFile *imageFile = [PFFile fileWithName:name data:imageData];
+        user[@"picture"]=imageFile;
+    }
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
