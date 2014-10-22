@@ -9,9 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 #import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface ResturantListViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,MKMapViewDelegate>{
+@interface ResturantListViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,MKMapViewDelegate,CLLocationManagerDelegate>{
     NSMutableArray *resturantList;
+    CLLocationManager *locationManager;
+    BOOL isServerData;
 }
 
 @property IBOutlet MKMapView *mapView;

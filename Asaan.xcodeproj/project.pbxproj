@@ -78,12 +78,8 @@
 		9A5D6A9219CE8A0B0051DB88 /* STPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5D6A8719CE8A0B0051DB88 /* STPUtils.m */; };
 		9A5D6A9319CE8A0B0051DB88 /* Stripe.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5D6A8A19CE8A0B0051DB88 /* Stripe.m */; };
 		9A5D6A9419CE8A0B0051DB88 /* StripeError.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5D6A8C19CE8A0B0051DB88 /* StripeError.m */; };
-		9A5D6A9819CE8AFB0051DB88 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A5D6A9719CE8AFB0051DB88 /* PassKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		9A5D6A9A19CE8AFF0051DB88 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A5D6A9919CE8AFF0051DB88 /* StoreKit.framework */; };
 		9A8A5F1D19F3772600B876F2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A8A5F1C19F3772600B876F2 /* CoreData.framework */; };
 		9A8A5F2119F380F700B876F2 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9A8A5F1F19F380F700B876F2 /* Model.xcdatamodeld */; };
-		9A8A5F2A19F387D300B876F2 /* Store.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8A5F2919F387D300B876F2 /* Store.m */; };
-		9A8A5F2D19F387D400B876F2 /* StoreImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8A5F2C19F387D400B876F2 /* StoreImage.m */; };
 		9A9E502219D2AE1F001F2C64 /* asaanTopLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A9E501F19D2AE1F001F2C64 /* asaanTopLogo.png */; };
 		9A9E502319D2AE1F001F2C64 /* nextSinguppage.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A9E502019D2AE1F001F2C64 /* nextSinguppage.png */; };
 		9A9E502419D2AE1F001F2C64 /* personePlaceholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A9E502119D2AE1F001F2C64 /* personePlaceholder.png */; };
@@ -114,6 +110,10 @@
 		9AB3A96D19C98A7300C98D8D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB3A96C19C98A7300C98D8D /* Social.framework */; };
 		9AB8389119CFE7D900F7D334 /* InviteFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB8389019CFE7D900F7D334 /* InviteFriendsViewController.m */; };
 		9AB8389519CFF39E00F7D334 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB8389419CFF39E00F7D334 /* MBProgressHUD.m */; };
+		9AC0C94219F77CEC004F9D51 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AC0C94119F77CEC004F9D51 /* PassKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		9AC0C94519F7846F004F9D51 /* DatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC0C94419F7846F004F9D51 /* DatabaseHelper.m */; };
+		9AC0C95119F79971004F9D51 /* StoreImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC0C95019F79971004F9D51 /* StoreImage.m */; };
+		9AC0C95419F79972004F9D51 /* Store.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC0C95319F79972004F9D51 /* Store.m */; };
 		9AF9C4CF19D184ED00E85A39 /* ResturantDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF9C4CE19D184ED00E85A39 /* ResturantDetailViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -229,14 +229,8 @@
 		9A5D6A8A19CE8A0B0051DB88 /* Stripe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Stripe.m; sourceTree = "<group>"; };
 		9A5D6A8B19CE8A0B0051DB88 /* StripeError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StripeError.h; sourceTree = "<group>"; };
 		9A5D6A8C19CE8A0B0051DB88 /* StripeError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StripeError.m; sourceTree = "<group>"; };
-		9A5D6A9719CE8AFB0051DB88 /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
-		9A5D6A9919CE8AFF0051DB88 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		9A8A5F1C19F3772600B876F2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		9A8A5F2019F380F700B876F2 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		9A8A5F2819F387D300B876F2 /* Store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Store.h; sourceTree = "<group>"; };
-		9A8A5F2919F387D300B876F2 /* Store.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Store.m; sourceTree = "<group>"; };
-		9A8A5F2B19F387D400B876F2 /* StoreImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreImage.h; sourceTree = "<group>"; };
-		9A8A5F2C19F387D400B876F2 /* StoreImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreImage.m; sourceTree = "<group>"; };
 		9A92022219C068CD00EA68E1 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		9A9E501F19D2AE1F001F2C64 /* asaanTopLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = asaanTopLogo.png; sourceTree = "<group>"; };
 		9A9E502019D2AE1F001F2C64 /* nextSinguppage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nextSinguppage.png; sourceTree = "<group>"; };
@@ -261,6 +255,7 @@
 		9AA9835519D29C8700178BDD /* gplusBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gplusBtn.png; sourceTree = "<group>"; };
 		9AA9835619D29C8700178BDD /* landingpage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = landingpage.png; sourceTree = "<group>"; };
 		9AA9835A19D29DDE00178BDD /* landingpage2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = landingpage2.png; sourceTree = "<group>"; };
+		9AAFC31419F3DA2600B3C0C9 /* Asaan.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Asaan.entitlements; sourceTree = "<group>"; };
 		9AB3A90919C986F900C98D8D /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		9AB3A90B19C9870E00C98D8D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		9AB3A90D19C9871800C98D8D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -272,6 +267,13 @@
 		9AB8389019CFE7D900F7D334 /* InviteFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendsViewController.m; sourceTree = "<group>"; };
 		9AB8389319CFF39E00F7D334 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		9AB8389419CFF39E00F7D334 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		9AC0C94119F77CEC004F9D51 /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
+		9AC0C94319F7846F004F9D51 /* DatabaseHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseHelper.h; sourceTree = "<group>"; };
+		9AC0C94419F7846F004F9D51 /* DatabaseHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseHelper.m; sourceTree = "<group>"; };
+		9AC0C94F19F79971004F9D51 /* StoreImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreImage.h; sourceTree = "<group>"; };
+		9AC0C95019F79971004F9D51 /* StoreImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreImage.m; sourceTree = "<group>"; };
+		9AC0C95219F79972004F9D51 /* Store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Store.h; sourceTree = "<group>"; };
+		9AC0C95319F79972004F9D51 /* Store.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Store.m; sourceTree = "<group>"; };
 		9AF9C4CD19D184ED00E85A39 /* ResturantDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResturantDetailViewController.h; sourceTree = "<group>"; };
 		9AF9C4CE19D184ED00E85A39 /* ResturantDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResturantDetailViewController.m; sourceTree = "<group>"; };
 		B0B96892E3864402B50A3677 /* Pods-Asaan.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Asaan.xcconfig"; path = "Pods/Pods-Asaan.xcconfig"; sourceTree = "<group>"; };
@@ -282,16 +284,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AC0C94219F77CEC004F9D51 /* PassKit.framework in Frameworks */,
 				9A8A5F1D19F3772600B876F2 /* CoreData.framework in Frameworks */,
 				9A5971EF19D16B960047D1CE /* MapKit.framework in Frameworks */,
 				9A3D8B0319CD7F2D00BE1F25 /* AddressBook.framework in Frameworks */,
 				9A55A2CB19CE991A00A5EDB5 /* Foundation.framework in Frameworks */,
 				9A55A2CC19CE992200A5EDB5 /* CFNetwork.framework in Frameworks */,
-				9A5D6A9819CE8AFB0051DB88 /* PassKit.framework in Frameworks */,
 				9AB3A91519C9874C00C98D8D /* QuartzCore.framework in Frameworks */,
 				9A3D8B0719CD7F7600BE1F25 /* MediaPlayer.framework in Frameworks */,
 				9A3D8B0619CD7F6600BE1F25 /* CoreText.framework in Frameworks */,
-				9A5D6A9A19CE8AFF0051DB88 /* StoreKit.framework in Frameworks */,
 				9A3D8B0519CD7F5B00BE1F25 /* CoreMotion.framework in Frameworks */,
 				9A3D8B0419CD7F3800BE1F25 /* AssetsLibrary.framework in Frameworks */,
 				9AB3A96D19C98A7300C98D8D /* Social.framework in Frameworks */,
@@ -351,9 +352,8 @@
 		9A1F299D19BED4C900CBF581 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9AC0C94119F77CEC004F9D51 /* PassKit.framework */,
 				9A8A5F1C19F3772600B876F2 /* CoreData.framework */,
-				9A5D6A9919CE8AFF0051DB88 /* StoreKit.framework */,
-				9A5D6A9719CE8AFB0051DB88 /* PassKit.framework */,
 				9AB3A96C19C98A7300C98D8D /* Social.framework */,
 				9AB3A91419C9874C00C98D8D /* QuartzCore.framework */,
 				9AB3A91219C9874600C98D8D /* MobileCoreServices.framework */,
@@ -382,6 +382,7 @@
 		9A1F29A419BED4C900CBF581 /* Asaan */ = {
 			isa = PBXGroup;
 			children = (
+				9AAFC31419F3DA2600B3C0C9 /* Asaan.entitlements */,
 				9A1F29AD19BED4C900CBF581 /* AppDelegate.h */,
 				9A1F29AE19BED4C900CBF581 /* AppDelegate.m */,
 				9A8A5F1E19F3809B00B876F2 /* Model */,
@@ -486,6 +487,8 @@
 		9A59722519CEDEAF00333E7A /* Helper Classes */ = {
 			isa = PBXGroup;
 			children = (
+				9AC0C94319F7846F004F9D51 /* DatabaseHelper.h */,
+				9AC0C94419F7846F004F9D51 /* DatabaseHelper.m */,
 			);
 			name = "Helper Classes";
 			sourceTree = "<group>";
@@ -593,10 +596,10 @@
 			isa = PBXGroup;
 			children = (
 				9A8A5F1F19F380F700B876F2 /* Model.xcdatamodeld */,
-				9A8A5F2B19F387D400B876F2 /* StoreImage.h */,
-				9A8A5F2C19F387D400B876F2 /* StoreImage.m */,
-				9A8A5F2819F387D300B876F2 /* Store.h */,
-				9A8A5F2919F387D300B876F2 /* Store.m */,
+				9AC0C95219F79972004F9D51 /* Store.h */,
+				9AC0C95319F79972004F9D51 /* Store.m */,
+				9AC0C94F19F79971004F9D51 /* StoreImage.h */,
+				9AC0C95019F79971004F9D51 /* StoreImage.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -689,10 +692,10 @@
 								enabled = 1;
 							};
 							com.apple.InAppPurchase = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.Passbook = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -821,11 +824,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AC0C94519F7846F004F9D51 /* DatabaseHelper.m in Sources */,
 				9A5D6A4119CE87830051DB88 /* PTKAddressZip.m in Sources */,
 				9A5D6A8D19CE8A0B0051DB88 /* PKPayment+STPTestKeys.m in Sources */,
+				9AC0C95119F79971004F9D51 /* StoreImage.m in Sources */,
 				9A5D6A8F19CE8A0B0051DB88 /* STPCard.m in Sources */,
-				9A8A5F2D19F387D400B876F2 /* StoreImage.m in Sources */,
-				9A8A5F2A19F387D300B876F2 /* Store.m in Sources */,
 				9A5D6A4819CE87830051DB88 /* PTKUSAddressZip.m in Sources */,
 				9A9E503F19D2CB05001F2C64 /* LoginViewController.m in Sources */,
 				9A5D6A4719CE87830051DB88 /* PTKTextField.m in Sources */,
@@ -836,6 +839,7 @@
 				9AB8389119CFE7D900F7D334 /* InviteFriendsViewController.m in Sources */,
 				9A1F29AF19BED4C900CBF581 /* AppDelegate.m in Sources */,
 				9A5D6A4319CE87830051DB88 /* PTKCardCVC.m in Sources */,
+				9AC0C95419F79972004F9D51 /* Store.m in Sources */,
 				9A1F29AB19BED4C900CBF581 /* main.m in Sources */,
 				9A5971F219D16BD60047D1CE /* ResturantListViewController.m in Sources */,
 				9A5D6A4219CE87830051DB88 /* PTKCard.m in Sources */,

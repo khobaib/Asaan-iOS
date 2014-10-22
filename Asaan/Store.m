@@ -2,7 +2,7 @@
 //  Store.m
 //  Asaan
 //
-//  Created by MC MINI on 10/19/14.
+//  Created by MC MINI on 10/22/14.
 //  Copyright (c) 2014 Tech Fiesta. All rights reserved.
 //
 
@@ -11,19 +11,16 @@
 
 @implementation Store
 
-@dynamic storeId;
 @dynamic address;
-@dynamic backgroundimageurl;
 @dynamic backgroundimagethumbnilurl;
+@dynamic backgroundimageurl;
 @dynamic beaconid;
 @dynamic bssid;
 @dynamic city;
 @dynamic createddate;
-@dynamic storeDescription;
 @dynamic fburl;
 @dynamic gplusurl;
 @dynamic hourse;
-@dynamic siActive;
 @dynamic lat;
 @dynamic lon;
 @dynamic modifiedDate;
@@ -32,8 +29,11 @@
 @dynamic priceRange;
 @dynamic rewardDescription;
 @dynamic rewardSrate;
+@dynamic isActive;
 @dynamic ssid;
 @dynamic state;
+@dynamic storeDescription;
+@dynamic storeId;
 @dynamic subtype;
 @dynamic trophies;
 @dynamic twitterUrl;

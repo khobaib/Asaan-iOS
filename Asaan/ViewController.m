@@ -40,7 +40,7 @@ static NSString * const kClientId = @"622430232205-vjs2qkqr73saoov2vacspnctvig7n
     {
         locationmanager=[[CLLocationManager alloc]init];
         //  manager.delegate = self;
-       // [locationmanager requestWhenInUseAuthorization];
+        [locationmanager requestAlwaysAuthorization];
     }else{
           locationmanager=[[CLLocationManager alloc]init];
         [locationmanager startUpdatingLocation];

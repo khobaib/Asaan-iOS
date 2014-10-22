@@ -7,7 +7,13 @@
 //
 
 #import "ResturantListViewController.h"
+#import "AFNetworking.h"
+#import "MBProgressHUD.h"
+#import "Store.h"
+#import "AppDelegate.h"
+#import "DatabaseHelper.h"
 #define METERS_PER_MILE 1609.344
+
 
 
 @interface ResturantListViewController ()
@@ -38,9 +44,42 @@
     self.navigationController.navigationBarHidden=NO;
     resturantList=[[NSMutableArray alloc]init];
     
-    [self fetchRestrurant];
+     NSDate *saveDate=[[NSUserDefaults standardUserDefaults]objectForKey:@"resturantListUpdateTime"];
     
 
+    
+    if(saveDate==nil){
+        [self fetchRestrurant];
+    }else{
+        int i = -[saveDate timeIntervalSinceNow];///3600;
+        
+        NSLog(@"%d",i);
+
+        if(i>24){
+            [self fetchRestrurant];
+            
+        }else{
+            isServerData=NO;
+            resturantList=[[DatabaseHelper getAllStores]mutableCopy];
+            
+          
+            
+        }
+
+    }
+    
+    
+    
+    locationManager = [[CLLocationManager alloc] init];
+    locationManager.distanceFilter = 50; // whenever we move
+    locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters; // 100 m
+    [locationManager startUpdatingLocation];
+    
+
+}
+
+- (void)locationManager:(CLLocationManager *)manager  didUpdateLocations:(NSArray *)locations{
+    NSLog(@"%@",[locations lastObject]);
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,22 +92,49 @@
 
 -(void)fetchRestrurant{
     
-    /*
-    PFQuery *query = [PFQuery queryWithClassName:@"Store"];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            // The find succeeded.
-            NSLog(@"Successfully retrieved %d scores.", objects.count);
-            // Do something with the found objects
-            [resturantList addObjectsFromArray:objects];
-            [self.tableView reloadData];
-        } else {
-            // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    
+
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    [manager POST:@"https://asaan-server.appspot.com/_ah/api/storeendpoint/v1/storecollection" parameters:nil success:^(AFHTTPRequestOperation *operation,id responseObject){
+        
+        NSDictionary *dic=(NSDictionary *)responseObject;
+        
+
+        
+        resturantList=dic[@"items"];
+        
+        isServerData=YES;
+        [self.tableView reloadData];
+        
+        if([DatabaseHelper saveUpdateStores:resturantList]){
+            NSDate *currentdate=[NSDate date] ;
+            
+            NSLog(@"%@",currentdate);
+
+            [[NSUserDefaults standardUserDefaults]setObject:currentdate forKey:@"resturantListUpdateTime"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+
         }
-    }];*/
+        
+   
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        
+    }failure:^(AFHTTPRequestOperation *operation,NSError *error){
+        
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        
+        NSLog(@"%@",[error userInfo]);
+        
+    }];
+    
+   
 }
+
+
 
 -(void)goToLocation{
    
@@ -82,6 +148,9 @@
 
 }
 
+
+#pragma mark table datasoource delegat
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     return resturantList.count;
@@ -89,18 +158,7 @@
 }
 
 
-- (void)addcellBackground:(UITableViewCell *)cell {
-    UIView *selectedView = [[UIView alloc]initWithFrame:cell.frame];
-    
-    selectedView.backgroundColor=[UIColor colorWithRed:(103.0/255.0) green:(103.0/255.0) blue:(103.0/255.0) alpha:1];
-    
-    UIView *viewTop=[[UIView alloc]initWithFrame:CGRectMake(0, 0, cell.frame.size.width, 79)];
-    
-    viewTop.backgroundColor = [UIColor grayColor];
-    [selectedView addSubview:viewTop];
-    
-    cell.selectedBackgroundView =  selectedView;
-}
+
 
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
 // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
@@ -115,12 +173,29 @@
     UILabel *name=(UILabel *)[cell viewWithTag:301];
     UILabel *desctiprionText=(UILabel *)[cell viewWithTag:302];
     
-    PFObject *resturant=[resturantList objectAtIndex:indexPath.row];
+    if(isServerData){
+        NSMutableDictionary *resturant=[resturantList objectAtIndex:indexPath.row];
+        [self addShadowToText:name withText:resturant[@"name"]];
+        [self addShadowToText:desctiprionText withText:resturant[@"description"]];
+    }else{
+        
+        Store *store=[resturantList objectAtIndex:indexPath.row];
+        
+
+        [self addShadowToText:name withText:store.name];
+        [self addShadowToText:desctiprionText withText:store.storeDescription];
+    }
     
-    [self addShadowToText:name withText:resturant[@"name"]];
-    [self addShadowToText:desctiprionText withText:resturant[@"cuisineType"]];
+  
     return cell;
 }
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+}
+
+#pragma mark -tableUIhelper
 
 - (void)addShadowToText:(UILabel *)textView withText:(NSString *)text{
     NSMutableAttributedString* attString = [[NSMutableAttributedString alloc] initWithString:text];
@@ -137,10 +212,18 @@
     textView.attributedText = attString;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)addcellBackground:(UITableViewCell *)cell {
+    UIView *selectedView = [[UIView alloc]initWithFrame:cell.frame];
     
+    selectedView.backgroundColor=[UIColor colorWithRed:(103.0/255.0) green:(103.0/255.0) blue:(103.0/255.0) alpha:1];
+    
+    UIView *viewTop=[[UIView alloc]initWithFrame:CGRectMake(0, 0, cell.frame.size.width, 79)];
+    
+    viewTop.backgroundColor = [UIColor grayColor];
+    [selectedView addSubview:viewTop];
+    
+    cell.selectedBackgroundView =  selectedView;
 }
-
 
 #pragma mark - Navigation
 
@@ -150,9 +233,11 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
-    NSLog(@"log");
+    NSLog(@"%f  %f",locationManager.location.coordinate.latitude,locationManager.location.coordinate.longitude);
+    
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
 }
+
 
 
 @end

@@ -2,7 +2,7 @@
 //  StoreImage.h
 //  Asaan
 //
-//  Created by MC MINI on 10/19/14.
+//  Created by MC MINI on 10/22/14.
 //  Copyright (c) 2014 Tech Fiesta. All rights reserved.
 //
 
@@ -12,11 +12,11 @@
 
 @interface StoreImage : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * storeImageID;
 @property (nonatomic, retain) NSNumber * createdDate;
 @property (nonatomic, retain) NSString * imageUrl;
 @property (nonatomic, retain) NSNumber * modifiedDate;
 @property (nonatomic, retain) NSNumber * storeID;
+@property (nonatomic, retain) NSNumber * storeImageID;
 @property (nonatomic, retain) NSString * thumbnilUrl;
 
 @end
