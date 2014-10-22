@@ -114,6 +114,7 @@
 		9AC0C94519F7846F004F9D51 /* DatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC0C94419F7846F004F9D51 /* DatabaseHelper.m */; };
 		9AC0C95119F79971004F9D51 /* StoreImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC0C95019F79971004F9D51 /* StoreImage.m */; };
 		9AC0C95419F79972004F9D51 /* Store.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC0C95319F79972004F9D51 /* Store.m */; };
+		9AC0C95719F7CB7C004F9D51 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC0C95619F7CB7C004F9D51 /* MenuViewController.m */; };
 		9AF9C4CF19D184ED00E85A39 /* ResturantDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF9C4CE19D184ED00E85A39 /* ResturantDetailViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -274,6 +275,8 @@
 		9AC0C95019F79971004F9D51 /* StoreImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreImage.m; sourceTree = "<group>"; };
 		9AC0C95219F79972004F9D51 /* Store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Store.h; sourceTree = "<group>"; };
 		9AC0C95319F79972004F9D51 /* Store.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Store.m; sourceTree = "<group>"; };
+		9AC0C95519F7CB7C004F9D51 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		9AC0C95619F7CB7C004F9D51 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		9AF9C4CD19D184ED00E85A39 /* ResturantDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResturantDetailViewController.h; sourceTree = "<group>"; };
 		9AF9C4CE19D184ED00E85A39 /* ResturantDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResturantDetailViewController.m; sourceTree = "<group>"; };
 		B0B96892E3864402B50A3677 /* Pods-Asaan.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Asaan.xcconfig"; path = "Pods/Pods-Asaan.xcconfig"; sourceTree = "<group>"; };
@@ -623,6 +626,8 @@
 				9AF9C4CE19D184ED00E85A39 /* ResturantDetailViewController.m */,
 				9A9E503D19D2CB05001F2C64 /* LoginViewController.h */,
 				9A9E503E19D2CB05001F2C64 /* LoginViewController.m */,
+				9AC0C95519F7CB7C004F9D51 /* MenuViewController.h */,
+				9AC0C95619F7CB7C004F9D51 /* MenuViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -855,6 +860,7 @@
 				9A59722E19CEF59C00333E7A /* PaymentInfo.m in Sources */,
 				9A5D6A9319CE8A0B0051DB88 /* Stripe.m in Sources */,
 				9A5D6A4419CE87830051DB88 /* PTKCardExpiry.m in Sources */,
+				9AC0C95719F7CB7C004F9D51 /* MenuViewController.m in Sources */,
 				9A8A5F2119F380F700B876F2 /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

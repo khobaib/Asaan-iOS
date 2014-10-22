@@ -51,7 +51,7 @@
     if(saveDate==nil){
         [self fetchRestrurant];
     }else{
-        int i = -[saveDate timeIntervalSinceNow];///3600;
+        int i = -[saveDate timeIntervalSinceNow]/3600;
         
         NSLog(@"%d",i);
 

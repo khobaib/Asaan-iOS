@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4hN-M0-Ibr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4hN-M0-Ibr">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -331,7 +331,61 @@
             </objects>
             <point key="canvasLocation" x="-2670" y="-548"/>
         </scene>
-        <!--Resturant List View Controller - Restaurant List-->
+        <!--Menu View Controller-->
+        <scene sceneID="FQb-31-96w">
+            <objects>
+                <viewController storyboardIdentifier="menuView" id="rsI-t2-Ppw" customClass="MenuViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Y7g-6x-trI"/>
+                        <viewControllerLayoutGuide type="bottom" id="W10-u1-aB4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mqf-ax-MZ0">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fTt-Y0-lXS">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="65" id="nFr-fk-F34"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="rsI-t2-Ppw" id="3FK-eB-Nlh"/>
+                                </connections>
+                            </scrollView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="71" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="rNr-yJ-iDS">
+                                <rect key="frame" x="0.0" y="65" width="320" height="439"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="menu" rowHeight="71" id="NhE-tv-o2w">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NhE-tv-o2w" id="gTd-a4-WJv">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="rNr-yJ-iDS" firstAttribute="leading" secondItem="mqf-ax-MZ0" secondAttribute="leading" id="Dh4-lm-3gd"/>
+                            <constraint firstItem="fTt-Y0-lXS" firstAttribute="top" secondItem="mqf-ax-MZ0" secondAttribute="top" id="VjD-Ug-cre"/>
+                            <constraint firstItem="rNr-yJ-iDS" firstAttribute="top" secondItem="fTt-Y0-lXS" secondAttribute="bottom" id="ZXa-aN-14V"/>
+                            <constraint firstAttribute="trailing" secondItem="fTt-Y0-lXS" secondAttribute="trailing" id="nDY-Hn-9hy"/>
+                            <constraint firstAttribute="trailing" secondItem="rNr-yJ-iDS" secondAttribute="trailing" id="pN1-oM-UQF"/>
+                            <constraint firstItem="W10-u1-aB4" firstAttribute="top" secondItem="rNr-yJ-iDS" secondAttribute="bottom" id="was-4f-Hcm"/>
+                            <constraint firstItem="fTt-Y0-lXS" firstAttribute="leading" secondItem="mqf-ax-MZ0" secondAttribute="leading" id="y9D-Np-pYu"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="gOZ-I1-YeX"/>
+                    <connections>
+                        <outlet property="horizontalScroller" destination="fTt-Y0-lXS" id="thk-Vf-c4V"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NrS-Y5-yPh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2437" y="636"/>
+        </scene>
+        <!--Restaurant List-->
         <scene sceneID="BcN-U0-mgx">
             <objects>
                 <viewController storyboardIdentifier="rabbi101" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rl6-40-Cwn" customClass="ResturantListViewController" sceneMemberID="viewController">
@@ -372,7 +426,6 @@
                                                     <color key="backgroundColor" red="0.40232252039999999" green="0.40232252039999999" blue="0.40232252039999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 </view>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eug-7u-PBt">
-                                                    <rect key="frame" x="80" y="0.0" width="15" height="80"/>
                                                     <color key="backgroundColor" red="0.40232252039999999" green="0.40232252039999999" blue="0.40232252039999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 </view>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="301" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Star Kabab" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c0E-1Q-jjJ">
@@ -387,12 +440,21 @@
                                                     <color key="textColor" red="0.77112347146739135" green="0.77112347146739135" blue="0.77112347146739135" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="> 3 miles" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xYf-gp-t7n">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="&gt; 3 miles" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xYf-gp-t7n">
                                                     <rect key="frame" x="239" y="29" width="61" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cb0-d4-3Iz">
+                                                    <rect key="frame" x="229" y="4" width="71" height="30"/>
+                                                    <state key="normal" title="Menu">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <segue destination="rsI-t2-Ppw" kind="push" id="TUo-q2-b9o"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
@@ -686,7 +748,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JH2-6c-G4Y">
                                                     <rect key="frame" x="247" y="23" width="53" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <state key="normal" title="Details >">
+                                                    <state key="normal" title="Details &gt;">
                                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
@@ -734,7 +796,7 @@
             </objects>
             <point key="canvasLocation" x="-1551" y="626"/>
         </scene>
-        <!--View Controller - Information-->
+        <!--Information-->
         <scene sceneID="nGC-ie-qBY">
             <objects>
                 <viewController id="CBk-tQ-kDp" sceneMemberID="viewController">
@@ -753,7 +815,7 @@
             </objects>
             <point key="canvasLocation" x="1077" y="-1070"/>
         </scene>
-        <!--View Controller - Menu-->
+        <!--Menu-->
         <scene sceneID="kuR-1q-nZd">
             <objects>
                 <viewController id="exL-0h-hRG" sceneMemberID="viewController">
@@ -794,7 +856,7 @@
             </objects>
             <point key="canvasLocation" x="214" y="-401"/>
         </scene>
-        <!--View Controller - Reviews-->
+        <!--Reviews-->
         <scene sceneID="bGW-uw-7Oc">
             <objects>
                 <viewController id="9tz-cl-90y" sceneMemberID="viewController">
@@ -813,7 +875,7 @@
             </objects>
             <point key="canvasLocation" x="1043" y="258"/>
         </scene>
-        <!--View Controller - History-->
+        <!--History-->
         <scene sceneID="Te6-hD-BNg">
             <objects>
                 <viewController id="VXy-hM-ccL" sceneMemberID="viewController">
@@ -947,7 +1009,6 @@
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZC6-QB-GLy">
                                                 <rect key="frame" x="10" y="69" width="80" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <state key="normal" title="Edit photo">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -1108,7 +1169,6 @@
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pfC-L1-ey9">
                                                 <rect key="frame" x="20" y="357" width="68" height="42"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.92549019610000005" green="0.72941176470000002" blue="0.062745098040000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal">
                                                     <string key="title" base64-UTF8="YES">
@@ -1243,7 +1303,7 @@ EFNraXA
             </objects>
             <point key="canvasLocation" x="-1412" y="-1330"/>
         </scene>
-        <!--Profile View Controller - Title-->
+        <!--Title-->
         <scene sceneID="P5E-8Z-edU">
             <objects>
                 <viewController storyboardIdentifier="profile" id="Tgi-g1-yxX" customClass="ProfileViewController" sceneMemberID="viewController">
