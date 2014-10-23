@@ -12,6 +12,8 @@
 #import "Store.h"
 #import "AppDelegate.h"
 #import "DatabaseHelper.h"
+#import "GTLStoreendpoint.h"
+#import "GTMHTTPFetcher.h"
 #define METERS_PER_MILE 1609.344
 
 
@@ -49,14 +51,14 @@
 
     
     if(saveDate==nil){
-        [self fetchRestrurant];
+        [self fetchResturantwitGTLquery];
     }else{
-        int i = -[saveDate timeIntervalSinceNow]/3600;
+        int i = -[saveDate timeIntervalSinceNow];///3600;
         
         NSLog(@"%d",i);
 
         if(i>24){
-            [self fetchRestrurant];
+            [self fetchResturantwitGTLquery];
             
         }else{
             isServerData=NO;
@@ -90,6 +92,54 @@
  
 }
 
+
+-(void)fetchResturantwitGTLquery{
+
+    static GTLServiceStoreendpoint *storeService=nil;
+    
+    if(!storeService){
+        storeService=[[GTLServiceStoreendpoint alloc]init];
+        storeService.retryEnabled=YES;
+      
+
+    }
+    
+    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStatsForAllStores];
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [storeService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreSummaryStatsCollection *object,NSError *error){
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+
+        if(!error){
+            
+            resturantList=[object.items mutableCopy];
+              isServerData=YES;
+            [self.tableView reloadData];
+            
+            /*if([DatabaseHelper saveUpdateStores:resturantList]){
+                NSDate *currentdate=[NSDate date] ;
+                
+                NSLog(@"%@",currentdate);
+                
+                [[NSUserDefaults standardUserDefaults]setObject:currentdate forKey:@"resturantListUpdateTime"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                
+            }*/
+            
+            
+           
+
+            NSLog(@"%@",object.JSONString);
+        }else{
+            NSLog(@"%@",[error userInfo]);
+        }
+        
+    }];
+    
+}
+
+
+/*
 -(void)fetchRestrurant{
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -134,7 +184,7 @@
    
 }
 
-
+*/
 
 -(void)goToLocation{
    
@@ -153,6 +203,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
+    NSLog(@"%d",resturantList.count);
     return resturantList.count;
     
 }
@@ -174,9 +225,9 @@
     UILabel *desctiprionText=(UILabel *)[cell viewWithTag:302];
     
     if(isServerData){
-        NSMutableDictionary *resturant=[resturantList objectAtIndex:indexPath.row];
-        [self addShadowToText:name withText:resturant[@"name"]];
-        [self addShadowToText:desctiprionText withText:resturant[@"description"]];
+        GTLStoreendpointStore *store=[resturantList objectAtIndex:indexPath.row];
+        [self addShadowToText:name withText:store.name];
+        [self addShadowToText:desctiprionText withText:store.descriptionProperty];
     }else{
         
         Store *store=[resturantList objectAtIndex:indexPath.row];

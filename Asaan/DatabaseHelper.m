@@ -9,6 +9,7 @@
 #import "DatabaseHelper.h"
 #import "AppDelegate.h"
 #import "Store.h"
+#import "GTLStoreendpoint.h"
 
 @implementation DatabaseHelper
 +(BOOL)saveUpdateStores:(NSArray *)resturantList{
@@ -20,9 +21,9 @@
     [request setEntity:[NSEntityDescription entityForName:@"Store" inManagedObjectContext:managedObjectContext]];
     
     for(int i=0;i<resturantList.count;i++){
-        NSMutableDictionary *dic=[resturantList objectAtIndex:i];
+        GTLStoreendpointStore *storegtl=[resturantList objectAtIndex:i];
         
-        NSPredicate *predicate =[NSPredicate predicateWithFormat:@"storeId == %@",[NSNumber numberWithInteger:[dic[@"id"] integerValue]]];
+        NSPredicate *predicate =[NSPredicate predicateWithFormat:@"storeId == %@",[NSNumber numberWithInteger:[storegtl.identifier integerValue]]];
         
         [request setPredicate:predicate];
         NSError *error = nil;
@@ -41,7 +42,7 @@
             
         }
         
-        [self dicToStore:dic store:store];
+        [self dicToStore:storegtl store:store];
     }
     
     
@@ -60,34 +61,34 @@
 
 }
 
-+(void)dicToStore:(NSDictionary *)dic store:(Store*)store{
++(void)dicToStore:(GTLStoreendpointStore *)dic store:(Store*)store{
     
-    store.storeId=[NSNumber numberWithInteger:[dic[@"id"] integerValue]];
-    store.name=dic[@"name"];
-    store.storeDescription=dic[@"description"];
-    store.beaconid=dic[@"beaconId"];
-    store.phone=dic[@"phone"];
-    store.isActive=dic[@"isActive"];
-    store.priceRange=[NSNumber numberWithInt:[dic[@"priceRange"] intValue]];
-    store.bssid=dic[@"bssid"];
-    store.ssid=dic[@"ssid"];
-    store.address=dic[@"address"];
-    store.city=dic[@"city"];
-    store.state=dic[@"state"];
-    store.zip=dic[@"zip"];
-    store.type=dic[@"type"];
-    store.subtype=dic[@"subType"];
-    store.lat=dic[@"lat"];
-    store.lon=dic[@"lng"];
-    store.websiteurl=dic[@"webSiteUrl"];
-    store.fburl=dic[@"fbUrl"];
+    store.storeId=dic.identifier;
+    store.name=dic.name;
+    store.storeDescription=dic.descriptionProperty;
+    store.beaconid=[NSString stringWithFormat:@"%@",dic.beaconId];
+    store.phone=dic.phone;
+    store.isActive=dic.isActive;
+    store.priceRange=dic.priceRange;
+    store.bssid=dic.bssid;
+    store.ssid=dic.ssid;
+    store.address=dic.address;
+    store.city=dic.city;
+    store.state=dic.state;
+    store.zip=dic.zip;
+    store.type=dic.type;
+    store.subtype=dic.subType;
+    store.lat=dic.lat;
+    store.lon=dic.lng;
+    store.websiteurl=dic.webSiteUrl;
+    store.fburl=dic.fbUrl;
     
-    store.twitterUrl=dic[@"twitterUrl"];
+    store.twitterUrl=dic.twitterUrl;
 
-    store.rewardSrate=dic[@"rewardsRate"];
-    store.hourse=dic[@"hours"];
-    store.createddate=[NSNumber numberWithInt:[dic[@"createdDate"] intValue]];
-    store.modifiedDate=[NSNumber numberWithInt:[dic[@"modifiedDate"] intValue]];
+    store.rewardSrate=dic.rewardsRate;
+    store.hourse=dic.hours;
+    store.createddate=dic.createdDate;
+    store.modifiedDate=dic.modifiedDate;
    
  
 }

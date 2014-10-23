@@ -40,6 +40,39 @@
 		9A5971EF19D16B960047D1CE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A92022219C068CD00EA68E1 /* MapKit.framework */; };
 		9A5971F219D16BD60047D1CE /* ResturantListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5971F119D16BD60047D1CE /* ResturantListViewController.m */; };
 		9A59722E19CEF59C00333E7A /* PaymentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A59722D19CEF59C00333E7A /* PaymentInfo.m */; };
+		9A5B17E519F8D13500722E4A /* GTLPersonendpointConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B17A119F8D13500722E4A /* GTLPersonendpointConstants.m */; };
+		9A5B17E619F8D13500722E4A /* GTLPersonendpointDeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B17A319F8D13500722E4A /* GTLPersonendpointDeviceInfo.m */; };
+		9A5B17E719F8D13500722E4A /* GTLPersonendpointPersonCards.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B17A519F8D13500722E4A /* GTLPersonendpointPersonCards.m */; };
+		9A5B17E819F8D13500722E4A /* GTLPersonendpointPersonCardsListWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B17A719F8D13500722E4A /* GTLPersonendpointPersonCardsListWrapper.m */; };
+		9A5B17E919F8D13500722E4A /* GTLPersonendpointPersonCredentials.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B17A919F8D13500722E4A /* GTLPersonendpointPersonCredentials.m */; };
+		9A5B17EA19F8D13500722E4A /* GTLPersonendpointPersonInfoWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B17AB19F8D13500722E4A /* GTLPersonendpointPersonInfoWrapper.m */; };
+		9A5B17EB19F8D13500722E4A /* GTLPersonendpointPersonProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B17AD19F8D13500722E4A /* GTLPersonendpointPersonProfile.m */; };
+		9A5B17EC19F8D13500722E4A /* GTLPersonendpointSessionTokenWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B17AF19F8D13500722E4A /* GTLPersonendpointSessionTokenWrapper.m */; };
+		9A5B17ED19F8D13500722E4A /* GTLQueryPersonendpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B17B119F8D13500722E4A /* GTLQueryPersonendpoint.m */; };
+		9A5B17EE19F8D13500722E4A /* GTLQueryStoreendpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B17B319F8D13500722E4A /* GTLQueryStoreendpoint.m */; };
+		9A5B17EF19F8D13500722E4A /* GTLServicePersonendpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B17B519F8D13500722E4A /* GTLServicePersonendpoint.m */; };
+		9A5B17F019F8D13500722E4A /* GTLServiceStoreendpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B17B719F8D13500722E4A /* GTLServiceStoreendpoint.m */; };
+		9A5B17F219F8D13500722E4A /* GTLStoreendpointConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B17BB19F8D13500722E4A /* GTLStoreendpointConstants.m */; };
+		9A5B17F319F8D13500722E4A /* GTLStoreendpointMenuItemModifiersAndGroups.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B17BD19F8D13500722E4A /* GTLStoreendpointMenuItemModifiersAndGroups.m */; };
+		9A5B17F419F8D13500722E4A /* GTLStoreendpointOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B17BF19F8D13500722E4A /* GTLStoreendpointOrder.m */; };
+		9A5B17F519F8D13500722E4A /* GTLStoreendpointOrderCustomer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B17C119F8D13500722E4A /* GTLStoreendpointOrderCustomer.m */; };
+		9A5B17F619F8D13500722E4A /* GTLStoreendpointOrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B17C319F8D13500722E4A /* GTLStoreendpointOrderItem.m */; };
+		9A5B17F719F8D13500722E4A /* GTLStoreendpointOrderItemsAndCustomers.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B17C519F8D13500722E4A /* GTLStoreendpointOrderItemsAndCustomers.m */; };
+		9A5B17F819F8D13500722E4A /* GTLStoreendpointStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B17C719F8D13500722E4A /* GTLStoreendpointStore.m */; };
+		9A5B17F919F8D13500722E4A /* GTLStoreendpointStoreCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B17C919F8D13500722E4A /* GTLStoreendpointStoreCollection.m */; };
+		9A5B17FA19F8D13500722E4A /* GTLStoreendpointStoreImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B17CB19F8D13500722E4A /* GTLStoreendpointStoreImage.m */; };
+		9A5B17FB19F8D13500722E4A /* GTLStoreendpointStoreImageCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B17CD19F8D13500722E4A /* GTLStoreendpointStoreImageCollection.m */; };
+		9A5B17FC19F8D13500722E4A /* GTLStoreendpointStoreMenuHierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B17CF19F8D13500722E4A /* GTLStoreendpointStoreMenuHierarchy.m */; };
+		9A5B17FD19F8D13500722E4A /* GTLStoreendpointStoreMenuHierarchyCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B17D119F8D13500722E4A /* GTLStoreendpointStoreMenuHierarchyCollection.m */; };
+		9A5B17FE19F8D13500722E4A /* GTLStoreendpointStoreMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B17D319F8D13500722E4A /* GTLStoreendpointStoreMenuItem.m */; };
+		9A5B17FF19F8D13500722E4A /* GTLStoreendpointStoreMenuItemCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B17D519F8D13500722E4A /* GTLStoreendpointStoreMenuItemCollection.m */; };
+		9A5B180019F8D13500722E4A /* GTLStoreendpointStoreMenuItemModifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B17D719F8D13500722E4A /* GTLStoreendpointStoreMenuItemModifier.m */; };
+		9A5B180119F8D13500722E4A /* GTLStoreendpointStoreMenuItemModifierGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B17D919F8D13500722E4A /* GTLStoreendpointStoreMenuItemModifierGroup.m */; };
+		9A5B180219F8D13500722E4A /* GTLStoreendpointStoreOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B17DB19F8D13500722E4A /* GTLStoreendpointStoreOwner.m */; };
+		9A5B180319F8D13500722E4A /* GTLStoreendpointStoreOwnerCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B17DD19F8D13500722E4A /* GTLStoreendpointStoreOwnerCollection.m */; };
+		9A5B180419F8D13500722E4A /* GTLStoreendpointStorePOSConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B17DF19F8D13500722E4A /* GTLStoreendpointStorePOSConnection.m */; };
+		9A5B180519F8D13500722E4A /* GTLStoreendpointStoreSummaryStats.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B17E119F8D13500722E4A /* GTLStoreendpointStoreSummaryStats.m */; };
+		9A5B180619F8D13500722E4A /* GTLStoreendpointStoreSummaryStatsCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B17E319F8D13500722E4A /* GTLStoreendpointStoreSummaryStatsCollection.m */; };
 		9A5D6A4119CE87830051DB88 /* PTKAddressZip.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5D6A1819CE87830051DB88 /* PTKAddressZip.m */; };
 		9A5D6A4219CE87830051DB88 /* PTKCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5D6A1A19CE87830051DB88 /* PTKCard.m */; };
 		9A5D6A4319CE87830051DB88 /* PTKCardCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5D6A1C19CE87830051DB88 /* PTKCardCVC.m */; };
@@ -172,6 +205,74 @@
 		9A5971F119D16BD60047D1CE /* ResturantListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResturantListViewController.m; sourceTree = "<group>"; };
 		9A59722C19CEF59C00333E7A /* PaymentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentInfo.h; sourceTree = "<group>"; };
 		9A59722D19CEF59C00333E7A /* PaymentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentInfo.m; sourceTree = "<group>"; };
+		9A5B179F19F8D13500722E4A /* GTLPersonendpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLPersonendpoint.h; sourceTree = "<group>"; };
+		9A5B17A019F8D13500722E4A /* GTLPersonendpointConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLPersonendpointConstants.h; sourceTree = "<group>"; };
+		9A5B17A119F8D13500722E4A /* GTLPersonendpointConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLPersonendpointConstants.m; sourceTree = "<group>"; };
+		9A5B17A219F8D13500722E4A /* GTLPersonendpointDeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLPersonendpointDeviceInfo.h; sourceTree = "<group>"; };
+		9A5B17A319F8D13500722E4A /* GTLPersonendpointDeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLPersonendpointDeviceInfo.m; sourceTree = "<group>"; };
+		9A5B17A419F8D13500722E4A /* GTLPersonendpointPersonCards.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLPersonendpointPersonCards.h; sourceTree = "<group>"; };
+		9A5B17A519F8D13500722E4A /* GTLPersonendpointPersonCards.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLPersonendpointPersonCards.m; sourceTree = "<group>"; };
+		9A5B17A619F8D13500722E4A /* GTLPersonendpointPersonCardsListWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLPersonendpointPersonCardsListWrapper.h; sourceTree = "<group>"; };
+		9A5B17A719F8D13500722E4A /* GTLPersonendpointPersonCardsListWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLPersonendpointPersonCardsListWrapper.m; sourceTree = "<group>"; };
+		9A5B17A819F8D13500722E4A /* GTLPersonendpointPersonCredentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLPersonendpointPersonCredentials.h; sourceTree = "<group>"; };
+		9A5B17A919F8D13500722E4A /* GTLPersonendpointPersonCredentials.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLPersonendpointPersonCredentials.m; sourceTree = "<group>"; };
+		9A5B17AA19F8D13500722E4A /* GTLPersonendpointPersonInfoWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLPersonendpointPersonInfoWrapper.h; sourceTree = "<group>"; };
+		9A5B17AB19F8D13500722E4A /* GTLPersonendpointPersonInfoWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLPersonendpointPersonInfoWrapper.m; sourceTree = "<group>"; };
+		9A5B17AC19F8D13500722E4A /* GTLPersonendpointPersonProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLPersonendpointPersonProfile.h; sourceTree = "<group>"; };
+		9A5B17AD19F8D13500722E4A /* GTLPersonendpointPersonProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLPersonendpointPersonProfile.m; sourceTree = "<group>"; };
+		9A5B17AE19F8D13500722E4A /* GTLPersonendpointSessionTokenWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLPersonendpointSessionTokenWrapper.h; sourceTree = "<group>"; };
+		9A5B17AF19F8D13500722E4A /* GTLPersonendpointSessionTokenWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLPersonendpointSessionTokenWrapper.m; sourceTree = "<group>"; };
+		9A5B17B019F8D13500722E4A /* GTLQueryPersonendpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLQueryPersonendpoint.h; sourceTree = "<group>"; };
+		9A5B17B119F8D13500722E4A /* GTLQueryPersonendpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLQueryPersonendpoint.m; sourceTree = "<group>"; };
+		9A5B17B219F8D13500722E4A /* GTLQueryStoreendpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLQueryStoreendpoint.h; sourceTree = "<group>"; };
+		9A5B17B319F8D13500722E4A /* GTLQueryStoreendpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLQueryStoreendpoint.m; sourceTree = "<group>"; };
+		9A5B17B419F8D13500722E4A /* GTLServicePersonendpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLServicePersonendpoint.h; sourceTree = "<group>"; };
+		9A5B17B519F8D13500722E4A /* GTLServicePersonendpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLServicePersonendpoint.m; sourceTree = "<group>"; };
+		9A5B17B619F8D13500722E4A /* GTLServiceStoreendpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLServiceStoreendpoint.h; sourceTree = "<group>"; };
+		9A5B17B719F8D13500722E4A /* GTLServiceStoreendpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLServiceStoreendpoint.m; sourceTree = "<group>"; };
+		9A5B17B919F8D13500722E4A /* GTLStoreendpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpoint.h; sourceTree = "<group>"; };
+		9A5B17BA19F8D13500722E4A /* GTLStoreendpointConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointConstants.h; sourceTree = "<group>"; };
+		9A5B17BB19F8D13500722E4A /* GTLStoreendpointConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointConstants.m; sourceTree = "<group>"; };
+		9A5B17BC19F8D13500722E4A /* GTLStoreendpointMenuItemModifiersAndGroups.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointMenuItemModifiersAndGroups.h; sourceTree = "<group>"; };
+		9A5B17BD19F8D13500722E4A /* GTLStoreendpointMenuItemModifiersAndGroups.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointMenuItemModifiersAndGroups.m; sourceTree = "<group>"; };
+		9A5B17BE19F8D13500722E4A /* GTLStoreendpointOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointOrder.h; sourceTree = "<group>"; };
+		9A5B17BF19F8D13500722E4A /* GTLStoreendpointOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointOrder.m; sourceTree = "<group>"; };
+		9A5B17C019F8D13500722E4A /* GTLStoreendpointOrderCustomer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointOrderCustomer.h; sourceTree = "<group>"; };
+		9A5B17C119F8D13500722E4A /* GTLStoreendpointOrderCustomer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointOrderCustomer.m; sourceTree = "<group>"; };
+		9A5B17C219F8D13500722E4A /* GTLStoreendpointOrderItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointOrderItem.h; sourceTree = "<group>"; };
+		9A5B17C319F8D13500722E4A /* GTLStoreendpointOrderItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointOrderItem.m; sourceTree = "<group>"; };
+		9A5B17C419F8D13500722E4A /* GTLStoreendpointOrderItemsAndCustomers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointOrderItemsAndCustomers.h; sourceTree = "<group>"; };
+		9A5B17C519F8D13500722E4A /* GTLStoreendpointOrderItemsAndCustomers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointOrderItemsAndCustomers.m; sourceTree = "<group>"; };
+		9A5B17C619F8D13500722E4A /* GTLStoreendpointStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStore.h; sourceTree = "<group>"; };
+		9A5B17C719F8D13500722E4A /* GTLStoreendpointStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStore.m; sourceTree = "<group>"; };
+		9A5B17C819F8D13500722E4A /* GTLStoreendpointStoreCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreCollection.h; sourceTree = "<group>"; };
+		9A5B17C919F8D13500722E4A /* GTLStoreendpointStoreCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreCollection.m; sourceTree = "<group>"; };
+		9A5B17CA19F8D13500722E4A /* GTLStoreendpointStoreImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreImage.h; sourceTree = "<group>"; };
+		9A5B17CB19F8D13500722E4A /* GTLStoreendpointStoreImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreImage.m; sourceTree = "<group>"; };
+		9A5B17CC19F8D13500722E4A /* GTLStoreendpointStoreImageCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreImageCollection.h; sourceTree = "<group>"; };
+		9A5B17CD19F8D13500722E4A /* GTLStoreendpointStoreImageCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreImageCollection.m; sourceTree = "<group>"; };
+		9A5B17CE19F8D13500722E4A /* GTLStoreendpointStoreMenuHierarchy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreMenuHierarchy.h; sourceTree = "<group>"; };
+		9A5B17CF19F8D13500722E4A /* GTLStoreendpointStoreMenuHierarchy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreMenuHierarchy.m; sourceTree = "<group>"; };
+		9A5B17D019F8D13500722E4A /* GTLStoreendpointStoreMenuHierarchyCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreMenuHierarchyCollection.h; sourceTree = "<group>"; };
+		9A5B17D119F8D13500722E4A /* GTLStoreendpointStoreMenuHierarchyCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreMenuHierarchyCollection.m; sourceTree = "<group>"; };
+		9A5B17D219F8D13500722E4A /* GTLStoreendpointStoreMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreMenuItem.h; sourceTree = "<group>"; };
+		9A5B17D319F8D13500722E4A /* GTLStoreendpointStoreMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreMenuItem.m; sourceTree = "<group>"; };
+		9A5B17D419F8D13500722E4A /* GTLStoreendpointStoreMenuItemCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreMenuItemCollection.h; sourceTree = "<group>"; };
+		9A5B17D519F8D13500722E4A /* GTLStoreendpointStoreMenuItemCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreMenuItemCollection.m; sourceTree = "<group>"; };
+		9A5B17D619F8D13500722E4A /* GTLStoreendpointStoreMenuItemModifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreMenuItemModifier.h; sourceTree = "<group>"; };
+		9A5B17D719F8D13500722E4A /* GTLStoreendpointStoreMenuItemModifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreMenuItemModifier.m; sourceTree = "<group>"; };
+		9A5B17D819F8D13500722E4A /* GTLStoreendpointStoreMenuItemModifierGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreMenuItemModifierGroup.h; sourceTree = "<group>"; };
+		9A5B17D919F8D13500722E4A /* GTLStoreendpointStoreMenuItemModifierGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreMenuItemModifierGroup.m; sourceTree = "<group>"; };
+		9A5B17DA19F8D13500722E4A /* GTLStoreendpointStoreOwner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreOwner.h; sourceTree = "<group>"; };
+		9A5B17DB19F8D13500722E4A /* GTLStoreendpointStoreOwner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreOwner.m; sourceTree = "<group>"; };
+		9A5B17DC19F8D13500722E4A /* GTLStoreendpointStoreOwnerCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreOwnerCollection.h; sourceTree = "<group>"; };
+		9A5B17DD19F8D13500722E4A /* GTLStoreendpointStoreOwnerCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreOwnerCollection.m; sourceTree = "<group>"; };
+		9A5B17DE19F8D13500722E4A /* GTLStoreendpointStorePOSConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStorePOSConnection.h; sourceTree = "<group>"; };
+		9A5B17DF19F8D13500722E4A /* GTLStoreendpointStorePOSConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStorePOSConnection.m; sourceTree = "<group>"; };
+		9A5B17E019F8D13500722E4A /* GTLStoreendpointStoreSummaryStats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreSummaryStats.h; sourceTree = "<group>"; };
+		9A5B17E119F8D13500722E4A /* GTLStoreendpointStoreSummaryStats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreSummaryStats.m; sourceTree = "<group>"; };
+		9A5B17E219F8D13500722E4A /* GTLStoreendpointStoreSummaryStatsCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreSummaryStatsCollection.h; sourceTree = "<group>"; };
+		9A5B17E319F8D13500722E4A /* GTLStoreendpointStoreSummaryStatsCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreSummaryStatsCollection.m; sourceTree = "<group>"; };
 		9A5D6A1719CE87830051DB88 /* PTKAddressZip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTKAddressZip.h; sourceTree = "<group>"; };
 		9A5D6A1819CE87830051DB88 /* PTKAddressZip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTKAddressZip.m; sourceTree = "<group>"; };
 		9A5D6A1919CE87830051DB88 /* PTKCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTKCard.h; sourceTree = "<group>"; };
@@ -496,6 +597,81 @@
 			name = "Helper Classes";
 			sourceTree = "<group>";
 		};
+		9A5B179D19F8D10D00722E4A /* GAEEndpoint */ = {
+			isa = PBXGroup;
+			children = (
+				9A5B179F19F8D13500722E4A /* GTLPersonendpoint.h */,
+				9A5B17A019F8D13500722E4A /* GTLPersonendpointConstants.h */,
+				9A5B17A119F8D13500722E4A /* GTLPersonendpointConstants.m */,
+				9A5B17A219F8D13500722E4A /* GTLPersonendpointDeviceInfo.h */,
+				9A5B17A319F8D13500722E4A /* GTLPersonendpointDeviceInfo.m */,
+				9A5B17A419F8D13500722E4A /* GTLPersonendpointPersonCards.h */,
+				9A5B17A519F8D13500722E4A /* GTLPersonendpointPersonCards.m */,
+				9A5B17A619F8D13500722E4A /* GTLPersonendpointPersonCardsListWrapper.h */,
+				9A5B17A719F8D13500722E4A /* GTLPersonendpointPersonCardsListWrapper.m */,
+				9A5B17A819F8D13500722E4A /* GTLPersonendpointPersonCredentials.h */,
+				9A5B17A919F8D13500722E4A /* GTLPersonendpointPersonCredentials.m */,
+				9A5B17AA19F8D13500722E4A /* GTLPersonendpointPersonInfoWrapper.h */,
+				9A5B17AB19F8D13500722E4A /* GTLPersonendpointPersonInfoWrapper.m */,
+				9A5B17AC19F8D13500722E4A /* GTLPersonendpointPersonProfile.h */,
+				9A5B17AD19F8D13500722E4A /* GTLPersonendpointPersonProfile.m */,
+				9A5B17AE19F8D13500722E4A /* GTLPersonendpointSessionTokenWrapper.h */,
+				9A5B17AF19F8D13500722E4A /* GTLPersonendpointSessionTokenWrapper.m */,
+				9A5B17B019F8D13500722E4A /* GTLQueryPersonendpoint.h */,
+				9A5B17B119F8D13500722E4A /* GTLQueryPersonendpoint.m */,
+				9A5B17B219F8D13500722E4A /* GTLQueryStoreendpoint.h */,
+				9A5B17B319F8D13500722E4A /* GTLQueryStoreendpoint.m */,
+				9A5B17B419F8D13500722E4A /* GTLServicePersonendpoint.h */,
+				9A5B17B519F8D13500722E4A /* GTLServicePersonendpoint.m */,
+				9A5B17B619F8D13500722E4A /* GTLServiceStoreendpoint.h */,
+				9A5B17B719F8D13500722E4A /* GTLServiceStoreendpoint.m */,
+				9A5B17B919F8D13500722E4A /* GTLStoreendpoint.h */,
+				9A5B17BA19F8D13500722E4A /* GTLStoreendpointConstants.h */,
+				9A5B17BB19F8D13500722E4A /* GTLStoreendpointConstants.m */,
+				9A5B17BC19F8D13500722E4A /* GTLStoreendpointMenuItemModifiersAndGroups.h */,
+				9A5B17BD19F8D13500722E4A /* GTLStoreendpointMenuItemModifiersAndGroups.m */,
+				9A5B17BE19F8D13500722E4A /* GTLStoreendpointOrder.h */,
+				9A5B17BF19F8D13500722E4A /* GTLStoreendpointOrder.m */,
+				9A5B17C019F8D13500722E4A /* GTLStoreendpointOrderCustomer.h */,
+				9A5B17C119F8D13500722E4A /* GTLStoreendpointOrderCustomer.m */,
+				9A5B17C219F8D13500722E4A /* GTLStoreendpointOrderItem.h */,
+				9A5B17C319F8D13500722E4A /* GTLStoreendpointOrderItem.m */,
+				9A5B17C419F8D13500722E4A /* GTLStoreendpointOrderItemsAndCustomers.h */,
+				9A5B17C519F8D13500722E4A /* GTLStoreendpointOrderItemsAndCustomers.m */,
+				9A5B17C619F8D13500722E4A /* GTLStoreendpointStore.h */,
+				9A5B17C719F8D13500722E4A /* GTLStoreendpointStore.m */,
+				9A5B17C819F8D13500722E4A /* GTLStoreendpointStoreCollection.h */,
+				9A5B17C919F8D13500722E4A /* GTLStoreendpointStoreCollection.m */,
+				9A5B17CA19F8D13500722E4A /* GTLStoreendpointStoreImage.h */,
+				9A5B17CB19F8D13500722E4A /* GTLStoreendpointStoreImage.m */,
+				9A5B17CC19F8D13500722E4A /* GTLStoreendpointStoreImageCollection.h */,
+				9A5B17CD19F8D13500722E4A /* GTLStoreendpointStoreImageCollection.m */,
+				9A5B17CE19F8D13500722E4A /* GTLStoreendpointStoreMenuHierarchy.h */,
+				9A5B17CF19F8D13500722E4A /* GTLStoreendpointStoreMenuHierarchy.m */,
+				9A5B17D019F8D13500722E4A /* GTLStoreendpointStoreMenuHierarchyCollection.h */,
+				9A5B17D119F8D13500722E4A /* GTLStoreendpointStoreMenuHierarchyCollection.m */,
+				9A5B17D219F8D13500722E4A /* GTLStoreendpointStoreMenuItem.h */,
+				9A5B17D319F8D13500722E4A /* GTLStoreendpointStoreMenuItem.m */,
+				9A5B17D419F8D13500722E4A /* GTLStoreendpointStoreMenuItemCollection.h */,
+				9A5B17D519F8D13500722E4A /* GTLStoreendpointStoreMenuItemCollection.m */,
+				9A5B17D619F8D13500722E4A /* GTLStoreendpointStoreMenuItemModifier.h */,
+				9A5B17D719F8D13500722E4A /* GTLStoreendpointStoreMenuItemModifier.m */,
+				9A5B17D819F8D13500722E4A /* GTLStoreendpointStoreMenuItemModifierGroup.h */,
+				9A5B17D919F8D13500722E4A /* GTLStoreendpointStoreMenuItemModifierGroup.m */,
+				9A5B17DA19F8D13500722E4A /* GTLStoreendpointStoreOwner.h */,
+				9A5B17DB19F8D13500722E4A /* GTLStoreendpointStoreOwner.m */,
+				9A5B17DC19F8D13500722E4A /* GTLStoreendpointStoreOwnerCollection.h */,
+				9A5B17DD19F8D13500722E4A /* GTLStoreendpointStoreOwnerCollection.m */,
+				9A5B17DE19F8D13500722E4A /* GTLStoreendpointStorePOSConnection.h */,
+				9A5B17DF19F8D13500722E4A /* GTLStoreendpointStorePOSConnection.m */,
+				9A5B17E019F8D13500722E4A /* GTLStoreendpointStoreSummaryStats.h */,
+				9A5B17E119F8D13500722E4A /* GTLStoreendpointStoreSummaryStats.m */,
+				9A5B17E219F8D13500722E4A /* GTLStoreendpointStoreSummaryStatsCollection.h */,
+				9A5B17E319F8D13500722E4A /* GTLStoreendpointStoreSummaryStatsCollection.m */,
+			);
+			name = GAEEndpoint;
+			sourceTree = "<group>";
+		};
 		9A5D6A1619CE87830051DB88 /* PaymentKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -587,6 +763,7 @@
 		9A7F20B319C806CD00FE7929 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				9A5B179D19F8D10D00722E4A /* GAEEndpoint */,
 				9AB8389219CFF39E00F7D334 /* MBProgressHUD */,
 				9A5D6A7A19CE89F90051DB88 /* Stripe */,
 				9A5D6A1619CE87830051DB88 /* PaymentKit */,
@@ -829,38 +1006,71 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A5B17F019F8D13500722E4A /* GTLServiceStoreendpoint.m in Sources */,
 				9AC0C94519F7846F004F9D51 /* DatabaseHelper.m in Sources */,
 				9A5D6A4119CE87830051DB88 /* PTKAddressZip.m in Sources */,
+				9A5B180019F8D13500722E4A /* GTLStoreendpointStoreMenuItemModifier.m in Sources */,
+				9A5B17FC19F8D13500722E4A /* GTLStoreendpointStoreMenuHierarchy.m in Sources */,
+				9A5B17F419F8D13500722E4A /* GTLStoreendpointOrder.m in Sources */,
+				9A5B17F919F8D13500722E4A /* GTLStoreendpointStoreCollection.m in Sources */,
 				9A5D6A8D19CE8A0B0051DB88 /* PKPayment+STPTestKeys.m in Sources */,
 				9AC0C95119F79971004F9D51 /* StoreImage.m in Sources */,
 				9A5D6A8F19CE8A0B0051DB88 /* STPCard.m in Sources */,
 				9A5D6A4819CE87830051DB88 /* PTKUSAddressZip.m in Sources */,
 				9A9E503F19D2CB05001F2C64 /* LoginViewController.m in Sources */,
 				9A5D6A4719CE87830051DB88 /* PTKTextField.m in Sources */,
+				9A5B17F619F8D13500722E4A /* GTLStoreendpointOrderItem.m in Sources */,
+				9A5B17F519F8D13500722E4A /* GTLStoreendpointOrderCustomer.m in Sources */,
+				9A5B180419F8D13500722E4A /* GTLStoreendpointStorePOSConnection.m in Sources */,
 				9A5D6A9119CE8A0B0051DB88 /* STPToken.m in Sources */,
 				9A1F2A1A19BEFF1100CBF581 /* ProfileViewController.m in Sources */,
 				9A1F29B519BED4C900CBF581 /* ViewController.m in Sources */,
 				9A5D6A9019CE8A0B0051DB88 /* STPTestPaymentAuthorizationViewController.m in Sources */,
 				9AB8389119CFE7D900F7D334 /* InviteFriendsViewController.m in Sources */,
+				9A5B17EE19F8D13500722E4A /* GTLQueryStoreendpoint.m in Sources */,
+				9A5B17EF19F8D13500722E4A /* GTLServicePersonendpoint.m in Sources */,
+				9A5B180319F8D13500722E4A /* GTLStoreendpointStoreOwnerCollection.m in Sources */,
+				9A5B180519F8D13500722E4A /* GTLStoreendpointStoreSummaryStats.m in Sources */,
 				9A1F29AF19BED4C900CBF581 /* AppDelegate.m in Sources */,
 				9A5D6A4319CE87830051DB88 /* PTKCardCVC.m in Sources */,
+				9A5B17F719F8D13500722E4A /* GTLStoreendpointOrderItemsAndCustomers.m in Sources */,
+				9A5B17E619F8D13500722E4A /* GTLPersonendpointDeviceInfo.m in Sources */,
 				9AC0C95419F79972004F9D51 /* Store.m in Sources */,
+				9A5B17FB19F8D13500722E4A /* GTLStoreendpointStoreImageCollection.m in Sources */,
+				9A5B180619F8D13500722E4A /* GTLStoreendpointStoreSummaryStatsCollection.m in Sources */,
 				9A1F29AB19BED4C900CBF581 /* main.m in Sources */,
+				9A5B17EA19F8D13500722E4A /* GTLPersonendpointPersonInfoWrapper.m in Sources */,
 				9A5971F219D16BD60047D1CE /* ResturantListViewController.m in Sources */,
 				9A5D6A4219CE87830051DB88 /* PTKCard.m in Sources */,
+				9A5B17F219F8D13500722E4A /* GTLStoreendpointConstants.m in Sources */,
 				9A1F2A1419BEEA0C00CBF581 /* SignupViewController.m in Sources */,
 				9A5D6A4919CE87830051DB88 /* PTKView.m in Sources */,
 				9A5D6A9419CE8A0B0051DB88 /* StripeError.m in Sources */,
+				9A5B180219F8D13500722E4A /* GTLStoreendpointStoreOwner.m in Sources */,
+				9A5B17EC19F8D13500722E4A /* GTLPersonendpointSessionTokenWrapper.m in Sources */,
 				9AB8389519CFF39E00F7D334 /* MBProgressHUD.m in Sources */,
+				9A5B17FA19F8D13500722E4A /* GTLStoreendpointStoreImage.m in Sources */,
+				9A5B17EB19F8D13500722E4A /* GTLPersonendpointPersonProfile.m in Sources */,
+				9A5B17E819F8D13500722E4A /* GTLPersonendpointPersonCardsListWrapper.m in Sources */,
 				9A5D6A4519CE87830051DB88 /* PTKCardNumber.m in Sources */,
+				9A5B17E719F8D13500722E4A /* GTLPersonendpointPersonCards.m in Sources */,
 				9A5D6A4619CE87830051DB88 /* PTKComponent.m in Sources */,
 				9AF9C4CF19D184ED00E85A39 /* ResturantDetailViewController.m in Sources */,
 				9A5D6A9219CE8A0B0051DB88 /* STPUtils.m in Sources */,
+				9A5B180119F8D13500722E4A /* GTLStoreendpointStoreMenuItemModifierGroup.m in Sources */,
 				9A5D6A8E19CE8A0B0051DB88 /* STPAPIConnection.m in Sources */,
 				9A59722E19CEF59C00333E7A /* PaymentInfo.m in Sources */,
+				9A5B17FE19F8D13500722E4A /* GTLStoreendpointStoreMenuItem.m in Sources */,
+				9A5B17ED19F8D13500722E4A /* GTLQueryPersonendpoint.m in Sources */,
+				9A5B17E919F8D13500722E4A /* GTLPersonendpointPersonCredentials.m in Sources */,
+				9A5B17F819F8D13500722E4A /* GTLStoreendpointStore.m in Sources */,
 				9A5D6A9319CE8A0B0051DB88 /* Stripe.m in Sources */,
+				9A5B17FF19F8D13500722E4A /* GTLStoreendpointStoreMenuItemCollection.m in Sources */,
+				9A5B17F319F8D13500722E4A /* GTLStoreendpointMenuItemModifiersAndGroups.m in Sources */,
 				9A5D6A4419CE87830051DB88 /* PTKCardExpiry.m in Sources */,
 				9AC0C95719F7CB7C004F9D51 /* MenuViewController.m in Sources */,
+				9A5B17FD19F8D13500722E4A /* GTLStoreendpointStoreMenuHierarchyCollection.m in Sources */,
+				9A5B17E519F8D13500722E4A /* GTLPersonendpointConstants.m in Sources */,
 				9A8A5F2119F380F700B876F2 /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -999,6 +1209,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Applications/Xcode\\ 2.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include",
+					"$(PROJECT_DIR)/Asaan/GoogleOpenSource.framework/Headers",
 				);
 				INFOPLIST_FILE = "Asaan/Asaan-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
@@ -1027,6 +1238,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Applications/Xcode\\ 2.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include",
+					"$(PROJECT_DIR)/Asaan/GoogleOpenSource.framework/Headers",
 				);
 				INFOPLIST_FILE = "Asaan/Asaan-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
