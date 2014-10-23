@@ -53,7 +53,7 @@
     if(saveDate==nil){
         [self fetchResturantwitGTLquery];
     }else{
-        int i = -[saveDate timeIntervalSinceNow];///3600;
+        int i = -[saveDate timeIntervalSinceNow]/3600;
         
         NSLog(@"%d",i);
 
@@ -104,19 +104,20 @@
 
     }
     
-    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStatsForAllStores];
+    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStores];
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [storeService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreSummaryStatsCollection *object,NSError *error){
+    [storeService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreCollection *object,NSError *error){
         [MBProgressHUD hideHUDForView:self.view animated:YES];
 
         if(!error){
             
+             NSLog(@"%@",object.JSONString);
             resturantList=[object.items mutableCopy];
               isServerData=YES;
             [self.tableView reloadData];
             
-            /*if([DatabaseHelper saveUpdateStores:resturantList]){
+            if([DatabaseHelper saveUpdateStores:resturantList]){
                 NSDate *currentdate=[NSDate date] ;
                 
                 NSLog(@"%@",currentdate);
@@ -124,12 +125,9 @@
                 [[NSUserDefaults standardUserDefaults]setObject:currentdate forKey:@"resturantListUpdateTime"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 
-            }*/
+            }
             
-            
-           
 
-            NSLog(@"%@",object.JSONString);
         }else{
             NSLog(@"%@",[error userInfo]);
         }
@@ -139,7 +137,7 @@
 }
 
 
-/*
+
 -(void)fetchRestrurant{
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -184,7 +182,6 @@
    
 }
 
-*/
 
 -(void)goToLocation{
    

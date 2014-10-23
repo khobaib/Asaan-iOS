@@ -78,7 +78,9 @@
         [view addGestureRecognizer:singleTap];
         [self.horizontalScroller addSubview:view];
         // 4
-        [self.menuData replaceObjectAtIndex:page withObject:view];
+        [self.menuPage replaceObjectAtIndex:page withObject:view];
+    }else{
+        
     }
 }
 
@@ -117,22 +119,22 @@
     // Update the page control
     
     // Work out which pages you want to load
-    NSInteger firstPage = page - 1;
-    NSInteger lastPage = page + 1;
+    NSInteger firstPage = page - 5;
+    NSInteger lastPage = page + 5;
     
     // Purge anything before the first page
     for (NSInteger i=0; i<firstPage; i++) {
-        //[self purgeSimilarProduct:i];
+       // [self purgeMenu:i];
     }
     
     // Load pages in our range
-    for (NSInteger i=0; i<=self.menuData.count; i++) {
+    for (NSInteger i=0; i<=self.menuPage.count; i++) {
         [self loadMenu:i];
     }
     
     // Purge anything after the last page
     for (NSInteger i=lastPage+1; i<self.menuPage.count; i++) {
-        //[self purgeSimilarProduct:i];
+        //[self purgeMenu:i];
     }
 }
 
@@ -144,6 +146,59 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+#pragma mark -uitableview delegate function
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+ 
+    return 5;
+}
+
+// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
+// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"menu" forIndexPath:indexPath];
+    
+    UILabel *lable=(UILabel *)[cell viewWithTag:201];
+    
+    lable.text=@"hehe";
+    
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 40.0;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    
+    return 3;
+}// Default is 1 if not implemented
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *view;
+    view=[[UIView alloc]initWithFrame:CGRectMake(5, 5, 150, 30)];
+    view.backgroundColor=[UIColor redColor];
+    
+    UILabel *lable=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 30)];
+    lable.text=@"Amar Soup";
+    
+    [view addSubview:lable];
+    
+    return view;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section    // fixed font style. use custom view (UILabel) if {
+{
+    return @"Soup";
+}
+
+
+
 
 /*
 #pragma mark - Navigation

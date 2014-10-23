@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MenuViewController : UIViewController<UIScrollViewDelegate>
+@interface MenuViewController : UIViewController<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate>
 
 @property NSMutableArray *menuData;
 @property NSMutableArray *menuPage;
