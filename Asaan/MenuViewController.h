@@ -10,9 +10,10 @@
 
 @interface MenuViewController : UIViewController<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate>
 
-@property NSMutableArray *menuData;
+@property NSMutableArray *menuArray;
 @property NSMutableArray *menuPage;
 
 @property (strong,nonatomic) IBOutlet UIScrollView *horizontalScroller;
+@property NSNumber *storeID;
 
 @end

@@ -200,7 +200,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    NSLog(@"%d",resturantList.count);
+
     return resturantList.count;
     
 }

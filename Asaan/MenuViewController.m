@@ -8,6 +8,7 @@
 
 #import "MenuViewController.h"
 #import "MBProgressHUD.h"
+#import "GTLStoreendpoint.h"
 
 @interface MenuViewController ()
 
@@ -18,18 +19,54 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.menuData=[[NSMutableArray alloc]init];
+    self.menuArray=[[NSMutableArray alloc]init];
     self.menuPage=[[NSMutableArray alloc]init];
     
-    self.menuData=[@[@"Pen",@"Book",@"hand",@"food",@"pot",@"joint",@"mobile",@"latitude",@"uhaha",@"meu meu",@"meu"] mutableCopy];
+  //  self.menuArray=[@[@"Pen",@"Book",@"hand",@"food",@"pot",@"joint",@"mobile",@"latitude",@"uhaha",@"meu meu",@"meu"] mutableCopy];
     
-    self.horizontalScroller.contentSize=CGSizeMake(120*self.menuData.count, self.horizontalScroller.frame.size.height);
+ }
+
+
+
+-(void)fetchMenu{
     
-    for(int i=0;i<self.menuData.count;i++){
-        [self.menuPage addObject:[NSNull null]];
+    static GTLServiceStoreendpoint *storeService=nil;
+    
+    if(!storeService){
+        storeService=[[GTLServiceStoreendpoint alloc]init];
+        storeService.retryEnabled=YES;
+        
+        
     }
+
+    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreMenuItemsWithStoreId:1];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
+    [storeService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreMenuItemCollection *object,NSError *error){
+       
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        if(error==nil){
+            
+            self.menuArray=[object.items mutableCopy];
+            
+            self.horizontalScroller.contentSize=CGSizeMake(120*self.menuArray.count, self.horizontalScroller.frame.size.height);
+            
+            for(int i=0;i<self.menuArray.count;i++){
+                [self.menuPage addObject:[NSNull null]];
+            }
+            
+            [self loadVisibleMenu];
+
+        }else{
+            NSLog(@"%@",[error userInfo]);
+        }
+        
+    }];
     
-    [self loadVisibleMenu];
+    
+    
+    
+   
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -39,7 +76,7 @@
 }
 
 - (void)loadMenu:(NSInteger)page {
-    if (page < 0 || page >= self.menuData.count) {
+    if (page < 0 || page >= self.menuArray.count) {
         // If it's outside the range of what you have to display, then do nothing
         return;
     }
@@ -98,7 +135,7 @@
 }
 
 - (void)purgeMenu:(NSInteger)page {
-    if (page < 0 || page >= self.menuData.count) {
+    if (page < 0 || page >= self.menuArray.count) {
         // If it's outside the range of what you have to display, then do nothing
         return;
     }
