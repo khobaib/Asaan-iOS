@@ -124,6 +124,7 @@
 		9AB0434A19FCA91C007BC71E /* GTLStoreendpointStorePOSConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB0432F19FCA91C007BC71E /* GTLStoreendpointStorePOSConnection.m */; };
 		9AB0434B19FCA91C007BC71E /* GTLStoreendpointStoreSummaryStats.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB0433119FCA91C007BC71E /* GTLStoreendpointStoreSummaryStats.m */; };
 		9AB0434C19FCA91C007BC71E /* GTLStoreendpointStoreSummaryStatsCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB0433319FCA91C007BC71E /* GTLStoreendpointStoreSummaryStatsCollection.m */; };
+		9AB0434F19FCC670007BC71E /* MenuSectionHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB0434E19FCC670007BC71E /* MenuSectionHolder.m */; };
 		9AB3A90C19C9870E00C98D8D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB3A90B19C9870E00C98D8D /* AudioToolbox.framework */; };
 		9AB3A90F19C9872900C98D8D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1F29D919BED9B500CBF581 /* CoreLocation.framework */; };
 		9AB3A91119C9873700C98D8D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB3A91019C9873700C98D8D /* libz.dylib */; };
@@ -330,6 +331,8 @@
 		9AB0433119FCA91C007BC71E /* GTLStoreendpointStoreSummaryStats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreSummaryStats.m; sourceTree = "<group>"; };
 		9AB0433219FCA91C007BC71E /* GTLStoreendpointStoreSummaryStatsCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreSummaryStatsCollection.h; sourceTree = "<group>"; };
 		9AB0433319FCA91C007BC71E /* GTLStoreendpointStoreSummaryStatsCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreSummaryStatsCollection.m; sourceTree = "<group>"; };
+		9AB0434D19FCC670007BC71E /* MenuSectionHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuSectionHolder.h; sourceTree = "<group>"; };
+		9AB0434E19FCC670007BC71E /* MenuSectionHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuSectionHolder.m; sourceTree = "<group>"; };
 		9AB3A90919C986F900C98D8D /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		9AB3A90B19C9870E00C98D8D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		9AB3A90D19C9871800C98D8D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -758,6 +761,8 @@
 				9A1F2A1919BEFF1100CBF581 /* ProfileViewController.m */,
 				9A9E503D19D2CB05001F2C64 /* LoginViewController.h */,
 				9A9E503E19D2CB05001F2C64 /* LoginViewController.m */,
+				9AB0434D19FCC670007BC71E /* MenuSectionHolder.h */,
+				9AB0434E19FCC670007BC71E /* MenuSectionHolder.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -961,6 +966,7 @@
 			files = (
 				9AC0C94519F7846F004F9D51 /* DatabaseHelper.m in Sources */,
 				9A5D6A4119CE87830051DB88 /* PTKAddressZip.m in Sources */,
+				9AB0434F19FCC670007BC71E /* MenuSectionHolder.m in Sources */,
 				9A5D6A8D19CE8A0B0051DB88 /* PKPayment+STPTestKeys.m in Sources */,
 				9AB0434619FCA91C007BC71E /* GTLStoreendpointStoreMenuItemModifier.m in Sources */,
 				9AB0433A19FCA91C007BC71E /* GTLStoreendpointOrder.m in Sources */,

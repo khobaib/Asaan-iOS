@@ -397,6 +397,7 @@
                     <navigationItem key="navigationItem" id="gOZ-I1-YeX"/>
                     <connections>
                         <outlet property="horizontalScroller" destination="fTt-Y0-lXS" id="thk-Vf-c4V"/>
+                        <outlet property="tableView" destination="rNr-yJ-iDS" id="36U-9V-fmM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NrS-Y5-yPh" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -8,7 +8,7 @@
 
 #import "MenuViewController.h"
 #import "MBProgressHUD.h"
-#import "GTLStoreendpoint.h"
+#import "MenuSectionHolder.h"
 
 @interface MenuViewController ()
 
@@ -19,8 +19,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.menuArray=[[NSMutableArray alloc]init];
-    self.menuPage=[[NSMutableArray alloc]init];
+    menuLevel0Array=[[NSMutableArray alloc]init];
+    menuPage=[[NSMutableArray alloc]init];
+    headerArray=[[NSMutableArray alloc]init];
+    tableDataArray=[[NSMutableArray alloc]init];
+    
     
     [self fetchMenu];
   //  self.menuArray=[@[@"Pen",@"Book",@"hand",@"food",@"pot",@"joint",@"mobile",@"latitude",@"uhaha",@"meu meu",@"meu"] mutableCopy];
@@ -40,25 +43,39 @@
         
     }
 
-    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreMenuItemsWithStoreId:1 firstPosition:0 maxResult:10];
+    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreMenuHierarchyAndItemsWithStoreId:1 menuType:0 maxResult:50];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 
-    [storeService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreMenuItemCollection *object,NSError *error){
+    [storeService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointMenusAndMenuItems *object,NSError *error){
        
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         if(error==nil){
             
+            menuHierarchyCollectionObject=object;
 
             
-            self.menuArray=[object.items mutableCopy];
-            
-            self.horizontalScroller.contentSize=CGSizeMake(120*self.menuArray.count, self.horizontalScroller.frame.size.height);
-            
-            for(int i=0;i<self.menuArray.count;i++){
-                [self.menuPage addObject:[NSNull null]];
+            for (int i=0; i<object.menusAndSubmenus.count; i++) {
+                GTLStoreendpointStoreMenuHierarchy *menu=[object.menusAndSubmenus objectAtIndex:i];
+                
+                if([menu.level intValue]==0){
+
+                    [menuLevel0Array addObject:menu];
+                }
             }
             
+            
+            self.horizontalScroller.contentSize=CGSizeMake(120*menuLevel0Array.count, self.horizontalScroller.frame.size.height);
+            
+            for(int i=0;i<menuLevel0Array.count;i++){
+                [menuPage addObject:[NSNull null]];
+            }
+             GTLStoreendpointStoreMenuHierarchy *menu=[object.menusAndSubmenus objectAtIndex:0];
+            
+            menuPosID=menu.menuPOSId;
+            
             [self loadVisibleMenu];
+            
+            [self changeDatasetForMenu];
 
         }else{
             NSLog(@"%@",[error userInfo]);
@@ -79,24 +96,24 @@
 }
 
 - (void)loadMenu:(NSInteger)page {
-    if (page < 0 || page >= self.menuArray.count) {
+    if (page < 0 || page >=menuLevel0Array.count) {
         // If it's outside the range of what you have to display, then do nothing
         return;
     }
     
     // 1
-    UIView *pageView = [self.menuPage objectAtIndex:page];
+    UIView *pageView = [menuPage objectAtIndex:page];
     if ((NSNull*)pageView == [NSNull null]) {
         // 2
         CGRect frame =CGRectMake(120*page, 0.0, 120, 140);
         
         
         
-        GTLStoreendpointStoreMenuItem *menu =[self.menuArray objectAtIndex:page];
+        GTLStoreendpointStoreMenuHierarchy *menu =[menuLevel0Array objectAtIndex:page];
         
         
         UILabel *lable=[[UILabel alloc]initWithFrame:CGRectMake(4, 4, 100, 40)];
-        lable.text=menu.menuName;
+        lable.text=menu.name;
         lable.numberOfLines=2;
         [lable setFont:[UIFont systemFontOfSize:12]];
         lable.textAlignment=NSTextAlignmentCenter;
@@ -119,7 +136,7 @@
         [view addGestureRecognizer:singleTap];
         [self.horizontalScroller addSubview:view];
         // 4
-        [self.menuPage replaceObjectAtIndex:page withObject:view];
+        [menuPage replaceObjectAtIndex:page withObject:view];
     }else{
         
     }
@@ -139,16 +156,16 @@
 }
 
 - (void)purgeMenu:(NSInteger)page {
-    if (page < 0 || page >= self.menuArray.count) {
+    if (page < 0 || page >= menuLevel0Array.count) {
         // If it's outside the range of what you have to display, then do nothing
         return;
     }
     
     // Remove a page from the scroll view and reset the container array
-    UIView *pageView = [self.menuPage objectAtIndex:page];
+    UIView *pageView = [menuPage objectAtIndex:page];
     if ((NSNull*)pageView != [NSNull null]) {
         [pageView removeFromSuperview];
-        [self.menuPage replaceObjectAtIndex:page withObject:[NSNull null]];
+        [menuPage replaceObjectAtIndex:page withObject:[NSNull null]];
     }
 }
 
@@ -169,12 +186,12 @@
     }
     
     // Load pages in our range
-    for (NSInteger i=0; i<=self.menuPage.count; i++) {
+    for (NSInteger i=0; i<=menuPage.count; i++) {
         [self loadMenu:i];
     }
     
     // Purge anything after the last page
-    for (NSInteger i=lastPage+1; i<self.menuPage.count; i++) {
+    for (NSInteger i=lastPage+1; i<menuPage.count; i++) {
         //[self purgeMenu:i];
     }
 }
@@ -192,9 +209,15 @@
 #pragma mark -uitableview delegate function
 
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    
+    return headerArray.count;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
  
-    return 5;
+    MenuSectionHolder *sectionOb=[headerArray objectAtIndex:section];
+    return sectionOb.items.count;
 }
 
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
@@ -202,11 +225,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+      MenuSectionHolder *holder=[headerArray objectAtIndex:indexPath.section];
+    
+     GTLStoreendpointStoreMenuItem *item=[holder.items objectAtIndex:indexPath.row];
+    
     UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"menu" forIndexPath:indexPath];
     
     UILabel *lable=(UILabel *)[cell viewWithTag:201];
     
-    lable.text=@"hehe";
+    lable.text=item.shortDescription;
     
     return cell;
 }
@@ -215,10 +242,7 @@
     return 40.0;
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    
-    return 3;
-}// Default is 1 if not implemented
+
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *view;
@@ -226,18 +250,56 @@
     view.backgroundColor=[UIColor redColor];
     
     UILabel *lable=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 30)];
-    lable.text=@"Amar Soup";
+    
+    MenuSectionHolder *holder=[headerArray objectAtIndex:section];
+    
+    lable.text=holder.headerMenu.shortDescription;
     
     [view addSubview:lable];
     
     return view;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section    // fixed font style. use custom view (UILabel) if {
-{
-    return @"Soup";
+
+
+#pragma mark -Init array for ui data
+
+-(void)removeDataFromArray{
+    [menuLevel0Array removeAllObjects];
+    [menuPage removeAllObjects];
+    [tableDataArray removeAllObjects];
+    [headerArray removeAllObjects];
 }
 
+
+-(void)changeDatasetForMenu{
+    [self removeDataFromArray];
+    
+    NSArray *array = menuHierarchyCollectionObject.menuItems;
+    for(int i=0;i<array.count;i++){
+        
+        GTLStoreendpointStoreMenuItem *item=[array objectAtIndex:i];
+        
+        if([item.level intValue]==1 && item.menuPOSId==menuPosID){
+            MenuSectionHolder *section=[[MenuSectionHolder alloc]init];
+            section.headerMenu=item;
+            
+            for(int j=0;j<array.count;j++){
+                 GTLStoreendpointStoreMenuItem *item2=[array objectAtIndex:j];
+                
+                
+                if([item2.subMenuPOSId intValue]==[item.subMenuPOSId intValue] && [item2.level intValue]==2){
+                    [section.items addObject:item2];
+                }
+                
+            }
+            [headerArray addObject:section];
+        }
+    }
+    
+    
+    [self.tableView reloadData];
+}
 
 
 
