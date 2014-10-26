@@ -57,32 +57,11 @@ static NSString * const kClientId = @"622430232205-vjs2qkqr73saoov2vacspnctvig7n
    // [PFUser logOut];
     //[[GPPSignIn sharedInstance] signOut];
     
-    [self test];
     
     
     
 }
 
-
--(void)test{
-    static GTLServiceStoreendpoint *storeService=nil;
-    
-    if(!storeService){
-        storeService=[[GTLServiceStoreendpoint alloc]init];
-        storeService.retryEnabled=YES;
-        
-        
-    }
-    
-    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreMenuItemsForMenuWithStoreId:1 menuPOSId:1];
-    
-  
-    [storeService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLObject *object,NSError *error){
-        
-        NSLog(@"%@",object.JSONString);
-        
-    }];
-}
 
 
 -(void)viewWillAppear:(BOOL)animated{

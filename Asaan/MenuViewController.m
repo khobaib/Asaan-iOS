@@ -22,6 +22,7 @@
     self.menuArray=[[NSMutableArray alloc]init];
     self.menuPage=[[NSMutableArray alloc]init];
     
+    [self fetchMenu];
   //  self.menuArray=[@[@"Pen",@"Book",@"hand",@"food",@"pot",@"joint",@"mobile",@"latitude",@"uhaha",@"meu meu",@"meu"] mutableCopy];
     
  }
@@ -39,13 +40,15 @@
         
     }
 
-    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreMenuItemsWithStoreId:1];
+    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreMenuItemsWithStoreId:1 firstPosition:0 maxResult:10];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 
     [storeService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreMenuItemCollection *object,NSError *error){
        
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         if(error==nil){
+            
+
             
             self.menuArray=[object.items mutableCopy];
             
@@ -89,10 +92,11 @@
         
         
         
+        GTLStoreendpointStoreMenuItem *menu =[self.menuArray objectAtIndex:page];
         
         
         UILabel *lable=[[UILabel alloc]initWithFrame:CGRectMake(4, 4, 100, 40)];
-        lable.text=@"new";//[self.menuData objectAtIndex:page];
+        lable.text=menu.menuName;
         lable.numberOfLines=2;
         [lable setFont:[UIFont systemFontOfSize:12]];
         lable.textAlignment=NSTextAlignmentCenter;

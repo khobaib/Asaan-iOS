@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryStoreendpoint (21 custom class methods, 3 custom properties)
+//   GTLQueryStoreendpoint (21 custom class methods, 7 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLQuery.h"
@@ -43,7 +43,11 @@
 //
 // Method-specific parameters; see the comments below for more information.
 //
+@property (assign) NSInteger firstPosition;
+@property (assign) NSInteger maxResult;
+@property (assign) long long menuItemPOSId;
 @property (assign) long long menuPOSId;
+@property (assign) long long menuType;
 @property (assign) long long storeId;
 
 #pragma mark -
@@ -54,38 +58,56 @@
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 // Fetches a GTLStoreendpointStoreSummaryStatsCollection.
-+ (id)queryForGetStatsForAllStores;
++ (id)queryForGetStatsForAllStoresWithFirstPosition:(NSInteger)firstPosition
+                                          maxResult:(NSInteger)maxResult;
 
 // Method: storeendpoint.getStoreImages
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 // Fetches a GTLStoreendpointStoreImageCollection.
-+ (id)queryForGetStoreImagesWithStoreId:(long long)storeId;
++ (id)queryForGetStoreImagesWithStoreId:(long long)storeId
+                          firstPosition:(NSInteger)firstPosition
+                              maxResult:(NSInteger)maxResult;
+
+// Method: storeendpoint.getStoreMenuHierarchyAndItems
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
+// Fetches a GTLStoreendpointMenusAndMenuItems.
++ (id)queryForGetStoreMenuHierarchyAndItemsWithStoreId:(long long)storeId
+                                              menuType:(long long)menuType
+                                             maxResult:(NSInteger)maxResult;
 
 // Method: storeendpoint.getStoreMenuItemModifiers
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 // Fetches a GTLStoreendpointMenuItemModifiersAndGroups.
-+ (id)queryForGetStoreMenuItemModifiersWithStoreId:(long long)storeId;
++ (id)queryForGetStoreMenuItemModifiersWithStoreId:(long long)storeId
+                                     menuItemPOSId:(long long)menuItemPOSId;
 
 // Method: storeendpoint.getStoreMenuItems
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 // Fetches a GTLStoreendpointStoreMenuItemCollection.
-+ (id)queryForGetStoreMenuItemsWithStoreId:(long long)storeId;
++ (id)queryForGetStoreMenuItemsWithStoreId:(long long)storeId
+                             firstPosition:(NSInteger)firstPosition
+                                 maxResult:(NSInteger)maxResult;
 
 // Method: storeendpoint.getStoreMenuItemsForMenu
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 // Fetches a GTLStoreendpointStoreMenuItemCollection.
 + (id)queryForGetStoreMenuItemsForMenuWithStoreId:(long long)storeId
-                                        menuPOSId:(long long)menuPOSId;
+                                        menuPOSId:(long long)menuPOSId
+                                    firstPosition:(NSInteger)firstPosition
+                                        maxResult:(NSInteger)maxResult;
 
 // Method: storeendpoint.getStoreMenus
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 // Fetches a GTLStoreendpointStoreMenuHierarchyCollection.
-+ (id)queryForGetStoreMenusWithStoreId:(long long)storeId;
++ (id)queryForGetStoreMenusWithStoreId:(long long)storeId
+                         firstPosition:(NSInteger)firstPosition
+                             maxResult:(NSInteger)maxResult;
 
 // Method: storeendpoint.getStoreOwners
 //  Authorization scope(s):
@@ -97,20 +119,14 @@
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 // Fetches a GTLStoreendpointStoreCollection.
-+ (id)queryForGetStores;
++ (id)queryForGetStoresWithFirstPosition:(NSInteger)firstPosition
+                               maxResult:(NSInteger)maxResult;
 
 // Method: storeendpoint.getStoreStats
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 // Fetches a GTLStoreendpointStoreSummaryStats.
 + (id)queryForGetStoreStatsWithStoreId:(long long)storeId;
-
-// Method: storeendpoint.getStoreSubmenusForMenu
-//  Authorization scope(s):
-//   kGTLAuthScopeStoreendpointUserinfoEmail
-// Fetches a GTLStoreendpointStoreMenuHierarchyCollection.
-+ (id)queryForGetStoreSubmenusForMenuWithStoreId:(long long)storeId
-                                       menuPOSId:(long long)menuPOSId;
 
 // Method: storeendpoint.placeOrder
 //  Authorization scope(s):

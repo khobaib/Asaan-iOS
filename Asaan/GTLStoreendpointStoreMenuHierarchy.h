@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStoreMenuHierarchy (0 custom class methods, 12 custom properties)
+//   GTLStoreendpointStoreMenuHierarchy (0 custom class methods, 13 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLObject.h"
@@ -35,6 +35,7 @@
 @property (retain) NSNumber *identifier;  // longLongValue
 
 @property (retain) NSNumber *level;  // longLongValue
+@property (retain) NSNumber *menuItemCount;  // longLongValue
 @property (retain) NSNumber *menuItemPosition;  // longLongValue
 @property (retain) NSNumber *menuPOSId;  // longLongValue
 @property (retain) NSNumber *menuType;  // longLongValue

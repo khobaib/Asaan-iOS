@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStoreMenuItem (0 custom class methods, 25 custom properties)
+//   GTLStoreendpointStoreMenuItem (0 custom class methods, 26 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLObject.h"
@@ -33,6 +33,7 @@
 @property (retain) NSNumber *createdDate;  // longLongValue
 @property (retain) NSNumber *glutenFree;  // boolValue
 @property (retain) NSNumber *halal;  // boolValue
+@property (retain) NSNumber *hasModifiers;  // boolValue
 @property (retain) NSNumber *heatIndex;  // longLongValue
 
 // identifier property maps to 'id' in JSON (to avoid Objective C's 'id').

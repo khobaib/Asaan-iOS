@@ -104,7 +104,7 @@
 
     }
     
-    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStores];
+    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoresWithFirstPosition:0 maxResult:10];
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [storeService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreCollection *object,NSError *error){
@@ -112,7 +112,7 @@
 
         if(!error){
             
-             NSLog(@"%@",object.JSONString);
+
             resturantList=[object.items mutableCopy];
               isServerData=YES;
             [self.tableView reloadData];
@@ -120,7 +120,7 @@
             if([DatabaseHelper saveUpdateStores:resturantList]){
                 NSDate *currentdate=[NSDate date] ;
                 
-                NSLog(@"%@",currentdate);
+
                 
                 [[NSUserDefaults standardUserDefaults]setObject:currentdate forKey:@"resturantListUpdateTime"];
                 [[NSUserDefaults standardUserDefaults] synchronize];

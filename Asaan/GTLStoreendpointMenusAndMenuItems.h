@@ -3,17 +3,17 @@
  */
 
 //
-//  GTLPersonendpointSessionTokenWrapper.h
+//  GTLStoreendpointMenusAndMenuItems.h
 //
 
 // ----------------------------------------------------------------------------
 // NOTE: This file is generated from Google APIs Discovery Service.
 // Service:
-//   personendpoint/v1
+//   storeendpoint/v1
 // Description:
 //   This is an API
 // Classes:
-//   GTLPersonendpointSessionTokenWrapper (0 custom class methods, 1 custom properties)
+//   GTLStoreendpointMenusAndMenuItems (0 custom class methods, 2 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLObject.h"
@@ -21,11 +21,15 @@
   #import "GTLObject.h"
 #endif
 
+@class GTLStoreendpointStoreMenuHierarchy;
+@class GTLStoreendpointStoreMenuItem;
+
 // ----------------------------------------------------------------------------
 //
-//   GTLPersonendpointSessionTokenWrapper
+//   GTLStoreendpointMenusAndMenuItems
 //
 
-@interface GTLPersonendpointSessionTokenWrapper : GTLObject
-@property (copy) NSString *sessionToken;
+@interface GTLStoreendpointMenusAndMenuItems : GTLObject
+@property (retain) NSArray *menuItems;  // of GTLStoreendpointStoreMenuItem
+@property (retain) NSArray *menusAndSubmenus;  // of GTLStoreendpointStoreMenuHierarchy
 @end

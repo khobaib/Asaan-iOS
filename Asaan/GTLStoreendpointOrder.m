@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointOrder (0 custom class methods, 18 custom properties)
+//   GTLStoreendpointOrder (0 custom class methods, 20 custom properties)
 
 #import "GTLStoreendpointOrder.h"
 
@@ -25,8 +25,9 @@
 @implementation GTLStoreendpointOrder
 @dynamic closeDate, createdDate, discount, discountDescription, gratuity,
          identifier, invoiceNumber, modifiedDate, paymentApprovalToken,
-         paymentProvider, paymentType, posticket, serverId, serviceCharge,
-         status, storeId, tax, totalAmount;
+         paymentProvider, paymentType, poscheckId, serverFirstName,
+         serverLastName, serverPOSId, serviceCharge, status, storeId, tax,
+         totalAmount;
 
 + (NSDictionary *)propertyToJSONKeyMap {
   NSDictionary *map =
