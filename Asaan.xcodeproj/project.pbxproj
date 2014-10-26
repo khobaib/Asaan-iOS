@@ -125,6 +125,7 @@
 		9AB0434B19FCA91C007BC71E /* GTLStoreendpointStoreSummaryStats.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB0433119FCA91C007BC71E /* GTLStoreendpointStoreSummaryStats.m */; };
 		9AB0434C19FCA91C007BC71E /* GTLStoreendpointStoreSummaryStatsCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB0433319FCA91C007BC71E /* GTLStoreendpointStoreSummaryStatsCollection.m */; };
 		9AB0434F19FCC670007BC71E /* MenuSectionHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB0434E19FCC670007BC71E /* MenuSectionHolder.m */; };
+		9AB0435219FCE670007BC71E /* PlaceOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB0435119FCE670007BC71E /* PlaceOrderViewController.m */; };
 		9AB3A90C19C9870E00C98D8D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB3A90B19C9870E00C98D8D /* AudioToolbox.framework */; };
 		9AB3A90F19C9872900C98D8D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1F29D919BED9B500CBF581 /* CoreLocation.framework */; };
 		9AB3A91119C9873700C98D8D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB3A91019C9873700C98D8D /* libz.dylib */; };
@@ -333,6 +334,8 @@
 		9AB0433319FCA91C007BC71E /* GTLStoreendpointStoreSummaryStatsCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreSummaryStatsCollection.m; sourceTree = "<group>"; };
 		9AB0434D19FCC670007BC71E /* MenuSectionHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuSectionHolder.h; sourceTree = "<group>"; };
 		9AB0434E19FCC670007BC71E /* MenuSectionHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuSectionHolder.m; sourceTree = "<group>"; };
+		9AB0435019FCE670007BC71E /* PlaceOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceOrderViewController.h; sourceTree = "<group>"; };
+		9AB0435119FCE670007BC71E /* PlaceOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceOrderViewController.m; sourceTree = "<group>"; };
 		9AB3A90919C986F900C98D8D /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		9AB3A90B19C9870E00C98D8D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		9AB3A90D19C9871800C98D8D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -566,6 +569,8 @@
 		9A59722519CEDEAF00333E7A /* Helper Classes */ = {
 			isa = PBXGroup;
 			children = (
+				9AB0434D19FCC670007BC71E /* MenuSectionHolder.h */,
+				9AB0434E19FCC670007BC71E /* MenuSectionHolder.m */,
 				9AC0C94319F7846F004F9D51 /* DatabaseHelper.h */,
 				9AC0C94419F7846F004F9D51 /* DatabaseHelper.m */,
 			);
@@ -751,6 +756,8 @@
 				9AF9C4CE19D184ED00E85A39 /* ResturantDetailViewController.m */,
 				9AC0C95519F7CB7C004F9D51 /* MenuViewController.h */,
 				9AC0C95619F7CB7C004F9D51 /* MenuViewController.m */,
+				9AB0435019FCE670007BC71E /* PlaceOrderViewController.h */,
+				9AB0435119FCE670007BC71E /* PlaceOrderViewController.m */,
 				9A1F2A1219BEEA0B00CBF581 /* SignupViewController.h */,
 				9A1F2A1319BEEA0C00CBF581 /* SignupViewController.m */,
 				9A59722C19CEF59C00333E7A /* PaymentInfo.h */,
@@ -761,8 +768,6 @@
 				9A1F2A1919BEFF1100CBF581 /* ProfileViewController.m */,
 				9A9E503D19D2CB05001F2C64 /* LoginViewController.h */,
 				9A9E503E19D2CB05001F2C64 /* LoginViewController.m */,
-				9AB0434D19FCC670007BC71E /* MenuSectionHolder.h */,
-				9AB0434E19FCC670007BC71E /* MenuSectionHolder.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -976,6 +981,7 @@
 				9AB0434419FCA91C007BC71E /* GTLStoreendpointStoreMenuItem.m in Sources */,
 				9A9E503F19D2CB05001F2C64 /* LoginViewController.m in Sources */,
 				9AB0434519FCA91C007BC71E /* GTLStoreendpointStoreMenuItemCollection.m in Sources */,
+				9AB0435219FCE670007BC71E /* PlaceOrderViewController.m in Sources */,
 				9AB0433419FCA91C007BC71E /* GTLQueryStoreendpoint.m in Sources */,
 				9A5D6A4719CE87830051DB88 /* PTKTextField.m in Sources */,
 				9AB0434B19FCA91C007BC71E /* GTLStoreendpointStoreSummaryStats.m in Sources */,

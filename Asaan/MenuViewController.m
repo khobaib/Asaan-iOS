@@ -9,6 +9,7 @@
 #import "MenuViewController.h"
 #import "MBProgressHUD.h"
 #import "MenuSectionHolder.h"
+#import "PlaceOrderViewController.h"
 
 @interface MenuViewController ()
 
@@ -207,6 +208,22 @@
 
 
 #pragma mark -uitableview delegate function
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    MenuSectionHolder *section=[headerArray objectAtIndex:indexPath.section];
+    GTLStoreendpointStoreMenuItem *item=[section.items objectAtIndex:indexPath.row];
+    
+    PlaceOrderViewController *povc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"orderview"];
+    
+    
+    povc.item=item;
+    
+    [self.navigationController pushViewController:povc animated:YES];
+    
+    
+}
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
