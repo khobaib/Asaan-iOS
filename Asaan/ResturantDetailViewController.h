@@ -7,15 +7,25 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
+#import "GTLStoreendpoint.h"
 
-@interface ResturantDetailViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
+
+@interface ResturantDetailViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>{
+
+    BOOL isReview;
+}
 
 @property IBOutlet UIView *containerView;
 @property IBOutlet UITableView *tableView;
 @property IBOutlet UISegmentedControl *segment;
 
+@property IBOutlet UILabel *addressLable;
+@property IBOutlet UILabel *phoneNoLable;
+@property IBOutlet MKMapView *mapView;
 
 
+@property GTLStoreendpointStore *store;
 
 
 @end

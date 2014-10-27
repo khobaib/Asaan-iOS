@@ -126,6 +126,9 @@
 		9AB0434C19FCA91C007BC71E /* GTLStoreendpointStoreSummaryStatsCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB0433319FCA91C007BC71E /* GTLStoreendpointStoreSummaryStatsCollection.m */; };
 		9AB0434F19FCC670007BC71E /* MenuSectionHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB0434E19FCC670007BC71E /* MenuSectionHolder.m */; };
 		9AB0435219FCE670007BC71E /* PlaceOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB0435119FCE670007BC71E /* PlaceOrderViewController.m */; };
+		9AB300FF19FE21ED00AE45D1 /* RateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB300FE19FE21ED00AE45D1 /* RateView.m */; };
+		9AB3010319FE22E400AE45D1 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AB3010119FE22E400AE45D1 /* star.png */; };
+		9AB3010419FE22E400AE45D1 /* starhighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AB3010219FE22E400AE45D1 /* starhighlighted.png */; };
 		9AB3A90C19C9870E00C98D8D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB3A90B19C9870E00C98D8D /* AudioToolbox.framework */; };
 		9AB3A90F19C9872900C98D8D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1F29D919BED9B500CBF581 /* CoreLocation.framework */; };
 		9AB3A91119C9873700C98D8D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB3A91019C9873700C98D8D /* libz.dylib */; };
@@ -336,6 +339,10 @@
 		9AB0434E19FCC670007BC71E /* MenuSectionHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuSectionHolder.m; sourceTree = "<group>"; };
 		9AB0435019FCE670007BC71E /* PlaceOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceOrderViewController.h; sourceTree = "<group>"; };
 		9AB0435119FCE670007BC71E /* PlaceOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceOrderViewController.m; sourceTree = "<group>"; };
+		9AB300FD19FE21EC00AE45D1 /* RateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateView.h; sourceTree = "<group>"; };
+		9AB300FE19FE21ED00AE45D1 /* RateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateView.m; sourceTree = "<group>"; };
+		9AB3010119FE22E400AE45D1 /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
+		9AB3010219FE22E400AE45D1 /* starhighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = starhighlighted.png; sourceTree = "<group>"; };
 		9AB3A90919C986F900C98D8D /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		9AB3A90B19C9870E00C98D8D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		9AB3A90D19C9871800C98D8D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -412,7 +419,6 @@
 			isa = PBXGroup;
 			children = (
 				9A1F29A419BED4C900CBF581 /* Asaan */,
-				9A1F2A1719BEFCAA00CBF581 /* images */,
 				9A1F29E519BEDA1500CBF581 /* Imported Frameworks */,
 				9A7F20B319C806CD00FE7929 /* Libs */,
 				9A1F29C319BED4CA00CBF581 /* AsaanTests */,
@@ -469,6 +475,7 @@
 				9A1F29AE19BED4C900CBF581 /* AppDelegate.m */,
 				9A8A5F1E19F3809B00B876F2 /* Model */,
 				9A1F29B019BED4C900CBF581 /* Main.storyboard */,
+				9A1F2A1719BEFCAA00CBF581 /* images */,
 				9A9E504119D2CB1D001F2C64 /* ViewControllers */,
 				9A59722519CEDEAF00333E7A /* Helper Classes */,
 				9A1F29B619BED4CA00CBF581 /* Images.xcassets */,
@@ -519,6 +526,8 @@
 		9A1F2A1719BEFCAA00CBF581 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				9AB3010119FE22E400AE45D1 /* star.png */,
+				9AB3010219FE22E400AE45D1 /* starhighlighted.png */,
 				9A9E504319D2DE6F001F2C64 /* splash2.png */,
 				9A9E504219D2DE5F001F2C64 /* splash1.png */,
 				9A9E503919D2C951001F2C64 /* F_icon.svg.png */,
@@ -543,7 +552,6 @@
 				9AA9835A19D29DDE00178BDD /* landingpage2.png */,
 			);
 			name = images;
-			path = Asaan;
 			sourceTree = "<group>";
 		};
 		9A3D8AFB19CD7DA200BE1F25 /* ParseFB */ = {
@@ -724,6 +732,8 @@
 		9A7F20B319C806CD00FE7929 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				9AB300FD19FE21EC00AE45D1 /* RateView.h */,
+				9AB300FE19FE21ED00AE45D1 /* RateView.m */,
 				9A5B179D19F8D10D00722E4A /* GAEEndpoint */,
 				9AB8389219CFF39E00F7D334 /* MBProgressHUD */,
 				9A5D6A7A19CE89F90051DB88 /* Stripe */,
@@ -874,6 +884,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A5D6A5A19CE87830051DB88 /* visa.png in Resources */,
+				9AB3010419FE22E400AE45D1 /* starhighlighted.png in Resources */,
 				9A9E502219D2AE1F001F2C64 /* asaanTopLogo.png in Resources */,
 				9A9E502919D2B8EC001F2C64 /* address.png in Resources */,
 				9A9E502619D2B7A7001F2C64 /* resturantDetailDemo.png in Resources */,
@@ -884,6 +895,7 @@
 				9A9E503619D2BEE4001F2C64 /* money.png in Resources */,
 				9AA9835B19D29DDE00178BDD /* landingpage2.png in Resources */,
 				9A5D6A5019CE87830051DB88 /* diners.png in Resources */,
+				9AB3010319FE22E400AE45D1 /* star.png in Resources */,
 				9A5D6A5119CE87830051DB88 /* diners@2x.png in Resources */,
 				9A5D6A4B19CE87830051DB88 /* amex@2x.png in Resources */,
 				9A4DA0E919CD940E002EEA67 /* GooglePlus.bundle in Resources */,
@@ -977,6 +989,7 @@
 				9AB0433A19FCA91C007BC71E /* GTLStoreendpointOrder.m in Sources */,
 				9AC0C95119F79971004F9D51 /* StoreImage.m in Sources */,
 				9A5D6A8F19CE8A0B0051DB88 /* STPCard.m in Sources */,
+				9AB300FF19FE21ED00AE45D1 /* RateView.m in Sources */,
 				9A5D6A4819CE87830051DB88 /* PTKUSAddressZip.m in Sources */,
 				9AB0434419FCA91C007BC71E /* GTLStoreendpointStoreMenuItem.m in Sources */,
 				9A9E503F19D2CB05001F2C64 /* LoginViewController.m in Sources */,

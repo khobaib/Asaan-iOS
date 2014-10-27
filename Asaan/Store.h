@@ -8,9 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "GTLStoreendpoint.h"
 
 
 @interface Store : NSManagedObject
+
++(GTLStoreendpointStore *)gtlStoreFromStore:(Store *)store;
+
 
 @property (nonatomic, retain) NSString * address;
 @property (nonatomic, retain) NSString * backgroundimagethumbnilurl;

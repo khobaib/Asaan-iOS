@@ -14,6 +14,8 @@
 #import "DatabaseHelper.h"
 #import "GTLStoreendpoint.h"
 #import "GTMHTTPFetcher.h"
+#import "ResturantDetailViewController.h"
+
 #define METERS_PER_MILE 1609.344
 
 
@@ -280,6 +282,19 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    ResturantDetailViewController *resturantDetail=[segue destinationViewController];
+    
+    NSIndexPath *indexPath=[self.tableView indexPathForSelectedRow];
+    
+    
+    if(isServerData){
+         resturantDetail.store=[resturantList objectAtIndex:indexPath.row];
+       
+    }else{
+         Store *store=[resturantList objectAtIndex:indexPath.row];
+        resturantDetail.store=[Store gtlStoreFromStore:store];
+    }
+    
     
     NSLog(@"%f  %f",locationManager.location.coordinate.latitude,locationManager.location.coordinate.longitude);
     

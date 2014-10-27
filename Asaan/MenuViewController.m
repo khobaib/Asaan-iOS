@@ -44,7 +44,7 @@
         
     }
 
-    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreMenuHierarchyAndItemsWithStoreId:1 menuType:0 maxResult:50];
+    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreMenuHierarchyAndItemsWithStoreId:[self.store.identifier intValue] menuType:0 maxResult:50];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 
     [storeService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointMenusAndMenuItems *object,NSError *error){

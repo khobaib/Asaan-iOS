@@ -29,7 +29,7 @@
 
 
 @property (strong,nonatomic) IBOutlet UIScrollView *horizontalScroller;
-@property NSNumber *storeID;
+@property GTLStoreendpointStore *store;
 
 @property IBOutlet UITableView *tableView;
 

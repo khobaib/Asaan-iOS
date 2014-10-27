@@ -458,7 +458,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mUc-lW-ymG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2853" y="632"/>
+            <point key="canvasLocation" x="-2513" y="640"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="FQb-31-96w">
@@ -537,7 +537,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NrS-Y5-yPh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2421" y="622"/>
+            <point key="canvasLocation" x="-1142" y="626"/>
         </scene>
         <!--Restaurant List-->
         <scene sceneID="BcN-U0-mgx">
@@ -605,9 +605,6 @@
                                                     <state key="normal" title="Menu">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
-                                                    <connections>
-                                                        <segue destination="rsI-t2-Ppw" kind="push" id="TUo-q2-b9o"/>
-                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -821,6 +818,8 @@
                                 <segments>
                                     <segment title="Info"/>
                                     <segment title="History"/>
+                                    <segment title="Reviews"/>
+                                    <segment title="Menu"/>
                                 </segments>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -911,6 +910,40 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReviewList" rowHeight="85" id="HMD-vt-F4p">
+                                        <rect key="frame" x="0.0" y="22" width="306" height="90"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HMD-vt-F4p" id="1pz-ck-dvW">
+                                            <rect key="frame" x="0.0" y="0.0" width="306" height="90"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bLW-9J-NGB">
+                                                    <rect key="frame" x="0.0" y="74" width="306" height="9"/>
+                                                    <color key="backgroundColor" red="0.40232252039999999" green="0.40232252039999999" blue="0.40232252039999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                </view>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="person_placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="jyv-xe-bR9">
+                                                    <rect key="frame" x="8" y="11" width="50" height="50"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="efd-TS-m3E">
+                                                    <rect key="frame" x="71" y="11" width="125" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Review" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="150" translatesAutoresizingMaskIntoConstraints="NO" id="Vvf-rU-AOf">
+                                                    <rect key="frame" x="71" y="35" width="170" height="40"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mQW-N1-jPM" customClass="RateView">
+                                                    <rect key="frame" x="212" y="7" width="90" height="25"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </view>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.59069483240223464" green="0.59069483240223464" blue="0.59069483240223464" alpha="1" colorSpace="calibratedRGB"/>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="jld-oo-V7s" id="j7B-vu-k2g"/>
@@ -941,14 +974,18 @@
                     </view>
                     <navigationItem key="navigationItem" id="PAX-5i-JQt"/>
                     <connections>
+                        <outlet property="addressLable" destination="Bpm-QO-bQi" id="oE9-8p-PaG"/>
                         <outlet property="containerView" destination="oKW-jp-ZFn" id="EAc-eR-au9"/>
+                        <outlet property="mapView" destination="a9M-ax-2wC" id="zHv-BL-GVr"/>
+                        <outlet property="phoneNoLable" destination="7MJ-cq-Y5l" id="AHI-MQ-S4O"/>
                         <outlet property="segment" destination="9pH-SI-DkK" id="AmB-N3-3Ik"/>
                         <outlet property="tableView" destination="lbh-dO-Pqh" id="Tr5-lO-4jp"/>
+                        <segue destination="rsI-t2-Ppw" kind="push" identifier="menusegu" id="fVK-Dl-kFv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RtJ-iM-stk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1551" y="626"/>
+            <point key="canvasLocation" x="-1612" y="626"/>
         </scene>
         <!--Information-->
         <scene sceneID="nGC-ie-qBY">
