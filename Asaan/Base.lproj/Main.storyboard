@@ -918,7 +918,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bLW-9J-NGB">
-                                                    <rect key="frame" x="0.0" y="74" width="306" height="9"/>
+                                                    <rect key="frame" x="0.0" y="74" width="306" height="11"/>
                                                     <color key="backgroundColor" red="0.40232252039999999" green="0.40232252039999999" blue="0.40232252039999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 </view>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="person_placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="jyv-xe-bR9">
