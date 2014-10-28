@@ -110,7 +110,6 @@
             UIAlertView *alert1=[[UIAlertView alloc]initWithTitle:@"Error" message:[error.userInfo description] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert1 show];
         } else {
-            NSLog(@"%@ \n %@",token.card.name,token.card.fingerprint);
             PFObject *tokenOb=[PFObject objectWithClassName:@"UserStripeCard"];
             
             [self addPfObject:tokenOb forKey:@"address_city" value:token.card.addressCity];
