@@ -64,8 +64,8 @@
                 }
             }
             
-            
-            self.horizontalScroller.contentSize=CGSizeMake(120*menuLevel0Array.count, self.horizontalScroller.frame.size.height);
+            [self setMenuWidth];
+           
             
             for(int i=0;i<menuLevel0Array.count;i++){
                 [menuPage addObject:[NSNull null]];
@@ -90,6 +90,23 @@
    
 }
 
+
+-(void)setMenuWidth{
+    
+    CGFloat screenWidth=[UIScreen mainScreen].bounds.size.width;
+    
+     CGFloat temp=screenWidth/menuLevel0Array.count;
+    if(temp<120.0){
+        menuWidth=120;
+    }else{
+        menuWidth=temp;
+    }
+    
+
+    
+     self.horizontalScroller.contentSize=CGSizeMake(menuWidth*menuLevel0Array.count, self.horizontalScroller.frame.size.height);
+}
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     // Load the pages that are now on screen
     
@@ -107,9 +124,9 @@
     if ((NSNull*)pageView == [NSNull null]) {
       
         GTLStoreendpointStoreMenuHierarchy *menu =[menuLevel0Array objectAtIndex:page];
-        pageView=[[UIView alloc]initWithFrame:CGRectMake(120*page, 0, 110, 50)];
+        pageView=[[UIView alloc]initWithFrame:CGRectMake(menuWidth*page, 0, menuWidth, 50)];
         
-        UILabel *lable=[[UILabel alloc]initWithFrame:CGRectMake(120*page+4, 4, 100, 40)];
+        UILabel *lable=[[UILabel alloc]initWithFrame:CGRectMake(4, 4, menuWidth-10, 40)];
         lable.text=menu.name;
         lable.numberOfLines=2;
         [lable setFont:[UIFont systemFontOfSize:12]];
@@ -216,6 +233,7 @@
     povc.item=item;
     
     [self.navigationController pushViewController:povc animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
     
 }

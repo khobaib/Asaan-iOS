@@ -23,6 +23,8 @@
      NSMutableArray *tableDataArray;
     
     
+    CGFloat menuWidth;
+    
     GTLStoreendpointMenusAndMenuItems *menuHierarchyCollectionObject;
 }
 

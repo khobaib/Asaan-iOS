@@ -296,7 +296,7 @@
     }
     
     
-    NSLog(@"%f  %f",locationManager.location.coordinate.latitude,locationManager.location.coordinate.longitude);
+
     
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
 }

@@ -54,10 +54,21 @@
     if(!storeService){
         storeService=[[GTLServiceStoreendpoint alloc]init];
         storeService.retryEnabled=YES;
-        
-        
     }
     
+    NSString *orderString=[NSString stringWithFormat:@"<CHECKREQUESTS> <ADDCHECK TABLENUMBER=\"TableNumber\" EXTCHECKID=\"Asaan\" READYTIME=\"18:45\" READYDATETIME=\"\" NOTE=\"Need Extra Spicy\" ORDERMODEFEE=\"\" ORDERID=\"\" PRICEONLY=\"\" ORDERMODE=\"Delivery\"> <ITEMREQUESTS>                           <ADDITEM QTY=\"1\" ITEMID=\"7007\" FOR=\"Khobaib\" >  <MODITEM ITEMID=\"90204\" /> </ADDITEM> </ITEMREQUESTS> </ADDCHECK>                           <PAYMENTREQUESTS> DDTENDER TENDERID=\"AsaanTenderId\" AMOUNT=\"10.00\" TIP=\"1.50\" TOKEN=\"hadkahahoaasdasjdhaod\" />                           </PAYMENTREQUESTS>  </CHECKREQUESTS>"];
+    
+   // NSLog(@"%@",orderString);
+ 
+    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForPlaceOrderWithStoreId:[self.item.storeId intValue]  order:orderString];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    [storeService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreMenuItem *object,NSError *error){
+        
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        
+        NSLog(@"%@",[error userInfo]);
+    }];
     
 }
 
@@ -78,9 +89,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    
-
-
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
