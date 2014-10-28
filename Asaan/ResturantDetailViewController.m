@@ -61,6 +61,11 @@
     // Do any additional setup after loading the view.
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    [self segmentControlInit];
+}
 
 -(void)setValueOnUI{
     self.addressLable.text=self.store.address;
@@ -80,6 +85,7 @@
     if(segment.selectedSegmentIndex==3){
     
         [self performSegueWithIdentifier:@"menusegu" sender:self];
+        
         
         return;
     }
@@ -136,12 +142,17 @@
         
         selectedView.backgroundColor=[UIColor colorWithRed:(103.0/255.0) green:(103.0/255.0) blue:(103.0/255.0) alpha:1];
         
-        UIView *viewTop=[[UIView alloc]initWithFrame:CGRectMake(0, 0, cell.frame.size.width, 79)];
+        UIView *viewTop=[[UIView alloc]initWithFrame:CGRectMake(0, 0, cell.frame.size.width, 74)];
         
         viewTop.backgroundColor = [UIColor grayColor];
         [selectedView addSubview:viewTop];
         
         cell.selectedBackgroundView =  selectedView;
+        
+        
+        RateView *rate=(RateView *)[cell viewWithTag:405];
+        [self rateview:rate rating:4];
+        
         
         return cell;
         
@@ -168,6 +179,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 -(void)rateview:(RateView *)starRater rating:(float)rating{

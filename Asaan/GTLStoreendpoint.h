@@ -17,10 +17,6 @@
 
 #import "GTLStoreendpointMenuItemModifiersAndGroups.h"
 #import "GTLStoreendpointMenusAndMenuItems.h"
-#import "GTLStoreendpointOrder.h"
-#import "GTLStoreendpointOrderCustomer.h"
-#import "GTLStoreendpointOrderItem.h"
-#import "GTLStoreendpointOrderItemsAndCustomers.h"
 #import "GTLStoreendpointStore.h"
 #import "GTLStoreendpointStoreCollection.h"
 #import "GTLStoreendpointStoreImage.h"

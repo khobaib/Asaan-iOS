@@ -473,38 +473,56 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fTt-Y0-lXS">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="65" id="nFr-fk-F34"/>
+                                    <constraint firstAttribute="height" constant="50" id="nFr-fk-F34"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="delegate" destination="rsI-t2-Ppw" id="3FK-eB-Nlh"/>
                                 </connections>
                             </scrollView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="91" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="rNr-yJ-iDS">
-                                <rect key="frame" x="0.0" y="65" width="320" height="439"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="111" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="rNr-yJ-iDS">
+                                <rect key="frame" x="0.0" y="50" width="320" height="454"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="menu" rowHeight="91" id="NhE-tv-o2w">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="menu" rowHeight="111" id="NhE-tv-o2w">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NhE-tv-o2w" id="gTd-a4-WJv">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="201" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="keB-fP-u09">
-                                                    <rect key="frame" x="14" y="11" width="196" height="32"/>
+                                                    <rect key="frame" x="11" y="13" width="196" height="23"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="201" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jwd-LO-u7t">
-                                                    <rect key="frame" x="18" y="44" width="128" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="202" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jwd-LO-u7t">
+                                                    <rect key="frame" x="14" y="52" width="220" height="41"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.3404715401785714" green="0.3404715401785714" blue="0.3404715401785714" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="203" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IRi-AO-ITW">
-                                                    <rect key="frame" x="270" y="8" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="203" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="42" translatesAutoresizingMaskIntoConstraints="NO" id="IRi-AO-ITW">
+                                                    <rect key="frame" x="248" y="8" width="61" height="21"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="like.png" translatesAutoresizingMaskIntoConstraints="NO" id="2AS-YQ-n2d">
+                                                    <rect key="frame" x="240" y="40" width="20" height="20"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="starhighlighted.png" translatesAutoresizingMaskIntoConstraints="NO" id="LjG-3Q-bpy">
+                                                    <rect key="frame" x="240" y="78" width="20" height="20"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ihB-kF-Xws">
+                                                    <rect key="frame" x="268" y="43" width="32" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YR2-ku-w3T">
+                                                    <rect key="frame" x="268" y="76" width="32" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -537,7 +555,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NrS-Y5-yPh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1142" y="626"/>
+            <point key="canvasLocation" x="-1148" y="623"/>
         </scene>
         <!--Restaurant List-->
         <scene sceneID="BcN-U0-mgx">
@@ -892,7 +910,7 @@
                                                     <rect key="frame" x="74" y="0.0" width="15" height="75"/>
                                                     <color key="backgroundColor" red="0.40232252039999999" green="0.40232252039999999" blue="0.40232252039999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 </view>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="January 12th,2014" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gow-YC-IZy">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="401" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="January 12th,2014" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gow-YC-IZy">
                                                     <rect key="frame" x="95" y="27" width="140" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.83846382472826086" green="0.83846382472826086" blue="0.83846382472826086" alpha="1" colorSpace="calibratedRGB"/>
@@ -921,25 +939,25 @@
                                                     <rect key="frame" x="0.0" y="74" width="306" height="11"/>
                                                     <color key="backgroundColor" red="0.40232252039999999" green="0.40232252039999999" blue="0.40232252039999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 </view>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="person_placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="jyv-xe-bR9">
-                                                    <rect key="frame" x="8" y="11" width="50" height="50"/>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="efd-TS-m3E">
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="402" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="efd-TS-m3E">
                                                     <rect key="frame" x="71" y="11" width="125" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Review" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="150" translatesAutoresizingMaskIntoConstraints="NO" id="Vvf-rU-AOf">
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="403" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Review" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="150" translatesAutoresizingMaskIntoConstraints="NO" id="Vvf-rU-AOf">
                                                     <rect key="frame" x="71" y="35" width="170" height="40"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mQW-N1-jPM" customClass="RateView">
+                                                <view tag="405" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mQW-N1-jPM" customClass="RateView">
                                                     <rect key="frame" x="212" y="7" width="90" height="25"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
+                                                <imageView userInteractionEnabled="NO" tag="404" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="person_placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="jyv-xe-bR9">
+                                                    <rect key="frame" x="8" y="11" width="50" height="50"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.59069483240223464" green="0.59069483240223464" blue="0.59069483240223464" alpha="1" colorSpace="calibratedRGB"/>
@@ -1640,10 +1658,12 @@ EFNraXA
         <image name="gplusBtn.png" width="368" height="105"/>
         <image name="ic_email_black_16.png" width="16" height="16"/>
         <image name="landingpage.png" width="640" height="1136"/>
+        <image name="like.png" width="50" height="50"/>
         <image name="money.png" width="91" height="55"/>
         <image name="person_placeholder.png" width="240" height="300"/>
         <image name="personePlaceholder.png" width="316" height="316"/>
         <image name="resturantDetailDemo.png" width="1079" height="630"/>
+        <image name="starhighlighted.png" width="16" height="16"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

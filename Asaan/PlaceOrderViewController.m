@@ -24,7 +24,7 @@
     self.stepper.maximumValue=10;
     [self setValueOnUI];
 
-    NSLog(@"%@",self.item);
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -58,22 +58,6 @@
         
     }
     
- 
-    GTLStoreendpointOrderItemsAndCustomers *order=[[GTLStoreendpointOrderItemsAndCustomers alloc]init];
-    
-    GTLStoreendpointOrder *item2;
-    item2.status=@"bla";
-    order.order=item2;
-    
-    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForPlaceOrderWithObject:order];
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
-    [storeService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreMenuItem *object,NSError *error){
-        
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        
-        NSLog(@"%@",[error userInfo]);
-    }];
     
 }
 

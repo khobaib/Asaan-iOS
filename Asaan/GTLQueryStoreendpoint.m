@@ -13,13 +13,12 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryStoreendpoint (21 custom class methods, 7 custom properties)
+//   GTLQueryStoreendpoint (21 custom class methods, 8 custom properties)
 
 #import "GTLQueryStoreendpoint.h"
 
 #import "GTLStoreendpointMenuItemModifiersAndGroups.h"
 #import "GTLStoreendpointMenusAndMenuItems.h"
-#import "GTLStoreendpointOrderItemsAndCustomers.h"
 #import "GTLStoreendpointStore.h"
 #import "GTLStoreendpointStoreCollection.h"
 #import "GTLStoreendpointStoreImage.h"
@@ -39,7 +38,7 @@
 @implementation GTLQueryStoreendpoint
 
 @dynamic fields, firstPosition, maxResult, menuItemPOSId, menuPOSId, menuType,
-         storeId;
+         order, storeId;
 
 #pragma mark -
 #pragma mark Service level methods
@@ -153,15 +152,12 @@
   return query;
 }
 
-+ (id)queryForPlaceOrderWithObject:(GTLStoreendpointOrderItemsAndCustomers *)object {
-  if (object == nil) {
-    GTL_DEBUG_ASSERT(object != nil, @"%@ got a nil object", NSStringFromSelector(_cmd));
-    return nil;
-  }
++ (id)queryForPlaceOrderWithStoreId:(long long)storeId
+                              order:(NSString *)order {
   NSString *methodName = @"storeendpoint.placeOrder";
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
-  query.bodyObject = object;
-  query.expectedObjectClass = [GTLStoreendpointStoreMenuItem class];
+  query.storeId = storeId;
+  query.order = order;
   return query;
 }
 

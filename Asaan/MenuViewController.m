@@ -105,39 +105,34 @@
     // 1
     UIView *pageView = [menuPage objectAtIndex:page];
     if ((NSNull*)pageView == [NSNull null]) {
-        // 2
-        CGRect frame =CGRectMake(120*page, 0.0, 120, 140);
-        
-        
-        
+      
         GTLStoreendpointStoreMenuHierarchy *menu =[menuLevel0Array objectAtIndex:page];
+        pageView=[[UIView alloc]initWithFrame:CGRectMake(120*page, 0, 110, 50)];
         
-        
-        UILabel *lable=[[UILabel alloc]initWithFrame:CGRectMake(4, 4, 100, 40)];
+        UILabel *lable=[[UILabel alloc]initWithFrame:CGRectMake(120*page+4, 4, 100, 40)];
         lable.text=menu.name;
         lable.numberOfLines=2;
         [lable setFont:[UIFont systemFontOfSize:12]];
         lable.textAlignment=NSTextAlignmentCenter;
         // lable.textColor=[UIColor whiteColor];
         lable.backgroundColor=[UIColor whiteColor];
-        UIView *view=[[UIView alloc]initWithFrame:CGRectMake(frame.origin.x+5, frame.origin.y+5, frame.size.width-10, frame.size.height-10)];
-        //  UIColor *color= [UIColor colorWithRed:(78.0/255.0)  green:(46.0/255.0) blue:(40.0/255.0) alpha:1.0f];
         
         
         
         //[view setBackgroundColor:[TextStyling appColor]];
        
-        [view addSubview:lable];
+        [pageView addSubview:lable];
+    
+        pageView.backgroundColor=[UIColor grayColor];
         
-        view.tag=page;
-        view.backgroundColor=[UIColor grayColor];
+        pageView.tag=page;
         UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(similarProductTap:)];
         singleTap.numberOfTapsRequired = 1;
         
-        [view addGestureRecognizer:singleTap];
-        [self.horizontalScroller addSubview:view];
+        [pageView addGestureRecognizer:singleTap];
+        [self.horizontalScroller addSubview:pageView];
         // 4
-        [menuPage replaceObjectAtIndex:page withObject:view];
+        [menuPage replaceObjectAtIndex:page withObject:pageView];
     }else{
         
     }
@@ -248,9 +243,13 @@
     
     UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"menu" forIndexPath:indexPath];
     
-    UILabel *lable=(UILabel *)[cell viewWithTag:201];
+    UILabel *name=(UILabel *)[cell viewWithTag:201];
+    UILabel *price=(UILabel *)[cell viewWithTag:203];
+    UILabel *longdescription=(UILabel *)[cell viewWithTag:202];
     
-    lable.text=item.shortDescription;
+    name.text=item.shortDescription;
+    longdescription.text=item.longDescription;
+    price.text=[NSString stringWithFormat:@"$%.2f",item.price.floatValue/100];
     
     return cell;
 }
