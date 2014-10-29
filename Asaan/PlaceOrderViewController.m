@@ -9,6 +9,7 @@
 #import "PlaceOrderViewController.h"
 #import "MBProgressHUD.h"
 #import <Parse/Parse.h>
+#import "Order.h"
 
 
 @interface PlaceOrderViewController ()

@@ -225,15 +225,31 @@
     
     if(isServerData){
         GTLStoreendpointStore *store=[resturantList objectAtIndex:indexPath.row];
-        [self addShadowToText:name withText:store.name];
-        [self addShadowToText:desctiprionText withText:store.descriptionProperty];
+    
+        if(store.name!=nil ){
+            [self addShadowToText:name withText:store.name];
+           
+        }
+        if (store.descriptionProperty!=nil) {
+            
+             [self addShadowToText:desctiprionText withText:store.descriptionProperty];
+        }
+
     }else{
         
         Store *store=[resturantList objectAtIndex:indexPath.row];
         
+        if(!(store.name==nil)){
+            [self addShadowToText:name withText:store.name];
+        }
+        
+        if(store.storeDescription!=nil){
+         
+            [self addShadowToText:desctiprionText withText:store.storeDescription];
 
-        [self addShadowToText:name withText:store.name];
-        [self addShadowToText:desctiprionText withText:store.storeDescription];
+        }
+
+       
     }
     
   
@@ -282,6 +298,11 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if([sender isKindOfClass:[UIButton class]]){
+        return;
+    }
+    
     ResturantDetailViewController *resturantDetail=[segue destinationViewController];
     
     NSIndexPath *indexPath=[self.tableView indexPathForSelectedRow];
@@ -297,7 +318,7 @@
     
     
 
-    
+   
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
 }
 

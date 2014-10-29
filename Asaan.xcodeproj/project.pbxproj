@@ -99,6 +99,8 @@
 		9A84194F19FF72B4008692CA /* GTLStoreendpointStorePOSConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A84193819FF72B4008692CA /* GTLStoreendpointStorePOSConnection.m */; };
 		9A84195019FF72B4008692CA /* GTLStoreendpointStoreSummaryStats.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A84193A19FF72B4008692CA /* GTLStoreendpointStoreSummaryStats.m */; };
 		9A84195119FF72B4008692CA /* GTLStoreendpointStoreSummaryStatsCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A84193C19FF72B4008692CA /* GTLStoreendpointStoreSummaryStatsCollection.m */; };
+		9A89E6C41A00D5510084A5B3 /* CheckoutOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A89E6C31A00D5500084A5B3 /* CheckoutOrderViewController.m */; };
+		9A89E6C71A0104130084A5B3 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A89E6C61A0104130084A5B3 /* Order.m */; };
 		9A8A5F1D19F3772600B876F2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A8A5F1C19F3772600B876F2 /* CoreData.framework */; };
 		9A8A5F2119F380F700B876F2 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9A8A5F1F19F380F700B876F2 /* Model.xcdatamodeld */; };
 		9A9E502219D2AE1F001F2C64 /* asaanTopLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A9E501F19D2AE1F001F2C64 /* asaanTopLogo.png */; };
@@ -298,6 +300,10 @@
 		9A84193A19FF72B4008692CA /* GTLStoreendpointStoreSummaryStats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreSummaryStats.m; sourceTree = "<group>"; };
 		9A84193B19FF72B4008692CA /* GTLStoreendpointStoreSummaryStatsCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreSummaryStatsCollection.h; sourceTree = "<group>"; };
 		9A84193C19FF72B4008692CA /* GTLStoreendpointStoreSummaryStatsCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreSummaryStatsCollection.m; sourceTree = "<group>"; };
+		9A89E6C21A00D5500084A5B3 /* CheckoutOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckoutOrderViewController.h; sourceTree = "<group>"; };
+		9A89E6C31A00D5500084A5B3 /* CheckoutOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckoutOrderViewController.m; sourceTree = "<group>"; };
+		9A89E6C51A0104130084A5B3 /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order.h; sourceTree = "<group>"; };
+		9A89E6C61A0104130084A5B3 /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
 		9A8A5F1C19F3772600B876F2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		9A8A5F2019F380F700B876F2 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		9A92022219C068CD00EA68E1 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -730,6 +736,8 @@
 			isa = PBXGroup;
 			children = (
 				9A8A5F1F19F380F700B876F2 /* Model.xcdatamodeld */,
+				9A89E6C51A0104130084A5B3 /* Order.h */,
+				9A89E6C61A0104130084A5B3 /* Order.m */,
 				9AC0C95219F79972004F9D51 /* Store.h */,
 				9AC0C95319F79972004F9D51 /* Store.m */,
 				9AC0C94F19F79971004F9D51 /* StoreImage.h */,
@@ -761,6 +769,8 @@
 				9A1F2A1919BEFF1100CBF581 /* ProfileViewController.m */,
 				9A9E503D19D2CB05001F2C64 /* LoginViewController.h */,
 				9A9E503E19D2CB05001F2C64 /* LoginViewController.m */,
+				9A89E6C21A00D5500084A5B3 /* CheckoutOrderViewController.h */,
+				9A89E6C31A00D5500084A5B3 /* CheckoutOrderViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -996,6 +1006,7 @@
 				9A1F29AB19BED4C900CBF581 /* main.m in Sources */,
 				9A84194119FF72B4008692CA /* GTLStoreendpointMenuItemModifiersAndGroups.m in Sources */,
 				9A84194319FF72B4008692CA /* GTLStoreendpointStore.m in Sources */,
+				9A89E6C41A00D5510084A5B3 /* CheckoutOrderViewController.m in Sources */,
 				9A5971F219D16BD60047D1CE /* ResturantListViewController.m in Sources */,
 				9A5D6A4219CE87830051DB88 /* PTKCard.m in Sources */,
 				9A84194419FF72B4008692CA /* GTLStoreendpointStoreCollection.m in Sources */,
@@ -1010,6 +1021,7 @@
 				9A84194B19FF72B4008692CA /* GTLStoreendpointStoreMenuItemModifier.m in Sources */,
 				9A5D6A4619CE87830051DB88 /* PTKComponent.m in Sources */,
 				9AF9C4CF19D184ED00E85A39 /* ResturantDetailViewController.m in Sources */,
+				9A89E6C71A0104130084A5B3 /* Order.m in Sources */,
 				9A5D6A9219CE8A0B0051DB88 /* STPUtils.m in Sources */,
 				9A84194A19FF72B4008692CA /* GTLStoreendpointStoreMenuItemCollection.m in Sources */,
 				9A84194519FF72B4008692CA /* GTLStoreendpointStoreImage.m in Sources */,
@@ -1146,6 +1158,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-3";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1161,9 +1174,11 @@
 					"$(PROJECT_DIR)/Asaan/GoogleOpenSource.framework/Headers",
 				);
 				INFOPLIST_FILE = "Asaan/Asaan-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Asaan/GoogleOpenSource.framework/Headers";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1175,6 +1190,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-3";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1190,6 +1206,7 @@
 					"$(PROJECT_DIR)/Asaan/GoogleOpenSource.framework/Headers",
 				);
 				INFOPLIST_FILE = "Asaan/Asaan-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
