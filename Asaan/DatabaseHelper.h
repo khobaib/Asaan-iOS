@@ -7,10 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GTLStoreendpoint.h"
+#import "Order.h"
 
 @interface DatabaseHelper : NSObject
 
 +(BOOL)saveUpdateStores:(NSArray *)stores;
+
++(BOOL)saveOrder:(GTLStoreendpointStoreMenuItem *)item quantityStr:(NSString *)quantity noteStr:(NSString *)note;
 
 +(NSArray *)getAllStores;
 

@@ -16,7 +16,7 @@
 @property IBOutlet UILabel *itemName;
 @property IBOutlet UILabel *price;
 @property IBOutlet UILabel *quantity;
-@property IBOutlet UITextField *specianProperty;
+@property IBOutlet UITextField *specialPropertyLabel;
 @property IBOutlet UIStepper *stepper;
 
 @property IBOutlet UIView *holderview;

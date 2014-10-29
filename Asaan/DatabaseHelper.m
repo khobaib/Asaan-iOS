@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "Store.h"
 #import "GTLStoreendpoint.h"
+#import <Parse/Parse.h>
 
 @implementation DatabaseHelper
 +(BOOL)saveUpdateStores:(NSArray *)resturantList{
@@ -61,6 +62,34 @@
 
 }
 
+
++(BOOL)saveOrder:(GTLStoreendpointStoreMenuItem *)item quantityStr:(NSString *)quantity noteStr:(NSString *)note{
+    
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    NSManagedObjectContext *managedObjectContext= [appDelegate managedObjectContext];
+    
+    Order *order=[NSEntityDescription
+           insertNewObjectForEntityForName:@"Order"
+           inManagedObjectContext:managedObjectContext];
+    
+    [self itemToOrder:item orderOb:order quantityStr:quantity noteStr:note];
+    
+    
+    NSError *error;
+    if (![managedObjectContext save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+        
+        return NO;
+    }else{
+        
+        NSLog(@"saved");
+        return YES;
+    }
+
+}
+
+
 +(void)dicToStore:(GTLStoreendpointStore *)dic store:(Store*)store{
     
     store.storeId=dic.identifier;
@@ -94,6 +123,23 @@
 }
 
 
++(void)itemToOrder:(GTLStoreendpointStoreMenuItem *)item orderOb:(Order *)order quantityStr:(NSString *)quantity noteStr:(NSString *)note{
+    
+   
+    order.menuItemPOSId=item.menuItemPOSId;
+    order.menuItemPosition=item.menuItemPosition;
+    order.menuPOSId=item.menuPOSId;
+    order.menuName=item.menuName;
+    order.subMenuPOSId=item.subMenuPOSId;
+    order.shortDescriptionProperty=item.shortDescription;
+    order.quantity=[NSNumber numberWithInt:[quantity intValue]];
+    order.userID=[NSNumber numberWithInt:[[PFUser currentUser].objectId intValue]];
+    order.note=note;
+    order.username=[PFUser currentUser].username;
+    order.storeId=item.storeId;
+    
+    
+}
 
 +(NSArray *)getAllStores{
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];

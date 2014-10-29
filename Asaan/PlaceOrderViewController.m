@@ -10,6 +10,7 @@
 #import "MBProgressHUD.h"
 #import <Parse/Parse.h>
 #import "Order.h"
+#import "DatabaseHelper.h"
 
 
 @interface PlaceOrderViewController ()
@@ -50,6 +51,14 @@
 
 -(IBAction)placeorder:(id)sender{
     
+    
+    [DatabaseHelper saveOrder:self.item quantityStr:self.quantity.text noteStr:self.specialPropertyLabel.text];
+
+    
+}
+
+
+-(void)other{
     static GTLServiceStoreendpoint *storeService=nil;
     
     if(!storeService){
@@ -59,8 +68,8 @@
     
     NSString *orderString=[NSString stringWithFormat:@"<CHECKREQUESTS> <ADDCHECK TABLENUMBER=\"TableNumber\" EXTCHECKID=\"Asaan\" READYTIME=\"18:45\" READYDATETIME=\"\" NOTE=\"Need Extra Spicy\" ORDERMODEFEE=\"\" ORDERID=\"\" PRICEONLY=\"\" ORDERMODE=\"Delivery\"> <ITEMREQUESTS>                           <ADDITEM QTY=\"1\" ITEMID=\"7007\" FOR=\"Khobaib\" >  <MODITEM ITEMID=\"90204\" /> </ADDITEM> </ITEMREQUESTS> </ADDCHECK>                           <PAYMENTREQUESTS> DDTENDER TENDERID=\"AsaanTenderId\" AMOUNT=\"10.00\" TIP=\"1.50\" TOKEN=\"hadkahahoaasdasjdhaod\" />                           </PAYMENTREQUESTS>  </CHECKREQUESTS>"];
     
-   // NSLog(@"%@",orderString);
- 
+    // NSLog(@"%@",orderString);
+    
     GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForPlaceOrderWithStoreId:[self.item.storeId intValue]  order:orderString];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
@@ -70,7 +79,9 @@
         
         NSLog(@"%@",[error userInfo]);
     }];
+
     
+
 }
 
 /*

@@ -455,7 +455,7 @@
                         <outlet property="itemName" destination="n3H-EP-DUL" id="vd0-Jl-4FE"/>
                         <outlet property="price" destination="DwN-OL-DbE" id="Yu5-cT-Hza"/>
                         <outlet property="quantity" destination="LFv-wf-U1v" id="xCB-h9-99K"/>
-                        <outlet property="specianProperty" destination="H19-xY-vfq" id="wfc-CM-bH1"/>
+                        <outlet property="specialPropertyLabel" destination="H19-xY-vfq" id="4Xs-TN-2pe"/>
                         <outlet property="stepper" destination="dvp-uv-dp2" id="5MG-yX-3to"/>
                     </connections>
                 </viewController>
