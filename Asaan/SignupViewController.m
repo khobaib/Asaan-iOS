@@ -107,10 +107,10 @@
 
 -(void)nextPressed:(id)sender{
     
-  //  PaymentInfo *paytmentInfo=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Signup2"];
-    //[self.navigationController pushViewController:paytmentInfo animated:YES];
+    PaymentInfo *paytmentInfo=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Signup2"];
+    [self.navigationController pushViewController:paytmentInfo animated:YES];
     
-   // return;
+    return;
     
     
     NSString *firstName=self.firstName.text;

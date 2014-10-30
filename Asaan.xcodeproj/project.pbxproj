@@ -106,6 +106,12 @@
 		9A8B0EFC1A020B30001C65C4 /* DataCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8B0EFB1A020B30001C65C4 /* DataCommunicator.m */; };
 		9A8B0EFF1A021D7D001C65C4 /* StoreOrderHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8B0EFE1A021D7D001C65C4 /* StoreOrderHistoryViewController.m */; };
 		9A8B0F021A022AE0001C65C4 /* ReviewListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8B0F011A022AE0001C65C4 /* ReviewListViewController.m */; };
+		9A8B0F101A024B82001C65C4 /* GTLQueryUserendpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8B0F041A024B82001C65C4 /* GTLQueryUserendpoint.m */; };
+		9A8B0F111A024B82001C65C4 /* GTLServiceUserendpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8B0F061A024B82001C65C4 /* GTLServiceUserendpoint.m */; };
+		9A8B0F121A024B82001C65C4 /* GTLUserendpointConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8B0F091A024B82001C65C4 /* GTLUserendpointConstants.m */; };
+		9A8B0F131A024B82001C65C4 /* GTLUserendpointUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8B0F0B1A024B82001C65C4 /* GTLUserendpointUser.m */; };
+		9A8B0F141A024B82001C65C4 /* GTLUserendpointUserCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8B0F0D1A024B82001C65C4 /* GTLUserendpointUserCard.m */; };
+		9A8B0F151A024B82001C65C4 /* GTLUserendpointUserCardCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8B0F0F1A024B82001C65C4 /* GTLUserendpointUserCardCollection.m */; };
 		9A9E502219D2AE1F001F2C64 /* asaanTopLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A9E501F19D2AE1F001F2C64 /* asaanTopLogo.png */; };
 		9A9E502319D2AE1F001F2C64 /* nextSinguppage.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A9E502019D2AE1F001F2C64 /* nextSinguppage.png */; };
 		9A9E502419D2AE1F001F2C64 /* personePlaceholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A9E502119D2AE1F001F2C64 /* personePlaceholder.png */; };
@@ -315,6 +321,19 @@
 		9A8B0EFE1A021D7D001C65C4 /* StoreOrderHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreOrderHistoryViewController.m; sourceTree = "<group>"; };
 		9A8B0F001A022AE0001C65C4 /* ReviewListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewListViewController.h; sourceTree = "<group>"; };
 		9A8B0F011A022AE0001C65C4 /* ReviewListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewListViewController.m; sourceTree = "<group>"; };
+		9A8B0F031A024B82001C65C4 /* GTLQueryUserendpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLQueryUserendpoint.h; sourceTree = "<group>"; };
+		9A8B0F041A024B82001C65C4 /* GTLQueryUserendpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLQueryUserendpoint.m; sourceTree = "<group>"; };
+		9A8B0F051A024B82001C65C4 /* GTLServiceUserendpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLServiceUserendpoint.h; sourceTree = "<group>"; };
+		9A8B0F061A024B82001C65C4 /* GTLServiceUserendpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLServiceUserendpoint.m; sourceTree = "<group>"; };
+		9A8B0F071A024B82001C65C4 /* GTLUserendpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLUserendpoint.h; sourceTree = "<group>"; };
+		9A8B0F081A024B82001C65C4 /* GTLUserendpointConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLUserendpointConstants.h; sourceTree = "<group>"; };
+		9A8B0F091A024B82001C65C4 /* GTLUserendpointConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLUserendpointConstants.m; sourceTree = "<group>"; };
+		9A8B0F0A1A024B82001C65C4 /* GTLUserendpointUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLUserendpointUser.h; sourceTree = "<group>"; };
+		9A8B0F0B1A024B82001C65C4 /* GTLUserendpointUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLUserendpointUser.m; sourceTree = "<group>"; };
+		9A8B0F0C1A024B82001C65C4 /* GTLUserendpointUserCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLUserendpointUserCard.h; sourceTree = "<group>"; };
+		9A8B0F0D1A024B82001C65C4 /* GTLUserendpointUserCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLUserendpointUserCard.m; sourceTree = "<group>"; };
+		9A8B0F0E1A024B82001C65C4 /* GTLUserendpointUserCardCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLUserendpointUserCardCollection.h; sourceTree = "<group>"; };
+		9A8B0F0F1A024B82001C65C4 /* GTLUserendpointUserCardCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLUserendpointUserCardCollection.m; sourceTree = "<group>"; };
 		9A92022219C068CD00EA68E1 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		9A9E501F19D2AE1F001F2C64 /* asaanTopLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = asaanTopLogo.png; sourceTree = "<group>"; };
 		9A9E502019D2AE1F001F2C64 /* nextSinguppage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nextSinguppage.png; sourceTree = "<group>"; };
@@ -596,6 +615,19 @@
 		9A5B179D19F8D10D00722E4A /* GAEEndpoint */ = {
 			isa = PBXGroup;
 			children = (
+				9A8B0F031A024B82001C65C4 /* GTLQueryUserendpoint.h */,
+				9A8B0F041A024B82001C65C4 /* GTLQueryUserendpoint.m */,
+				9A8B0F051A024B82001C65C4 /* GTLServiceUserendpoint.h */,
+				9A8B0F061A024B82001C65C4 /* GTLServiceUserendpoint.m */,
+				9A8B0F071A024B82001C65C4 /* GTLUserendpoint.h */,
+				9A8B0F081A024B82001C65C4 /* GTLUserendpointConstants.h */,
+				9A8B0F091A024B82001C65C4 /* GTLUserendpointConstants.m */,
+				9A8B0F0A1A024B82001C65C4 /* GTLUserendpointUser.h */,
+				9A8B0F0B1A024B82001C65C4 /* GTLUserendpointUser.m */,
+				9A8B0F0C1A024B82001C65C4 /* GTLUserendpointUserCard.h */,
+				9A8B0F0D1A024B82001C65C4 /* GTLUserendpointUserCard.m */,
+				9A8B0F0E1A024B82001C65C4 /* GTLUserendpointUserCardCollection.h */,
+				9A8B0F0F1A024B82001C65C4 /* GTLUserendpointUserCardCollection.m */,
 				9A84191319FF72B4008692CA /* GTLQueryStoreendpoint.h */,
 				9A84191419FF72B4008692CA /* GTLQueryStoreendpoint.m */,
 				9A84191519FF72B4008692CA /* GTLServiceStoreendpoint.h */,
@@ -1003,6 +1035,7 @@
 				9A8B0EFF1A021D7D001C65C4 /* StoreOrderHistoryViewController.m in Sources */,
 				9A9E503F19D2CB05001F2C64 /* LoginViewController.m in Sources */,
 				9A84194919FF72B4008692CA /* GTLStoreendpointStoreMenuItem.m in Sources */,
+				9A8B0F131A024B82001C65C4 /* GTLUserendpointUser.m in Sources */,
 				9AB0435219FCE670007BC71E /* PlaceOrderViewController.m in Sources */,
 				9A84195019FF72B4008692CA /* GTLStoreendpointStoreSummaryStats.m in Sources */,
 				9A5D6A4719CE87830051DB88 /* PTKTextField.m in Sources */,
@@ -1015,7 +1048,9 @@
 				9A5D6A9019CE8A0B0051DB88 /* STPTestPaymentAuthorizationViewController.m in Sources */,
 				9A84194E19FF72B4008692CA /* GTLStoreendpointStoreOwnerCollection.m in Sources */,
 				9AB8389119CFE7D900F7D334 /* InviteFriendsViewController.m in Sources */,
+				9A8B0F121A024B82001C65C4 /* GTLUserendpointConstants.m in Sources */,
 				9A84194619FF72B4008692CA /* GTLStoreendpointStoreImageCollection.m in Sources */,
+				9A8B0F141A024B82001C65C4 /* GTLUserendpointUserCard.m in Sources */,
 				9A1F29AF19BED4C900CBF581 /* AppDelegate.m in Sources */,
 				9A5D6A4319CE87830051DB88 /* PTKCardCVC.m in Sources */,
 				9AC0C95419F79972004F9D51 /* Store.m in Sources */,
@@ -1044,13 +1079,16 @@
 				9A8B0EFC1A020B30001C65C4 /* DataCommunicator.m in Sources */,
 				9A84194519FF72B4008692CA /* GTLStoreendpointStoreImage.m in Sources */,
 				9A5D6A8E19CE8A0B0051DB88 /* STPAPIConnection.m in Sources */,
+				9A8B0F151A024B82001C65C4 /* GTLUserendpointUserCardCollection.m in Sources */,
 				9A59722E19CEF59C00333E7A /* PaymentInfo.m in Sources */,
 				9A5D6A9319CE8A0B0051DB88 /* Stripe.m in Sources */,
 				9A84194819FF72B4008692CA /* GTLStoreendpointStoreMenuHierarchyCollection.m in Sources */,
 				9A84194719FF72B4008692CA /* GTLStoreendpointStoreMenuHierarchy.m in Sources */,
+				9A8B0F101A024B82001C65C4 /* GTLQueryUserendpoint.m in Sources */,
 				9A5D6A4419CE87830051DB88 /* PTKCardExpiry.m in Sources */,
 				9AC0C95719F7CB7C004F9D51 /* MenuViewController.m in Sources */,
 				9A8A5F2119F380F700B876F2 /* Model.xcdatamodeld in Sources */,
+				9A8B0F111A024B82001C65C4 /* GTLServiceUserendpoint.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

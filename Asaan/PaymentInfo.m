@@ -11,6 +11,7 @@
 #import "Stripe.h"
 #import "MBProgressHUD.h"
 #import <Parse/Parse.h>
+#import "GTLUserendpoint.h"
 
 
 @interface PaymentInfo ()
@@ -95,79 +96,25 @@
         [alert show];
         return;
     }
-    STPCard *card = [[STPCard alloc] init];
-    card.number = self.payment.card.number;
-    card.expMonth = self.payment.card.expMonth;
-    card.expYear = self.payment.card.expYear;
-    card.cvc = self.payment.card.cvc;
     
-
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [Stripe createTokenWithCard:card completion:^(STPToken *token, NSError *error) {
-        if (error) {
-            // handle the error as you did previously
-            
-            UIAlertView *alert1=[[UIAlertView alloc]initWithTitle:@"Error" message:[error.userInfo description] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alert1 show];
-        } else {
-            PFObject *tokenOb=[PFObject objectWithClassName:@"UserStripeCard"];
-            
-            [self addPfObject:tokenOb forKey:@"address_city" value:token.card.addressCity];
-
-            [self addPfObject:tokenOb forKey:@"address_country" value:token.card.addressCountry];
-
-            [self addPfObject:tokenOb forKey:@"address_line1" value:token.card.addressLine1];
-
-            [self addPfObject:tokenOb forKey:@"address_line2" value:token.card.addressLine2];
-
-            [self addPfObject:tokenOb forKey:@"address_state" value:token.card.addressState];
-
-            [self addPfObject:tokenOb forKey:@"address_zip" value:token.card.addressZip];
-
-            [self addPfObject:tokenOb forKey:@"country" value:token.card.country];
-            [self addPfObject:tokenOb forKey:@"cvc_check" value:token.card.cvc];
-            [self addPfObject:tokenOb forKey:@"exp_year" value:[NSNumber numberWithInt:token.card.expYear]];
-            [self addPfObject:tokenOb forKey:@"exp_month" value:[NSNumber numberWithInt:token.card.expMonth]];
-            [self addPfObject:tokenOb forKey:@"fingerprint" value:token.card.fingerprint];
-            [self addPfObject:tokenOb forKey:@"last4" value:token.card.last4];
-            [self addPfObject:tokenOb forKey:@"name" value:token.card.name];
-            [self addPfObject:tokenOb forKey:@"stripeCardid" value:token.card.number];
-            [self addPfObject:tokenOb forKey:@"user" value:[PFUser currentUser]];
-
-            
-         /*   tokenOb[@"address_city"]=token.card.addressCity;
-            tokenOb[@"address_country"]=token.card.addressCountry;
-            tokenOb[@"address_line1"]=token.card.addressLine1;
-            tokenOb[@"address_line2"]=token.card.addressLine2;
-            tokenOb[@"address_state"]=token.card.addressState;
-            tokenOb[@"address_zip"]=token.card.addressZip;
-            tokenOb[@"brand"]=token.card.type;
-            tokenOb[@"country"]=token.card.country;
-            tokenOb[@"cvc_check"]=token.card.cvc;
-            tokenOb[@"exp_year"]=[NSNumber numberWithInt:token.card.expYear] ;
-            tokenOb[@"exp_month"]=[NSNumber numberWithInt:token.card.expMonth];
-            tokenOb[@"fingerprint"]=token.card.fingerprint;
-
-            tokenOb[@"last4"]=token.card.last4;
-
-            tokenOb[@"name"]=token.card.name;
-
-            tokenOb[@"stripeCardid"]=token.card.number;
-            tokenOb[@"user"]=[PFUser currentUser];*/
-            
-           [tokenOb saveEventually:^(BOOL success,NSError *error){
-               
-                if(success){
-                    NSLog(@"done");
-                }else{
-                    NSLog(@"%@",[error userInfo]);
-                }
-           }];
-
-            // submit the token to your payment backend as you did previously
-        }
+    static GTLServiceUserendpoint *userService=nil;
+    
+    if(!userService){
+        userService=[[GTLServiceUserendpoint alloc]init];
+        userService.retryEnabled=YES;
+    }
+    
+    GTLUserendpointUserCard *card=[[GTLUserendpointUserCard alloc]init];
+    
+    
+    
+    GTLQueryUserendpoint *query=[GTLQueryUserendpoint queryForSaveUserCardWithObject:card];
+    
+    [userService executeQuery:query completionHandler:^(GTLServiceTicket * ticket,GTLUserendpointUserCard *object,NSError *error ){
+        NSLog(@"%@",[error userInfo]);
+        
     }];
-
+    
     
 }
 
@@ -181,6 +128,84 @@
     }
 }
 
+
+
+-(void)cardSaveAtParse{
+    STPCard *card = [[STPCard alloc] init];
+    card.number = self.payment.card.number;
+    card.expMonth = self.payment.card.expMonth;
+    card.expYear = self.payment.card.expYear;
+    card.cvc = self.payment.card.cvc;
+    
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [Stripe createTokenWithCard:card completion:^(STPToken *token, NSError *error) {
+        if (error) {
+            // handle the error as you did previously
+            
+            UIAlertView *alert1=[[UIAlertView alloc]initWithTitle:@"Error" message:[error.userInfo description] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert1 show];
+        } else {
+            PFObject *tokenOb=[PFObject objectWithClassName:@"UserStripeCard"];
+            
+            [self addPfObject:tokenOb forKey:@"address_city" value:token.card.addressCity];
+            
+            [self addPfObject:tokenOb forKey:@"address_country" value:token.card.addressCountry];
+            
+            [self addPfObject:tokenOb forKey:@"address_line1" value:token.card.addressLine1];
+            
+            [self addPfObject:tokenOb forKey:@"address_line2" value:token.card.addressLine2];
+            
+            [self addPfObject:tokenOb forKey:@"address_state" value:token.card.addressState];
+            
+            [self addPfObject:tokenOb forKey:@"address_zip" value:token.card.addressZip];
+            
+            [self addPfObject:tokenOb forKey:@"country" value:token.card.country];
+            [self addPfObject:tokenOb forKey:@"cvc_check" value:token.card.cvc];
+            [self addPfObject:tokenOb forKey:@"exp_year" value:[NSNumber numberWithInt:token.card.expYear]];
+            [self addPfObject:tokenOb forKey:@"exp_month" value:[NSNumber numberWithInt:token.card.expMonth]];
+            [self addPfObject:tokenOb forKey:@"fingerprint" value:token.card.fingerprint];
+            [self addPfObject:tokenOb forKey:@"last4" value:token.card.last4];
+            [self addPfObject:tokenOb forKey:@"name" value:token.card.name];
+            [self addPfObject:tokenOb forKey:@"stripeCardid" value:token.card.number];
+            [self addPfObject:tokenOb forKey:@"user" value:[PFUser currentUser]];
+            
+            
+            /*   tokenOb[@"address_city"]=token.card.addressCity;
+             tokenOb[@"address_country"]=token.card.addressCountry;
+             tokenOb[@"address_line1"]=token.card.addressLine1;
+             tokenOb[@"address_line2"]=token.card.addressLine2;
+             tokenOb[@"address_state"]=token.card.addressState;
+             tokenOb[@"address_zip"]=token.card.addressZip;
+             tokenOb[@"brand"]=token.card.type;
+             tokenOb[@"country"]=token.card.country;
+             tokenOb[@"cvc_check"]=token.card.cvc;
+             tokenOb[@"exp_year"]=[NSNumber numberWithInt:token.card.expYear] ;
+             tokenOb[@"exp_month"]=[NSNumber numberWithInt:token.card.expMonth];
+             tokenOb[@"fingerprint"]=token.card.fingerprint;
+             
+             tokenOb[@"last4"]=token.card.last4;
+             
+             tokenOb[@"name"]=token.card.name;
+             
+             tokenOb[@"stripeCardid"]=token.card.number;
+             tokenOb[@"user"]=[PFUser currentUser];*/
+            
+            [tokenOb saveEventually:^(BOOL success,NSError *error){
+                
+                if(success){
+                    NSLog(@"done");
+                }else{
+                    NSLog(@"%@",[error userInfo]);
+                }
+            }];
+            
+            // submit the token to your payment backend as you did previously
+        }
+    }];
+    
+
+}
 
 -(IBAction)Skip:(id)sender{
     InviteFriendsViewController *paytmentInfo=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Signup3"];
