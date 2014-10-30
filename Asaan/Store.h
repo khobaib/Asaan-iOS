@@ -14,7 +14,7 @@
 @interface Store : NSManagedObject
 
 +(GTLStoreendpointStore *)gtlStoreFromStore:(Store *)store;
-
++(GTLStoreendpointStore *)gtlStoreFromID:(id)store;
 
 @property (nonatomic, retain) NSString * address;
 @property (nonatomic, retain) NSString * backgroundimagethumbnilurl;

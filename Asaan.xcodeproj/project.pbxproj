@@ -103,6 +103,9 @@
 		9A89E6C71A0104130084A5B3 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A89E6C61A0104130084A5B3 /* Order.m */; };
 		9A8A5F1D19F3772600B876F2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A8A5F1C19F3772600B876F2 /* CoreData.framework */; };
 		9A8A5F2119F380F700B876F2 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9A8A5F1F19F380F700B876F2 /* Model.xcdatamodeld */; };
+		9A8B0EFC1A020B30001C65C4 /* DataCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8B0EFB1A020B30001C65C4 /* DataCommunicator.m */; };
+		9A8B0EFF1A021D7D001C65C4 /* StoreOrderHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8B0EFE1A021D7D001C65C4 /* StoreOrderHistoryViewController.m */; };
+		9A8B0F021A022AE0001C65C4 /* ReviewListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8B0F011A022AE0001C65C4 /* ReviewListViewController.m */; };
 		9A9E502219D2AE1F001F2C64 /* asaanTopLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A9E501F19D2AE1F001F2C64 /* asaanTopLogo.png */; };
 		9A9E502319D2AE1F001F2C64 /* nextSinguppage.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A9E502019D2AE1F001F2C64 /* nextSinguppage.png */; };
 		9A9E502419D2AE1F001F2C64 /* personePlaceholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A9E502119D2AE1F001F2C64 /* personePlaceholder.png */; };
@@ -306,6 +309,12 @@
 		9A89E6C61A0104130084A5B3 /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
 		9A8A5F1C19F3772600B876F2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		9A8A5F2019F380F700B876F2 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		9A8B0EFA1A020B30001C65C4 /* DataCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataCommunicator.h; sourceTree = "<group>"; };
+		9A8B0EFB1A020B30001C65C4 /* DataCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataCommunicator.m; sourceTree = "<group>"; };
+		9A8B0EFD1A021D7D001C65C4 /* StoreOrderHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreOrderHistoryViewController.h; sourceTree = "<group>"; };
+		9A8B0EFE1A021D7D001C65C4 /* StoreOrderHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreOrderHistoryViewController.m; sourceTree = "<group>"; };
+		9A8B0F001A022AE0001C65C4 /* ReviewListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewListViewController.h; sourceTree = "<group>"; };
+		9A8B0F011A022AE0001C65C4 /* ReviewListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewListViewController.m; sourceTree = "<group>"; };
 		9A92022219C068CD00EA68E1 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		9A9E501F19D2AE1F001F2C64 /* asaanTopLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = asaanTopLogo.png; sourceTree = "<group>"; };
 		9A9E502019D2AE1F001F2C64 /* nextSinguppage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nextSinguppage.png; sourceTree = "<group>"; };
@@ -578,6 +587,8 @@
 				9AB0434E19FCC670007BC71E /* MenuSectionHolder.m */,
 				9AC0C94319F7846F004F9D51 /* DatabaseHelper.h */,
 				9AC0C94419F7846F004F9D51 /* DatabaseHelper.m */,
+				9A8B0EFA1A020B30001C65C4 /* DataCommunicator.h */,
+				9A8B0EFB1A020B30001C65C4 /* DataCommunicator.m */,
 			);
 			name = "Helper Classes";
 			sourceTree = "<group>";
@@ -759,6 +770,12 @@
 				9AC0C95619F7CB7C004F9D51 /* MenuViewController.m */,
 				9AB0435019FCE670007BC71E /* PlaceOrderViewController.h */,
 				9AB0435119FCE670007BC71E /* PlaceOrderViewController.m */,
+				9A89E6C21A00D5500084A5B3 /* CheckoutOrderViewController.h */,
+				9A89E6C31A00D5500084A5B3 /* CheckoutOrderViewController.m */,
+				9A8B0EFD1A021D7D001C65C4 /* StoreOrderHistoryViewController.h */,
+				9A8B0EFE1A021D7D001C65C4 /* StoreOrderHistoryViewController.m */,
+				9A8B0F001A022AE0001C65C4 /* ReviewListViewController.h */,
+				9A8B0F011A022AE0001C65C4 /* ReviewListViewController.m */,
 				9A1F2A1219BEEA0B00CBF581 /* SignupViewController.h */,
 				9A1F2A1319BEEA0C00CBF581 /* SignupViewController.m */,
 				9A59722C19CEF59C00333E7A /* PaymentInfo.h */,
@@ -769,8 +786,6 @@
 				9A1F2A1919BEFF1100CBF581 /* ProfileViewController.m */,
 				9A9E503D19D2CB05001F2C64 /* LoginViewController.h */,
 				9A9E503E19D2CB05001F2C64 /* LoginViewController.m */,
-				9A89E6C21A00D5500084A5B3 /* CheckoutOrderViewController.h */,
-				9A89E6C31A00D5500084A5B3 /* CheckoutOrderViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -985,6 +1000,7 @@
 				9AB300FF19FE21ED00AE45D1 /* RateView.m in Sources */,
 				9A84194019FF72B4008692CA /* GTLStoreendpointConstants.m in Sources */,
 				9A5D6A4819CE87830051DB88 /* PTKUSAddressZip.m in Sources */,
+				9A8B0EFF1A021D7D001C65C4 /* StoreOrderHistoryViewController.m in Sources */,
 				9A9E503F19D2CB05001F2C64 /* LoginViewController.m in Sources */,
 				9A84194919FF72B4008692CA /* GTLStoreendpointStoreMenuItem.m in Sources */,
 				9AB0435219FCE670007BC71E /* PlaceOrderViewController.m in Sources */,
@@ -1013,6 +1029,7 @@
 				9A1F2A1419BEEA0C00CBF581 /* SignupViewController.m in Sources */,
 				9A5D6A4919CE87830051DB88 /* PTKView.m in Sources */,
 				9A5D6A9419CE8A0B0051DB88 /* StripeError.m in Sources */,
+				9A8B0F021A022AE0001C65C4 /* ReviewListViewController.m in Sources */,
 				9A84194219FF72B4008692CA /* GTLStoreendpointMenusAndMenuItems.m in Sources */,
 				9A84195119FF72B4008692CA /* GTLStoreendpointStoreSummaryStatsCollection.m in Sources */,
 				9AB8389519CFF39E00F7D334 /* MBProgressHUD.m in Sources */,
@@ -1024,6 +1041,7 @@
 				9A89E6C71A0104130084A5B3 /* Order.m in Sources */,
 				9A5D6A9219CE8A0B0051DB88 /* STPUtils.m in Sources */,
 				9A84194A19FF72B4008692CA /* GTLStoreendpointStoreMenuItemCollection.m in Sources */,
+				9A8B0EFC1A020B30001C65C4 /* DataCommunicator.m in Sources */,
 				9A84194519FF72B4008692CA /* GTLStoreendpointStoreImage.m in Sources */,
 				9A5D6A8E19CE8A0B0051DB88 /* STPAPIConnection.m in Sources */,
 				9A59722E19CEF59C00333E7A /* PaymentInfo.m in Sources */,

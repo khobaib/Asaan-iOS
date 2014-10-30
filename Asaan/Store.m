@@ -84,4 +84,16 @@
     return gtlStore;
 }
 
++(GTLStoreendpointStore *)gtlStoreFromID:(id)str{
+    
+    GTLStoreendpointStore *store;
+    if([str isKindOfClass:[GTLStoreendpointStore class]]){
+        store=(GTLStoreendpointStore *)str;
+    }else{
+        store=[self gtlStoreFromStore:(Store *)str];
+    }
+
+    return store;
+}
+
 @end

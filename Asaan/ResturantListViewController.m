@@ -15,6 +15,7 @@
 #import "GTLStoreendpoint.h"
 #import "GTMHTTPFetcher.h"
 #import "ResturantDetailViewController.h"
+#import "DataCommunicator.h"
 
 #define METERS_PER_MILE 1609.344
 
@@ -299,26 +300,20 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
+    
     if([sender isKindOfClass:[UIButton class]]){
         return;
     }
     
-    ResturantDetailViewController *resturantDetail=[segue destinationViewController];
+  
     
     NSIndexPath *indexPath=[self.tableView indexPathForSelectedRow];
     
     
-    if(isServerData){
-         resturantDetail.store=[resturantList objectAtIndex:indexPath.row];
-       
-    }else{
-         Store *store=[resturantList objectAtIndex:indexPath.row];
-        resturantDetail.store=[Store gtlStoreFromStore:store];
-    }
-    
+    [DataCommunicator setSelectedStore:[resturantList objectAtIndex:indexPath.row]];
     
 
-   
+ 
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
 }
 

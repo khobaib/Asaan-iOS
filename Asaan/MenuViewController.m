@@ -10,7 +10,8 @@
 #import "MBProgressHUD.h"
 #import "MenuSectionHolder.h"
 #import "PlaceOrderViewController.h"
-
+#import "DataCommunicator.h"
+#import "Store.h"
 @interface MenuViewController ()
 
 @end
@@ -25,6 +26,9 @@
     headerArray=[[NSMutableArray alloc]init];
     tableDataArray=[[NSMutableArray alloc]init];
     
+    id str=[DataCommunicator getSelectedStore];
+    
+    self.store=[Store gtlStoreFromID:str];
     
     [self fetchMenu];
   //  self.menuArray=[@[@"Pen",@"Book",@"hand",@"food",@"pot",@"joint",@"mobile",@"latitude",@"uhaha",@"meu meu",@"meu"] mutableCopy];

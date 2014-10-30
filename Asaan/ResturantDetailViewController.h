@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "GTLStoreendpoint.h"
+#import "Store.h"
+#import "DataCommunicator.h"
+#import "DatabaseHelper.h"
 
 
 @interface ResturantDetailViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>{
@@ -23,6 +26,7 @@
 @property IBOutlet UILabel *addressLable;
 @property IBOutlet UILabel *phoneNoLable;
 @property IBOutlet MKMapView *mapView;
+
 
 
 @property GTLStoreendpointStore *store;

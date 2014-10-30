@@ -13,6 +13,7 @@
 
 @end
 
+#define METERS_PER_MILE 1609.344
 @implementation ResturantDetailViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -24,36 +25,18 @@
     return self;
 }
 
-- (void)segmentControlInit
-{
-    self.segment.selectedSegmentIndex=0;
-    //UIColor *tintcolor=[UIColor colorWithRed:236.0/255.0 green:186.0/255.0 blue:16.0/255.0 alpha:1.0];
-    //[[self.segment.subviews objectAtIndex:1] setTintColor:tintcolor];
-    
-    self.tableView.hidden=YES;
-    self.containerView.hidden=NO;
-    /*
-    for (int i=0; i<[self.segment.subviews count]; i++)
-    {
-        if ([[self.segment.subviews objectAtIndex:i]isSelected] )
-        {
-            UIColor *tintcolor=[UIColor colorWithRed:236.0/255.0 green:186.0/255.0 blue:16.0/255.0 alpha:1.0];
-            [[self.segment.subviews objectAtIndex:i] setTintColor:tintcolor];
-        }
-        else
-        {
-            [[self.segment.subviews objectAtIndex:i] setTintColor:nil];
-        }
-    }*/
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    isReview=NO;
 
-    [self segmentControlInit];
+
+    id str=[DataCommunicator getSelectedStore];
+
+    self.store=[Store gtlStoreFromID:str];
+    
+
     
     [self setValueOnUI];
     
@@ -64,63 +47,30 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    [self segmentControlInit];
+
 }
 
 -(void)setValueOnUI{
     self.addressLable.text=self.store.address;
     self.phoneNoLable.text=self.store.phone;
+    [self goTolocation];
+}
+
+-(void)goTolocation{
+ 
+    CLLocationCoordinate2D zoomLocation;
+    zoomLocation.latitude = [self.store.lat floatValue];
+    zoomLocation.longitude= [self.store.lng floatValue];
     
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.75*METERS_PER_MILE, 0.75*METERS_PER_MILE);
+    
+    [self.mapView setRegion:viewRegion animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
--(IBAction)segmentControl:(id)sender{
-    UISegmentedControl *segment=(UISegmentedControl *)sender;
-    
-    if(segment.selectedSegmentIndex==3){
-    
-        [self performSegueWithIdentifier:@"menusegu" sender:self];
-        
-        
-        return;
-    }
-    
-    if(segment.selectedSegmentIndex==0){
-        self.tableView.hidden=YES;
-        self.containerView.hidden=NO;
-    }else{
-        self.tableView.hidden=NO;
-        self.containerView.hidden=YES;
-        
-        if(segment.selectedSegmentIndex==1){
-            
-            isReview=NO;
-            [[self tableView]reloadData];
-            
-        }else if (segment.selectedSegmentIndex==2){
-            
-            isReview=YES;
-            [[self tableView]reloadData];
-        }
-    }
-    /*
-   for (int i=0; i<[segment.subviews count]; i++)
-    {
-        if ([[segment.subviews objectAtIndex:i]isSelected] )
-        {
-            UIColor *tintcolor=[UIColor colorWithRed:236.0/255.0 green:186.0/255.0 blue:16.0/255.0 alpha:1.0];
-            [[segment.subviews objectAtIndex:i] setTintColor:tintcolor];
-        }
-        else
-        {
-            [[segment.subviews objectAtIndex:i] setTintColor:nil];
-        }
-    }*/
 }
 
 
