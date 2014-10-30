@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DatabaseHelper.h"
 
-@interface CheckoutOrderViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface CheckoutOrderViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>{
+       NSArray *tableData;
+}
 
 
 @property IBOutlet UITableView *tableView;

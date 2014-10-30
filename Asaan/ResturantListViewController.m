@@ -16,6 +16,7 @@
 #import "GTMHTTPFetcher.h"
 #import "ResturantDetailViewController.h"
 #import "DataCommunicator.h"
+#import "DatabaseHelper.h"
 
 #define METERS_PER_MILE 1609.344
 
@@ -52,6 +53,7 @@
      NSDate *saveDate=[[NSUserDefaults standardUserDefaults]objectForKey:@"resturantListUpdateTime"];
     
 
+    [DatabaseHelper deletAllObjectsfromEntity:@"Order"];
     
     if(saveDate==nil){
         [self fetchResturantwitGTLquery];

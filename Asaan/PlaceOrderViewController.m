@@ -51,8 +51,16 @@
 
 -(IBAction)placeorder:(id)sender{
     
+    if([DatabaseHelper saveOrder:self.item quantityStr:self.quantity.text noteStr:self.specialPropertyLabel.text]){
+        
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"Go to checkout?" delegate:self cancelButtonTitle:@"NO" otherButtonTitles: @"YES",nil];
+        [alert show];
+        
+    }else{
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"Some problem occure.Please try again." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [alert show];
+    }
     
-    [DatabaseHelper saveOrder:self.item quantityStr:self.quantity.text noteStr:self.specialPropertyLabel.text];
 
     
 }
@@ -83,6 +91,13 @@
     
 
 }
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if(buttonIndex ==1){
+        
+    }
+}
+
 
 /*
 #pragma mark - Navigation

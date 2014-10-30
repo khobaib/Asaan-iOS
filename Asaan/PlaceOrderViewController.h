@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "GTLStoreendpoint.h"
 
-@interface PlaceOrderViewController : UIViewController<UITextFieldDelegate>
+@interface PlaceOrderViewController : UIViewController<UITextFieldDelegate,UIAlertViewDelegate>{
+ 
+}
 
 @property GTLStoreendpointStoreMenuItem *item;
 

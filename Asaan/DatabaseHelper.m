@@ -83,7 +83,7 @@
         return NO;
     }else{
         
-        NSLog(@"saved");
+       
         return YES;
     }
 
@@ -137,6 +137,7 @@
     order.note=note;
     order.username=[PFUser currentUser].username;
     order.storeId=item.storeId;
+    order.price=item.price;
     
     
 }
@@ -151,5 +152,42 @@
     return  [managedObjectContext executeFetchRequest:request error:&error];
 }
 
++(NSArray *)getAllOrders{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    NSManagedObjectContext *managedObjectContext= [appDelegate managedObjectContext];
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"Order" inManagedObjectContext:managedObjectContext]];
+    NSError *error = nil;
+    return  [managedObjectContext executeFetchRequest:request error:&error];
+}
+
+
++(BOOL)deletAllObjectsfromEntity:(NSString *)entity{
+    
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    NSManagedObjectContext *managedObjectContext= [appDelegate managedObjectContext];
+    
+    NSFetchRequest * allCars = [[NSFetchRequest alloc] init];
+    [allCars setEntity:[NSEntityDescription entityForName:entity inManagedObjectContext:managedObjectContext]];
+    [allCars setIncludesPropertyValues:NO];
+    
+    NSError * error = nil;
+    NSArray * cars = [managedObjectContext executeFetchRequest:allCars error:&error];
+ 
+
+    for (NSManagedObject * car in cars) {
+        [managedObjectContext deleteObject:car];
+    }
+    NSError *saveError = nil;
+    if([managedObjectContext save:&saveError]){
+        return YES;
+    }else{
+        return NO;
+    }
+    
+  
+}
 
 @end

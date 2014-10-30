@@ -17,5 +17,7 @@
 +(BOOL)saveOrder:(GTLStoreendpointStoreMenuItem *)item quantityStr:(NSString *)quantity noteStr:(NSString *)note;
 
 +(NSArray *)getAllStores;
++(NSArray *)getAllOrders;
++(BOOL)deletAllObjectsfromEntity:(NSString *)entity;
 
 @end
