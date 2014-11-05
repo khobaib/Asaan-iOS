@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryStoreendpoint (21 custom class methods, 8 custom properties)
+//   GTLQueryStoreendpoint (23 custom class methods, 9 custom properties)
 
 #import "GTLQueryStoreendpoint.h"
 
@@ -29,6 +29,7 @@
 #import "GTLStoreendpointStoreMenuItemCollection.h"
 #import "GTLStoreendpointStoreMenuItemModifier.h"
 #import "GTLStoreendpointStoreMenuItemModifierGroup.h"
+#import "GTLStoreendpointStoreOrder.h"
 #import "GTLStoreendpointStoreOwner.h"
 #import "GTLStoreendpointStoreOwnerCollection.h"
 #import "GTLStoreendpointStorePOSConnection.h"
@@ -38,7 +39,7 @@
 @implementation GTLQueryStoreendpoint
 
 @dynamic fields, firstPosition, maxResult, menuItemPOSId, menuPOSId, menuType,
-         order, storeId;
+         order, orderMode, storeId;
 
 #pragma mark -
 #pragma mark Service level methods
@@ -51,6 +52,14 @@
   query.firstPosition = firstPosition;
   query.maxResult = maxResult;
   query.expectedObjectClass = [GTLStoreendpointStoreSummaryStatsCollection class];
+  return query;
+}
+
++ (id)queryForGetStoreWithStoreId:(long long)storeId {
+  NSString *methodName = @"storeendpoint.getStore";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.storeId = storeId;
+  query.expectedObjectClass = [GTLStoreendpointStore class];
   return query;
 }
 
@@ -134,6 +143,14 @@
   return query;
 }
 
++ (id)queryForGetStorePOSConnectionWithStoreId:(long long)storeId {
+  NSString *methodName = @"storeendpoint.getStorePOSConnection";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.storeId = storeId;
+  query.expectedObjectClass = [GTLStoreendpointStorePOSConnection class];
+  return query;
+}
+
 + (id)queryForGetStoresWithFirstPosition:(NSInteger)firstPosition
                                maxResult:(NSInteger)maxResult {
   NSString *methodName = @"storeendpoint.getStores";
@@ -153,11 +170,14 @@
 }
 
 + (id)queryForPlaceOrderWithStoreId:(long long)storeId
+                          orderMode:(long long)orderMode
                               order:(NSString *)order {
   NSString *methodName = @"storeendpoint.placeOrder";
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
   query.storeId = storeId;
+  query.orderMode = orderMode;
   query.order = order;
+  query.expectedObjectClass = [GTLStoreendpointStoreOrder class];
   return query;
 }
 

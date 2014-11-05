@@ -27,6 +27,7 @@
 #import "GTLStoreendpointStoreMenuItemCollection.h"
 #import "GTLStoreendpointStoreMenuItemModifier.h"
 #import "GTLStoreendpointStoreMenuItemModifierGroup.h"
+#import "GTLStoreendpointStoreOrder.h"
 #import "GTLStoreendpointStoreOwner.h"
 #import "GTLStoreendpointStoreOwnerCollection.h"
 #import "GTLStoreendpointStorePOSConnection.h"

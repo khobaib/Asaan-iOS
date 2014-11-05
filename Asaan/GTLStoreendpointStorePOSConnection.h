@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStorePOSConnection (0 custom class methods, 11 custom properties)
+//   GTLStoreendpointStorePOSConnection (0 custom class methods, 13 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLObject.h"
@@ -31,10 +31,12 @@
 @property (retain) NSNumber *carryoutModeId;  // longLongValue
 @property (retain) NSNumber *createdDate;  // longLongValue
 @property (retain) NSNumber *deliveryModeId;  // longLongValue
+@property (copy) NSString *fallbackEmail;
+@property (copy) NSString *fallbackFax;
 @property (copy) NSString *hiddenHeaderName;
 @property (copy) NSString *hiddenHeaderValue;
 @property (retain) NSNumber *modifiedDate;  // longLongValue
-@property (copy) NSString *status;
+@property (retain) NSNumber *status;  // longLongValue
 @property (retain) NSNumber *storeId;  // longLongValue
 @property (copy) NSString *token;
 @property (copy) NSString *url;

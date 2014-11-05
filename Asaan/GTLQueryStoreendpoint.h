@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryStoreendpoint (21 custom class methods, 8 custom properties)
+//   GTLQueryStoreendpoint (23 custom class methods, 9 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLQuery.h"
@@ -48,6 +48,7 @@
 @property (assign) long long menuPOSId;
 @property (assign) long long menuType;
 @property (copy) NSString *order;
+@property (assign) long long orderMode;
 @property (assign) long long storeId;
 
 #pragma mark -
@@ -60,6 +61,12 @@
 // Fetches a GTLStoreendpointStoreSummaryStatsCollection.
 + (id)queryForGetStatsForAllStoresWithFirstPosition:(NSInteger)firstPosition
                                           maxResult:(NSInteger)maxResult;
+
+// Method: storeendpoint.getStore
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
+// Fetches a GTLStoreendpointStore.
++ (id)queryForGetStoreWithStoreId:(long long)storeId;
 
 // Method: storeendpoint.getStoreImages
 //  Authorization scope(s):
@@ -115,6 +122,12 @@
 // Fetches a GTLStoreendpointStoreOwnerCollection.
 + (id)queryForGetStoreOwnersWithStoreId:(long long)storeId;
 
+// Method: storeendpoint.getStorePOSConnection
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
+// Fetches a GTLStoreendpointStorePOSConnection.
++ (id)queryForGetStorePOSConnectionWithStoreId:(long long)storeId;
+
 // Method: storeendpoint.getStores
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
@@ -131,7 +144,9 @@
 // Method: storeendpoint.placeOrder
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
+// Fetches a GTLStoreendpointStoreOrder.
 + (id)queryForPlaceOrderWithStoreId:(long long)storeId
+                          orderMode:(long long)orderMode
                               order:(NSString *)order;
 
 // Method: storeendpoint.removeStoreImage

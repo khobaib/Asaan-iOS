@@ -66,7 +66,7 @@
 }
 
 
--(void)other{
+-(void)order{
     static GTLServiceStoreendpoint *storeService=nil;
     
     if(!storeService){
@@ -74,12 +74,20 @@
         storeService.retryEnabled=YES;
     }
     
-    NSString *orderString=[NSString stringWithFormat:@"<CHECKREQUESTS> <ADDCHECK TABLENUMBER=\"TableNumber\" EXTCHECKID=\"Asaan\" READYTIME=\"18:45\" READYDATETIME=\"\" NOTE=\"Need Extra Spicy\" ORDERMODEFEE=\"\" ORDERID=\"\" PRICEONLY=\"\" ORDERMODE=\"Delivery\"> <ITEMREQUESTS>                           <ADDITEM QTY=\"1\" ITEMID=\"7007\" FOR=\"Khobaib\" >  <MODITEM ITEMID=\"90204\" /> </ADDITEM> </ITEMREQUESTS> </ADDCHECK>                           <PAYMENTREQUESTS> DDTENDER TENDERID=\"AsaanTenderId\" AMOUNT=\"10.00\" TIP=\"1.50\" TOKEN=\"hadkahahoaasdasjdhaod\" />                           </PAYMENTREQUESTS>  </CHECKREQUESTS>"];
+    NSString *orderString=[NSString stringWithFormat:@"<CHECKREQUESTS><ADDCHECK EXTCHECKID=\"Nirav\" READYTIME=\"4:45PM\" NOTE=\"Please make it spicy - no Peanuts Please\" ORDERMODE=\"@ORDER_MODE\" ><ITEMREQUESTS><ADDITEM QTY=\"1\" ITEMID=\"7007\" FOR=\"Nirav\" ><MODITEM ITEMID=\"90204\" /></ADDITEM><ADDITEM QTY=\"1\" ITEMID=\"7007\" FOR=\"Khobaib\" ><MODITEM QTY=\"1\" ITEMID=\"90204\" /><MODITEM QTY=\"1\" ITEMID=\"90201\" /><MODITEM QTY=\"1\" ITEMID=\"90302\" /><MODITEM QTY=\"1\" ITEMID=\"91501\" /></ADDITEM></ITEMREQUESTS></ADDCHECK></CHECKREQUESTS>"];
     
-    // NSLog(@"%@",orderString);
+  
     
-    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForPlaceOrderWithStoreId:[self.item.storeId intValue]  order:orderString];
+    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForPlaceOrderWithStoreId:[self.item.storeId intValue] orderMode:1 order:orderString];
+   
+    
+   //[query setCustomParameter:@"hmHAJvHvKYmilfOqgUnc22tf/RL5GLmPbcFBg02d6wm+ZB1o3f7RKYqmB31+DGoH9Ad3s3WP99n587qDZ5tm+w==" forKey:@"asaan-auth-token"];
+    NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
+    dic[@"asaan-auth-token"]=[PFUser currentUser][@"authToken"];
+ 
+    [query setAdditionalHTTPHeaders:dic];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
     
     [storeService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreMenuItem *object,NSError *error){
         
@@ -94,7 +102,8 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if(buttonIndex ==1){
-        
+     
+        [self order];
     }
 }
 

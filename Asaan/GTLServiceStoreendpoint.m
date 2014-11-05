@@ -37,6 +37,7 @@
                       [GTLStoreendpointStoreMenuItemCollection class],
                       [GTLStoreendpointStoreMenuItemModifier class],
                       [GTLStoreendpointStoreMenuItemModifierGroup class],
+                      [GTLStoreendpointStoreOrder class],
                       [GTLStoreendpointStoreOwner class],
                       [GTLStoreendpointStoreOwnerCollection class],
                       [GTLStoreendpointStorePOSConnection class],

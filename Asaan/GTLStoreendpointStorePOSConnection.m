@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStorePOSConnection (0 custom class methods, 11 custom properties)
+//   GTLStoreendpointStorePOSConnection (0 custom class methods, 13 custom properties)
 
 #import "GTLStoreendpointStorePOSConnection.h"
 
@@ -24,6 +24,6 @@
 
 @implementation GTLStoreendpointStorePOSConnection
 @dynamic asaanTenderId, carryoutModeId, createdDate, deliveryModeId,
-         hiddenHeaderName, hiddenHeaderValue, modifiedDate, status, storeId,
-         token, url;
+         fallbackEmail, fallbackFax, hiddenHeaderName, hiddenHeaderValue,
+         modifiedDate, status, storeId, token, url;
 @end
