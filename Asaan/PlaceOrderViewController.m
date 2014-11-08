@@ -11,6 +11,7 @@
 #import <Parse/Parse.h>
 #import "Order.h"
 #import "DatabaseHelper.h"
+#import "CheckoutOrderViewController.h"
 
 
 @interface PlaceOrderViewController ()
@@ -66,44 +67,14 @@
 }
 
 
--(void)order{
-    static GTLServiceStoreendpoint *storeService=nil;
-    
-    if(!storeService){
-        storeService=[[GTLServiceStoreendpoint alloc]init];
-        storeService.retryEnabled=YES;
-    }
-    
-    NSString *orderString=[NSString stringWithFormat:@"<CHECKREQUESTS><ADDCHECK EXTCHECKID=\"Nirav\" READYTIME=\"4:45PM\" NOTE=\"Please make it spicy - no Peanuts Please\" ORDERMODE=\"@ORDER_MODE\" ><ITEMREQUESTS><ADDITEM QTY=\"1\" ITEMID=\"7007\" FOR=\"Nirav\" ><MODITEM ITEMID=\"90204\" /></ADDITEM><ADDITEM QTY=\"1\" ITEMID=\"7007\" FOR=\"Khobaib\" ><MODITEM QTY=\"1\" ITEMID=\"90204\" /><MODITEM QTY=\"1\" ITEMID=\"90201\" /><MODITEM QTY=\"1\" ITEMID=\"90302\" /><MODITEM QTY=\"1\" ITEMID=\"91501\" /></ADDITEM></ITEMREQUESTS></ADDCHECK></CHECKREQUESTS>"];
-    
-  
-    
-    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForPlaceOrderWithStoreId:[self.item.storeId intValue] orderMode:1 order:orderString];
-   
-    
-   //[query setCustomParameter:@"hmHAJvHvKYmilfOqgUnc22tf/RL5GLmPbcFBg02d6wm+ZB1o3f7RKYqmB31+DGoH9Ad3s3WP99n587qDZ5tm+w==" forKey:@"asaan-auth-token"];
-    NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
-    dic[@"asaan-auth-token"]=[PFUser currentUser][@"authToken"];
- 
-    [query setAdditionalHTTPHeaders:dic];
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
-    
-    [storeService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreMenuItem *object,NSError *error){
-        
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        
-        NSLog(@"%@",[error userInfo]);
-    }];
-
-    
-
-}
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if(buttonIndex ==1){
      
-        [self order];
+        CheckoutOrderViewController *chekout=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"placeorder"];
+        
+        [self.navigationController pushViewController:chekout animated:YES];
+       
     }
 }
 

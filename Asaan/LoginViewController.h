@@ -7,8 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MBProgressHUD.h"
+#import <GooglePlus/GooglePlus.h>
 
-@interface LoginViewController : UIViewController
+@interface LoginViewController : UIViewController<UIAlertViewDelegate,GPPSignInDelegate>{
+    MBProgressHUD *hud;
+
+}
 
 @property IBOutlet UITextField *emailField;
 @property IBOutlet UITextField *passwordFild;

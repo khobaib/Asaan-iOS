@@ -267,6 +267,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="forgetPassword:" destination="TRr-OO-nhS" eventType="touchUpInside" id="BYH-bB-gG0"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vWh-GP-YZ0">
                                 <rect key="frame" x="190" y="534" width="4" height="20"/>
@@ -799,6 +802,9 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="order:" destination="aaD-TW-I3G" eventType="touchUpInside" id="ADz-TX-zol"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.40232252039999999" green="0.40232252039999999" blue="0.40232252039999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -1411,11 +1417,11 @@
                         <viewControllerLayoutGuide type="bottom" id="7hV-ew-Qqf"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="wbe-eu-JY5">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oMJ-3I-m1q">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="454"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qa0-P4-tV2">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="670"/>
@@ -1536,7 +1542,7 @@
                                 </constraints>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LSB-el-q6a">
-                                <rect key="frame" x="0.0" y="454" width="320" height="50"/>
+                                <rect key="frame" x="0.0" y="518" width="320" height="50"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="GSt-FN-cO9"/>
@@ -1963,7 +1969,7 @@ EFNraXA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Qvo-1F-4Dw"/>
         <segue reference="92I-tM-DPc"/>
+        <segue reference="Lp8-aV-sb5"/>
     </inferredMetricsTieBreakers>
 </document>

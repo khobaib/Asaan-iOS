@@ -8,6 +8,9 @@
 
 #import "CheckoutOrderViewController.h"
 #import "Order.h"
+#import <Parse/Parse.h>
+#import "MBProgressHUD.h"
+#import "LoginViewController.h"
 
 @interface CheckoutOrderViewController ()
 
@@ -74,6 +77,79 @@
     
     UILabel *lable=(UILabel *)[cell viewWithTag:804];
     [lable setText:[NSString stringWithFormat:@"%d", (int)value]];
+}
+
+-(IBAction)order:(id)sender{
+    static GTLServiceStoreendpoint *storeService=nil;
+    
+    if([PFUser currentUser]==nil){
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Asaan" message:@"To place order you have to login first." delegate:nil cancelButtonTitle:@"Cancle" otherButtonTitles: nil];
+        [alert show];
+
+        LoginViewController *loginview=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"login"];
+        
+        [self.navigationController pushViewController:loginview animated:YES];
+        
+        
+        return;
+    }
+    
+    if(!storeService){
+        storeService=[[GTLServiceStoreendpoint alloc]init];
+        storeService.retryEnabled=YES;
+    }
+    
+    NSString *str = @"<ITEMREQUESTS>";
+    for(int i=0;i<tableData.count;i++){
+        Order *order=[tableData objectAtIndex:i];
+        NSString *itemString=[NSString stringWithFormat:@"<ADDITEM QTY=\"%@\" ITEMID=\"%@\" FOR=\"%@\" />",order.quantity,order.menuItemPOSId,order.username];
+        
+        str=[str stringByAppendingString:itemString];
+    }
+    
+    str=[str stringByAppendingString:@"</ITEMREQUESTS>"];
+    
+    NSString *deliveryString=[NSString stringWithFormat:@"<DELIVERY DELIVERYACCT=\"123ABC\" DELIVERYNOTE=\"BEWARE OF DOG\" ADDRESS1=\"123 Main street\" ADDRESS2=\"APT 123\" ADDRESS3=\"Back Door\" CITY=\"DENVER\" STATE=\"CO\" POSTALCODE=\"12345\" CROSSSTREET=\"MAIN AND 1st\" />"];
+    
+    NSString *contactString=[NSString stringWithFormat:@"<CONTACT FIRSTNAME=\"JOHN\" LASTNAME=\"SMITH\" PHONE1=\"303-123-4567\" PHONE2=\"8012345678\" COMPANY=\"TEST CO\" DEPT=\"DEPT 123\" />"];
+    
+    NSString *orderString=[NSString stringWithFormat:@"<CHECKREQUESTS><ADDCHECK EXTCHECKID=\"PARA\" READYTIME=\"\" NOTE=\"\" ORDERMODE=\"@ORDER_MODE\">%@%@%@</ADDCHECK></CHECKREQUESTS>",contactString,deliveryString,str];
+    
+    
+    NSLog(@"%@",orderString);
+    
+    
+    Order *order=[tableData objectAtIndex:0];
+    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForPlaceOrderWithStoreId:[order.storeId intValue] orderMode:1 order:orderString];
+    
+    
+    //[query setCustomParameter:@"hmHAJvHvKYmilfOqgUnc22tf/RL5GLmPbcFBg02d6wm+ZB1o3f7RKYqmB31+DGoH9Ad3s3WP99n587qDZ5tm+w==" forKey:@"asaan-auth-token"];
+    NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
+    dic[@"asaan-auth-token"]=[PFUser currentUser][@"authToken"];
+    
+    [query setAdditionalHTTPHeaders:dic];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    
+    
+    [storeService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreMenuItem *object,NSError *error){
+        
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        
+        NSLog(@"%@",object);
+        if(error!=nil){
+            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Asaan" message:@"Your order place is successfull." delegate:nil cancelButtonTitle:@"Cancle" otherButtonTitles: nil];
+            [alert show];
+        }
+        else{
+            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Asaan" message:[error userInfo][@"error"] delegate:nil cancelButtonTitle:@"Cancle" otherButtonTitles: nil];
+            [alert show];
+        }
+        NSLog(@"%@",[error userInfo]);
+    }];
+    
+    
+    
 }
 
 

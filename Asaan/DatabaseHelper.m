@@ -165,7 +165,7 @@
 
 +(BOOL)deletAllObjectsfromEntity:(NSString *)entity{
     
-    
+    NSLog(@"delet");
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     NSManagedObjectContext *managedObjectContext= [appDelegate managedObjectContext];
     
