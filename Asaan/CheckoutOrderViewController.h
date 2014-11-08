@@ -11,8 +11,10 @@
 
 @interface CheckoutOrderViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>{
        NSArray *tableData;
+    float totalSum;
 }
 
 
 @property IBOutlet UITableView *tableView;
+@property IBOutlet UILabel *total;
 @end

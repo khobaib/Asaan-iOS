@@ -22,8 +22,22 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     tableData=[DatabaseHelper getAllOrders];
+    totalSum=[self getTotal];
+    
+    self.total.text=[NSString stringWithFormat:@"$%.2f",totalSum];
+    
 }
 
+-(float)getTotal{
+    float sum=0.00;
+    
+    for(int i=0;i<tableData.count;i++){
+        Order *order=[tableData objectAtIndex:i];
+        sum+=[order.quantity intValue]*[order.price floatValue]/100;
+    }
+    
+    return sum;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -49,8 +63,11 @@
     UILabel *sDiscription=(UILabel *)[cell viewWithTag:802];
     UILabel *price=(UILabel *)[cell viewWithTag:803];
     UILabel *quantity=(UILabel *)[cell viewWithTag:804];
-    UILabel *total=(UILabel *)[cell viewWithTag:405];
+    UILabel *total=(UILabel *)[cell viewWithTag:805];
     
+ 
+    UIStepper *steper=(UIStepper *)[cell viewWithTag:806];
+    steper.value=[order.quantity intValue];
     
     name.text=order.shortDescriptionProperty;
     sDiscription.text=order.note;
@@ -69,14 +86,32 @@
     CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.tableView];
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:buttonPosition];
     
-    
+    Order *order=[tableData objectAtIndex:indexPath.row];
 
     UITableViewCell *cell=[self.tableView cellForRowAtIndexPath:indexPath];
     UIStepper *steper=(UIStepper *)sender;
     double value = [steper value];
     
     UILabel *lable=(UILabel *)[cell viewWithTag:804];
+    
+    UILabel *total=(UILabel *)[cell viewWithTag:805];
+    
+    total.text=[NSString stringWithFormat:@"$%.2f",value*[order.price floatValue]/100];
+    
     [lable setText:[NSString stringWithFormat:@"%d", (int)value]];
+    if([order.quantity floatValue]>value){
+        order.quantity=[NSNumber numberWithInt:[order.quantity intValue]-1];
+        totalSum-=[order.price floatValue]/100;
+    }else{
+     
+        order.quantity=[NSNumber numberWithInt:[order.quantity intValue]+1];
+        totalSum+=[order.price floatValue]/100;
+
+    }
+    
+    self.total.text=[NSString stringWithFormat:@"$%.2f",totalSum];
+
+    
 }
 
 -(IBAction)order:(id)sender{
@@ -137,9 +172,10 @@
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         
         NSLog(@"%@",object);
-        if(error!=nil){
+        if(error==nil){
             UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Asaan" message:@"Your order place is successfull." delegate:nil cancelButtonTitle:@"Cancle" otherButtonTitles: nil];
             [alert show];
+            [DatabaseHelper deletAllObjectsfromEntity:@"Order"];
         }
         else{
             UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Asaan" message:[error userInfo][@"error"] delegate:nil cancelButtonTitle:@"Cancle" otherButtonTitles: nil];

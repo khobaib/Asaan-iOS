@@ -53,7 +53,7 @@
      NSDate *saveDate=[[NSUserDefaults standardUserDefaults]objectForKey:@"resturantListUpdateTime"];
     
 
-    [DatabaseHelper deletAllObjectsfromEntity:@"Order"];
+ //   [DatabaseHelper deletAllObjectsfromEntity:@"Order"];
     
     if(saveDate==nil){
         [self fetchResturantwitGTLquery];
