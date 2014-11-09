@@ -97,7 +97,7 @@ static NSString * const kClientId = @"622430232205-vjs2qkqr73saoov2vacspnctvig7n
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
-        self.navigationController.navigationBarHidden=YES;
+        //self.navigationController.navigationBarHidden=YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -135,7 +135,7 @@ static NSString * const kClientId = @"622430232205-vjs2qkqr73saoov2vacspnctvig7n
 {
     [UIView animateWithDuration:0.3 animations:^{
         CGRect f = self.view.frame;
-        f.origin.y = 0.0f;
+        f.origin.y = 0.0f+self.navigationController.navigationBar.frame.size.height;
         self.view.frame = f;
     }];
 }

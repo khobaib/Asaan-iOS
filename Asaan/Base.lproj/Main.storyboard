@@ -246,6 +246,9 @@
                                 <state key="normal" image="F_icon.svg.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="fbLogin:" destination="TRr-OO-nhS" eventType="touchUpInside" id="3Tj-lQ-lnZ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bql-wP-ZzP">
                                 <rect key="frame" x="166" y="404" width="30" height="30"/>
@@ -256,6 +259,9 @@
                                 <state key="normal" image="g128.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="gPlusLogin:" destination="TRr-OO-nhS" eventType="touchUpInside" id="iuu-za-5AE"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="usk-70-HUT">
                                 <rect key="frame" x="51" y="522" width="132" height="40"/>
