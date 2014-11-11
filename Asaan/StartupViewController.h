@@ -12,7 +12,7 @@
 #import <CoreLocation/CoreLocation.h>
 @class GPPSignInButton;
 
-@interface ViewController : UIViewController<GPPSignInDelegate>{
+@interface StartupViewController : UIViewController<GPPSignInDelegate>{
     MBProgressHUD *hud;
     CLLocationManager *locationmanager;
 }

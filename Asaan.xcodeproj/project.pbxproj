@@ -14,7 +14,7 @@
 		9A1F29AB19BED4C900CBF581 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A1F29AA19BED4C900CBF581 /* main.m */; };
 		9A1F29AF19BED4C900CBF581 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A1F29AE19BED4C900CBF581 /* AppDelegate.m */; };
 		9A1F29B219BED4C900CBF581 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A1F29B019BED4C900CBF581 /* Main.storyboard */; };
-		9A1F29B519BED4C900CBF581 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A1F29B419BED4C900CBF581 /* ViewController.m */; };
+		9A1F29B519BED4C900CBF581 /* StartupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A1F29B419BED4C900CBF581 /* StartupViewController.m */; };
 		9A1F29B719BED4CA00CBF581 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A1F29B619BED4CA00CBF581 /* Images.xcassets */; };
 		9A1F29BE19BED4CA00CBF581 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1F29BD19BED4CA00CBF581 /* XCTest.framework */; };
 		9A1F29BF19BED4CA00CBF581 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1F299E19BED4C900CBF581 /* Foundation.framework */; };
@@ -179,8 +179,8 @@
 		9A1F29AD19BED4C900CBF581 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9A1F29AE19BED4C900CBF581 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		9A1F29B119BED4C900CBF581 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		9A1F29B319BED4C900CBF581 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		9A1F29B419BED4C900CBF581 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		9A1F29B319BED4C900CBF581 /* StartupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartupViewController.h; sourceTree = "<group>"; };
+		9A1F29B419BED4C900CBF581 /* StartupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartupViewController.m; sourceTree = "<group>"; };
 		9A1F29B619BED4CA00CBF581 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9A1F29BC19BED4CA00CBF581 /* AsaanTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AsaanTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A1F29BD19BED4CA00CBF581 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -797,8 +797,8 @@
 		9A9E504119D2CB1D001F2C64 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				9A1F29B319BED4C900CBF581 /* ViewController.h */,
-				9A1F29B419BED4C900CBF581 /* ViewController.m */,
+				9A1F29B319BED4C900CBF581 /* StartupViewController.h */,
+				9A1F29B419BED4C900CBF581 /* StartupViewController.m */,
 				9A5971F019D16BD60047D1CE /* ResturantListViewController.h */,
 				9A5971F119D16BD60047D1CE /* ResturantListViewController.m */,
 				9AF9C4CD19D184ED00E85A39 /* ResturantDetailViewController.h */,
@@ -886,7 +886,7 @@
 				ORGANIZATIONNAME = "Tech Fiesta";
 				TargetAttributes = {
 					9A1F299A19BED4C900CBF581 = {
-						DevelopmentTeam = V39QP9S6S6;
+						DevelopmentTeam = 7742T5X57N;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -900,6 +900,7 @@
 						};
 					};
 					9A1F29BB19BED4CA00CBF581 = {
+						DevelopmentTeam = 7742T5X57N;
 						TestTargetID = 9A1F299A19BED4C900CBF581;
 					};
 				};
@@ -1053,7 +1054,7 @@
 				9A5D6A9119CE8A0B0051DB88 /* STPToken.m in Sources */,
 				9A1F2A1A19BEFF1100CBF581 /* ProfileViewController.m in Sources */,
 				9AE346C61A09E94800C66953 /* GTLStoreendpointStoreImage.m in Sources */,
-				9A1F29B519BED4C900CBF581 /* ViewController.m in Sources */,
+				9A1F29B519BED4C900CBF581 /* StartupViewController.m in Sources */,
 				9A5D6A9019CE8A0B0051DB88 /* STPTestPaymentAuthorizationViewController.m in Sources */,
 				9AB8389119CFE7D900F7D334 /* InviteFriendsViewController.m in Sources */,
 				9AE346CE1A09E94800C66953 /* GTLStoreendpointStoreOrder.m in Sources */,
@@ -1236,6 +1237,7 @@
 					"$(PROJECT_DIR)/Asaan/GoogleOpenSource.framework/Headers",
 				);
 				INFOPLIST_FILE = "Asaan/Asaan-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1268,6 +1270,7 @@
 					"$(PROJECT_DIR)/Asaan/GoogleOpenSource.framework/Headers",
 				);
 				INFOPLIST_FILE = "Asaan/Asaan-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";

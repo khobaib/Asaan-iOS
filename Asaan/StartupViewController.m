@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Tech Fiesta. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "StartupViewController.h"
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import <GoogleOpenSource/GoogleOpenSource.h>
 #import "ProfileViewController.h"
@@ -17,13 +17,13 @@
 #import "LoginViewController.h"
 #import "GTLStoreendpoint.h"
 
-@interface ViewController ()
+@interface StartupViewController ()
 
 
 @end
 
 static NSString * const kClientId = @"622430232205-vjs2qkqr73saoov2vacspnctvig7nq6r.apps.googleusercontent.com";
-@implementation ViewController
+@implementation StartupViewController
 
 - (void)viewDidLoad
 {
