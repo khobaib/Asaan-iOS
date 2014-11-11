@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
+#import "Stripe.h"
+#import "PTKView.h"
 
-@interface StripeViewController : UIViewController
+@interface StripeViewController : BaseViewController<PTKViewDelegate>
 
+
+@property IBOutlet PTKView *ptkView;
+@property IBOutlet UIButton *addCard;
 @end

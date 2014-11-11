@@ -10,4 +10,23 @@
 
 @implementation StripeViewController
 
+-(void)viewDidLoad{
+    [super viewDidLoad];
+    
+   
+    
+    
+}
+
+
+- (void) paymentView:(PTKView*)paymentView withCard:(PTKCard *)card isValid:(BOOL)valid
+{
+    NSLog(@"Card number: %@", card.number);
+    NSLog(@"Card expiry: %lu/%lu", (unsigned long)card.expMonth, (unsigned long)card.expYear);
+    NSLog(@"Card cvc: %@", card.cvc);
+    NSLog(@"Address zip: %@", card.addressZip);
+    
+    // self.navigationItem.rightBarButtonItem.enabled = valid;
+}
+
 @end

@@ -7,16 +7,20 @@
 //
 
 #import "AppDelegate.h"
+#import "Stripe.h"
 
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
+NSString * const StripePublishableKey = @"pk_test_hlpADPUOWaxn6uN0aATgLivW";
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [Stripe setDefaultPublishableKey:StripePublishableKey];
+    [[UITextField appearance]setTextColor:[UIColor whiteColor]];
     return YES;
 }
 

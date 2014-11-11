@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface SignupViewController : UIViewController
+@interface SignupViewController : BaseViewController
 
+@property IBOutlet UITextField *textEmail;
+@property IBOutlet UITextField *textPassword;
+@property IBOutlet UITextField *textPhone;
 @end

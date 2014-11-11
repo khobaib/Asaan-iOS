@@ -20,6 +20,8 @@
 //                             forBarMetrics:UIBarMetricsDefault];
 //    self.navigationController.navigationBar.shadowImage = [UIImage new];
 //    self.navigationController.navigationBar.translucent = YES;
+    
+    self.navigationController.navigationBarHidden=YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -28,7 +30,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [self.navigationController setNavigationBarHidden:YES];
+   // [self.navigationController setNavigationBarHidden:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
