@@ -11,7 +11,4 @@
 
 @interface SignupViewController : BaseViewController
 
-@property IBOutlet UITextField *textEmail;
-@property IBOutlet UITextField *textPassword;
-@property IBOutlet UITextField *textPhone;
 @end

@@ -7,26 +7,26 @@
 //
 
 #import "StripeViewController.h"
+#import "PTKView.h"
+#import "UIColor+AsaanGoldColor.h"
+
+@interface StripeViewController ()
+@property (weak, nonatomic) IBOutlet PTKView *ptkView;
+@end
 
 @implementation StripeViewController
 
--(void)viewDidLoad{
-    [super viewDidLoad];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
-   
+    [self.navigationController setNavigationBarHidden:NO];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor : [UIColor goldColor]};
     
-    
-}
-
-
-- (void) paymentView:(PTKView*)paymentView withCard:(PTKCard *)card isValid:(BOOL)valid
-{
-    NSLog(@"Card number: %@", card.number);
-    NSLog(@"Card expiry: %lu/%lu", (unsigned long)card.expMonth, (unsigned long)card.expYear);
-    NSLog(@"Card cvc: %@", card.cvc);
-    NSLog(@"Address zip: %@", card.addressZip);
-    
-    // self.navigationItem.rightBarButtonItem.enabled = valid;
+//    _ptkView.delegate = self;
 }
 
 @end

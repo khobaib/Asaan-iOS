@@ -10,6 +10,9 @@
 #import "UIColor+AsaanGoldColor.h"
 
 @interface SignupViewController ()
+@property (weak, nonatomic) IBOutlet UITextField *txtEmail;
+@property (weak, nonatomic) IBOutlet UITextField *txtPassword;
+@property (weak, nonatomic) IBOutlet UITextField *txtPhone;
 
 @end
 
@@ -18,45 +21,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    self.navigationController.navigationBar.translucent = YES;
-    
-    
-    UIColor *color = [UIColor lightTextColor];
-    _textEmail.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"name@example.com" attributes:@{NSForegroundColorAttributeName: color}];
-    _textPassword.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Min 8 characters" attributes:@{NSForegroundColorAttributeName: color}];
-    _textPhone.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"(***)***-****" attributes:@{NSForegroundColorAttributeName: color}];
-    
-    
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-   
 
-    self.navigationController.navigationBarHidden=NO;
+    [self.navigationController setNavigationBarHidden:NO];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
     self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor : [UIColor goldColor]};
     
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-    [button setBackgroundImage:[UIImage imageNamed:@"nextSinguppage.png"] forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(nextPressed:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *btn=[[UIBarButtonItem alloc]initWithCustomView:button];
-    self.navigationItem.rightBarButtonItem=btn;
-   
-}
-
--(void)viewWillDisappear:(BOOL)animated{
-    self.navigationItem.rightBarButtonItem=nil;
-}
-
--(void)nextPressed:(id)sender{
-    if([_textEmail.text isEqualToString:@""]||[_textPassword.text isEqualToString:@""]||[_textPhone.text isEqualToString:@""]){
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"Please fillup all the fields" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
-        [alert show];
-        return;
-    }
+    UIColor *color = [UIColor lightTextColor];
+    _txtEmail.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"name@example.com" attributes:@{NSForegroundColorAttributeName: color}];
+    _txtPassword.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Min 8 characters" attributes:@{NSForegroundColorAttributeName: color}];
+    _txtPhone.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"(***) ***-****" attributes:@{NSForegroundColorAttributeName: color}];
     
-    [self performSegueWithIdentifier:@"profileInfo" sender:self];
+    _txtEmail.delegate = self;
+    _txtPassword.delegate = self;
+    _txtPhone.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {

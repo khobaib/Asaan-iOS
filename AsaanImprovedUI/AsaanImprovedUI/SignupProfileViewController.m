@@ -11,6 +11,8 @@
 
 @interface SignupProfileViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *profileImageView;
+@property (weak, nonatomic) IBOutlet UITextField *txtLastName;
+@property (weak, nonatomic) IBOutlet UITextField *txtFirstName;
 
 @end
 
@@ -26,7 +28,13 @@
     
     // NOTE: Rounded rect
     // self.profileImageView.layer.cornerRadius = 10.0f;
-
+    
+    UIColor *color = [UIColor lightTextColor];
+    _txtLastName.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Smith" attributes:@{NSForegroundColorAttributeName: color}];
+    _txtFirstName.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"John" attributes:@{NSForegroundColorAttributeName: color}];
+    
+    _txtLastName.delegate = self;
+    _txtFirstName.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,23 +44,14 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+
     [self.navigationController setNavigationBarHidden:NO];
- 
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
     self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor : [UIColor goldColor]};
-    
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-    [button setBackgroundImage:[UIImage imageNamed:@"nextSinguppage.png"] forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(nextPressed:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *btn=[[UIBarButtonItem alloc]initWithCustomView:button];
-    self.navigationItem.rightBarButtonItem=btn;
 }
-
--(void)nextPressed:(id)sender{
-   
-    [self performSegueWithIdentifier:@"addCard" sender:self];
-}
-
 
 - (void)viewDidAppear:(BOOL)animated {
 }

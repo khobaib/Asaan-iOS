@@ -66,21 +66,34 @@
 {
     NSDictionary* info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    
-
-    
-    
-    // If active text field is hidden by keyboard, scroll it so it's visible
-    // Your app might not need or want this behavior.
     CGRect aRect = self.view.frame;
-    aRect.size.height -= kbSize.height;
     
-    if (!CGRectContainsPoint(aRect, activeField.frame.origin) ) {
+    if (UIDeviceOrientationIsPortrait(self.interfaceOrientation)){
+        //DO Portrait
+        aRect.size.height -= kbSize.height;
         
-        [UIView animateWithDuration:0.3 animations:^{
-          
-            self.view.frame = aRect;
-        }];
+        // If active text field is hidden by keyboard, scroll it so it's visible
+        if (!CGRectContainsPoint(aRect, activeField.frame.origin) ) {
+            
+            [UIView animateWithDuration:0.3 animations:^{
+                
+                self.view.frame = aRect;
+            }];
+        }
+    }else{
+        //DO Landscape
+        
+        //NOTE: For some reason, the keyboard is not aware of an orientation change. Hence its width becomes height and vice versa!
+        aRect.size.height -= kbSize.width;
+        
+        // If active text field is hidden by keyboard, scroll it so it's visible
+        if (!CGRectContainsPoint(aRect, activeField.frame.origin) ) {
+            
+            [UIView animateWithDuration:0.3 animations:^{
+                
+                self.view.frame = aRect;
+            }];
+        }
     }
 }
 
