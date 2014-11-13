@@ -70,6 +70,7 @@
 		D41D322A1A11DD9300EA49B6 /* resturantDetailDemo.png in Resources */ = {isa = PBXBuildFile; fileRef = D41D32131A11DD9300EA49B6 /* resturantDetailDemo.png */; };
 		D41D322B1A11DD9300EA49B6 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = D41D32141A11DD9300EA49B6 /* star.png */; };
 		D41D322C1A11DD9300EA49B6 /* starhighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = D41D32151A11DD9300EA49B6 /* starhighlighted.png */; };
+		D46D0FAB1A13B2920072A413 /* UITextField+Extender.m in Sources */ = {isa = PBXBuildFile; fileRef = D46D0FAA1A13B2920072A413 /* UITextField+Extender.m */; };
 		D4A4EC661A0D3F2300B688EA /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A4EC651A0D3F2300B688EA /* LoginViewController.m */; };
 		D4A4EC691A0D5D3300B688EA /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A4EC681A0D5D3300B688EA /* SignupViewController.m */; };
 		D4EAF9E71A12ACB20078FA9C /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4EAF9E31A12ACB20078FA9C /* BaseViewController.m */; };
@@ -179,6 +180,8 @@
 		D41D32131A11DD9300EA49B6 /* resturantDetailDemo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = resturantDetailDemo.png; sourceTree = "<group>"; };
 		D41D32141A11DD9300EA49B6 /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
 		D41D32151A11DD9300EA49B6 /* starhighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = starhighlighted.png; sourceTree = "<group>"; };
+		D46D0FA91A13B2920072A413 /* UITextField+Extender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITextField+Extender.h"; path = "HelperClasses/UITextField+Extender.h"; sourceTree = "<group>"; };
+		D46D0FAA1A13B2920072A413 /* UITextField+Extender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITextField+Extender.m"; path = "HelperClasses/UITextField+Extender.m"; sourceTree = "<group>"; };
 		D4A4EC641A0D3F2300B688EA /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		D4A4EC651A0D3F2300B688EA /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		D4A4EC671A0D5D3300B688EA /* SignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupViewController.h; sourceTree = "<group>"; };
@@ -384,6 +387,8 @@
 				D4F275A41A0C021800CEC95A /* main.m */,
 				D404EDB91A13149A000285F2 /* UIColor+AsaanBackgroundColor.h */,
 				D404EDBA1A13149A000285F2 /* UIColor+AsaanBackgroundColor.m */,
+				D46D0FA91A13B2920072A413 /* UITextField+Extender.h */,
+				D46D0FAA1A13B2920072A413 /* UITextField+Extender.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -552,6 +557,7 @@
 			files = (
 				D404EDB01A130625000285F2 /* PTKView.m in Sources */,
 				D4A4EC691A0D5D3300B688EA /* SignupViewController.m in Sources */,
+				D46D0FAB1A13B2920072A413 /* UITextField+Extender.m in Sources */,
 				D404EDA91A130625000285F2 /* PTKCard.m in Sources */,
 				D4EAF9E71A12ACB20078FA9C /* BaseViewController.m in Sources */,
 				D404EDAC1A130625000285F2 /* PTKCardNumber.m in Sources */,

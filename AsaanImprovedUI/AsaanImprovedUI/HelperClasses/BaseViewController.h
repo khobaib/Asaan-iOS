@@ -11,6 +11,6 @@
 @interface BaseViewController : UIViewController<UITextFieldDelegate>{
     UITextField *activeField;
 }
-
+    @property(weak, nonatomic) UIScrollView* baseScrollView;
 
 @end

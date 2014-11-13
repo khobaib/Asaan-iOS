@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtEmail;
 @property (weak, nonatomic) IBOutlet UITextField *txtPassword;
 @property (weak, nonatomic) IBOutlet UITextField *txtPhone;
+@property (weak, nonatomic) IBOutlet UIScrollView *signupScrollView;
 
 @end
 
@@ -20,6 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [super setBaseScrollView:_signupScrollView];
 //    self.navigationController.navigationBar.translucent = YES;
 }
 
@@ -37,10 +39,6 @@
     _txtEmail.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"name@example.com" attributes:@{NSForegroundColorAttributeName: color}];
     _txtPassword.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Min 8 characters" attributes:@{NSForegroundColorAttributeName: color}];
     _txtPhone.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"(***) ***-****" attributes:@{NSForegroundColorAttributeName: color}];
-    
-    _txtEmail.delegate = self;
-    _txtPassword.delegate = self;
-    _txtPhone.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {

@@ -7,18 +7,20 @@
 //
 
 #import "BaseViewController.h"
+#import "UITextField+Extender.h"
+#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 
 @interface BaseViewController ()
-
+    @property(nonatomic) CGRect frameRect;
+    @property(nonatomic) Boolean isKeyboardShowing;
+    @property(nonatomic) CGFloat keyboardHeight;
+    @property(nonatomic) UITapGestureRecognizer *tap;
 @end
 
 @implementation BaseViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-
-    
        // Do any additional setup after loading the view.
 }
 
@@ -26,8 +28,22 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+- (void)viewWillTransitionToSize:(CGSize)size
+       withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
+    [super viewWillTransitionToSize: size withTransitionCoordinator:coordinator];
+    _frameRect.size = size;
+    _baseScrollView.contentSize = _frameRect.size;
+    NSLog(@"viewWillTransitionToSize");
+}
+- (void) didRotateFromInterfaceOrientation: (UIInterfaceOrientation) fromInterfaceOrientation
+{
+    [super didRotateFromInterfaceOrientation: fromInterfaceOrientation];
+    _frameRect = self.view.frame;
+    _baseScrollView.contentSize = _frameRect.size;
+    NSLog(@"didRotateFromInterfaceOrientation");
+}
 -(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWasShown:)
@@ -36,18 +52,25 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillBeHidden:)
                                                  name:UIKeyboardWillHideNotification object:nil];
+    _frameRect = self.view.frame;
+    _baseScrollView.contentSize = _frameRect.size;
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillShowNotification
+                                                    name:UIKeyboardDidShowNotification
                                                   object:nil];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIKeyboardWillHideNotification
                                                   object:nil];
+    [super viewWillDisappear:animated];
 }
-
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    _baseScrollView.contentSize = _frameRect.size;
+    [_baseScrollView layoutSubviews];
+}
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
@@ -59,64 +82,71 @@
     activeField = nil;
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
+    
+    UITextField *next = theTextField.nextTextField;
+    if (next) {
+        [next becomeFirstResponder];
+    } else {
+        [self.view endEditing:YES];
+    }
+    
+    return YES;
+}
 
+- (void)resizeScrollbarToFitKeyboard
+{
+    UIEdgeInsets contentInsets;
+    contentInsets = UIEdgeInsetsMake(0.0, 0.0, _keyboardHeight, 0.0);
+    
+    _baseScrollView.contentInset = contentInsets;
+    _baseScrollView.scrollIndicatorInsets = contentInsets;
+    
+    // If active text field is hidden by keyboard, scroll it so it's visible
+    // Your app might not need or want this behavior.
+    CGRect aRect = _frameRect;
+    aRect.size.height -= _keyboardHeight;
+    if (!CGRectContainsPoint(aRect, activeField.frame.origin) ) {
+        [_baseScrollView scrollRectToVisible:activeField.frame animated:YES];
+    }
+}
 
-// Called when the UIKeyboardDidShowNotification is sent.
+-(void)dismissKeyboard {
+    [self.view endEditing:YES];
+    [self.view removeGestureRecognizer:_tap];
+}
+
 - (void)keyboardWasShown:(NSNotification*)aNotification
 {
+    _tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    
+    [self.view addGestureRecognizer:_tap];
+    _isKeyboardShowing = true;
     NSDictionary* info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    CGRect aRect = self.view.frame;
+    NSLog(@"keyboardWasShown kbSize.height = %f, width = %f", kbSize.height, kbSize.width);
     
-    if (UIDeviceOrientationIsPortrait(self.interfaceOrientation)){
-        //DO Portrait
-        aRect.size.height -= kbSize.height;
-        
-        // If active text field is hidden by keyboard, scroll it so it's visible
-        if (!CGRectContainsPoint(aRect, activeField.frame.origin) ) {
-            
-            [UIView animateWithDuration:0.3 animations:^{
-                
-                self.view.frame = aRect;
-            }];
-        }
-    }else{
-        //DO Landscape
-        
-        //NOTE: For some reason, the keyboard is not aware of an orientation change. Hence its width becomes height and vice versa!
-        aRect.size.height -= kbSize.width;
-        
-        // If active text field is hidden by keyboard, scroll it so it's visible
-        if (!CGRectContainsPoint(aRect, activeField.frame.origin) ) {
-            
-            [UIView animateWithDuration:0.3 animations:^{
-                
-                self.view.frame = aRect;
-            }];
-        }
-    }
+    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    
+    _keyboardHeight = kbSize.height;
+    
+    if (UIDeviceOrientationIsLandscape(orientation) == true && SYSTEM_VERSION_LESS_THAN(@"8.0"))
+        _keyboardHeight = kbSize.width;
+    
+    [self resizeScrollbarToFitKeyboard];
 }
 
 // Called when the UIKeyboardWillHideNotification is sent
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification
 {
-    CGRect aRect = self.view.frame;
-    aRect.size.height -= self.navigationController.navigationBar.frame.size.height+self.tabBarController.tabBar.frame.size.height;
-    [UIView animateWithDuration:0.3 animations:^{
-        
-        self.view.frame = aRect;
-    }];
+    _isKeyboardShowing = false;
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    _baseScrollView.contentInset = contentInsets;
+    _baseScrollView.scrollIndicatorInsets = contentInsets;
+    NSLog(@"keyboardWillBeHidden");
 }
-
-/*
-- (void)keyboardWasShown:(NSNotification*)aNotification {
-    NSDictionary* info = [aNotification userInfo];
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    CGRect bkgndRect = activeField.superview.frame;
-    bkgndRect.size.height += kbSize.height;
-    [activeField.superview setFrame:bkgndRect];
-    [_scrollView setContentOffset:CGPointMake(0.0, activeField.frame.origin.y-kbSize.height) animated:YES];
-}*/
 
 /*
 #pragma mark - Navigation

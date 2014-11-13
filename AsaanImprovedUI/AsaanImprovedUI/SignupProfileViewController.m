@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *profileImageView;
 @property (weak, nonatomic) IBOutlet UITextField *txtLastName;
 @property (weak, nonatomic) IBOutlet UITextField *txtFirstName;
+@property (weak, nonatomic) IBOutlet UIScrollView *signupProfileScrollView;
 
 @end
 
@@ -20,6 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [super setBaseScrollView:_signupProfileScrollView];
     
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
     self.profileImageView.clipsToBounds = YES;
@@ -33,8 +35,6 @@
     _txtLastName.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Smith" attributes:@{NSForegroundColorAttributeName: color}];
     _txtFirstName.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"John" attributes:@{NSForegroundColorAttributeName: color}];
     
-    _txtLastName.delegate = self;
-    _txtFirstName.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {

@@ -12,6 +12,7 @@
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *txtEmail;
 @property (weak, nonatomic) IBOutlet UITextField *txtPassword;
+@property (weak, nonatomic) IBOutlet UIScrollView *loginScrollView;
 
 @end
 
@@ -19,6 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [super setBaseScrollView:_loginScrollView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -34,9 +36,6 @@
     UIColor *color = [UIColor lightTextColor];
     _txtEmail.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"name@example.com" attributes:@{NSForegroundColorAttributeName: color}];
     _txtPassword.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Min 8 characters" attributes:@{NSForegroundColorAttributeName: color}];
-    
-    _txtEmail.delegate = self;
-    _txtPassword.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
