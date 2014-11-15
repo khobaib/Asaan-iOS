@@ -141,6 +141,9 @@
                                         <exclude reference="9PW-Mn-xxo"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="actionFacebookLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zyo-wK-3AP"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.20000000000000001" green="0.16862745100000001" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -1,13 +1,15 @@
-# Uncomment this line to define a global platform for your project
- platform :ios, "7.1"
+platform :ios, "7.1"
 
-target "Asaan" do
+xcodeproj 'AsaanImprovedUI/AsaanImprovedUI.xcodeproj'
+
+target "AsaanImprovedUI" do
 pod 'SDWebImage', '~>3.6'
 pod 'AFNetworking', '~> 2.0'
+pod 'MBProgressHUD', '~> 0.8'
 
 end
 
-target "AsaanTests" do
+target "AsaanImprovedUITests" do
 
 end
 

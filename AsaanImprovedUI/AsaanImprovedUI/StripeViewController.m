@@ -17,6 +17,7 @@
 @implementation StripeViewController
 
 - (void)viewWillAppear:(BOOL)animated {
+    
     [super viewWillAppear:animated];
     
     [self.navigationController setNavigationBarHidden:NO];
@@ -26,7 +27,7 @@
     self.navigationController.navigationBar.translucent = YES;
     self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor : [UIColor goldColor]};
     
-//    _ptkView.delegate = self;
+    //    _ptkView.delegate = self;
 }
 
 @end

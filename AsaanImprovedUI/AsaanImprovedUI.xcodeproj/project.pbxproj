@@ -7,6 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37CDB4D21A173A7F00ACA378 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37CDB4CF1A173A7F00ACA378 /* FacebookSDK.framework */; };
+		37CDB4D31A173A7F00ACA378 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37CDB4D01A173A7F00ACA378 /* Parse.framework */; };
+		37CDB4D41A173A7F00ACA378 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37CDB4D11A173A7F00ACA378 /* ParseFacebookUtils.framework */; };
+		37CDB4DA1A174BB500ACA378 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37CDB4D91A174BB500ACA378 /* Foundation.framework */; };
+		37CDB4DC1A174BD500ACA378 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37CDB4DB1A174BD500ACA378 /* CoreGraphics.framework */; };
+		37CDB4DE1A174BDF00ACA378 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37CDB4DD1A174BDF00ACA378 /* UIKit.framework */; };
+		37CDB4E01A174C1500ACA378 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37CDB4DF1A174C1500ACA378 /* AudioToolbox.framework */; };
+		37CDB4E21A174C2100ACA378 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37CDB4E11A174C2100ACA378 /* CFNetwork.framework */; };
+		37CDB4E41A174C2E00ACA378 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37CDB4E31A174C2E00ACA378 /* CoreLocation.framework */; };
+		37CDB4E61A174C4600ACA378 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 37CDB4E51A174C4600ACA378 /* libz.dylib */; };
+		37CDB4E81A174C5400ACA378 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37CDB4E71A174C5400ACA378 /* MobileCoreServices.framework */; };
+		37CDB4EA1A174C5F00ACA378 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37CDB4E91A174C5F00ACA378 /* QuartzCore.framework */; };
+		37CDB4EC1A174C6900ACA378 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37CDB4EB1A174C6900ACA378 /* Security.framework */; };
+		37CDB4EE1A174C7300ACA378 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37CDB4ED1A174C7300ACA378 /* StoreKit.framework */; };
+		37CDB4F01A174C7F00ACA378 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37CDB4EF1A174C7F00ACA378 /* SystemConfiguration.framework */; };
+		37CDB4F21A174D0400ACA378 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37CDB4F11A174D0400ACA378 /* Social.framework */; };
+		37CDB4F41A174D0C00ACA378 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37CDB4F31A174D0C00ACA378 /* Accounts.framework */; };
+		9979DB71D9AB336EFA535518 /* libPods-AsaanImprovedUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C14D4163C6DFF57F4674F76 /* libPods-AsaanImprovedUI.a */; };
 		D404EDA81A130625000285F2 /* PTKAddressZip.m in Sources */ = {isa = PBXBuildFile; fileRef = D404ED851A130625000285F2 /* PTKAddressZip.m */; };
 		D404EDA91A130625000285F2 /* PTKCard.m in Sources */ = {isa = PBXBuildFile; fileRef = D404ED871A130625000285F2 /* PTKCard.m */; };
 		D404EDAA1A130625000285F2 /* PTKCardCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D404ED891A130625000285F2 /* PTKCardCVC.m */; };
@@ -96,6 +114,29 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		37CDB4CB1A17379600ACA378 /* AsaanDebug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AsaanDebug.h; sourceTree = "<group>"; };
+		37CDB4CC1A1739E800ACA378 /* AsaanImprovedUI-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AsaanImprovedUI-Prefix.pch"; sourceTree = "<group>"; };
+		37CDB4CF1A173A7F00ACA378 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		37CDB4D01A173A7F00ACA378 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		37CDB4D11A173A7F00ACA378 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
+		37CDB4D71A174B7200ACA378 /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
+		37CDB4D91A174BB500ACA378 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		37CDB4DB1A174BD500ACA378 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		37CDB4DD1A174BDF00ACA378 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		37CDB4DF1A174C1500ACA378 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		37CDB4E11A174C2100ACA378 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		37CDB4E31A174C2E00ACA378 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		37CDB4E51A174C4600ACA378 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		37CDB4E71A174C5400ACA378 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		37CDB4E91A174C5F00ACA378 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		37CDB4EB1A174C6900ACA378 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		37CDB4ED1A174C7300ACA378 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		37CDB4EF1A174C7F00ACA378 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		37CDB4F11A174D0400ACA378 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		37CDB4F31A174D0C00ACA378 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		37CDB4F51A174EA800ACA378 /* AsaanConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsaanConstants.h; sourceTree = "<group>"; };
+		5C14D4163C6DFF57F4674F76 /* libPods-AsaanImprovedUI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AsaanImprovedUI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7425533BFF98518C0726BBF3 /* Pods-AsaanImprovedUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AsaanImprovedUI.release.xcconfig"; path = "../Pods/Target Support Files/Pods-AsaanImprovedUI/Pods-AsaanImprovedUI.release.xcconfig"; sourceTree = "<group>"; };
 		D404ED841A130625000285F2 /* PTKAddressZip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTKAddressZip.h; sourceTree = "<group>"; };
 		D404ED851A130625000285F2 /* PTKAddressZip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTKAddressZip.m; sourceTree = "<group>"; };
 		D404ED861A130625000285F2 /* PTKCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTKCard.h; sourceTree = "<group>"; };
@@ -204,6 +245,7 @@
 		D4F275BB1A0C021800CEC95A /* AsaanImprovedUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AsaanImprovedUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4F275C01A0C021800CEC95A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4F275C11A0C021800CEC95A /* AsaanImprovedUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AsaanImprovedUITests.m; sourceTree = "<group>"; };
+		F118727E4C88674E833D5326 /* Pods-AsaanImprovedUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AsaanImprovedUI.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-AsaanImprovedUI/Pods-AsaanImprovedUI.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +253,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37CDB4F41A174D0C00ACA378 /* Accounts.framework in Frameworks */,
+				37CDB4F21A174D0400ACA378 /* Social.framework in Frameworks */,
+				37CDB4F01A174C7F00ACA378 /* SystemConfiguration.framework in Frameworks */,
+				37CDB4EE1A174C7300ACA378 /* StoreKit.framework in Frameworks */,
+				37CDB4EC1A174C6900ACA378 /* Security.framework in Frameworks */,
+				37CDB4EA1A174C5F00ACA378 /* QuartzCore.framework in Frameworks */,
+				37CDB4E81A174C5400ACA378 /* MobileCoreServices.framework in Frameworks */,
+				37CDB4E61A174C4600ACA378 /* libz.dylib in Frameworks */,
+				37CDB4E41A174C2E00ACA378 /* CoreLocation.framework in Frameworks */,
+				37CDB4E21A174C2100ACA378 /* CFNetwork.framework in Frameworks */,
+				37CDB4E01A174C1500ACA378 /* AudioToolbox.framework in Frameworks */,
+				37CDB4DE1A174BDF00ACA378 /* UIKit.framework in Frameworks */,
+				37CDB4DC1A174BD500ACA378 /* CoreGraphics.framework in Frameworks */,
+				37CDB4DA1A174BB500ACA378 /* Foundation.framework in Frameworks */,
+				37CDB4D31A173A7F00ACA378 /* Parse.framework in Frameworks */,
+				37CDB4D21A173A7F00ACA378 /* FacebookSDK.framework in Frameworks */,
+				37CDB4D41A173A7F00ACA378 /* ParseFacebookUtils.framework in Frameworks */,
+				9979DB71D9AB336EFA535518 /* libPods-AsaanImprovedUI.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,6 +284,56 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		37CDB4CA1A17376800ACA378 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				37CDB4CB1A17379600ACA378 /* AsaanDebug.h */,
+				37CDB4F51A174EA800ACA378 /* AsaanConstants.h */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		37CDB4CD1A173A7F00ACA378 /* External */ = {
+			isa = PBXGroup;
+			children = (
+				37CDB4CE1A173A7F00ACA378 /* Parse */,
+			);
+			path = External;
+			sourceTree = "<group>";
+		};
+		37CDB4CE1A173A7F00ACA378 /* Parse */ = {
+			isa = PBXGroup;
+			children = (
+				37CDB4CF1A173A7F00ACA378 /* FacebookSDK.framework */,
+				37CDB4D01A173A7F00ACA378 /* Parse.framework */,
+				37CDB4D11A173A7F00ACA378 /* ParseFacebookUtils.framework */,
+			);
+			path = Parse;
+			sourceTree = "<group>";
+		};
+		703EC5836F1BB0E0943269D4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				37CDB4F31A174D0C00ACA378 /* Accounts.framework */,
+				37CDB4F11A174D0400ACA378 /* Social.framework */,
+				37CDB4EF1A174C7F00ACA378 /* SystemConfiguration.framework */,
+				37CDB4ED1A174C7300ACA378 /* StoreKit.framework */,
+				37CDB4EB1A174C6900ACA378 /* Security.framework */,
+				37CDB4E91A174C5F00ACA378 /* QuartzCore.framework */,
+				37CDB4E71A174C5400ACA378 /* MobileCoreServices.framework */,
+				37CDB4E51A174C4600ACA378 /* libz.dylib */,
+				37CDB4E31A174C2E00ACA378 /* CoreLocation.framework */,
+				37CDB4E11A174C2100ACA378 /* CFNetwork.framework */,
+				37CDB4DF1A174C1500ACA378 /* AudioToolbox.framework */,
+				37CDB4DD1A174BDF00ACA378 /* UIKit.framework */,
+				37CDB4DB1A174BD500ACA378 /* CoreGraphics.framework */,
+				37CDB4D91A174BB500ACA378 /* Foundation.framework */,
+				37CDB4D71A174B7200ACA378 /* libz.1.1.3.dylib */,
+				5C14D4163C6DFF57F4674F76 /* libPods-AsaanImprovedUI.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D404ED831A130625000285F2 /* Stripe */ = {
 			isa = PBXGroup;
 			children = (
@@ -347,6 +457,8 @@
 				D4F275A11A0C021800CEC95A /* AsaanImprovedUI */,
 				D4F275BE1A0C021800CEC95A /* AsaanImprovedUITests */,
 				D4F275A01A0C021800CEC95A /* Products */,
+				F8D6939A2EBA134C4A972512 /* Pods */,
+				703EC5836F1BB0E0943269D4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -362,11 +474,13 @@
 		D4F275A11A0C021800CEC95A /* AsaanImprovedUI */ = {
 			isa = PBXGroup;
 			children = (
+				37CDB4CD1A173A7F00ACA378 /* External */,
 				D41D31FE1A11DD9300EA49B6 /* images */,
 				D404ED831A130625000285F2 /* Stripe */,
 				D4A4EC631A0D3DD800B688EA /* ViewControllers */,
 				D4F275A61A0C021800CEC95A /* AppDelegate.h */,
 				D4F275A71A0C021800CEC95A /* AppDelegate.m */,
+				37CDB4CA1A17376800ACA378 /* Utilities */,
 				D4F275AF1A0C021800CEC95A /* Main.storyboard */,
 				D4F275B21A0C021800CEC95A /* Images.xcassets */,
 				D4F275B41A0C021800CEC95A /* LaunchScreen.xib */,
@@ -379,6 +493,7 @@
 		D4F275A21A0C021800CEC95A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				37CDB4CC1A1739E800ACA378 /* AsaanImprovedUI-Prefix.pch */,
 				D4EAF9EA1A12AD9F0078FA9C /* BaseViewController.h */,
 				D4EAF9E31A12ACB20078FA9C /* BaseViewController.m */,
 				D4EAF9E51A12ACB20078FA9C /* UIColor+AsaanGoldColor.h */,
@@ -410,6 +525,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		F8D6939A2EBA134C4A972512 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F118727E4C88674E833D5326 /* Pods-AsaanImprovedUI.debug.xcconfig */,
+				7425533BFF98518C0726BBF3 /* Pods-AsaanImprovedUI.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -417,9 +541,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4F275C51A0C021800CEC95A /* Build configuration list for PBXNativeTarget "AsaanImprovedUI" */;
 			buildPhases = (
+				F95ADD3BABA8DCFE6EB4095F /* Check Pods Manifest.lock */,
 				D4F2759B1A0C021800CEC95A /* Sources */,
 				D4F2759C1A0C021800CEC95A /* Frameworks */,
 				D4F2759D1A0C021800CEC95A /* Resources */,
+				9EEABC34409E9752CB0E3735 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -459,7 +585,7 @@
 				TargetAttributes = {
 					D4F2759E1A0C021800CEC95A = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = 7742T5X57N;
+						DevelopmentTeam = V39QP9S6S6;
 					};
 					D4F275BA1A0C021800CEC95A = {
 						CreatedOnToolsVersion = 6.1;
@@ -549,6 +675,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9EEABC34409E9752CB0E3735 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-AsaanImprovedUI/Pods-AsaanImprovedUI-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F95ADD3BABA8DCFE6EB4095F /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D4F2759B1A0C021800CEC95A /* Sources */ = {
@@ -641,7 +800,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Khobaib Chowdhury (HK8YVC6C79)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Khobaib Chowdhury (HK8YVC6C79)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -658,9 +818,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "578875d7-a7b0-42c1-8bea-e1507602ed90";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -683,7 +844,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Khobaib Chowdhury (HK8YVC6C79)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Khobaib Chowdhury (HK8YVC6C79)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -694,8 +856,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "578875d7-a7b0-42c1-8bea-e1507602ed90";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -704,26 +867,40 @@
 		};
 		D4F275C61A0C021800CEC95A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F118727E4C88674E833D5326 /* Pods-AsaanImprovedUI.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Khobaib Chowdhury (HK8YVC6C79)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/AsaanImprovedUI/External/Parse",
+				);
+				GCC_PREFIX_HEADER = "AsaanImprovedUI/AsaanImprovedUI-Prefix.pch";
 				INFOPLIST_FILE = AsaanImprovedUI/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "578875d7-a7b0-42c1-8bea-e1507602ed90";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		D4F275C71A0C021800CEC95A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7425533BFF98518C0726BBF3 /* Pods-AsaanImprovedUI.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Khobaib Chowdhury (HK8YVC6C79)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/AsaanImprovedUI/External/Parse",
+				);
+				GCC_PREFIX_HEADER = "AsaanImprovedUI/AsaanImprovedUI-Prefix.pch";
 				INFOPLIST_FILE = AsaanImprovedUI/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "578875d7-a7b0-42c1-8bea-e1507602ed90";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
