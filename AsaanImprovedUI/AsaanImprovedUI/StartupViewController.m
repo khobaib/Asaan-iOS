@@ -49,15 +49,19 @@
 }
 
 #pragma mark - Actions
-- (IBAction)actionFacebookLogin:(id)sender {
+- (IBAction)actionFBButtonClicked:(id)sender {
     
-    NSArray *permissions=@[@"public_profile", @"user_friends",@"email"];
+    [self facebookLogin];
+}
+
+#pragma mark - Facebook
+- (void)facebookLogin {
     
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.labelText = @"Please Wait";
     hud.hidden=NO;
     
-    [PFFacebookUtils logInWithPermissions:permissions block:^(PFUser *user, NSError *error) {
+    [PFFacebookUtils logInWithPermissions:FACEBOOK_PERMISSIONS block:^(PFUser *user, NSError *error) {
         
         if (!user) {
             
@@ -83,26 +87,22 @@
         } else {
             
 #if DEBUG_LOGIN
-            NSLog(@"User logged in through Facebook!");
+            NSLog(@"User %@ logged in through Facebook!", user.username);
 #endif
             hud.hidden=YES;
             
-            NSLog(@"Test 1");
-#pragma warning
-//            ProfileViewController *acv=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"profile"];
-//            [self.navigationController pushViewController:acv animated:YES];
+#warning Disabled functionality for unimplemented ViewController
+            //            ProfileViewController *acv=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"profile"];
+            //            [self.navigationController pushViewController:acv animated:YES];
             
         }
     }];
 }
 
-
 - (void)facebookDataLoad {
     
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.labelText = @"Please Wait";
-    
-    
     
     FBRequest *request = [FBRequest requestForMe];
     [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
@@ -131,7 +131,7 @@
             [user saveInBackgroundWithBlock:^(BOOL complete,NSError *error){
                 
             NSLog(@"Test 2");
-#pragma warning
+#warning Disabled functionality for unimplemented ViewController
 //                ProfileViewController *acv=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"profile"];
 //                [self.navigationController pushViewController:acv animated:YES];
                 

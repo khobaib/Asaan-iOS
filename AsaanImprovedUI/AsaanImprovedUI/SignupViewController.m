@@ -10,6 +10,7 @@
 #import "UIColor+AsaanGoldColor.h"
 
 @interface SignupViewController ()
+
 @property (weak, nonatomic) IBOutlet UITextField *txtEmail;
 @property (weak, nonatomic) IBOutlet UITextField *txtPassword;
 @property (weak, nonatomic) IBOutlet UITextField *txtPhone;
@@ -20,12 +21,14 @@
 @implementation SignupViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     [super setBaseScrollView:_signupScrollView];
 //    self.navigationController.navigationBar.translucent = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    
     [super viewWillAppear:animated];
 
     [self.navigationController setNavigationBarHidden:NO];
@@ -42,6 +45,7 @@
 }
 
 - (void)didReceiveMemoryWarning {
+    
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -55,5 +59,6 @@
     // Pass the selected object to the new view controller.
 }
 */
+
 
 @end

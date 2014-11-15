@@ -24,6 +24,7 @@
 		37CDB4F01A174C7F00ACA378 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37CDB4EF1A174C7F00ACA378 /* SystemConfiguration.framework */; };
 		37CDB4F21A174D0400ACA378 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37CDB4F11A174D0400ACA378 /* Social.framework */; };
 		37CDB4F41A174D0C00ACA378 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37CDB4F31A174D0C00ACA378 /* Accounts.framework */; };
+		37CDB4FB1A17617C00ACA378 /* AsaanUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 37CDB4FA1A17617C00ACA378 /* AsaanUtilities.m */; };
 		9979DB71D9AB336EFA535518 /* libPods-AsaanImprovedUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C14D4163C6DFF57F4674F76 /* libPods-AsaanImprovedUI.a */; };
 		D404EDA81A130625000285F2 /* PTKAddressZip.m in Sources */ = {isa = PBXBuildFile; fileRef = D404ED851A130625000285F2 /* PTKAddressZip.m */; };
 		D404EDA91A130625000285F2 /* PTKCard.m in Sources */ = {isa = PBXBuildFile; fileRef = D404ED871A130625000285F2 /* PTKCard.m */; };
@@ -135,6 +136,8 @@
 		37CDB4F11A174D0400ACA378 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		37CDB4F31A174D0C00ACA378 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		37CDB4F51A174EA800ACA378 /* AsaanConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsaanConstants.h; sourceTree = "<group>"; };
+		37CDB4F91A17617C00ACA378 /* AsaanUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsaanUtilities.h; sourceTree = "<group>"; };
+		37CDB4FA1A17617C00ACA378 /* AsaanUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsaanUtilities.m; sourceTree = "<group>"; };
 		5C14D4163C6DFF57F4674F76 /* libPods-AsaanImprovedUI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AsaanImprovedUI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7425533BFF98518C0726BBF3 /* Pods-AsaanImprovedUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AsaanImprovedUI.release.xcconfig"; path = "../Pods/Target Support Files/Pods-AsaanImprovedUI/Pods-AsaanImprovedUI.release.xcconfig"; sourceTree = "<group>"; };
 		D404ED841A130625000285F2 /* PTKAddressZip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTKAddressZip.h; sourceTree = "<group>"; };
@@ -289,6 +292,8 @@
 			children = (
 				37CDB4CB1A17379600ACA378 /* AsaanDebug.h */,
 				37CDB4F51A174EA800ACA378 /* AsaanConstants.h */,
+				37CDB4F91A17617C00ACA378 /* AsaanUtilities.h */,
+				37CDB4FA1A17617C00ACA378 /* AsaanUtilities.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -716,6 +721,7 @@
 			files = (
 				D404EDB01A130625000285F2 /* PTKView.m in Sources */,
 				D4A4EC691A0D5D3300B688EA /* SignupViewController.m in Sources */,
+				37CDB4FB1A17617C00ACA378 /* AsaanUtilities.m in Sources */,
 				D46D0FAB1A13B2920072A413 /* UITextField+Extender.m in Sources */,
 				D404EDA91A130625000285F2 /* PTKCard.m in Sources */,
 				D4EAF9E71A12ACB20078FA9C /* BaseViewController.m in Sources */,

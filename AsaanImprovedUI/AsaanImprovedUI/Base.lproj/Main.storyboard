@@ -142,7 +142,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <action selector="actionFacebookLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zyo-wK-3AP"/>
+                                    <action selector="actionFBButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1Bt-jV-eiA"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -363,6 +363,9 @@
                                         <exclude reference="ztE-t3-6nR"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="actionLoginButtonClicked:" destination="aU0-Ig-YO4" eventType="touchUpInside" id="rVT-9Q-M5t"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fkg-e2-myY">
                                 <rect key="frame" x="210" y="412" width="181" height="30"/>

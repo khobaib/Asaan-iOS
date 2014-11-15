@@ -12,5 +12,7 @@
 #define PARSE_APPLICATION_ID    @"uX5Pxp1cPWJUbhl4qp5REJskOqDIp33tfMcSu1Ac"
 #define PARSE_CLIENT_KEY        @"4cad0RAqv53bvlmgiTgnOScuJVk7IY28XeH4Mes5"
 
+#define FACEBOOK_PERMISSIONS    @[@"public_profile", @"user_friends",@"email"]
+
 
 #endif

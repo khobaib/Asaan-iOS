@@ -8,8 +8,13 @@
 
 #import "LoginViewController.h"
 #import "UIColor+AsaanGoldColor.h"
+#import "Utilities/AsaanUtilities.h"
+
+#import <ParseFacebookUtils/PFFacebookUtils.h>
+#import <Parse/Parse.h>
 
 @interface LoginViewController ()
+
 @property (weak, nonatomic) IBOutlet UITextField *txtEmail;
 @property (weak, nonatomic) IBOutlet UITextField *txtPassword;
 @property (weak, nonatomic) IBOutlet UIScrollView *loginScrollView;
@@ -19,11 +24,13 @@
 @implementation LoginViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     [super setBaseScrollView:_loginScrollView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    
     [super viewWillAppear:animated];
     
     [self.navigationController setNavigationBarHidden:NO];
@@ -39,18 +46,50 @@
 }
 
 - (void)didReceiveMemoryWarning {
+    
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 /*
-#pragma mark - Navigation
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)actionLoginButtonClicked:(id)sender {
+    
+    NSString *email = self.txtEmail.text;
+    NSString *pass = self.txtPassword.text;
+    
+    if ([AsaanUtilities validateEmail:email] || [pass isEqualToString:@""]) {
+        
+        UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please Enter Email And Password." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        
+        [alert show];
+        
+        return;
+    }
+    
+    [PFUser logInWithUsernameInBackground:email password:pass block:^(PFUser *user,NSError *error){
+        
+        if (user) {
+#if DEBUG_LOGIN
+            NSLog(@"User : %@",[user description]);
+#endif
+            [self performSegueWithIdentifier:@"profilePage" sender:self];
+            
+        }
+#if DEBUG_LOGIN
+        else {
+            NSLog(@"Login Error : %@",[error userInfo]);
+        }
+#endif
+    }];
 }
-*/
 
 @end

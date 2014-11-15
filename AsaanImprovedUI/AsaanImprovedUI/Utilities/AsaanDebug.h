@@ -9,7 +9,7 @@
 #ifndef AsaanImprovedUI_AsaanDebug_h
 #define AsaanImprovedUI_AsaanDebug_h
 
-#define DEBUG_LOGIN         0
+#define DEBUG_LOGIN         1
 
 
 #endif
