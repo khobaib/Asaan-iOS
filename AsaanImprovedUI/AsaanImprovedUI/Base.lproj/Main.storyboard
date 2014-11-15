@@ -701,7 +701,7 @@
                     <navigationItem key="navigationItem" id="o0U-yE-scu">
                         <barButtonItem key="rightBarButtonItem" title="&gt;" style="done" id="6lC-4A-uTb">
                             <connections>
-                                <segue destination="v7O-R1-Ng6" kind="show" id="4XF-D4-bWO"/>
+                                <segue destination="v7O-R1-Ng6" kind="show" identifier="SignupToSignupProfileSegue" id="4XF-D4-bWO"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -876,7 +876,7 @@
                     <navigationItem key="navigationItem" id="Wor-pc-ha4">
                         <barButtonItem key="rightBarButtonItem" title="&gt;" style="done" id="SL6-th-sok">
                             <connections>
-                                <segue destination="qW5-ik-R7D" kind="show" id="foT-qu-ne7"/>
+                                <segue destination="qW5-ik-R7D" kind="show" identifier="SignupProfileToStripeSegue" id="foT-qu-ne7"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

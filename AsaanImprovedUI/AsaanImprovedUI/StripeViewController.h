@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
+#import "UserInfo.h"
 
 @interface StripeViewController : BaseViewController
+
+@property (strong, nonatomic) UserInfo* userInfo;
 
 @end

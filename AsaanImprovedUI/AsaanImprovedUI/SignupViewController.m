@@ -8,6 +8,9 @@
 
 #import "SignupViewController.h"
 #import "UIColor+AsaanGoldColor.h"
+#import "Data/UserInfo.h"
+
+#import "SignupProfileViewController.h"
 
 @interface SignupViewController ()
 
@@ -18,13 +21,18 @@
 
 @end
 
-@implementation SignupViewController
+@implementation SignupViewController {
+
+    UserInfo* _userInfo;
+}
 
 - (void)viewDidLoad {
     
     [super viewDidLoad];
     [super setBaseScrollView:_signupScrollView];
 //    self.navigationController.navigationBar.translucent = YES;
+    
+    _userInfo = [[UserInfo alloc] init];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -50,15 +58,22 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if ([segue.identifier isEqualToString:@"SignupToSignupProfileSegue"]) {
+        
+        _userInfo.email = self.txtEmail.text;
+        _userInfo.password = self.txtEmail.text;
+        _userInfo.phone = self.txtEmail.text;
+        
+        ((SignupProfileViewController *)segue.destinationViewController).userInfo = _userInfo;
+    }
 }
-*/
 
 
 @end

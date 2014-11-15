@@ -28,6 +28,8 @@
     self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor : [UIColor goldColor]};
     
     //    _ptkView.delegate = self;
+    
+    NSLog(@"User %@", self.userInfo.email);
 }
 
 @end

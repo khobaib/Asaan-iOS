@@ -25,6 +25,7 @@
 		37CDB4F21A174D0400ACA378 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37CDB4F11A174D0400ACA378 /* Social.framework */; };
 		37CDB4F41A174D0C00ACA378 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37CDB4F31A174D0C00ACA378 /* Accounts.framework */; };
 		37CDB4FB1A17617C00ACA378 /* AsaanUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 37CDB4FA1A17617C00ACA378 /* AsaanUtilities.m */; };
+		37CDB4FF1A1768C900ACA378 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 37CDB4FE1A1768C900ACA378 /* UserInfo.m */; };
 		9979DB71D9AB336EFA535518 /* libPods-AsaanImprovedUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C14D4163C6DFF57F4674F76 /* libPods-AsaanImprovedUI.a */; };
 		D404EDA81A130625000285F2 /* PTKAddressZip.m in Sources */ = {isa = PBXBuildFile; fileRef = D404ED851A130625000285F2 /* PTKAddressZip.m */; };
 		D404EDA91A130625000285F2 /* PTKCard.m in Sources */ = {isa = PBXBuildFile; fileRef = D404ED871A130625000285F2 /* PTKCard.m */; };
@@ -138,6 +139,8 @@
 		37CDB4F51A174EA800ACA378 /* AsaanConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsaanConstants.h; sourceTree = "<group>"; };
 		37CDB4F91A17617C00ACA378 /* AsaanUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsaanUtilities.h; sourceTree = "<group>"; };
 		37CDB4FA1A17617C00ACA378 /* AsaanUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsaanUtilities.m; sourceTree = "<group>"; };
+		37CDB4FD1A1768C900ACA378 /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
+		37CDB4FE1A1768C900ACA378 /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
 		5C14D4163C6DFF57F4674F76 /* libPods-AsaanImprovedUI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AsaanImprovedUI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7425533BFF98518C0726BBF3 /* Pods-AsaanImprovedUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AsaanImprovedUI.release.xcconfig"; path = "../Pods/Target Support Files/Pods-AsaanImprovedUI/Pods-AsaanImprovedUI.release.xcconfig"; sourceTree = "<group>"; };
 		D404ED841A130625000285F2 /* PTKAddressZip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTKAddressZip.h; sourceTree = "<group>"; };
@@ -234,7 +237,7 @@
 		D4EAF9E51A12ACB20078FA9C /* UIColor+AsaanGoldColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+AsaanGoldColor.h"; path = "HelperClasses/UIColor+AsaanGoldColor.h"; sourceTree = "<group>"; };
 		D4EAF9E61A12ACB20078FA9C /* UIColor+AsaanGoldColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+AsaanGoldColor.m"; path = "HelperClasses/UIColor+AsaanGoldColor.m"; sourceTree = "<group>"; };
 		D4EAF9EA1A12AD9F0078FA9C /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseViewController.h; path = HelperClasses/BaseViewController.h; sourceTree = "<group>"; };
-		D4F2759F1A0C021800CEC95A /* AsaanImprovedUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AsaanImprovedUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4F2759F1A0C021800CEC95A /* Asaan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Asaan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4F275A31A0C021800CEC95A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4F275A41A0C021800CEC95A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D4F275A61A0C021800CEC95A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -314,6 +317,15 @@
 				37CDB4D11A173A7F00ACA378 /* ParseFacebookUtils.framework */,
 			);
 			path = Parse;
+			sourceTree = "<group>";
+		};
+		37CDB4FC1A1768A700ACA378 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				37CDB4FD1A1768C900ACA378 /* UserInfo.h */,
+				37CDB4FE1A1768C900ACA378 /* UserInfo.m */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		703EC5836F1BB0E0943269D4 /* Frameworks */ = {
@@ -470,7 +482,7 @@
 		D4F275A01A0C021800CEC95A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D4F2759F1A0C021800CEC95A /* AsaanImprovedUI.app */,
+				D4F2759F1A0C021800CEC95A /* Asaan.app */,
 				D4F275BB1A0C021800CEC95A /* AsaanImprovedUITests.xctest */,
 			);
 			name = Products;
@@ -485,6 +497,7 @@
 				D4A4EC631A0D3DD800B688EA /* ViewControllers */,
 				D4F275A61A0C021800CEC95A /* AppDelegate.h */,
 				D4F275A71A0C021800CEC95A /* AppDelegate.m */,
+				37CDB4FC1A1768A700ACA378 /* Data */,
 				37CDB4CA1A17376800ACA378 /* Utilities */,
 				D4F275AF1A0C021800CEC95A /* Main.storyboard */,
 				D4F275B21A0C021800CEC95A /* Images.xcassets */,
@@ -558,7 +571,7 @@
 			);
 			name = AsaanImprovedUI;
 			productName = AsaanImprovedUI;
-			productReference = D4F2759F1A0C021800CEC95A /* AsaanImprovedUI.app */;
+			productReference = D4F2759F1A0C021800CEC95A /* Asaan.app */;
 			productType = "com.apple.product-type.application";
 		};
 		D4F275BA1A0C021800CEC95A /* AsaanImprovedUITests */ = {
@@ -747,6 +760,7 @@
 				D404EDB51A130625000285F2 /* STPUtils.m in Sources */,
 				D4A4EC661A0D3F2300B688EA /* LoginViewController.m in Sources */,
 				D404EDAA1A130625000285F2 /* PTKCardCVC.m in Sources */,
+				37CDB4FF1A1768C900ACA378 /* UserInfo.m in Sources */,
 				D404EDB71A130625000285F2 /* StripeError.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -885,7 +899,7 @@
 				INFOPLIST_FILE = AsaanImprovedUI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Asaan;
 				PROVISIONING_PROFILE = "578875d7-a7b0-42c1-8bea-e1507602ed90";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -905,7 +919,7 @@
 				INFOPLIST_FILE = AsaanImprovedUI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Asaan;
 				PROVISIONING_PROFILE = "578875d7-a7b0-42c1-8bea-e1507602ed90";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

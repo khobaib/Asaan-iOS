@@ -87,7 +87,7 @@
         } else {
             
 #if DEBUG_LOGIN
-            NSLog(@"User %@ logged in through Facebook!", user.username);
+            NSLog(@"User %@ logged in through Facebook!", user.email);
 #endif
             hud.hidden=YES;
             
@@ -113,24 +113,24 @@
             NSDateFormatter* dateFormatter = [[NSDateFormatter alloc]init] ;
             
             [dateFormatter setDateFormat:@"dd/MM/YYYY"];
-            PFUser *user=[PFUser currentUser];
+            PFUser *user = [PFUser currentUser];
             
-            user[@"firstName"]=userData[@"first_name"];
+            user[@"firstName"] = userData[@"first_name"];
             
-            user[@"lastName"]=userData[@"last_name"];
-            user[@"profilePhotoUrl"]=[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large", userData[@"id"]];
+            user[@"lastName"] = userData[@"last_name"];
+            user[@"profilePhotoUrl"] = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large", userData[@"id"]];
             
             NSLog(@" birthday %@",userData[@"birthday"]);
             
             // user[@"birthDate"]=[dateFormatter dateFromString:userData[@"birthday"]];
             
             NSLog(@"log");
-            user.email=userData[@"email"];
+            user.email = userData[@"email"];
             
             
             [user saveInBackgroundWithBlock:^(BOOL complete,NSError *error){
                 
-            NSLog(@"Test 2");
+            NSLog(@"Test 2 : %@", user.username);
 #warning Disabled functionality for unimplemented ViewController
 //                ProfileViewController *acv=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"profile"];
 //                [self.navigationController pushViewController:acv animated:YES];
