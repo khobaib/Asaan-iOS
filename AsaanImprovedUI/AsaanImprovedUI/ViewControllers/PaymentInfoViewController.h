@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
+#import "UserInfo.h"
 
 @interface PaymentInfoViewController : BaseViewController
+
+@property (strong, nonatomic) UserInfo* userInfo;
 
 @end

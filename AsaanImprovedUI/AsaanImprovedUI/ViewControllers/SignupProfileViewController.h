@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
+#import "UserInfo.h"
 
 @interface SignupProfileViewController : BaseViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+
+@property (strong, nonatomic) UserInfo* userInfo;
 
 @end

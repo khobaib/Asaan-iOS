@@ -8,23 +8,36 @@
 
 #import "SignupViewController.h"
 #import "UIColor+AsaanGoldColor.h"
+<<<<<<< HEAD:AsaanImprovedUI/AsaanImprovedUI/ViewControllers/SignupViewController.m
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import "InlineCalls.h"
 #import "MBProgressHUD.h"
+=======
+#import "Data/UserInfo.h"
+
+#import "SignupProfileViewController.h"
+>>>>>>> FETCH_HEAD:AsaanImprovedUI/AsaanImprovedUI/SignupViewController.m
 
 @interface SignupViewController ()
+
 @property (weak, nonatomic) IBOutlet UITextField *txtEmail;
 @property (weak, nonatomic) IBOutlet UITextField *txtPassword;
 @property (weak, nonatomic) IBOutlet UIScrollView *signupScrollView;
 
 @end
 
-@implementation SignupViewController
+@implementation SignupViewController {
+
+    UserInfo* _userInfo;
+}
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     [super setBaseScrollView:_signupScrollView];
 //    self.navigationController.navigationBar.translucent = YES;
+    
+    _userInfo = [[UserInfo alloc] init];
 }
 
 - (IBAction)signup:(id)sender {
@@ -58,6 +71,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    
     [super viewWillAppear:animated];
 
     [self.navigationController setNavigationBarHidden:NO];
@@ -76,18 +90,27 @@
 }
 
 - (void)didReceiveMemoryWarning {
+    
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if ([segue.identifier isEqualToString:@"SignupToSignupProfileSegue"]) {
+        
+        _userInfo.email = self.txtEmail.text;
+        _userInfo.password = self.txtEmail.text;
+        _userInfo.phone = self.txtEmail.text;
+        
+        ((SignupProfileViewController *)segue.destinationViewController).userInfo = _userInfo;
+    }
 }
-*/
+
 
 @end

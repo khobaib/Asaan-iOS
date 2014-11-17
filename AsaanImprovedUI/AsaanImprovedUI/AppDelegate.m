@@ -13,6 +13,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import <CoreData/CoreData.h>
 
+#import <ParseFacebookUtils/PFFacebookUtils.h>
+#import <Parse/Parse.h>
+
 @interface AppDelegate ()
 
 @end
@@ -21,6 +24,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+<<<<<<< HEAD
     // Override point for customization after application launch.
     
     // ****************************************************************************
@@ -124,6 +128,26 @@
     } else {
         NSLog(@"ParseStarterProject failed to subscribe to push notifications on the broadcast channel.");
     }
+=======
+    
+    [Parse setApplicationId:PARSE_APPLICATION_ID
+                  clientKey:PARSE_CLIENT_KEY];
+    [PFFacebookUtils initializeFacebook];
+    
+    return YES;
+}
+
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    // attempt to extract a token from the url
+    
+    
+    return [FBAppCall handleOpenURL:url
+                   sourceApplication:sourceApplication
+                         withSession:[PFFacebookUtils session]];
+    
+    
+>>>>>>> FETCH_HEAD
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -142,10 +166,15 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    [FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    [[PFFacebookUtils session] close];
+    
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
 }

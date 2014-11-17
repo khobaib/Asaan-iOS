@@ -17,6 +17,7 @@
 @implementation PaymentInfoViewController
 
 - (void)viewWillAppear:(BOOL)animated {
+    
     [super viewWillAppear:animated];
     
     [self.navigationController setNavigationBarHidden:NO];
@@ -26,9 +27,15 @@
     self.navigationController.navigationBar.translucent = YES;
     self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor : [UIColor goldColor]};
     
+<<<<<<< HEAD:AsaanImprovedUI/AsaanImprovedUI/ViewControllers/PaymentInfoViewController.m
     // Prevent keyboard from showing by default
     [self.view endEditing:YES];
 //    _ptkView.delegate = self;
+=======
+    //    _ptkView.delegate = self;
+    
+    NSLog(@"User %@", self.userInfo.email);
+>>>>>>> FETCH_HEAD:AsaanImprovedUI/AsaanImprovedUI/StripeViewController.m
 }
 
 @end
