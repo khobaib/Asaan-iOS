@@ -6,15 +6,15 @@
 //  Copyright (c) 2014 Nirav Saraiya. All rights reserved.
 //
 
-#import "StripeViewController.h"
+#import "PaymentInfoViewController.h"
 #import "PTKView.h"
 #import "UIColor+AsaanGoldColor.h"
 
-@interface StripeViewController ()
+@interface PaymentInfoViewController ()
 @property (weak, nonatomic) IBOutlet PTKView *ptkView;
 @end
 
-@implementation StripeViewController
+@implementation PaymentInfoViewController
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -26,6 +26,8 @@
     self.navigationController.navigationBar.translucent = YES;
     self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor : [UIColor goldColor]};
     
+    // Prevent keyboard from showing by default
+    [self.view endEditing:YES];
 //    _ptkView.delegate = self;
 }
 

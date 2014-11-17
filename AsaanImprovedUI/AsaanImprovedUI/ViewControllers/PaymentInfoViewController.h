@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
-@interface StripeViewController : BaseViewController
+@interface PaymentInfoViewController : BaseViewController
 
 @end

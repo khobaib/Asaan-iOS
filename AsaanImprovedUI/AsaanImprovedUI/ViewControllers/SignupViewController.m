@@ -70,6 +70,9 @@
     UIColor *color = [UIColor lightTextColor];
     _txtEmail.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"name@example.com" attributes:@{NSForegroundColorAttributeName: color}];
     _txtPassword.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Min 8 characters" attributes:@{NSForegroundColorAttributeName: color}];
+    PFUser *user = [PFUser currentUser];
+    if (user != nil && IsEmpty(user[@"firstName"]) == false)
+        _txtEmail.text = user.email;
 }
 
 - (void)didReceiveMemoryWarning {

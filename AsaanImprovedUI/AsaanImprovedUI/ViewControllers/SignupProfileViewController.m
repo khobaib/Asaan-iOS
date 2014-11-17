@@ -12,12 +12,13 @@
 #import "MBProgressHUD.h"
 #import "InlineCalls.h"
 #import "UIImageView+WebCache.h"
+#import "SHSPhoneTextField.h"
 
 @interface SignupProfileViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *btnPhoto;
 @property (weak, nonatomic) IBOutlet UITextField *txtLastName;
 @property (weak, nonatomic) IBOutlet UITextField *txtFirstName;
-@property (weak, nonatomic) IBOutlet UITextField *txtPhone;
+@property (weak, nonatomic) IBOutlet SHSPhoneTextField *txtPhone;
 @property (weak, nonatomic) IBOutlet UIScrollView *signupProfileScrollView;
 
 @end
@@ -40,14 +41,23 @@
     _txtLastName.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Smith" attributes:@{NSForegroundColorAttributeName: color}];
     _txtFirstName.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"John" attributes:@{NSForegroundColorAttributeName: color}];
     _txtPhone.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"(***) ***-****" attributes:@{NSForegroundColorAttributeName: color}];
+    [_txtPhone.formatter setDefaultOutputPattern:@"(###) ###-####"];
+    _txtPhone.formatter.prefix = @"+1 ";
     
     PFUser *user = [PFUser currentUser];
-    if (!IsEmpty(user[@"firstName"]))
-        _txtFirstName.text = user[@"firstName"];
-    if (!IsEmpty(user[@"lastName"]))
-        _txtLastName.text = user[@"lastName"];
-    if (!IsEmpty(user[@"phone"]))
-        _txtPhone.text = user[@"phone"];
+    if (user != nil){
+        if (!IsEmpty(user[@"firstName"]))
+            _txtFirstName.text = user[@"firstName"];
+        if (!IsEmpty(user[@"lastName"]))
+            _txtLastName.text = user[@"lastName"];
+        if (!IsEmpty(user[@"phone"]))
+            _txtPhone.text = user[@"phone"];
+    }
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.labelText = @"Please Wait";
+    hud.hidden = YES;
 
     NSString *profilePhotoUrl=user[@"profilePhotoUrl"];
 
@@ -56,8 +66,10 @@
     } else {
         PFFile *file=user[@"picture"];
         if(file!=nil){
+            hud.hidden = YES;
             [file getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
-                if (!error) {
+                hud.hidden = NO;
+               if (!error) {
                     _btnPhoto.imageView.image = [UIImage imageWithData:imageData];
                 }
             }];
@@ -112,7 +124,7 @@
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please enter the name and phone number" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     } else {
-        PFUser *user=[PFUser user];
+        PFUser *user=[PFUser currentUser];
         user[@"phone"]=_txtPhone.text;
         user[@"firstName"]=_txtFirstName.text;
         user[@"lastName"]=_txtLastName.text;

@@ -50,7 +50,6 @@
 		D435F0E51A1711B100A86CC4 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = D435F0221A1711B100A86CC4 /* UIProgressView+AFNetworking.m */; };
 		D435F0E61A1711B100A86CC4 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = D435F0241A1711B100A86CC4 /* UIRefreshControl+AFNetworking.m */; };
 		D435F0E71A1711B100A86CC4 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = D435F0261A1711B100A86CC4 /* UIWebView+AFNetworking.m */; };
-		D435F0E81A1711B100A86CC4 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D435F0731A1711B100A86CC4 /* MBProgressHUD.m */; };
 		D435F0E91A1711B100A86CC4 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = D435F0751A1711B100A86CC4 /* LICENSE */; };
 		D435F0EA1A1711B100A86CC4 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D435F0761A1711B100A86CC4 /* README.md */; };
 		D435F0EB1A1711B100A86CC4 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = D435F0791A1711B100A86CC4 /* NSData+ImageContentType.m */; };
@@ -67,47 +66,6 @@
 		D435F0F61A1711B100A86CC4 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D435F0901A1711B100A86CC4 /* UIImageView+HighlightedWebCache.m */; };
 		D435F0F71A1711B100A86CC4 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D435F0921A1711B100A86CC4 /* UIImageView+WebCache.m */; };
 		D435F0F81A1711B100A86CC4 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D435F0941A1711B100A86CC4 /* UIView+WebCacheOperation.m */; };
-		D435F0F91A1711B100A86CC4 /* amex.png in Resources */ = {isa = PBXBuildFile; fileRef = D435F0971A1711B100A86CC4 /* amex.png */; };
-		D435F0FA1A1711B100A86CC4 /* amex@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D435F0981A1711B100A86CC4 /* amex@2x.png */; };
-		D435F0FB1A1711B100A86CC4 /* cvc-amex.png in Resources */ = {isa = PBXBuildFile; fileRef = D435F0991A1711B100A86CC4 /* cvc-amex.png */; };
-		D435F0FC1A1711B100A86CC4 /* cvc-amex@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D435F09A1A1711B100A86CC4 /* cvc-amex@2x.png */; };
-		D435F0FD1A1711B100A86CC4 /* cvc.png in Resources */ = {isa = PBXBuildFile; fileRef = D435F09B1A1711B100A86CC4 /* cvc.png */; };
-		D435F0FE1A1711B100A86CC4 /* cvc@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D435F09C1A1711B100A86CC4 /* cvc@2x.png */; };
-		D435F0FF1A1711B100A86CC4 /* diners.png in Resources */ = {isa = PBXBuildFile; fileRef = D435F09D1A1711B100A86CC4 /* diners.png */; };
-		D435F1001A1711B100A86CC4 /* diners@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D435F09E1A1711B100A86CC4 /* diners@2x.png */; };
-		D435F1011A1711B100A86CC4 /* discover.png in Resources */ = {isa = PBXBuildFile; fileRef = D435F09F1A1711B100A86CC4 /* discover.png */; };
-		D435F1021A1711B100A86CC4 /* discover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D435F0A01A1711B100A86CC4 /* discover@2x.png */; };
-		D435F1031A1711B100A86CC4 /* jcb.png in Resources */ = {isa = PBXBuildFile; fileRef = D435F0A11A1711B100A86CC4 /* jcb.png */; };
-		D435F1041A1711B100A86CC4 /* jcb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D435F0A21A1711B100A86CC4 /* jcb@2x.png */; };
-		D435F1051A1711B100A86CC4 /* mastercard.png in Resources */ = {isa = PBXBuildFile; fileRef = D435F0A31A1711B100A86CC4 /* mastercard.png */; };
-		D435F1061A1711B100A86CC4 /* mastercard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D435F0A41A1711B100A86CC4 /* mastercard@2x.png */; };
-		D435F1071A1711B100A86CC4 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = D435F0A51A1711B100A86CC4 /* placeholder.png */; };
-		D435F1081A1711B100A86CC4 /* placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D435F0A61A1711B100A86CC4 /* placeholder@2x.png */; };
-		D435F1091A1711B100A86CC4 /* visa.png in Resources */ = {isa = PBXBuildFile; fileRef = D435F0A71A1711B100A86CC4 /* visa.png */; };
-		D435F10A1A1711B100A86CC4 /* visa@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D435F0A81A1711B100A86CC4 /* visa@2x.png */; };
-		D435F10B1A1711B100A86CC4 /* gradient@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D435F0A91A1711B100A86CC4 /* gradient@2x.png */; };
-		D435F10C1A1711B100A86CC4 /* PTKAddressZip.m in Sources */ = {isa = PBXBuildFile; fileRef = D435F0AB1A1711B100A86CC4 /* PTKAddressZip.m */; };
-		D435F10D1A1711B100A86CC4 /* PTKCard.m in Sources */ = {isa = PBXBuildFile; fileRef = D435F0AD1A1711B100A86CC4 /* PTKCard.m */; };
-		D435F10E1A1711B100A86CC4 /* PTKCardCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D435F0AF1A1711B100A86CC4 /* PTKCardCVC.m */; };
-		D435F10F1A1711B100A86CC4 /* PTKCardExpiry.m in Sources */ = {isa = PBXBuildFile; fileRef = D435F0B11A1711B100A86CC4 /* PTKCardExpiry.m */; };
-		D435F1101A1711B100A86CC4 /* PTKCardNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = D435F0B31A1711B100A86CC4 /* PTKCardNumber.m */; };
-		D435F1111A1711B100A86CC4 /* PTKComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = D435F0B61A1711B100A86CC4 /* PTKComponent.m */; };
-		D435F1121A1711B100A86CC4 /* PTKTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = D435F0B81A1711B100A86CC4 /* PTKTextField.m */; };
-		D435F1131A1711B100A86CC4 /* PTKUSAddressZip.m in Sources */ = {isa = PBXBuildFile; fileRef = D435F0BA1A1711B100A86CC4 /* PTKUSAddressZip.m */; };
-		D435F1141A1711B100A86CC4 /* PTKView.m in Sources */ = {isa = PBXBuildFile; fileRef = D435F0BC1A1711B100A86CC4 /* PTKView.m */; };
-		D435F1151A1711B100A86CC4 /* STPAPIConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = D435F0BE1A1711B100A86CC4 /* STPAPIConnection.m */; };
-		D435F1161A1711B100A86CC4 /* STPBankAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = D435F0C01A1711B100A86CC4 /* STPBankAccount.m */; };
-		D435F1171A1711B100A86CC4 /* STPCard.m in Sources */ = {isa = PBXBuildFile; fileRef = D435F0C21A1711B100A86CC4 /* STPCard.m */; };
-		D435F1181A1711B100A86CC4 /* STPToken.m in Sources */ = {isa = PBXBuildFile; fileRef = D435F0C51A1711B100A86CC4 /* STPToken.m */; };
-		D435F1191A1711B100A86CC4 /* STPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D435F0C71A1711B100A86CC4 /* STPUtils.m */; };
-		D435F11A1A1711B100A86CC4 /* Stripe.m in Sources */ = {isa = PBXBuildFile; fileRef = D435F0C91A1711B100A86CC4 /* Stripe.m */; };
-		D435F11B1A1711B100A86CC4 /* StripeError.m in Sources */ = {isa = PBXBuildFile; fileRef = D435F0CB1A1711B100A86CC4 /* StripeError.m */; };
-		D435F11C1A1711B100A86CC4 /* textfield.png in Resources */ = {isa = PBXBuildFile; fileRef = D435F0CC1A1711B100A86CC4 /* textfield.png */; };
-		D435F11D1A1711B100A86CC4 /* textfield@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D435F0CD1A1711B100A86CC4 /* textfield@2x.png */; };
-		D435F11E1A1711B100A86CC4 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D435F0D01A1711B100A86CC4 /* MenuViewController.m */; };
-		D435F11F1A1711B100A86CC4 /* reveal-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D435F0D11A1711B100A86CC4 /* reveal-icon.png */; };
-		D435F1201A1711B100A86CC4 /* reveal-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D435F0D21A1711B100A86CC4 /* reveal-icon@2x.png */; };
-		D435F1211A1711B100A86CC4 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D435F0D41A1711B100A86CC4 /* SWRevealViewController.m */; };
 		D4522B081A15264F002EFA92 /* amex.png in Resources */ = {isa = PBXBuildFile; fileRef = D4522ACE1A15264F002EFA92 /* amex.png */; };
 		D4522B091A15264F002EFA92 /* amex@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4522ACF1A15264F002EFA92 /* amex@2x.png */; };
 		D4522B0A1A15264F002EFA92 /* cvc-amex.png in Resources */ = {isa = PBXBuildFile; fileRef = D4522AD01A15264F002EFA92 /* cvc-amex.png */; };
@@ -170,9 +128,15 @@
 		D4522BF51A1679F2002EFA92 /* SignupProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4522BEA1A1679F2002EFA92 /* SignupProfileViewController.m */; };
 		D4522BF61A1679F2002EFA92 /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4522BEC1A1679F2002EFA92 /* SignupViewController.m */; };
 		D4522BF81A1679F2002EFA92 /* StartupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4522BF01A1679F2002EFA92 /* StartupViewController.m */; };
-		D4522BF91A1679F2002EFA92 /* StripeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4522BF21A1679F2002EFA92 /* StripeViewController.m */; };
+		D4522BF91A1679F2002EFA92 /* PaymentInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4522BF21A1679F2002EFA92 /* PaymentInfoViewController.m */; };
 		D4522BFC1A167A25002EFA92 /* StoreListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4522BFB1A167A25002EFA92 /* StoreListViewController.m */; };
 		D46D0FAB1A13B2920072A413 /* UITextField+Extender.m in Sources */ = {isa = PBXBuildFile; fileRef = D46D0FAA1A13B2920072A413 /* UITextField+Extender.m */; };
+		D4A6A3901A17D175003F3EAB /* SHSFlagAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A6A3861A17D175003F3EAB /* SHSFlagAccessoryView.m */; };
+		D4A6A3911A17D175003F3EAB /* SHSPhoneLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A6A3891A17D175003F3EAB /* SHSPhoneLogic.m */; };
+		D4A6A3921A17D175003F3EAB /* SHSPhoneNumberFormatter+UserConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A6A38B1A17D175003F3EAB /* SHSPhoneNumberFormatter+UserConfig.m */; };
+		D4A6A3931A17D175003F3EAB /* SHSPhoneNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A6A38D1A17D175003F3EAB /* SHSPhoneNumberFormatter.m */; };
+		D4A6A3941A17D175003F3EAB /* SHSPhoneTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A6A38F1A17D175003F3EAB /* SHSPhoneTextField.m */; };
+		D4A6A3971A181FAB003F3EAB /* RetrievePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A6A3961A181FAB003F3EAB /* RetrievePasswordViewController.m */; };
 		D4EAF9E71A12ACB20078FA9C /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4EAF9E31A12ACB20078FA9C /* BaseViewController.m */; };
 		D4EAF9E91A12ACB20078FA9C /* UIColor+AsaanGoldColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D4EAF9E61A12ACB20078FA9C /* UIColor+AsaanGoldColor.m */; };
 		D4F275A51A0C021800CEC95A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F275A41A0C021800CEC95A /* main.m */; };
@@ -326,8 +290,6 @@
 		D435F06E1A1711B100A86CC4 /* UIImageView+HighlightedWebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+HighlightedWebCache.h"; sourceTree = "<group>"; };
 		D435F06F1A1711B100A86CC4 /* UIImageView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+WebCache.h"; sourceTree = "<group>"; };
 		D435F0701A1711B100A86CC4 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
-		D435F0721A1711B100A86CC4 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
-		D435F0731A1711B100A86CC4 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		D435F0751A1711B100A86CC4 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		D435F0761A1711B100A86CC4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D435F0781A1711B100A86CC4 /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
@@ -359,67 +321,6 @@
 		D435F0921A1711B100A86CC4 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		D435F0931A1711B100A86CC4 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		D435F0941A1711B100A86CC4 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
-		D435F0971A1711B100A86CC4 /* amex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = amex.png; sourceTree = "<group>"; };
-		D435F0981A1711B100A86CC4 /* amex@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "amex@2x.png"; sourceTree = "<group>"; };
-		D435F0991A1711B100A86CC4 /* cvc-amex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cvc-amex.png"; sourceTree = "<group>"; };
-		D435F09A1A1711B100A86CC4 /* cvc-amex@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cvc-amex@2x.png"; sourceTree = "<group>"; };
-		D435F09B1A1711B100A86CC4 /* cvc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cvc.png; sourceTree = "<group>"; };
-		D435F09C1A1711B100A86CC4 /* cvc@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cvc@2x.png"; sourceTree = "<group>"; };
-		D435F09D1A1711B100A86CC4 /* diners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diners.png; sourceTree = "<group>"; };
-		D435F09E1A1711B100A86CC4 /* diners@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "diners@2x.png"; sourceTree = "<group>"; };
-		D435F09F1A1711B100A86CC4 /* discover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = discover.png; sourceTree = "<group>"; };
-		D435F0A01A1711B100A86CC4 /* discover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "discover@2x.png"; sourceTree = "<group>"; };
-		D435F0A11A1711B100A86CC4 /* jcb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jcb.png; sourceTree = "<group>"; };
-		D435F0A21A1711B100A86CC4 /* jcb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jcb@2x.png"; sourceTree = "<group>"; };
-		D435F0A31A1711B100A86CC4 /* mastercard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mastercard.png; sourceTree = "<group>"; };
-		D435F0A41A1711B100A86CC4 /* mastercard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mastercard@2x.png"; sourceTree = "<group>"; };
-		D435F0A51A1711B100A86CC4 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
-		D435F0A61A1711B100A86CC4 /* placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder@2x.png"; sourceTree = "<group>"; };
-		D435F0A71A1711B100A86CC4 /* visa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = visa.png; sourceTree = "<group>"; };
-		D435F0A81A1711B100A86CC4 /* visa@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "visa@2x.png"; sourceTree = "<group>"; };
-		D435F0A91A1711B100A86CC4 /* gradient@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gradient@2x.png"; sourceTree = "<group>"; };
-		D435F0AA1A1711B100A86CC4 /* PTKAddressZip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTKAddressZip.h; sourceTree = "<group>"; };
-		D435F0AB1A1711B100A86CC4 /* PTKAddressZip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTKAddressZip.m; sourceTree = "<group>"; };
-		D435F0AC1A1711B100A86CC4 /* PTKCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTKCard.h; sourceTree = "<group>"; };
-		D435F0AD1A1711B100A86CC4 /* PTKCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTKCard.m; sourceTree = "<group>"; };
-		D435F0AE1A1711B100A86CC4 /* PTKCardCVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTKCardCVC.h; sourceTree = "<group>"; };
-		D435F0AF1A1711B100A86CC4 /* PTKCardCVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTKCardCVC.m; sourceTree = "<group>"; };
-		D435F0B01A1711B100A86CC4 /* PTKCardExpiry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTKCardExpiry.h; sourceTree = "<group>"; };
-		D435F0B11A1711B100A86CC4 /* PTKCardExpiry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTKCardExpiry.m; sourceTree = "<group>"; };
-		D435F0B21A1711B100A86CC4 /* PTKCardNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTKCardNumber.h; sourceTree = "<group>"; };
-		D435F0B31A1711B100A86CC4 /* PTKCardNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTKCardNumber.m; sourceTree = "<group>"; };
-		D435F0B41A1711B100A86CC4 /* PTKCardType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTKCardType.h; sourceTree = "<group>"; };
-		D435F0B51A1711B100A86CC4 /* PTKComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTKComponent.h; sourceTree = "<group>"; };
-		D435F0B61A1711B100A86CC4 /* PTKComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTKComponent.m; sourceTree = "<group>"; };
-		D435F0B71A1711B100A86CC4 /* PTKTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTKTextField.h; sourceTree = "<group>"; };
-		D435F0B81A1711B100A86CC4 /* PTKTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTKTextField.m; sourceTree = "<group>"; };
-		D435F0B91A1711B100A86CC4 /* PTKUSAddressZip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTKUSAddressZip.h; sourceTree = "<group>"; };
-		D435F0BA1A1711B100A86CC4 /* PTKUSAddressZip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTKUSAddressZip.m; sourceTree = "<group>"; };
-		D435F0BB1A1711B100A86CC4 /* PTKView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTKView.h; sourceTree = "<group>"; };
-		D435F0BC1A1711B100A86CC4 /* PTKView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTKView.m; sourceTree = "<group>"; };
-		D435F0BD1A1711B100A86CC4 /* STPAPIConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPAPIConnection.h; sourceTree = "<group>"; };
-		D435F0BE1A1711B100A86CC4 /* STPAPIConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPAPIConnection.m; sourceTree = "<group>"; };
-		D435F0BF1A1711B100A86CC4 /* STPBankAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPBankAccount.h; sourceTree = "<group>"; };
-		D435F0C01A1711B100A86CC4 /* STPBankAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPBankAccount.m; sourceTree = "<group>"; };
-		D435F0C11A1711B100A86CC4 /* STPCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPCard.h; sourceTree = "<group>"; };
-		D435F0C21A1711B100A86CC4 /* STPCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPCard.m; sourceTree = "<group>"; };
-		D435F0C31A1711B100A86CC4 /* STPFormEncodeProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPFormEncodeProtocol.h; sourceTree = "<group>"; };
-		D435F0C41A1711B100A86CC4 /* STPToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPToken.h; sourceTree = "<group>"; };
-		D435F0C51A1711B100A86CC4 /* STPToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPToken.m; sourceTree = "<group>"; };
-		D435F0C61A1711B100A86CC4 /* STPUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPUtils.h; sourceTree = "<group>"; };
-		D435F0C71A1711B100A86CC4 /* STPUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPUtils.m; sourceTree = "<group>"; };
-		D435F0C81A1711B100A86CC4 /* Stripe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stripe.h; sourceTree = "<group>"; };
-		D435F0C91A1711B100A86CC4 /* Stripe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Stripe.m; sourceTree = "<group>"; };
-		D435F0CA1A1711B100A86CC4 /* StripeError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StripeError.h; sourceTree = "<group>"; };
-		D435F0CB1A1711B100A86CC4 /* StripeError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StripeError.m; sourceTree = "<group>"; };
-		D435F0CC1A1711B100A86CC4 /* textfield.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = textfield.png; sourceTree = "<group>"; };
-		D435F0CD1A1711B100A86CC4 /* textfield@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "textfield@2x.png"; sourceTree = "<group>"; };
-		D435F0CF1A1711B100A86CC4 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
-		D435F0D01A1711B100A86CC4 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
-		D435F0D11A1711B100A86CC4 /* reveal-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reveal-icon.png"; sourceTree = "<group>"; };
-		D435F0D21A1711B100A86CC4 /* reveal-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reveal-icon@2x.png"; sourceTree = "<group>"; };
-		D435F0D31A1711B100A86CC4 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
-		D435F0D41A1711B100A86CC4 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		D4522ACE1A15264F002EFA92 /* amex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = amex.png; sourceTree = "<group>"; };
 		D4522ACF1A15264F002EFA92 /* amex@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "amex@2x.png"; sourceTree = "<group>"; };
 		D4522AD01A15264F002EFA92 /* cvc-amex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cvc-amex.png"; sourceTree = "<group>"; };
@@ -507,12 +408,25 @@
 		D4522BEC1A1679F2002EFA92 /* SignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupViewController.m; sourceTree = "<group>"; };
 		D4522BEF1A1679F2002EFA92 /* StartupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartupViewController.h; sourceTree = "<group>"; };
 		D4522BF01A1679F2002EFA92 /* StartupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartupViewController.m; sourceTree = "<group>"; };
-		D4522BF11A1679F2002EFA92 /* StripeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StripeViewController.h; sourceTree = "<group>"; };
-		D4522BF21A1679F2002EFA92 /* StripeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StripeViewController.m; sourceTree = "<group>"; };
+		D4522BF11A1679F2002EFA92 /* PaymentInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentInfoViewController.h; sourceTree = "<group>"; };
+		D4522BF21A1679F2002EFA92 /* PaymentInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentInfoViewController.m; sourceTree = "<group>"; };
 		D4522BFA1A167A25002EFA92 /* StoreListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreListViewController.h; sourceTree = "<group>"; };
 		D4522BFB1A167A25002EFA92 /* StoreListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreListViewController.m; sourceTree = "<group>"; };
 		D46D0FA91A13B2920072A413 /* UITextField+Extender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITextField+Extender.h"; path = "HelperClasses/UITextField+Extender.h"; sourceTree = "<group>"; };
 		D46D0FAA1A13B2920072A413 /* UITextField+Extender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITextField+Extender.m"; path = "HelperClasses/UITextField+Extender.m"; sourceTree = "<group>"; };
+		D4A6A3851A17D175003F3EAB /* SHSFlagAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHSFlagAccessoryView.h; sourceTree = "<group>"; };
+		D4A6A3861A17D175003F3EAB /* SHSFlagAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHSFlagAccessoryView.m; sourceTree = "<group>"; };
+		D4A6A3871A17D175003F3EAB /* SHSPhoneLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHSPhoneLibrary.h; sourceTree = "<group>"; };
+		D4A6A3881A17D175003F3EAB /* SHSPhoneLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHSPhoneLogic.h; sourceTree = "<group>"; };
+		D4A6A3891A17D175003F3EAB /* SHSPhoneLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHSPhoneLogic.m; sourceTree = "<group>"; };
+		D4A6A38A1A17D175003F3EAB /* SHSPhoneNumberFormatter+UserConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SHSPhoneNumberFormatter+UserConfig.h"; sourceTree = "<group>"; };
+		D4A6A38B1A17D175003F3EAB /* SHSPhoneNumberFormatter+UserConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SHSPhoneNumberFormatter+UserConfig.m"; sourceTree = "<group>"; };
+		D4A6A38C1A17D175003F3EAB /* SHSPhoneNumberFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHSPhoneNumberFormatter.h; sourceTree = "<group>"; };
+		D4A6A38D1A17D175003F3EAB /* SHSPhoneNumberFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHSPhoneNumberFormatter.m; sourceTree = "<group>"; };
+		D4A6A38E1A17D175003F3EAB /* SHSPhoneTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHSPhoneTextField.h; sourceTree = "<group>"; };
+		D4A6A38F1A17D175003F3EAB /* SHSPhoneTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHSPhoneTextField.m; sourceTree = "<group>"; };
+		D4A6A3951A181FAB003F3EAB /* RetrievePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RetrievePasswordViewController.h; sourceTree = "<group>"; };
+		D4A6A3961A181FAB003F3EAB /* RetrievePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RetrievePasswordViewController.m; sourceTree = "<group>"; };
 		D4B23BF31A16CB4A0004B462 /* InlineCalls.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InlineCalls.h; sourceTree = "<group>"; };
 		D4EAF9E31A12ACB20078FA9C /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseViewController.m; path = HelperClasses/BaseViewController.m; sourceTree = "<group>"; };
 		D4EAF9E51A12ACB20078FA9C /* UIColor+AsaanGoldColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+AsaanGoldColor.h"; path = "HelperClasses/UIColor+AsaanGoldColor.h"; sourceTree = "<group>"; };
@@ -594,21 +508,6 @@
 				D41D32151A11DD9300EA49B6 /* starhighlighted.png */,
 			);
 			path = images;
-			sourceTree = "<group>";
-		};
-		D435EFFD1A1711B100A86CC4 /* library */ = {
-			isa = PBXGroup;
-			children = (
-				D435EFFE1A1711B100A86CC4 /* AFNetworking */,
-				D435F0271A1711B100A86CC4 /* BuildHeaders */,
-				D435F04C1A1711B100A86CC4 /* Headers */,
-				D435F0711A1711B100A86CC4 /* MBProgressHUD */,
-				D435F0741A1711B100A86CC4 /* SDWebImage */,
-				D435F0951A1711B100A86CC4 /* Stripe */,
-				D435F0CE1A1711B100A86CC4 /* SWRevealViewController */,
-			);
-			name = library;
-			path = AsaanImprovedUI/library;
 			sourceTree = "<group>";
 		};
 		D435EFFE1A1711B100A86CC4 /* AFNetworking */ = {
@@ -786,15 +685,6 @@
 			path = SDWebImage;
 			sourceTree = "<group>";
 		};
-		D435F0711A1711B100A86CC4 /* MBProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				D435F0721A1711B100A86CC4 /* MBProgressHUD.h */,
-				D435F0731A1711B100A86CC4 /* MBProgressHUD.m */,
-			);
-			path = MBProgressHUD;
-			sourceTree = "<group>";
-		};
 		D435F0741A1711B100A86CC4 /* SDWebImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -841,92 +731,14 @@
 			path = SDWebImage;
 			sourceTree = "<group>";
 		};
-		D435F0951A1711B100A86CC4 /* Stripe */ = {
-			isa = PBXGroup;
-			children = (
-				D435F0961A1711B100A86CC4 /* cards */,
-				D435F0A91A1711B100A86CC4 /* gradient@2x.png */,
-				D435F0AA1A1711B100A86CC4 /* PTKAddressZip.h */,
-				D435F0AB1A1711B100A86CC4 /* PTKAddressZip.m */,
-				D435F0AC1A1711B100A86CC4 /* PTKCard.h */,
-				D435F0AD1A1711B100A86CC4 /* PTKCard.m */,
-				D435F0AE1A1711B100A86CC4 /* PTKCardCVC.h */,
-				D435F0AF1A1711B100A86CC4 /* PTKCardCVC.m */,
-				D435F0B01A1711B100A86CC4 /* PTKCardExpiry.h */,
-				D435F0B11A1711B100A86CC4 /* PTKCardExpiry.m */,
-				D435F0B21A1711B100A86CC4 /* PTKCardNumber.h */,
-				D435F0B31A1711B100A86CC4 /* PTKCardNumber.m */,
-				D435F0B41A1711B100A86CC4 /* PTKCardType.h */,
-				D435F0B51A1711B100A86CC4 /* PTKComponent.h */,
-				D435F0B61A1711B100A86CC4 /* PTKComponent.m */,
-				D435F0B71A1711B100A86CC4 /* PTKTextField.h */,
-				D435F0B81A1711B100A86CC4 /* PTKTextField.m */,
-				D435F0B91A1711B100A86CC4 /* PTKUSAddressZip.h */,
-				D435F0BA1A1711B100A86CC4 /* PTKUSAddressZip.m */,
-				D435F0BB1A1711B100A86CC4 /* PTKView.h */,
-				D435F0BC1A1711B100A86CC4 /* PTKView.m */,
-				D435F0BD1A1711B100A86CC4 /* STPAPIConnection.h */,
-				D435F0BE1A1711B100A86CC4 /* STPAPIConnection.m */,
-				D435F0BF1A1711B100A86CC4 /* STPBankAccount.h */,
-				D435F0C01A1711B100A86CC4 /* STPBankAccount.m */,
-				D435F0C11A1711B100A86CC4 /* STPCard.h */,
-				D435F0C21A1711B100A86CC4 /* STPCard.m */,
-				D435F0C31A1711B100A86CC4 /* STPFormEncodeProtocol.h */,
-				D435F0C41A1711B100A86CC4 /* STPToken.h */,
-				D435F0C51A1711B100A86CC4 /* STPToken.m */,
-				D435F0C61A1711B100A86CC4 /* STPUtils.h */,
-				D435F0C71A1711B100A86CC4 /* STPUtils.m */,
-				D435F0C81A1711B100A86CC4 /* Stripe.h */,
-				D435F0C91A1711B100A86CC4 /* Stripe.m */,
-				D435F0CA1A1711B100A86CC4 /* StripeError.h */,
-				D435F0CB1A1711B100A86CC4 /* StripeError.m */,
-				D435F0CC1A1711B100A86CC4 /* textfield.png */,
-				D435F0CD1A1711B100A86CC4 /* textfield@2x.png */,
-			);
-			path = Stripe;
-			sourceTree = "<group>";
-		};
-		D435F0961A1711B100A86CC4 /* cards */ = {
-			isa = PBXGroup;
-			children = (
-				D435F0971A1711B100A86CC4 /* amex.png */,
-				D435F0981A1711B100A86CC4 /* amex@2x.png */,
-				D435F0991A1711B100A86CC4 /* cvc-amex.png */,
-				D435F09A1A1711B100A86CC4 /* cvc-amex@2x.png */,
-				D435F09B1A1711B100A86CC4 /* cvc.png */,
-				D435F09C1A1711B100A86CC4 /* cvc@2x.png */,
-				D435F09D1A1711B100A86CC4 /* diners.png */,
-				D435F09E1A1711B100A86CC4 /* diners@2x.png */,
-				D435F09F1A1711B100A86CC4 /* discover.png */,
-				D435F0A01A1711B100A86CC4 /* discover@2x.png */,
-				D435F0A11A1711B100A86CC4 /* jcb.png */,
-				D435F0A21A1711B100A86CC4 /* jcb@2x.png */,
-				D435F0A31A1711B100A86CC4 /* mastercard.png */,
-				D435F0A41A1711B100A86CC4 /* mastercard@2x.png */,
-				D435F0A51A1711B100A86CC4 /* placeholder.png */,
-				D435F0A61A1711B100A86CC4 /* placeholder@2x.png */,
-				D435F0A71A1711B100A86CC4 /* visa.png */,
-				D435F0A81A1711B100A86CC4 /* visa@2x.png */,
-			);
-			path = cards;
-			sourceTree = "<group>";
-		};
-		D435F0CE1A1711B100A86CC4 /* SWRevealViewController */ = {
-			isa = PBXGroup;
-			children = (
-				D435F0CF1A1711B100A86CC4 /* MenuViewController.h */,
-				D435F0D01A1711B100A86CC4 /* MenuViewController.m */,
-				D435F0D11A1711B100A86CC4 /* reveal-icon.png */,
-				D435F0D21A1711B100A86CC4 /* reveal-icon@2x.png */,
-				D435F0D31A1711B100A86CC4 /* SWRevealViewController.h */,
-				D435F0D41A1711B100A86CC4 /* SWRevealViewController.m */,
-			);
-			path = SWRevealViewController;
-			sourceTree = "<group>";
-		};
 		D4522ACB1A15264F002EFA92 /* library */ = {
 			isa = PBXGroup;
 			children = (
+				D4A6A3841A17D175003F3EAB /* SHSPhoneComponents */,
+				D435EFFE1A1711B100A86CC4 /* AFNetworking */,
+				D435F0271A1711B100A86CC4 /* BuildHeaders */,
+				D435F04C1A1711B100A86CC4 /* Headers */,
+				D435F0741A1711B100A86CC4 /* SDWebImage */,
 				D4522BB01A16654B002EFA92 /* MBProgressHUD */,
 				D4522ACC1A15264F002EFA92 /* Stripe */,
 				D4522B051A15264F002EFA92 /* SWRevealViewController */,
@@ -1060,18 +872,37 @@
 				D4522BEC1A1679F2002EFA92 /* SignupViewController.m */,
 				D4522BEF1A1679F2002EFA92 /* StartupViewController.h */,
 				D4522BF01A1679F2002EFA92 /* StartupViewController.m */,
-				D4522BF11A1679F2002EFA92 /* StripeViewController.h */,
-				D4522BF21A1679F2002EFA92 /* StripeViewController.m */,
+				D4522BF11A1679F2002EFA92 /* PaymentInfoViewController.h */,
+				D4522BF21A1679F2002EFA92 /* PaymentInfoViewController.m */,
 				D4522BFA1A167A25002EFA92 /* StoreListViewController.h */,
 				D4522BFB1A167A25002EFA92 /* StoreListViewController.m */,
+				D4A6A3951A181FAB003F3EAB /* RetrievePasswordViewController.h */,
+				D4A6A3961A181FAB003F3EAB /* RetrievePasswordViewController.m */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		D4A6A3841A17D175003F3EAB /* SHSPhoneComponents */ = {
+			isa = PBXGroup;
+			children = (
+				D4A6A3851A17D175003F3EAB /* SHSFlagAccessoryView.h */,
+				D4A6A3861A17D175003F3EAB /* SHSFlagAccessoryView.m */,
+				D4A6A3871A17D175003F3EAB /* SHSPhoneLibrary.h */,
+				D4A6A3881A17D175003F3EAB /* SHSPhoneLogic.h */,
+				D4A6A3891A17D175003F3EAB /* SHSPhoneLogic.m */,
+				D4A6A38A1A17D175003F3EAB /* SHSPhoneNumberFormatter+UserConfig.h */,
+				D4A6A38B1A17D175003F3EAB /* SHSPhoneNumberFormatter+UserConfig.m */,
+				D4A6A38C1A17D175003F3EAB /* SHSPhoneNumberFormatter.h */,
+				D4A6A38D1A17D175003F3EAB /* SHSPhoneNumberFormatter.m */,
+				D4A6A38E1A17D175003F3EAB /* SHSPhoneTextField.h */,
+				D4A6A38F1A17D175003F3EAB /* SHSPhoneTextField.m */,
+			);
+			path = SHSPhoneComponents;
 			sourceTree = "<group>";
 		};
 		D4F275961A0C021800CEC95A = {
 			isa = PBXGroup;
 			children = (
-				D435EFFD1A1711B100A86CC4 /* library */,
 				D4522BCA1A1668BC002EFA92 /* frameworks */,
 				D4F275A11A0C021800CEC95A /* AsaanImprovedUI */,
 				D4F275BE1A0C021800CEC95A /* AsaanImprovedUITests */,
@@ -1225,70 +1056,47 @@
 				D4522B2B1A15264F002EFA92 /* textfield.png in Resources */,
 				D41D321F1A11DD9300EA49B6 /* fbbutton.png in Resources */,
 				D4522B181A15264F002EFA92 /* visa.png in Resources */,
-				D435F1021A1711B100A86CC4 /* discover@2x.png in Resources */,
 				D4522B081A15264F002EFA92 /* amex.png in Resources */,
 				D4522B0D1A15264F002EFA92 /* cvc@2x.png in Resources */,
 				D4522B1A1A15264F002EFA92 /* gradient@2x.png in Resources */,
-				D435F0FB1A1711B100A86CC4 /* cvc-amex.png in Resources */,
 				D41D322A1A11DD9300EA49B6 /* resturantDetailDemo.png in Resources */,
-				D435F1001A1711B100A86CC4 /* diners@2x.png in Resources */,
-				D435F1031A1711B100A86CC4 /* jcb.png in Resources */,
 				D41D322C1A11DD9300EA49B6 /* starhighlighted.png in Resources */,
 				D4522B2C1A15264F002EFA92 /* textfield@2x.png in Resources */,
 				D4522B141A15264F002EFA92 /* mastercard.png in Resources */,
 				D4522B0C1A15264F002EFA92 /* cvc.png in Resources */,
 				D4522B171A15264F002EFA92 /* placeholder@2x.png in Resources */,
-				D435F11F1A1711B100A86CC4 /* reveal-icon.png in Resources */,
 				D41D32241A11DD9300EA49B6 /* like.png in Resources */,
-				D435F0FE1A1711B100A86CC4 /* cvc@2x.png in Resources */,
-				D435F0F91A1711B100A86CC4 /* amex.png in Resources */,
-				D435F1011A1711B100A86CC4 /* discover.png in Resources */,
 				D41D32251A11DD9300EA49B6 /* money.png in Resources */,
 				D4522B161A15264F002EFA92 /* placeholder.png in Resources */,
 				D4522B0A1A15264F002EFA92 /* cvc-amex.png in Resources */,
 				D41D32281A11DD9300EA49B6 /* personePlaceholder.png in Resources */,
-				D435F0FA1A1711B100A86CC4 /* amex@2x.png in Resources */,
 				D4522B151A15264F002EFA92 /* mastercard@2x.png in Resources */,
-				D435F0FD1A1711B100A86CC4 /* cvc.png in Resources */,
 				D4F275B11A0C021800CEC95A /* Main.storyboard in Resources */,
 				D41D32161A11DD9300EA49B6 /* addCard.png in Resources */,
-				D435F1091A1711B100A86CC4 /* visa.png in Resources */,
 				D41D32291A11DD9300EA49B6 /* Phone.png in Resources */,
-				D435F1071A1711B100A86CC4 /* placeholder.png in Resources */,
 				D4522B0E1A15264F002EFA92 /* diners.png in Resources */,
 				D4522B331A155977002EFA92 /* reveal-icon.png in Resources */,
 				D41D32191A11DD9300EA49B6 /* asaanLogin.png in Resources */,
 				D41D321B1A11DD9300EA49B6 /* cal.png in Resources */,
 				D4522B0B1A15264F002EFA92 /* cvc-amex@2x.png in Resources */,
-				D435F11D1A1711B100A86CC4 /* textfield@2x.png in Resources */,
 				D41D322B1A11DD9300EA49B6 /* star.png in Resources */,
 				D4522B0F1A15264F002EFA92 /* diners@2x.png in Resources */,
-				D435F1081A1711B100A86CC4 /* placeholder@2x.png in Resources */,
 				D41D32211A11DD9300EA49B6 /* gplusBtn.png in Resources */,
-				D435F1051A1711B100A86CC4 /* mastercard.png in Resources */,
 				D4522B091A15264F002EFA92 /* amex@2x.png in Resources */,
 				D41D32271A11DD9300EA49B6 /* person_placeholder.png in Resources */,
 				D4522B101A15264F002EFA92 /* discover.png in Resources */,
-				D435F1201A1711B100A86CC4 /* reveal-icon@2x.png in Resources */,
 				D41D321D1A11DD9300EA49B6 /* edit.png in Resources */,
 				D435F0DE1A1711B100A86CC4 /* LICENSE in Resources */,
 				D41D321C1A11DD9300EA49B6 /* contacts.png in Resources */,
 				D4522B191A15264F002EFA92 /* visa@2x.png in Resources */,
-				D435F11C1A1711B100A86CC4 /* textfield.png in Resources */,
-				D435F1061A1711B100A86CC4 /* mastercard@2x.png in Resources */,
 				D41D321A1A11DD9300EA49B6 /* asaanTopLogo.png in Resources */,
 				D4522B341A155977002EFA92 /* reveal-icon@2x.png in Resources */,
 				D41D32171A11DD9300EA49B6 /* address.png in Resources */,
 				D4522B121A15264F002EFA92 /* jcb.png in Resources */,
-				D435F0FC1A1711B100A86CC4 /* cvc-amex@2x.png in Resources */,
 				D4F275B61A0C021800CEC95A /* LaunchScreen.xib in Resources */,
 				D435F0E91A1711B100A86CC4 /* LICENSE in Resources */,
 				D41D321E1A11DD9300EA49B6 /* F_icon.svg.png in Resources */,
-				D435F0FF1A1711B100A86CC4 /* diners.png in Resources */,
-				D435F10B1A1711B100A86CC4 /* gradient@2x.png in Resources */,
-				D435F1041A1711B100A86CC4 /* jcb@2x.png in Resources */,
 				D41D32261A11DD9300EA49B6 /* nextPage.png in Resources */,
-				D435F10A1A1711B100A86CC4 /* visa@2x.png in Resources */,
 				D4522B131A15264F002EFA92 /* jcb@2x.png in Resources */,
 				D41D32221A11DD9300EA49B6 /* landingpage.png in Resources */,
 				D4F275B31A0C021800CEC95A /* Images.xcassets in Resources */,
@@ -1317,47 +1125,38 @@
 				D435F0F61A1711B100A86CC4 /* UIImageView+HighlightedWebCache.m in Sources */,
 				D4522B1E1A15264F002EFA92 /* PTKCardExpiry.m in Sources */,
 				D435F0F81A1711B100A86CC4 /* UIView+WebCacheOperation.m in Sources */,
-				D435F1121A1711B100A86CC4 /* PTKTextField.m in Sources */,
+				D4A6A3911A17D175003F3EAB /* SHSPhoneLogic.m in Sources */,
 				D46D0FAB1A13B2920072A413 /* UITextField+Extender.m in Sources */,
+				D4A6A3901A17D175003F3EAB /* SHSFlagAccessoryView.m in Sources */,
 				D4522B2A1A15264F002EFA92 /* StripeError.m in Sources */,
 				D435F0DA1A1711B100A86CC4 /* AFURLConnectionOperation.m in Sources */,
 				D4522BF81A1679F2002EFA92 /* StartupViewController.m in Sources */,
-				D435F0E81A1711B100A86CC4 /* MBProgressHUD.m in Sources */,
 				D435F0DD1A1711B100A86CC4 /* AFURLSessionManager.m in Sources */,
-				D435F1111A1711B100A86CC4 /* PTKComponent.m in Sources */,
 				D435F0DB1A1711B100A86CC4 /* AFURLRequestSerialization.m in Sources */,
 				D435F0E41A1711B100A86CC4 /* UIImageView+AFNetworking.m in Sources */,
 				D4522B251A15264F002EFA92 /* STPBankAccount.m in Sources */,
 				D4522BF31A1679F2002EFA92 /* LoginViewController.m in Sources */,
 				D435F0EB1A1711B100A86CC4 /* NSData+ImageContentType.m in Sources */,
-				D4522BF91A1679F2002EFA92 /* StripeViewController.m in Sources */,
-				D435F10C1A1711B100A86CC4 /* PTKAddressZip.m in Sources */,
-				D435F10F1A1711B100A86CC4 /* PTKCardExpiry.m in Sources */,
+				D4522BF91A1679F2002EFA92 /* PaymentInfoViewController.m in Sources */,
 				D435F0D91A1711B100A86CC4 /* AFSecurityPolicy.m in Sources */,
-				D435F1161A1711B100A86CC4 /* STPBankAccount.m in Sources */,
 				D435F0E01A1711B100A86CC4 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				D435F0F31A1711B100A86CC4 /* UIButton+WebCache.m in Sources */,
 				D4522B271A15264F002EFA92 /* STPToken.m in Sources */,
 				D435F0E11A1711B100A86CC4 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
-				D435F11B1A1711B100A86CC4 /* StripeError.m in Sources */,
 				D435F0E51A1711B100A86CC4 /* UIProgressView+AFNetworking.m in Sources */,
 				D4EAF9E71A12ACB20078FA9C /* BaseViewController.m in Sources */,
 				D435F0F21A1711B100A86CC4 /* SDWebImagePrefetcher.m in Sources */,
 				D435F0D81A1711B100A86CC4 /* AFNetworkReachabilityManager.m in Sources */,
-				D435F1151A1711B100A86CC4 /* STPAPIConnection.m in Sources */,
 				D435F0ED1A1711B100A86CC4 /* SDWebImageCompat.m in Sources */,
 				D435F0DC1A1711B100A86CC4 /* AFURLResponseSerialization.m in Sources */,
-				D435F1211A1711B100A86CC4 /* SWRevealViewController.m in Sources */,
-				D435F1131A1711B100A86CC4 /* PTKUSAddressZip.m in Sources */,
+				D4A6A3941A17D175003F3EAB /* SHSPhoneTextField.m in Sources */,
 				D435F0F71A1711B100A86CC4 /* UIImageView+WebCache.m in Sources */,
 				D4522BFC1A167A25002EFA92 /* StoreListViewController.m in Sources */,
-				D435F11A1A1711B100A86CC4 /* Stripe.m in Sources */,
 				D435F0E71A1711B100A86CC4 /* UIWebView+AFNetworking.m in Sources */,
 				D4EAF9E91A12ACB20078FA9C /* UIColor+AsaanGoldColor.m in Sources */,
 				D435F0D71A1711B100A86CC4 /* AFHTTPSessionManager.m in Sources */,
 				D435F0EE1A1711B100A86CC4 /* SDWebImageDecoder.m in Sources */,
 				D404EDBB1A13149A000285F2 /* UIColor+AsaanBackgroundColor.m in Sources */,
-				D435F1141A1711B100A86CC4 /* PTKView.m in Sources */,
 				D4522B1F1A15264F002EFA92 /* PTKCardNumber.m in Sources */,
 				D4F275A81A0C021800CEC95A /* AppDelegate.m in Sources */,
 				D4522B231A15264F002EFA92 /* PTKView.m in Sources */,
@@ -1365,35 +1164,31 @@
 				D4F275A51A0C021800CEC95A /* main.m in Sources */,
 				D435F0DF1A1711B100A86CC4 /* README.md in Sources */,
 				D4522B221A15264F002EFA92 /* PTKUSAddressZip.m in Sources */,
-				D435F1181A1711B100A86CC4 /* STPToken.m in Sources */,
 				D4522B241A15264F002EFA92 /* STPAPIConnection.m in Sources */,
-				D435F1171A1711B100A86CC4 /* STPCard.m in Sources */,
 				D4522B2D1A15264F002EFA92 /* SWRevealViewController.m in Sources */,
 				D435F0EC1A1711B100A86CC4 /* SDImageCache.m in Sources */,
 				D435F0E31A1711B100A86CC4 /* UIButton+AFNetworking.m in Sources */,
+				D4A6A3971A181FAB003F3EAB /* RetrievePasswordViewController.m in Sources */,
 				D4522BF51A1679F2002EFA92 /* SignupProfileViewController.m in Sources */,
 				D435F0F41A1711B100A86CC4 /* UIImage+GIF.m in Sources */,
 				D435F0D51A1711B100A86CC4 /* AFHTTPRequestOperation.m in Sources */,
+				D4A6A3931A17D175003F3EAB /* SHSPhoneNumberFormatter.m in Sources */,
 				D4522BB31A16654B002EFA92 /* MBProgressHUD.m in Sources */,
-				D435F1101A1711B100A86CC4 /* PTKCardNumber.m in Sources */,
 				D4522B301A153BC2002EFA92 /* MenuViewController.m in Sources */,
 				D4522B1C1A15264F002EFA92 /* PTKCard.m in Sources */,
 				D4F275AB1A0C021800CEC95A /* AsaanImprovedUI.xcdatamodeld in Sources */,
 				D4522B1D1A15264F002EFA92 /* PTKCardCVC.m in Sources */,
 				D4522BF61A1679F2002EFA92 /* SignupViewController.m in Sources */,
 				D435F0F51A1711B100A86CC4 /* UIImage+MultiFormat.m in Sources */,
-				D435F11E1A1711B100A86CC4 /* MenuViewController.m in Sources */,
 				D4522B281A15264F002EFA92 /* STPUtils.m in Sources */,
-				D435F10E1A1711B100A86CC4 /* PTKCardCVC.m in Sources */,
 				D435F0E21A1711B100A86CC4 /* UIAlertView+AFNetworking.m in Sources */,
 				D4522B1B1A15264F002EFA92 /* PTKAddressZip.m in Sources */,
+				D4A6A3921A17D175003F3EAB /* SHSPhoneNumberFormatter+UserConfig.m in Sources */,
 				D435F0F11A1711B100A86CC4 /* SDWebImageManager.m in Sources */,
-				D435F10D1A1711B100A86CC4 /* PTKCard.m in Sources */,
 				D435F0EF1A1711B100A86CC4 /* SDWebImageDownloader.m in Sources */,
 				D4522B211A15264F002EFA92 /* PTKTextField.m in Sources */,
 				D435F0F01A1711B100A86CC4 /* SDWebImageDownloaderOperation.m in Sources */,
 				D4522B291A15264F002EFA92 /* Stripe.m in Sources */,
-				D435F1191A1711B100A86CC4 /* STPUtils.m in Sources */,
 				D435F0D61A1711B100A86CC4 /* AFHTTPRequestOperationManager.m in Sources */,
 				D4522B201A15264F002EFA92 /* PTKComponent.m in Sources */,
 			);

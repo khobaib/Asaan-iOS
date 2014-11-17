@@ -8,7 +8,8 @@
 
 #import "LoginViewController.h"
 #import "UIColor+AsaanGoldColor.h"
-#import <ParseFacebookUtils/PFFacebookUtils.h>
+#import "MBProgressHUD.h"
+#import <Parse/Parse.h>
 #import "InlineCalls.h"
 
 @interface LoginViewController ()
@@ -51,10 +52,16 @@
         return;
     }
     
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.labelText = @"Please Wait";
+    hud.hidden = NO;
+    
     [PFUser logInWithUsernameInBackground:email password:password block:^(PFUser *user,NSError *error){
+        hud.hidden = YES;
         if(user){
             NSLog(@"%@",[user description]);
-            [self performSegueWithIdentifier:@"profilePage" sender:self];
+//            [self performSegueWithIdentifier:@"profilePage" sender:self];
             [self.navigationController popToRootViewControllerAnimated:YES];
         }else{
             NSLog(@"%@",[error userInfo]);
