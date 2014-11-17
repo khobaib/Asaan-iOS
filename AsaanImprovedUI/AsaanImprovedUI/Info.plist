@@ -7,11 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-<<<<<<< HEAD
 	<string>com.asaan.AsaanImprovedUI</string>
-=======
-	<string>com.TechFiesta.$(PRODUCT_NAME:rfc1034identifier)</string>
->>>>>>> FETCH_HEAD
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -25,44 +21,18 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
-<<<<<<< HEAD
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb718517514848212</string>
-=======
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>fb1460267094262357</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>com.TechFiesta.Asaan</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>com.TechFiesta.Asaan</string>
->>>>>>> FETCH_HEAD
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>FacebookAppID</key>
-<<<<<<< HEAD
 	<string>718517514848212</string>
 	<key>FacebookDisplayName</key>
 	<string>Asaan</string>
-=======
-	<string>1460267094262357</string>
-	<key>FacebookDisplayName</key>
-	<string>Asaan</string>
-	<key>LSApplicationCategoryType</key>
-	<string></string>
->>>>>>> FETCH_HEAD
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIBackgroundModes</key>

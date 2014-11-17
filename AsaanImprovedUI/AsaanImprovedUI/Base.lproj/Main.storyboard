@@ -142,11 +142,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
-<<<<<<< HEAD
                                     <action selector="connectWithFacebook:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Muo-Jc-Ryu"/>
-=======
-                                    <action selector="actionFBButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1Bt-jV-eiA"/>
->>>>>>> FETCH_HEAD
                                 </connections>
                             </button>
                         </subviews>
@@ -371,11 +367,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
-<<<<<<< HEAD
                                     <action selector="login:" destination="aU0-Ig-YO4" eventType="touchUpInside" id="ef2-30-pRN"/>
-=======
-                                    <action selector="actionLoginButtonClicked:" destination="aU0-Ig-YO4" eventType="touchUpInside" id="rVT-9Q-M5t"/>
->>>>>>> FETCH_HEAD
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fkg-e2-myY">
@@ -649,11 +641,7 @@
                     <navigationItem key="navigationItem" id="o0U-yE-scu">
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="KP0-0w-hYB">
                             <connections>
-<<<<<<< HEAD
                                 <action selector="signup:" destination="Dv2-6v-uWn" id="F2t-Rq-j1d"/>
-=======
-                                <segue destination="v7O-R1-Ng6" kind="show" identifier="SignupToSignupProfileSegue" id="4XF-D4-bWO"/>
->>>>>>> FETCH_HEAD
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1011,11 +999,7 @@
                     <navigationItem key="navigationItem" id="Wor-pc-ha4">
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="SL6-th-sok">
                             <connections>
-<<<<<<< HEAD
                                 <action selector="btnSaveClick:" destination="v7O-R1-Ng6" id="CYw-ZB-Uc3"/>
-=======
-                                <segue destination="qW5-ik-R7D" kind="show" identifier="SignupProfileToStripeSegue" id="foT-qu-ne7"/>
->>>>>>> FETCH_HEAD
                             </connections>
                         </barButtonItem>
                     </navigationItem>
