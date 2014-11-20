@@ -155,6 +155,7 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+@synthesize gtlStoreService = _gtlStoreService;
 
 - (NSURL *)applicationDocumentsDirectory {
     // The directory the application uses to store the Core Data store file. This code uses a directory named "com.asaan.AsaanImprovedUI" in the application's documents directory.
@@ -197,6 +198,15 @@
     }
     
     return _persistentStoreCoordinator;
+}
+
+- (GTLServiceStoreendpoint *)gtlStoreService {
+    
+    if(_gtlStoreService == nil){
+        _gtlStoreService = [[GTLServiceStoreendpoint alloc]init];
+        _gtlStoreService.retryEnabled = YES;
+    }
+    return _gtlStoreService;
 }
 
 

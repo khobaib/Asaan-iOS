@@ -1,0 +1,1226 @@
+{
+ "kind": "discovery#rpcDescription",
+ "etag": "\"9mnLCPwbyZOHH18t8ExzO2gqgTk/iZNmTKMGK566_u9W3RkXprW0aFg\"",
+ "discoveryVersion": "v1",
+ "id": "storeendpoint:v1",
+ "name": "storeendpoint",
+ "version": "v1",
+ "description": "This is an API",
+ "ownerDomain": "server.asaan.com",
+ "ownerName": "server.asaan.com",
+ "packagePath": "com.asaan.server.endpoint",
+ "icons": {
+  "x16": "http://www.google.com/images/icons/product/search-16.gif",
+  "x32": "http://www.google.com/images/icons/product/search-32.gif"
+ },
+ "protocol": "rpc",
+ "rootUrl": "https://asaan-server.appspot.com/_ah/api/",
+ "rpcUrl": "https://asaan-server.appspot.com/_ah/api/rpc",
+ "rpcPath": "/_ah/api/rpc",
+ "parameters": {
+  "alt": {
+   "type": "string",
+   "description": "Data format for the response.",
+   "default": "json",
+   "enum": [
+    "json"
+   ],
+   "enumDescriptions": [
+    "Responses with Content-Type of application/json"
+   ],
+   "location": "query"
+  },
+  "fields": {
+   "type": "string",
+   "description": "Selector specifying which fields to include in a partial response.",
+   "location": "query"
+  },
+  "key": {
+   "type": "string",
+   "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+   "location": "query"
+  },
+  "oauth_token": {
+   "type": "string",
+   "description": "OAuth 2.0 token for the current user.",
+   "location": "query"
+  },
+  "prettyPrint": {
+   "type": "boolean",
+   "description": "Returns response with indentations and line breaks.",
+   "default": "true",
+   "location": "query"
+  },
+  "quotaUser": {
+   "type": "string",
+   "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+   "location": "query"
+  },
+  "userIp": {
+   "type": "string",
+   "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+   "location": "query"
+  }
+ },
+ "auth": {
+  "oauth2": {
+   "scopes": {
+    "https://www.googleapis.com/auth/userinfo.email": {
+     "description": "View your email address"
+    }
+   }
+  }
+ },
+ "schemas": {
+  "MenuItemModifiersAndGroups": {
+   "id": "MenuItemModifiersAndGroups",
+   "type": "object",
+   "properties": {
+    "modifierGroups": {
+     "type": "array",
+     "items": {
+      "$ref": "StoreMenuItemModifierGroup"
+     }
+    },
+    "modifiers": {
+     "type": "array",
+     "items": {
+      "$ref": "StoreMenuItemModifier"
+     }
+    }
+   }
+  },
+  "MenusAndMenuItems": {
+   "id": "MenusAndMenuItems",
+   "type": "object",
+   "properties": {
+    "menuItems": {
+     "type": "array",
+     "items": {
+      "$ref": "StoreMenuItem"
+     }
+    },
+    "menusAndSubmenus": {
+     "type": "array",
+     "items": {
+      "$ref": "StoreMenuHierarchy"
+     }
+    }
+   }
+  },
+  "Store": {
+   "id": "Store",
+   "type": "object",
+   "properties": {
+    "address": {
+     "type": "string"
+    },
+    "backgroundImageUrl": {
+     "type": "string"
+    },
+    "backgroundThumbnailUrl": {
+     "type": "string"
+    },
+    "beaconId": {
+     "type": "string",
+     "format": "int64"
+    },
+    "bssid": {
+     "type": "string"
+    },
+    "city": {
+     "type": "string"
+    },
+    "createdDate": {
+     "type": "string",
+     "format": "int64"
+    },
+    "deliveryDistance": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "description": {
+     "type": "string"
+    },
+    "fbUrl": {
+     "type": "string"
+    },
+    "gplusUrl": {
+     "type": "string"
+    },
+    "hours": {
+     "type": "string"
+    },
+    "id": {
+     "type": "string",
+     "format": "int64"
+    },
+    "isActive": {
+     "type": "boolean"
+    },
+    "lat": {
+     "type": "number",
+     "format": "double"
+    },
+    "lng": {
+     "type": "number",
+     "format": "double"
+    },
+    "modifiedDate": {
+     "type": "string",
+     "format": "int64"
+    },
+    "name": {
+     "type": "string"
+    },
+    "phone": {
+     "type": "string"
+    },
+    "priceRange": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "providesCarryout": {
+     "type": "boolean"
+    },
+    "providesDelivery": {
+     "type": "boolean"
+    },
+    "rewardsDescription": {
+     "type": "string"
+    },
+    "rewardsRate": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "ssid": {
+     "type": "string"
+    },
+    "state": {
+     "type": "string"
+    },
+    "subType": {
+     "type": "string"
+    },
+    "trophies": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "twitterUrl": {
+     "type": "string"
+    },
+    "type": {
+     "type": "string"
+    },
+    "webSiteUrl": {
+     "type": "string"
+    },
+    "zip": {
+     "type": "string"
+    }
+   }
+  },
+  "StoreCollection": {
+   "id": "StoreCollection",
+   "type": "object",
+   "properties": {
+    "items": {
+     "type": "array",
+     "items": {
+      "$ref": "Store"
+     }
+    }
+   }
+  },
+  "StoreMenuCombined": {
+   "id": "StoreMenuCombined",
+   "type": "object",
+   "properties": {
+    "storeId": {
+     "type": "string",
+     "format": "int64"
+    },
+    "storeMenuHierarchy": {
+     "type": "array",
+     "items": {
+      "$ref": "StoreMenuHierarchy"
+     }
+    },
+    "storeMenuItem": {
+     "type": "array",
+     "items": {
+      "$ref": "StoreMenuItem"
+     }
+    },
+    "storeMenuItemModifier": {
+     "type": "array",
+     "items": {
+      "$ref": "StoreMenuItemModifier"
+     }
+    },
+    "storeMenuItemModifierGroup": {
+     "type": "array",
+     "items": {
+      "$ref": "StoreMenuItemModifierGroup"
+     }
+    }
+   }
+  },
+  "StoreMenuHierarchy": {
+   "id": "StoreMenuHierarchy",
+   "type": "object",
+   "properties": {
+    "active": {
+     "type": "boolean"
+    },
+    "createdDate": {
+     "type": "string",
+     "format": "int64"
+    },
+    "hours": {
+     "type": "string"
+    },
+    "id": {
+     "type": "string",
+     "format": "int64"
+    },
+    "level": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "menuItemCount": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "menuItemPosition": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "menuPOSId": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "menuType": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "modifiedDate": {
+     "type": "string",
+     "format": "int64"
+    },
+    "name": {
+     "type": "string"
+    },
+    "storeId": {
+     "type": "string",
+     "format": "int64"
+    },
+    "subMenuPOSId": {
+     "type": "integer",
+     "format": "int32"
+    }
+   }
+  },
+  "StoreMenuHierarchyCollection": {
+   "id": "StoreMenuHierarchyCollection",
+   "type": "object",
+   "properties": {
+    "items": {
+     "type": "array",
+     "items": {
+      "$ref": "StoreMenuHierarchy"
+     }
+    }
+   }
+  },
+  "StoreMenuItem": {
+   "id": "StoreMenuItem",
+   "type": "object",
+   "properties": {
+    "active": {
+     "type": "boolean"
+    },
+    "allergyInfo": {
+     "type": "string"
+    },
+    "calories": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "createdDate": {
+     "type": "string",
+     "format": "int64"
+    },
+    "glutenFree": {
+     "type": "boolean"
+    },
+    "halal": {
+     "type": "boolean"
+    },
+    "hasModifiers": {
+     "type": "boolean"
+    },
+    "heatIndex": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "id": {
+     "type": "string",
+     "format": "int64"
+    },
+    "imageUrl": {
+     "type": "string"
+    },
+    "kosher": {
+     "type": "boolean"
+    },
+    "level": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "longDescription": {
+     "type": "string"
+    },
+    "menuItemPOSId": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "menuItemPosition": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "menuName": {
+     "type": "string"
+    },
+    "menuPOSId": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "modifiedDate": {
+     "type": "string",
+     "format": "int64"
+    },
+    "price": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "shortDescription": {
+     "type": "string"
+    },
+    "storeId": {
+     "type": "string",
+     "format": "int64"
+    },
+    "subMenuPOSId": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "tax": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "thumbnailUrl": {
+     "type": "string"
+    },
+    "vegan": {
+     "type": "boolean"
+    },
+    "vegetarian": {
+     "type": "boolean"
+    }
+   }
+  },
+  "StoreMenuItemCollection": {
+   "id": "StoreMenuItemCollection",
+   "type": "object",
+   "properties": {
+    "items": {
+     "type": "array",
+     "items": {
+      "$ref": "StoreMenuItem"
+     }
+    }
+   }
+  },
+  "StoreMenuItemModifier": {
+   "id": "StoreMenuItemModifier",
+   "type": "object",
+   "properties": {
+    "createdDate": {
+     "type": "string",
+     "format": "int64"
+    },
+    "id": {
+     "type": "string",
+     "format": "int64"
+    },
+    "longDescription": {
+     "type": "string"
+    },
+    "modifiedDate": {
+     "type": "string",
+     "format": "int64"
+    },
+    "modifierGroupLongDescription": {
+     "type": "string"
+    },
+    "modifierGroupMaximum": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "modifierGroupMinimum": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "modifierGroupPOSId": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "modifierGroupShortDescription": {
+     "type": "string"
+    },
+    "modifierPOSId": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "price": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "shortDescription": {
+     "type": "string"
+    },
+    "storeId": {
+     "type": "string",
+     "format": "int64"
+    },
+    "weighting": {
+     "type": "integer",
+     "format": "int32"
+    }
+   }
+  },
+  "StoreMenuItemModifierGroup": {
+   "id": "StoreMenuItemModifierGroup",
+   "type": "object",
+   "properties": {
+    "createdDate": {
+     "type": "string",
+     "format": "int64"
+    },
+    "id": {
+     "type": "string",
+     "format": "int64"
+    },
+    "menuItemPOSId": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "modifiedDate": {
+     "type": "string",
+     "format": "int64"
+    },
+    "modifierGroupPOSId": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "storeId": {
+     "type": "string",
+     "format": "int64"
+    }
+   }
+  },
+  "StoreOrder": {
+   "id": "StoreOrder",
+   "type": "object",
+   "properties": {
+    "closeDate": {
+     "type": "string",
+     "format": "int64"
+    },
+    "createdDate": {
+     "type": "string",
+     "format": "int64"
+    },
+    "discount": {
+     "type": "string",
+     "format": "int64"
+    },
+    "discountDescription": {
+     "type": "string"
+    },
+    "employeeName": {
+     "type": "string"
+    },
+    "employeePOSId": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "finalTotal": {
+     "type": "string",
+     "format": "int64"
+    },
+    "guestCount": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "id": {
+     "type": "string",
+     "format": "int64"
+    },
+    "modifiedDate": {
+     "type": "string",
+     "format": "int64"
+    },
+    "note": {
+     "type": "string"
+    },
+    "orderDetails": {
+     "type": "string"
+    },
+    "orderMode": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "poscheckId": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "posintCheckId": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "serviceCharge": {
+     "type": "string",
+     "format": "int64"
+    },
+    "status": {
+     "type": "string"
+    },
+    "storeId": {
+     "type": "string",
+     "format": "int64"
+    },
+    "subTotal": {
+     "type": "string",
+     "format": "int64"
+    },
+    "tableNumber": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "tax": {
+     "type": "string",
+     "format": "int64"
+    }
+   }
+  },
+  "StoreOwner": {
+   "id": "StoreOwner",
+   "type": "object",
+   "properties": {
+    "createdDate": {
+     "type": "string",
+     "format": "int64"
+    },
+    "id": {
+     "type": "string",
+     "format": "int64"
+    },
+    "modifiedDate": {
+     "type": "string",
+     "format": "int64"
+    },
+    "storeId": {
+     "type": "string",
+     "format": "int64"
+    },
+    "userId": {
+     "type": "string",
+     "format": "int64"
+    }
+   }
+  },
+  "StoreOwnerCollection": {
+   "id": "StoreOwnerCollection",
+   "type": "object",
+   "properties": {
+    "items": {
+     "type": "array",
+     "items": {
+      "$ref": "StoreOwner"
+     }
+    }
+   }
+  },
+  "StorePOSConnection": {
+   "id": "StorePOSConnection",
+   "type": "object",
+   "properties": {
+    "asaanTenderId": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "carryoutModeId": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "createdDate": {
+     "type": "string",
+     "format": "int64"
+    },
+    "deliveryModeId": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "fallbackEmail": {
+     "type": "string"
+    },
+    "fallbackFax": {
+     "type": "string"
+    },
+    "hiddenHeaderName": {
+     "type": "string"
+    },
+    "hiddenHeaderValue": {
+     "type": "string"
+    },
+    "modifiedDate": {
+     "type": "string",
+     "format": "int64"
+    },
+    "status": {
+     "type": "string",
+     "format": "int64"
+    },
+    "storeId": {
+     "type": "string",
+     "format": "int64"
+    },
+    "token": {
+     "type": "string"
+    },
+    "url": {
+     "type": "string"
+    }
+   }
+  },
+  "StoreStats": {
+   "id": "StoreStats",
+   "type": "object",
+   "properties": {
+    "createdDate": {
+     "type": "string",
+     "format": "int64"
+    },
+    "daysOfService": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "dislikes": {
+     "type": "string",
+     "format": "int64"
+    },
+    "lastOrderPlacedDate": {
+     "type": "string",
+     "format": "int64"
+    },
+    "likes": {
+     "type": "string",
+     "format": "int64"
+    },
+    "modifiedDate": {
+     "type": "string",
+     "format": "int64"
+    },
+    "orders": {
+     "type": "string",
+     "format": "int64"
+    },
+    "recommendations": {
+     "type": "string",
+     "format": "int64"
+    },
+    "storeId": {
+     "type": "string",
+     "format": "int64"
+    },
+    "visits": {
+     "type": "string",
+     "format": "int64"
+    }
+   }
+  },
+  "StoreStatsCollection": {
+   "id": "StoreStatsCollection",
+   "type": "object",
+   "properties": {
+    "items": {
+     "type": "array",
+     "items": {
+      "$ref": "StoreStats"
+     }
+    }
+   }
+  }
+ },
+ "methods": {
+  "storeendpoint.getStatsForAllStores": {
+   "id": "storeendpoint.getStatsForAllStores",
+   "parameters": {
+    "firstPosition": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    },
+    "maxResult": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    }
+   },
+   "parameterOrder": [
+    "firstPosition",
+    "maxResult"
+   ],
+   "returns": {
+    "$ref": "StoreStatsCollection"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.getStore": {
+   "id": "storeendpoint.getStore",
+   "parameters": {
+    "storeId": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    }
+   },
+   "parameterOrder": [
+    "storeId"
+   ],
+   "returns": {
+    "$ref": "Store"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.getStoreMenuHierarchyAndItems": {
+   "id": "storeendpoint.getStoreMenuHierarchyAndItems",
+   "parameters": {
+    "maxResult": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    },
+    "menuType": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    },
+    "storeId": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    }
+   },
+   "parameterOrder": [
+    "storeId",
+    "menuType",
+    "maxResult"
+   ],
+   "returns": {
+    "$ref": "MenusAndMenuItems"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.getStoreMenuItemModifiers": {
+   "id": "storeendpoint.getStoreMenuItemModifiers",
+   "parameters": {
+    "menuItemPOSId": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    },
+    "storeId": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    }
+   },
+   "parameterOrder": [
+    "storeId",
+    "menuItemPOSId"
+   ],
+   "returns": {
+    "$ref": "MenuItemModifiersAndGroups"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.getStoreMenuItems": {
+   "id": "storeendpoint.getStoreMenuItems",
+   "parameters": {
+    "firstPosition": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    },
+    "maxResult": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    },
+    "storeId": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    }
+   },
+   "parameterOrder": [
+    "storeId",
+    "firstPosition",
+    "maxResult"
+   ],
+   "returns": {
+    "$ref": "StoreMenuItemCollection"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.getStoreMenuItemsForMenu": {
+   "id": "storeendpoint.getStoreMenuItemsForMenu",
+   "parameters": {
+    "firstPosition": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    },
+    "maxResult": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    },
+    "menuPOSId": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    },
+    "storeId": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    }
+   },
+   "parameterOrder": [
+    "storeId",
+    "menuPOSId",
+    "firstPosition",
+    "maxResult"
+   ],
+   "returns": {
+    "$ref": "StoreMenuItemCollection"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.getStoreMenus": {
+   "id": "storeendpoint.getStoreMenus",
+   "parameters": {
+    "firstPosition": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    },
+    "maxResult": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    },
+    "storeId": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    }
+   },
+   "parameterOrder": [
+    "storeId",
+    "firstPosition",
+    "maxResult"
+   ],
+   "returns": {
+    "$ref": "StoreMenuHierarchyCollection"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.getStoreOwners": {
+   "id": "storeendpoint.getStoreOwners",
+   "parameters": {
+    "storeId": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    }
+   },
+   "parameterOrder": [
+    "storeId"
+   ],
+   "returns": {
+    "$ref": "StoreOwnerCollection"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.getStorePOSConnection": {
+   "id": "storeendpoint.getStorePOSConnection",
+   "parameters": {
+    "storeId": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    }
+   },
+   "parameterOrder": [
+    "storeId"
+   ],
+   "returns": {
+    "$ref": "StorePOSConnection"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.getStoreStats": {
+   "id": "storeendpoint.getStoreStats",
+   "parameters": {
+    "storeId": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    }
+   },
+   "parameterOrder": [
+    "storeId"
+   ],
+   "returns": {
+    "$ref": "StoreStats"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.getStores": {
+   "id": "storeendpoint.getStores",
+   "parameters": {
+    "firstPosition": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    },
+    "maxResult": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    }
+   },
+   "parameterOrder": [
+    "firstPosition",
+    "maxResult"
+   ],
+   "returns": {
+    "$ref": "StoreCollection"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.placeOrder": {
+   "id": "storeendpoint.placeOrder",
+   "parameters": {
+    "order": {
+     "type": "string",
+     "required": true
+    },
+    "orderMode": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    },
+    "storeId": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    }
+   },
+   "parameterOrder": [
+    "storeId",
+    "orderMode",
+    "order"
+   ],
+   "returns": {
+    "$ref": "StoreOrder"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.removeStoreOwner": {
+   "id": "storeendpoint.removeStoreOwner",
+   "parameters": {
+    "resource": {
+     "$ref": "StoreOwner"
+    }
+   },
+   "parameterOrder": [
+    "resource"
+   ],
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.saveStore": {
+   "id": "storeendpoint.saveStore",
+   "parameters": {
+    "resource": {
+     "$ref": "Store"
+    }
+   },
+   "parameterOrder": [
+    "resource"
+   ],
+   "returns": {
+    "$ref": "Store"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.saveStoreMenuCombined": {
+   "id": "storeendpoint.saveStoreMenuCombined",
+   "parameters": {
+    "resource": {
+     "$ref": "StoreMenuCombined"
+    }
+   },
+   "parameterOrder": [
+    "resource"
+   ],
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.saveStoreMenuHierarchy": {
+   "id": "storeendpoint.saveStoreMenuHierarchy",
+   "parameters": {
+    "resource": {
+     "$ref": "StoreMenuHierarchy"
+    }
+   },
+   "parameterOrder": [
+    "resource"
+   ],
+   "returns": {
+    "$ref": "StoreMenuHierarchy"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.saveStoreMenuItem": {
+   "id": "storeendpoint.saveStoreMenuItem",
+   "parameters": {
+    "resource": {
+     "$ref": "StoreMenuItem"
+    }
+   },
+   "parameterOrder": [
+    "resource"
+   ],
+   "returns": {
+    "$ref": "StoreMenuItem"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.saveStoreMenuItemModifier": {
+   "id": "storeendpoint.saveStoreMenuItemModifier",
+   "parameters": {
+    "resource": {
+     "$ref": "StoreMenuItemModifier"
+    }
+   },
+   "parameterOrder": [
+    "resource"
+   ],
+   "returns": {
+    "$ref": "StoreMenuItemModifier"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.saveStoreMenuItemModifierGroup": {
+   "id": "storeendpoint.saveStoreMenuItemModifierGroup",
+   "parameters": {
+    "resource": {
+     "$ref": "StoreMenuItemModifierGroup"
+    }
+   },
+   "parameterOrder": [
+    "resource"
+   ],
+   "returns": {
+    "$ref": "StoreMenuItemModifierGroup"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.saveStoreOwner": {
+   "id": "storeendpoint.saveStoreOwner",
+   "parameters": {
+    "resource": {
+     "$ref": "StoreOwner"
+    }
+   },
+   "parameterOrder": [
+    "resource"
+   ],
+   "returns": {
+    "$ref": "StoreOwner"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.saveStorePOSConnection": {
+   "id": "storeendpoint.saveStorePOSConnection",
+   "parameters": {
+    "resource": {
+     "$ref": "StorePOSConnection"
+    }
+   },
+   "parameterOrder": [
+    "resource"
+   ],
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  }
+ }
+}
