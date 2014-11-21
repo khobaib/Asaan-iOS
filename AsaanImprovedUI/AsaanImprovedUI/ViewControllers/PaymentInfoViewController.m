@@ -9,12 +9,24 @@
 #import "PaymentInfoViewController.h"
 #import "PTKView.h"
 #import "UIColor+AsaanGoldColor.h"
+#import "UIColor+AsaanBackgroundColor.h"
+#import "DropdownView.h"
 
 @interface PaymentInfoViewController ()
-@property (weak, nonatomic) IBOutlet PTKView *ptkView;
+@property (weak, nonatomic) IBOutlet UIView *ptkView;
+@property (weak, nonatomic) IBOutlet UIScrollView *paymentInfoScrollView;
+@property (weak, nonatomic) IBOutlet DropdownView *dropdownView;
+
 @end
 
 @implementation PaymentInfoViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [super setBaseScrollView:_paymentInfoScrollView];
+    
+    [self.dropdownView setData:@[@"15%", @"20%", @"25%", @"30%"]];
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -28,7 +40,12 @@
     
     // Prevent keyboard from showing by default
     [self.view endEditing:YES];
-//    _ptkView.delegate = self;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    
+    CGRect frame = {.origin = {0, 0}, .size = self.ptkView.frame.size};
+    [self.ptkView addSubview:[[PTKView alloc] initWithFrame:frame]];
 }
 
 @end

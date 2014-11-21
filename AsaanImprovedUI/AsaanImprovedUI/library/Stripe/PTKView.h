@@ -36,6 +36,7 @@
 @property IBOutlet PTKTextField *cardNumberField;
 @property IBOutlet PTKTextField *cardExpiryField;
 @property IBOutlet PTKTextField *cardCVCField;
+@property IBOutlet PTKTextField *addressZIPField;
 @property IBOutlet UIImageView *placeholderView;
 @property (nonatomic, weak) id <PTKViewDelegate> delegate;
 @property (readonly) PTKCard *card;

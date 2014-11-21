@@ -36,7 +36,8 @@
 }
 
 - (IBAction)connectWithFacebook:(id)sender {
-    NSArray *permissions=@[@"public_profile", @"user_friends",@"email"];    
+
+    NSArray *permissions=@[@"public_profile", @"user_friends",@"email"];
     
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.labelText = @"Please Wait";
