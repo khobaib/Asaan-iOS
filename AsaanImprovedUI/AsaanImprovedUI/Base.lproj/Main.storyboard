@@ -1351,10 +1351,10 @@
                                         </variation>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AIV-dK-JAg" customClass="DropdownView">
-                                        <rect key="frame" x="166" y="66" width="362" height="24"/>
+                                        <rect key="frame" x="166" y="61" width="362" height="35"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="24" id="DOK-Ap-gKA"/>
+                                            <constraint firstAttribute="height" constant="35" id="DOK-Ap-gKA"/>
                                         </constraints>
                                     </view>
                                 </subviews>

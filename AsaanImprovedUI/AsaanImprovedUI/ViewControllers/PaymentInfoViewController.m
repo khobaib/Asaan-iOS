@@ -12,7 +12,8 @@
 #import "UIColor+AsaanBackgroundColor.h"
 #import "DropdownView.h"
 
-@interface PaymentInfoViewController ()
+@interface PaymentInfoViewController () <DropdownViewDelegate>
+
 @property (weak, nonatomic) IBOutlet PTKView *ptkView;
 @property (weak, nonatomic) IBOutlet UIScrollView *paymentInfoScrollView;
 @property (weak, nonatomic) IBOutlet DropdownView *dropdownView;
@@ -26,6 +27,10 @@
     [super setBaseScrollView:_paymentInfoScrollView];
     
     [self.dropdownView setData:@[@"15%", @"20%", @"25%", @"30%"]];
+    self.dropdownView.delegate = self;
+    [self.dropdownView setDefaultSelection:1];
+    self.dropdownView.listBackgroundColor = [UIColor asaanBackgroundColor];
+    self.dropdownView.titleColor = [UIColor whiteColor];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -40,6 +45,12 @@
     
     // Prevent keyboard from showing by default
     [self.view endEditing:YES];
+}
+
+#pragma mark - DropdownViewDelegate
+- (void)dropdownViewActionForSelectedRow:(int)row sender:(id)sender
+{
+    NSLog(@"Selected row : %d", row);
 }
 
 @end

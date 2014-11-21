@@ -8,6 +8,13 @@
 
 #import "DropdownView.h"
 
+#define DDImageViewFrame        {.origin = {self.frame.size.width - 30, 5}, .size = {20, self.frame.size.height - 10}}
+#define DDTitleLabelFreame      {.origin = {0, 0}, .size = {self.frame.size.width - 25, self.frame.size.height}}
+
+#define DDListTableViewHeight   100
+#define DDListTableViewOrigin   {-5, self.frame.size.height}
+#define DDListTableViewSize     {self.frame.size.width + 10, DDListTableViewHeight}
+
 @interface DropdownView () <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
 {
     int _currentSelction;
@@ -23,7 +30,11 @@
 
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIImageView *dropdownImageView;
+
+@property (nonatomic, strong) UIButton* backgroundView;
+@property (nonatomic, weak) UIView* listTableSuperview;
 @property (nonatomic, strong) UITableView* listTableView;
+@property (nonatomic, assign) CGRect listTableFrame;
 
 @end
 
@@ -48,19 +59,30 @@
     
     [super layoutSubviews];
     
-    CGRect frame1 = {.origin = {0, 0}, .size = {self.frame.size.width - 25, self.frame.size.height}};
+    CGRect frame1 = DDTitleLabelFreame;
     self.titleLabel.frame = frame1;
     
-    CGRect frame2 = {.origin = {self.frame.size.width - 20, 5}, .size = {20, self.frame.size.height - 10}};
+    CGRect frame2 = DDImageViewFrame;
     self.dropdownImageView.frame = frame2;
     
-    CGRect frame3 = {.origin = {self.frame.origin.x - 10, self.frame.origin.y + self.frame.size.height}, .size = {self.frame.size.width + 20, 100}};
-    self.listTableView.frame = frame3;
+    self.backgroundView.frame = self.listTableSuperview.frame;
+    self.listTableView.frame = self.listTableFrame;
+}
+
+-(void) dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver: self];
+    [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
 }
 
 #pragma mark - Private Methods
 - (void)setup
 {
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+    [[NSNotificationCenter defaultCenter] addObserver: self selector:   @selector(deviceOrientationDidChange:) name: UIDeviceOrientationDidChangeNotification object: nil];
+    
+    self.listTableFrame = CGRectZero;
+    
     self.userInteractionEnabled = YES;
     self.clipsToBounds = YES;
     self.backgroundColor = [UIColor clearColor];
@@ -84,14 +106,14 @@
 
 - (void)setupDropdownButton
 {
-    CGRect frame = {.origin = {0, 0}, .size = {self.frame.size.width - 25, self.frame.size.height}};
+    CGRect frame = DDTitleLabelFreame;
     self.titleLabel = [[UILabel alloc] initWithFrame:frame];
     self.titleLabel.textAlignment = NSTextAlignmentLeft;
     self.titleLabel.text = _data[_currentSelction];
     self.titleLabel.textColor = [UIColor whiteColor];
     self.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
     
-    CGRect frame1 = {.origin = {self.frame.size.width - 20, 5}, .size = {20, self.frame.size.height - 10}};
+    CGRect frame1 = DDImageViewFrame;
     self.dropdownImageView = [[UIImageView alloc] initWithFrame:frame1];
     self.dropdownImageView.image = [UIImage imageNamed:@"drop_down"];
     self.dropdownImageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -99,8 +121,10 @@
 
 - (void)setupDropdownTableView
 {
-    CGRect frame = {.origin = {self.frame.origin.x - 10, self.frame.origin.y + self.frame.size.height}, .size = {self.frame.size.width + 20, 100}};
-    self.listTableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain];
+    self.backgroundView = [[UIButton alloc] initWithFrame:self.superview.frame];
+    [self.backgroundView addTarget:self action:@selector(backgroundTap:) forControlEvents:UIControlEventTouchDown];
+    
+    self.listTableView = [[UITableView alloc] initWithFrame:self.listTableFrame style:UITableViewStylePlain];
     
     CALayer *layer = self.listTableView.layer;
     layer.cornerRadius = 3.0;
@@ -110,6 +134,8 @@
     self.listTableView.backgroundColor = [UIColor whiteColor];
     self.listTableView.dataSource = self;
     self.listTableView.delegate = self;
+    
+    [self.backgroundView addSubview:self.listTableView];
 }
 
 #pragma mark - Public Methods
@@ -118,13 +144,16 @@
     @synchronized(self) {
         
         if (data) {
-            NSMutableArray* temp = [NSMutableArray arrayWithArray:data];
-            [temp addObject:@""];
-            _data = temp;
+            _data = data;
         }
     }
     
     self.titleLabel.text = _data[_currentSelction];
+}
+
+- (void)setListBackgroundColor:(UIColor *)listBackgroundColor {
+
+    self.listTableView.backgroundColor = listBackgroundColor;
 }
 
 - (void)setDefaultSelection:(int)defaultSelection {
@@ -137,13 +166,55 @@
     }
 
     self.titleLabel.text = _data[_currentSelction];
+    [self.listTableView reloadData];
 }
 
 - (void)showList
 {
     _listShowed = true;
     self.dropdownImageView.image = [UIImage imageNamed:@"drop_up"];
-    [self.superview addSubview:self.listTableView];
+    
+    self.listTableSuperview = nil;
+    
+    UIView* superview = self.superview;
+    UIView* subview = self;
+    
+    while (superview) {
+        
+        if (superview.frame.size.height >= subview.frame.origin.y + DDListTableViewHeight) {
+            break;
+        }
+        
+        superview = superview.superview;
+        subview = superview;
+    }
+    
+    CGPoint origin = DDListTableViewOrigin;
+    if (superview) {
+        
+        origin = [superview convertPoint:origin fromView:self];  // origin in superview's coordinate system
+        CGRect frame = {.origin = origin, .size = DDListTableViewSize};
+        
+        self.listTableFrame = self.listTableView.frame = frame;
+        self.listTableSuperview = superview;
+    }
+    else {
+        
+        origin = [self.superview convertPoint:origin fromView:self];  // origin in self.superview's coordinate system
+        CGRect frame = {.origin = origin, .size = {self.frame.size.width + 20, self.superview.frame.size.height - self.frame.origin.y}};
+        
+        self.listTableFrame = self.listTableView.frame = frame;
+        self.listTableSuperview = self.superview;
+    }
+    
+//    if (![self.listTableSuperview.subviews containsObject:self.listTableView]) {
+//        [self.listTableSuperview addSubview:self.listTableView];
+//    }
+    if (![self.listTableSuperview.subviews containsObject:self.backgroundView]) {
+        [self.listTableSuperview addSubview:self.backgroundView];
+        self.backgroundView.frame = self.listTableSuperview.frame;
+    }
+    [self.listTableView reloadData];
 }
 
 - (void)hideList
@@ -151,7 +222,8 @@
     
     _listShowed = false;
     self.dropdownImageView.image = [UIImage imageNamed:@"drop_down"];
-    [self.listTableView removeFromSuperview];
+//    [self.listTableView removeFromSuperview];
+    [self.backgroundView removeFromSuperview];
 }
 
 #pragma mark - Actions
@@ -159,13 +231,24 @@
 {
     [self.superview endEditing:YES];
     
-    NSLog(@"Jello");
     if (_listShowed) {
         [self hideList];
     }
     else {
         [self showList];
     }
+}
+
+- (void)deviceOrientationDidChange:(NSNotification *)notification {
+    
+    if (_listShowed) {
+        [self showList];
+    }
+}
+
+- (IBAction)backgroundTap:(id)sender {
+
+    [self hideList];
 }
 
 #pragma mark - UITableViewDataSource
@@ -193,6 +276,9 @@
         //If not possible create a new cell
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
+        cell.textLabel.textColor = self.titleColor;
+        cell.backgroundColor = self.listBackgroundColor;
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     cell.textLabel.text = [self.data objectAtIndex:indexPath.row];
     
@@ -214,7 +300,6 @@
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)l_tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"hello");
     _currentSelction = (int)indexPath.row;
     self.titleLabel.text = self.data[_currentSelction];
     
@@ -222,6 +307,10 @@
     [l_tableView deselectRowAtIndexPath:indexPath animated:NO];
     
     [self hideList];
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(dropdownViewActionForSelectedRow:sender:)]) {
+        [self.delegate dropdownViewActionForSelectedRow:_currentSelction sender:self];
+    }
 }
 
 #pragma mark - UIGestureRecognizerDelegate
