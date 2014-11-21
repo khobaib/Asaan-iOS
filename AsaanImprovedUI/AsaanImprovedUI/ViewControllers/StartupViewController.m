@@ -37,6 +37,7 @@
 
 - (IBAction)connectWithFacebook:(id)sender {
 
+//#warning Comment out for testing
     NSArray *permissions=@[@"public_profile", @"user_friends",@"email"];
     
     hud.mode = MBProgressHUDModeIndeterminate;
@@ -53,6 +54,9 @@
             [self _loadData];
         }
     }];
+    
+//#warning Code for testing
+//    [self performSegueWithIdentifier:@"segueStartupToAddPayment" sender:self];
 
 }
 - (void)_loadData {

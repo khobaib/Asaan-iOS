@@ -22,6 +22,8 @@
 #define kPTKViewCardCVCFieldEndX 100
 #define kPTKViewAddressZIPFieldEndX 137
 
+#define kPTKViewInnerViewFrame  {.origin = {40, 12}, .size = {self.frame.size.width - 40, 36}}
+
 #import "PTKView.h"
 #import "PTKTextField.h"
 #import "UIColor+AsaanBackgroundColor.h"
@@ -76,6 +78,14 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
     [self setup];
 }
 
+- (void)layoutSubviews {
+    
+    [super layoutSubviews];
+    
+    CGRect frame1 = kPTKViewInnerViewFrame;
+    self.innerView.frame = frame1;
+}
+
 - (void)setup
 {
     _isInitialState = YES;
@@ -89,8 +99,9 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
 //    backgroundImageView.image = [[UIImage imageNamed:@"textfield"]
 //            resizableImageWithCapInsets:UIEdgeInsetsMake(0, 8, 0, 8)];
 //    [self addSubview:backgroundImageView];
-
-    self.innerView = [[UIView alloc] initWithFrame:CGRectMake(40, 12, self.frame.size.width - 40, 36)];
+    
+    CGRect frame1 = kPTKViewInnerViewFrame;
+    self.innerView = [[UIView alloc] initWithFrame:frame1];
     self.innerView.clipsToBounds = YES;
 
     [self setupPlaceholderView];

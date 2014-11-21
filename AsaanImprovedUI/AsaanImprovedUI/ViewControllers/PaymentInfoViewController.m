@@ -13,7 +13,7 @@
 #import "DropdownView.h"
 
 @interface PaymentInfoViewController ()
-@property (weak, nonatomic) IBOutlet UIView *ptkView;
+@property (weak, nonatomic) IBOutlet PTKView *ptkView;
 @property (weak, nonatomic) IBOutlet UIScrollView *paymentInfoScrollView;
 @property (weak, nonatomic) IBOutlet DropdownView *dropdownView;
 
@@ -40,12 +40,6 @@
     
     // Prevent keyboard from showing by default
     [self.view endEditing:YES];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    
-    CGRect frame = {.origin = {0, 0}, .size = self.ptkView.frame.size};
-    [self.ptkView addSubview:[[PTKView alloc] initWithFrame:frame]];
 }
 
 @end
