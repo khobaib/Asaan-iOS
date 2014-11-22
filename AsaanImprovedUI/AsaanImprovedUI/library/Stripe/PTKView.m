@@ -55,7 +55,7 @@
 @property (nonatomic) PTKCardNumber *cardNumber;
 @property (nonatomic) PTKCardExpiry *cardExpiry;
 @property (nonatomic) PTKCardCVC *cardCVC;
-@property (nonatomic) PTKAddressZip *addressZip;
+@property (nonatomic) PTKUSAddressZip *addressZip;
 @end
 
 #pragma mark -
@@ -239,9 +239,9 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
     return [PTKCardCVC cardCVCWithString:self.cardCVCField.text];
 }
 
-- (PTKAddressZip *)addressZip
+- (PTKUSAddressZip *)addressZip
 {
-    return [PTKAddressZip addressZipWithString:self.addressZIPField.text];
+    return [PTKUSAddressZip addressZipWithString:self.addressZIPField.text];
 }
 
 #pragma mark - State
@@ -580,7 +580,7 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
 {
     NSString *resultString = [self.addressZIPField.text stringByReplacingCharactersInRange:range withString:replacementString];
     resultString = [PTKTextField textByRemovingUselessSpacesFromString:resultString];
-    PTKAddressZip *addressZIP = [PTKAddressZip addressZipWithString:resultString];
+    PTKUSAddressZip *addressZIP = [PTKUSAddressZip addressZipWithString:resultString];
     
     // Restrict length
     if (![addressZIP isPartiallyValid]) return NO;
@@ -663,7 +663,7 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
         return self.cardExpiryField;
     else if (![[PTKCardCVC cardCVCWithString:self.cardCVCField.text] isValid])
         return self.cardCVCField;
-    else if (![[PTKAddressZip addressZipWithString:self.addressZIPField.text] isValid])
+    else if (![[PTKUSAddressZip addressZipWithString:self.addressZIPField.text] isValid])
         return self.addressZIPField;
 
     return nil;

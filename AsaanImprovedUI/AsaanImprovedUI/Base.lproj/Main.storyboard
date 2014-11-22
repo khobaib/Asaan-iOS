@@ -1447,7 +1447,11 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Add Payment Info" id="ji5-Ra-Nuz">
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="v0r-HY-8Vr"/>
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="v0r-HY-8Vr">
+                            <connections>
+                                <action selector="paymentSaveClicked:" destination="qW5-ik-R7D" id="5Rb-mq-JLv"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="dropdownView" destination="AIV-dK-JAg" id="1WZ-e5-5eV"/>

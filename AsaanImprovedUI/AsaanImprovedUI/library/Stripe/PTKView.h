@@ -29,7 +29,7 @@
 @property (nonatomic, readonly) PTKCardNumber *cardNumber;
 @property (nonatomic, readonly) PTKCardExpiry *cardExpiry;
 @property (nonatomic, readonly) PTKCardCVC *cardCVC;
-@property (nonatomic, readonly) PTKAddressZip *addressZip;
+@property (nonatomic, readonly) PTKUSAddressZip *addressZip;
 
 @property IBOutlet UIView *innerView;
 @property IBOutlet UIView *clipView;
