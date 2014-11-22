@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DataReceiver.h"
 
-@interface StoreListTableTableViewController : UITableViewController
+@interface StoreListTableTableViewController : UITableViewController <DataReceiver>
 
 @end

@@ -14,38 +14,51 @@
 #import "GTMHTTPFetcher.h"
 #import "AppDelegate.h"
 #import "InlineCalls.h"
+#import "UtilCalls.h"
 #import "UIColor+AsaanGoldColor.h"
+#import "DataProvider.h"
 
-@interface StoreListTableTableViewController ()
-{
-    MBProgressHUD *hud;
-    NSMutableArray *storeList;
-    NSMutableArray *storeStatsList;
-}
-- (NSString *) formattedNumber:(NSNumber*) number;
+const NSUInteger FluentPagingTablePreloadMargin = 5;
+
+@interface StoreListTableTableViewController ()<DataProviderDelegate>
+    @property (nonatomic, strong) MBProgressHUD *hud;
+    @property (strong, nonatomic) IBOutlet UITableView *tableView;
+    @property (nonatomic) int startPosition;
+    @property (nonatomic) int maxResult;
+
 @end
 
 @implementation StoreListTableTableViewController
+@synthesize tableView = _tableView;
+@synthesize startPosition = _startPosition;
+@synthesize maxResult = _maxResult;
+@synthesize dataProvider = _dataProvider;
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    storeList = [[NSMutableArray alloc]init];
-    storeStatsList = [[NSMutableArray alloc]init];
-    
+    _dataProvider = [[DataProvider alloc] initWithPageSize:6 itemCount:6 type:QueriedObjectTypeStore];
+    _dataProvider.delegate = self;
+    _dataProvider.shouldLoadAutomatically = YES;
+    _dataProvider.automaticPreloadMargin = FluentPagingTablePreloadMargin;
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+//    if ([self isViewLoaded])
+//        [self.tableView reloadData];
 }
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.hud = [MBProgressHUD showHUDAddedTo:_tableView animated:YES];
+    [self.hud hide:YES];
     
-    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.hidden=NO;
     PFUser *currentUser = [PFUser currentUser];
-    hud.hidden=YES;
     if (!currentUser) {
         [self performSegueWithIdentifier:@"segueStartup" sender:self];
         return;
@@ -57,37 +70,6 @@
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
     self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor : [UIColor goldColor]};
-
-    [self fetchStoresFromServer];
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
-}
-
--(void)fetchStoresFromServer{
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-    
-    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoresWithFirstPosition:0 maxResult:20];
-    
-    __weak StoreListTableTableViewController *myself = self;
-    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreCollection *object,NSError *error){
-        if(!error){
-            storeList = [object.items mutableCopy];
-            [myself.tableView reloadData];
-        }else{
-            NSLog(@"%@",[error userInfo]);
-        }
-    }];
-    
-    GTLQueryStoreendpoint *query2=[GTLQueryStoreendpoint queryForGetStatsForAllStoresWithFirstPosition:0 maxResult:20];
-    
-    [gtlStoreService executeQuery:query2 completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreStatsCollection *object,NSError *error){
-        if(!error){
-            storeStatsList = [object.items mutableCopy];
-            [myself.tableView reloadData];
-        }else{
-            NSLog(@"%@",[error userInfo]);
-        }
-    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -102,11 +84,36 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return storeList.count;
+    return self.dataProvider.dataObjects.count;
+}
+
+#pragma mark - Data controller delegate
+- (void)dataProvider:(DataProvider *)dataProvider didLoadDataAtIndexes:(NSIndexSet *)indexes {
+    
+    NSMutableArray *indexPathsToReload = [NSMutableArray array];
+    
+    [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+        
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:idx inSection:0];
+        
+        if ([self.tableView.indexPathsForVisibleRows containsObject:indexPath]) {
+            [indexPathsToReload addObject:indexPath];
+        }
+    }];
+    
+    if (indexPathsToReload.count > 0) {
+        [self.tableView reloadRowsAtIndexPaths:indexPathsToReload withRowAnimation:UITableViewRowAnimationFade];
+    }
+    [self.hud hide:YES];
+}
+
+- (void)dataProvider:(DataProvider *)dataProvider willLoadDataAtIndexes:(NSIndexSet *)indexes {
+    [self.hud hide:NO];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StoreListCell" forIndexPath:indexPath];
+
     PFImageView *imgBackground = (PFImageView *)[cell viewWithTag:400];
     UILabel *txtName=(UILabel *)[cell viewWithTag:500];
     UILabel *txtTrophy=(UILabel *)[cell viewWithTag:501];
@@ -121,12 +128,21 @@
     imgLikes.hidden = true;
     UIImageView *imgRecommends = (UIImageView*)[cell viewWithTag:507];
     imgRecommends.hidden = true;
+
+//    imgBackground.image = [UIImage imageNamed:@"loading-wait"]; // placeholder image
     
+    txtName.text = nil;
+    txtTrophy.text = nil;
+    txtCuisine.text = nil;
     txtVisits.text = nil;
     txtLikes.text = nil;
     txtRecommends.text = nil;
+    
+    id dataObject = self.dataProvider.dataObjects[indexPath.row];
+    if ([dataObject isKindOfClass:[NSNull class]])
+        return cell;
 
-    GTLStoreendpointStore *store=[storeList objectAtIndex:indexPath.row];
+    GTLStoreendpointStore *store = dataObject;
     if (store != nil) {
         if (IsEmpty(store.backgroundImageUrl) == false) {
             imgBackground.image = [UIImage imageNamed:@"loading-wait"]; // placeholder image
@@ -143,99 +159,33 @@
         txtTrophy.text = store.trophies.firstObject;
         txtCuisine.text = store.subType;
     }
-    if (storeStatsList.count > indexPath.row)
-    {
-        GTLStoreendpointStoreStats *storeStats = [storeStatsList objectAtIndex:indexPath.row];
-        if (storeStats.visits.longValue > 0){
-            txtVisits.text = [self formattedNumber:storeStats.visits];
-            imgVisits.hidden = false;
-        }
-        long reviewCount = storeStats.dislikes.longValue + storeStats.likes.longValue;
-        if (reviewCount > 0){
-            NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-            [numberFormatter setNumberStyle:NSNumberFormatterPercentStyle];
-            int iPercent = (int)(storeStats.likes.longValue*100/reviewCount);
-            NSNumber *likePercent = [NSNumber numberWithInt:iPercent];
-            NSString *strReviews = [self formattedNumber:[NSNumber numberWithLong:reviewCount]];
-            NSString *strLikePercent = [self formattedNumber:likePercent];
-            txtLikes.text = [[[strLikePercent stringByAppendingString:@"%("] stringByAppendingString:strReviews] stringByAppendingString:@")"];
-            imgLikes.hidden = false;
-        }
-        
-        if (storeStats.recommendations.longValue > 0){
-            txtRecommends.text = [self formattedNumber:storeStats.recommendations];
-            imgRecommends.hidden = false;
-        }
-    }
+//    if (self.storeStatsList.count > indexPath.row)
+//    {
+//        GTLStoreendpointStoreStats *storeStats = [self.storeStatsList objectAtIndex:indexPath.row];
+//        if (storeStats.visits.longValue > 0){
+//            txtVisits.text = [UtilCalls formattedNumber:storeStats.visits];
+//            imgVisits.hidden = false;
+//        }
+//        long reviewCount = storeStats.dislikes.longValue + storeStats.likes.longValue;
+//        if (reviewCount > 0){
+//            NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+//            [numberFormatter setNumberStyle:NSNumberFormatterPercentStyle];
+//            int iPercent = (int)(storeStats.likes.longValue*100/reviewCount);
+//            NSNumber *likePercent = [NSNumber numberWithInt:iPercent];
+//            NSString *strReviews = [UtilCalls formattedNumber:[NSNumber numberWithLong:reviewCount]];
+//            NSString *strLikePercent = [UtilCalls formattedNumber:likePercent];
+//            txtLikes.text = [[[strLikePercent stringByAppendingString:@"%("] stringByAppendingString:strReviews] stringByAppendingString:@")"];
+//            imgLikes.hidden = false;
+//        }
+//        
+//        if (storeStats.recommendations.longValue > 0){
+//            txtRecommends.text = [UtilCalls formattedNumber:storeStats.recommendations];
+//            imgRecommends.hidden = false;
+//        }
+//    }
     
     return cell;
 }
-
-- (NSString *) formattedNumber:(NSNumber*) number{
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    
-    if (number.longValue >= 1000000){
-        number = [NSNumber numberWithFloat:ceil(number.longValue/1000000)];
-        NSString *strNumber = [numberFormatter stringFromNumber:number];
-        return [strNumber stringByAppendingString:@"M+"];
-    }
-    else if (number.longValue >= 10000){
-        number = [NSNumber numberWithFloat:ceil(number.longValue/1000)];
-        NSString *strNumber = [numberFormatter stringFromNumber:number];
-        return [strNumber stringByAppendingString:@"K+"];
-    }
-    else
-        return [numberFormatter stringFromNumber:number];
-}
-
-- (void)addShadowToText:(UILabel *)textView withText:(NSString *)text{
-    NSMutableAttributedString* attString = [[NSMutableAttributedString alloc] initWithString:text];
-    NSRange range = NSMakeRange(0, [attString length]);
-    
-    [attString addAttribute:NSFontAttributeName value:textView.font range:range];
-    [attString addAttribute:NSForegroundColorAttributeName value:textView.textColor range:range];
-    
-    NSShadow* shadow = [[NSShadow alloc] init];
-    shadow.shadowColor = [UIColor grayColor];
-    shadow.shadowOffset = CGSizeMake(0.0f, -1.0f);
-    [attString addAttribute:NSShadowAttributeName value:shadow range:range];
-    
-    textView.attributedText = attString;
-}
-
-
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return NO;
-}
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 /*
 #pragma mark - Navigation
