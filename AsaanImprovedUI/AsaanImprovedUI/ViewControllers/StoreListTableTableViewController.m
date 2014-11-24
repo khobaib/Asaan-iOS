@@ -60,7 +60,8 @@ const NSUInteger FluentPagingTablePreloadMargin = 5;
     
     PFUser *currentUser = [PFUser currentUser];
     if (!currentUser) {
-        [self performSegueWithIdentifier:@"segueStartup" sender:self];
+//        [self performSegueWithIdentifier:@"segueStartup" sender:self];
+        [self performSegueWithIdentifier:@"segueLoginStoryboard" sender:self];
         return;
     }
     
