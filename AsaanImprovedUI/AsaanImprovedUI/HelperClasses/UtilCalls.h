@@ -9,5 +9,6 @@
 @interface UtilCalls : NSObject
 
 + (NSString *) formattedNumber:(NSNumber*) number;
++ (NSString *) amountToString:(NSNumber*)number;
 
 @end

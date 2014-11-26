@@ -53,6 +53,8 @@
         [PFUser requestPasswordResetForEmailInBackground:_txtEmail.text];
         _lblMessage.text = @"Email sent. Please check your mailbox.";
         hud.hidden = YES;
+        [NSThread sleepForTimeInterval:1];
+        [self performSegueWithIdentifier:@"segueUnwindToLogin" sender:textField];
     }
     return YES;
 }

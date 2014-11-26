@@ -7,6 +7,7 @@
 //
 
 @import Foundation;
+#import "DataLoadingOperation.h"
 
 @class DataProvider;
 @protocol DataProviderDelegate<NSObject>
@@ -14,19 +15,13 @@
 @optional
 - (void)dataProvider:(DataProvider *)dataProvider willLoadDataAtIndexes:(NSIndexSet *)indexes;
 - (void)dataProvider:(DataProvider *)dataProvider didLoadDataAtIndexes:(NSIndexSet *)indexes;
+- (DataLoadingOperation *)getDataLoadingOperationForPage:(NSUInteger)page indexes:(NSIndexSet *)indexes;
 
 @end
 
-typedef enum{
-    QueriedObjectTypeStore = 1,
-    QueriedObjectTypeStoreItem = 2
-} QueriedObjectType;
-
 @interface DataProvider : NSObject
 
-- (instancetype)initWithPageSize:(NSUInteger)pageSize itemCount:(NSUInteger)itemCount type:(QueriedObjectType)queriedObjectType;
-
-@property (nonatomic) QueriedObjectType queriedObjectType;
+- (instancetype)initWithPageSize:(NSUInteger)pageSize itemCount:(NSUInteger)itemCount;
 
 @property (nonatomic, weak) id<DataProviderDelegate> delegate;
 

@@ -21,6 +21,10 @@
 
 @implementation LoginViewController
 
+- (IBAction)unwindToLogin:(UIStoryboardSegue*)sender
+{
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [super setBaseScrollView:_loginScrollView];
@@ -62,7 +66,7 @@
         if(user){
             NSLog(@"%@",[user description]);
 //            [self performSegueWithIdentifier:@"profilePage" sender:self];
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            [self performSegueWithIdentifier:@"segueUnwindToStoreList" sender:sender];
         }else{
             NSLog(@"%@",[error userInfo]);
             UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"Error" message:[error localizedDescription] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];

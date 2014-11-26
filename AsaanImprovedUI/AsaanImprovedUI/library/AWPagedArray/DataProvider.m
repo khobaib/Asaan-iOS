@@ -8,7 +8,6 @@
 
 #import "DataProvider.h"
 #import "AWPagedArray.h"
-#import "StoreLoadingOperation.h"
 
 //const NSUInteger DataProviderDefaultPageSize = 3;
 //const NSUInteger DataProviderDataCount = 6;
@@ -27,7 +26,7 @@
 }
 
 #pragma mark - Initialization
-- (instancetype)initWithPageSize:(NSUInteger)pageSize itemCount:(NSUInteger)itemCount type:(QueriedObjectType)queriedObjectType {
+- (instancetype)initWithPageSize:(NSUInteger)pageSize itemCount:(NSUInteger)itemCount {
     
     self = [super init];
     if (self) {
@@ -35,7 +34,6 @@
         _pagedArray.delegate = self;
         _dataLoadingOperations = [NSMutableDictionary dictionary];
         _operationQueue = [NSOperationQueue new];
-        _queriedObjectType = queriedObjectType;
     }
     return self;
 }
@@ -81,9 +79,9 @@
 }
 - (NSOperation *)_loadingOperationForPage:(NSUInteger)page indexes:(NSIndexSet *)indexes {
     
-    if (_queriedObjectType != QueriedObjectTypeStore)
+    DataLoadingOperation *operation = [self.delegate getDataLoadingOperationForPage:page indexes:indexes]; //[[StoreLoadingOperation alloc] initWithIndexes:indexes];
+    if (operation == nil)
         return nil;
-    DataLoadingOperation *operation = [[StoreLoadingOperation alloc] initWithIndexes:indexes];
     
     // Remember to not retain self in block since we store the operation
     __weak typeof(self) weakSelf = self;

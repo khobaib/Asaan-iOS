@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DataReceiver.h"
+#import "GTLStoreendpoint.h"
 
-@interface MenuTableViewController : UITableViewController
-
+@interface MenuTableViewController : UITableViewController <DataReceiver>
+@property (strong, nonatomic) GTLStoreendpointStore *selectedStore;
 @end

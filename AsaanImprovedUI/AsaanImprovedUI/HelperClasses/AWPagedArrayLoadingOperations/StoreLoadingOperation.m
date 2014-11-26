@@ -11,10 +11,14 @@
 #import "GTMHTTPFetcher.h"
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
+#import "InlineCalls.h"
+
+@interface StoreLoadingOperation()
+@property (nonatomic) Boolean bDataLoaded;
+@end
 
 @implementation StoreLoadingOperation
-
-Boolean bDataLoaded = false;
+@synthesize bDataLoaded = _bDataLoaded;
 
 const NSTimeInterval DataLoadingOperationDuration = 0.3;
 
@@ -27,7 +31,7 @@ const NSTimeInterval DataLoadingOperationDuration = 0.3;
     if (self)
     {
         typeof(self) weakSelf = self;
-        bDataLoaded = false;
+        _bDataLoaded = false;
         [self addExecutionBlock:^{
             AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
             GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
@@ -35,28 +39,32 @@ const NSTimeInterval DataLoadingOperationDuration = 0.3;
             int maxResult = indexes.count;
             GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoresWithFirstPosition:firstPosition maxResult:maxResult];
             
-            [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreCollection *object,NSError *error){
-                if(!error){
+            [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreCollection *object,NSError *error)
+            {
+                if(!error)
+                {
                     [weakSelf setDataPage:[object.items mutableCopy]];
-                    PFQuery *query = [PFQuery queryWithClassName:@"PictureFiles"];
-                    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-                    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                        if (error)
-                            NSLog(@"StoreLoadingOperation Error:%@",[error userInfo]);
-                        else{
-                            for (PFObject *object in objects) {
-                                PFFile *backgroundImgFile = object[@"picture_file"];
-                                [backgroundImgFile getDataInBackground];
-                            }
-                        }
-                    }];
-                }else{
+                    NSMutableArray *pictureFiles = [[NSMutableArray alloc]init];
+                    for (GTLStoreendpointStore *store in object)
+                        if (IsEmpty(store.backgroundImageUrl) == false)
+                            [pictureFiles addObject:store.backgroundImageUrl];
+                    if (pictureFiles.count > 0)
+                    {
+                        PFQuery *query = [PFQuery queryWithClassName:@"PictureFiles"];
+                        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+                        [query whereKey:@"objectId" containedIn:pictureFiles];
+                        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                            if (error)
+                                NSLog(@"StoreLoadingOperation Parse Error:%@",[error userInfo]);
+                        }];
+                    }
+                } else
                     NSLog(@"StoreLoadingOperation Error:%@",[error userInfo]);
-                }
-                bDataLoaded = true;
+                
+                weakSelf.bDataLoaded = true;
             }];
             
-            while (bDataLoaded == false)
+            while (weakSelf.bDataLoaded == false)
                 [NSThread sleepForTimeInterval:DataLoadingOperationDuration];
 
         }];
