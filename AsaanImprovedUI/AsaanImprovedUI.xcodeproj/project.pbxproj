@@ -195,23 +195,12 @@
 		D4F275B11A0C021800CEC95A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4F275AF1A0C021800CEC95A /* Main.storyboard */; };
 		D4F275B31A0C021800CEC95A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4F275B21A0C021800CEC95A /* Images.xcassets */; };
 		D4F275B61A0C021800CEC95A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4F275B41A0C021800CEC95A /* LaunchScreen.xib */; };
-		D4F275C21A0C021800CEC95A /* AsaanImprovedUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F275C11A0C021800CEC95A /* AsaanImprovedUITests.m */; };
 		D4FEF6F81A243FA000A41303 /* MenuItemLoadingOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D4FEF6F71A243FA000A41303 /* MenuItemLoadingOperation.m */; };
 		D4FEF6FC1A25335700A41303 /* MenuSegmentHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = D4FEF6FB1A25335700A41303 /* MenuSegmentHolder.m */; };
 		D4FF319D1A20513400C241CA /* drop_down.png in Resources */ = {isa = PBXBuildFile; fileRef = D4FF31991A20513400C241CA /* drop_down.png */; };
 		D4FF319E1A20513400C241CA /* drop_up.png in Resources */ = {isa = PBXBuildFile; fileRef = D4FF319A1A20513400C241CA /* drop_up.png */; };
 		D4FF319F1A20513400C241CA /* DropdownView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4FF319C1A20513400C241CA /* DropdownView.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		D4F275BC1A0C021800CEC95A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D4F275971A0C021800CEC95A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D4F2759E1A0C021800CEC95A;
-			remoteInfo = AsaanImprovedUI;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		37909B641A23828000649827 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -518,7 +507,6 @@
 		D4F275B01A0C021800CEC95A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D4F275B21A0C021800CEC95A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D4F275B51A0C021800CEC95A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		D4F275BB1A0C021800CEC95A /* AsaanImprovedUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AsaanImprovedUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4F275C01A0C021800CEC95A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4F275C11A0C021800CEC95A /* AsaanImprovedUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AsaanImprovedUITests.m; sourceTree = "<group>"; };
 		D4FEF6F71A243FA000A41303 /* MenuItemLoadingOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuItemLoadingOperation.m; sourceTree = "<group>"; };
@@ -566,13 +554,6 @@
 				D4522B3F1A165DAE002EFA92 /* Parse.framework in Frameworks */,
 				D4522B401A165DAE002EFA92 /* ParseFacebookUtils.framework in Frameworks */,
 				D4522B411A165DAE002EFA92 /* ParseUI.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D4F275B81A0C021800CEC95A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1030,7 +1011,6 @@
 			isa = PBXGroup;
 			children = (
 				D4F2759F1A0C021800CEC95A /* AsaanImprovedUI.app */,
-				D4F275BB1A0C021800CEC95A /* AsaanImprovedUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1133,24 +1113,6 @@
 			productReference = D4F2759F1A0C021800CEC95A /* AsaanImprovedUI.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D4F275BA1A0C021800CEC95A /* AsaanImprovedUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D4F275C81A0C021800CEC95A /* Build configuration list for PBXNativeTarget "AsaanImprovedUITests" */;
-			buildPhases = (
-				D4F275B71A0C021800CEC95A /* Sources */,
-				D4F275B81A0C021800CEC95A /* Frameworks */,
-				D4F275B91A0C021800CEC95A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D4F275BD1A0C021800CEC95A /* PBXTargetDependency */,
-			);
-			name = AsaanImprovedUITests;
-			productName = AsaanImprovedUITests;
-			productReference = D4F275BB1A0C021800CEC95A /* AsaanImprovedUITests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1163,11 +1125,6 @@
 					D4F2759E1A0C021800CEC95A = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = V39QP9S6S6;
-					};
-					D4F275BA1A0C021800CEC95A = {
-						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = 7742T5X57N;
-						TestTargetID = D4F2759E1A0C021800CEC95A;
 					};
 				};
 			};
@@ -1185,7 +1142,6 @@
 			projectRoot = "";
 			targets = (
 				D4F2759E1A0C021800CEC95A /* AsaanImprovedUI */,
-				D4F275BA1A0C021800CEC95A /* AsaanImprovedUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -1250,13 +1206,6 @@
 				D41D32181A11DD9300EA49B6 /* address2.png in Resources */,
 				D41D32201A11DD9300EA49B6 /* g128.png in Resources */,
 				D4522B111A15264F002EFA92 /* discover@2x.png in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D4F275B91A0C021800CEC95A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1379,23 +1328,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D4F275B71A0C021800CEC95A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D4F275C21A0C021800CEC95A /* AsaanImprovedUITests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		D4F275BD1A0C021800CEC95A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D4F2759E1A0C021800CEC95A /* AsaanImprovedUI */;
-			targetProxy = D4F275BC1A0C021800CEC95A /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		D4F275AF1A0C021800CEC95A /* Main.storyboard */ = {
@@ -1557,46 +1490,6 @@
 			};
 			name = Release;
 		};
-		D4F275C91A0C021800CEC95A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = AsaanImprovedUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AsaanImprovedUI.app/AsaanImprovedUI";
-			};
-			name = Debug;
-		};
-		D4F275CA1A0C021800CEC95A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = AsaanImprovedUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AsaanImprovedUI.app/AsaanImprovedUI";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1614,15 +1507,6 @@
 			buildConfigurations = (
 				D4F275C61A0C021800CEC95A /* Debug */,
 				D4F275C71A0C021800CEC95A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D4F275C81A0C021800CEC95A /* Build configuration list for PBXNativeTarget "AsaanImprovedUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D4F275C91A0C021800CEC95A /* Debug */,
-				D4F275CA1A0C021800CEC95A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

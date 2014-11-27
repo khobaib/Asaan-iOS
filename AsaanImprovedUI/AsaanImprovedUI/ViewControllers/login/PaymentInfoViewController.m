@@ -13,6 +13,7 @@
 #import "Stripe.h"
 
 #import <Parse/Parse.h>
+#import <GTLUserendpoint.h>
 
 #import "UIColor+AsaanGoldColor.h"
 #import "UIColor+AsaanBackgroundColor.h"
@@ -66,7 +67,8 @@
     
     if (_isCardValid) {
         
-        [self saveCardAtParse];
+//        [self saveCardAtParse];
+        [self saveCardAtGAE];
     }
     else {
         
@@ -164,7 +166,7 @@
              tokenOb[@"stripeCardid"]=token.card.number;
              tokenOb[@"user"]=[PFUser currentUser];*/
             
-            [tokenOb saveEventually:^(BOOL success,NSError *error){
+            [tokenOb saveEventually:^(BOOL success,NSError *error) {
                 
                 if(success){
                     NSLog(@"done");
@@ -176,6 +178,75 @@
             }];
             
             // submit the token to your payment backend as you did previously
+        }
+    }];
+}
+
+- (void)saveCardAtGAE {
+    
+    static GTLServiceUserendpoint *userService = nil;
+    
+    if (!userService) {
+        
+        userService = [[GTLServiceUserendpoint alloc] init];
+        userService.retryEnabled = YES;
+    }
+    
+    STPCard *card = [[STPCard alloc] init];
+    card.number = self.ptkView.card.number;
+    card.expMonth = self.ptkView.card.expMonth;
+    card.expYear = self.ptkView.card.expYear;
+    card.cvc = self.ptkView.card.cvc;
+    card.addressZip = self.ptkView.card.addressZip;
+    
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [Stripe createTokenWithCard:card completion:^(STPToken *token, NSError *error) {
+        
+        if (error) {
+            
+            [[[UIAlertView alloc]initWithTitle:@"Error" message:[error.userInfo description] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+            
+        } else {
+            
+            GTLUserendpointUserCard *card = [[GTLUserendpointUserCard alloc] init];
+            card.accessToken = token.tokenId;
+            card.address = token.card.addressLine1;
+            card.brand = token.card.type;
+            card.city = token.card.addressCity;
+            card.country = token.card.addressCountry; // ??? or token.card.country
+//            card.createdDate = [NSNumber numberWithBool:0];   // ???
+//            card.currency = @"";   // ???
+//            card.defaultProperty = [NSNumber numberWithBool:false];   // ???
+            card.expMonth = [NSNumber numberWithInteger:token.card.expMonth];
+            card.expYear = [NSNumber numberWithInteger:token.card.expYear];
+//            card.fundingType = @"";   // ???
+//            card.identifier = [NSNumber numberWithBool:false];
+            card.last4 = token.card.last4;
+//            card.modifiedDate = [NSNumber numberWithBool:false];   // ???
+            card.name = token.card.name;
+//            card.provider = @"";   // ???
+//            card.providerCustomerId = @"";   // ???
+//            card.refreshToken = @"";   // ???
+            card.state = token.card.addressState;
+//            card.userId = [NSNumber numberWithBool:false];   // ???
+            card.zip = token.card.addressZip;
+            
+            GTLQueryUserendpoint *query = [GTLQueryUserendpoint queryForSaveUserCardWithObject:card];
+            
+            [userService executeQuery:query completionHandler:^(GTLServiceTicket * ticket,GTLUserendpointUserCard *object, NSError *error ) {
+                
+                if (error) {
+                    
+                    [[[UIAlertView alloc]initWithTitle:@"Error" message:[error.userInfo description] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+                    NSLog(@"%@",[error userInfo]);
+                } else {
+                    
+                    NSLog(@"done %@", object.name);
+                }
+                
+                [MBProgressHUD hideHUDForView:self.view animated:true];
+            }];
         }
     }];
 }
