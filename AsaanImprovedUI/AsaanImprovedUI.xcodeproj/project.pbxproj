@@ -11,15 +11,6 @@
 		37909B6E1A23828000649827 /* PaymentInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37909B671A23828000649827 /* PaymentInfoViewController.m */; };
 		37909B6F1A23828000649827 /* SignupProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37909B691A23828000649827 /* SignupProfileViewController.m */; };
 		37909B701A23828000649827 /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37909B6B1A23828000649827 /* SignupViewController.m */; };
-		37909C551A23A2DA00649827 /* RBStoryboardLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 37909B771A23A2D900649827 /* RBStoryboardLink.m */; };
-		37909C561A23A2DA00649827 /* RBStoryboardModalSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 37909B7A1A23A2D900649827 /* RBStoryboardModalSegue.m */; };
-		37909C571A23A2DA00649827 /* RBStoryboardPopoverSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 37909B7C1A23A2D900649827 /* RBStoryboardPopoverSegue.m */; };
-		37909C581A23A2DA00649827 /* RBStoryboardPushSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 37909B7E1A23A2D900649827 /* RBStoryboardPushSegue.m */; };
-		37909C591A23A2DA00649827 /* RBStoryboardSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 37909B801A23A2D900649827 /* RBStoryboardSegue.m */; };
-		37909C5A1A23A2DA00649827 /* UIViewController+RBStoryboardLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 37909B821A23A2D900649827 /* UIViewController+RBStoryboardLink.m */; };
-		37909C5B1A23A2DA00649827 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 37909B831A23A2D900649827 /* LICENSE */; };
-		37909CAD1A23A2DA00649827 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 37909C531A23A2DA00649827 /* README.md */; };
-		37909CC41A23A35B00649827 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37909CC31A23A35B00649827 /* Login.storyboard */; };
 		D404EDBB1A13149A000285F2 /* UIColor+AsaanBackgroundColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D404EDBA1A13149A000285F2 /* UIColor+AsaanBackgroundColor.m */; };
 		D41D32161A11DD9300EA49B6 /* addCard.png in Resources */ = {isa = PBXBuildFile; fileRef = D41D31FF1A11DD9300EA49B6 /* addCard.png */; };
 		D41D32171A11DD9300EA49B6 /* address.png in Resources */ = {isa = PBXBuildFile; fileRef = D41D32001A11DD9300EA49B6 /* address.png */; };
@@ -232,22 +223,6 @@
 		37909B6A1A23828000649827 /* SignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupViewController.h; sourceTree = "<group>"; };
 		37909B6B1A23828000649827 /* SignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupViewController.m; sourceTree = "<group>"; };
 		37909B6C1A23828000649827 /* StartupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartupViewController.h; sourceTree = "<group>"; };
-		37909B761A23A2D900649827 /* RBStoryboardLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBStoryboardLink.h; sourceTree = "<group>"; };
-		37909B771A23A2D900649827 /* RBStoryboardLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBStoryboardLink.m; sourceTree = "<group>"; };
-		37909B781A23A2D900649827 /* RBStoryboardLinkSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBStoryboardLinkSource.h; sourceTree = "<group>"; };
-		37909B791A23A2D900649827 /* RBStoryboardModalSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBStoryboardModalSegue.h; sourceTree = "<group>"; };
-		37909B7A1A23A2D900649827 /* RBStoryboardModalSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBStoryboardModalSegue.m; sourceTree = "<group>"; };
-		37909B7B1A23A2D900649827 /* RBStoryboardPopoverSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBStoryboardPopoverSegue.h; sourceTree = "<group>"; };
-		37909B7C1A23A2D900649827 /* RBStoryboardPopoverSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBStoryboardPopoverSegue.m; sourceTree = "<group>"; };
-		37909B7D1A23A2D900649827 /* RBStoryboardPushSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBStoryboardPushSegue.h; sourceTree = "<group>"; };
-		37909B7E1A23A2D900649827 /* RBStoryboardPushSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBStoryboardPushSegue.m; sourceTree = "<group>"; };
-		37909B7F1A23A2D900649827 /* RBStoryboardSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBStoryboardSegue.h; sourceTree = "<group>"; };
-		37909B801A23A2D900649827 /* RBStoryboardSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBStoryboardSegue.m; sourceTree = "<group>"; };
-		37909B811A23A2D900649827 /* UIViewController+RBStoryboardLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+RBStoryboardLink.h"; sourceTree = "<group>"; };
-		37909B821A23A2D900649827 /* UIViewController+RBStoryboardLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+RBStoryboardLink.m"; sourceTree = "<group>"; };
-		37909B831A23A2D900649827 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		37909C531A23A2DA00649827 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		37909CC31A23A35B00649827 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		6ACE37C455484AD859AD8D7B /* libPods-AsaanImprovedUI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AsaanImprovedUI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D404EDB91A13149A000285F2 /* UIColor+AsaanBackgroundColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+AsaanBackgroundColor.h"; path = "HelperClasses/UIColor+AsaanBackgroundColor.h"; sourceTree = "<group>"; };
 		D404EDBA1A13149A000285F2 /* UIColor+AsaanBackgroundColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+AsaanBackgroundColor.m"; path = "HelperClasses/UIColor+AsaanBackgroundColor.m"; sourceTree = "<group>"; };
@@ -619,40 +594,9 @@
 				37909B691A23828000649827 /* SignupProfileViewController.m */,
 				37909B6A1A23828000649827 /* SignupViewController.h */,
 				37909B6B1A23828000649827 /* SignupViewController.m */,
-				37909CC31A23A35B00649827 /* Login.storyboard */,
 			);
 			name = Login;
 			path = login;
-			sourceTree = "<group>";
-		};
-		37909B731A23A2D900649827 /* RBStoryboardLink */ = {
-			isa = PBXGroup;
-			children = (
-				37909B751A23A2D900649827 /* Classes */,
-				37909B831A23A2D900649827 /* LICENSE */,
-				37909C531A23A2DA00649827 /* README.md */,
-			);
-			path = RBStoryboardLink;
-			sourceTree = "<group>";
-		};
-		37909B751A23A2D900649827 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				37909B761A23A2D900649827 /* RBStoryboardLink.h */,
-				37909B771A23A2D900649827 /* RBStoryboardLink.m */,
-				37909B781A23A2D900649827 /* RBStoryboardLinkSource.h */,
-				37909B791A23A2D900649827 /* RBStoryboardModalSegue.h */,
-				37909B7A1A23A2D900649827 /* RBStoryboardModalSegue.m */,
-				37909B7B1A23A2D900649827 /* RBStoryboardPopoverSegue.h */,
-				37909B7C1A23A2D900649827 /* RBStoryboardPopoverSegue.m */,
-				37909B7D1A23A2D900649827 /* RBStoryboardPushSegue.h */,
-				37909B7E1A23A2D900649827 /* RBStoryboardPushSegue.m */,
-				37909B7F1A23A2D900649827 /* RBStoryboardSegue.h */,
-				37909B801A23A2D900649827 /* RBStoryboardSegue.m */,
-				37909B811A23A2D900649827 /* UIViewController+RBStoryboardLink.h */,
-				37909B821A23A2D900649827 /* UIViewController+RBStoryboardLink.m */,
-			);
-			path = Classes;
 			sourceTree = "<group>";
 		};
 		D41D31FE1A11DD9300EA49B6 /* images */ = {
@@ -779,7 +723,6 @@
 				D4A8C1321A263B1800DA344A /* AFNetworking */,
 				D4A8C15B1A263B1800DA344A /* MBProgressHUD */,
 				D4A8C1601A263B1800DA344A /* SDWebImage */,
-				37909B731A23A2D900649827 /* RBStoryboardLink */,
 				D43EECFB1A1F91B1000C4FE5 /* AWPagedArray */,
 				D4ED02811A1EA08A000AB270 /* SVPullToRefresh */,
 				D4A6A3841A17D175003F3EAB /* SHSPhoneComponents */,
@@ -1268,7 +1211,6 @@
 				D4522B0C1A15264F002EFA92 /* cvc.png in Resources */,
 				D4522B171A15264F002EFA92 /* placeholder@2x.png in Resources */,
 				D41D32251A11DD9300EA49B6 /* money.png in Resources */,
-				37909C5B1A23A2DA00649827 /* LICENSE in Resources */,
 				D4522B161A15264F002EFA92 /* placeholder.png in Resources */,
 				D4522B0A1A15264F002EFA92 /* cvc-amex.png in Resources */,
 				D41D32281A11DD9300EA49B6 /* personePlaceholder.png in Resources */,
@@ -1282,7 +1224,6 @@
 				D41D321B1A11DD9300EA49B6 /* cal.png in Resources */,
 				D4522B0B1A15264F002EFA92 /* cvc-amex@2x.png in Resources */,
 				D41D322B1A11DD9300EA49B6 /* star.png in Resources */,
-				37909CC41A23A35B00649827 /* Login.storyboard in Resources */,
 				D4522B0F1A15264F002EFA92 /* diners@2x.png in Resources */,
 				D41D32211A11DD9300EA49B6 /* gplusBtn.png in Resources */,
 				D4522B091A15264F002EFA92 /* amex@2x.png in Resources */,
@@ -1339,7 +1280,6 @@
 				D4522B2A1A15264F002EFA92 /* StripeError.m in Sources */,
 				D449EB631A1BCDEB00879383 /* GTLStoreendpointMenusAndMenuItems.m in Sources */,
 				D4A8C18C1A263B1800DA344A /* AFNetworkActivityIndicatorManager.m in Sources */,
-				37909C561A23A2DA00649827 /* RBStoryboardModalSegue.m in Sources */,
 				D449EB691A1BCDEB00879383 /* GTLStoreendpointStoreMenuHierarchyCollection.m in Sources */,
 				D4ED02801A1E47A2000AB270 /* MenuTableViewController.m in Sources */,
 				D4ED02871A1EA08A000AB270 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
@@ -1358,12 +1298,10 @@
 				D449EB741A1BCDEB00879383 /* GTLUserendpointConstants.m in Sources */,
 				D449EB611A1BCDEB00879383 /* GTLStoreendpointConstants.m in Sources */,
 				D4FF319F1A20513400C241CA /* DropdownView.m in Sources */,
-				37909C5A1A23A2DA00649827 /* UIViewController+RBStoryboardLink.m in Sources */,
 				D4A8C19F1A263B1800DA344A /* SDWebImageManager.m in Sources */,
 				D4522B271A15264F002EFA92 /* STPToken.m in Sources */,
 				D4A8C1821A263B1800DA344A /* AFHTTPRequestOperationManager.m in Sources */,
 				D4A8C18D1A263B1800DA344A /* UIActivityIndicatorView+AFNetworking.m in Sources */,
-				37909C551A23A2DA00649827 /* RBStoryboardLink.m in Sources */,
 				D449EB5D1A1BCDEB00879383 /* GTLQueryUserendpoint.m in Sources */,
 				D43EED071A1F9EC5000C4FE5 /* DataLoadingOperation.m in Sources */,
 				D43EED101A1FC0A2000C4FE5 /* StoreLoadingOperation.m in Sources */,
@@ -1382,13 +1320,10 @@
 				D4EAF9E91A12ACB20078FA9C /* UIColor+AsaanGoldColor.m in Sources */,
 				D404EDBB1A13149A000285F2 /* UIColor+AsaanBackgroundColor.m in Sources */,
 				D4A8C1A61A263B1800DA344A /* UIView+WebCacheOperation.m in Sources */,
-				37909CAD1A23A2DA00649827 /* README.md in Sources */,
 				D4A8C1891A263B1800DA344A /* AFURLSessionManager.m in Sources */,
 				D4A8C1921A263B1800DA344A /* UIRefreshControl+AFNetworking.m in Sources */,
 				D449EB681A1BCDEB00879383 /* GTLStoreendpointStoreMenuHierarchy.m in Sources */,
 				D4522B1F1A15264F002EFA92 /* PTKCardNumber.m in Sources */,
-				37909C591A23A2DA00649827 /* RBStoryboardSegue.m in Sources */,
-				37909C581A23A2DA00649827 /* RBStoryboardPushSegue.m in Sources */,
 				D449EB751A1BCDEB00879383 /* GTLUserendpointUser.m in Sources */,
 				D4F275A81A0C021800CEC95A /* AppDelegate.m in Sources */,
 				D4522B231A15264F002EFA92 /* PTKView.m in Sources */,
@@ -1400,7 +1335,6 @@
 				D4522B2D1A15264F002EFA92 /* SWRevealViewController.m in Sources */,
 				D49A3ABF1A26C450008BC180 /* RetrievePasswordViewController.m in Sources */,
 				D4A8C1851A263B1800DA344A /* AFSecurityPolicy.m in Sources */,
-				37909C571A23A2DA00649827 /* RBStoryboardPopoverSegue.m in Sources */,
 				D4A8C1951A263B1800DA344A /* MBProgressHUD.m in Sources */,
 				D49A3AC01A26C450008BC180 /* StartupViewController.m in Sources */,
 				D449EB761A1BCDEB00879383 /* GTLUserendpointUserCard.m in Sources */,
