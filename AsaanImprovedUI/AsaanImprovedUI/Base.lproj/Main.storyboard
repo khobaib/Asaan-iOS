@@ -234,11 +234,7 @@
                             <outlet property="delegate" destination="VTS-fT-VLj" id="jSr-Ni-njW"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="h0o-YY-T31">
-                        <connections>
-                            <outlet property="backBarButtonItem" destination="0W5-T6-ces" id="dXh-pg-qJ1"/>
-                        </connections>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="h0o-YY-T31"/>
                     <connections>
                         <outlet property="tableView" destination="iLr-wH-RNn" id="ZuM-cD-V5M"/>
                         <segue destination="eRi-F6-0Pv" kind="show" identifier="segueReveal" id="Tad-Vz-OyK"/>
@@ -418,11 +414,7 @@
                         </connections>
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" title="Menu" id="PFQ-dH-UT6">
-                        <connections>
-                            <outlet property="backBarButtonItem" destination="HAV-Wy-bvQ" id="lh0-rV-es0"/>
-                        </connections>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Menu" id="PFQ-dH-UT6"/>
                     <connections>
                         <outlet property="tableView" destination="6bZ-Qj-a9y" id="vMl-jP-eTD"/>
                     </connections>
@@ -479,9 +471,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="uED-Ll-pER">
                         <barButtonItem key="leftBarButtonItem" image="reveal-icon.png" id="gRm-pZ-UD9"/>
-                        <connections>
-                            <outlet property="backBarButtonItem" destination="o1q-ie-XGz" id="vWd-i2-6NW"/>
-                        </connections>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LJK-RF-2fO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -826,9 +815,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Update your info" id="4Mi-ec-MDg">
                         <barButtonItem key="leftBarButtonItem" image="reveal-icon.png" id="uwf-pN-0QV"/>
-                        <connections>
-                            <outlet property="backBarButtonItem" destination="8zT-a1-6BH" id="iLX-NI-Zjo"/>
-                        </connections>
                     </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="600"/>
@@ -1229,11 +1215,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="2Se-3c-Mov">
-                        <connections>
-                            <outlet property="backBarButtonItem" destination="f9b-Yl-H5j" id="9GX-jb-QWo"/>
-                        </connections>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="2Se-3c-Mov"/>
                     <connections>
                         <segue destination="iob-Jr-Zqf" kind="show" identifier="segueStartupToPhoneFB" id="t2R-Le-XNf"/>
                     </connections>
@@ -1473,11 +1455,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Login" id="70K-gV-w7D">
-                        <connections>
-                            <outlet property="backBarButtonItem" destination="Ww2-AV-FHE" id="Msw-1X-4jg"/>
-                        </connections>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Login" id="70K-gV-w7D"/>
                     <connections>
                         <outlet property="loginScrollView" destination="bFz-Un-Vr1" id="hGS-t0-zuh"/>
                         <outlet property="txtEmail" destination="2Tn-Ci-nFA" id="mxf-Wu-yAG"/>
@@ -1625,9 +1603,6 @@
                                 <action selector="signup:" destination="VkN-UB-NiP" id="1jt-qi-o6m"/>
                             </connections>
                         </barButtonItem>
-                        <connections>
-                            <outlet property="backBarButtonItem" destination="X4b-db-Oyn" id="6Hq-CV-LSe"/>
-                        </connections>
                     </navigationItem>
                     <connections>
                         <outlet property="signupScrollView" destination="4Ps-4B-jTC" id="3yO-Wb-9KU"/>
@@ -1731,11 +1706,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Reset Password" id="vjG-Tg-Qb0">
-                        <connections>
-                            <outlet property="backBarButtonItem" destination="iNj-47-7wI" id="avt-pB-4rj"/>
-                        </connections>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Reset Password" id="vjG-Tg-Qb0"/>
                     <connections>
                         <outlet property="lblMessage" destination="L89-yx-Np0" id="rb3-ze-7Hf"/>
                         <outlet property="txtEmail" destination="uoE-4W-ZOw" id="Nrs-3M-yfI"/>
@@ -1992,9 +1963,6 @@
                                 <action selector="btnSaveClick:" destination="iob-Jr-Zqf" id="Z5D-s7-Amd"/>
                             </connections>
                         </barButtonItem>
-                        <connections>
-                            <outlet property="backBarButtonItem" destination="ylT-X5-4x7" id="Zum-sl-4Uq"/>
-                        </connections>
                     </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="600"/>
@@ -2211,9 +2179,6 @@
                                 <action selector="paymentSaveClicked:" destination="nh0-Sx-5o1" id="H2R-Xr-QBN"/>
                             </connections>
                         </barButtonItem>
-                        <connections>
-                            <outlet property="backBarButtonItem" destination="9jM-km-Bb6" id="bux-JY-itM"/>
-                        </connections>
                     </navigationItem>
                     <connections>
                         <outlet property="dropdownView" destination="7vp-uD-sJC" id="Bb4-Y8-A9H"/>
@@ -2284,9 +2249,9 @@
         <image name="visits-blue" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="cQG-s7-LJm"/>
         <segue reference="MeC-Bq-6yp"/>
-        <segue reference="MkO-xh-gwn"/>
-        <segue reference="t2R-Le-XNf"/>
+        <segue reference="BxH-0j-lGN"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.79607843140000001" green="0.59607843140000005" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
