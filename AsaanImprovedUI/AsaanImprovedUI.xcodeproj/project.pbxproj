@@ -141,14 +141,15 @@
 		D4522BC51A1667F1002EFA92 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4522BC41A1667F1002EFA92 /* MobileCoreServices.framework */; };
 		D4522BC71A166802002EFA92 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4522BC61A166802002EFA92 /* SystemConfiguration.framework */; };
 		D4522BC91A166811002EFA92 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4522BC81A166811002EFA92 /* UIKit.framework */; };
-		D4522BF81A1679F2002EFA92 /* StartupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4522BF01A1679F2002EFA92 /* StartupViewController.m */; };
 		D46D0FAB1A13B2920072A413 /* UITextField+Extender.m in Sources */ = {isa = PBXBuildFile; fileRef = D46D0FAA1A13B2920072A413 /* UITextField+Extender.m */; };
+		D49A3ABB1A267F49008BC180 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = D49A3ABA1A267F49008BC180 /* back.png */; };
+		D49A3ABF1A26C450008BC180 /* RetrievePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D49A3ABD1A26C450008BC180 /* RetrievePasswordViewController.m */; };
+		D49A3AC01A26C450008BC180 /* StartupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D49A3ABE1A26C450008BC180 /* StartupViewController.m */; };
 		D4A6A3901A17D175003F3EAB /* SHSFlagAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A6A3861A17D175003F3EAB /* SHSFlagAccessoryView.m */; };
 		D4A6A3911A17D175003F3EAB /* SHSPhoneLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A6A3891A17D175003F3EAB /* SHSPhoneLogic.m */; };
 		D4A6A3921A17D175003F3EAB /* SHSPhoneNumberFormatter+UserConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A6A38B1A17D175003F3EAB /* SHSPhoneNumberFormatter+UserConfig.m */; };
 		D4A6A3931A17D175003F3EAB /* SHSPhoneNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A6A38D1A17D175003F3EAB /* SHSPhoneNumberFormatter.m */; };
 		D4A6A3941A17D175003F3EAB /* SHSPhoneTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A6A38F1A17D175003F3EAB /* SHSPhoneTextField.m */; };
-		D4A6A3971A181FAB003F3EAB /* RetrievePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A6A3961A181FAB003F3EAB /* RetrievePasswordViewController.m */; };
 		D4A8C1811A263B1800DA344A /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8C1351A263B1800DA344A /* AFHTTPRequestOperation.m */; };
 		D4A8C1821A263B1800DA344A /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8C1371A263B1800DA344A /* AFHTTPRequestOperationManager.m */; };
 		D4A8C1831A263B1800DA344A /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8C1391A263B1800DA344A /* AFHTTPSessionManager.m */; };
@@ -422,9 +423,12 @@
 		D4522BC41A1667F1002EFA92 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		D4522BC61A166802002EFA92 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		D4522BC81A166811002EFA92 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		D4522BF01A1679F2002EFA92 /* StartupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartupViewController.m; sourceTree = "<group>"; };
 		D46D0FA91A13B2920072A413 /* UITextField+Extender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITextField+Extender.h"; path = "HelperClasses/UITextField+Extender.h"; sourceTree = "<group>"; };
 		D46D0FAA1A13B2920072A413 /* UITextField+Extender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITextField+Extender.m"; path = "HelperClasses/UITextField+Extender.m"; sourceTree = "<group>"; };
+		D49A3ABA1A267F49008BC180 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
+		D49A3ABC1A26C450008BC180 /* RetrievePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RetrievePasswordViewController.h; sourceTree = "<group>"; };
+		D49A3ABD1A26C450008BC180 /* RetrievePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RetrievePasswordViewController.m; sourceTree = "<group>"; };
+		D49A3ABE1A26C450008BC180 /* StartupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartupViewController.m; sourceTree = "<group>"; };
 		D4A6A3851A17D175003F3EAB /* SHSFlagAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHSFlagAccessoryView.h; sourceTree = "<group>"; };
 		D4A6A3861A17D175003F3EAB /* SHSFlagAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHSFlagAccessoryView.m; sourceTree = "<group>"; };
 		D4A6A3871A17D175003F3EAB /* SHSPhoneLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHSPhoneLibrary.h; sourceTree = "<group>"; };
@@ -436,8 +440,6 @@
 		D4A6A38D1A17D175003F3EAB /* SHSPhoneNumberFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHSPhoneNumberFormatter.m; sourceTree = "<group>"; };
 		D4A6A38E1A17D175003F3EAB /* SHSPhoneTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHSPhoneTextField.h; sourceTree = "<group>"; };
 		D4A6A38F1A17D175003F3EAB /* SHSPhoneTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHSPhoneTextField.m; sourceTree = "<group>"; };
-		D4A6A3951A181FAB003F3EAB /* RetrievePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RetrievePasswordViewController.h; path = ../RetrievePasswordViewController.h; sourceTree = "<group>"; };
-		D4A6A3961A181FAB003F3EAB /* RetrievePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RetrievePasswordViewController.m; path = ../RetrievePasswordViewController.m; sourceTree = "<group>"; };
 		D4A8C1341A263B1800DA344A /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		D4A8C1351A263B1800DA344A /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		D4A8C1361A263B1800DA344A /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -605,14 +607,15 @@
 		37909B631A23828000649827 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				D49A3ABC1A26C450008BC180 /* RetrievePasswordViewController.h */,
+				D49A3ABD1A26C450008BC180 /* RetrievePasswordViewController.m */,
+				D49A3ABE1A26C450008BC180 /* StartupViewController.m */,
 				37909B641A23828000649827 /* LoginViewController.h */,
 				37909B651A23828000649827 /* LoginViewController.m */,
 				37909B661A23828000649827 /* PaymentInfoViewController.h */,
 				37909B671A23828000649827 /* PaymentInfoViewController.m */,
 				37909B681A23828000649827 /* SignupProfileViewController.h */,
 				37909B691A23828000649827 /* SignupProfileViewController.m */,
-				D4A6A3951A181FAB003F3EAB /* RetrievePasswordViewController.h */,
-				D4A6A3961A181FAB003F3EAB /* RetrievePasswordViewController.m */,
 				37909B6A1A23828000649827 /* SignupViewController.h */,
 				37909B6B1A23828000649827 /* SignupViewController.m */,
 				37909B6C1A23828000649827 /* StartupViewController.h */,
@@ -655,6 +658,7 @@
 		D41D31FE1A11DD9300EA49B6 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				D49A3ABA1A267F49008BC180 /* back.png */,
 				D41D31FF1A11DD9300EA49B6 /* addCard.png */,
 				D41D32001A11DD9300EA49B6 /* address.png */,
 				D41D32011A11DD9300EA49B6 /* address2.png */,
@@ -913,7 +917,6 @@
 				37909B631A23828000649827 /* Login */,
 				D449EB961A1BF01300879383 /* StoreListTableTableViewController.h */,
 				D449EB971A1BF01300879383 /* StoreListTableTableViewController.m */,
-				D4522BF01A1679F2002EFA92 /* StartupViewController.m */,
 				D4ED027E1A1E47A2000AB270 /* MenuTableViewController.h */,
 				D4ED027F1A1E47A2000AB270 /* MenuTableViewController.m */,
 			);
@@ -1299,6 +1302,7 @@
 				D4FF319D1A20513400C241CA /* drop_down.png in Resources */,
 				D41D32261A11DD9300EA49B6 /* nextPage.png in Resources */,
 				D4522B131A15264F002EFA92 /* jcb@2x.png in Resources */,
+				D49A3ABB1A267F49008BC180 /* back.png in Resources */,
 				D4A8C1941A263B1800DA344A /* LICENSE in Resources */,
 				D41D32221A11DD9300EA49B6 /* landingpage.png in Resources */,
 				D4F275B31A0C021800CEC95A /* Images.xcassets in Resources */,
@@ -1337,7 +1341,6 @@
 				D4A8C18C1A263B1800DA344A /* AFNetworkActivityIndicatorManager.m in Sources */,
 				37909C561A23A2DA00649827 /* RBStoryboardModalSegue.m in Sources */,
 				D449EB691A1BCDEB00879383 /* GTLStoreendpointStoreMenuHierarchyCollection.m in Sources */,
-				D4522BF81A1679F2002EFA92 /* StartupViewController.m in Sources */,
 				D4ED02801A1E47A2000AB270 /* MenuTableViewController.m in Sources */,
 				D4ED02871A1EA08A000AB270 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				D4A8C18B1A263B1800DA344A /* README.md in Sources */,
@@ -1395,10 +1398,11 @@
 				D4522B241A15264F002EFA92 /* STPAPIConnection.m in Sources */,
 				D4FEF6F81A243FA000A41303 /* MenuItemLoadingOperation.m in Sources */,
 				D4522B2D1A15264F002EFA92 /* SWRevealViewController.m in Sources */,
+				D49A3ABF1A26C450008BC180 /* RetrievePasswordViewController.m in Sources */,
 				D4A8C1851A263B1800DA344A /* AFSecurityPolicy.m in Sources */,
 				37909C571A23A2DA00649827 /* RBStoryboardPopoverSegue.m in Sources */,
-				D4A6A3971A181FAB003F3EAB /* RetrievePasswordViewController.m in Sources */,
 				D4A8C1951A263B1800DA344A /* MBProgressHUD.m in Sources */,
+				D49A3AC01A26C450008BC180 /* StartupViewController.m in Sources */,
 				D449EB761A1BCDEB00879383 /* GTLUserendpointUserCard.m in Sources */,
 				D4A6A3931A17D175003F3EAB /* SHSPhoneNumberFormatter.m in Sources */,
 				D449EB5C1A1BCDEB00879383 /* GTLQueryStoreendpoint.m in Sources */,

@@ -109,7 +109,10 @@ const NSUInteger MenuFluentPagingTablePageSize = 20;
             {
                 _segmentedControl = [[UISegmentedControl alloc] init];
                 [_segmentedControl setSegmentedControlStyle:UISegmentedControlStyleBar];
-                self.navigationItem.titleView = _segmentedControl;
+                UIFont *font = [UIFont systemFontOfSize:[UIFont smallSystemFontSize]];
+                NSDictionary *attributes = [NSDictionary dictionaryWithObject:font forKey:NSFontAttributeName];
+                [_segmentedControl setTitleTextAttributes:attributes
+                                                forState:UIControlStateNormal];                self.navigationItem.titleView = _segmentedControl;
                 for (MenuSegmentHolder *menuSegmentHolder in _menuSegmentHolders)
                     [_segmentedControl insertSegmentWithTitle:menuSegmentHolder.menu.name atIndex:_segmentedControl.numberOfSegments animated:NO];
                 [_segmentedControl sizeToFit];
@@ -117,6 +120,7 @@ const NSUInteger MenuFluentPagingTablePageSize = 20;
                            action:@selector(segmentControllerValueChanged:)
                             forControlEvents:UIControlEventValueChanged];
                 [_segmentedControl setSelectedSegmentIndex:0];
+                _segmentedControl.apportionsSegmentWidthsByContent = YES;
             }
             [weakSelf.tableView reloadData];
             hud.hidden = YES;
@@ -222,6 +226,8 @@ const NSUInteger MenuFluentPagingTablePageSize = 20;
     if ([dataObject isKindOfClass:[NSNull class]])
     {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SubMenuCell" forIndexPath:indexPath];
+        UILabel *txtName=(UILabel *)[cell viewWithTag:401];
+        txtName.text = nil;
         return cell;
     }
     

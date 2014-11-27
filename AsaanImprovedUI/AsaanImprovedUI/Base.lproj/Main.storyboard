@@ -37,6 +37,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <color key="sectionIndexBackgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" restorationIdentifier="StoreListCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="StoreListCell" id="Csa-Sc-eig" userLabel="StoreListCell">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -254,7 +255,11 @@
                             <outlet property="delegate" destination="VTS-fT-VLj" id="jSr-Ni-njW"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="h0o-YY-T31"/>
+                    <navigationItem key="navigationItem" id="h0o-YY-T31">
+                        <connections>
+                            <outlet property="backBarButtonItem" destination="0W5-T6-ces" id="dXh-pg-qJ1"/>
+                        </connections>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="iLr-wH-RNn" id="ZuM-cD-V5M"/>
                         <segue destination="eRi-F6-0Pv" kind="show" identifier="segueReveal" id="Tad-Vz-OyK"/>
@@ -264,6 +269,9 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GwC-ok-Dof" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <barButtonItem image="back" style="plain" id="0W5-T6-ces">
+                    <color key="tintColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
+                </barButtonItem>
             </objects>
             <point key="canvasLocation" x="-204" y="1125"/>
         </scene>
@@ -432,13 +440,16 @@
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="Menu" id="PFQ-dH-UT6">
-                        <barButtonItem key="backBarButtonItem" title="Back" style="done" systemItem="done" id="tqg-E0-gRR"/>
+                        <connections>
+                            <outlet property="backBarButtonItem" destination="HAV-Wy-bvQ" id="lh0-rV-es0"/>
+                        </connections>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="6bZ-Qj-a9y" id="vMl-jP-eTD"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d6o-lq-fO3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <barButtonItem image="back" style="plain" id="HAV-Wy-bvQ"/>
             </objects>
             <point key="canvasLocation" x="513" y="1125"/>
         </scene>
@@ -510,9 +521,13 @@
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="uED-Ll-pER">
                         <barButtonItem key="leftBarButtonItem" image="reveal-icon.png" id="gRm-pZ-UD9"/>
+                        <connections>
+                            <outlet property="backBarButtonItem" destination="o1q-ie-XGz" id="vWd-i2-6NW"/>
+                        </connections>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LJK-RF-2fO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <barButtonItem image="back" id="o1q-ie-XGz"/>
             </objects>
             <point key="canvasLocation" x="513" y="399"/>
         </scene>
@@ -853,11 +868,15 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Update your info" id="4Mi-ec-MDg">
                         <barButtonItem key="leftBarButtonItem" image="reveal-icon.png" id="uwf-pN-0QV"/>
+                        <connections>
+                            <outlet property="backBarButtonItem" destination="8zT-a1-6BH" id="iLX-NI-Zjo"/>
+                        </connections>
                     </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="600"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eB1-Et-AML" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <barButtonItem image="back" id="8zT-a1-6BH"/>
             </objects>
             <point key="canvasLocation" x="2062" y="3100"/>
         </scene>
@@ -1044,6 +1063,7 @@
     <resources>
         <image name="Like" width="198" height="129"/>
         <image name="Like-blue" width="198" height="129"/>
+        <image name="back" width="22" height="22"/>
         <image name="fb_logo" width="29" height="29"/>
         <image name="food-default" width="241" height="188"/>
         <image name="person-profile-photo" width="316" height="316"/>

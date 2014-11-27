@@ -240,12 +240,17 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="mFw-1U-TJS"/>
+                    <navigationItem key="navigationItem" id="mFw-1U-TJS">
+                        <connections>
+                            <outlet property="backBarButtonItem" destination="PdE-9D-vgw" id="Gxk-NI-p3y"/>
+                        </connections>
+                    </navigationItem>
                     <connections>
                         <segue destination="tHU-Y8-sLu" kind="show" identifier="segueStartupToPhoneFB" id="PPf-vC-QAo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rW2-6E-V03" sceneMemberID="firstResponder"/>
+                <barButtonItem image="back" style="plain" id="PdE-9D-vgw"/>
             </objects>
             <point key="canvasLocation" x="-319" y="-395"/>
         </scene>
@@ -479,7 +484,11 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Login" id="tDj-xb-Itw"/>
+                    <navigationItem key="navigationItem" title="Login" id="tDj-xb-Itw">
+                        <connections>
+                            <outlet property="backBarButtonItem" destination="Acp-QW-Cl8" id="G2D-Qy-aYS"/>
+                        </connections>
+                    </navigationItem>
                     <connections>
                         <outlet property="loginScrollView" destination="ErM-Rd-G1K" id="Tea-i0-Fx2"/>
                         <outlet property="txtEmail" destination="c6u-vJ-Jex" id="NC6-N5-6qs"/>
@@ -489,6 +498,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hPf-ew-4le" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="6aI-bJ-Vpc" userLabel="Exit" sceneMemberID="exit"/>
+                <barButtonItem image="back" style="plain" id="Acp-QW-Cl8"/>
             </objects>
             <point key="canvasLocation" x="387" y="-1173"/>
         </scene>
@@ -626,6 +636,9 @@
                                 <action selector="signup:" destination="7ew-Ev-UzR" id="7hK-yq-v6K"/>
                             </connections>
                         </barButtonItem>
+                        <connections>
+                            <outlet property="backBarButtonItem" destination="8vt-Bh-Znt" id="c4d-OY-z3I"/>
+                        </connections>
                     </navigationItem>
                     <connections>
                         <outlet property="signupScrollView" destination="DQJ-CC-Ybp" id="hHE-g0-cgy"/>
@@ -635,6 +648,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j2s-VZ-taZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <barButtonItem image="back" style="plain" id="8vt-Bh-Znt"/>
             </objects>
             <point key="canvasLocation" x="395" y="-395"/>
         </scene>
@@ -729,7 +743,9 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Reset Password" id="UCp-5w-8Sq">
-                        <barButtonItem key="backBarButtonItem" title="Back" id="t4w-jF-WZE"/>
+                        <connections>
+                            <outlet property="backBarButtonItem" destination="RMY-zZ-k9n" id="gue-Zd-UTq"/>
+                        </connections>
                     </navigationItem>
                     <connections>
                         <outlet property="lblMessage" destination="okI-u6-gFb" id="IFG-Cr-zWS"/>
@@ -739,6 +755,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ihX-5p-xgx" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="eoM-BU-iMq" userLabel="Exit" sceneMemberID="exit"/>
+                <barButtonItem image="back" style="plain" id="RMY-zZ-k9n"/>
             </objects>
             <point key="canvasLocation" x="1084" y="-1173"/>
         </scene>
@@ -986,6 +1003,9 @@
                                 <action selector="btnSaveClick:" destination="tHU-Y8-sLu" id="dgr-zF-B77"/>
                             </connections>
                         </barButtonItem>
+                        <connections>
+                            <outlet property="backBarButtonItem" destination="VUU-jM-gi0" id="diG-IA-ET1"/>
+                        </connections>
                     </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="600"/>
@@ -999,6 +1019,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="828-KA-VRv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <barButtonItem image="back" style="plain" id="VUU-jM-gi0"/>
             </objects>
             <point key="canvasLocation" x="395" y="357"/>
         </scene>
@@ -1201,6 +1222,9 @@
                                 <action selector="paymentSaveClicked:" destination="RnO-fm-bHk" id="Rz9-Ei-kXK"/>
                             </connections>
                         </barButtonItem>
+                        <connections>
+                            <outlet property="backBarButtonItem" destination="BQq-PQ-zPm" id="KdK-KB-jYz"/>
+                        </connections>
                     </navigationItem>
                     <connections>
                         <outlet property="dropdownView" destination="nF2-s7-AV3" id="lSS-Re-Z0W"/>
@@ -1209,6 +1233,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ciw-aR-eY3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <barButtonItem image="back" style="plain" id="BQq-PQ-zPm"/>
             </objects>
             <point key="canvasLocation" x="1084" y="357"/>
         </scene>
@@ -1257,11 +1282,12 @@
     </scenes>
     <resources>
         <image name="asaan_logo" width="72" height="62"/>
+        <image name="back" width="22" height="22"/>
         <image name="contacts.png" width="137" height="76"/>
         <image name="money.png" width="91" height="55"/>
         <image name="person-profile-photo" width="316" height="316"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="TcU-ho-MTM"/>
+        <segue reference="PPf-vC-QAo"/>
     </inferredMetricsTieBreakers>
 </document>
