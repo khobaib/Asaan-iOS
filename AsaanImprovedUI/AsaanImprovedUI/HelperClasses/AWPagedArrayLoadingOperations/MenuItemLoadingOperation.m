@@ -20,7 +20,7 @@
 @implementation MenuItemLoadingOperation
 @synthesize bDataLoaded = _bDataLoaded;
 
-const NSTimeInterval DataLoadingOperationDuration = 0.3;
+const NSTimeInterval DataLoadingOperationDuration1 = 0.3;
 
 - (instancetype)initWithIndexes:(NSIndexSet *)indexes storeId:(long)storeId menuPOSId:(long)menuPOSId{
     
@@ -64,7 +64,7 @@ const NSTimeInterval DataLoadingOperationDuration = 0.3;
             }];
             
             while (weakSelf.bDataLoaded == false)
-                [NSThread sleepForTimeInterval:DataLoadingOperationDuration];
+                [NSThread sleepForTimeInterval:DataLoadingOperationDuration1];
             
         }];
     }
