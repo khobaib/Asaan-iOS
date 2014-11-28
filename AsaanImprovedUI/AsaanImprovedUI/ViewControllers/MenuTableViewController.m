@@ -17,7 +17,7 @@
 #import "UtilCalls.h"
 #import "UIColor+AsaanGoldColor.h"
 #import "DataProvider.h"
-#include "DropdownView.h"
+#import "DropdownView.h"
 #import "UIImageView+WebCache.h"
 #import "MenuItemLoadingOperation.h"
 #import "MenuSegmentHolder.h"
@@ -30,6 +30,7 @@ const NSUInteger MenuFluentPagingTablePageSize = 20;
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+@property (nonatomic) NSInteger segmentedControlSelectedIndex;
 @property (nonatomic, strong) MBProgressHUD *hud;
 @property (nonatomic) int startPosition;
 @property (nonatomic) int maxResult;
@@ -41,6 +42,7 @@ const NSUInteger MenuFluentPagingTablePageSize = 20;
 
 @synthesize tableView = _tableView;
 @synthesize segmentedControl = _segmentedControl;
+@synthesize segmentedControlSelectedIndex = _segmentedControlSelectedIndex;
 @synthesize startPosition = _startPosition;
 @synthesize maxResult = _maxResult;
 @synthesize dataProvider = _dataProvider;
@@ -64,11 +66,18 @@ const NSUInteger MenuFluentPagingTablePageSize = 20;
 
 - (IBAction)segmentControllerValueChanged:(id)sender
 {
-    [_tableView reloadData];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [_tableView scrollToRowAtIndexPath:indexPath
+    MenuSegmentHolder *oldMenuSegmentHolder = [_menuSegmentHolders objectAtIndex:_segmentedControlSelectedIndex];
+    NSIndexPath *firstVisibleIndexPath = [[self.tableView indexPathsForVisibleRows] objectAtIndex:0];
+    oldMenuSegmentHolder.topRowIndex = firstVisibleIndexPath;
+    
+    _segmentedControlSelectedIndex = _segmentedControl.selectedSegmentIndex;
+    MenuSegmentHolder *newMenuSegmentHolder = [_menuSegmentHolders objectAtIndex:_segmentedControlSelectedIndex];
+    firstVisibleIndexPath = newMenuSegmentHolder.topRowIndex;
+    
+    [_tableView scrollToRowAtIndexPath:firstVisibleIndexPath
                          atScrollPosition:UITableViewScrollPositionTop
                                  animated:YES];
+    [_tableView reloadData];
 }
 
 - (void)setupMenuSegmentController {
@@ -84,11 +93,12 @@ const NSUInteger MenuFluentPagingTablePageSize = 20;
         typeof(self) weakSelf = self;
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
         GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-        GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreMenuHierarchyAndItemsWithStoreId:[_selectedStore identifier].longValue menuType:0 maxResult:20];
+        GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreMenuHierarchyAndItemsWithStoreId:[_selectedStore identifier].longValue menuType:0 maxResult:MenuFluentPagingTablePageSize];
         
         [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointMenusAndMenuItems *object,NSError *error)
         {
-            if(!error){
+            if(!error && object.menuItems.count > 0 && object.menusAndSubmenus.count > 0){
+                GTLStoreendpointStoreMenuItem *menuItem = [object.menuItems firstObject];
                 for (GTLStoreendpointStoreMenuHierarchy *menu in object.menusAndSubmenus)
                 {
                     if (menu.level.intValue == 0)
@@ -101,6 +111,8 @@ const NSUInteger MenuFluentPagingTablePageSize = 20;
                         menuSegmentHolder.provider.automaticPreloadMargin = MenuFluentPagingTablePreloadMargin;
                         menuSegmentHolder.topRowIndex = 0;
                         [_menuSegmentHolders addObject:menuSegmentHolder];
+                        if (menu.menuPOSId.longValue == menuItem.menuPOSId.longValue)
+                            [menuSegmentHolder.provider setInitialObjects:object.menuItems ForPage:0];
                     }
                 }
                 
@@ -127,7 +139,8 @@ const NSUInteger MenuFluentPagingTablePageSize = 20;
                 [_segmentedControl addTarget:self
                            action:@selector(segmentControllerValueChanged:)
                             forControlEvents:UIControlEventValueChanged];
-                [_segmentedControl setSelectedSegmentIndex:0];
+                _segmentedControlSelectedIndex = 0;
+                [_segmentedControl setSelectedSegmentIndex:_segmentedControlSelectedIndex];
                 _segmentedControl.apportionsSegmentWidthsByContent = YES;
             }
             [weakSelf.tableView reloadData];

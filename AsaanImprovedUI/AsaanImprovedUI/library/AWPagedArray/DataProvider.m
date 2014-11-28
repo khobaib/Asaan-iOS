@@ -38,6 +38,11 @@
     return self;
 }
 
+- (void) setInitialObjects:(NSArray*)objects ForPage:(int)page {
+    if (objects.count > 0)
+        [_pagedArray setObjects:objects forPage:page];
+}
+
 #pragma mark - Accessors
 - (NSUInteger)loadedCount {
     return _pagedArray.pages.count*_pagedArray.objectsPerPage;

@@ -22,6 +22,7 @@
 @interface DataProvider : NSObject
 
 - (instancetype)initWithPageSize:(NSUInteger)pageSize itemCount:(NSUInteger)itemCount;
+- (void) setInitialObjects:(NSArray*)objects ForPage:(int)page;
 
 @property (nonatomic, weak) id<DataProviderDelegate> delegate;
 
