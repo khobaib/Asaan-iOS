@@ -8,6 +8,8 @@
 
 #import "DropdownView.h"
 
+#define DEBUG_DropdownView_HASAN false
+
 #define DDImageViewFrame        {.origin = {self.frame.size.width - 30, 5}, .size = {20, self.frame.size.height - 10}}
 #define DDTitleLabelFreame      {.origin = {0, 0}, .size = {self.frame.size.width - 25, self.frame.size.height}}
 
@@ -24,6 +26,8 @@
 - (void)setup;
 - (void)setupDropdownButton;
 - (void)setupDropdownTableView;
+
+- (void)unsetup;
 
 @property (nonatomic, strong) NSArray *data;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
@@ -138,7 +142,30 @@
     [self.backgroundView addSubview:self.listTableView];
 }
 
+- (void)unsetup {
+    
+    [self.listTableView removeFromSuperview];
+    [self.backgroundView removeFromSuperview];
+    
+    [self.titleLabel removeFromSuperview];
+    [self.dropdownImageView removeFromSuperview];
+    
+    [self removeGestureRecognizer:self.tapGestureRecognizer];
+    
+    self.listTableView = nil;
+    self.backgroundView = nil;
+    self.titleLabel = nil;
+    self.dropdownImageView = nil;
+    self.tapGestureRecognizer = nil;
+}
+
 #pragma mark - Public Methods
+- (void)refresh {
+    
+    [self unsetup];
+    [self setup];
+}
+
 - (void)setData:(NSArray *)data {
 
     @synchronized(self) {
@@ -174,19 +201,33 @@
     _listShowed = true;
     self.dropdownImageView.image = [UIImage imageNamed:@"drop_up"];
     
+    self.backgroundView.frame = self.superview.frame;
+    [self.backgroundView removeFromSuperview];
     self.listTableSuperview = nil;
     
     UIView* superview = self.superview;
     UIView* subview = self;
+    CGPoint tableOrigin = DDListTableViewOrigin;
+    
+#if DEBUG_DropdownView_HASAN
+    NSLog(@"Superview Initial : %@ \n\t %@", superview, subview);
+#endif
     
     while (superview) {
         
-        if (superview.frame.size.height >= subview.frame.origin.y + DDListTableViewHeight) {
+        CGPoint origin = [superview convertPoint:tableOrigin fromView:self];
+        
+        if (superview.frame.size.height >= origin.y + DDListTableViewHeight) {
             break;
         }
         
-        superview = superview.superview;
         subview = superview;
+        superview = superview.superview;
+        
+#if DEBUG_DropdownView_HASAN
+        NSLog(@"Superview Intermediate : %@", NSStringFromCGPoint(origin));
+        NSLog(@"Superview Intermediate : %@", superview);
+#endif
     }
     
     CGPoint origin = DDListTableViewOrigin;
@@ -200,16 +241,21 @@
     }
     else {
         
-        origin = [self.superview convertPoint:origin fromView:self];  // origin in self.superview's coordinate system
-        CGRect frame = {.origin = origin, .size = {self.frame.size.width + 20, self.superview.frame.size.height - self.frame.origin.y}};
+        if (subview == self) {
+            subview = self.superview;
+        }
+        
+        origin = [subview convertPoint:origin fromView:self];  // origin in subview's coordinate system
+        CGRect frame = {.origin = origin, .size = {self.frame.size.width + 20, subview.frame.size.height - origin.y}};
         
         self.listTableFrame = self.listTableView.frame = frame;
-        self.listTableSuperview = self.superview;
+        self.listTableSuperview = subview;
     }
     
-//    if (![self.listTableSuperview.subviews containsObject:self.listTableView]) {
-//        [self.listTableSuperview addSubview:self.listTableView];
-//    }
+#if DEBUG_DropdownView_HASAN
+    NSLog(@"Superview Final : %@", self.listTableSuperview);
+#endif
+    
     if (![self.listTableSuperview.subviews containsObject:self.backgroundView]) {
         [self.listTableSuperview addSubview:self.backgroundView];
         self.backgroundView.frame = self.listTableSuperview.frame;
@@ -222,7 +268,6 @@
     
     _listShowed = false;
     self.dropdownImageView.image = [UIImage imageNamed:@"drop_down"];
-//    [self.listTableView removeFromSuperview];
     [self.backgroundView removeFromSuperview];
 }
 
@@ -278,7 +323,7 @@
         cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
         cell.textLabel.textColor = self.titleColor;
         cell.backgroundColor = self.listBackgroundColor;
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     cell.textLabel.text = [self.data objectAtIndex:indexPath.row];
     

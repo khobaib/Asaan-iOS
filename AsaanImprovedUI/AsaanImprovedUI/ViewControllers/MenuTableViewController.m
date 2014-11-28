@@ -21,11 +21,13 @@
 #import "UIImageView+WebCache.h"
 #import "MenuItemLoadingOperation.h"
 #import "MenuSegmentHolder.h"
+#import "UIColor+AsaanBackgroundColor.h"
 
 const NSUInteger MenuFluentPagingTablePreloadMargin = 5;
 const NSUInteger MenuFluentPagingTablePageSize = 20;
 
-@interface MenuTableViewController ()<DataProviderDelegate, DropdownViewDelegate>
+@interface MenuTableViewController() <DataProviderDelegate, DropdownViewDelegate>
+
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (nonatomic, strong) MBProgressHUD *hud;
@@ -36,6 +38,7 @@ const NSUInteger MenuFluentPagingTablePageSize = 20;
 @end
 
 @implementation MenuTableViewController
+
 @synthesize tableView = _tableView;
 @synthesize segmentedControl = _segmentedControl;
 @synthesize startPosition = _startPosition;
@@ -45,9 +48,11 @@ const NSUInteger MenuFluentPagingTablePageSize = 20;
 @synthesize selectedStore = _selectedStore;
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     [self setupMenuSegmentController];
+    self.tableView.estimatedRowHeight = 100.0;
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -56,6 +61,7 @@ const NSUInteger MenuFluentPagingTablePageSize = 20;
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
 }
+
 - (IBAction)segmentControllerValueChanged:(id)sender
 {
     [_tableView reloadData];
@@ -66,11 +72,13 @@ const NSUInteger MenuFluentPagingTablePageSize = 20;
 }
 
 - (void)setupMenuSegmentController {
+    
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.labelText = @"Please Wait";
     hud.hidden = NO;
     _menuSegmentHolders = [[NSMutableArray alloc] init];
+    
     if (self)
     {
         typeof(self) weakSelf = self;
@@ -129,6 +137,7 @@ const NSUInteger MenuFluentPagingTablePageSize = 20;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    
     [super viewWillAppear:animated];
     
     [self.navigationController setNavigationBarHidden:NO];
@@ -136,18 +145,24 @@ const NSUInteger MenuFluentPagingTablePageSize = 20;
                                                   forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
-    self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor : [UIColor goldColor]};
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor goldColor]};
 }
 
 - (void)didReceiveMemoryWarning {
+    
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 - (void)setupDropdownView:(DropdownView *)dropdownView
 {
+    [dropdownView refresh];
+    
     [dropdownView setData:@[@"15%", @"20%", @"25%", @"30%"]];
     dropdownView.delegate = self;
+    [dropdownView setDefaultSelection:1];
+    dropdownView.listBackgroundColor = [UIColor asaanBackgroundColor];
+    dropdownView.titleColor = [UIColor whiteColor];
 }
 
 #pragma mark - Data controller delegate
@@ -238,7 +253,9 @@ const NSUInteger MenuFluentPagingTablePageSize = 20;
         {
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SubMenuCell" forIndexPath:indexPath];
             UILabel *txtName=(UILabel *)[cell viewWithTag:401];
+            
             DropdownView *dropdownView = (DropdownView*)[cell viewWithTag:402];
+            [self setupDropdownView:dropdownView];
             
             txtName.text = menuItem.shortDescription;
 //            dropdownView.delegate = self;
