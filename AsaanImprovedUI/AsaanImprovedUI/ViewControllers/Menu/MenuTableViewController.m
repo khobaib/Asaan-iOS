@@ -22,6 +22,8 @@
 #import "MenuItemLoadingOperation.h"
 #import "MenuSegmentHolder.h"
 #import "UIColor+AsaanBackgroundColor.h"
+
+#import "MenuItemCell.h"
 #import "SubMenuCell.h"
 
 const NSUInteger MenuFluentPagingTablePreloadMargin = 5;
@@ -37,7 +39,8 @@ const NSUInteger MenuFluentPagingTablePageSize = 20;
 @property (nonatomic) int maxResult;
 @property (strong, nonatomic) NSMutableArray *menuSegmentHolders;
 
-@property (nonatomic, strong) SubMenuCell *prototypeCell;
+@property (nonatomic, strong) MenuItemCell *prototypeMenuItemCell;
+@property (nonatomic, strong) SubMenuCell *prototypeSubMenuCell;
 
 @end
 
@@ -53,18 +56,28 @@ const NSUInteger MenuFluentPagingTablePageSize = 20;
 @synthesize selectedStore = _selectedStore;
 
 static NSString *SubMenuCellIdentifier = @"SubMenuCell";
+static NSString *MenuItemCellIdentifier = @"MenuItemCell";
 
 #pragma mark -
 #pragma mark === Accessors ===
 #pragma mark -
 
-- (SubMenuCell *)prototypeCell
+- (SubMenuCell *)prototypeSubMenuCell
 {
-    if (!_prototypeCell)
+    if (!_prototypeSubMenuCell)
     {
-        _prototypeCell = [self.tableView dequeueReusableCellWithIdentifier:SubMenuCellIdentifier];
+        _prototypeSubMenuCell = [self.tableView dequeueReusableCellWithIdentifier:SubMenuCellIdentifier];
     }
-    return _prototypeCell;
+    return _prototypeSubMenuCell;
+}
+
+- (MenuItemCell *)prototypeMenuItemCell
+{
+    if (!_prototypeMenuItemCell)
+    {
+        _prototypeMenuItemCell = [self.tableView dequeueReusableCellWithIdentifier:MenuItemCellIdentifier];
+    }
+    return _prototypeMenuItemCell;
 }
 
 #pragma mark -
@@ -302,11 +315,8 @@ static NSString *SubMenuCellIdentifier = @"SubMenuCell";
     if ([dataObject isKindOfClass:[NSNull class]])
     {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SubMenuCellIdentifier forIndexPath:indexPath];
-        
         [self configureSubMenuCell:cell forRowAtIndexPath:indexPath withItem:dataObject];
         
-//        UILabel *txtName=(UILabel *)[cell viewWithTag:401];
-//        txtName.text = nil;
         return cell;
     }
     else
@@ -315,38 +325,19 @@ static NSString *SubMenuCellIdentifier = @"SubMenuCell";
         if (menuItem.level.intValue == 1)
         {
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SubMenuCell" forIndexPath:indexPath];
-//            UILabel *txtName=(UILabel *)[cell viewWithTag:401];
-            
             [self configureSubMenuCell:cell forRowAtIndexPath:indexPath withItem:menuItem];
             
             DropdownView *dropdownView = (DropdownView*)[cell viewWithTag:402];
             [self setupDropdownView:dropdownView];
-            
-//            txtName.text = menuItem.shortDescription;
             
             return cell;
         }
         else
         {
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MenuItemCell" forIndexPath:indexPath];
-            UIImageView *imgBackground = (UIImageView *)[cell viewWithTag:301];
-            //    imgBackground.image = [UIImage imageNamed:@"loading-wait"]; // placeholder image
-            UILabel *txtName=(UILabel *)[cell viewWithTag:302];
-            UILabel *txtDescription=(UILabel *)[cell viewWithTag:303];
-            UILabel *txtTodaysOrders=(UILabel *)[cell viewWithTag:304];
-            UILabel *txtLikes=(UILabel *)[cell viewWithTag:305];
-            UIImageView *imgLike = (UIImageView *)[cell viewWithTag:306];
-            UILabel *txtPrice=(UILabel *)[cell viewWithTag:307];
-            UILabel *txtMostOrdered=(UILabel *)[cell viewWithTag:308];
+            [self configureMenuItemCell:cell forRowAtIndexPath:indexPath withItem:menuItem];
             
-            txtName.text = menuItem.shortDescription;
-            txtDescription.text = menuItem.longDescription;
-            txtTodaysOrders.text = nil;
-            txtLikes.text = nil;
-            imgLike.image = nil;
-            txtPrice.text = [UtilCalls amountToString:menuItem.price];
-            txtMostOrdered.text = nil;
-
+            UIImageView *imgBackground = (UIImageView *)[cell viewWithTag:301];
             if (IsEmpty(menuItem.imageUrl) == false)
             {
                 PFQuery *query = [PFQuery queryWithClassName:@"PictureFiles"];
@@ -380,6 +371,28 @@ static NSString *SubMenuCellIdentifier = @"SubMenuCell";
     return nil;
 }
 
+- (void)configureMenuItemCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath withItem:(GTLStoreendpointStoreMenuItem *)menuItem
+{
+    if ([cell isKindOfClass:[MenuItemCell class]])
+    {
+        UILabel *txtName=(UILabel *)[cell viewWithTag:302];
+        UILabel *txtDescription=(UILabel *)[cell viewWithTag:303];
+        UILabel *txtTodaysOrders=(UILabel *)[cell viewWithTag:304];
+        UILabel *txtLikes=(UILabel *)[cell viewWithTag:305];
+        UIImageView *imgLike = (UIImageView *)[cell viewWithTag:306];
+        UILabel *txtPrice=(UILabel *)[cell viewWithTag:307];
+        UILabel *txtMostOrdered=(UILabel *)[cell viewWithTag:308];
+        
+        txtName.text = menuItem.shortDescription;
+        txtDescription.text = menuItem.longDescription;
+        txtTodaysOrders.text = nil;
+        txtLikes.text = nil;
+        imgLike.image = nil;
+        txtPrice.text = [UtilCalls amountToString:menuItem.price];
+        txtMostOrdered.text = nil;
+    }
+}
+
 - (void)configureSubMenuCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath withItem:(GTLStoreendpointStoreMenuItem *)menuItem
 {
     if ([cell isKindOfClass:[SubMenuCell class]])
@@ -410,9 +423,12 @@ static NSString *SubMenuCellIdentifier = @"SubMenuCell";
         menuSegmentHolder = [_menuSegmentHolders firstObject];
     
     id dataObject = menuSegmentHolder.provider.dataObjects[indexPath.row];
+    UITableViewCell *cell;
+    
     if ([dataObject isKindOfClass:[NSNull class]])
     {
-        [self configureSubMenuCell:self.prototypeCell forRowAtIndexPath:indexPath withItem:dataObject];
+        [self configureSubMenuCell:self.prototypeSubMenuCell forRowAtIndexPath:indexPath withItem:dataObject];
+        cell = self.prototypeSubMenuCell;
     }
     else
     {
@@ -420,22 +436,24 @@ static NSString *SubMenuCellIdentifier = @"SubMenuCell";
         
         if (menuItem.level.intValue == 1)
         {
-            [self configureSubMenuCell:self.prototypeCell forRowAtIndexPath:indexPath withItem:menuItem];
+            [self configureSubMenuCell:self.prototypeSubMenuCell forRowAtIndexPath:indexPath withItem:menuItem];
+            cell = self.prototypeSubMenuCell;
         }
         else
         {
-            return 100.0;
+            [self configureMenuItemCell:self.prototypeMenuItemCell forRowAtIndexPath:indexPath withItem:menuItem];
+            cell = self.prototypeMenuItemCell;
         }
     }
     
     // Need to set the width of the prototype cell to the width of the table view
     // as this will change when the device is rotated.
     
-    self.prototypeCell.bounds = CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.tableView.bounds), CGRectGetHeight(self.prototypeCell.bounds));
+    cell.bounds = CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.tableView.bounds), CGRectGetHeight(cell.bounds));
     
-    [self.prototypeCell layoutIfNeeded];
+    [cell layoutIfNeeded];
     
-    CGSize size = [self.prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    CGSize size = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
     return size.height+1;
 }
 

@@ -13,6 +13,7 @@
 		37909B701A23828000649827 /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37909B6B1A23828000649827 /* SignupViewController.m */; };
 		37EDCCD41A29100800046F3C /* MenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37EDCCD31A29100800046F3C /* MenuTableViewController.m */; };
 		37EDCCDA1A2910B100046F3C /* SubMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37EDCCD91A2910B100046F3C /* SubMenuCell.m */; };
+		37EDCCDD1A2924AA00046F3C /* MenuItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37EDCCDC1A2924AA00046F3C /* MenuItemCell.m */; };
 		D404EDBB1A13149A000285F2 /* UIColor+AsaanBackgroundColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D404EDBA1A13149A000285F2 /* UIColor+AsaanBackgroundColor.m */; };
 		D41D32161A11DD9300EA49B6 /* addCard.png in Resources */ = {isa = PBXBuildFile; fileRef = D41D31FF1A11DD9300EA49B6 /* addCard.png */; };
 		D41D32171A11DD9300EA49B6 /* address.png in Resources */ = {isa = PBXBuildFile; fileRef = D41D32001A11DD9300EA49B6 /* address.png */; };
@@ -218,6 +219,8 @@
 		37EDCCD31A29100800046F3C /* MenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTableViewController.m; sourceTree = "<group>"; };
 		37EDCCD81A2910B100046F3C /* SubMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubMenuCell.h; sourceTree = "<group>"; };
 		37EDCCD91A2910B100046F3C /* SubMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubMenuCell.m; sourceTree = "<group>"; };
+		37EDCCDB1A2924AA00046F3C /* MenuItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuItemCell.h; sourceTree = "<group>"; };
+		37EDCCDC1A2924AA00046F3C /* MenuItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuItemCell.m; sourceTree = "<group>"; };
 		6ACE37C455484AD859AD8D7B /* libPods-AsaanImprovedUI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AsaanImprovedUI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D404EDB91A13149A000285F2 /* UIColor+AsaanBackgroundColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+AsaanBackgroundColor.h"; path = "HelperClasses/UIColor+AsaanBackgroundColor.h"; sourceTree = "<group>"; };
 		D404EDBA1A13149A000285F2 /* UIColor+AsaanBackgroundColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+AsaanBackgroundColor.m"; path = "HelperClasses/UIColor+AsaanBackgroundColor.m"; sourceTree = "<group>"; };
@@ -591,6 +594,8 @@
 				37EDCCD31A29100800046F3C /* MenuTableViewController.m */,
 				37EDCCD81A2910B100046F3C /* SubMenuCell.h */,
 				37EDCCD91A2910B100046F3C /* SubMenuCell.m */,
+				37EDCCDB1A2924AA00046F3C /* MenuItemCell.h */,
+				37EDCCDC1A2924AA00046F3C /* MenuItemCell.m */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -1239,6 +1244,7 @@
 				D4A6A3911A17D175003F3EAB /* SHSPhoneLogic.m in Sources */,
 				D46D0FAB1A13B2920072A413 /* UITextField+Extender.m in Sources */,
 				D4A8C1871A263B1800DA344A /* AFURLRequestSerialization.m in Sources */,
+				37EDCCDD1A2924AA00046F3C /* MenuItemCell.m in Sources */,
 				D4A6A3901A17D175003F3EAB /* SHSFlagAccessoryView.m in Sources */,
 				D449EB6F1A1BCDEB00879383 /* GTLStoreendpointStoreOwnerCollection.m in Sources */,
 				D4522B2A1A15264F002EFA92 /* StripeError.m in Sources */,
