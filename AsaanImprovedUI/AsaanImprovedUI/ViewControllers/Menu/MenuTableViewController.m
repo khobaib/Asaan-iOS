@@ -22,6 +22,7 @@
 #import "MenuItemLoadingOperation.h"
 #import "MenuSegmentHolder.h"
 #import "UIColor+AsaanBackgroundColor.h"
+#import "SubMenuCell.h"
 
 const NSUInteger MenuFluentPagingTablePreloadMargin = 5;
 const NSUInteger MenuFluentPagingTablePageSize = 20;
@@ -36,6 +37,8 @@ const NSUInteger MenuFluentPagingTablePageSize = 20;
 @property (nonatomic) int maxResult;
 @property (strong, nonatomic) NSMutableArray *menuSegmentHolders;
 
+@property (nonatomic, strong) SubMenuCell *prototypeCell;
+
 @end
 
 @implementation MenuTableViewController
@@ -49,12 +52,30 @@ const NSUInteger MenuFluentPagingTablePageSize = 20;
 @synthesize menuSegmentHolders = _menuSegmentHolders;
 @synthesize selectedStore = _selectedStore;
 
+static NSString *SubMenuCellIdentifier = @"SubMenuCell";
+
+#pragma mark -
+#pragma mark === Accessors ===
+#pragma mark -
+
+- (SubMenuCell *)prototypeCell
+{
+    if (!_prototypeCell)
+    {
+        _prototypeCell = [self.tableView dequeueReusableCellWithIdentifier:SubMenuCellIdentifier];
+    }
+    return _prototypeCell;
+}
+
+#pragma mark -
+#pragma mark === View Life Cycle ===
+#pragma mark -
+
 - (void)viewDidLoad {
     
     [super viewDidLoad];
     
     [self setupMenuSegmentController];
-    self.tableView.estimatedRowHeight = 100.0;
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -62,6 +83,43 @@ const NSUInteger MenuFluentPagingTablePageSize = 20;
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didChangePreferredContentSize:)
+                                                 name:UIContentSizeCategoryDidChangeNotification object:nil];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIContentSizeCategoryDidChangeNotification
+                                                  object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    [self.navigationController setNavigationBarHidden:NO];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor goldColor]};
+}
+
+- (void)didReceiveMemoryWarning {
+    
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark -
+#pragma mark === Actions ===
+#pragma mark -
+
+- (void)didChangePreferredContentSize:(NSNotification *)notification
+{
+    [self.tableView reloadData];
 }
 
 - (IBAction)segmentControllerValueChanged:(id)sender
@@ -149,24 +207,6 @@ const NSUInteger MenuFluentPagingTablePageSize = 20;
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    
-    [super viewWillAppear:animated];
-    
-    [self.navigationController setNavigationBarHidden:NO];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
-                                                  forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
-    self.navigationController.navigationBar.translucent = YES;
-    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor goldColor]};
-}
-
-- (void)didReceiveMemoryWarning {
-    
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (void)setupDropdownView:(DropdownView *)dropdownView
 {
     [dropdownView refresh];
@@ -178,7 +218,10 @@ const NSUInteger MenuFluentPagingTablePageSize = 20;
     dropdownView.titleColor = [UIColor whiteColor];
 }
 
-#pragma mark - Data controller delegate
+#pragma mark - 
+#pragma mark  === DataProviderDelegate ===
+#pragma mark -
+
 - (void)dataProvider:(DataProvider *)dataProvider didLoadDataAtIndexes:(NSIndexSet *)indexes
 {
     
@@ -217,13 +260,18 @@ const NSUInteger MenuFluentPagingTablePageSize = 20;
     [self.hud hide:NO];
 }
 
-#pragma mark - DropdownViewDelegate
+#pragma mark -
+#pragma mark  === DropdownViewDelegate ===
+#pragma mark -
+
 - (void)dropdownViewActionForSelectedRow:(int)row sender:(id)sender
 {
     NSLog(@"Selected row : %d", row);
 }
 
-#pragma mark - Table view data source
+#pragma mark -
+#pragma mark  === UITableViewDataSource ===
+#pragma mark -
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -253,25 +301,29 @@ const NSUInteger MenuFluentPagingTablePageSize = 20;
     id dataObject = menuSegmentHolder.provider.dataObjects[indexPath.row];
     if ([dataObject isKindOfClass:[NSNull class]])
     {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SubMenuCell" forIndexPath:indexPath];
-        UILabel *txtName=(UILabel *)[cell viewWithTag:401];
-        txtName.text = nil;
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SubMenuCellIdentifier forIndexPath:indexPath];
+        
+        [self configureSubMenuCell:cell forRowAtIndexPath:indexPath withItem:dataObject];
+        
+//        UILabel *txtName=(UILabel *)[cell viewWithTag:401];
+//        txtName.text = nil;
         return cell;
     }
-    
-    GTLStoreendpointStoreMenuItem *menuItem = dataObject;
-    if (menuItem != nil)
+    else
     {
+        GTLStoreendpointStoreMenuItem *menuItem = dataObject;
         if (menuItem.level.intValue == 1)
         {
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SubMenuCell" forIndexPath:indexPath];
-            UILabel *txtName=(UILabel *)[cell viewWithTag:401];
+//            UILabel *txtName=(UILabel *)[cell viewWithTag:401];
+            
+            [self configureSubMenuCell:cell forRowAtIndexPath:indexPath withItem:menuItem];
             
             DropdownView *dropdownView = (DropdownView*)[cell viewWithTag:402];
             [self setupDropdownView:dropdownView];
             
-            txtName.text = menuItem.shortDescription;
-//            dropdownView.delegate = self;
+//            txtName.text = menuItem.shortDescription;
+            
             return cell;
         }
         else
@@ -327,4 +379,69 @@ const NSUInteger MenuFluentPagingTablePageSize = 20;
     }
     return nil;
 }
+
+- (void)configureSubMenuCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath withItem:(GTLStoreendpointStoreMenuItem *)menuItem
+{
+    if ([cell isKindOfClass:[SubMenuCell class]])
+    {
+        UILabel *txtName=(UILabel *)[cell viewWithTag:401];
+        
+        if ([menuItem isKindOfClass:[NSNull class]])
+        {
+            txtName.text = nil;
+        }
+        else
+        {
+            txtName.text = menuItem.shortDescription;
+        }
+    }
+}
+
+#pragma mark -
+#pragma mark === UITableViewDelegate ===
+#pragma mark -
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MenuSegmentHolder *menuSegmentHolder;
+    if (_menuSegmentHolders.count > 1)
+        menuSegmentHolder = [_menuSegmentHolders objectAtIndex:_segmentedControl.selectedSegmentIndex];
+    else
+        menuSegmentHolder = [_menuSegmentHolders firstObject];
+    
+    id dataObject = menuSegmentHolder.provider.dataObjects[indexPath.row];
+    if ([dataObject isKindOfClass:[NSNull class]])
+    {
+        [self configureSubMenuCell:self.prototypeCell forRowAtIndexPath:indexPath withItem:dataObject];
+    }
+    else
+    {
+        GTLStoreendpointStoreMenuItem *menuItem = dataObject;
+        
+        if (menuItem.level.intValue == 1)
+        {
+            [self configureSubMenuCell:self.prototypeCell forRowAtIndexPath:indexPath withItem:menuItem];
+        }
+        else
+        {
+            return 100.0;
+        }
+    }
+    
+    // Need to set the width of the prototype cell to the width of the table view
+    // as this will change when the device is rotated.
+    
+    self.prototypeCell.bounds = CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.tableView.bounds), CGRectGetHeight(self.prototypeCell.bounds));
+    
+    [self.prototypeCell layoutIfNeeded];
+    
+    CGSize size = [self.prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    return size.height+1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewAutomaticDimension;
+}
+
 @end

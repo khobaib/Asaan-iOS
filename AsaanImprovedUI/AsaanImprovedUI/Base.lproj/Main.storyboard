@@ -361,40 +361,43 @@
                                 <color key="backgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SubMenuCell" rowHeight="32" id="ZkS-er-Nns" userLabel="SubMenuCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SubMenuCell" rowHeight="40" id="ZkS-er-Nns" userLabel="SubMenuCell" customClass="SubMenuCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZkS-er-Nns" id="1aA-Sl-ctT">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view tag="402" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O0j-Pz-gGY" userLabel="DropdownView" customClass="DropdownView">
-                                            <rect key="frame" x="484" y="1" width="100" height="30"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="401" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="749" text="Appetizers" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="035-Ls-zlP">
+                                            <rect key="frame" x="250" y="9" width="100" height="20"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="30" id="2ww-2C-I5J"/>
-                                                <constraint firstAttribute="width" constant="100" id="x2t-C1-SzX"/>
-                                            </constraints>
-                                        </view>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="401" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Appetizers" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="035-Ls-zlP">
-                                            <rect key="frame" x="250" y="6" width="100" height="20"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="20" id="hdH-yi-Pea"/>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="hdH-yi-Pea"/>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="iFK-b8-djf"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <view tag="402" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O0j-Pz-gGY" userLabel="DropdownView" customClass="DropdownView">
+                                            <rect key="frame" x="484" y="5" width="100" height="30"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="2ww-2C-I5J"/>
+                                                <constraint firstAttribute="width" constant="100" id="x2t-C1-SzX"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="centerX" secondItem="035-Ls-zlP" secondAttribute="centerX" id="5f0-vO-0X6"/>
                                         <constraint firstItem="035-Ls-zlP" firstAttribute="top" secondItem="1aA-Sl-ctT" secondAttribute="topMargin" constant="4" id="Apj-zB-nbh"/>
                                         <constraint firstAttribute="centerX" secondItem="035-Ls-zlP" secondAttribute="centerX" id="Gbt-2e-IDF"/>
+                                        <constraint firstItem="035-Ls-zlP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="1aA-Sl-ctT" secondAttribute="leadingMargin" priority="900" constant="20" id="Mmq-Xp-peX"/>
+                                        <constraint firstAttribute="centerY" secondItem="035-Ls-zlP" secondAttribute="centerY" id="NC1-sZ-dNh"/>
                                         <constraint firstAttribute="centerY" secondItem="035-Ls-zlP" secondAttribute="centerY" id="OLL-ud-9KS"/>
-                                        <constraint firstAttribute="centerY" secondItem="035-Ls-zlP" secondAttribute="centerY" id="Zrn-cl-Lfn"/>
-                                        <constraint firstAttribute="centerX" secondItem="035-Ls-zlP" secondAttribute="centerX" priority="999" id="dhU-PW-EiU"/>
+                                        <constraint firstAttribute="centerX" secondItem="035-Ls-zlP" secondAttribute="centerX" priority="950" id="dhU-PW-EiU"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="O0j-Pz-gGY" secondAttribute="trailing" constant="8" id="f9k-Lk-aUm"/>
-                                        <constraint firstItem="O0j-Pz-gGY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="035-Ls-zlP" secondAttribute="trailing" constant="50" id="fhU-8u-drT"/>
+                                        <constraint firstItem="O0j-Pz-gGY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="035-Ls-zlP" secondAttribute="trailing" priority="980" constant="50" id="fhU-8u-drT"/>
+                                        <constraint firstItem="035-Ls-zlP" firstAttribute="top" secondItem="1aA-Sl-ctT" secondAttribute="topMargin" priority="900" constant="2" id="gDr-iv-g9c"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="035-Ls-zlP" secondAttribute="bottom" priority="901" constant="2" id="gQk-wb-LWn"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="035-Ls-zlP" secondAttribute="bottom" constant="4" id="i30-Md-KbS"/>
                                         <constraint firstAttribute="centerY" secondItem="O0j-Pz-gGY" secondAttribute="centerY" id="s3t-ku-aRr"/>
                                     </constraints>
@@ -410,6 +413,10 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <connections>
+                                    <outlet property="dropdownView" destination="O0j-Pz-gGY" id="xcB-Kg-G7p"/>
+                                    <outlet property="titleLabel" destination="035-Ls-zlP" id="dQL-49-jL8"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
