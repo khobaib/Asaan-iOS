@@ -64,6 +64,8 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIKeyboardWillHideNotification
                                                   object:nil];
+    
+    [self.view endEditing:YES];
     [super viewWillDisappear:animated];
 }
 - (void)viewDidLayoutSubviews {
