@@ -234,6 +234,10 @@
             
             GTLQueryUserendpoint *query = [GTLQueryUserendpoint queryForSaveUserCardWithObject:card];
             
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+            dic[@"asaan-auth-token"] = [PFUser currentUser][@"authToken"];
+            [query setAdditionalHTTPHeaders:dic];
+            
             [userService executeQuery:query completionHandler:^(GTLServiceTicket * ticket,GTLUserendpointUserCard *object, NSError *error ) {
                 
                 if (error) {
