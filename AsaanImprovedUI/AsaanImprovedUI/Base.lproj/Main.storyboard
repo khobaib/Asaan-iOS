@@ -2054,7 +2054,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ai5-zb-Z4U">
-                                <rect key="frame" x="36" y="230" width="528" height="140"/>
+                                <rect key="frame" x="36" y="325" width="528" height="140"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Default Tip:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8o0-ie-OM4">
                                         <rect key="frame" x="56" y="71" width="60" height="14"/>
@@ -2182,7 +2182,7 @@
                                 </variation>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use Asaan to easily pay the check inside restaurants or for online orders." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BpU-F7-1GS">
-                                <rect key="frame" x="56" y="197" width="488" height="17"/>
+                                <rect key="frame" x="56" y="292" width="488" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="AdH-q4-gUD"/>
                                     <constraint firstAttribute="height" constant="40" id="pXR-uv-B0A"/>
@@ -2205,10 +2205,10 @@
                             <constraint firstItem="BpU-F7-1GS" firstAttribute="leading" secondItem="5de-OG-Thj" secondAttribute="leadingMargin" constant="40" id="Aao-G8-mJV"/>
                             <constraint firstItem="ai5-zb-Z4U" firstAttribute="top" secondItem="BpU-F7-1GS" secondAttribute="bottom" constant="8" symbolic="YES" id="Dis-NY-ozi"/>
                             <constraint firstAttribute="trailingMargin" secondItem="BpU-F7-1GS" secondAttribute="trailing" constant="40" id="QgY-R3-i0w"/>
+                            <constraint firstAttribute="centerY" secondItem="BpU-F7-1GS" secondAttribute="centerY" id="Sxg-Pg-TaF"/>
                             <constraint firstAttribute="centerX" secondItem="ai5-zb-Z4U" secondAttribute="centerX" id="Xuq-VO-cSQ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ai5-zb-Z4U" secondAttribute="trailing" constant="20" id="Xwv-ZG-7ec"/>
                             <constraint firstAttribute="centerY" secondItem="BpU-F7-1GS" secondAttribute="centerY" id="bEL-c6-Fjb"/>
-                            <constraint firstAttribute="centerY" secondItem="ai5-zb-Z4U" secondAttribute="centerY" id="bTt-lZ-pLI"/>
                             <constraint firstItem="ai5-zb-Z4U" firstAttribute="top" secondItem="BpU-F7-1GS" secondAttribute="bottom" constant="8" id="fYj-Sv-0g0"/>
                             <constraint firstAttribute="centerX" secondItem="BpU-F7-1GS" secondAttribute="centerX" id="gFU-bw-eAz"/>
                             <constraint firstAttribute="centerX" secondItem="BpU-F7-1GS" secondAttribute="centerX" id="hEl-od-rYt"/>

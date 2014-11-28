@@ -212,6 +212,7 @@
 		37909B6A1A23828000649827 /* SignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupViewController.h; sourceTree = "<group>"; };
 		37909B6B1A23828000649827 /* SignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupViewController.m; sourceTree = "<group>"; };
 		37909B6C1A23828000649827 /* StartupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartupViewController.h; sourceTree = "<group>"; };
+		37C90E151A2897B500077FAA /* AsaanConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AsaanConstants.h; path = HelperClasses/AsaanConstants.h; sourceTree = "<group>"; };
 		6ACE37C455484AD859AD8D7B /* libPods-AsaanImprovedUI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AsaanImprovedUI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D404EDB91A13149A000285F2 /* UIColor+AsaanBackgroundColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+AsaanBackgroundColor.h"; path = "HelperClasses/UIColor+AsaanBackgroundColor.h"; sourceTree = "<group>"; };
 		D404EDBA1A13149A000285F2 /* UIColor+AsaanBackgroundColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+AsaanBackgroundColor.m"; path = "HelperClasses/UIColor+AsaanBackgroundColor.m"; sourceTree = "<group>"; };
@@ -1052,6 +1053,7 @@
 				D404EDBA1A13149A000285F2 /* UIColor+AsaanBackgroundColor.m */,
 				D46D0FA91A13B2920072A413 /* UITextField+Extender.h */,
 				D46D0FAA1A13B2920072A413 /* UITextField+Extender.m */,
+				37C90E151A2897B500077FAA /* AsaanConstants.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
