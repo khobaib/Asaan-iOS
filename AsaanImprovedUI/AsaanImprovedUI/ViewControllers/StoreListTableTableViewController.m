@@ -38,10 +38,6 @@ const NSUInteger FluentPagingTablePreloadMargin = 5;
 @synthesize dataProvider = _dataProvider;
 @synthesize selectedStore = _selectedStore;
 
-- (IBAction)unwindToStoreList:(UIStoryboardSegue*)sender
-{
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -287,6 +283,11 @@ const NSUInteger FluentPagingTablePreloadMargin = 5;
         // Pass any objects to the view controller here, like...
         [menuController setSelectedStore:_selectedStore];
     }
+}
+
+- (IBAction)unwindToStoreList:(UIStoryboardSegue *)unwindSegue
+{
+    NSLog(@"Back from PaymentInfoViewController");
 }
 
 @end

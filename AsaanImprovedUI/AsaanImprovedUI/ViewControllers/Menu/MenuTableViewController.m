@@ -238,7 +238,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     GTLStoreendpointStoreMenuHierarchy *submenu = [menuSegmentHolder.subMenus objectAtIndex:row];
     
     [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:submenu.menuItemPosition.longValue inSection:0]
-                     atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+                     atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
 }
 
 - (void)setupDropdownView:(DropdownView *)dropdownView
@@ -253,12 +253,13 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     for (GTLStoreendpointStoreMenuHierarchy *submenu in menuSegmentHolder.subMenus)
         [subMenuNames addObject:submenu.name];
     
+    [dropdownView refresh];
     [dropdownView setData:subMenuNames];
     dropdownView.delegate = self;
-//    [dropdownView setDefaultSelection:1];
     dropdownView.listBackgroundColor = [UIColor asaanBackgroundColor];
     dropdownView.titleColor = [UIColor whiteColor];
-    [dropdownView refresh];
+    dropdownView.enabledTitle = false;
+    dropdownView.enabledCheckmark = false;
 }
 
 #pragma mark - 
@@ -362,7 +363,9 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
             if (IsEmpty(menuItem.imageUrl) == false)
             {
                 PFQuery *query = [PFQuery queryWithClassName:@"PictureFiles"];
-                query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+                query.cachePolicy = kPFCachePolicyCacheElseNetwork;
+                query.maxCacheAge = 60 * 60; // 1 hr
+                
                 [query getObjectInBackgroundWithId:menuItem.imageUrl block:^(PFObject *pictureFile, NSError *error)
                 {
                     if (error.code != kPFErrorCacheMiss)
@@ -372,16 +375,25 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
                         else
                         {
                             PFFile *backgroundImgFile = pictureFile[@"picture_file"];
-                            [imgBackground sd_setImageWithURL:[NSURL URLWithString:backgroundImgFile.url]
-                                                    completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *backgroundImgUrl)
-                            {
-                                imgBackground.alpha = 0.0;
-                                [UIView transitionWithView:imgBackground duration:3.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^
-                                {
-                                    [imgBackground setImage:image];
-                                    imgBackground.alpha = 1.0;
-                                } completion:NULL];
-                            }];
+                            UIImage *image = [[SDWebImageManager sharedManager].imageCache imageFromDiskCacheForKey:[[NSURL URLWithString:backgroundImgFile.url] absoluteString]];
+                            
+                            if (image) {
+                                
+                                imgBackground.image = image;
+                            }
+                            else {
+                                [imgBackground sd_setImageWithURL:[NSURL URLWithString:backgroundImgFile.url]
+                                                 placeholderImage:[UIImage imageNamed:@"loading-wait"]
+                                                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *backgroundImgUrl)
+                                 {
+                                     imgBackground.alpha = 0.0;
+                                     [UIView transitionWithView:imgBackground duration:3.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^
+                                      {
+                                          [imgBackground setImage:image];
+                                          imgBackground.alpha = 1.0;
+                                      } completion:NULL];
+                                 }];
+                            }
                         }
                     }
                 }];

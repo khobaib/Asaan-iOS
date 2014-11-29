@@ -13,14 +13,17 @@
 #define DDImageViewFrame        {.origin = {self.frame.size.width - 30, 5}, .size = {20, self.frame.size.height - 10}}
 #define DDTitleLabelFreame      {.origin = {0, 0}, .size = {self.frame.size.width - 25, self.frame.size.height}}
 
-#define DDListTableViewHeight   100
+#define MAX_ROWS_SHOWED     6
+#define ROW_HEIGHT          35
+
 #define DDListTableViewOrigin   {-5, self.frame.size.height}
-#define DDListTableViewSize     {self.frame.size.width + 10, DDListTableViewHeight}
+#define DDListTableViewSize(x)  {self.frame.size.width + 10, x}
 
 @interface DropdownView () <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
 {
     int _currentSelction;
     bool _listShowed;
+    int _ddListTableViewHeight;
 }
 
 - (void)setup;
@@ -91,8 +94,11 @@
     self.clipsToBounds = YES;
     self.backgroundColor = [UIColor clearColor];
     
-    _data = @[@"No Item"];
-    _currentSelction = 0;
+    _enabledTitle = true;
+    _enabledCheckmark = true;
+    _data = @[];
+    _currentSelction = -1;
+    _ddListTableViewHeight = 0;
     
     self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondToTapGesture:)];
     self.tapGestureRecognizer.delegate = self;
@@ -113,7 +119,14 @@
     CGRect frame = DDTitleLabelFreame;
     self.titleLabel = [[UILabel alloc] initWithFrame:frame];
     self.titleLabel.textAlignment = NSTextAlignmentLeft;
-    self.titleLabel.text = _data[_currentSelction];
+    
+    if (_enabledTitle && _data && _data.count > 0 && _currentSelction >= 0) {
+        self.titleLabel.text = _data[_currentSelction];
+    }
+    else {
+        self.titleLabel.text = @"";
+    }
+    
     self.titleLabel.textColor = [UIColor whiteColor];
     self.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
     
@@ -172,10 +185,21 @@
         
         if (data) {
             _data = data;
+            
+            if (self.enabledTitle && _data.count > 0 && _currentSelction >= 0) {
+                
+                self.titleLabel.text = _data[_currentSelction];
+            }
+            
+            if (_data.count >= MAX_ROWS_SHOWED) {
+                
+                _ddListTableViewHeight = MAX_ROWS_SHOWED * ROW_HEIGHT;
+            }
+            else {
+                _ddListTableViewHeight = _data.count * ROW_HEIGHT;
+            }
         }
     }
-    
-    self.titleLabel.text = _data[_currentSelction];
 }
 
 - (void)setListBackgroundColor:(UIColor *)listBackgroundColor {
@@ -187,13 +211,13 @@
     
     @synchronized(self) {
     
-        if (defaultSelection >=0 && defaultSelection < _data.count) {
+        if (self.enabledTitle && defaultSelection >= 0 && defaultSelection < _data.count) {
             _currentSelction = defaultSelection;
+            
+            self.titleLabel.text = _data[_currentSelction];
+            [self.listTableView reloadData];
         }
     }
-
-    self.titleLabel.text = _data[_currentSelction];
-    [self.listTableView reloadData];
 }
 
 - (void)showList
@@ -217,7 +241,7 @@
         
         CGPoint origin = [superview convertPoint:tableOrigin fromView:self];
         
-        if (superview.frame.size.height >= origin.y + DDListTableViewHeight) {
+        if (superview.frame.size.height >= origin.y + _ddListTableViewHeight) {
             break;
         }
         
@@ -234,7 +258,7 @@
     if (superview) {
         
         origin = [superview convertPoint:origin fromView:self];  // origin in superview's coordinate system
-        CGRect frame = {.origin = origin, .size = DDListTableViewSize};
+        CGRect frame = {.origin = origin, .size = DDListTableViewSize(_ddListTableViewHeight)};
         
         self.listTableFrame = self.listTableView.frame = frame;
         self.listTableSuperview = superview;
@@ -327,7 +351,7 @@
     }
     cell.textLabel.text = [self.data objectAtIndex:indexPath.row];
     
-    if (indexPath.row == _currentSelction) {
+    if (self.enabledCheckmark && indexPath.row == _currentSelction) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
     else {
@@ -339,14 +363,17 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 35;
+    return ROW_HEIGHT;
 }
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)l_tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     _currentSelction = (int)indexPath.row;
-    self.titleLabel.text = self.data[_currentSelction];
+    
+    if (self.enabledTitle) {
+        self.titleLabel.text = self.data[_currentSelction];
+    }
     
     [self.delegate dropdownViewActionForSelectedRow:(int)indexPath.row sender:self];
     [l_tableView deselectRowAtIndexPath:indexPath animated:NO];

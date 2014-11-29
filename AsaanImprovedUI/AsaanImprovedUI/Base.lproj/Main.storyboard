@@ -2256,9 +2256,11 @@
                         <outlet property="dropdownView" destination="7vp-uD-sJC" id="Bb4-Y8-A9H"/>
                         <outlet property="paymentInfoScrollView" destination="5de-OG-Thj" id="NF0-UF-ZqE"/>
                         <outlet property="ptkView" destination="xgc-HB-OET" id="Evb-Bn-QaW"/>
+                        <segue destination="gV3-KZ-030" kind="unwind" identifier="segueUnwindPaymentInfoToStroeList" unwindAction="unwindToStoreList:" id="w7e-D8-2aL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yNf-Kb-NNs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="gV3-KZ-030" userLabel="Exit" sceneMemberID="exit"/>
                 <barButtonItem image="back" style="plain" id="9jM-km-Bb6"/>
             </objects>
             <point key="canvasLocation" x="4492" y="2341"/>

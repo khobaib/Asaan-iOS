@@ -21,6 +21,9 @@
 @property (nonatomic, strong) UIColor* listBackgroundColor;
 @property (nonatomic, strong) UIColor* titleColor;
 
+@property (nonatomic, assign) BOOL enabledTitle;
+@property (nonatomic, assign) BOOL enabledCheckmark;
+
 - (void)refresh;    // to unlink all previous views and setup from start. You have to setup all values after calling this method.
 - (void)setData:(NSArray *)data;        // to change existing data
 - (void)setDefaultSelection:(int)defaultSelection;
