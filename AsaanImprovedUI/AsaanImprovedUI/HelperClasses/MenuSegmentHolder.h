@@ -10,6 +10,7 @@
 
 @interface MenuSegmentHolder : NSObject
 @property (strong, nonatomic) GTLStoreendpointStoreMenuHierarchy *menu;
+@property (strong, nonatomic) NSMutableArray *subMenus;
 @property (strong, nonatomic) DataProvider *provider;
 @property NSIndexPath *topRowIndex;
 @end

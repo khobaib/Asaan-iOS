@@ -27,7 +27,7 @@
 #import "SubMenuCell.h"
 
 const NSUInteger MenuFluentPagingTablePreloadMargin = 5;
-const NSUInteger MenuFluentPagingTablePageSize = 20;
+const NSUInteger MenuFluentPagingTablePageSize = 50;
 
 @interface MenuTableViewController() <DataProviderDelegate, DropdownViewDelegate>
 
@@ -176,7 +176,11 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
                     {
                         MenuSegmentHolder *menuSegmentHolder = [[MenuSegmentHolder alloc]init];
                         menuSegmentHolder.menu = menu;
-                        menuSegmentHolder.provider = [[DataProvider alloc] initWithPageSize:MenuFluentPagingTablePageSize itemCount:menu.menuItemCount.integerValue];
+                        menuSegmentHolder.subMenus = [[NSMutableArray alloc] init];
+                        for (GTLStoreendpointStoreMenuHierarchy *submenu in object.menusAndSubmenus)
+                            if (submenu.level.intValue == 1 && submenu.menuPOSId.longValue == menu.menuPOSId.longValue)
+                                 [menuSegmentHolder.subMenus addObject:submenu];
+                        menuSegmentHolder.provider = [[DataProvider alloc] initWithPageSize:object.menuItems.count itemCount:menu.menuItemCount.integerValue];
                         menuSegmentHolder.provider.delegate = weakSelf;
                         menuSegmentHolder.provider.shouldLoadAutomatically = YES;
                         menuSegmentHolder.provider.automaticPreloadMargin = MenuFluentPagingTablePreloadMargin;
@@ -220,15 +224,41 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     }
 }
 
+#pragma mark -
+#pragma mark  === DropdownViewDelegate ===
+#pragma mark -
+
+- (void)dropdownViewActionForSelectedRow:(int)row sender:(id)sender
+{
+    MenuSegmentHolder *menuSegmentHolder;
+    if (_menuSegmentHolders.count > 1)
+        menuSegmentHolder = [_menuSegmentHolders objectAtIndex:_segmentedControl.selectedSegmentIndex];
+    else
+        menuSegmentHolder = [_menuSegmentHolders firstObject];
+    GTLStoreendpointStoreMenuHierarchy *submenu = [menuSegmentHolder.subMenus objectAtIndex:row];
+    
+    [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:submenu.menuItemPosition.longValue inSection:0]
+                     atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+}
+
 - (void)setupDropdownView:(DropdownView *)dropdownView
 {
-    [dropdownView refresh];
+    MenuSegmentHolder *menuSegmentHolder;
+    if (_menuSegmentHolders.count > 1)
+        menuSegmentHolder = [_menuSegmentHolders objectAtIndex:_segmentedControl.selectedSegmentIndex];
+    else
+        menuSegmentHolder = [_menuSegmentHolders firstObject];
     
-    [dropdownView setData:@[@"15%", @"20%", @"25%", @"30%"]];
+    NSMutableArray *subMenuNames = [[NSMutableArray alloc]initWithCapacity:menuSegmentHolder.subMenus.count];
+    for (GTLStoreendpointStoreMenuHierarchy *submenu in menuSegmentHolder.subMenus)
+        [subMenuNames addObject:submenu.name];
+    
+    [dropdownView setData:subMenuNames];
     dropdownView.delegate = self;
-    [dropdownView setDefaultSelection:1];
+//    [dropdownView setDefaultSelection:1];
     dropdownView.listBackgroundColor = [UIColor asaanBackgroundColor];
     dropdownView.titleColor = [UIColor whiteColor];
+    [dropdownView refresh];
 }
 
 #pragma mark - 
@@ -271,15 +301,6 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
 - (void)dataProvider:(DataProvider *)dataProvider willLoadDataAtIndexes:(NSIndexSet *)indexes
 {
     [self.hud hide:NO];
-}
-
-#pragma mark -
-#pragma mark  === DropdownViewDelegate ===
-#pragma mark -
-
-- (void)dropdownViewActionForSelectedRow:(int)row sender:(id)sender
-{
-    NSLog(@"Selected row : %d", row);
 }
 
 #pragma mark -
@@ -422,6 +443,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     else
         menuSegmentHolder = [_menuSegmentHolders firstObject];
     
+    NSLog(@"heightForRowAtIndexPath index = %d", indexPath.row);
     id dataObject = menuSegmentHolder.provider.dataObjects[indexPath.row];
     UITableViewCell *cell;
     

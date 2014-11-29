@@ -12,5 +12,6 @@
 @implementation MenuSegmentHolder
 @synthesize provider = _provider;
 @synthesize menu = _menu;
+@synthesize subMenus = _subMenus;
 @synthesize topRowIndex = _topRowIndex;
 @end
