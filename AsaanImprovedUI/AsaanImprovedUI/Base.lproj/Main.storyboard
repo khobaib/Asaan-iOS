@@ -286,7 +286,7 @@
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="305" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1,500" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DEv-46-NRA">
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="305" contentMode="left" horizontalHuggingPriority="248" verticalHuggingPriority="251" text="1,500" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DEv-46-NRA">
                                             <rect key="frame" x="542" y="55" width="50" height="15"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="50" id="ziE-o1-OqB"/>
@@ -295,7 +295,7 @@
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" tag="306" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Like" translatesAutoresizingMaskIntoConstraints="NO" id="85o-Iq-bK7">
+                                        <imageView userInteractionEnabled="NO" tag="306" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Like" translatesAutoresizingMaskIntoConstraints="NO" id="85o-Iq-bK7">
                                             <rect key="frame" x="509" y="55" width="25" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="Dh1-lg-y0H"/>
@@ -327,22 +327,23 @@
                                         <constraint firstItem="uhj-2P-NXA" firstAttribute="leading" secondItem="Hhm-Qb-AVQ" secondAttribute="leading" id="1KB-20-VyP"/>
                                         <constraint firstItem="uhj-2P-NXA" firstAttribute="trailing" secondItem="OB6-Yy-bKN" secondAttribute="trailing" id="Acd-uT-Ftu"/>
                                         <constraint firstAttribute="centerY" secondItem="5ai-uw-xzl" secondAttribute="centerY" id="Aqr-fL-dA2"/>
-                                        <constraint firstItem="Jaz-Ql-Iez" firstAttribute="leading" secondItem="zw4-vp-OMe" secondAttribute="trailing" constant="8" id="B2w-JC-ykg"/>
+                                        <constraint firstItem="Jaz-Ql-Iez" firstAttribute="leading" secondItem="zw4-vp-OMe" secondAttribute="trailing" priority="750" constant="8" id="B2w-JC-ykg"/>
                                         <constraint firstItem="uhj-2P-NXA" firstAttribute="leading" secondItem="zw4-vp-OMe" secondAttribute="leading" id="Djf-Yo-Utn"/>
                                         <constraint firstItem="uhj-2P-NXA" firstAttribute="trailing" secondItem="zw4-vp-OMe" secondAttribute="trailing" id="Hyu-Kw-CA7"/>
-                                        <constraint firstItem="OB6-Yy-bKN" firstAttribute="top" secondItem="zw4-vp-OMe" secondAttribute="bottom" constant="8" id="IhE-lc-Qkj"/>
+                                        <constraint firstItem="OB6-Yy-bKN" firstAttribute="top" secondItem="zw4-vp-OMe" secondAttribute="bottom" priority="850" constant="8" id="IhE-lc-Qkj"/>
                                         <constraint firstItem="5ai-uw-xzl" firstAttribute="leading" secondItem="iUk-l3-jzb" secondAttribute="leadingMargin" constant="-8" id="Kkk-Cl-6qQ"/>
-                                        <constraint firstItem="Hhm-Qb-AVQ" firstAttribute="top" secondItem="uhj-2P-NXA" secondAttribute="bottom" constant="8" id="Qlq-LK-BiA"/>
+                                        <constraint firstItem="Hhm-Qb-AVQ" firstAttribute="top" secondItem="uhj-2P-NXA" secondAttribute="bottom" priority="800" constant="8" id="Qlq-LK-BiA"/>
                                         <constraint firstItem="zw4-vp-OMe" firstAttribute="top" secondItem="iUk-l3-jzb" secondAttribute="topMargin" id="Qnn-GR-3a2"/>
+                                        <constraint firstItem="85o-Iq-bK7" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Jaz-Ql-Iez" secondAttribute="bottom" priority="750" id="UKG-nG-KeD"/>
                                         <constraint firstItem="DEv-46-NRA" firstAttribute="trailing" secondItem="iUk-l3-jzb" secondAttribute="trailingMargin" id="Y8m-os-xgM"/>
                                         <constraint firstItem="Jaz-Ql-Iez" firstAttribute="trailing" secondItem="iUk-l3-jzb" secondAttribute="trailingMargin" id="chK-gd-xTr"/>
                                         <constraint firstItem="zw4-vp-OMe" firstAttribute="leading" secondItem="5ai-uw-xzl" secondAttribute="trailing" constant="8" id="clN-Nr-cM5"/>
-                                        <constraint firstItem="85o-Iq-bK7" firstAttribute="top" secondItem="uhj-2P-NXA" secondAttribute="top" id="d0z-c3-GBX"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="zw4-vp-OMe" secondAttribute="trailing" constant="8" id="fa0-zY-LPI"/>
-                                        <constraint firstItem="85o-Iq-bK7" firstAttribute="leading" secondItem="uhj-2P-NXA" secondAttribute="trailing" constant="8" id="gmE-PO-sLd"/>
+                                        <constraint firstItem="85o-Iq-bK7" firstAttribute="leading" secondItem="uhj-2P-NXA" secondAttribute="trailing" priority="750" constant="8" id="gmE-PO-sLd"/>
                                         <constraint firstItem="5ai-uw-xzl" firstAttribute="leading" secondItem="iUk-l3-jzb" secondAttribute="leadingMargin" id="hLX-tQ-SU5"/>
                                         <constraint firstItem="uhj-2P-NXA" firstAttribute="top" secondItem="OB6-Yy-bKN" secondAttribute="bottom" constant="8" id="iR0-Di-aMD"/>
-                                        <constraint firstItem="Hhm-Qb-AVQ" firstAttribute="bottom" secondItem="iUk-l3-jzb" secondAttribute="bottomMargin" constant="8" id="n3I-P2-18X"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="85o-Iq-bK7" secondAttribute="bottom" constant="16" id="kXS-ER-LJI"/>
+                                        <constraint firstItem="Hhm-Qb-AVQ" firstAttribute="bottom" secondItem="iUk-l3-jzb" secondAttribute="bottomMargin" priority="750" constant="8" id="n3I-P2-18X"/>
                                         <constraint firstItem="zw4-vp-OMe" firstAttribute="trailing" secondItem="Hhm-Qb-AVQ" secondAttribute="trailing" id="pvP-Ix-JDv"/>
                                         <constraint firstItem="DEv-46-NRA" firstAttribute="leading" secondItem="85o-Iq-bK7" secondAttribute="trailing" constant="8" id="qu4-nu-Kco"/>
                                         <constraint firstItem="85o-Iq-bK7" firstAttribute="top" secondItem="DEv-46-NRA" secondAttribute="top" id="rMX-27-dtU"/>
@@ -436,7 +437,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d6o-lq-fO3" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <barButtonItem image="back" style="plain" id="HAV-Wy-bvQ"/>
             </objects>
-            <point key="canvasLocation" x="2001" y="-3"/>
+            <point key="canvasLocation" x="2001" y="-7"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Zf6-zw-cPL">
