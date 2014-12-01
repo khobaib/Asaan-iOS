@@ -362,42 +362,20 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
             UIImageView *imgBackground = (UIImageView *)[cell viewWithTag:301];
             if (IsEmpty(menuItem.imageUrl) == false)
             {
-                PFQuery *query = [PFQuery queryWithClassName:@"PictureFiles"];
-                query.cachePolicy = kPFCachePolicyCacheElseNetwork;
-                query.maxCacheAge = 60 * 60; // 1 hr
-                
-                [query getObjectInBackgroundWithId:menuItem.imageUrl block:^(PFObject *pictureFile, NSError *error)
-                {
-                    if (error.code != kPFErrorCacheMiss)
-                    {
-                        if (error)
-                            NSLog(@"Store List Background image loading error:%@",[error userInfo]);
-                        else
-                        {
-                            PFFile *backgroundImgFile = pictureFile[@"picture_file"];
-                            UIImage *image = [[SDWebImageManager sharedManager].imageCache imageFromDiskCacheForKey:[[NSURL URLWithString:backgroundImgFile.url] absoluteString]];
-                            
-                            if (image) {
-                                
-                                imgBackground.image = image;
-                            }
-                            else {
-                                [imgBackground sd_setImageWithURL:[NSURL URLWithString:backgroundImgFile.url]
-                                                 placeholderImage:[UIImage imageNamed:@"loading-wait"]
-                                                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *backgroundImgUrl)
-                                 {
-                                     imgBackground.alpha = 0.0;
-                                     [UIView transitionWithView:imgBackground duration:3.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^
-                                      {
-                                          [imgBackground setImage:image];
-                                          imgBackground.alpha = 1.0;
-                                      } completion:NULL];
-                                 }];
-                            }
-                        }
-                    }
-                }];
+                [imgBackground sd_setImageWithURL:[NSURL URLWithString:menuItem.imageUrl]];
+//                [imgBackground sd_setImageWithURL:[NSURL URLWithString:menuItem.imageUrl]
+//                                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *backgroundImgUrl)
+//                 {
+//                     imgBackground.alpha = 0.0;
+//                     [UIView transitionWithView:imgBackground duration:1.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^
+//                      {
+//                          [imgBackground setImage:image];
+//                          imgBackground.alpha = 1.0;
+//                      } completion:NULL];
+//                 }];
             }
+            else
+                imgBackground.image = nil;
             return cell;
         }
     }
