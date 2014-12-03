@@ -42,23 +42,8 @@ const NSTimeInterval DataLoadingOperationDuration2 = 0.3;
             [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreCollection *object,NSError *error)
             {
                 if(!error)
-                {
                     [weakSelf setDataPage:[object.items mutableCopy]];
-                    NSMutableArray *pictureFiles = [[NSMutableArray alloc]init];
-                    for (GTLStoreendpointStore *store in object)
-                        if (IsEmpty(store.backgroundImageUrl) == false)
-                            [pictureFiles addObject:store.backgroundImageUrl];
-                    if (pictureFiles.count > 0)
-                    {
-                        PFQuery *query = [PFQuery queryWithClassName:@"PictureFiles"];
-                        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-                        [query whereKey:@"objectId" containedIn:pictureFiles];
-                        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                            if (error)
-                                NSLog(@"StoreLoadingOperation Parse Error:%@",[error userInfo]);
-                        }];
-                    }
-                } else
+                else
                     NSLog(@"StoreLoadingOperation Error:%@",[error userInfo]);
                 
                 weakSelf.bDataLoaded = true;

@@ -153,7 +153,6 @@ const NSUInteger FluentPagingTablePreloadMargin = 5;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StoreListCell" forIndexPath:indexPath];
 
     UIImageView *imgBackground = (UIImageView *)[cell viewWithTag:400];
-//    imgBackground.image = [UIImage imageNamed:@"loading-wait"]; // placeholder image
     UILabel *txtName=(UILabel *)[cell viewWithTag:500];
     UILabel *txtTrophy=(UILabel *)[cell viewWithTag:501];
     UILabel *txtCuisine=(UILabel *)[cell viewWithTag:502];
@@ -192,47 +191,9 @@ const NSUInteger FluentPagingTablePreloadMargin = 5;
     GTLStoreendpointStore *store = dataObject;
     if (store != nil) {
         
-        if (IsEmpty(store.backgroundImageUrl) == false) {
-            
-            imgBackground.image = [UIImage imageNamed:@"loading-wait"];
-            
-            PFQuery *query = [PFQuery queryWithClassName:@"PictureFiles"];
-            query.cachePolicy = kPFCachePolicyCacheElseNetwork;
-            query.maxCacheAge = 60 * 60; // 1 hr
-            [query getObjectInBackgroundWithId:store.backgroundImageUrl block:^(PFObject *pictureFile, NSError *error) {
-                
-                if (error.code != kPFErrorCacheMiss) {
-                    if (error)
-                        NSLog(@"Store List Background image loading error:%@",[error userInfo]);
-                    else {
-                        
-                        PFFile *backgroundImgFile = pictureFile[@"picture_file"];
-                        UIImage *image = [[SDWebImageManager sharedManager].imageCache imageFromDiskCacheForKey:[[NSURL URLWithString:backgroundImgFile.url] absoluteString]];
-                        
-                        if (image) {
-                            
-                            imgBackground.image = image;
-                        }
-                        else {
-                            
-                            [imgBackground sd_setImageWithURL:[NSURL URLWithString:backgroundImgFile.url]
-                                             placeholderImage:[UIImage imageNamed:@"loading-wait"]
-                                                    completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *backgroundImgUrl) {
-                                                        imgBackground.alpha = 0.0;
-                                                        [UIView transitionWithView:imgBackground
-                                                                          duration:3.0
-                                                                           options:UIViewAnimationOptionTransitionCrossDissolve
-                                                                        animations:^{
-                                                                            [imgBackground setImage:image];
-                                                                            imgBackground.alpha = 1.0;
-                                                                        } completion:NULL];
-                                                    }
-                             ];
-                        }
-                    }
-                }
-            }];
-        }
+        if (IsEmpty(store.backgroundImageUrl) == false)
+            [imgBackground sd_setImageWithURL:[NSURL URLWithString:store.backgroundImageUrl]];
+
         NSLog(@"name = %@, torphy = %@, cuisine = %@", store.name, store.trophies.firstObject, store.subType);
         txtName.text = store.name;
         txtTrophy.text = store.trophies.firstObject;
