@@ -25,6 +25,7 @@
 + (NSArray *)checkClasses {
   NSArray *classes = [NSArray arrayWithObjects:
                       [GTLQueryStoreendpoint class],
+                      [GTLStoreendpointAsaanLong class],
                       [GTLStoreendpointMenuItemModifiersAndGroups class],
                       [GTLStoreendpointMenusAndMenuItems class],
                       [GTLStoreendpointStore class],

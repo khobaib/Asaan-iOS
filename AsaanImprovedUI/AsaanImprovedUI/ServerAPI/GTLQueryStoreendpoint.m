@@ -13,10 +13,11 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryStoreendpoint (21 custom class methods, 9 custom properties)
+//   GTLQueryStoreendpoint (22 custom class methods, 9 custom properties)
 
 #import "GTLQueryStoreendpoint.h"
 
+#import "GTLStoreendpointAsaanLong.h"
 #import "GTLStoreendpointMenuItemModifiersAndGroups.h"
 #import "GTLStoreendpointMenusAndMenuItems.h"
 #import "GTLStoreendpointStore.h"
@@ -59,6 +60,13 @@
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
   query.storeId = storeId;
   query.expectedObjectClass = [GTLStoreendpointStore class];
+  return query;
+}
+
++ (id)queryForGetStoreCount {
+  NSString *methodName = @"storeendpoint.getStoreCount";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.expectedObjectClass = [GTLStoreendpointAsaanLong class];
   return query;
 }
 

@@ -15,6 +15,7 @@
 
 #import "GTLStoreendpointConstants.h"
 
+#import "GTLStoreendpointAsaanLong.h"
 #import "GTLStoreendpointMenuItemModifiersAndGroups.h"
 #import "GTLStoreendpointMenusAndMenuItems.h"
 #import "GTLStoreendpointStore.h"

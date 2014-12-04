@@ -22,6 +22,7 @@
 #import "MenuTableViewController.h"
 
 const NSUInteger FluentPagingTablePreloadMargin = 5;
+const NSUInteger FluentPagingTablePageSize = 20;
 
 @interface StoreListTableTableViewController ()<DataProviderDelegate>
     @property (nonatomic, strong) MBProgressHUD *hud;
@@ -41,10 +42,21 @@ const NSUInteger FluentPagingTablePreloadMargin = 5;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _dataProvider = [[DataProvider alloc] initWithPageSize:6 itemCount:6];
-    _dataProvider.delegate = self;
-    _dataProvider.shouldLoadAutomatically = YES;
-    _dataProvider.automaticPreloadMargin = FluentPagingTablePreloadMargin;
+    typeof(self) weakSelf = self;
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
+    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreCount];
+    
+    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointAsaanLong *object,NSError *error)
+     {
+         NSInteger pageSize = FluentPagingTablePageSize < object.longValue.longValue ? FluentPagingTablePageSize : object.longValue.longValue;
+         _dataProvider = [[DataProvider alloc] initWithPageSize:pageSize itemCount:object.longValue.longValue];
+         _dataProvider.delegate = self;
+         _dataProvider.shouldLoadAutomatically = YES;
+         _dataProvider.automaticPreloadMargin = FluentPagingTablePreloadMargin;
+         if ([self isViewLoaded])
+             [self.tableView reloadData];
+     }];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -52,8 +64,6 @@ const NSUInteger FluentPagingTablePreloadMargin = 5;
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-//    if ([self isViewLoaded])
-//        [self.tableView reloadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -64,7 +74,6 @@ const NSUInteger FluentPagingTablePreloadMargin = 5;
     PFUser *currentUser = [PFUser currentUser];
     if (!currentUser) {
         [self performSegueWithIdentifier:@"segueStartup" sender:self];
-//        [self performSegueWithIdentifier:@"segueLoginStoryboard" sender:self];
         return;
     }
     

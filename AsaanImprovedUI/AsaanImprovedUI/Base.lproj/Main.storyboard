@@ -7,16 +7,18 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
-        <!--Store List Table Table View Controller-->
+        <!--StoreListTableViewController-->
         <scene sceneID="Cta-Gk-xQ7">
             <objects>
-                <tableViewController storyboardIdentifier="StoreListTableViewController" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VTS-fT-VLj" customClass="StoreListTableTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="StoreListTableViewController" title="ASAAN" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VTS-fT-VLj" userLabel="StoreListTableViewController" customClass="StoreListTableTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="250" sectionHeaderHeight="22" sectionFooterHeight="22" id="iLr-wH-RNn">
-                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="separatorColor" red="0.79607843140000001" green="0.59607843140000005" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <color key="sectionIndexBackgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="sectionIndexTrackingBackgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" restorationIdentifier="StoreListCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="StoreListCell" id="Csa-Sc-eig" userLabel="StoreListCell">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -237,7 +239,8 @@
                             <outlet property="delegate" destination="VTS-fT-VLj" id="jSr-Ni-njW"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="h0o-YY-T31"/>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" title="ASAAN" id="h0o-YY-T31"/>
                     <connections>
                         <outlet property="tableView" destination="iLr-wH-RNn" id="ZuM-cD-V5M"/>
                         <segue destination="eRi-F6-0Pv" kind="show" identifier="segueReveal" id="Tad-Vz-OyK"/>
@@ -257,13 +260,16 @@
         <scene sceneID="1g9-7q-4cr">
             <objects>
                 <tableViewController title="Menu" extendedLayoutIncludesOpaqueBars="YES" id="2nl-tz-z8l" userLabel="MenuTableViewController" customClass="MenuTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" id="6bZ-Qj-a9y">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="40" sectionFooterHeight="40" id="6bZ-Qj-a9y">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="separatorColor" red="0.79607843140000001" green="0.59607843140000005" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <color key="sectionIndexBackgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="sectionIndexTrackingBackgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MenuItemCell" id="0QP-pX-7Eu" userLabel="MenuItemCell" customClass="MenuItemCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MenuItemCell" id="0QP-pX-7Eu" userLabel="MenuItemCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0QP-pX-7Eu" id="iUk-l3-jzb">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -314,8 +320,9 @@
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" tag="301" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="food-default" translatesAutoresizingMaskIntoConstraints="NO" id="5ai-uw-xzl" customClass="PFImageView">
+                                        <imageView userInteractionEnabled="NO" tag="301" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5ai-uw-xzl" customClass="PFImageView">
                                             <rect key="frame" x="8" y="25" width="50" height="50"/>
+                                            <color key="backgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="ksz-4l-I9T"/>
                                                 <constraint firstAttribute="width" constant="50" id="wbk-Vm-PfM"/>
@@ -337,7 +344,7 @@
                                         <constraint firstItem="85o-Iq-bK7" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Jaz-Ql-Iez" secondAttribute="bottom" priority="750" id="UKG-nG-KeD"/>
                                         <constraint firstItem="DEv-46-NRA" firstAttribute="trailing" secondItem="iUk-l3-jzb" secondAttribute="trailingMargin" id="Y8m-os-xgM"/>
                                         <constraint firstItem="Jaz-Ql-Iez" firstAttribute="trailing" secondItem="iUk-l3-jzb" secondAttribute="trailingMargin" id="chK-gd-xTr"/>
-                                        <constraint firstItem="zw4-vp-OMe" firstAttribute="leading" secondItem="5ai-uw-xzl" secondAttribute="trailing" constant="8" id="clN-Nr-cM5"/>
+                                        <constraint firstItem="zw4-vp-OMe" firstAttribute="leading" secondItem="5ai-uw-xzl" secondAttribute="trailing" constant="8" symbolic="YES" id="clN-Nr-cM5"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="zw4-vp-OMe" secondAttribute="trailing" constant="8" id="fa0-zY-LPI"/>
                                         <constraint firstItem="85o-Iq-bK7" firstAttribute="leading" secondItem="uhj-2P-NXA" secondAttribute="trailing" priority="750" constant="8" id="gmE-PO-sLd"/>
                                         <constraint firstItem="5ai-uw-xzl" firstAttribute="leading" secondItem="iUk-l3-jzb" secondAttribute="leadingMargin" id="hLX-tQ-SU5"/>
@@ -359,30 +366,20 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <connections>
-                                    <outlet property="descriptionLabel" destination="OB6-Yy-bKN" id="sVC-JK-7fD"/>
-                                    <outlet property="foodImageView" destination="5ai-uw-xzl" id="tQD-Qu-F9N"/>
-                                    <outlet property="likeCountLabel" destination="DEv-46-NRA" id="FQa-P5-58T"/>
-                                    <outlet property="likeImageView" destination="85o-Iq-bK7" id="QIx-8z-Vvn"/>
-                                    <outlet property="priceLabel" destination="Jaz-Ql-Iez" id="Pva-zR-L8u"/>
-                                    <outlet property="statisticLabel" destination="uhj-2P-NXA" id="43l-fI-qvB"/>
-                                    <outlet property="statusLabel" destination="Hhm-Qb-AVQ" id="PX3-F0-cIL"/>
-                                    <outlet property="titleLabel" destination="zw4-vp-OMe" id="ui0-tl-sp4"/>
-                                </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SubMenuCell" rowHeight="40" id="ZkS-er-Nns" userLabel="SubMenuCell" customClass="SubMenuCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SubMenuCell" rowHeight="40" id="ZkS-er-Nns" userLabel="SubMenuCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZkS-er-Nns" id="1aA-Sl-ctT">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="401" contentMode="left" horizontalHuggingPriority="253" verticalHuggingPriority="252" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="Appetizers" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="035-Ls-zlP">
-                                            <rect key="frame" x="16" y="9" width="418" height="20"/>
+                                            <rect key="frame" x="16" y="9" width="568" height="20"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view tag="402" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O0j-Pz-gGY" userLabel="DropdownView" customClass="DropdownView">
-                                            <rect key="frame" x="484" y="5" width="100" height="30"/>
+                                            <rect key="frame" x="476" y="5" width="100" height="30"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="2ww-2C-I5J"/>
@@ -398,12 +395,13 @@
                                         <constraint firstItem="035-Ls-zlP" firstAttribute="leading" secondItem="1aA-Sl-ctT" secondAttribute="leadingMargin" priority="900" constant="8" id="Mmq-Xp-peX"/>
                                         <constraint firstAttribute="centerY" secondItem="035-Ls-zlP" secondAttribute="centerY" id="NC1-sZ-dNh"/>
                                         <constraint firstAttribute="centerY" secondItem="035-Ls-zlP" secondAttribute="centerY" id="OLL-ud-9KS"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="O0j-Pz-gGY" secondAttribute="trailing" constant="8" id="f9k-Lk-aUm"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="O0j-Pz-gGY" secondAttribute="trailing" constant="16" id="f9k-Lk-aUm"/>
                                         <constraint firstItem="O0j-Pz-gGY" firstAttribute="leading" secondItem="035-Ls-zlP" secondAttribute="trailing" priority="980" constant="50" id="fhU-8u-drT"/>
                                         <constraint firstItem="035-Ls-zlP" firstAttribute="top" secondItem="1aA-Sl-ctT" secondAttribute="topMargin" priority="900" constant="2" id="gDr-iv-g9c"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="035-Ls-zlP" secondAttribute="bottom" priority="901" constant="2" id="gQk-wb-LWn"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="035-Ls-zlP" secondAttribute="bottom" constant="4" id="i30-Md-KbS"/>
                                         <constraint firstAttribute="centerY" secondItem="O0j-Pz-gGY" secondAttribute="centerY" id="s3t-ku-aRr"/>
+                                        <constraint firstAttribute="centerX" secondItem="035-Ls-zlP" secondAttribute="centerX" id="svD-oi-AjJ"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
@@ -412,15 +410,12 @@
                                             <exclude reference="Gbt-2e-IDF"/>
                                             <exclude reference="OLL-ud-9KS"/>
                                             <exclude reference="i30-Md-KbS"/>
+                                            <exclude reference="fhU-8u-drT"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <connections>
-                                    <outlet property="dropdownView" destination="O0j-Pz-gGY" id="xcB-Kg-G7p"/>
-                                    <outlet property="titleLabel" destination="035-Ls-zlP" id="dQL-49-jL8"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -2335,7 +2330,6 @@
         <image name="back" width="22" height="22"/>
         <image name="contacts.png" width="137" height="76"/>
         <image name="fb_logo" width="29" height="29"/>
-        <image name="food-default" width="241" height="188"/>
         <image name="money.png" width="91" height="55"/>
         <image name="person-profile-photo" width="316" height="316"/>
         <image name="recommend-blue" width="56" height="55"/>

@@ -18,6 +18,7 @@
 
 #import "GTLStoreendpointConstants.m"
 
+#import "GTLStoreendpointAsaanLong.m"
 #import "GTLStoreendpointMenuItemModifiersAndGroups.m"
 #import "GTLStoreendpointMenusAndMenuItems.m"
 #import "GTLStoreendpointStore.m"

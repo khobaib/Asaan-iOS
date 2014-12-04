@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"9mnLCPwbyZOHH18t8ExzO2gqgTk/iZNmTKMGK566_u9W3RkXprW0aFg\"",
+ "etag": "\"9mnLCPwbyZOHH18t8ExzO2gqgTk/tMoz9MDAxehC8PDpnQexqnl76e8\"",
  "discoveryVersion": "v1",
  "id": "storeendpoint:v1",
  "name": "storeendpoint",
@@ -72,6 +72,16 @@
   }
  },
  "schemas": {
+  "AsaanLong": {
+   "id": "AsaanLong",
+   "type": "object",
+   "properties": {
+    "longValue": {
+     "type": "string",
+     "format": "int64"
+    }
+   }
+  },
   "MenuItemModifiersAndGroups": {
    "id": "MenuItemModifiersAndGroups",
    "type": "object",
@@ -806,6 +816,15 @@
    ],
    "returns": {
     "$ref": "Store"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.getStoreCount": {
+   "id": "storeendpoint.getStoreCount",
+   "returns": {
+    "$ref": "AsaanLong"
    },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"
