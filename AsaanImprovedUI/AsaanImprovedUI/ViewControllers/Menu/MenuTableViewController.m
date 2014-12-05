@@ -286,7 +286,6 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
         menuSegmentHolder = [_menuSegmentHolders objectAtIndex:_segmentedControl.selectedSegmentIndex];
     else
         menuSegmentHolder = [_menuSegmentHolders firstObject];
-    NSLog(@"Number of sections = %d", menuSegmentHolder.subMenus.count);
     return menuSegmentHolder.subMenus.count;
 }
 
@@ -300,7 +299,6 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     else
         menuSegmentHolder = [_menuSegmentHolders firstObject];
     GTLStoreendpointStoreMenuHierarchy *submenu = [menuSegmentHolder.subMenus objectAtIndex:section];
-    NSLog(@"Number of rows = %d in section %d", submenu.menuItemCount.integerValue, section);
     return submenu.menuItemCount.integerValue;
 }
 
@@ -313,8 +311,6 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
         menuSegmentHolder = [_menuSegmentHolders firstObject];
     GTLStoreendpointStoreMenuHierarchy *submenu = [menuSegmentHolder.subMenus objectAtIndex:indexPath.section];
     NSInteger rowIndex = submenu.menuItemPosition.intValue + indexPath.row + 1;
-
-    NSLog(@"cellForRowAtIndexPath index = %d indexPath.section = %d, indexPath.row = %d", rowIndex, indexPath.section, indexPath.row);
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MenuItemCellIdentifier forIndexPath:indexPath];
     UILabel *txtName=(UILabel *)[cell viewWithTag:302];
