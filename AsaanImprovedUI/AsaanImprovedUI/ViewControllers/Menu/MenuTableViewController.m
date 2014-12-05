@@ -328,6 +328,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
         menuSegmentHolder = [_menuSegmentHolders objectAtIndex:_segmentedControl.selectedSegmentIndex];
     else
         menuSegmentHolder = [_menuSegmentHolders firstObject];
+    
     GTLStoreendpointStoreMenuHierarchy *submenu = [menuSegmentHolder.subMenus objectAtIndex:indexPath.section];
     NSInteger rowIndex = submenu.menuItemPosition.intValue + indexPath.row + 1;
 
@@ -351,12 +352,14 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     cell.descriptionLabel.text = menuItem.longDescription;
     cell.priceLabel.text = [UtilCalls amountToString:menuItem.price];
     
+    cell.delegate = self;
+    cell.itemPFImageView.tag = rowIndex - indexPath.section - 1;
+    
+    NSLog(@"Test yy %d %ld %ld", submenu.menuItemPosition.intValue, (long)indexPath.row, (long)indexPath.section);
+    
     if (IsEmpty(menuItem.thumbnailUrl) == false)
     {
 //        [cell.itemPFImageView sd_setImageWithURL:[NSURL URLWithString:menuItem.thumbnailUrl]];
-        cell.delegate = self;
-        cell.itemPFImageView.tag = indexPath.row;
-        
         [cell.itemPFImageView setImageWithURL:[NSURL URLWithString:menuItem.thumbnailUrl]
                              placeholderImage:[UIImage imageWithColor:RGBA(0.0, 0.0, 0.0, 0.5)]
                                     completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -368,8 +371,6 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     }
     else {
         cell.itemPFImageView.image = [UIImage imageNamed:@"no_image"];
-        cell.delegate = self;
-        cell.itemPFImageView.tag = indexPath.row;
     }
     
     return cell;
@@ -489,7 +490,23 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
         return nil;
     }
     
-    id dataObject = menuSegmentHolder.provider.dataObjects[index];
+    int sum = 0;
+    int section = 0;
+    for (GTLStoreendpointStoreMenuHierarchy *submenu in menuSegmentHolder.subMenus) {
+        
+        sum += submenu.menuItemCount.integerValue;
+        
+        if (index < sum) {
+            break;
+        }
+        section += 1;
+    }
+    
+    NSLog(@"Test %lu %d %d", (unsigned long)index, sum, section);
+    
+//    GTLStoreendpointStoreMenuHierarchy *submenu = [menuSegmentHolder.subMenus objectAtIndex:section];
+    NSInteger rowIndex = section + index + 1;
+    id dataObject = menuSegmentHolder.provider.dataObjects[rowIndex];
     if ([dataObject isKindOfClass:[NSNull class]])
         return nil;
     
@@ -524,7 +541,21 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
         return nil;
     }
     
-    id dataObject = menuSegmentHolder.provider.dataObjects[index];
+    int sum = 0;
+    int section = 0;
+    for (GTLStoreendpointStoreMenuHierarchy *submenu in menuSegmentHolder.subMenus) {
+        
+        sum += submenu.menuItemCount.integerValue;
+        
+        if (index < sum) {
+            break;
+        }
+        section += 1;
+    }
+    
+//    GTLStoreendpointStoreMenuHierarchy *submenu = [menuSegmentHolder.subMenus objectAtIndex:section];
+    NSInteger rowIndex = section + index + 1;
+    id dataObject = menuSegmentHolder.provider.dataObjects[rowIndex];
     if ([dataObject isKindOfClass:[NSNull class]])
         return nil;
     
@@ -574,6 +605,8 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
 
 - (void)menuItemCell:(MenuItemCell *)menuItemCell didClickedItemImage:(UIImageView *)sender
 {
+    
+    NSLog(@"Test gh %lu ", sender.tag);
     
     // Create browser (must be done each time photo browser is
     // displayed. Photo browser objects cannot be re-used)
