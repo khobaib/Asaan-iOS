@@ -18,7 +18,7 @@
 #import "UIColor+AsaanGoldColor.h"
 #import "DataProvider.h"
 #import "DropdownView.h"
-#import "UIImageView+WebCache.h"
+//#import "UIImageView+WebCache.h"
 #import "MenuItemLoadingOperation.h"
 #import "MenuSegmentHolder.h"
 #import "UIColor+AsaanBackgroundColor.h"
@@ -27,6 +27,8 @@
 #import "MWPhotoBrowser.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "MenuMWCaptionView.h"
+#import "UIImageView+UIActivityIndicatorForSDWebImage.h"
+#import "Extension.h"
 
 const NSUInteger MenuFluentPagingTablePreloadMargin = 5;
 const NSUInteger MenuFluentPagingTablePageSize = 50;
@@ -330,21 +332,6 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     NSInteger rowIndex = submenu.menuItemPosition.intValue + indexPath.row + 1;
 
     MenuItemCell *cell = [tableView dequeueReusableCellWithIdentifier:MenuItemCellIdentifier forIndexPath:indexPath];
-//    UILabel *txtName=(UILabel *)[cell viewWithTag:302];
-//    UILabel *txtDescription=(UILabel *)[cell viewWithTag:303];
-//    UILabel *txtTodaysOrders=(UILabel *)[cell viewWithTag:304];
-//    UILabel *txtLikes=(UILabel *)[cell viewWithTag:305];
-//    UIImageView *imgLike = (UIImageView *)[cell viewWithTag:306];
-//    UILabel *txtPrice=(UILabel *)[cell viewWithTag:307];
-//    UILabel *txtMostOrdered=(UILabel *)[cell viewWithTag:308];
-    
-//    txtName.text = nil;
-//    txtDescription.text = nil;
-//    txtTodaysOrders.text = nil;
-//    txtLikes.text = nil;
-//    imgLike.image = nil;
-//    txtPrice.text = nil;
-//    txtMostOrdered.text = nil;
     
     cell.titleLabel.text = nil;
     cell.descriptionLabel.text = nil;
@@ -364,31 +351,23 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     cell.descriptionLabel.text = menuItem.longDescription;
     cell.priceLabel.text = [UtilCalls amountToString:menuItem.price];
     
-//    UIImageView *imgBackground = (UIImageView *)[cell viewWithTag:301];
-    NSLog(@"Image : %@ %d", menuItem.imageUrl, IsEmpty(menuItem.imageUrl));
-    if (IsEmpty(menuItem.imageUrl) == false)
+    if (IsEmpty(menuItem.thumbnailUrl) == false)
     {
-        [cell.itemPFImageView sd_setImageWithURL:[NSURL URLWithString:menuItem.imageUrl]];
+//        [cell.itemPFImageView sd_setImageWithURL:[NSURL URLWithString:menuItem.thumbnailUrl]];
         cell.delegate = self;
         cell.itemPFImageView.tag = indexPath.row;
         
-        
-        
-//                [imgBackground sd_setImageWithURL:[NSURL URLWithString:menuItem.imageUrl]
-//                                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *backgroundImgUrl)
-//                 {
-//                     imgBackground.alpha = 0.0;
-//                     [UIView transitionWithView:imgBackground duration:1.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^
-//                      {
-//                          [imgBackground setImage:image];
-//                          imgBackground.alpha = 1.0;
-//                      } completion:NULL];
-//                 }];
+        [cell.itemPFImageView setImageWithURL:[NSURL URLWithString:menuItem.thumbnailUrl]
+                             placeholderImage:[UIImage imageWithColor:RGBA(0.0, 0.0, 0.0, 0.5)]
+                                    completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                        if (error) {
+                                            NSLog(@"ERROR : %@", error);
+                                        }
+                                    }
+                  usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     }
     else {
-        cell.itemPFImageView.image = [UIImage imageNamed:@"busy0"];
-        
-#warning Test : For real comment these lines out.
+        cell.itemPFImageView.image = [UIImage imageNamed:@"no_image"];
         cell.delegate = self;
         cell.itemPFImageView.tag = indexPath.row;
     }
@@ -519,32 +498,13 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     
     if (IsEmpty(menuItem.imageUrl) == false)
     {
-#warning Change this to your required url
-        photo = [MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm2.static.flickr.com/1224/1011283712_5750c5ba8e_b.jpg"]];
+//        photo = [MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm2.static.flickr.com/1224/1011283712_5750c5ba8e_b.jpg"]];
+        photo = [MWPhoto photoWithURL:[NSURL URLWithString:menuItem.imageUrl]];
     }
     else {
-#warning Change this to your required image, you want to show when url is unavailable
-//        photo = [MWPhoto photoWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"busy0" ofType:@"jpg"]]];
-        photo = [MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm2.static.flickr.com/1224/1011283712_5750c5ba8e_b.jpg"]];
+        photo = [MWPhoto photoWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"no_image_big" ofType:@"png"]]];
+//        photo = [MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm2.static.flickr.com/1224/1011283712_5750c5ba8e_b.jpg"]];
     }
-    
-//    NSMutableString *caption = [NSMutableString stringWithFormat:@""];
-//    NSString *string = menuItem.shortDescription;
-//    if (string && ![string isEqualToString:@""]) {
-//        [caption appendFormat:@"%@\n", string];
-//    }
-//    
-//    string = menuItem.longDescription;
-//    if (string && ![string isEqualToString:@""]) {
-//        [caption appendFormat:@"%@\n", string];
-//    }
-//    
-//    string = [UtilCalls amountToString:menuItem.price];
-//    if (string && ![string isEqualToString:@""]) {
-//        [caption appendFormat:@"%@\n",string];
-//    }
-//    
-//    photo.caption = caption;
     
     return photo;
 }
@@ -573,13 +533,12 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     
     if (IsEmpty(menuItem.imageUrl) == false)
     {
-#warning Change this to your required url
-        photo = [MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm2.static.flickr.com/1224/1011283712_5750c5ba8e_b.jpg"]];
+//        photo = [MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm2.static.flickr.com/1224/1011283712_5750c5ba8e_b.jpg"]];
+        photo = [MWPhoto photoWithURL:[NSURL URLWithString:menuItem.imageUrl]];
     }
     else {
-#warning Change this to your required image, you want to show when url is unavailable
-        //        photo = [MWPhoto photoWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"busy0" ofType:@"jpg"]]];
-        photo = [MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm2.static.flickr.com/1224/1011283712_5750c5ba8e_b.jpg"]];
+        photo = [MWPhoto photoWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"no_image_big" ofType:@"png"]]];
+//        photo = [MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm2.static.flickr.com/1224/1011283712_5750c5ba8e_b.jpg"]];
     }
     
     MenuMWCaptionView *captionView = [[MenuMWCaptionView alloc] initWithPhoto:photo];
