@@ -45,8 +45,7 @@
 		3709EAC31A31804E0060B49B /* PSTGridLayoutSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3709EAB61A31804E0060B49B /* PSTGridLayoutSection.m */; };
 		3709EAC71A31C8420060B49B /* MenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3709EAC61A31C8420060B49B /* MenuTableViewController.m */; };
 		3709EACD1A31C8DA0060B49B /* MenuItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3709EACC1A31C8DA0060B49B /* MenuItemCell.m */; };
-		3709EAD01A31E2290060B49B /* CustomMWCaptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3709EACF1A31E2290060B49B /* CustomMWCaptionView.m */; };
-		3709EAD21A31E2570060B49B /* CustomMWCaptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3709EAD11A31E2570060B49B /* CustomMWCaptionView.xib */; };
+		3709EAD01A31E2290060B49B /* MenuMWCaptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3709EACF1A31E2290060B49B /* MenuMWCaptionView.m */; };
 		37909B6D1A23828000649827 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37909B651A23828000649827 /* LoginViewController.m */; };
 		37909B6E1A23828000649827 /* PaymentInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37909B671A23828000649827 /* PaymentInfoViewController.m */; };
 		37909B6F1A23828000649827 /* SignupProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37909B691A23828000649827 /* SignupProfileViewController.m */; };
@@ -310,9 +309,8 @@
 		3709EAC61A31C8420060B49B /* MenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTableViewController.m; sourceTree = "<group>"; };
 		3709EACB1A31C8DA0060B49B /* MenuItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuItemCell.h; sourceTree = "<group>"; };
 		3709EACC1A31C8DA0060B49B /* MenuItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuItemCell.m; sourceTree = "<group>"; };
-		3709EACE1A31E2290060B49B /* CustomMWCaptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomMWCaptionView.h; sourceTree = "<group>"; };
-		3709EACF1A31E2290060B49B /* CustomMWCaptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomMWCaptionView.m; sourceTree = "<group>"; };
-		3709EAD11A31E2570060B49B /* CustomMWCaptionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomMWCaptionView.xib; sourceTree = "<group>"; };
+		3709EACE1A31E2290060B49B /* MenuMWCaptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuMWCaptionView.h; sourceTree = "<group>"; };
+		3709EACF1A31E2290060B49B /* MenuMWCaptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuMWCaptionView.m; sourceTree = "<group>"; };
 		37909B641A23828000649827 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		37909B651A23828000649827 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		37909B661A23828000649827 /* PaymentInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentInfoViewController.h; sourceTree = "<group>"; };
@@ -769,9 +767,8 @@
 				3709EAC61A31C8420060B49B /* MenuTableViewController.m */,
 				3709EACB1A31C8DA0060B49B /* MenuItemCell.h */,
 				3709EACC1A31C8DA0060B49B /* MenuItemCell.m */,
-				3709EACE1A31E2290060B49B /* CustomMWCaptionView.h */,
-				3709EACF1A31E2290060B49B /* CustomMWCaptionView.m */,
-				3709EAD11A31E2570060B49B /* CustomMWCaptionView.xib */,
+				3709EACE1A31E2290060B49B /* MenuMWCaptionView.h */,
+				3709EACF1A31E2290060B49B /* MenuMWCaptionView.m */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -1401,7 +1398,6 @@
 				3709EA6E1A317C4E0060B49B /* busy3.png in Resources */,
 				D41D32291A11DD9300EA49B6 /* Phone.png in Resources */,
 				D4522B0E1A15264F002EFA92 /* diners.png in Resources */,
-				3709EAD21A31E2570060B49B /* CustomMWCaptionView.xib in Resources */,
 				D4522B331A155977002EFA92 /* reveal-icon.png in Resources */,
 				D41D32191A11DD9300EA49B6 /* asaanLogin.png in Resources */,
 				D41D321B1A11DD9300EA49B6 /* cal.png in Resources */,
@@ -1521,7 +1517,7 @@
 				3709EA971A31802A0060B49B /* MWTapDetectingView.m in Sources */,
 				D4522B1F1A15264F002EFA92 /* PTKCardNumber.m in Sources */,
 				D449EB751A1BCDEB00879383 /* GTLUserendpointUser.m in Sources */,
-				3709EAD01A31E2290060B49B /* CustomMWCaptionView.m in Sources */,
+				3709EAD01A31E2290060B49B /* MenuMWCaptionView.m in Sources */,
 				3709EAC71A31C8420060B49B /* MenuTableViewController.m in Sources */,
 				D4F275A81A0C021800CEC95A /* AppDelegate.m in Sources */,
 				D4522B231A15264F002EFA92 /* PTKView.m in Sources */,

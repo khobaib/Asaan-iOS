@@ -26,6 +26,7 @@
 #import "MenuItemCell.h"
 #import "MWPhotoBrowser.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "MenuMWCaptionView.h"
 
 const NSUInteger MenuFluentPagingTablePreloadMargin = 5;
 const NSUInteger MenuFluentPagingTablePageSize = 50;
@@ -527,25 +528,85 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
         photo = [MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm2.static.flickr.com/1224/1011283712_5750c5ba8e_b.jpg"]];
     }
     
-    NSMutableString *caption = [NSMutableString stringWithFormat:@""];
-    NSString *string = menuItem.shortDescription;
-    if (string && ![string isEqualToString:@""]) {
-        [caption appendFormat:@"%@\n", string];
+//    NSMutableString *caption = [NSMutableString stringWithFormat:@""];
+//    NSString *string = menuItem.shortDescription;
+//    if (string && ![string isEqualToString:@""]) {
+//        [caption appendFormat:@"%@\n", string];
+//    }
+//    
+//    string = menuItem.longDescription;
+//    if (string && ![string isEqualToString:@""]) {
+//        [caption appendFormat:@"%@\n", string];
+//    }
+//    
+//    string = [UtilCalls amountToString:menuItem.price];
+//    if (string && ![string isEqualToString:@""]) {
+//        [caption appendFormat:@"%@\n",string];
+//    }
+//    
+//    photo.caption = caption;
+    
+    return photo;
+}
+
+- (MWCaptionView *)photoBrowser:(MWPhotoBrowser *)photoBrowser captionViewForPhotoAtIndex:(NSUInteger)index {
+    
+    if (_menuSegmentHolders == nil || _menuSegmentHolders.count == 0)
+        return nil;
+    
+    MenuSegmentHolder *menuSegmentHolder;
+    if (_menuSegmentHolders.count > 1)
+        menuSegmentHolder = [_menuSegmentHolders objectAtIndex:_segmentedControl.selectedSegmentIndex];
+    else
+        menuSegmentHolder = [_menuSegmentHolders firstObject];
+    
+    if (menuSegmentHolder.provider.dataObjects.count == 0 && index >= menuSegmentHolder.provider.dataObjects.count) {
+        return nil;
     }
     
-    string = menuItem.longDescription;
+    id dataObject = menuSegmentHolder.provider.dataObjects[index];
+    if ([dataObject isKindOfClass:[NSNull class]])
+        return nil;
+    
+    GTLStoreendpointStoreMenuItem *menuItem = dataObject;
+    MWPhoto *photo = nil;
+    
+    if (IsEmpty(menuItem.imageUrl) == false)
+    {
+#warning Change this to your required url
+        photo = [MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm2.static.flickr.com/1224/1011283712_5750c5ba8e_b.jpg"]];
+    }
+    else {
+#warning Change this to your required image, you want to show when url is unavailable
+        //        photo = [MWPhoto photoWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"busy0" ofType:@"jpg"]]];
+        photo = [MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm2.static.flickr.com/1224/1011283712_5750c5ba8e_b.jpg"]];
+    }
+    
+    MenuMWCaptionView *captionView = [[MenuMWCaptionView alloc] initWithPhoto:photo];
+    
+    NSString *string = menuItem.shortDescription;
     if (string && ![string isEqualToString:@""]) {
-        [caption appendFormat:@"%@\n", string];
+        captionView.textTitle = string;
+        
+//        captionView.textTitle = [NSString stringWithFormat:@"stringstringstringstringstringstring stringstringstringstring kjkljakjlkfjalkjlkjf \n jlkajlkdjfkj"];
     }
     
     string = [UtilCalls amountToString:menuItem.price];
     if (string && ![string isEqualToString:@""]) {
-        [caption appendFormat:@"%@\n",string];
+        captionView.textPrice = string;
     }
     
-    photo.caption = caption;
+    string = menuItem.longDescription;
+    if (string && ![string isEqualToString:@""]) {
+        captionView.textDescription = string;
+    }
     
-    return photo;
+    captionView.textTodaysOrders = @"18 peoples ordered today.";
+    captionView.textMostOrdered = @"Most ordered";
+    captionView.imageLike = [UIImage imageNamed:@"Like"];
+    captionView.textLikes = @"1800";
+
+    return captionView;
 }
 
 #pragma mark -
