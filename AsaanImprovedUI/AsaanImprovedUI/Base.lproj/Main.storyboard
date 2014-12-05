@@ -636,8 +636,8 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="io3-CC-qRF"/>
                                         <exclude reference="hyQ-fC-bP0"/>
+                                        <exclude reference="io3-CC-qRF"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -671,7 +671,7 @@
                         <color key="sectionIndexBackgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexTrackingBackgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MenuItemCell" id="0QP-pX-7Eu" userLabel="MenuItemCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MenuItemCell" id="0QP-pX-7Eu" userLabel="MenuItemCell" customClass="MenuItemCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0QP-pX-7Eu" id="iUk-l3-jzb">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -768,6 +768,16 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <connections>
+                                    <outlet property="descriptionLabel" destination="OB6-Yy-bKN" id="czi-5L-M6s"/>
+                                    <outlet property="itemPFImageView" destination="5ai-uw-xzl" id="bWb-KE-3Yg"/>
+                                    <outlet property="likeImageView" destination="85o-Iq-bK7" id="gmo-4O-dDW"/>
+                                    <outlet property="likesLabel" destination="DEv-46-NRA" id="FWm-8S-ZsJ"/>
+                                    <outlet property="mostOrderedLabel" destination="Hhm-Qb-AVQ" id="XGa-Me-fkM"/>
+                                    <outlet property="priceLabel" destination="Jaz-Ql-Iez" id="JZg-kl-vEg"/>
+                                    <outlet property="titleLabel" destination="zw4-vp-OMe" id="1vk-9x-DBT"/>
+                                    <outlet property="todaysOrdersLabels" destination="uhj-2P-NXA" id="z44-pX-Xtn"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SubMenuCell" rowHeight="40" id="ZkS-er-Nns" userLabel="SubMenuCell">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -2935,10 +2945,10 @@
         <image name="visits-blue" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="cQG-s7-LJm"/>
-        <segue reference="BxH-0j-lGN"/>
         <segue reference="MeC-Bq-6yp"/>
+        <segue reference="cQG-s7-LJm"/>
         <segue reference="WLd-S5-b1x"/>
+        <segue reference="MkO-xh-gwn"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.79607843140000001" green="0.59607843140000005" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

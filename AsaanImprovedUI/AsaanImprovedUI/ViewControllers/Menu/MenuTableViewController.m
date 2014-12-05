@@ -23,10 +23,14 @@
 #import "MenuSegmentHolder.h"
 #import "UIColor+AsaanBackgroundColor.h"
 
+#import "MenuItemCell.h"
+#import "MWPhotoBrowser.h"
+#import <AssetsLibrary/AssetsLibrary.h>
+
 const NSUInteger MenuFluentPagingTablePreloadMargin = 5;
 const NSUInteger MenuFluentPagingTablePageSize = 50;
 
-@interface MenuTableViewController() <DataProviderDelegate, DropdownViewDelegate>
+@interface MenuTableViewController() <DataProviderDelegate, DropdownViewDelegate, MWPhotoBrowserDelegate, MenuItemCellDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
@@ -51,10 +55,6 @@ const NSUInteger MenuFluentPagingTablePageSize = 50;
 
 static NSString *SubMenuCellIdentifier = @"SubMenuCell";
 static NSString *MenuItemCellIdentifier = @"MenuItemCell";
-
-#pragma mark -
-#pragma mark === Accessors ===
-#pragma mark -
 
 #pragma mark -
 #pragma mark === View Life Cycle ===
@@ -101,6 +101,12 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark -
+#pragma mark === Private Methods ===
+#pragma mark -
+
+
 
 #pragma mark -
 #pragma mark === Actions ===
@@ -153,9 +159,15 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
                         MenuSegmentHolder *menuSegmentHolder = [[MenuSegmentHolder alloc]init];
                         menuSegmentHolder.menu = menu;
                         menuSegmentHolder.subMenus = [[NSMutableArray alloc] init];
+                        
                         for (GTLStoreendpointStoreMenuHierarchy *submenu in object.menusAndSubmenus)
+                        {
                             if (submenu.level.intValue == 1 && submenu.menuPOSId.longValue == menu.menuPOSId.longValue)
+                            {
                                  [menuSegmentHolder.subMenus addObject:submenu];
+                            }
+                        }
+                        
                         menuSegmentHolder.provider = [[DataProvider alloc] initWithPageSize:object.menuItems.count itemCount:menu.menuItemCount.integerValue];
                         menuSegmentHolder.provider.delegate = weakSelf;
                         menuSegmentHolder.provider.shouldLoadAutomatically = YES;
@@ -183,9 +195,13 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
                 UIFont *font = [UIFont systemFontOfSize:[UIFont smallSystemFontSize]];
                 NSDictionary *attributes = [NSDictionary dictionaryWithObject:font forKey:NSFontAttributeName];
                 [_segmentedControl setTitleTextAttributes:attributes
-                                                forState:UIControlStateNormal];                self.navigationItem.titleView = _segmentedControl;
-                for (MenuSegmentHolder *menuSegmentHolder in _menuSegmentHolders)
+                                                forState:UIControlStateNormal];
+                self.navigationItem.titleView = _segmentedControl;
+                
+                for (MenuSegmentHolder *menuSegmentHolder in _menuSegmentHolders) {
                     [_segmentedControl insertSegmentWithTitle:menuSegmentHolder.menu.name atIndex:_segmentedControl.numberOfSegments animated:NO];
+                }
+                
                 [_segmentedControl sizeToFit];
                 [_segmentedControl addTarget:self
                            action:@selector(segmentControllerValueChanged:)
@@ -312,22 +328,30 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     GTLStoreendpointStoreMenuHierarchy *submenu = [menuSegmentHolder.subMenus objectAtIndex:indexPath.section];
     NSInteger rowIndex = submenu.menuItemPosition.intValue + indexPath.row + 1;
 
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MenuItemCellIdentifier forIndexPath:indexPath];
-    UILabel *txtName=(UILabel *)[cell viewWithTag:302];
-    UILabel *txtDescription=(UILabel *)[cell viewWithTag:303];
-    UILabel *txtTodaysOrders=(UILabel *)[cell viewWithTag:304];
-    UILabel *txtLikes=(UILabel *)[cell viewWithTag:305];
-    UIImageView *imgLike = (UIImageView *)[cell viewWithTag:306];
-    UILabel *txtPrice=(UILabel *)[cell viewWithTag:307];
-    UILabel *txtMostOrdered=(UILabel *)[cell viewWithTag:308];
+    MenuItemCell *cell = [tableView dequeueReusableCellWithIdentifier:MenuItemCellIdentifier forIndexPath:indexPath];
+//    UILabel *txtName=(UILabel *)[cell viewWithTag:302];
+//    UILabel *txtDescription=(UILabel *)[cell viewWithTag:303];
+//    UILabel *txtTodaysOrders=(UILabel *)[cell viewWithTag:304];
+//    UILabel *txtLikes=(UILabel *)[cell viewWithTag:305];
+//    UIImageView *imgLike = (UIImageView *)[cell viewWithTag:306];
+//    UILabel *txtPrice=(UILabel *)[cell viewWithTag:307];
+//    UILabel *txtMostOrdered=(UILabel *)[cell viewWithTag:308];
     
-    txtName.text = nil;
-    txtDescription.text = nil;
-    txtTodaysOrders.text = nil;
-    txtLikes.text = nil;
-    imgLike.image = nil;
-    txtPrice.text = nil;
-    txtMostOrdered.text = nil;
+//    txtName.text = nil;
+//    txtDescription.text = nil;
+//    txtTodaysOrders.text = nil;
+//    txtLikes.text = nil;
+//    imgLike.image = nil;
+//    txtPrice.text = nil;
+//    txtMostOrdered.text = nil;
+    
+    cell.titleLabel.text = nil;
+    cell.descriptionLabel.text = nil;
+    cell.todaysOrdersLabels.text = nil;
+    cell.likesLabel.text = nil;
+    cell.likeImageView.image = nil;
+    cell.priceLabel.text = nil;
+    cell.mostOrderedLabel.text = nil;
     
     id dataObject = menuSegmentHolder.provider.dataObjects[rowIndex];
     if ([dataObject isKindOfClass:[NSNull class]])
@@ -335,14 +359,20 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     
     GTLStoreendpointStoreMenuItem *menuItem = dataObject;
     
-    txtName.text = menuItem.shortDescription;
-    txtDescription.text = menuItem.longDescription;
-    txtPrice.text = [UtilCalls amountToString:menuItem.price];
+    cell.titleLabel.text = menuItem.shortDescription;
+    cell.descriptionLabel.text = menuItem.longDescription;
+    cell.priceLabel.text = [UtilCalls amountToString:menuItem.price];
     
-    UIImageView *imgBackground = (UIImageView *)[cell viewWithTag:301];
+//    UIImageView *imgBackground = (UIImageView *)[cell viewWithTag:301];
+    NSLog(@"Image : %@ %d", menuItem.imageUrl, IsEmpty(menuItem.imageUrl));
     if (IsEmpty(menuItem.imageUrl) == false)
     {
-        [imgBackground sd_setImageWithURL:[NSURL URLWithString:menuItem.imageUrl]];
+        [cell.itemPFImageView sd_setImageWithURL:[NSURL URLWithString:menuItem.imageUrl]];
+        cell.delegate = self;
+        cell.itemPFImageView.tag = indexPath.row;
+        
+        
+        
 //                [imgBackground sd_setImageWithURL:[NSURL URLWithString:menuItem.imageUrl]
 //                                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *backgroundImgUrl)
 //                 {
@@ -354,8 +384,14 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
 //                      } completion:NULL];
 //                 }];
     }
-    else
-        imgBackground.image = nil;
+    else {
+        cell.itemPFImageView.image = [UIImage imageNamed:@"busy0"];
+        
+#warning Test : For real comment these lines out.
+        cell.delegate = self;
+        cell.itemPFImageView.tag = indexPath.row;
+    }
+    
     return cell;
 }
 -(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -380,6 +416,10 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
 #pragma mark -
 #pragma mark === UITableViewDelegate ===
 #pragma mark -
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+}
 
 //- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 //{
@@ -425,9 +465,116 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
 //    return size.height+1;
 //}
 
+
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return UITableViewAutomaticDimension;
+}
+
+#pragma mark -
+#pragma mark === MWPhotoBrowserDelegate ===
+#pragma mark -
+
+- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser
+{
+    if (_menuSegmentHolders == nil || _menuSegmentHolders.count == 0)
+        return 0;
+    
+    MenuSegmentHolder *menuSegmentHolder;
+    if (_menuSegmentHolders.count > 1)
+        menuSegmentHolder = [_menuSegmentHolders objectAtIndex:_segmentedControl.selectedSegmentIndex];
+    else
+        menuSegmentHolder = [_menuSegmentHolders firstObject];
+    
+    int sum = 0;
+    for (GTLStoreendpointStoreMenuHierarchy *submenu in menuSegmentHolder.subMenus) {
+        sum += submenu.menuItemCount.integerValue;
+    }
+    
+    return sum;
+}
+
+- (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
+    
+    if (_menuSegmentHolders == nil || _menuSegmentHolders.count == 0)
+        return nil;
+    
+    MenuSegmentHolder *menuSegmentHolder;
+    if (_menuSegmentHolders.count > 1)
+        menuSegmentHolder = [_menuSegmentHolders objectAtIndex:_segmentedControl.selectedSegmentIndex];
+    else
+        menuSegmentHolder = [_menuSegmentHolders firstObject];
+    
+    if (menuSegmentHolder.provider.dataObjects.count == 0 && index >= menuSegmentHolder.provider.dataObjects.count) {
+        return nil;
+    }
+    
+    id dataObject = menuSegmentHolder.provider.dataObjects[index];
+    if ([dataObject isKindOfClass:[NSNull class]])
+        return nil;
+    
+    GTLStoreendpointStoreMenuItem *menuItem = dataObject;
+    MWPhoto *photo = nil;
+    
+    if (IsEmpty(menuItem.imageUrl) == false)
+    {
+#warning Change this to your required url
+        photo = [MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm2.static.flickr.com/1224/1011283712_5750c5ba8e_b.jpg"]];
+    }
+    else {
+#warning Change this to your required image, you want to show when url is unavailable
+//        photo = [MWPhoto photoWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"busy0" ofType:@"jpg"]]];
+        photo = [MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm2.static.flickr.com/1224/1011283712_5750c5ba8e_b.jpg"]];
+    }
+    
+    NSMutableString *caption = [NSMutableString stringWithFormat:@""];
+    NSString *string = menuItem.shortDescription;
+    if (string && ![string isEqualToString:@""]) {
+        [caption appendFormat:@"%@\n", string];
+    }
+    
+    string = menuItem.longDescription;
+    if (string && ![string isEqualToString:@""]) {
+        [caption appendFormat:@"%@\n", string];
+    }
+    
+    string = [UtilCalls amountToString:menuItem.price];
+    if (string && ![string isEqualToString:@""]) {
+        [caption appendFormat:@"%@\n",string];
+    }
+    
+    photo.caption = caption;
+    
+    return photo;
+}
+
+#pragma mark -
+#pragma mark === MenuItemCellDelegate ===
+#pragma mark -
+
+- (void)menuItemCell:(MenuItemCell *)menuItemCell didClickedItemImage:(UIImageView *)sender
+{
+    
+    // Create browser (must be done each time photo browser is
+    // displayed. Photo browser objects cannot be re-used)
+    MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+    
+    // Set options
+    browser.displayActionButton = NO; // Show action button to allow sharing, copying, etc (defaults to YES)
+    browser.displayNavArrows = YES; // Whether to display left and right nav arrows on toolbar (defaults to NO)
+    browser.displaySelectionButtons = NO; // Whether selection buttons are shown on each image (defaults to NO)
+    browser.zoomPhotosToFill = YES; // Images that almost fill the screen will be initially zoomed to fill (defaults to YES)
+    browser.alwaysShowControls = NO; // Allows to control whether the bars and controls are always visible or whether they fade away to show the photo full (defaults to NO)
+    browser.enableGrid = NO; // Whether to allow the viewing of all the photo thumbnails on a grid (defaults to YES)
+    browser.startOnGrid = NO; // Whether to start on the grid of thumbnails instead of the first photo (defaults to NO)
+    
+    // Present
+    [self.navigationController pushViewController:browser animated:YES];
+    
+    // Manipulate
+    [browser showNextPhotoAnimated:YES];
+    [browser showPreviousPhotoAnimated:YES];
+    [browser setCurrentPhotoIndex:sender.tag];
 }
 
 @end
