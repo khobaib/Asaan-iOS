@@ -33,7 +33,7 @@
 const NSUInteger MenuFluentPagingTablePreloadMargin = 5;
 const NSUInteger MenuFluentPagingTablePageSize = 50;
 
-@interface MenuTableViewController() <DataProviderDelegate, DropdownViewDelegate, MWPhotoBrowserDelegate, MenuItemCellDelegate>
+@interface MenuTableViewController() <DataProviderDelegate, DropdownViewDelegate, MWPhotoBrowserDelegate, MenuItemCellDelegate, MenuMWCaptionViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
@@ -595,6 +595,11 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     captionView.textMostOrdered = @"Most ordered";
     captionView.imageLike = [UIImage imageNamed:@"Like"];
     captionView.textLikes = @"1800";
+    
+#warning These are needed to enable/disable order button
+    captionView.index = index;
+    captionView.delegate = self;
+    captionView.enabledOrderButton = true;
 
     return captionView;
 }
@@ -628,6 +633,16 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     [browser showNextPhotoAnimated:YES];
     [browser showPreviousPhotoAnimated:YES];
     [browser setCurrentPhotoIndex:sender.tag];
+}
+
+#pragma mark -
+#pragma mark === MenuMWCaptionViewDelegate ===
+#pragma mark -
+
+#warning Use this to go to ordercontroller and here 'index' starts from 0;
+- (void)menuMWCaptionView:(MenuMWCaptionView *)menuMWCaptionView didClickedOrderButtonAtIndex:(NSUInteger)index {
+
+    NSLog(@"Tapped order button at index : %lu", index);
 }
 
 @end
