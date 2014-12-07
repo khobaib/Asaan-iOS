@@ -7,7 +7,6 @@
 //
 
 #import "MenuItemCell.h"
-#import <ParseUI/ParseUI.h>
 
 @implementation MenuItemCell
 
@@ -17,8 +16,8 @@
     UITapGestureRecognizer *tapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedOnItemImageView:)];
     tapped.numberOfTapsRequired = 1;
     
-    _itemPFImageView.userInteractionEnabled = YES;
-    [_itemPFImageView addGestureRecognizer:tapped];
+    _itemImageView.userInteractionEnabled = YES;
+    [_itemImageView addGestureRecognizer:tapped];
     
     
 }
@@ -33,7 +32,7 @@
     
     if (self.delegate != nil && [self.delegate respondsToSelector:@selector(menuItemCell:didClickedItemImage:)]) {
         
-        [self.delegate menuItemCell:self didClickedItemImage:self.itemPFImageView];
+        [self.delegate menuItemCell:self didClickedItemImage:self.itemImageView];
     }
 }
 

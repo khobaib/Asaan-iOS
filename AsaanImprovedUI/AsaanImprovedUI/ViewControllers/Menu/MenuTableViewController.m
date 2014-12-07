@@ -354,14 +354,14 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     cell.priceLabel.text = [UtilCalls amountToString:menuItem.price];
     
     cell.delegate = self;
-    cell.itemPFImageView.tag = rowIndex - indexPath.section - 1;
+    cell.itemImageView.tag = rowIndex - indexPath.section - 1;
     
     NSLog(@"Test yy %d %ld %ld", submenu.menuItemPosition.intValue, (long)indexPath.row, (long)indexPath.section);
     
     if (IsEmpty(menuItem.thumbnailUrl) == false)
     {
         //        [cell.itemPFImageView sd_setImageWithURL:[NSURL URLWithString:menuItem.thumbnailUrl]];
-        [cell.itemPFImageView setImageWithURL:[NSURL URLWithString:menuItem.thumbnailUrl]
+        [cell.itemImageView setImageWithURL:[NSURL URLWithString:menuItem.thumbnailUrl]
                              placeholderImage:[UIImage imageWithColor:RGBA(0.0, 0.0, 0.0, 0.5)]
                                     completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                         if (error) {
@@ -371,7 +371,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
                   usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     }
     else {
-        cell.itemPFImageView.image = [UIImage imageNamed:@"no_image"];
+        cell.itemImageView.image = [UIImage imageNamed:@"no_image"];
     }
     
     return cell;

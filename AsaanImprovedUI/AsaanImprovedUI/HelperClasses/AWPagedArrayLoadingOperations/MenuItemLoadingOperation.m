@@ -44,7 +44,8 @@ const NSTimeInterval DataLoadingOperationDuration1 = 0.3;
                 if(!error){
                     [weakSelf setDataPage:[object.items mutableCopy]];
                     PFQuery *query = [PFQuery queryWithClassName:@"PictureFiles"];
-                    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+                    query.cachePolicy = kPFCachePolicyCacheElseNetwork;
+                    query.maxCacheAge = 60 * 60;
                     NSMutableArray *pictureFiles = [[NSMutableArray alloc]init];
                     for (GTLStoreendpointStoreMenuItem *menuItem in object) {
                         if (IsEmpty(menuItem.imageUrl) == false)

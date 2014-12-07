@@ -15,7 +15,6 @@
 
 @end
 
-@class PFImageView;
 @interface MenuItemCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -25,7 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *likeImageView;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *mostOrderedLabel;
-@property (weak, nonatomic) IBOutlet PFImageView *itemPFImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *itemImageView;
 
 @property (weak, nonatomic) IBOutlet id<MenuItemCellDelegate> delegate;
 
