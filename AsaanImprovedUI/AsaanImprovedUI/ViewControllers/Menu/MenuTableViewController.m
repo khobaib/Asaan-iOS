@@ -15,12 +15,12 @@
 #import "AppDelegate.h"
 #import "InlineCalls.h"
 #import "UtilCalls.h"
+#import "UIColor+AsaanGoldColor.h"
 #import "DataProvider.h"
 #import "DropdownView.h"
 //#import "UIImageView+WebCache.h"
 #import "MenuItemLoadingOperation.h"
 #import "MenuSegmentHolder.h"
-#import "UIColor+AsaanGoldColor.h"
 #import "UIColor+AsaanBackgroundColor.h"
 
 #import "MenuItemCell.h"
@@ -132,8 +132,8 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     firstVisibleIndexPath = newMenuSegmentHolder.topRowIndex;
     
     [_tableView scrollToRowAtIndexPath:firstVisibleIndexPath
-                         atScrollPosition:UITableViewScrollPositionTop
-                                 animated:NO];
+                      atScrollPosition:UITableViewScrollPositionTop
+                              animated:NO];
     [_tableView reloadData];
 }
 
@@ -153,70 +153,70 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
         GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreMenuHierarchyAndItemsWithStoreId:[_selectedStore identifier].longValue menuType:0 maxResult:MenuFluentPagingTablePageSize];
         
         [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointMenusAndMenuItems *object,NSError *error)
-        {
-            if(!error && object.menuItems.count > 0 && object.menusAndSubmenus.count > 0){
-                GTLStoreendpointStoreMenuItem *menuItem = [object.menuItems firstObject];
-                for (GTLStoreendpointStoreMenuHierarchy *menu in object.menusAndSubmenus)
-                {
-                    if (menu.level.intValue == 0)
-                    {
-                        MenuSegmentHolder *menuSegmentHolder = [[MenuSegmentHolder alloc]init];
-                        menuSegmentHolder.menu = menu;
-                        menuSegmentHolder.subMenus = [[NSMutableArray alloc] init];
-                        
-                        for (GTLStoreendpointStoreMenuHierarchy *submenu in object.menusAndSubmenus)
-                        {
-                            if (submenu.level.intValue == 1 && submenu.menuPOSId.longValue == menu.menuPOSId.longValue)
-                            {
+         {
+             if(!error && object.menuItems.count > 0 && object.menusAndSubmenus.count > 0){
+                 GTLStoreendpointStoreMenuItem *menuItem = [object.menuItems firstObject];
+                 for (GTLStoreendpointStoreMenuHierarchy *menu in object.menusAndSubmenus)
+                 {
+                     if (menu.level.intValue == 0)
+                     {
+                         MenuSegmentHolder *menuSegmentHolder = [[MenuSegmentHolder alloc]init];
+                         menuSegmentHolder.menu = menu;
+                         menuSegmentHolder.subMenus = [[NSMutableArray alloc] init];
+                         
+                         for (GTLStoreendpointStoreMenuHierarchy *submenu in object.menusAndSubmenus)
+                         {
+                             if (submenu.level.intValue == 1 && submenu.menuPOSId.longValue == menu.menuPOSId.longValue)
+                             {
                                  [menuSegmentHolder.subMenus addObject:submenu];
-                            }
-                        }
-                        
-                        menuSegmentHolder.provider = [[DataProvider alloc] initWithPageSize:object.menuItems.count itemCount:menu.menuItemCount.integerValue];
-                        menuSegmentHolder.provider.delegate = weakSelf;
-                        menuSegmentHolder.provider.shouldLoadAutomatically = YES;
-                        menuSegmentHolder.provider.automaticPreloadMargin = MenuFluentPagingTablePreloadMargin;
-                        menuSegmentHolder.topRowIndex = [NSIndexPath indexPathForRow:0 inSection:0];
-                        [_menuSegmentHolders addObject:menuSegmentHolder];
-                        if (menu.menuPOSId.longValue == menuItem.menuPOSId.longValue)
-                            [menuSegmentHolder.provider setInitialObjects:object.menuItems ForPage:0];
-                    }
-                }
-                
-            }else{
-                NSLog(@"StoreLoadingOperation Error:%@",[error userInfo]);
-            }
-            
-            if (_menuSegmentHolders.count == 1)
-            {
-                MenuSegmentHolder *menuSegmentHolder = [_menuSegmentHolders firstObject];
-                weakSelf.navigationItem.title = menuSegmentHolder.menu.name;
-            }
-            else
-            {
-                _segmentedControl = [[UISegmentedControl alloc] init];
-                [_segmentedControl setSegmentedControlStyle:UISegmentedControlStyleBar];
-                UIFont *font = [UIFont systemFontOfSize:[UIFont smallSystemFontSize]];
-                NSDictionary *attributes = [NSDictionary dictionaryWithObject:font forKey:NSFontAttributeName];
-                [_segmentedControl setTitleTextAttributes:attributes
-                                                forState:UIControlStateNormal];
-                self.navigationItem.titleView = _segmentedControl;
-                
-                for (MenuSegmentHolder *menuSegmentHolder in _menuSegmentHolders) {
-                    [_segmentedControl insertSegmentWithTitle:menuSegmentHolder.menu.name atIndex:_segmentedControl.numberOfSegments animated:NO];
-                }
-                
-                [_segmentedControl sizeToFit];
-                [_segmentedControl addTarget:self
-                           action:@selector(segmentControllerValueChanged:)
-                            forControlEvents:UIControlEventValueChanged];
-                _segmentedControlSelectedIndex = 0;
-                [_segmentedControl setSelectedSegmentIndex:_segmentedControlSelectedIndex];
-                _segmentedControl.apportionsSegmentWidthsByContent = YES;
-            }
-            [weakSelf.tableView reloadData];
-            hud.hidden = YES;
-        }];
+                             }
+                         }
+                         
+                         menuSegmentHolder.provider = [[DataProvider alloc] initWithPageSize:object.menuItems.count itemCount:menu.menuItemCount.integerValue];
+                         menuSegmentHolder.provider.delegate = weakSelf;
+                         menuSegmentHolder.provider.shouldLoadAutomatically = YES;
+                         menuSegmentHolder.provider.automaticPreloadMargin = MenuFluentPagingTablePreloadMargin;
+                         menuSegmentHolder.topRowIndex = [NSIndexPath indexPathForRow:0 inSection:0];
+                         [_menuSegmentHolders addObject:menuSegmentHolder];
+                         if (menu.menuPOSId.longValue == menuItem.menuPOSId.longValue)
+                             [menuSegmentHolder.provider setInitialObjects:object.menuItems ForPage:0];
+                     }
+                 }
+                 
+             }else{
+                 NSLog(@"StoreLoadingOperation Error:%@",[error userInfo]);
+             }
+             
+             if (_menuSegmentHolders.count == 1)
+             {
+                 MenuSegmentHolder *menuSegmentHolder = [_menuSegmentHolders firstObject];
+                 weakSelf.navigationItem.title = menuSegmentHolder.menu.name;
+             }
+             else
+             {
+                 _segmentedControl = [[UISegmentedControl alloc] init];
+                 [_segmentedControl setSegmentedControlStyle:UISegmentedControlStyleBar];
+                 UIFont *font = [UIFont systemFontOfSize:[UIFont smallSystemFontSize]];
+                 NSDictionary *attributes = [NSDictionary dictionaryWithObject:font forKey:NSFontAttributeName];
+                 [_segmentedControl setTitleTextAttributes:attributes
+                                                  forState:UIControlStateNormal];
+                 self.navigationItem.titleView = _segmentedControl;
+                 
+                 for (MenuSegmentHolder *menuSegmentHolder in _menuSegmentHolders) {
+                     [_segmentedControl insertSegmentWithTitle:menuSegmentHolder.menu.name atIndex:_segmentedControl.numberOfSegments animated:NO];
+                 }
+                 
+                 [_segmentedControl sizeToFit];
+                 [_segmentedControl addTarget:self
+                                       action:@selector(segmentControllerValueChanged:)
+                             forControlEvents:UIControlEventValueChanged];
+                 _segmentedControlSelectedIndex = 0;
+                 [_segmentedControl setSelectedSegmentIndex:_segmentedControlSelectedIndex];
+                 _segmentedControl.apportionsSegmentWidthsByContent = YES;
+             }
+             [weakSelf.tableView reloadData];
+             hud.hidden = YES;
+         }];
     }
 }
 
@@ -227,7 +227,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
 - (void)dropdownViewActionForSelectedRow:(int)row sender:(id)sender
 {
     [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:row]
-                     atScrollPosition:UITableViewScrollPositionTop animated:YES];
+                      atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
 - (void)setupDropdownView:(DropdownView *)dropdownView
@@ -251,7 +251,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     dropdownView.enabledCheckmark = false;
 }
 
-#pragma mark - 
+#pragma mark -
 #pragma mark  === DataProviderDelegate ===
 #pragma mark -
 
@@ -332,7 +332,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     
     GTLStoreendpointStoreMenuHierarchy *submenu = [menuSegmentHolder.subMenus objectAtIndex:indexPath.section];
     NSInteger rowIndex = submenu.menuItemPosition.intValue + indexPath.row + 1;
-
+    
     MenuItemCell *cell = [tableView dequeueReusableCellWithIdentifier:MenuItemCellIdentifier forIndexPath:indexPath];
     
     cell.titleLabel.text = nil;
@@ -360,7 +360,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     
     if (IsEmpty(menuItem.thumbnailUrl) == false)
     {
-//        [cell.itemPFImageView sd_setImageWithURL:[NSURL URLWithString:menuItem.thumbnailUrl]];
+        //        [cell.itemPFImageView sd_setImageWithURL:[NSURL URLWithString:menuItem.thumbnailUrl]];
         [cell.itemPFImageView setImageWithURL:[NSURL URLWithString:menuItem.thumbnailUrl]
                              placeholderImage:[UIImage imageWithColor:RGBA(0.0, 0.0, 0.0, 0.5)]
                                     completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -410,11 +410,11 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
 //        menuSegmentHolder = [_menuSegmentHolders objectAtIndex:_segmentedControl.selectedSegmentIndex];
 //    else
 //        menuSegmentHolder = [_menuSegmentHolders firstObject];
-//    
+//
 //    NSLog(@"heightForRowAtIndexPath index = %d", indexPath.row);
 //    id dataObject = menuSegmentHolder.provider.dataObjects[indexPath.row];
 //    UITableViewCell *cell;
-//    
+//
 //    if ([dataObject isKindOfClass:[NSNull class]])
 //    {
 //        [self configureSubMenuCell:self.prototypeSubMenuCell forRowAtIndexPath:indexPath withItem:dataObject];
@@ -423,7 +423,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
 //    else
 //    {
 //        GTLStoreendpointStoreMenuItem *menuItem = dataObject;
-//        
+//
 //        if (menuItem.level.intValue == 1)
 //        {
 //            [self configureSubMenuCell:self.prototypeSubMenuCell forRowAtIndexPath:indexPath withItem:menuItem];
@@ -435,14 +435,14 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
 //            cell = self.prototypeMenuItemCell;
 //        }
 //    }
-//    
+//
 //    // Need to set the width of the prototype cell to the width of the table view
 //    // as this will change when the device is rotated.
-//    
+//
 //    cell.bounds = CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.tableView.bounds), CGRectGetHeight(cell.bounds));
-//    
+//
 //    [cell layoutIfNeeded];
-//    
+//
 //    CGSize size = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
 //    return size.height+1;
 //}
@@ -505,7 +505,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     
     NSLog(@"Test %lu %d %d", (unsigned long)index, sum, section);
     
-//    GTLStoreendpointStoreMenuHierarchy *submenu = [menuSegmentHolder.subMenus objectAtIndex:section];
+    //    GTLStoreendpointStoreMenuHierarchy *submenu = [menuSegmentHolder.subMenus objectAtIndex:section];
     NSInteger rowIndex = section + index + 1;
     id dataObject = menuSegmentHolder.provider.dataObjects[rowIndex];
     if ([dataObject isKindOfClass:[NSNull class]])
@@ -516,12 +516,12 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     
     if (IsEmpty(menuItem.imageUrl) == false)
     {
-//        photo = [MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm2.static.flickr.com/1224/1011283712_5750c5ba8e_b.jpg"]];
+        //        photo = [MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm2.static.flickr.com/1224/1011283712_5750c5ba8e_b.jpg"]];
         photo = [MWPhoto photoWithURL:[NSURL URLWithString:menuItem.imageUrl]];
     }
     else {
         photo = [MWPhoto photoWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"no_image_big" ofType:@"png"]]];
-//        photo = [MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm2.static.flickr.com/1224/1011283712_5750c5ba8e_b.jpg"]];
+        //        photo = [MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm2.static.flickr.com/1224/1011283712_5750c5ba8e_b.jpg"]];
     }
     
     return photo;
@@ -554,7 +554,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
         section += 1;
     }
     
-//    GTLStoreendpointStoreMenuHierarchy *submenu = [menuSegmentHolder.subMenus objectAtIndex:section];
+    //    GTLStoreendpointStoreMenuHierarchy *submenu = [menuSegmentHolder.subMenus objectAtIndex:section];
     NSInteger rowIndex = section + index + 1;
     id dataObject = menuSegmentHolder.provider.dataObjects[rowIndex];
     if ([dataObject isKindOfClass:[NSNull class]])
@@ -565,12 +565,12 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     
     if (IsEmpty(menuItem.imageUrl) == false)
     {
-//        photo = [MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm2.static.flickr.com/1224/1011283712_5750c5ba8e_b.jpg"]];
+        //        photo = [MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm2.static.flickr.com/1224/1011283712_5750c5ba8e_b.jpg"]];
         photo = [MWPhoto photoWithURL:[NSURL URLWithString:menuItem.imageUrl]];
     }
     else {
         photo = [MWPhoto photoWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"no_image_big" ofType:@"png"]]];
-//        photo = [MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm2.static.flickr.com/1224/1011283712_5750c5ba8e_b.jpg"]];
+        //        photo = [MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm2.static.flickr.com/1224/1011283712_5750c5ba8e_b.jpg"]];
     }
     
     MenuMWCaptionView *captionView = [[MenuMWCaptionView alloc] initWithPhoto:photo];
@@ -579,7 +579,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     if (string && ![string isEqualToString:@""]) {
         captionView.textTitle = string;
         
-//        captionView.textTitle = [NSString stringWithFormat:@"stringstringstringstringstringstring stringstringstringstring kjkljakjlkfjalkjlkjf \n jlkajlkdjfkj"];
+        //        captionView.textTitle = [NSString stringWithFormat:@"stringstringstringstringstringstring stringstringstringstring kjkljakjlkfjalkjlkjf \n jlkajlkdjfkj"];
     }
     
     string = [UtilCalls amountToString:menuItem.price];
@@ -601,7 +601,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     captionView.index = index;
     captionView.delegate = self;
     captionView.enabledOrderButton = true;
-
+    
     return captionView;
 }
 
@@ -642,7 +642,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
 
 #warning Use this to go to ordercontroller and here 'index' starts from 0;
 - (void)menuMWCaptionView:(MenuMWCaptionView *)menuMWCaptionView didClickedOrderButtonAtIndex:(NSUInteger)index {
-
+    
     NSLog(@"Tapped order button at index : %lu", index);
 }
 
