@@ -41,26 +41,11 @@ const NSTimeInterval DataLoadingOperationDuration1 = 0.3;
             GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreMenuItemsForMenuWithStoreId:storeId menuPOSId:menuPOSId firstPosition:firstPosition maxResult:maxResult];
             
             [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreMenuItemCollection *object,NSError *error){
-                if(!error){
+                if(!error)
                     [weakSelf setDataPage:[object.items mutableCopy]];
-                    PFQuery *query = [PFQuery queryWithClassName:@"PictureFiles"];
-                    query.cachePolicy = kPFCachePolicyCacheElseNetwork;
-                    query.maxCacheAge = 60 * 60;
-                    NSMutableArray *pictureFiles = [[NSMutableArray alloc]init];
-                    for (GTLStoreendpointStoreMenuItem *menuItem in object) {
-                        if (IsEmpty(menuItem.imageUrl) == false)
-                            [pictureFiles addObject:menuItem.imageUrl];
-                    }
-                    if (pictureFiles.count > 0) {
-                        [query whereKey:@"objectId" containedIn:pictureFiles];
-                        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                            if (error)
-                                NSLog(@"StoreLoadingOperation Parse Error:%@",[error userInfo]);
-                       }];
-                    }
-                }else{
+                else
                     NSLog(@"StoreLoadingOperation Error:%@",[error userInfo]);
-                }
+                
                 weakSelf.bDataLoaded = true;
             }];
             
