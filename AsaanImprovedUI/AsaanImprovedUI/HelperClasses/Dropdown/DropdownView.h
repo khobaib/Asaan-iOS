@@ -20,6 +20,7 @@
 @property (nonatomic, weak) id <DropdownViewDelegate> delegate;
 @property (nonatomic, strong) UIColor* listBackgroundColor;
 @property (nonatomic, strong) UIColor* titleColor;
+@property (nonatomic, strong) UILabel *titleLabel;
 
 @property (nonatomic, assign) BOOL enabledTitle;
 @property (nonatomic, assign) BOOL enabledCheckmark;

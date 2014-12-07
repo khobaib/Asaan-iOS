@@ -16,6 +16,8 @@
 #import "GTLUserendpointConstants.h"
 
 #import "GTLUserendpointUser.h"
+#import "GTLUserendpointUserAddress.h"
+#import "GTLUserendpointUserAddressCollection.h"
 #import "GTLUserendpointUserCard.h"
 #import "GTLUserendpointUserCardCollection.h"
 

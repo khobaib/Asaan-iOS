@@ -26,6 +26,8 @@
   NSArray *classes = [NSArray arrayWithObjects:
                       [GTLQueryUserendpoint class],
                       [GTLUserendpointUser class],
+                      [GTLUserendpointUserAddress class],
+                      [GTLUserendpointUserAddressCollection class],
                       [GTLUserendpointUserCard class],
                       [GTLUserendpointUserCardCollection class],
                       nil];

@@ -1,22 +1,22 @@
 //
-//  MenuTableViewController.h
+//  SelectPaymentTableTableViewController.h
 //  AsaanImprovedUI
 //
-//  Created by Nirav Saraiya on 11/20/14.
+//  Created by Nirav Saraiya on 12/5/14.
 //  Copyright (c) 2014 Nirav Saraiya. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "DataReceiver.h"
 #import "GTLStoreendpoint.h"
 #import "GTLUserendpointUserAddress.h"
 #import "GTLUserendpointUserCard.h"
+#import "GTLUserendpointUserCardCollection.h"
 
-@interface MenuTableViewController : UITableViewController <DataReceiver>
+@interface SelectPaymentTableViewController : UITableViewController
 @property (strong, nonatomic) GTLStoreendpointStore *selectedStore;
 @property (strong, nonatomic) GTLUserendpointUserAddress *savedUserAddress;
 @property (strong, nonatomic) GTLUserendpointUserCard *savedUserCard;
+@property (strong, nonatomic) GTLUserendpointUserCardCollection *userCards;
 @property (nonatomic) int orderType;
-@property (nonatomic) NSInteger partySize;
-@property (nonatomic) NSDate *orderTime;
+
 @end

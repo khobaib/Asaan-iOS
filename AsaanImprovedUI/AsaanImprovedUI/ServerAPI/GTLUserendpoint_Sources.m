@@ -19,6 +19,8 @@
 #import "GTLUserendpointConstants.m"
 
 #import "GTLUserendpointUser.m"
+#import "GTLUserendpointUserAddress.m"
+#import "GTLUserendpointUserAddressCollection.m"
 #import "GTLUserendpointUserCard.m"
 #import "GTLUserendpointUserCardCollection.m"
 

@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryUserendpoint (5 custom class methods, 2 custom properties)
+//   GTLQueryUserendpoint (7 custom class methods, 2 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLQuery.h"
@@ -22,6 +22,7 @@
 #endif
 
 @class GTLUserendpointUser;
+@class GTLUserendpointUserAddress;
 @class GTLUserendpointUserCard;
 
 @interface GTLQueryUserendpoint : GTLQuery
@@ -42,6 +43,12 @@
 #pragma mark Service level methods
 // These create a GTLQueryUserendpoint object.
 
+// Method: userendpoint.getUserAddresses
+//  Authorization scope(s):
+//   kGTLAuthScopeUserendpointUserinfoEmail
+// Fetches a GTLUserendpointUserAddressCollection.
++ (id)queryForGetUserAddresses;
+
 // Method: userendpoint.getUserByEmail
 //  Authorization scope(s):
 //   kGTLAuthScopeUserendpointUserinfoEmail
@@ -58,6 +65,12 @@
 //  Authorization scope(s):
 //   kGTLAuthScopeUserendpointUserinfoEmail
 + (id)queryForSaveUserWithObject:(GTLUserendpointUser *)object;
+
+// Method: userendpoint.saveUserAddress
+//  Authorization scope(s):
+//   kGTLAuthScopeUserendpointUserinfoEmail
+// Fetches a GTLUserendpointUserAddress.
++ (id)queryForSaveUserAddressWithObject:(GTLUserendpointUserAddress *)object;
 
 // Method: userendpoint.saveUserCard
 //  Authorization scope(s):

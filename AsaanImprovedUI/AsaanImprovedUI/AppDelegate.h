@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 #import "GTLStoreendpoint.h"
+#import "GTLUserendpoint.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -18,6 +19,7 @@
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (readonly, strong, nonatomic) GTLServiceStoreendpoint *gtlStoreService;
+@property (readonly, strong, nonatomic) GTLServiceUserendpoint *gtlUserService;
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;

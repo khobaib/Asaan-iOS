@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"9mnLCPwbyZOHH18t8ExzO2gqgTk/SL4Xvl6zN4aDU45nghfCnK4FUjw\"",
+ "etag": "\"9mnLCPwbyZOHH18t8ExzO2gqgTk/H9lktAKYetDu4TjCWJdNqCjkoSs\"",
  "discoveryVersion": "v1",
  "id": "userendpoint:v1",
  "name": "userendpoint",
@@ -76,6 +76,9 @@
    "id": "User",
    "type": "object",
    "properties": {
+    "admin": {
+     "type": "boolean"
+    },
     "authToken": {
      "type": "string"
     },
@@ -127,6 +130,53 @@
     }
    }
   },
+  "UserAddress": {
+   "id": "UserAddress",
+   "type": "object",
+   "properties": {
+    "address1": {
+     "type": "string"
+    },
+    "address2": {
+     "type": "string"
+    },
+    "address3": {
+     "type": "string"
+    },
+    "city": {
+     "type": "string"
+    },
+    "crossStreet": {
+     "type": "string"
+    },
+    "id": {
+     "type": "string",
+     "format": "int64"
+    },
+    "state": {
+     "type": "string"
+    },
+    "userId": {
+     "type": "string",
+     "format": "int64"
+    },
+    "zip": {
+     "type": "string"
+    }
+   }
+  },
+  "UserAddressCollection": {
+   "id": "UserAddressCollection",
+   "type": "object",
+   "properties": {
+    "items": {
+     "type": "array",
+     "items": {
+      "$ref": "UserAddress"
+     }
+    }
+   }
+  },
   "UserCard": {
    "id": "UserCard",
    "type": "object",
@@ -157,12 +207,12 @@
      "type": "boolean"
     },
     "exp_month": {
-     "type": "string",
-     "format": "int64"
+     "type": "integer",
+     "format": "int32"
     },
     "exp_year": {
-     "type": "string",
-     "format": "int64"
+     "type": "integer",
+     "format": "int32"
     },
     "fundingType": {
      "type": "string"
@@ -216,6 +266,15 @@
   }
  },
  "methods": {
+  "userendpoint.getUserAddresses": {
+   "id": "userendpoint.getUserAddresses",
+   "returns": {
+    "$ref": "UserAddressCollection"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
   "userendpoint.getUserByEmail": {
    "id": "userendpoint.getUserByEmail",
    "parameters": {
@@ -253,6 +312,23 @@
    "parameterOrder": [
     "resource"
    ],
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "userendpoint.saveUserAddress": {
+   "id": "userendpoint.saveUserAddress",
+   "parameters": {
+    "resource": {
+     "$ref": "UserAddress"
+    }
+   },
+   "parameterOrder": [
+    "resource"
+   ],
+   "returns": {
+    "$ref": "UserAddress"
+   },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"
    ]

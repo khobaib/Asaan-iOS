@@ -15,22 +15,25 @@
 #import "AppDelegate.h"
 #import "InlineCalls.h"
 #import "UtilCalls.h"
-#import "UIColor+AsaanGoldColor.h"
 #import "DataProvider.h"
 #import "DropdownView.h"
-#import "UIImageView+WebCache.h"
+//#import "UIImageView+WebCache.h"
 #import "MenuItemLoadingOperation.h"
 #import "MenuSegmentHolder.h"
+#import "UIColor+AsaanGoldColor.h"
 #import "UIColor+AsaanBackgroundColor.h"
 
 #import "MenuItemCell.h"
 #import "MWPhotoBrowser.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "MenuMWCaptionView.h"
+#import "UIImageView+UIActivityIndicatorForSDWebImage.h"
+#import "Extension.h"
 
 const NSUInteger MenuFluentPagingTablePreloadMargin = 5;
 const NSUInteger MenuFluentPagingTablePageSize = 50;
 
-@interface MenuTableViewController() <DataProviderDelegate, DropdownViewDelegate, MWPhotoBrowserDelegate, MenuItemCellDelegate>
+@interface MenuTableViewController() <DataProviderDelegate, DropdownViewDelegate, MWPhotoBrowserDelegate, MenuItemCellDelegate, MenuMWCaptionViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
@@ -91,8 +94,9 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     [self.navigationController setNavigationBarHidden:NO];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
                                                   forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.barTintColor = [UIColor asaanBackgroundColor];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
-    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor goldColor]};
 }
 
@@ -325,25 +329,11 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
         menuSegmentHolder = [_menuSegmentHolders objectAtIndex:_segmentedControl.selectedSegmentIndex];
     else
         menuSegmentHolder = [_menuSegmentHolders firstObject];
+    
     GTLStoreendpointStoreMenuHierarchy *submenu = [menuSegmentHolder.subMenus objectAtIndex:indexPath.section];
     NSInteger rowIndex = submenu.menuItemPosition.intValue + indexPath.row + 1;
 
     MenuItemCell *cell = [tableView dequeueReusableCellWithIdentifier:MenuItemCellIdentifier forIndexPath:indexPath];
-//    UILabel *txtName=(UILabel *)[cell viewWithTag:302];
-//    UILabel *txtDescription=(UILabel *)[cell viewWithTag:303];
-//    UILabel *txtTodaysOrders=(UILabel *)[cell viewWithTag:304];
-//    UILabel *txtLikes=(UILabel *)[cell viewWithTag:305];
-//    UIImageView *imgLike = (UIImageView *)[cell viewWithTag:306];
-//    UILabel *txtPrice=(UILabel *)[cell viewWithTag:307];
-//    UILabel *txtMostOrdered=(UILabel *)[cell viewWithTag:308];
-    
-//    txtName.text = nil;
-//    txtDescription.text = nil;
-//    txtTodaysOrders.text = nil;
-//    txtLikes.text = nil;
-//    imgLike.image = nil;
-//    txtPrice.text = nil;
-//    txtMostOrdered.text = nil;
     
     cell.titleLabel.text = nil;
     cell.descriptionLabel.text = nil;
@@ -363,33 +353,25 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     cell.descriptionLabel.text = menuItem.longDescription;
     cell.priceLabel.text = [UtilCalls amountToString:menuItem.price];
     
-//    UIImageView *imgBackground = (UIImageView *)[cell viewWithTag:301];
-    NSLog(@"Image : %@ %d", menuItem.imageUrl, IsEmpty(menuItem.imageUrl));
-    if (IsEmpty(menuItem.imageUrl) == false)
+    cell.delegate = self;
+    cell.itemPFImageView.tag = rowIndex - indexPath.section - 1;
+    
+    NSLog(@"Test yy %d %ld %ld", submenu.menuItemPosition.intValue, (long)indexPath.row, (long)indexPath.section);
+    
+    if (IsEmpty(menuItem.thumbnailUrl) == false)
     {
-        [cell.itemPFImageView sd_setImageWithURL:[NSURL URLWithString:menuItem.imageUrl]];
-        cell.delegate = self;
-        cell.itemPFImageView.tag = indexPath.row;
-        
-        
-        
-//                [imgBackground sd_setImageWithURL:[NSURL URLWithString:menuItem.imageUrl]
-//                                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *backgroundImgUrl)
-//                 {
-//                     imgBackground.alpha = 0.0;
-//                     [UIView transitionWithView:imgBackground duration:1.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^
-//                      {
-//                          [imgBackground setImage:image];
-//                          imgBackground.alpha = 1.0;
-//                      } completion:NULL];
-//                 }];
+//        [cell.itemPFImageView sd_setImageWithURL:[NSURL URLWithString:menuItem.thumbnailUrl]];
+        [cell.itemPFImageView setImageWithURL:[NSURL URLWithString:menuItem.thumbnailUrl]
+                             placeholderImage:[UIImage imageWithColor:RGBA(0.0, 0.0, 0.0, 0.5)]
+                                    completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                        if (error) {
+                                            NSLog(@"ERROR : %@", error);
+                                        }
+                                    }
+                  usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     }
     else {
-        cell.itemPFImageView.image = [UIImage imageNamed:@"busy0"];
-        
-#warning Test : For real comment these lines out.
-        cell.delegate = self;
-        cell.itemPFImageView.tag = indexPath.row;
+        cell.itemPFImageView.image = [UIImage imageNamed:@"no_image"];
     }
     
     return cell;
@@ -509,7 +491,23 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
         return nil;
     }
     
-    id dataObject = menuSegmentHolder.provider.dataObjects[index];
+    int sum = 0;
+    int section = 0;
+    for (GTLStoreendpointStoreMenuHierarchy *submenu in menuSegmentHolder.subMenus) {
+        
+        sum += submenu.menuItemCount.integerValue;
+        
+        if (index < sum) {
+            break;
+        }
+        section += 1;
+    }
+    
+    NSLog(@"Test %lu %d %d", (unsigned long)index, sum, section);
+    
+//    GTLStoreendpointStoreMenuHierarchy *submenu = [menuSegmentHolder.subMenus objectAtIndex:section];
+    NSInteger rowIndex = section + index + 1;
+    id dataObject = menuSegmentHolder.provider.dataObjects[rowIndex];
     if ([dataObject isKindOfClass:[NSNull class]])
         return nil;
     
@@ -518,34 +516,93 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     
     if (IsEmpty(menuItem.imageUrl) == false)
     {
-#warning Change this to your required url
-        photo = [MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm2.static.flickr.com/1224/1011283712_5750c5ba8e_b.jpg"]];
+//        photo = [MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm2.static.flickr.com/1224/1011283712_5750c5ba8e_b.jpg"]];
+        photo = [MWPhoto photoWithURL:[NSURL URLWithString:menuItem.imageUrl]];
     }
     else {
-#warning Change this to your required image, you want to show when url is unavailable
-//        photo = [MWPhoto photoWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"busy0" ofType:@"jpg"]]];
-        photo = [MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm2.static.flickr.com/1224/1011283712_5750c5ba8e_b.jpg"]];
+        photo = [MWPhoto photoWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"no_image_big" ofType:@"png"]]];
+//        photo = [MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm2.static.flickr.com/1224/1011283712_5750c5ba8e_b.jpg"]];
     }
     
-    NSMutableString *caption = [NSMutableString stringWithFormat:@""];
+    return photo;
+}
+
+- (MWCaptionView *)photoBrowser:(MWPhotoBrowser *)photoBrowser captionViewForPhotoAtIndex:(NSUInteger)index {
+    
+    if (_menuSegmentHolders == nil || _menuSegmentHolders.count == 0)
+        return nil;
+    
+    MenuSegmentHolder *menuSegmentHolder;
+    if (_menuSegmentHolders.count > 1)
+        menuSegmentHolder = [_menuSegmentHolders objectAtIndex:_segmentedControl.selectedSegmentIndex];
+    else
+        menuSegmentHolder = [_menuSegmentHolders firstObject];
+    
+    if (menuSegmentHolder.provider.dataObjects.count == 0 && index >= menuSegmentHolder.provider.dataObjects.count) {
+        return nil;
+    }
+    
+    int sum = 0;
+    int section = 0;
+    for (GTLStoreendpointStoreMenuHierarchy *submenu in menuSegmentHolder.subMenus) {
+        
+        sum += submenu.menuItemCount.integerValue;
+        
+        if (index < sum) {
+            break;
+        }
+        section += 1;
+    }
+    
+//    GTLStoreendpointStoreMenuHierarchy *submenu = [menuSegmentHolder.subMenus objectAtIndex:section];
+    NSInteger rowIndex = section + index + 1;
+    id dataObject = menuSegmentHolder.provider.dataObjects[rowIndex];
+    if ([dataObject isKindOfClass:[NSNull class]])
+        return nil;
+    
+    GTLStoreendpointStoreMenuItem *menuItem = dataObject;
+    MWPhoto *photo = nil;
+    
+    if (IsEmpty(menuItem.imageUrl) == false)
+    {
+//        photo = [MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm2.static.flickr.com/1224/1011283712_5750c5ba8e_b.jpg"]];
+        photo = [MWPhoto photoWithURL:[NSURL URLWithString:menuItem.imageUrl]];
+    }
+    else {
+        photo = [MWPhoto photoWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"no_image_big" ofType:@"png"]]];
+//        photo = [MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm2.static.flickr.com/1224/1011283712_5750c5ba8e_b.jpg"]];
+    }
+    
+    MenuMWCaptionView *captionView = [[MenuMWCaptionView alloc] initWithPhoto:photo];
+    
     NSString *string = menuItem.shortDescription;
     if (string && ![string isEqualToString:@""]) {
-        [caption appendFormat:@"%@\n", string];
-    }
-    
-    string = menuItem.longDescription;
-    if (string && ![string isEqualToString:@""]) {
-        [caption appendFormat:@"%@\n", string];
+        captionView.textTitle = string;
+        
+//        captionView.textTitle = [NSString stringWithFormat:@"stringstringstringstringstringstring stringstringstringstring kjkljakjlkfjalkjlkjf \n jlkajlkdjfkj"];
     }
     
     string = [UtilCalls amountToString:menuItem.price];
     if (string && ![string isEqualToString:@""]) {
-        [caption appendFormat:@"%@\n",string];
+        captionView.textPrice = string;
     }
     
-    photo.caption = caption;
+    string = menuItem.longDescription;
+    if (string && ![string isEqualToString:@""]) {
+        captionView.textDescription = string;
+    }
     
-    return photo;
+    captionView.textTodaysOrders = @"18 peoples ordered today.";
+    captionView.textMostOrdered = @"Most ordered";
+    captionView.imageLike = [UIImage imageNamed:@"Like"];
+    captionView.textLikes = @"1800";
+    
+#warning These are needed to enable/disable order button
+    captionView.index = index;
+    captionView.delegate = self;
+    captionView.enabledOrderButton = true;
+
+    return captionView;
 }
 
 #pragma mark -
@@ -554,6 +611,8 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
 
 - (void)menuItemCell:(MenuItemCell *)menuItemCell didClickedItemImage:(UIImageView *)sender
 {
+    
+    NSLog(@"Test gh %lu ", sender.tag);
     
     // Create browser (must be done each time photo browser is
     // displayed. Photo browser objects cannot be re-used)
@@ -575,6 +634,16 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     [browser showNextPhotoAnimated:YES];
     [browser showPreviousPhotoAnimated:YES];
     [browser setCurrentPhotoIndex:sender.tag];
+}
+
+#pragma mark -
+#pragma mark === MenuMWCaptionViewDelegate ===
+#pragma mark -
+
+#warning Use this to go to ordercontroller and here 'index' starts from 0;
+- (void)menuMWCaptionView:(MenuMWCaptionView *)menuMWCaptionView didClickedOrderButtonAtIndex:(NSUInteger)index {
+
+    NSLog(@"Tapped order button at index : %lu", index);
 }
 
 @end

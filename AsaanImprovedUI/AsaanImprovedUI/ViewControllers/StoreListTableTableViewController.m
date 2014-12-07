@@ -16,10 +16,12 @@
 #import "InlineCalls.h"
 #import "UtilCalls.h"
 #import "UIColor+AsaanGoldColor.h"
+#import "UIColor+AsaanBackgroundColor.h"
 #import "DataProvider.h"
 #import "StoreLoadingOperation.h"
 #import "UIImageView+WebCache.h"
 #import "MenuTableViewController.h"
+#import "DeliveryOrCarryoutViewController.h"
 
 const NSUInteger FluentPagingTablePreloadMargin = 5;
 const NSUInteger FluentPagingTablePageSize = 20;
@@ -51,11 +53,11 @@ const NSUInteger FluentPagingTablePageSize = 20;
      {
          NSInteger pageSize = FluentPagingTablePageSize < object.longValue.longValue ? FluentPagingTablePageSize : object.longValue.longValue;
          _dataProvider = [[DataProvider alloc] initWithPageSize:pageSize itemCount:object.longValue.longValue];
-         _dataProvider.delegate = self;
+         _dataProvider.delegate = weakSelf;
          _dataProvider.shouldLoadAutomatically = YES;
          _dataProvider.automaticPreloadMargin = FluentPagingTablePreloadMargin;
-         if ([self isViewLoaded])
-             [self.tableView reloadData];
+         if ([weakSelf isViewLoaded])
+             [weakSelf.tableView reloadData];
      }];
 
     // Uncomment the following line to preserve selection between presentations.
@@ -80,8 +82,9 @@ const NSUInteger FluentPagingTablePageSize = 20;
     [self.navigationController setNavigationBarHidden:NO];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
                                                   forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.barTintColor = [UIColor asaanBackgroundColor];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
-    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor : [UIColor goldColor]};
 }
 
@@ -130,30 +133,30 @@ const NSUInteger FluentPagingTablePageSize = 20;
 
 - (void) callStore:(UIButton *)sender
 {
-    UITableViewCell* cell = (UITableViewCell*)[sender superview];
-    NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
-    _selectedStore = self.dataProvider.dataObjects[indexPath.row];
+    [self setSelectedStoreFromSender:sender];
 }
 - (void) showMenu:(UIButton *)sender
+{
+    [self setSelectedStoreFromSender:sender];
+    [self performSegueWithIdentifier:@"segueMenu" sender:sender];
+}
+- (void) placeOrder:(UIButton *)sender
+{
+    [self setSelectedStoreFromSender:sender];
+    [self performSegueWithIdentifier:@"seguePlaceOnlineOrder" sender:sender];
+}
+- (void) reserveTable:(UIButton *)sender
+{
+    [self setSelectedStoreFromSender:sender];
+}
+
+- (void) setSelectedStoreFromSender:(UIView *)sender
 {
     UIView *view = sender;
     while (view != nil && ![view isKindOfClass:[UITableViewCell class]]) {
         view = [view superview];
     }
     UITableViewCell *cell = (UITableViewCell *)view;
-    NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
-    _selectedStore = self.dataProvider.dataObjects[indexPath.row];
-    [self performSegueWithIdentifier:@"segueMenu" sender:sender];
-}
-- (void) placeOrder:(UIButton *)sender
-{
-    UITableViewCell* cell = (UITableViewCell*)[sender superview];
-    NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
-    _selectedStore = self.dataProvider.dataObjects[indexPath.row];
-}
-- (void) reserveTable:(UIButton *)sender
-{
-    UITableViewCell* cell = (UITableViewCell*)[sender superview];
     NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
     _selectedStore = self.dataProvider.dataObjects[indexPath.row];
 }
@@ -249,9 +252,16 @@ const NSUInteger FluentPagingTablePageSize = 20;
     if ([[segue identifier] isEqualToString:@"segueMenu"])
     {
         // Get reference to the destination view controller
-        MenuTableViewController *menuController = [segue destinationViewController];
+        MenuTableViewController *controller = [segue destinationViewController];
         // Pass any objects to the view controller here, like...
-        [menuController setSelectedStore:_selectedStore];
+        [controller setSelectedStore:_selectedStore];
+    }
+    else if ([[segue identifier] isEqualToString:@"seguePlaceOnlineOrder"])
+    {
+        // Get reference to the destination view controller
+        DeliveryOrCarryoutViewController *controller = [segue destinationViewController];
+        // Pass any objects to the view controller here, like...
+        [controller setSelectedStore:_selectedStore];
     }
 }
 

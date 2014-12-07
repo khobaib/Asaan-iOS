@@ -177,7 +177,7 @@
                     
                     NSLog(@"done %@", object.name);
                     
-                    [self performSegueWithIdentifier:@"segueUnwindPaymentInfoToStroeList" sender:self];
+                    [self performSegueWithIdentifier:@"segueUnwindPaymentInfoToStoreList" sender:self];
                 }
             }];
         }

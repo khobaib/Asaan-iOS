@@ -13,11 +13,13 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryUserendpoint (5 custom class methods, 2 custom properties)
+//   GTLQueryUserendpoint (7 custom class methods, 2 custom properties)
 
 #import "GTLQueryUserendpoint.h"
 
 #import "GTLUserendpointUser.h"
+#import "GTLUserendpointUserAddress.h"
+#import "GTLUserendpointUserAddressCollection.h"
 #import "GTLUserendpointUserCard.h"
 #import "GTLUserendpointUserCardCollection.h"
 
@@ -28,6 +30,13 @@
 #pragma mark -
 #pragma mark Service level methods
 // These create a GTLQueryUserendpoint object.
+
++ (id)queryForGetUserAddresses {
+  NSString *methodName = @"userendpoint.getUserAddresses";
+  GTLQueryUserendpoint *query = [self queryWithMethodName:methodName];
+  query.expectedObjectClass = [GTLUserendpointUserAddressCollection class];
+  return query;
+}
 
 + (id)queryForGetUserByEmailWithEmail:(NSString *)email {
   NSString *methodName = @"userendpoint.getUserByEmail";
@@ -52,6 +61,18 @@
   NSString *methodName = @"userendpoint.saveUser";
   GTLQueryUserendpoint *query = [self queryWithMethodName:methodName];
   query.bodyObject = object;
+  return query;
+}
+
++ (id)queryForSaveUserAddressWithObject:(GTLUserendpointUserAddress *)object {
+  if (object == nil) {
+    GTL_DEBUG_ASSERT(object != nil, @"%@ got a nil object", NSStringFromSelector(_cmd));
+    return nil;
+  }
+  NSString *methodName = @"userendpoint.saveUserAddress";
+  GTLQueryUserendpoint *query = [self queryWithMethodName:methodName];
+  query.bodyObject = object;
+  query.expectedObjectClass = [GTLUserendpointUserAddress class];
   return query;
 }
 

@@ -38,8 +38,8 @@
 // Remapped to 'defaultProperty' to avoid language reserved word 'default'.
 @property (retain) NSNumber *defaultProperty;  // boolValue
 
-@property (retain) NSNumber *expMonth;  // longLongValue
-@property (retain) NSNumber *expYear;  // longLongValue
+@property (retain) NSNumber *expMonth;  // intValue
+@property (retain) NSNumber *expYear;  // intValue
 @property (copy) NSString *fundingType;
 
 // identifier property maps to 'id' in JSON (to avoid Objective C's 'id').

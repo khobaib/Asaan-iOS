@@ -3,7 +3,7 @@
  */
 
 //
-//  GTLUserendpointUser.m
+//  GTLUserendpointUserAddress.m
 //
 
 // ----------------------------------------------------------------------------
@@ -13,19 +13,18 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLUserendpointUser (0 custom class methods, 16 custom properties)
+//   GTLUserendpointUserAddress (0 custom class methods, 9 custom properties)
 
-#import "GTLUserendpointUser.h"
+#import "GTLUserendpointUserAddress.h"
 
 // ----------------------------------------------------------------------------
 //
-//   GTLUserendpointUser
+//   GTLUserendpointUserAddress
 //
 
-@implementation GTLUserendpointUser
-@dynamic admin, authToken, createdDate, defaultTip, email, firstName,
-         identifier, lastName, modifiedDate, parseAuthData, parseCreatedAt,
-         parseObjectId, parseUpdatedAt, phone, profilePhotoUrl, userId;
+@implementation GTLUserendpointUserAddress
+@dynamic address1, address2, address3, city, crossStreet, identifier, state,
+         userId, zip;
 
 + (NSDictionary *)propertyToJSONKeyMap {
   NSDictionary *map =

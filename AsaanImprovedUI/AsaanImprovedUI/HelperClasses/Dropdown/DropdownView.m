@@ -35,7 +35,6 @@
 @property (nonatomic, strong) NSArray *data;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
 
-@property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIImageView *dropdownImageView;
 
 @property (nonatomic, strong) UIButton* backgroundView;

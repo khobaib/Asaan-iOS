@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLUserendpointUser (0 custom class methods, 15 custom properties)
+//   GTLUserendpointUser (0 custom class methods, 16 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLObject.h"
@@ -27,6 +27,7 @@
 //
 
 @interface GTLUserendpointUser : GTLObject
+@property (retain) NSNumber *admin;  // boolValue
 @property (copy) NSString *authToken;
 @property (retain) NSNumber *createdDate;  // longLongValue
 @property (retain) NSNumber *defaultTip;  // longLongValue
