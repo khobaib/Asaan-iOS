@@ -62,7 +62,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if ([self.userCards isKindOfClass:[NSNull class]])
+    if (self.userCards == nil)
         return 1;
     else
         return self.userCards.items.count + 1;

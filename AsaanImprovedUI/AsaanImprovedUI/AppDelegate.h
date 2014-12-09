@@ -10,6 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "GTLStoreendpoint.h"
 #import "GTLUserendpoint.h"
+#import "GlobalObjectHolder.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -20,6 +21,7 @@
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (readonly, strong, nonatomic) GTLServiceStoreendpoint *gtlStoreService;
 @property (readonly, strong, nonatomic) GTLServiceUserendpoint *gtlUserService;
+@property (readonly, strong, nonatomic) GlobalObjectHolder *globalObjectHolder;
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;

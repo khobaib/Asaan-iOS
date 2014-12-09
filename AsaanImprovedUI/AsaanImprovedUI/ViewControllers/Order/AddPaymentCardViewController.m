@@ -139,7 +139,8 @@
             card.brand = [weakSelf getCardTypeForCard:weakSelf.ptkView.cardNumber];
             card.city = token.card.addressCity;
             card.country = token.card.country;
-            card.currency = @"";   // ???
+            card.cardId = token.card.cardId;
+            card.fingerprint = token.card.fingerprint;
             card.expMonth = [NSNumber numberWithInteger:token.card.expMonth];
             card.expYear = [NSNumber numberWithInteger:token.card.expYear];
             //            card.fundingType = @"";   // ???

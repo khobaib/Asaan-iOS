@@ -142,22 +142,14 @@
             card.brand = token.card.type;
             card.city = token.card.addressCity;
             card.country = token.card.addressCountry; // ??? or token.card.country
-//            card.createdDate = [NSNumber numberWithBool:0];   // ???
-//            card.currency = @"";   // ???
-//            card.defaultProperty = [NSNumber numberWithBool:false];   // ???
             card.expMonth = [NSNumber numberWithInteger:token.card.expMonth];
             card.expYear = [NSNumber numberWithInteger:token.card.expYear];
-//            card.fundingType = @"";   // ???
-//            card.identifier = [NSNumber numberWithBool:false];
             card.last4 = token.card.last4;
-//            card.modifiedDate = [NSNumber numberWithBool:false];   // ???
             card.name = token.card.name;
-//            card.provider = @"";   // ???
-//            card.providerCustomerId = @"";   // ???
-//            card.refreshToken = @"";   // ???
             card.state = token.card.addressState;
-//            card.userId = [NSNumber numberWithBool:false];   // ???
             card.zip = token.card.addressZip;
+            card.cardId = token.card.cardId;
+            card.fingerprint = token.card.fingerprint;
             
             GTLQueryUserendpoint *query = [GTLQueryUserendpoint queryForSaveUserCardWithObject:card];
             

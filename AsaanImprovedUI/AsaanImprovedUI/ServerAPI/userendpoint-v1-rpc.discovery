@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"9mnLCPwbyZOHH18t8ExzO2gqgTk/H9lktAKYetDu4TjCWJdNqCjkoSs\"",
+ "etag": "\"9mnLCPwbyZOHH18t8ExzO2gqgTk/-xHoRo6sG08GYF6Y-nyp_HdXVfQ\"",
  "discoveryVersion": "v1",
  "id": "userendpoint:v1",
  "name": "userendpoint",
@@ -134,9 +134,6 @@
    "id": "UserAddress",
    "type": "object",
    "properties": {
-    "address1": {
-     "type": "string"
-    },
     "address2": {
      "type": "string"
     },
@@ -149,11 +146,28 @@
     "crossStreet": {
      "type": "string"
     },
+    "default": {
+     "type": "boolean"
+    },
     "id": {
      "type": "string",
      "format": "int64"
     },
+    "lat": {
+     "type": "number",
+     "format": "double"
+    },
+    "lng": {
+     "type": "number",
+     "format": "double"
+    },
     "state": {
+     "type": "string"
+    },
+    "streetAddress": {
+     "type": "string"
+    },
+    "title": {
      "type": "string"
     },
     "userId": {
@@ -190,6 +204,9 @@
     "brand": {
      "type": "string"
     },
+    "cardId": {
+     "type": "string"
+    },
     "city": {
      "type": "string"
     },
@@ -199,9 +216,6 @@
     "createdDate": {
      "type": "string",
      "format": "int64"
-    },
-    "currency": {
-     "type": "string"
     },
     "default": {
      "type": "boolean"
@@ -213,6 +227,9 @@
     "exp_year": {
      "type": "integer",
      "format": "int32"
+    },
+    "fingerprint": {
+     "type": "string"
     },
     "fundingType": {
      "type": "string"

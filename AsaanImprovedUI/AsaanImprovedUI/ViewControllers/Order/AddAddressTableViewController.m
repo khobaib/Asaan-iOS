@@ -191,7 +191,7 @@
                 else
                 {
                     GTLUserendpointUserAddress *userAddress = [[GTLUserendpointUserAddress alloc]init];
-                    [userAddress setAddress1:self.addressTitle.text];
+                    [userAddress setTitle:self.addressTitle.text];
                     [userAddress setAddress2:selectedAddress];
                     [userAddress setAddress3:self.aptNo.text];
                     [userAddress setCrossStreet:self.other.text];

@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStoreMenuItemModifier (0 custom class methods, 14 custom properties)
+//   GTLStoreendpointStoreMenuItemModifier (0 custom class methods, 10 custom properties)
 
 #import "GTLStoreendpointStoreMenuItemModifier.h"
 
@@ -24,10 +24,8 @@
 
 @implementation GTLStoreendpointStoreMenuItemModifier
 @dynamic createdDate, identifier, longDescription, modifiedDate,
-         modifierGroupLongDescription, modifierGroupMaximum,
-         modifierGroupMinimum, modifierGroupPOSId,
-         modifierGroupShortDescription, modifierPOSId, price, shortDescription,
-         storeId, weighting;
+         modifierGroupPOSId, modifierPOSId, price, shortDescription, storeId,
+         weighting;
 
 + (NSDictionary *)propertyToJSONKeyMap {
   NSDictionary *map =

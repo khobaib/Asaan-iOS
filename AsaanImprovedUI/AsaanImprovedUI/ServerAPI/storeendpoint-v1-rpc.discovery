@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"9mnLCPwbyZOHH18t8ExzO2gqgTk/tMoz9MDAxehC8PDpnQexqnl76e8\"",
+ "etag": "\"9mnLCPwbyZOHH18t8ExzO2gqgTk/GzeUDaQvReMrzh2_nPZdazCZ9w4\"",
  "discoveryVersion": "v1",
  "id": "storeendpoint:v1",
  "name": "storeendpoint",
@@ -473,23 +473,9 @@
      "type": "string",
      "format": "int64"
     },
-    "modifierGroupLongDescription": {
-     "type": "string"
-    },
-    "modifierGroupMaximum": {
-     "type": "integer",
-     "format": "int32"
-    },
-    "modifierGroupMinimum": {
-     "type": "integer",
-     "format": "int32"
-    },
     "modifierGroupPOSId": {
      "type": "integer",
      "format": "int32"
-    },
-    "modifierGroupShortDescription": {
-     "type": "string"
     },
     "modifierPOSId": {
      "type": "integer",
@@ -532,9 +518,23 @@
      "type": "string",
      "format": "int64"
     },
+    "modifierGroupLongDescription": {
+     "type": "string"
+    },
+    "modifierGroupMaximum": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "modifierGroupMinimum": {
+     "type": "integer",
+     "format": "int32"
+    },
     "modifierGroupPOSId": {
      "type": "integer",
      "format": "int32"
+    },
+    "modifierGroupShortDescription": {
+     "type": "string"
     },
     "storeId": {
      "type": "string",

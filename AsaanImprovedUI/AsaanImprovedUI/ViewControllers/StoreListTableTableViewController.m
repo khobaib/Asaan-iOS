@@ -86,6 +86,19 @@ const NSUInteger FluentPagingTablePageSize = 20;
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor : [UIColor goldColor]};
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
+    if (goh.orderInProgress != nil)
+    {
+        UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"cart.png"] style:UIBarButtonItemStylePlain target:self action:@selector(showOrderSummaryPressed)];
+        [self.navigationItem setRightBarButtonItem:item animated:YES];
+    }
+}
+
+- (void) showOrderSummaryPressed
+{
+    [self performSegueWithIdentifier:@"segueStoreListToOrderSummary" sender:self];
 }
 
 - (void)didReceiveMemoryWarning {

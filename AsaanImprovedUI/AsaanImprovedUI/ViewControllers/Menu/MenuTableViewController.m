@@ -7,6 +7,7 @@
 //
 
 #import "MenuTableViewController.h"
+#import "MenuModifierGroupViewController.h"
 #import "MBProgressHUD.h"
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
@@ -29,6 +30,8 @@
 #import "MenuMWCaptionView.h"
 #import "UIImageView+UIActivityIndicatorForSDWebImage.h"
 #import "Extension.h"
+#import "GlobalObjectHolder.h"
+
 
 const NSUInteger MenuFluentPagingTablePreloadMargin = 5;
 const NSUInteger MenuFluentPagingTablePageSize = 50;
@@ -42,6 +45,9 @@ const NSUInteger MenuFluentPagingTablePageSize = 50;
 @property (nonatomic) int startPosition;
 @property (nonatomic) int maxResult;
 @property (strong, nonatomic) NSMutableArray *menuSegmentHolders;
+@property (strong, nonatomic) GTLStoreendpointStoreMenuItem *selectedMenuItem;
+
+- (void) showOrderSummaryPressed;
 
 @end
 
@@ -98,6 +104,19 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor goldColor]};
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
+    if (goh.orderInProgress != nil)
+    {
+        UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"cart.png"] style:UIBarButtonItemStylePlain target:self action:@selector(showOrderSummaryPressed)];
+        [self.navigationItem setRightBarButtonItem:item animated:YES];
+    }
+}
+
+- (void) showOrderSummaryPressed
+{
+    [self performSegueWithIdentifier:@"segueMenuToOrderSummary" sender:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -150,7 +169,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
         typeof(self) weakSelf = self;
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
         GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-        GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreMenuHierarchyAndItemsWithStoreId:[_selectedStore identifier].longValue menuType:0 maxResult:MenuFluentPagingTablePageSize];
+        GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreMenuHierarchyAndItemsWithStoreId:self.selectedStore.identifier.longValue menuType:0 maxResult:MenuFluentPagingTablePageSize];
         
         [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointMenusAndMenuItems *object,NSError *error)
          {
@@ -401,6 +420,24 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if ([self.savedUserCard isKindOfClass:[GTLUserendpointUserCard class]]) // Menu is in Order Mode
+    {
+        MenuSegmentHolder *menuSegmentHolder;
+        if (_menuSegmentHolders.count > 1)
+            menuSegmentHolder = [_menuSegmentHolders objectAtIndex:_segmentedControl.selectedSegmentIndex];
+        else
+            menuSegmentHolder = [_menuSegmentHolders firstObject];
+        
+        GTLStoreendpointStoreMenuHierarchy *submenu = [menuSegmentHolder.subMenus objectAtIndex:indexPath.section];
+        NSInteger rowIndex = submenu.menuItemPosition.intValue + indexPath.row + 1;
+        
+        id dataObject = menuSegmentHolder.provider.dataObjects[rowIndex];
+        if (![dataObject isKindOfClass:[NSNull class]])
+        {
+            self.selectedMenuItem = dataObject;
+            [self performSegueWithIdentifier:@"segueMenuToModifierGroup" sender:self];
+        }
+    }
 }
 
 //- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -644,6 +681,31 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
 - (void)menuMWCaptionView:(MenuMWCaptionView *)menuMWCaptionView didClickedOrderButtonAtIndex:(NSUInteger)index {
     
     NSLog(@"Tapped order button at index : %lu", index);
+}
+
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    
+    // Get reference to the destination view controller
+    if ([[segue identifier] isEqualToString:@"segueMenuToModifierGroup"])
+    {
+        MenuModifierGroupViewController *controller = [segue destinationViewController];
+        [controller setSelectedStore:self.selectedStore];
+        [controller setSelectedMenuItem:self.selectedMenuItem];
+        [controller setSavedUserAddress:self.savedUserAddress];
+        [controller setSavedUserCard:self.savedUserCard];
+        [controller setOrderTime:self.orderTime];
+        [controller setOrderType:self.orderType];
+    }
+}
+
+- (IBAction)unwindModifierGroupToMenu:(UIStoryboardSegue *)unwindSegue
+{
 }
 
 @end

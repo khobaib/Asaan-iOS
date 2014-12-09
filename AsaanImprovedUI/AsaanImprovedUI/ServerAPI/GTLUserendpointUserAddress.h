@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLUserendpointUserAddress (0 custom class methods, 9 custom properties)
+//   GTLUserendpointUserAddress (0 custom class methods, 13 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLObject.h"
@@ -27,16 +27,22 @@
 //
 
 @interface GTLUserendpointUserAddress : GTLObject
-@property (copy) NSString *address1;
 @property (copy) NSString *address2;
 @property (copy) NSString *address3;
 @property (copy) NSString *city;
 @property (copy) NSString *crossStreet;
 
+// Remapped to 'defaultProperty' to avoid language reserved word 'default'.
+@property (retain) NSNumber *defaultProperty;  // boolValue
+
 // identifier property maps to 'id' in JSON (to avoid Objective C's 'id').
 @property (retain) NSNumber *identifier;  // longLongValue
 
+@property (retain) NSNumber *lat;  // doubleValue
+@property (retain) NSNumber *lng;  // doubleValue
 @property (copy) NSString *state;
+@property (copy) NSString *streetAddress;
+@property (copy) NSString *title;
 @property (retain) NSNumber *userId;  // longLongValue
 @property (copy) NSString *zip;
 @end

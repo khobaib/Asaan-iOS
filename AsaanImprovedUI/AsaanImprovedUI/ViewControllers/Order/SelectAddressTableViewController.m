@@ -68,7 +68,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
-    if ([self.userAddresses isKindOfClass:[NSNull class]])
+    if (self.userAddresses == nil)
         return 1;
     else
         return self.userAddresses.items.count + 1;
@@ -87,7 +87,7 @@
     else
     {
         GTLUserendpointUserAddress *userAddress = [self.userAddresses.items objectAtIndex:indexPath.row];
-        txtTitle.text = userAddress.address1;
+        txtTitle.text = userAddress.title;
         txtAddress.text = userAddress.address2;
     }
 

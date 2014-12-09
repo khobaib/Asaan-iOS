@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStoreMenuItemModifierGroup (0 custom class methods, 6 custom properties)
+//   GTLStoreendpointStoreMenuItemModifierGroup (0 custom class methods, 10 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLObject.h"
@@ -34,6 +34,10 @@
 
 @property (retain) NSNumber *menuItemPOSId;  // intValue
 @property (retain) NSNumber *modifiedDate;  // longLongValue
+@property (copy) NSString *modifierGroupLongDescription;
+@property (retain) NSNumber *modifierGroupMaximum;  // intValue
+@property (retain) NSNumber *modifierGroupMinimum;  // intValue
 @property (retain) NSNumber *modifierGroupPOSId;  // intValue
+@property (copy) NSString *modifierGroupShortDescription;
 @property (retain) NSNumber *storeId;  // longLongValue
 @end

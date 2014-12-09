@@ -157,6 +157,7 @@
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 @synthesize gtlStoreService = _gtlStoreService;
 @synthesize gtlUserService = _gtlUserService;
+@synthesize globalObjectHolder = _globalObjectHolder;
 
 - (NSURL *)applicationDocumentsDirectory {
     // The directory the application uses to store the Core Data store file. This code uses a directory named "com.asaan.AsaanImprovedUI" in the application's documents directory.
@@ -208,6 +209,13 @@
         _gtlStoreService.retryEnabled = YES;
     }
     return _gtlStoreService;
+}
+
+- (GlobalObjectHolder *)globalObjectHolder {
+    
+    if(_globalObjectHolder == nil)
+        _globalObjectHolder = [[GlobalObjectHolder alloc]init];
+    return _globalObjectHolder;
 }
 
 - (GTLServiceUserendpoint *)gtlUserService {
