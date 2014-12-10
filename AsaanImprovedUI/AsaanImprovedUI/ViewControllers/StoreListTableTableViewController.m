@@ -224,8 +224,20 @@ const NSUInteger FluentPagingTablePageSize = 20;
     txtRecommends.text = nil;
     
     id dataObject = self.dataProvider.dataObjects[indexPath.row];
-    if ([dataObject isKindOfClass:[NSNull class]])
+    if ([dataObject isKindOfClass:[NSNull class]]) {
+        
+        btnCall.enabled = false;
+        btnMenu.enabled = false;
+        btnOrder.enabled = false;
+        btnReserve.enabled = false;
+        
         return cell;
+    }
+    
+    btnCall.enabled = true;
+    btnMenu.enabled = true;
+    btnOrder.enabled = true;
+    btnReserve.enabled = true;
 
     GTLStoreendpointStore *store = dataObject;
     if (store != nil) {
