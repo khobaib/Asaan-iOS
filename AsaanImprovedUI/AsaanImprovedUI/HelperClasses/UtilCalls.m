@@ -40,4 +40,13 @@
     return [numberFormatter stringFromNumber:[NSNumber numberWithFloat:fVal]];
 }
 
++ (NSString *) percentAmountToString:(NSNumber*)number
+{
+    NSNumberFormatter * numberFormatter = [[NSNumberFormatter new] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [numberFormatter setMaximumFractionDigits:2];
+    [numberFormatter setRoundingMode:NSNumberFormatterRoundFloor];
+    float fVal = [number floatValue]/10000;
+    return [numberFormatter stringFromNumber:[NSNumber numberWithFloat:fVal]];
+}
 @end

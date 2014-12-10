@@ -701,6 +701,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
         [controller setSavedUserCard:self.savedUserCard];
         [controller setOrderTime:self.orderTime];
         [controller setOrderType:self.orderType];
+        [controller setPartySize:self.partySize];
     }
 }
 

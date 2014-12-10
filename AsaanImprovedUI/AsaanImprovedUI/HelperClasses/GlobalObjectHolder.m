@@ -13,8 +13,8 @@
 
 - (OnlineOrderDetails *)createOrderInProgress {
     
-    if(_orderInProgress == nil)
-        _orderInProgress = [[OnlineOrderDetails alloc]init];
+    _orderInProgress = [[OnlineOrderDetails alloc]init];
+    _orderInProgress.selectedMenuItems = [[NSMutableArray alloc]init];
     return _orderInProgress;
 }
 

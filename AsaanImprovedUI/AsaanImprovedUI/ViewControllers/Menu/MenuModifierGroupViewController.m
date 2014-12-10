@@ -53,11 +53,14 @@
     }
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.txtMenuItemName.text = self.selectedMenuItem.shortDescription;
-    self.qty = 1;
+    self.qty = _onlineOrderSelectedMenuItem.qty = 1;
     self.finalPrice = self.selectedMenuItem.price.longValue;
-    NSNumber *amount = [[NSNumber alloc] initWithLong:self.finalPrice*self.qty ];
+    NSNumber *amount = [[NSNumber alloc] initWithLong:self.finalPrice*self.qty];
+    _onlineOrderSelectedMenuItem.amount = amount.longValue;
     self.txtAmount.text = [UtilCalls amountToString:amount];
     [self.btnAddToOrder setTitle:[NSString stringWithFormat:@"Add to Order - %@", self.txtAmount.text] forState:UIControlStateNormal];
+    
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -123,7 +126,9 @@
             }
         }
         self.finalPrice = finalPrice;
-        NSNumber *amount = [[NSNumber alloc] initWithLong:self.finalPrice*self.qty ];
+        _onlineOrderSelectedMenuItem.amount = self.finalPrice*self.qty;
+        _onlineOrderSelectedMenuItem.qty = self.qty;
+        NSNumber *amount = [[NSNumber alloc] initWithLong:_onlineOrderSelectedMenuItem.amount];
         self.txtAmount.text = [UtilCalls amountToString:amount];
         [self.btnAddToOrder setTitle:[NSString stringWithFormat:@"Add to Order - %@", self.txtAmount.text] forState:UIControlStateNormal];
         [self.tableView reloadData];
@@ -265,17 +270,22 @@
                      return;
                  else
                  {
-                     [appDelegate.globalObjectHolder removeOrderInProgress];
                      orderInProgress.selectedStore = weakSelf.selectedStore;
                      orderInProgress.savedUserAddress = weakSelf.savedUserAddress;
                      orderInProgress.savedUserCard = weakSelf.savedUserCard;
                      orderInProgress.orderType = weakSelf.orderType;
                      orderInProgress.orderTime = weakSelf.orderTime;
                      orderInProgress.partySize = weakSelf.partySize;
+                     [orderInProgress.selectedMenuItems removeAllObjects];
                      [orderInProgress.selectedMenuItems addObject:weakSelf.onlineOrderSelectedMenuItem];
                      [weakSelf performSegueWithIdentifier:@"segueunwindModifierGroupToMenu" sender:weakSelf];
                  }
              }];
+        }
+        else
+        {
+            [orderInProgress.selectedMenuItems addObject:self.onlineOrderSelectedMenuItem];
+            [self performSegueWithIdentifier:@"segueunwindModifierGroupToMenu" sender:self];
         }
     }
 }

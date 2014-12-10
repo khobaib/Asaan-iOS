@@ -18,6 +18,7 @@
 @property (strong, nonatomic) GTLUserendpointUserCard *savedUserCard;
 @property (strong, nonatomic) NSMutableArray *selectedMenuItems; //OnlineOrderSelectedMenuItem
 @property (nonatomic) int orderType;
-@property (nonatomic) NSInteger partySize;
-@property (nonatomic) NSDate *orderTime;
+@property (nonatomic) int partySize;
+@property (strong, nonatomic) NSDate *orderTime;
+@property (strong, nonatomic) NSString *specialInstructions;
 @end

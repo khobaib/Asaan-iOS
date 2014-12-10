@@ -10,5 +10,6 @@
 
 + (NSString *) formattedNumber:(NSNumber*) number;
 + (NSString *) amountToString:(NSNumber*)number;
++ (NSString *) percentAmountToString:(NSNumber*)number;
 
 @end
