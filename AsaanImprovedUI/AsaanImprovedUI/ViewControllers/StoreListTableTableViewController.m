@@ -280,7 +280,6 @@ const NSUInteger FluentPagingTablePageSize = 20;
 
 - (IBAction)unwindToStoreList:(UIStoryboardSegue *)unwindSegue
 {
-    NSLog(@"Back from PaymentInfoViewController");
 }
 
 @end

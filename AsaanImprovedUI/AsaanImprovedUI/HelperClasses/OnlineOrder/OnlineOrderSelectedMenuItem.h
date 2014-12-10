@@ -16,6 +16,7 @@
 @property (strong, nonatomic) GTLStoreendpointStoreMenuItem *selectedItem;
 @property (strong, nonatomic) GTLStoreendpointMenuItemModifiersAndGroups *allModifiersAndGroups;
 @property (strong, nonatomic) NSMutableArray *selectedModifierGroups; //Array of OnlineOrderSelectedModifierGroup
+@property NSUInteger price;
 @property NSUInteger amount;
 @property NSUInteger qty;
 @end

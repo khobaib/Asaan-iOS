@@ -702,6 +702,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
         [controller setOrderTime:self.orderTime];
         [controller setOrderType:self.orderType];
         [controller setPartySize:self.partySize];
+        [controller setBInEditMode:NO];
     }
 }
 

@@ -15,7 +15,6 @@
 #import "GTLStoreendpointStoreMenuItemModifierGroup.h"
 #import "GTLStoreendpointStoreMenuItemModifier.h"
 #import "MenuModifierTableViewController.h"
-#import "OnlineOrderSelectedMenuItem.h"
 #import "OnlineOrderSelectedModifierGroup.h"
 #import "UIAlertView+Blocks.h"
 
@@ -27,15 +26,10 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *txtSpecialInstructions;
 @property (weak, nonatomic) IBOutlet UIButton *btnAddToOrder;
-@property (strong, nonatomic) GTLStoreendpointMenuItemModifiersAndGroups *gtlModifiersAndGroups;
-@property (strong, nonatomic) NSMutableArray *allModifiersForSelectedGroup;
 @property (strong, nonatomic) GTLStoreendpointStoreMenuItemModifierGroup *selectedModifierGroup;
 @property (strong, nonatomic) NSIndexPath *selectedRow;
-
 @property (strong, nonatomic) OnlineOrderSelectedMenuItem *onlineOrderSelectedMenuItem;
-
-@property long finalPrice;
-@property long qty;
+@property (strong, nonatomic) GTLStoreendpointMenuItemModifiersAndGroups *gtlModifiersAndGroups;
 
 @end
 
@@ -43,24 +37,43 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+
+    _onlineOrderSelectedMenuItem = [[OnlineOrderSelectedMenuItem alloc]init];
     
-    if (_onlineOrderSelectedMenuItem == nil)
+    if (self.bInEditMode == NO)
     {
-        _onlineOrderSelectedMenuItem = [[OnlineOrderSelectedMenuItem alloc]init];
         _onlineOrderSelectedMenuItem.selectedItem = self.selectedMenuItem;
         _onlineOrderSelectedMenuItem.selectedStore = self.selectedStore;
         _onlineOrderSelectedMenuItem.selectedModifierGroups = [[NSMutableArray alloc]init];
+        _onlineOrderSelectedMenuItem.qty = 1;
+        _onlineOrderSelectedMenuItem.price = self.selectedMenuItem.price.longValue;
+        _onlineOrderSelectedMenuItem.amount = _onlineOrderSelectedMenuItem.price*_onlineOrderSelectedMenuItem.qty;
     }
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    self.txtMenuItemName.text = self.selectedMenuItem.shortDescription;
-    self.qty = _onlineOrderSelectedMenuItem.qty = 1;
-    self.finalPrice = self.selectedMenuItem.price.longValue;
-    NSNumber *amount = [[NSNumber alloc] initWithLong:self.finalPrice*self.qty];
+    else
+    {
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+        OnlineOrderDetails *orderInProgress = appDelegate.globalObjectHolder.orderInProgress;
+        if (orderInProgress != nil)
+        {
+            OnlineOrderSelectedMenuItem *currentSelectedMenu = [orderInProgress.selectedMenuItems objectAtIndex:self.selectedIndex];
+            _onlineOrderSelectedMenuItem.selectedItem = currentSelectedMenu.selectedItem;
+            _onlineOrderSelectedMenuItem.selectedStore = currentSelectedMenu.selectedStore;
+            _onlineOrderSelectedMenuItem.selectedModifierGroups = [[NSMutableArray alloc]initWithArray:currentSelectedMenu.selectedModifierGroups copyItems:YES];
+            _onlineOrderSelectedMenuItem.qty = currentSelectedMenu.qty;
+            _onlineOrderSelectedMenuItem.price = currentSelectedMenu.price;
+            _onlineOrderSelectedMenuItem.amount = currentSelectedMenu.amount;
+            self.gtlModifiersAndGroups = _onlineOrderSelectedMenuItem.allModifiersAndGroups = currentSelectedMenu.allModifiersAndGroups;
+        }
+    }
+    self.txtMenuItemName.text = _onlineOrderSelectedMenuItem.selectedItem.shortDescription;
+    NSNumber *amount = [[NSNumber alloc] initWithLong:_onlineOrderSelectedMenuItem.amount];
     _onlineOrderSelectedMenuItem.amount = amount.longValue;
     self.txtAmount.text = [UtilCalls amountToString:amount];
-    [self.btnAddToOrder setTitle:[NSString stringWithFormat:@"Add to Order - %@", self.txtAmount.text] forState:UIControlStateNormal];
-    
-    
+    if (self.bInEditMode == YES)
+        [self.btnAddToOrder setTitle:[NSString stringWithFormat:@"Change Order - %@", self.txtAmount.text] forState:UIControlStateNormal];
+    else
+        [self.btnAddToOrder setTitle:[NSString stringWithFormat:@"Add to Order - %@", self.txtAmount.text] forState:UIControlStateNormal];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -74,8 +87,8 @@
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor goldColor]};
-    self.navigationItem.title = self.selectedMenuItem.shortDescription;
-    if (self.selectedMenuItem.hasModifiers.boolValue == true)
+    self.navigationItem.title = _onlineOrderSelectedMenuItem.selectedItem.shortDescription;
+    if (_onlineOrderSelectedMenuItem.selectedItem.hasModifiers.boolValue == true)
         [self getModifierGroupsAndModifiers];
 }
 
@@ -85,9 +98,9 @@
     typeof(self) weakSelf = self;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreMenuItemModifiersWithStoreId:self.selectedStore.identifier.longValue menuItemPOSId:self.selectedMenuItem.menuItemPOSId.longValue];
+    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreMenuItemModifiersWithStoreId:_onlineOrderSelectedMenuItem.selectedStore.identifier.longValue menuItemPOSId:_onlineOrderSelectedMenuItem.selectedItem.menuItemPOSId.longValue];
     
-    NSLog(@"storeid=%ld, menuitemposid=%ld", self.selectedStore.identifier.longValue, self.selectedMenuItem.menuItemPOSId.longValue);
+    NSLog(@"storeid=%ld, menuitemposid=%ld", _onlineOrderSelectedMenuItem.selectedStore.identifier.longValue, _onlineOrderSelectedMenuItem.selectedItem.menuItemPOSId.longValue);
     
     [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error)
      {
@@ -111,7 +124,7 @@
 {
     if (_onlineOrderSelectedMenuItem.selectedModifierGroups.count > 0)
     {
-        long finalPrice = self.selectedMenuItem.price.longValue;
+        long finalPrice = _onlineOrderSelectedMenuItem.selectedItem.price.longValue;
         for (OnlineOrderSelectedModifierGroup *modifierGroup in _onlineOrderSelectedMenuItem.selectedModifierGroups)
         {
             for (int i = 0; i < modifierGroup.selectedModifierIndexes.count; i++)
@@ -125,12 +138,16 @@
                 }
             }
         }
-        self.finalPrice = finalPrice;
-        _onlineOrderSelectedMenuItem.amount = self.finalPrice*self.qty;
-        _onlineOrderSelectedMenuItem.qty = self.qty;
-        NSNumber *amount = [[NSNumber alloc] initWithLong:_onlineOrderSelectedMenuItem.amount];
+        _onlineOrderSelectedMenuItem.price = finalPrice;
+        _onlineOrderSelectedMenuItem.amount = _onlineOrderSelectedMenuItem.price*_onlineOrderSelectedMenuItem.qty;
+        _onlineOrderSelectedMenuItem.qty = _onlineOrderSelectedMenuItem.qty;
+        _onlineOrderSelectedMenuItem.amount = _onlineOrderSelectedMenuItem.price*_onlineOrderSelectedMenuItem.qty;
+        NSNumber *amount = [[NSNumber alloc] initWithLong: _onlineOrderSelectedMenuItem.amount];
         self.txtAmount.text = [UtilCalls amountToString:amount];
-        [self.btnAddToOrder setTitle:[NSString stringWithFormat:@"Add to Order - %@", self.txtAmount.text] forState:UIControlStateNormal];
+        if (self.bInEditMode == YES)
+            [self.btnAddToOrder setTitle:[NSString stringWithFormat:@"Change Order - %@", self.txtAmount.text] forState:UIControlStateNormal];
+        else
+            [self.btnAddToOrder setTitle:[NSString stringWithFormat:@"Add to Order - %@", self.txtAmount.text] forState:UIControlStateNormal];
         [self.tableView reloadData];
     }
 }
@@ -223,21 +240,29 @@
 
 - (IBAction)incQty:(id)sender
 {
-    self.qty++;
-    NSNumber *amount = [[NSNumber alloc] initWithLong:self.finalPrice*self.qty ];
+    _onlineOrderSelectedMenuItem.qty++;
+    _onlineOrderSelectedMenuItem.amount = _onlineOrderSelectedMenuItem.price*_onlineOrderSelectedMenuItem.qty;
+    NSNumber *amount = [[NSNumber alloc] initWithLong: _onlineOrderSelectedMenuItem.amount];
     self.txtAmount.text = [UtilCalls amountToString:amount];
-    [self.btnAddToOrder setTitle:[NSString stringWithFormat:@"Add to Order - %@", self.txtAmount.text] forState:UIControlStateNormal];
-    self.txtQty.text = [NSString stringWithFormat:@"%ld", self.qty];
+    if (self.bInEditMode == YES)
+        [self.btnAddToOrder setTitle:[NSString stringWithFormat:@"Change Order - %@", self.txtAmount.text] forState:UIControlStateNormal];
+    else
+        [self.btnAddToOrder setTitle:[NSString stringWithFormat:@"Add to Order - %@", self.txtAmount.text] forState:UIControlStateNormal];
+    self.txtQty.text = [NSString stringWithFormat:@"%d", _onlineOrderSelectedMenuItem.qty];
 }
 - (IBAction)decQty:(id)sender
 {
-    if (self.qty > 1)
+    if (_onlineOrderSelectedMenuItem.qty > 1)
     {
-        self.qty--;
-        NSNumber *amount = [[NSNumber alloc] initWithLong:self.finalPrice*self.qty ];
+        _onlineOrderSelectedMenuItem.qty--;
+        _onlineOrderSelectedMenuItem.amount = _onlineOrderSelectedMenuItem.price*_onlineOrderSelectedMenuItem.qty;
+        NSNumber *amount = [[NSNumber alloc] initWithLong: _onlineOrderSelectedMenuItem.amount];
         self.txtAmount.text = [UtilCalls amountToString:amount];
-        [self.btnAddToOrder setTitle:[NSString stringWithFormat:@"Add to Order - %@", self.txtAmount.text] forState:UIControlStateNormal];
-        self.txtQty.text = [NSString stringWithFormat:@"%ld", self.qty];
+        if (self.bInEditMode == YES)
+            [self.btnAddToOrder setTitle:[NSString stringWithFormat:@"Change Order - %@", self.txtAmount.text] forState:UIControlStateNormal];
+        else
+            [self.btnAddToOrder setTitle:[NSString stringWithFormat:@"Add to Order - %@", self.txtAmount.text] forState:UIControlStateNormal];
+        self.txtQty.text = [NSString stringWithFormat:@"%d", _onlineOrderSelectedMenuItem.qty];
     }
     
 }
@@ -245,10 +270,18 @@
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     OnlineOrderDetails *orderInProgress = appDelegate.globalObjectHolder.orderInProgress;
+    
+    if (self.bInEditMode == YES)
+    {
+        [orderInProgress.selectedMenuItems replaceObjectAtIndex:self.selectedIndex withObject:self.onlineOrderSelectedMenuItem];
+        [self performSegueWithIdentifier:@"unwindModifierGroupToOrderSummary" sender:self];
+        return;
+    }
+
     if (orderInProgress == nil)
     {
         orderInProgress = [appDelegate.globalObjectHolder createOrderInProgress];
-        orderInProgress.selectedStore = self.selectedStore;
+        orderInProgress.selectedStore = _onlineOrderSelectedMenuItem.selectedStore;
         orderInProgress.savedUserAddress = self.savedUserAddress;
         orderInProgress.savedUserCard = self.savedUserCard;
         orderInProgress.orderType = self.orderType;
@@ -259,7 +292,7 @@
     }
     else
     {
-        if (orderInProgress.selectedStore.identifier.longValue != self.selectedStore.identifier.longValue)
+        if (orderInProgress.selectedStore.identifier.longValue != _onlineOrderSelectedMenuItem.selectedStore.identifier.longValue)
         {
             typeof(self) weakSelf = self;
             NSString *errMsg = @"You are starting an order at a new restaurant. Do you want to cancel your other order?";
@@ -270,7 +303,7 @@
                      return;
                  else
                  {
-                     orderInProgress.selectedStore = weakSelf.selectedStore;
+                     orderInProgress.selectedStore = weakSelf.onlineOrderSelectedMenuItem.selectedStore;
                      orderInProgress.savedUserAddress = weakSelf.savedUserAddress;
                      orderInProgress.savedUserCard = weakSelf.savedUserCard;
                      orderInProgress.orderType = weakSelf.orderType;

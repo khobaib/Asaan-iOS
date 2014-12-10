@@ -91,7 +91,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.savedUserAddress = nil;
     if (self.userCards.items.count == indexPath.row)
         [self performSegueWithIdentifier:@"segueAddPaymentMethod" sender:self];
     else

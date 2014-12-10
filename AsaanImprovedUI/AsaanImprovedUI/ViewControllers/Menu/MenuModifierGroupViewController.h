@@ -11,6 +11,7 @@
 #import "GTLStoreendpoint.h"
 #import "GTLUserendpointUserAddress.h"
 #import "GTLUserendpointUserCard.h"
+#import "OnlineOrderSelectedMenuItem.h"
 
 @interface MenuModifierGroupViewController : UIViewController
 @property (strong, nonatomic) GTLStoreendpointStore *selectedStore;
@@ -20,4 +21,9 @@
 @property (nonatomic) int orderType;
 @property (nonatomic) NSInteger partySize;
 @property (nonatomic) NSDate *orderTime;
+
+@property (nonatomic) Boolean bInEditMode;
+@property (nonatomic) NSUInteger selectedIndex;
+@property (strong, nonatomic) NSMutableArray *allModifiersForSelectedGroup;
+
 @end

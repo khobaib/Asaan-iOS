@@ -15,6 +15,13 @@
 #import "OnlineOrderSelectedModifierGroup.h"
 #import "OnlineOrderDetails.h"
 #import "MenuTableViewController.h"
+#import "MenuModifierGroupViewController.h"
+#import <Parse/Parse.h>
+#import <ParseUI/ParseUI.h>
+#import <MBProgressHUD.h>
+#import "AppDelegate.h"
+#import "UIAlertView+Blocks.h"
+#import "DeliveryOrCarryoutViewController.h"
 
 @interface OrderSummaryViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -22,6 +29,8 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnAdd;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnEdit;
 @property (strong, nonatomic) MenuTableViewController *itemInputController;
+
+@property (nonatomic) NSUInteger selectedIndex;
 @end
 
 @implementation OrderSummaryViewController
@@ -54,11 +63,96 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (IBAction)placeOrder:(id)sender {
+- (IBAction)placeOrder:(id)sender
+{
+    if (self.orderInProgress == nil)
+        return;
+    
+    NSString *str = @"<ITEMREQUESTS>";
+    for (OnlineOrderSelectedMenuItem *object in self.orderInProgress.selectedMenuItems)
+    {
+        NSString *itemString=[NSString stringWithFormat:@"<ADDITEM QTY=\"%d\" ITEMID=\"%@\" />",object.qty,object.selectedItem.menuItemPOSId];
+        
+        str=[str stringByAppendingString:itemString];
+    }
+    str=[str stringByAppendingString:@"</ITEMREQUESTS>"];
+    
+    //NSString *contactString=[NSString stringWithFormat:@"<CONTACT FIRSTNAME=\"%@\" LASTNAME=\"%@\" PHONE1=\"%@\" PHONE2=\"8012345678\" COMPANY=\"TEST CO\" DEPT=\"DEPT 123\" />"];
+    
+    PFUser *user = [PFUser currentUser];
+    NSString *contactString=[NSString stringWithFormat:@"<CONTACT FIRSTNAME=\"%@\" LASTNAME=\"%@\" PHONE1=\"%@\" />", user[@"firstName"], user[@"lastName"], user[@"phone"]];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"hh:mm a"];
+    NSString *orderTime = [dateFormatter stringFromDate: self.orderInProgress.orderTime];
+    
+    NSString *orderString;
+    if (self.orderInProgress.orderType == [DeliveryOrCarryoutViewController ORDERTYPE_DELIVERY])
+    {
+        
+        //    NSString *deliveryString=[NSString stringWithFormat:@"<DELIVERY DELIVERYACCT=\"%@\" DELIVERYNOTE=\"%@\" ADDRESS1=\"123 Main street\" ADDRESS2=\"APT 123\" ADDRESS3=\"Back Door\" CITY=\"DENVER\" STATE=\"CO\" POSTALCODE=\"12345\" CROSSSTREET=\"MAIN AND 1st\" />"];
+        GTLUserendpointUserAddress *address = self.orderInProgress.savedUserAddress;
+        NSString *deliveryString=[NSString stringWithFormat:@"<DELIVERY DELIVERYACCT=\"%@\" DELIVERYNOTE=\"%@\" ADDRESS=\"%@\" />", address.title, address.address3, address.address2];
+        
+        orderString=[NSString stringWithFormat:@"<CHECKREQUESTS><ADDCHECK EXTCHECKID=\"ASAAN\" READYTIME=\"%@\" NOTE=\"%@\" ORDERMODE=\"@ORDER_MODE\">%@%@%@</ADDCHECK></CHECKREQUESTS>",orderTime, self.orderInProgress.specialInstructions, contactString, deliveryString, str];
+    }
+    else
+        orderString=[NSString stringWithFormat:@"<CHECKREQUESTS><ADDCHECK EXTCHECKID=\"ASAAN\" READYTIME=\"%@\" NOTE=\"%@\" ORDERMODE=\"@ORDER_MODE\">%@%@</ADDCHECK></CHECKREQUESTS>",orderTime, self.orderInProgress.specialInstructions, contactString, str];
+    
+    NSLog(@"%@",orderString);
+    
+    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForPlaceOrderWithStoreId:self.orderInProgress.selectedStore.identifier.longValue orderMode:self.orderInProgress.orderType order:orderString];
+    
+    //[query setCustomParameter:@"hmHAJvHvKYmilfOqgUnc22tf/RL5GLmPbcFBg02d6wm+ZB1o3f7RKYqmB31+DGoH9Ad3s3WP99n587qDZ5tm+w==" forKey:@"asaan-auth-token"];
+    NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
+    dic[@"asaan-auth-token"]=[PFUser currentUser][@"authToken"];
+    
+    [query setAdditionalHTTPHeaders:dic];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    typeof(self) weakSelf = self;
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
+    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreMenuItem *object,NSError *error)
+    {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        
+        NSLog(@"%@",object);
+        if(error==nil)
+        {
+            NSString *title = [NSString stringWithFormat:@"Your Order - %@", self.orderInProgress.selectedStore.name];
+            NSString *msg = [NSString stringWithFormat:@"Thank you - your order has been placed. If you need to make changes please call %@ immediately at %@.", weakSelf.orderInProgress.selectedStore.name, weakSelf.orderInProgress.selectedStore.phone];
+            [appDelegate.globalObjectHolder removeOrderInProgress];
+            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:title message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+            [alert show];
+            [weakSelf performSegueWithIdentifier:@"segueUnwindOrderSummaryToStoreList" sender:weakSelf];
+        }
+        else
+        {
+            NSLog(@"%@",[error userInfo]);
+            NSString *title = @"Something went wrong";
+            NSString *msg = [NSString stringWithFormat:@"We were unable to reach %@ and place your order. We're really sorry. Please call %@ directly at %@ to place your order.", weakSelf.orderInProgress.selectedStore.name, weakSelf.orderInProgress.selectedStore.name, weakSelf.orderInProgress.selectedStore.phone];
+            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:title message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+            [alert show];
+        }
+    }];
 }
 - (IBAction)cancelOrder:(id)sender
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    typeof(self) weakSelf = self;
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    NSString *errMsg = [NSString stringWithFormat:@"Do you want to cancel your current order at %@?", self.orderInProgress.selectedStore.name];
+    [UIAlertView showWithTitle:@"Cancel your order?" message:errMsg cancelButtonTitle:@"No" otherButtonTitles:@[@"Yes"]
+                      tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex)
+     {
+         if (buttonIndex == [alertView cancelButtonIndex])
+             return;
+         else
+         {
+             [appDelegate.globalObjectHolder removeOrderInProgress];
+             [weakSelf performSegueWithIdentifier:@"segueUnwindOrderSummaryToStoreList" sender:weakSelf];
+         }
+     }];
 }
 - (IBAction)editTable:(id)sender
 {
@@ -319,6 +413,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //segueOrderSummaryToModifierGroup
+    self.selectedIndex = indexPath.row;
+    if (self.orderInProgress.selectedMenuItems.count > indexPath.row)
+        [self performSegueWithIdentifier:@"segueOrderSummaryToModifierGroup" sender:self];
 }
 
 #pragma mark - Navigation
@@ -339,6 +437,15 @@
         [controller setPartySize:self.orderInProgress.partySize];
         [controller setOrderTime:self.orderInProgress.orderTime];
     }
+    else if ([[segue identifier] isEqualToString:@"segueOrderSummaryToModifierGroup"])
+    {
+        MenuModifierGroupViewController *controller = [segue destinationViewController];
+        [controller setSelectedIndex:self.selectedIndex];
+        [controller setBInEditMode:YES];
+    }
 }
 
+- (IBAction)unwindToOrderSummary:(UIStoryboardSegue *)unwindSegue
+{
+}
 @end

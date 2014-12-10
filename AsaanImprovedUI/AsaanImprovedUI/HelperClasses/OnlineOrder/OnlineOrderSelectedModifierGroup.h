@@ -10,7 +10,7 @@
 #import "GTLStoreendpointStoreMenuItemModifierGroup.h"
 #import "GTLStoreendpointStoreMenuItemModifier.h"
 
-@interface OnlineOrderSelectedModifierGroup : NSObject
+@interface OnlineOrderSelectedModifierGroup : NSObject<NSCopying>
 @property (strong, nonatomic) GTLStoreendpointStoreMenuItemModifierGroup *modifierGroup;
 @property (strong, nonatomic) NSArray *modifiers;
 @property (strong, nonatomic) NSMutableArray *selectedModifierIndexes;

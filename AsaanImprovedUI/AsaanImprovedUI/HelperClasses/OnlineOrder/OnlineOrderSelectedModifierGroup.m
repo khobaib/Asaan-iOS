@@ -10,4 +10,18 @@
 
 @implementation OnlineOrderSelectedModifierGroup
 
+- (id)copyWithZone:(NSZone *)zone
+{
+    OnlineOrderSelectedModifierGroup *copy = [[[self class] alloc] init];
+    
+    if (copy)
+    {
+        // Copy NSObject subclasses
+        copy.modifierGroup = self.modifierGroup;
+        copy.modifiers = self.modifiers;
+        copy.selectedModifierIndexes = [[NSMutableArray alloc]initWithArray:self.selectedModifierIndexes copyItems:YES];
+    }
+    
+    return copy;
+}
 @end
