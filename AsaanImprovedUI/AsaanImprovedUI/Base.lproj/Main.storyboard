@@ -323,6 +323,7 @@
                         <outlet property="txtDelivery" destination="q58-Qy-Aub" id="BiH-G0-pV1"/>
                         <segue destination="Rba-OY-hsV" kind="show" identifier="segueDeliveryPayment" id="gI1-Gk-ko0"/>
                         <segue destination="yA3-i5-l3p" kind="show" identifier="segueDeliveryAddress" id="6ci-7P-WoS"/>
+                        <segue destination="YwB-wm-Nu4" kind="show" identifier="segueDeliveryToAddPayment" id="h4A-Mw-FuI"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U47-zP-j1Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -798,7 +799,7 @@
                     <connections>
                         <outlet property="paymentInfoScrollView" destination="SP5-vP-NGG" id="4Ev-mT-hw5"/>
                         <outlet property="ptkView" destination="qUf-cq-SyV" id="cwS-tF-I8O"/>
-                        <segue destination="qQB-3J-7B4" kind="unwind" identifier="segueunwindToSelectPaymentMethod" unwindAction="unwindToSelectPaymentMethod:" id="Bsm-UH-kLr"/>
+                        <segue destination="qQB-3J-7B4" kind="unwind" identifier="segueunwindToSelectPaymentMethod" unwindAction="unwindToSelectPaymentMethod:" id="HBi-LG-K9h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4E7-iq-XDz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -811,7 +812,7 @@
             <objects>
                 <tableViewController title="Menu" extendedLayoutIncludesOpaqueBars="YES" id="2nl-tz-z8l" userLabel="MenuTableViewController" customClass="MenuTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="100" sectionHeaderHeight="40" sectionFooterHeight="40" id="6bZ-Qj-a9y">
-                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="separatorColor" red="0.79607843140000001" green="0.59607843140000005" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1465,7 +1466,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="MenuModifierTableViewController" extendedLayoutIncludesOpaqueBars="YES" id="Lsr-tg-uYa" userLabel="MenuModifierTableViewController" customClass="MenuModifierTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="aB3-tD-etc">
-                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexBackgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -3641,10 +3642,11 @@
         <image name="visits-blue" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="cQG-s7-LJm"/>
         <segue reference="BxH-0j-lGN"/>
-        <segue reference="MeC-Bq-6yp"/>
+        <segue reference="cQG-s7-LJm"/>
+        <segue reference="h4A-Mw-FuI"/>
         <segue reference="hGp-RD-wox"/>
+        <segue reference="MeC-Bq-6yp"/>
         <segue reference="33i-hP-PSJ"/>
         <segue reference="uGl-gS-kfz"/>
         <segue reference="WgG-9g-jiE"/>

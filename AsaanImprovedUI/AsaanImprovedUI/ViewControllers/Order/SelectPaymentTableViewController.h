@@ -13,6 +13,7 @@
 #import "GTLUserendpointUserCardCollection.h"
 
 @interface SelectPaymentTableViewController : UITableViewController
+
 @property (strong, nonatomic) GTLStoreendpointStore *selectedStore;
 @property (strong, nonatomic) GTLUserendpointUserAddress *savedUserAddress;
 @property (strong, nonatomic) GTLUserendpointUserCard *savedUserCard;

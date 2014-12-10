@@ -13,9 +13,23 @@
 #import "UIColor+AsaanGoldColor.h"
 #import "UIColor+AsaanBackgroundColor.h"
 
+#import "GTLUserendpointUserAddress.h"
+#import "GTLUserendpointUserCard.h"
+#import "GTLUserendpointUserCardCollection.h"
+#import "AsaanConstants.h"
+#import "AppDelegate.h"
+#import "PTKCardType.h"
+#import <Parse/Parse.h>
+#import "MBProgressHUD.h"
+#import "AddPaymentCardViewController.h"
+
 @interface DeliveryOrCarryoutViewController ()
+
 @property (weak, nonatomic) IBOutlet UILabel *txtCarryout;
 @property (weak, nonatomic) IBOutlet UILabel *txtDelivery;
+@property (strong, nonatomic) GTLUserendpointUserCardCollection *userCards;
+@property (nonatomic, strong) MBProgressHUD *hud;
+
 @end
 
 @implementation DeliveryOrCarryoutViewController
@@ -64,8 +78,11 @@
 {
     if (indexPath.row == 0)
     {
-        self.orderType = [DeliveryOrCarryoutViewController ORDERTYPE_CARRYOUT];
-        [self performSegueWithIdentifier:@"segueDeliveryPayment" sender:self];
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.mode = MBProgressHUDModeIndeterminate;
+        hud.labelText = @"Please Wait";
+        
+        [self getUserCards];
     }
     else
     {
@@ -96,8 +113,43 @@
     {
         SelectPaymentTableViewController *controller = [segue destinationViewController];
         [controller setSelectedStore:_selectedStore];
+        [controller setUserCards:self.userCards];
         [controller setOrderType:_orderType];
     }
+}
+
+#pragma mark - Private Methods
+- (void) getUserCards
+{
+    typeof(self) weakSelf = self;
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    GTLServiceUserendpoint *gtlUserService= [appDelegate gtlUserService];
+    GTLQueryUserendpoint *query = [GTLQueryUserendpoint queryForGetUserCards];
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    dic[USER_AUTH_TOKEN_HEADER_NAME] = [PFUser currentUser][@"authToken"];
+    [query setAdditionalHTTPHeaders:dic];
+    [gtlUserService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error)
+     {
+         if (!error)
+         {
+             weakSelf.userCards = object;
+             [MBProgressHUD hideHUDForView:self.view animated:true];
+             
+             self.orderType = [DeliveryOrCarryoutViewController ORDERTYPE_CARRYOUT];
+             [self performSegueWithIdentifier:@"segueDeliveryPayment" sender:self];
+             
+             
+         }
+         else
+         {
+             NSString *errMsg = [NSString stringWithFormat:@"%@", [error userInfo]];
+             UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"Asaan Server Access Failure" message:errMsg delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+             
+             [alert show];
+             return;
+         }
+     }];
 }
 
 @end
