@@ -48,15 +48,22 @@
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor goldColor]};
     
-//    [self getUserCards];
     [self.tableView reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
 
     if (!self.userCards || !self.userCards.items || self.userCards.items.count == 0) {
-        [self performSegueWithIdentifier:@"segueAddPaymentMethod" sender:self];
+        
+        if (!self.fromFront) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else {
+            [self performSegueWithIdentifier:@"segueAddPaymentMethod" sender:self];
+        }
     }
+    
+    self.fromFront = false;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -109,39 +116,6 @@
         [self performSegueWithIdentifier:@"segueOrderDetails" sender:self];
     }
 }
-
-//- (void) getUserCards
-//{
-//    typeof(self) weakSelf = self;
-//    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-//    GTLServiceUserendpoint *gtlUserService= [appDelegate gtlUserService];
-//    GTLQueryUserendpoint *query = [GTLQueryUserendpoint queryForGetUserCards];
-//    
-//    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-//    dic[USER_AUTH_TOKEN_HEADER_NAME] = [PFUser currentUser][@"authToken"];
-//    [query setAdditionalHTTPHeaders:dic];
-//    [gtlUserService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error)
-//     {
-//         if (!error)
-//         {
-//             weakSelf.userCards = object;
-//             if (weakSelf.userCards.items.count == 0) {
-////                 [self performSegueWithIdentifier:@"segueAddPaymentMethod" sender:weakSelf];
-//                 NSLog(@"Here should not come");
-//             }
-//             else
-//                 [weakSelf.tableView reloadData];
-//         }
-//         else
-//         {
-//             NSString *errMsg = [NSString stringWithFormat:@"%@", [error userInfo]];
-//             UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"Asaan Server Access Failure" message:errMsg delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-//             
-//             [alert show];
-//             return;
-//         }
-//     }];
-//}
 
 #pragma mark - Navigation
 

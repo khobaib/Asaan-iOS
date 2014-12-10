@@ -57,6 +57,8 @@
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIKeyboardDidShowNotification
                                                   object:nil];
@@ -66,7 +68,6 @@
                                                   object:nil];
     
     [self.view endEditing:YES];
-    [super viewWillDisappear:animated];
 }
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
@@ -104,6 +105,7 @@
     _baseScrollView.contentInset = contentInsets;
     _baseScrollView.scrollIndicatorInsets = contentInsets;
     
+    NSLog(@"Hello");
     // If active text field is hidden by keyboard, scroll it so it's visible
     // Your app might not need or want this behavior.
     CGRect aRect = _frameRect;
