@@ -14,10 +14,14 @@
 #import "OnlineOrderSelectedMenuItem.h"
 #import "OnlineOrderSelectedModifierGroup.h"
 #import "OnlineOrderDetails.h"
+#import "MenuTableViewController.h"
 
 @interface OrderSummaryViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) OnlineOrderDetails *orderInProgress;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *btnAdd;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *btnEdit;
+@property (strong, nonatomic) MenuTableViewController *itemInputController;
 @end
 
 @implementation OrderSummaryViewController
@@ -26,8 +30,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    self.orderInProgress = appDelegate.globalObjectHolder.orderInProgress;
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
@@ -42,6 +44,9 @@
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor goldColor]};
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    self.orderInProgress = appDelegate.globalObjectHolder.orderInProgress;
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -55,7 +60,29 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
+- (IBAction)editTable:(id)sender
+{
+    if (self.btnEdit.tag == 0) // start editing
+    {
+        [self setEditing:YES animated:YES];
+        self.btnEdit.title = @"Done";
+        self.btnEdit.tag = 1;
+        self.btnAdd.enabled = NO;
+    }
+    else
+    {
+        [self setEditing:NO animated:YES];
+        self.btnEdit.title = @"Edit";
+        self.btnEdit.tag = 0;
+        self.btnAdd.enabled = YES;
+    }
+}
 
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated
+{
+    [super setEditing:editing animated:animated];
+    [self.tableView setEditing:editing animated:YES];
+}
 #pragma mark -
 #pragma mark  === UITableViewDataSource ===
 #pragma mark -
@@ -102,7 +129,23 @@
     
     return cell;
 }
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.orderInProgress.selectedMenuItems.count > indexPath.row)
+        return UITableViewCellEditingStyleDelete;
+    else
+        return UITableViewCellEditingStyleNone;
+}
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // If row is deleted, remove it from the list.
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        [self.orderInProgress.selectedMenuItems removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
 - (NSUInteger)subTotal
 {
     NSUInteger subTotal = 0;
@@ -278,14 +321,24 @@
 {
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+ 
+    if ([[segue identifier] isEqualToString:@"segueOrderSummaryToMenu"])
+    {
+        MenuTableViewController *controller = [segue destinationViewController];
+        [controller setSelectedStore:self.orderInProgress.selectedStore];
+        [controller setSavedUserAddress:self.orderInProgress.savedUserAddress];
+        [controller setSavedUserCard:self.orderInProgress.savedUserCard];
+        [controller setOrderType:self.orderInProgress.orderType];
+        [controller setPartySize:self.orderInProgress.partySize];
+        [controller setOrderTime:self.orderInProgress.orderTime];
+    }
 }
-*/
 
 @end

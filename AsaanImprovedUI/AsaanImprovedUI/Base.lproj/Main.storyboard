@@ -811,7 +811,7 @@
             <objects>
                 <tableViewController title="Menu" extendedLayoutIncludesOpaqueBars="YES" id="2nl-tz-z8l" userLabel="MenuTableViewController" customClass="MenuTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="100" sectionHeaderHeight="40" sectionFooterHeight="40" id="6bZ-Qj-a9y">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="separatorColor" red="0.79607843140000001" green="0.59607843140000005" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1161,9 +1161,19 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="pmQ-md-PrQ">
                                 <rect key="frame" x="16" y="64" width="568" height="44"/>
                                 <items>
-                                    <barButtonItem systemItem="edit" id="OEu-kb-Tan"/>
+                                    <barButtonItem title="Edit" id="OEu-kb-Tan">
+                                        <color key="tintColor" red="0.79607843140000001" green="0.59607843140000005" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <action selector="editTable:" destination="tr6-CX-CMT" id="dN3-H7-sIU"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="jUD-xg-bJ8"/>
-                                    <barButtonItem systemItem="add" id="bD4-eq-fWS"/>
+                                    <barButtonItem systemItem="add" id="bD4-eq-fWS">
+                                        <color key="tintColor" red="0.79607843140000001" green="0.59607843140000005" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <segue destination="2nl-tz-z8l" kind="show" identifier="segueOrderSummaryToMenu" id="WgG-9g-jiE"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                                 <color key="tintColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                             </toolbar>
@@ -1197,8 +1207,10 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Your Order" id="Wet-fa-Ziw"/>
                     <connections>
+                        <outlet property="btnAdd" destination="bD4-eq-fWS" id="4Rc-fJ-TkA"/>
+                        <outlet property="btnEdit" destination="OEu-kb-Tan" id="8Hn-dd-hvL"/>
                         <outlet property="tableView" destination="NzV-NJ-IC1" id="NsG-Ud-GlD"/>
-                        <segue destination="OEM-gH-M5m" kind="unwind" unwindAction="unwindToStoreList:" id="x4C-so-2tk"/>
+                        <segue destination="OEM-gH-M5m" kind="unwind" identifier="segueUnwindOrderSummaryToStoreList" unwindAction="unwindToStoreList:" id="x4C-so-2tk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oPL-b4-Hek" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1443,14 +1455,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BhF-gw-zCS" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="eTW-PD-3gg" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="877" y="1125"/>
+            <point key="canvasLocation" x="859" y="1125"/>
         </scene>
         <!--MenuModifierTableViewController-->
         <scene sceneID="p4D-ma-p03">
             <objects>
                 <tableViewController storyboardIdentifier="MenuModifierTableViewController" extendedLayoutIncludesOpaqueBars="YES" id="Lsr-tg-uYa" userLabel="MenuModifierTableViewController" customClass="MenuModifierTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="aB3-tD-etc">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexBackgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -3626,12 +3638,12 @@
         <image name="visits-blue" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="F9u-xN-ecY"/>
-        <segue reference="g5V-KY-zil"/>
         <segue reference="MeC-Bq-6yp"/>
         <segue reference="cQG-s7-LJm"/>
         <segue reference="BxH-0j-lGN"/>
         <segue reference="hGp-RD-wox"/>
+        <segue reference="WgG-9g-jiE"/>
+        <segue reference="uGl-gS-kfz"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.79607843140000001" green="0.59607843140000005" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
