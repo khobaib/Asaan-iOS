@@ -10,6 +10,13 @@
 #import "GTLUserendpointUserCard.h"
 #include "BaseViewController.h"
 
+#import "GTLStoreendpoint.h"
+#import "GTLUserendpointUserAddress.h"
+#import "GTLUserendpointUserCard.h"
+#import "GTLUserendpointUserCardCollection.h"
+
 @interface AddPaymentCardViewController : BaseViewController
+
 @property (strong, nonatomic) GTLUserendpointUserCard *savedUserCard;
+
 @end

@@ -22,6 +22,7 @@
 #import "AsaanConstants.h"
 #import "AppDelegate.h"
 #import "AsaanConstants.h"
+#import "SelectPaymentTableViewController.h"
 
 @interface AddPaymentCardViewController ()<PTKViewDelegate>
 @property (weak, nonatomic) IBOutlet PTKView *ptkView;
@@ -176,14 +177,19 @@
     }];
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    
+    if ([segue.identifier isEqualToString:@"segueunwindToSelectPaymentMethod"]) {
+        
+        GTLUserendpointUserCardCollection *cards = [[GTLUserendpointUserCardCollection alloc] init];
+        cards.items = @[self.savedUserCard];
+        
+        SelectPaymentTableViewController *controller = [segue destinationViewController];
+        [controller setUserCards:cards];
+    }
 }
-*/
 
 @end
