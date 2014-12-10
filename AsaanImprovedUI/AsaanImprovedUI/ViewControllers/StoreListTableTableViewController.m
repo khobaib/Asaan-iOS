@@ -91,8 +91,22 @@ const NSUInteger FluentPagingTablePageSize = 20;
     GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
     if (goh.orderInProgress != nil)
     {
-        UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"cart.png"] style:UIBarButtonItemStylePlain target:self action:@selector(showOrderSummaryPressed)];
-        [self.navigationItem setRightBarButtonItem:item animated:YES];
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button setImage:[UIImage imageNamed:@"cart.png"] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(showOrderSummaryPressed) forControlEvents:UIControlEventTouchUpInside];
+        [button setFrame:CGRectMake(0, 0, 25, 25)];
+        button.backgroundColor = [UIColor clearColor];
+        
+//        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(3, 5, 50, 20)];
+//        [label setFont:[UIFont fontWithName:@"Arial-BoldMT" size:13]];
+//        [label setText:@"Order"];
+//        label.textAlignment = UITextAlignmentCenter;
+//        [label setTextColor:[UIColor whiteColor]];
+//        [label setBackgroundColor:[UIColor clearColor]];
+//        [button addSubview:label];
+        
+        UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:button];
+        self.navigationItem.rightBarButtonItem = item;
     }
 }
 
