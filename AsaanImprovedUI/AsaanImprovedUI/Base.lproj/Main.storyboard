@@ -805,7 +805,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4E7-iq-XDz" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="qQB-3J-7B4" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2323" y="-337"/>
+            <point key="canvasLocation" x="2351" y="-381"/>
         </scene>
         <!--MenuTableViewController-->
         <scene sceneID="1g9-7q-4cr">

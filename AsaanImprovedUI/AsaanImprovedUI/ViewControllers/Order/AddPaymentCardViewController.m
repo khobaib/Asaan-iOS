@@ -55,7 +55,7 @@
     self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor : [UIColor goldColor]};
     
     // Prevent keyboard from showing by default
-    [self.view endEditing:YES];
+    [self.ptkView endEditing:YES];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -20,4 +20,6 @@
 @property (strong, nonatomic) GTLUserendpointUserCardCollection *userCards;
 @property (nonatomic) int orderType;
 
+@property (nonatomic, assign) bool fromFront;
+
 @end

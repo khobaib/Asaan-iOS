@@ -115,6 +115,7 @@
         [controller setSelectedStore:_selectedStore];
         [controller setUserCards:self.userCards];
         [controller setOrderType:_orderType];
+        controller.fromFront = true;
     }
 }
 
