@@ -130,7 +130,7 @@
         user[@"lastName"]=_txtLastName.text;
         
         [user saveInBackground];
-        [self performSegueWithIdentifier:@"segueSignupProfileToPaymentInfo" sender:self];
+        [self performSegueWithIdentifier:@"segueSignupProfileToStoreList" sender:self];
     }
 }
 

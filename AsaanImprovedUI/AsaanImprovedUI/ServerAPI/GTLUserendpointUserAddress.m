@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLUserendpointUserAddress (0 custom class methods, 13 custom properties)
+//   GTLUserendpointUserAddress (0 custom class methods, 20 custom properties)
 
 #import "GTLUserendpointUserAddress.h"
 
@@ -23,8 +23,9 @@
 //
 
 @implementation GTLUserendpointUserAddress
-@dynamic address2, address3, city, crossStreet, defaultProperty, identifier,
-         lat, lng, state, streetAddress, title, userId, zip;
+@dynamic apartment, city, country, county, crossStreet, defaultProperty,
+         fullAddress, identifier, isocountryCode, lat, lng, name, neighbourhood,
+         notes, state, street, streetNumber, title, userId, zip;
 
 + (NSDictionary *)propertyToJSONKeyMap {
   NSDictionary *map =

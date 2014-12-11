@@ -16,8 +16,6 @@
 @interface MenuModifierGroupViewController : UIViewController
 @property (strong, nonatomic) GTLStoreendpointStore *selectedStore;
 @property (strong, nonatomic) GTLStoreendpointStoreMenuItem *selectedMenuItem;
-@property (strong, nonatomic) GTLUserendpointUserAddress *savedUserAddress;
-@property (strong, nonatomic) GTLUserendpointUserCard *savedUserCard;
 @property (nonatomic) int orderType;
 @property (nonatomic) NSInteger partySize;
 @property (nonatomic) NSDate *orderTime;

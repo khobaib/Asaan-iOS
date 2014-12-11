@@ -22,6 +22,8 @@
 #import <Parse/Parse.h>
 #import "MBProgressHUD.h"
 #import "AddPaymentCardViewController.h"
+#import "MenuTableViewController.h"
+#import "UtilCalls.h"
 
 @interface DeliveryOrCarryoutViewController ()
 
@@ -29,7 +31,17 @@
 @property (weak, nonatomic) IBOutlet UILabel *txtDelivery;
 @property (strong, nonatomic) GTLUserendpointUserCardCollection *userCards;
 @property (nonatomic, strong) MBProgressHUD *hud;
+@property (weak, nonatomic) IBOutlet UILabel *orderTime;
+@property (weak, nonatomic) IBOutlet UILabel *partySize;
 
+@property (nonatomic) NSInteger minOrderTime;
+@property (nonatomic) NSInteger timeIncrementInterval;
+@property (nonatomic) NSInteger timeDecrementInterval;
+@property (nonatomic) NSInteger minPartySize;
+@property (nonatomic) NSInteger currPartySize;
+@property (nonatomic) NSDate *currOrderTime;
+
+@property (nonatomic) Boolean bIsSeekingDeliveryAddress;
 @end
 
 @implementation DeliveryOrCarryoutViewController
@@ -41,7 +53,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.minPartySize = self.currPartySize = 1;
+    self.partySize.text = [NSString stringWithFormat:@"%d", self.currPartySize];
+    self.minOrderTime = 3600;
+    self.timeIncrementInterval = 900; // 15 min
+    self.timeDecrementInterval = -900; // 15 min
+    
+    NSDate *currentTime = [NSDate date];
+    NSDate *minOrderDate = [currentTime dateByAddingTimeInterval:self.minOrderTime];
+    self.currOrderTime = minOrderDate;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"hh:mm a"];
+    self.orderTime.text = [dateFormatter stringFromDate: self.currOrderTime];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -65,6 +89,15 @@
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+//    if (!self.userCards || !self.userCards.items || self.userCards.items.count == 0)
+//        [self performSegueWithIdentifier:@"segueAddPaymentMethod" sender:self];
+//
+//    if (!self.userAddresses || !self.userAddresses.items || self.userAddresses.items.count == 0)
+//        [self performSegueWithIdentifier:@"segueAddAddress" sender:self];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -76,22 +109,57 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0)
+    if (indexPath.row == 2)
     {
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.mode = MBProgressHUDModeIndeterminate;
-        hud.labelText = @"Please Wait";
-        
-        [self getUserCards];
+        self.orderType = [DeliveryOrCarryoutViewController ORDERTYPE_CARRYOUT];
+        [self performSegueWithIdentifier:@"segueStartOrderToMenu" sender:self];
     }
-    else
+    else if (indexPath.row == 3)
     {
         if (self.selectedStore.providesDelivery.boolValue == NO)
             return;
 
         self.orderType = [DeliveryOrCarryoutViewController ORDERTYPE_DELIVERY];
-        [self performSegueWithIdentifier:@"segueDeliveryAddress" sender:self];
+        [self performSegueWithIdentifier:@"segueStartOrderToMenu" sender:self];
     }
+    
+}
+
+#pragma mark - Action Buttons
+- (IBAction)decOrderTime:(id)sender
+{
+    NSDate *currentTime = [NSDate date];
+    NSDate *newTime = [[NSDate alloc] initWithTimeInterval:self.timeDecrementInterval
+                                                 sinceDate:self.currOrderTime];
+    
+    NSDate *minOrderTime = [[NSDate alloc] initWithTimeInterval:self.minOrderTime
+                                                      sinceDate:currentTime];
+    self.currOrderTime = [newTime laterDate:minOrderTime];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"hh:mm a"];
+    self.orderTime.text = [dateFormatter stringFromDate: self.currOrderTime];
+}
+- (IBAction)incOrderTime:(id)sender
+{
+    NSDate *currentTime = [NSDate date];
+    NSDate *newTime = [[NSDate alloc] initWithTimeInterval:self.timeIncrementInterval
+                                                 sinceDate:self.currOrderTime];
+    
+    NSDate *minOrderTime = [[NSDate alloc] initWithTimeInterval:self.minOrderTime
+                                                      sinceDate:currentTime];
+    self.currOrderTime = [newTime laterDate:minOrderTime];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"hh:mm a"];
+    self.orderTime.text = [dateFormatter stringFromDate: self.currOrderTime];
+}
+- (IBAction)decPartySize:(id)sender
+{
+    if (self.currPartySize > self.minPartySize)
+        self.partySize.text = [NSString stringWithFormat:@"%d", --self.currPartySize];
+}
+- (IBAction)incPartySize:(id)sender
+{
+    self.partySize.text = [NSString stringWithFormat:@"%d", ++self.currPartySize];
 }
 
 #pragma mark - Navigation
@@ -101,56 +169,21 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-
-    // Get reference to the destination view controller
-    if ([[segue identifier] isEqualToString:@"segueDeliveryAddress"])
+    
+    if ([[segue identifier] isEqualToString:@"segueStartOrderToMenu"])
+    {
+        MenuTableViewController *controller = [segue destinationViewController];
+        [controller setSelectedStore:self.selectedStore];
+        [controller setOrderType:self.orderType];
+        [controller setPartySize:self.currPartySize];
+        [controller setOrderTime:self.currOrderTime];
+        [controller setBMenuIsInOrderMode:YES];
+    }
+    else if ([[segue identifier] isEqualToString:@"segueStartOrderToSelectAddress"])
     {
         SelectAddressTableViewController *controller = [segue destinationViewController];
-        [controller setSelectedStore:_selectedStore];
-        [controller setOrderType:_orderType];
+        [controller setSelectedStore:self.selectedStore];
     }
-    else if ([[segue identifier] isEqualToString:@"segueDeliveryPayment"])
-    {
-        SelectPaymentTableViewController *controller = [segue destinationViewController];
-        [controller setSelectedStore:_selectedStore];
-        [controller setUserCards:self.userCards];
-        [controller setOrderType:_orderType];
-        controller.fromFront = true;
-    }
-}
-
-#pragma mark - Private Methods
-- (void) getUserCards
-{
-    typeof(self) weakSelf = self;
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    GTLServiceUserendpoint *gtlUserService= [appDelegate gtlUserService];
-    GTLQueryUserendpoint *query = [GTLQueryUserendpoint queryForGetUserCards];
-    
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    dic[USER_AUTH_TOKEN_HEADER_NAME] = [PFUser currentUser][@"authToken"];
-    [query setAdditionalHTTPHeaders:dic];
-    [gtlUserService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error)
-     {
-         if (!error)
-         {
-             weakSelf.userCards = object;
-             [MBProgressHUD hideHUDForView:self.view animated:true];
-             
-             self.orderType = [DeliveryOrCarryoutViewController ORDERTYPE_CARRYOUT];
-             [self performSegueWithIdentifier:@"segueDeliveryPayment" sender:self];
-             
-             
-         }
-         else
-         {
-             NSString *errMsg = [NSString stringWithFormat:@"%@", [error userInfo]];
-             UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"Asaan Server Access Failure" message:errMsg delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-             
-             [alert show];
-             return;
-         }
-     }];
 }
 
 @end

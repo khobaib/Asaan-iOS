@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"9mnLCPwbyZOHH18t8ExzO2gqgTk/-xHoRo6sG08GYF6Y-nyp_HdXVfQ\"",
+ "etag": "\"9mnLCPwbyZOHH18t8ExzO2gqgTk/7XYe5WE6P5CyBVIGYcdiewhc3FY\"",
  "discoveryVersion": "v1",
  "id": "userendpoint:v1",
  "name": "userendpoint",
@@ -134,13 +134,16 @@
    "id": "UserAddress",
    "type": "object",
    "properties": {
-    "address2": {
-     "type": "string"
-    },
-    "address3": {
+    "apartment": {
      "type": "string"
     },
     "city": {
+     "type": "string"
+    },
+    "country": {
+     "type": "string"
+    },
+    "county": {
      "type": "string"
     },
     "crossStreet": {
@@ -149,9 +152,15 @@
     "default": {
      "type": "boolean"
     },
+    "fullAddress": {
+     "type": "string"
+    },
     "id": {
      "type": "string",
      "format": "int64"
+    },
+    "isocountryCode": {
+     "type": "string"
     },
     "lat": {
      "type": "number",
@@ -161,10 +170,22 @@
      "type": "number",
      "format": "double"
     },
+    "name": {
+     "type": "string"
+    },
+    "neighbourhood": {
+     "type": "string"
+    },
+    "notes": {
+     "type": "string"
+    },
     "state": {
      "type": "string"
     },
-    "streetAddress": {
+    "street": {
+     "type": "string"
+    },
+    "streetNumber": {
      "type": "string"
     },
     "title": {

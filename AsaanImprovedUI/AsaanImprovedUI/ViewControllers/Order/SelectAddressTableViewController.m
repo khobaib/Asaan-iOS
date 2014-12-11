@@ -16,12 +16,14 @@
 #import "MBProgressHUD.h"
 #import "AsaanConstants.h"
 #import <Parse/Parse.h>
+#include "UtilCalls.h"
 
 @interface SelectAddressTableViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) GTLUserendpointUserAddressCollection *userAddresses;
+@property (strong, nonatomic) GTLUserendpointUserAddress *savedUserAddress;
 @property (strong, nonatomic) CLGeocoder *geocoder;
 @property (nonatomic, strong) MBProgressHUD *hud;
-@property (nonatomic) float meterToMile;
 @end
 
 @implementation SelectAddressTableViewController
@@ -35,7 +37,6 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    self.meterToMile = 0.000621371;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -49,8 +50,8 @@
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor goldColor]};
-    
-    [self getUserAddresses];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    self.userAddresses = appDelegate.globalObjectHolder.userAddresses;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -88,38 +89,10 @@
     {
         GTLUserendpointUserAddress *userAddress = [self.userAddresses.items objectAtIndex:indexPath.row];
         txtTitle.text = userAddress.title;
-        txtAddress.text = userAddress.address2;
+        txtAddress.text = userAddress.fullAddress;
     }
 
     return cell;
-}
-
-- (void) getUserAddresses
-{
-    typeof(self) weakSelf = self;
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    GTLServiceUserendpoint *gtlUserService= [appDelegate gtlUserService];
-    GTLQueryUserendpoint *query = [GTLQueryUserendpoint queryForGetUserAddresses];
-    
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    dic[USER_AUTH_TOKEN_HEADER_NAME] = [PFUser currentUser][@"authToken"];
-    [query setAdditionalHTTPHeaders:dic];
-    [gtlUserService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error)
-     {
-         if (!error)
-         {
-             weakSelf.userAddresses = object;
-             [weakSelf.tableView reloadData];
-         }
-         else
-         {
-             NSString *errMsg = [NSString stringWithFormat:@"%@", [error userInfo]];
-             UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"Asaan Server Access Failure" message:errMsg delegate:weakSelf cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-             
-             [alert show];
-             return;
-         }
-    }];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -132,72 +105,42 @@
     }
 
     GTLUserendpointUserAddress *userAddress = [self.userAddresses.items objectAtIndex:indexPath.row];
-    //
-    // TODO Save the coordinates in AddAddress and Remove the call below!!!!
-    //
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeIndeterminate;
-    hud.labelText = @"Please Wait";
-    hud.hidden = NO;
-    typeof(self) weakSelf = self;
-    if (!self.geocoder) self.geocoder = [[CLGeocoder alloc] init];
-    [weakSelf.geocoder geocodeAddressString:userAddress.address2 completionHandler:^(NSArray* placemarks, NSError* error)
-     {
-         if (!error)
-         {
-             CLPlacemark *placemark = placemarks.firstObject;
-             CLLocation* first = [[CLLocation alloc] initWithLatitude:placemark.location.coordinate.latitude longitude:placemark.location.coordinate.longitude];
-             CLLocation* second = [[CLLocation alloc] initWithLatitude:weakSelf.selectedStore.lat.doubleValue longitude:weakSelf.selectedStore.lng.doubleValue];
-             
-             CGFloat distance = [first distanceFromLocation:second];
-             NSInteger maxDistance = floorf(distance * weakSelf.meterToMile);
-             
-             if (maxDistance > weakSelf.selectedStore.deliveryDistance.intValue)
-             {
-                 NSString *errMsg = [NSString stringWithFormat:@"Address is out of %@'s delivery range", weakSelf.selectedStore.name];
-                 UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"Error" message:errMsg delegate:weakSelf cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-                 
-                 hud.hidden = YES;
-                 [alert show];
-                 return;
-             }
-             else
-             {
-                 hud.hidden = YES;
-                 weakSelf.savedUserAddress = userAddress;
-                 [weakSelf performSegueWithIdentifier:@"segueAddressToPayment" sender:weakSelf];
-             }
-         }
-         else
-         {
-             NSString *errMsg = [NSString stringWithFormat:@"%@", [error userInfo]];
-             UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"Address not found" message:errMsg delegate:weakSelf cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-             
-             hud.hidden = YES;
-             [alert show];
-             return;
-         }
-     }];
-}
+    CLLocation* first = [[CLLocation alloc] initWithLatitude:userAddress.lat.doubleValue longitude:userAddress.lng.doubleValue];
+    CLLocation* second = [[CLLocation alloc] initWithLatitude:self.selectedStore.lat.doubleValue longitude:self.selectedStore.lng.doubleValue];
 
+    if (![UtilCalls isDistanceBetweenPointA:first AndPointB:second withinRange:self.selectedStore.deliveryDistance.intValue])
+    {
+        NSString *errMsg = [NSString stringWithFormat:@"Address is out of %@'s delivery range", self.selectedStore.name];
+        UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"Error" message:errMsg delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    else
+    {
+        self.savedUserAddress = userAddress;
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+        appDelegate.globalObjectHolder.defaultUserAddress = userAddress;
+       [self.navigationController popViewControllerAnimated:YES];
+    }
+}
 
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([[segue identifier] isEqualToString:@"segueAddressToPayment"])
-    {
-        SelectPaymentTableViewController *controller = [segue destinationViewController];
-        [controller setSelectedStore:self.selectedStore];
-        [controller setSavedUserAddress:self.savedUserAddress];
-        [controller setOrderType:self.orderType];
-    }
-}
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+//{
+//    if ([[segue identifier] isEqualToString:@"segueAddressToPayment"])
+//    {
+//        SelectPaymentTableViewController *controller = [segue destinationViewController];
+//        [controller setSelectedStore:self.selectedStore];
+//        [controller setSavedUserAddress:self.savedUserAddress];
+//        [controller setOrderType:self.orderType];
+//    }
+//}
 
 - (IBAction)unwindToSelectAddress:(UIStoryboardSegue *)unwindSegue
 {
-    NSLog(@"Back to SelectAddressTableViewController");
+//    NSLog(@"Back to SelectAddressTableViewController");
 //    UIViewController *cc = [unwindSegue sourceViewController];
 //
 //    if ([cc isKindOfClass:[AddAddressTableViewController class]])

@@ -22,6 +22,7 @@
 #import "UIImageView+WebCache.h"
 #import "MenuTableViewController.h"
 #import "DeliveryOrCarryoutViewController.h"
+#import "UIAlertView+Blocks.h"
 
 const NSUInteger FluentPagingTablePreloadMargin = 5;
 const NSUInteger FluentPagingTablePageSize = 20;
@@ -73,10 +74,17 @@ const NSUInteger FluentPagingTablePageSize = 20;
     self.hud = [MBProgressHUD showHUDAddedTo:_tableView animated:YES];
     [self.hud hide:YES];
     
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     PFUser *currentUser = [PFUser currentUser];
     if (!currentUser) {
         [self performSegueWithIdentifier:@"segueStartup" sender:self];
         return;
+    }
+    else{
+        // Load GAE Objects on startup
+        GlobalObjectHolder *objectHolder = appDelegate.globalObjectHolder;
+        [objectHolder loadUserCardsFromServer];
+        [objectHolder loadUserAddressesFromServer];
     }
     
     [self.navigationController setNavigationBarHidden:NO];
@@ -87,7 +95,6 @@ const NSUInteger FluentPagingTablePageSize = 20;
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor : [UIColor goldColor]};
     
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
     if (goh.orderInProgress != nil)
     {
@@ -170,6 +177,21 @@ const NSUInteger FluentPagingTablePageSize = 20;
 - (void) placeOrder:(UIButton *)sender
 {
     [self setSelectedStoreFromSender:sender];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    OnlineOrderDetails *orderInProgress = appDelegate.globalObjectHolder.orderInProgress;
+    if (orderInProgress != nil && orderInProgress.selectedStore.identifier.longValue != self.selectedStore.identifier.longValue)
+    {
+        typeof(self) weakSelf = self;
+        NSString *errMsg = @"You are starting an order at a new restaurant. Do you want to cancel your other order?";
+        [UIAlertView showWithTitle:@"Cancel your order?" message:errMsg cancelButtonTitle:@"No" otherButtonTitles:@[@"Yes"]
+                          tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex)
+         {
+             if (buttonIndex == [alertView cancelButtonIndex])
+                 return;
+             else
+                 [appDelegate.globalObjectHolder removeOrderInProgress];
+         }];
+    }
     [self performSegueWithIdentifier:@"seguePlaceOnlineOrder" sender:sender];
 }
 - (void) reserveTable:(UIButton *)sender
@@ -301,6 +323,7 @@ const NSUInteger FluentPagingTablePageSize = 20;
         DeliveryOrCarryoutViewController *controller = [segue destinationViewController];
         // Pass any objects to the view controller here, like...
         [controller setSelectedStore:_selectedStore];
+        [controller setBCalledFromStoreList:YES];
     }
 }
 

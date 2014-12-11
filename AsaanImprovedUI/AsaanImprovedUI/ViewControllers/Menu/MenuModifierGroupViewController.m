@@ -16,7 +16,6 @@
 #import "GTLStoreendpointStoreMenuItemModifier.h"
 #import "MenuModifierTableViewController.h"
 #import "OnlineOrderSelectedModifierGroup.h"
-#import "UIAlertView+Blocks.h"
 
 
 @interface MenuModifierGroupViewController ()<UITableViewDataSource, UITableViewDelegate>
@@ -282,8 +281,6 @@
     {
         orderInProgress = [appDelegate.globalObjectHolder createOrderInProgress];
         orderInProgress.selectedStore = _onlineOrderSelectedMenuItem.selectedStore;
-        orderInProgress.savedUserAddress = self.savedUserAddress;
-        orderInProgress.savedUserCard = self.savedUserCard;
         orderInProgress.orderType = self.orderType;
         orderInProgress.orderTime = self.orderTime;
         orderInProgress.partySize = self.partySize;
@@ -292,34 +289,8 @@
     }
     else
     {
-        if (orderInProgress.selectedStore.identifier.longValue != _onlineOrderSelectedMenuItem.selectedStore.identifier.longValue)
-        {
-            typeof(self) weakSelf = self;
-            NSString *errMsg = @"You are starting an order at a new restaurant. Do you want to cancel your other order?";
-            [UIAlertView showWithTitle:@"Cancel your order?" message:errMsg cancelButtonTitle:@"No" otherButtonTitles:@[@"Yes"]
-                              tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex)
-             {
-                 if (buttonIndex == [alertView cancelButtonIndex])
-                     return;
-                 else
-                 {
-                     orderInProgress.selectedStore = weakSelf.onlineOrderSelectedMenuItem.selectedStore;
-                     orderInProgress.savedUserAddress = weakSelf.savedUserAddress;
-                     orderInProgress.savedUserCard = weakSelf.savedUserCard;
-                     orderInProgress.orderType = weakSelf.orderType;
-                     orderInProgress.orderTime = weakSelf.orderTime;
-                     orderInProgress.partySize = weakSelf.partySize;
-                     [orderInProgress.selectedMenuItems removeAllObjects];
-                     [orderInProgress.selectedMenuItems addObject:weakSelf.onlineOrderSelectedMenuItem];
-                     [weakSelf performSegueWithIdentifier:@"segueunwindModifierGroupToMenu" sender:weakSelf];
-                 }
-             }];
-        }
-        else
-        {
-            [orderInProgress.selectedMenuItems addObject:self.onlineOrderSelectedMenuItem];
-            [self performSegueWithIdentifier:@"segueunwindModifierGroupToMenu" sender:self];
-        }
+        [orderInProgress.selectedMenuItems addObject:self.onlineOrderSelectedMenuItem];
+        [self performSegueWithIdentifier:@"segueunwindModifierGroupToMenu" sender:self];
     }
 }
 

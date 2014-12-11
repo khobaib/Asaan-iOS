@@ -8,11 +8,25 @@
 
 #import <Foundation/Foundation.h>
 #import "OnlineOrderDetails.h"
+#import "GTLUserendpointUserAddress.h"
+#import "GTLUserendpointUserCard.h"
+#import "GTLUserendpointUserAddressCollection.h"
+#import "GTLUserendpointUserCardCollection.h"
 
 @interface GlobalObjectHolder : NSObject
 @property (strong, nonatomic) OnlineOrderDetails *orderInProgress;
+@property (strong, nonatomic) GTLUserendpointUserAddressCollection *userAddresses;
+@property (strong, nonatomic) GTLUserendpointUserCardCollection *userCards;
+@property (strong, nonatomic) GTLUserendpointUserCard *defaultUserCard;
+@property (strong, nonatomic) GTLUserendpointUserAddress *defaultUserAddress;
 
 - (OnlineOrderDetails *)createOrderInProgress;
 - (void) removeOrderInProgress;
+
+- (void) loadUserAddressesFromServer;
+- (void) loadUserCardsFromServer;
+
+- (void) addCardToUserCards:(GTLUserendpointUserCard *)card;
+- (void) addAddressToUserAddresses:(GTLUserendpointUserAddress *)address;
 
 @end

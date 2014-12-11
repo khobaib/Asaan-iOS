@@ -66,8 +66,6 @@
 - (IBAction)savePaymentClicked:(id)sender
 {
     if (_isCardValid) {
-        
-        //        [self saveCardAtParse];
         [self saveCardAtGAE];
     }
     else {
@@ -166,8 +164,9 @@
                 [MBProgressHUD hideHUDForView:self.view animated:true];
                 if (!error)
                 {
-                    self.savedUserCard = object;
-                    [self performSegueWithIdentifier:@"segueunwindToSelectPaymentMethod" sender:self];
+                    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+                    [appDelegate.globalObjectHolder addCardToUserCards:self.savedUserCard];
+                    [self.navigationController popViewControllerAnimated:YES];
                 } else
                     [[[UIAlertView alloc]initWithTitle:@"Error" message:[error.userInfo description] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
             }];
@@ -180,16 +179,16 @@
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-    if ([segue.identifier isEqualToString:@"segueunwindToSelectPaymentMethod"]) {
-        
-        GTLUserendpointUserCardCollection *cards = [[GTLUserendpointUserCardCollection alloc] init];
-        cards.items = @[self.savedUserCard];
-        
-        SelectPaymentTableViewController *controller = [segue destinationViewController];
-        [controller setUserCards:cards];
-    }
-}
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    
+//    if ([segue.identifier isEqualToString:@"segueunwindToSelectPaymentMethod"]) {
+//        
+//        GTLUserendpointUserCardCollection *cards = [[GTLUserendpointUserCardCollection alloc] init];
+//        cards.items = @[self.savedUserCard];
+//        
+//        SelectPaymentTableViewController *controller = [segue destinationViewController];
+//        [controller setUserCards:cards];
+//    }
+//}
 
 @end

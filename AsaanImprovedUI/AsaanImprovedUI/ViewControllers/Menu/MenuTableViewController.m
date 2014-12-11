@@ -434,7 +434,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self.savedUserCard isKindOfClass:[GTLUserendpointUserCard class]]) // Menu is in Order Mode
+    if (self.bMenuIsInOrderMode) // Menu is in Order Mode
     {
         MenuSegmentHolder *menuSegmentHolder;
         if (_menuSegmentHolders.count > 1)
@@ -694,7 +694,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
 #warning Use this to go to ordercontroller and here 'index' starts from 0;
 - (void)menuMWCaptionView:(MenuMWCaptionView *)menuMWCaptionView didClickedOrderButtonAtIndex:(NSUInteger)index {
     
-    NSLog(@"Tapped order button at index : %lu", index);
+    NSLog(@"Tapped order button at index : %u", index);
 }
 
 #pragma mark - Navigation
@@ -711,8 +711,6 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
         MenuModifierGroupViewController *controller = [segue destinationViewController];
         [controller setSelectedStore:self.selectedStore];
         [controller setSelectedMenuItem:self.selectedMenuItem];
-        [controller setSavedUserAddress:self.savedUserAddress];
-        [controller setSavedUserCard:self.savedUserCard];
         [controller setOrderTime:self.orderTime];
         [controller setOrderType:self.orderType];
         [controller setPartySize:self.partySize];

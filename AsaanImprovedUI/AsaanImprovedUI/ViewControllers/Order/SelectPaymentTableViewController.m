@@ -8,7 +8,6 @@
 
 #import "SelectPaymentTableViewController.h"
 #import "AddPaymentCardViewController.h"
-#import "OrderDetailsTableViewController.h"
 #import "UIColor+AsaanGoldColor.h"
 #import "UIColor+AsaanBackgroundColor.h"
 #import "AppDelegate.h"
@@ -21,6 +20,7 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) MBProgressHUD *hud;
+@property (strong, nonatomic) GTLUserendpointUserCardCollection *userCards;
 
 @end
 
@@ -28,6 +28,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    self.userCards = appDelegate.globalObjectHolder.userCards;
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -47,23 +49,6 @@
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor goldColor]};
-    
-    [self.tableView reloadData];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-
-    if (!self.userCards || !self.userCards.items || self.userCards.items.count == 0) {
-        
-        if (!self.fromFront) {
-            [self.navigationController popViewControllerAnimated:YES];
-        }
-        else {
-            [self performSegueWithIdentifier:@"segueAddPaymentMethod" sender:self];
-        }
-    }
-    
-    self.fromFront = false;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -111,8 +96,9 @@
         [self performSegueWithIdentifier:@"segueAddPaymentMethod" sender:self];
     else
     {
-        self.savedUserCard = [self.userCards.items objectAtIndex:indexPath.row];
-        [self performSegueWithIdentifier:@"segueOrderDetails" sender:self];
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+        appDelegate.globalObjectHolder.defaultUserCard = [self.userCards.items objectAtIndex:indexPath.row];
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 
@@ -121,14 +107,14 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[segue identifier] isEqualToString:@"segueOrderDetails"])
-    {
-        OrderDetailsTableViewController *controller = [segue destinationViewController];
-        [controller setSelectedStore:self.selectedStore];
-        [controller setSavedUserAddress:self.savedUserAddress];
-        [controller setSavedUserCard:self.savedUserCard];
-        [controller setOrderType:self.orderType];
-    }
+//    if ([[segue identifier] isEqualToString:@"segueOrderDetails"])
+//    {
+//        OrderDetailsTableViewController *controller = [segue destinationViewController];
+//        [controller setSelectedStore:self.selectedStore];
+//        [controller setSavedUserAddress:self.savedUserAddress];
+//        [controller setSavedUserCard:self.savedUserCard];
+//        [controller setOrderType:self.orderType];
+//    }
 }
 
 - (IBAction)unwindToSelectPaymentMethod:(UIStoryboardSegue *)unwindSegue

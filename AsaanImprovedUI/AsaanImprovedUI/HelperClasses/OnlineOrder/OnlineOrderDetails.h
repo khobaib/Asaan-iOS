@@ -14,8 +14,6 @@
 @interface OnlineOrderDetails : NSObject
 
 @property (strong, nonatomic) GTLStoreendpointStore *selectedStore;
-@property (strong, nonatomic) GTLUserendpointUserAddress *savedUserAddress;
-@property (strong, nonatomic) GTLUserendpointUserCard *savedUserCard;
 @property (strong, nonatomic) NSMutableArray *selectedMenuItems; //OnlineOrderSelectedMenuItem
 @property (nonatomic) int orderType;
 @property (nonatomic) int partySize;

@@ -13,6 +13,7 @@
 @interface DeliveryOrCarryoutViewController : UITableViewController
 @property (strong, nonatomic) GTLStoreendpointStore *selectedStore;
 @property (nonatomic) int orderType;
+@property (nonatomic) Boolean bCalledFromStoreList;
 
 + (int) ORDERTYPE_CARRYOUT;
 + (int) ORDERTYPE_DELIVERY;

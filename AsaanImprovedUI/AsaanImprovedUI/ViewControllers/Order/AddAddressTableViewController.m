@@ -192,9 +192,24 @@
                 {
                     GTLUserendpointUserAddress *userAddress = [[GTLUserendpointUserAddress alloc]init];
                     [userAddress setTitle:self.addressTitle.text];
-                    [userAddress setAddress2:selectedAddress];
-                    [userAddress setAddress3:self.aptNo.text];
-                    [userAddress setCrossStreet:self.other.text];
+                    [userAddress setApartment:self.aptNo.text];
+                    [userAddress setState:placemark.administrativeArea];
+                    [userAddress setCounty:placemark.subAdministrativeArea];
+                    [userAddress setCity:placemark.locality];
+                    [userAddress setNeighbourhood:placemark.subLocality];
+                    [userAddress setStreet:placemark.thoroughfare];
+                    [userAddress setStreetNumber:placemark.subThoroughfare];
+                    [userAddress setApartment:self.aptNo.text];
+                    [userAddress setIsocountryCode:placemark.ISOcountryCode];
+                    [userAddress setCountry:placemark.country];
+                    [userAddress setZip:placemark.postalCode];
+                    [userAddress setNotes:self.other.text];
+                    [userAddress setFullAddress:selectedAddress];
+                    NSNumber *lat = [NSNumber numberWithDouble:placemark.location.coordinate.latitude];
+                    [userAddress setLat:lat];
+                    NSNumber *lng = [NSNumber numberWithDouble:placemark.location.coordinate.longitude];
+                    [userAddress setLng:lng];
+                    
                     GTLQueryUserendpoint *query = [GTLQueryUserendpoint queryForSaveUserAddressWithObject:userAddress];
                     
                     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
@@ -202,18 +217,19 @@
                     [query setAdditionalHTTPHeaders:dic];
                     [gtlUserService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error)
                      {
+                         hud.hidden = YES;
                          if (!error)
                          {
-                             hud.hidden = YES;
                              weakSelf.savedUserAddress = object;
-                             [weakSelf performSegueWithIdentifier:@"segueunwindToSelectAddress" sender:weakSelf];
+                             AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+                             [appDelegate.globalObjectHolder addAddressToUserAddresses:weakSelf.savedUserAddress];
+                             [self.navigationController popViewControllerAnimated:YES];
                          }
                          else
                          {
                              NSString *errMsg = [NSString stringWithFormat:@"%@", [error userInfo]];
                              UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"Asaan Server Access Failure" message:errMsg delegate:weakSelf cancelButtonTitle:@"Ok" otherButtonTitles:nil];
                              
-                             hud.hidden = YES;
                              [alert show];
                              return;
                          }

@@ -49,4 +49,17 @@
     float fVal = [number floatValue]/10000;
     return [numberFormatter stringFromNumber:[NSNumber numberWithFloat:fVal]];
 }
+
+
++ (Boolean)isDistanceBetweenPointA:(CLLocation*)first AndPointB:(CLLocation *)second withinRange:(NSUInteger)range
+{
+    float meterToMile = 0.000621371;
+    CGFloat distance = [first distanceFromLocation:second];
+    NSInteger maxDistance = floorf(distance * meterToMile);
+    
+    if (maxDistance > range)
+        return NO;
+    else
+        return YES;
+}
 @end

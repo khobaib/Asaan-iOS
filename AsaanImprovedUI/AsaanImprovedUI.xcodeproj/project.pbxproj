@@ -222,7 +222,6 @@
 		D4DEC1D21A321F160075281E /* AddAddressTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4DEC1D11A321F160075281E /* AddAddressTableViewController.m */; };
 		D4DEC1D51A321F630075281E /* AddPaymentCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4DEC1D41A321F630075281E /* AddPaymentCardViewController.m */; };
 		D4DEC1D81A321FB70075281E /* SelectPaymentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4DEC1D71A321FB70075281E /* SelectPaymentTableViewController.m */; };
-		D4DEC1DB1A3220730075281E /* OrderDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4DEC1DA1A3220730075281E /* OrderDetailsTableViewController.m */; };
 		D4E8072F1A1D8BAA008E343C /* GTLStoreendpointStoreMenuCombined.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E807281A1D8BAA008E343C /* GTLStoreendpointStoreMenuCombined.m */; };
 		D4E807301A1D8BAA008E343C /* GTLStoreendpointStoreOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E8072A1A1D8BAA008E343C /* GTLStoreendpointStoreOrder.m */; };
 		D4E807311A1D8BAA008E343C /* GTLStoreendpointStoreStats.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E8072C1A1D8BAA008E343C /* GTLStoreendpointStoreStats.m */; };
@@ -602,8 +601,8 @@
 		D4B7A62F1A35193800D72BC4 /* GlobalObjectHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GlobalObjectHolder.h; path = HelperClasses/GlobalObjectHolder.h; sourceTree = "<group>"; };
 		D4B7A6301A35193800D72BC4 /* GlobalObjectHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GlobalObjectHolder.m; path = HelperClasses/GlobalObjectHolder.m; sourceTree = "<group>"; };
 		D4B7A6321A35288600D72BC4 /* cart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cart.png; sourceTree = "<group>"; };
-		D4B7A6341A35299200D72BC4 /* OrderSummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderSummaryViewController.h; sourceTree = "<group>"; };
-		D4B7A6351A35299200D72BC4 /* OrderSummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderSummaryViewController.m; sourceTree = "<group>"; };
+		D4B7A6341A35299200D72BC4 /* OrderSummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderSummaryViewController.h; path = ../Menu/OrderSummaryViewController.h; sourceTree = "<group>"; };
+		D4B7A6351A35299200D72BC4 /* OrderSummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderSummaryViewController.m; path = ../Menu/OrderSummaryViewController.m; sourceTree = "<group>"; };
 		D4DEC1C21A2FF3050075281E /* GTLStoreendpointAsaanLong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointAsaanLong.h; sourceTree = "<group>"; };
 		D4DEC1C31A2FF3050075281E /* GTLStoreendpointAsaanLong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointAsaanLong.m; sourceTree = "<group>"; };
 		D4DEC1CA1A3211780075281E /* DeliveryOrCarryoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliveryOrCarryoutViewController.h; sourceTree = "<group>"; };
@@ -616,8 +615,6 @@
 		D4DEC1D41A321F630075281E /* AddPaymentCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPaymentCardViewController.m; sourceTree = "<group>"; };
 		D4DEC1D61A321FB70075281E /* SelectPaymentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectPaymentTableViewController.h; sourceTree = "<group>"; };
 		D4DEC1D71A321FB70075281E /* SelectPaymentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectPaymentTableViewController.m; sourceTree = "<group>"; };
-		D4DEC1D91A3220730075281E /* OrderDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailsTableViewController.h; sourceTree = "<group>"; };
-		D4DEC1DA1A3220730075281E /* OrderDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailsTableViewController.m; sourceTree = "<group>"; };
 		D4E807271A1D8BAA008E343C /* GTLStoreendpointStoreMenuCombined.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreMenuCombined.h; sourceTree = "<group>"; };
 		D4E807281A1D8BAA008E343C /* GTLStoreendpointStoreMenuCombined.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreMenuCombined.m; sourceTree = "<group>"; };
 		D4E807291A1D8BAA008E343C /* GTLStoreendpointStoreOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreOrder.h; sourceTree = "<group>"; };
@@ -792,8 +789,6 @@
 				3709EACC1A31C8DA0060B49B /* MenuItemCell.m */,
 				D4B7A62C1A35104200D72BC4 /* MenuModifierGroupViewController.h */,
 				D4B7A62D1A35104200D72BC4 /* MenuModifierGroupViewController.m */,
-				D4B7A6341A35299200D72BC4 /* OrderSummaryViewController.h */,
-				D4B7A6351A35299200D72BC4 /* OrderSummaryViewController.m */,
 				D49A7A801A3552550052522E /* MenuModifierTableViewController.h */,
 				D49A7A811A3552550052522E /* MenuModifierTableViewController.m */,
 			);
@@ -1268,11 +1263,11 @@
 				D4DEC1D01A321F160075281E /* AddAddressTableViewController.h */,
 				D4DEC1D11A321F160075281E /* AddAddressTableViewController.m */,
 				D4DEC1D31A321F630075281E /* AddPaymentCardViewController.h */,
+				D4B7A6341A35299200D72BC4 /* OrderSummaryViewController.h */,
+				D4B7A6351A35299200D72BC4 /* OrderSummaryViewController.m */,
 				D4DEC1D41A321F630075281E /* AddPaymentCardViewController.m */,
 				D4DEC1D61A321FB70075281E /* SelectPaymentTableViewController.h */,
 				D4DEC1D71A321FB70075281E /* SelectPaymentTableViewController.m */,
-				D4DEC1D91A3220730075281E /* OrderDetailsTableViewController.h */,
-				D4DEC1DA1A3220730075281E /* OrderDetailsTableViewController.m */,
 			);
 			path = Order;
 			sourceTree = "<group>";
@@ -1669,7 +1664,6 @@
 				D4DEC1D21A321F160075281E /* AddAddressTableViewController.m in Sources */,
 				3709EA991A31802A0060B49B /* README.md in Sources */,
 				D4A8C18E1A263B1800DA344A /* UIAlertView+AFNetworking.m in Sources */,
-				D4DEC1DB1A3220730075281E /* OrderDetailsTableViewController.m in Sources */,
 				D4464B1F1A36138100206728 /* OnlineOrderDetails.m in Sources */,
 				D4A8C1831A263B1800DA344A /* AFHTTPSessionManager.m in Sources */,
 				D4A8C18F1A263B1800DA344A /* UIButton+AFNetworking.m in Sources */,

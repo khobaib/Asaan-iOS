@@ -13,7 +13,4 @@
 
 @interface SelectAddressTableViewController : UITableViewController
 @property (strong, nonatomic) GTLStoreendpointStore *selectedStore;
-@property (strong, nonatomic) GTLUserendpointUserAddressCollection *userAddresses;
-@property (strong, nonatomic) GTLUserendpointUserAddress *savedUserAddress;
-@property (nonatomic) int orderType;
 @end
