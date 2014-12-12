@@ -63,15 +63,6 @@
     [self.tableView reloadData];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    if (self.bInPlaceOrderMode)
-    {
-        self.bInPlaceOrderMode = NO;
-        [self placeOrder:self];
-    }
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -80,6 +71,7 @@
 
 - (IBAction)placeOrder:(id)sender
 {
+    self.bInPlaceOrderMode = YES;
     if (self.orderInProgress == nil)
         return;
 
@@ -87,46 +79,32 @@
     
     if (appDelegate.globalObjectHolder.defaultUserCard == nil)
     {
-        self.bInPlaceOrderMode = YES;
         [self performSegueWithIdentifier:@"segueOrderSummaryToSelectPaymentMode" sender:self];
+        return;
     }
     
-    if (self.orderInProgress.orderType == [DeliveryOrCarryoutViewController ORDERTYPE_DELIVERY])
-    {
-        if (![self isDefaultUserAddressValidForStoreDelivery])
-        {
-            if (appDelegate.globalObjectHolder.defaultUserAddress != nil)
-            {
-                typeof(self) weakSelf = self;
-                NSString *errMsg = [NSString stringWithFormat:@"%@ does not deliver to your %@. what do you want to do?", self.orderInProgress.selectedStore.name, appDelegate.globalObjectHolder.defaultUserAddress.title];
-                [UIAlertView showWithTitle:@"Address outside delivery range" message:errMsg cancelButtonTitle:@"Switch to Carryout" otherButtonTitles:@[@"Change Address", @"Cancel"]
-                                  tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex)
-                 {
-                     if (buttonIndex == [alertView cancelButtonIndex])
-                         weakSelf.orderInProgress.orderType = [DeliveryOrCarryoutViewController ORDERTYPE_CARRYOUT];
-                     else if (buttonIndex == 0)
-                     {
-                         weakSelf.bInPlaceOrderMode = YES;
-                         [weakSelf performSegueWithIdentifier:@"segueOrderSummaryToSelectAddress" sender:weakSelf];
-                     }
-                     else
-                         return;
-                 }];
-            }
-            else
-            {
-                self.bInPlaceOrderMode = YES;
-                [self performSegueWithIdentifier:@"segueOrderSummaryToSelectAddress" sender:self];
-            }
-        }
-    }
+    if (![self AreDeliveryRequirementsValid])
+        return;
     
     NSString *str = @"<ITEMREQUESTS>";
     for (OnlineOrderSelectedMenuItem *object in self.orderInProgress.selectedMenuItems)
     {
-        NSString *itemString=[NSString stringWithFormat:@"<ADDITEM QTY=\"%d\" ITEMID=\"%@\" />",object.qty,object.selectedItem.menuItemPOSId];
-        
+        NSString *itemString=[NSString stringWithFormat:@"<ADDITEM QTY=\"%d\" ITEMID=\"%@\" >",object.qty,object.selectedItem.menuItemPOSId];
         str=[str stringByAppendingString:itemString];
+        for (OnlineOrderSelectedModifierGroup *modGroup in object.selectedModifierGroups)
+        {
+            for (int i = 0; i < modGroup.selectedModifierIndexes.count; i++)
+            {
+                NSNumber *value = [modGroup.selectedModifierIndexes objectAtIndex:i];
+                if (value.boolValue)
+                {
+                    GTLStoreendpointStoreMenuItemModifier *modifier = [modGroup.modifiers objectAtIndex:i];
+                    NSString *modString=[NSString stringWithFormat:@"<MODITEM QTY=\"1\" ITEMID=\"%@\" />",modifier.modifierPOSId];
+                    str=[str stringByAppendingString:modString];
+                }
+            }
+        }
+        str=[str stringByAppendingString:@"</ADDITEM>"];
     }
     str=[str stringByAppendingString:@"</ITEMREQUESTS>"];
     
@@ -147,10 +125,10 @@
         GTLUserendpointUserAddress *address = appDelegate.globalObjectHolder.defaultUserAddress;
         NSString *deliveryString=[NSString stringWithFormat:@"<DELIVERY DELIVERYACCT=\"%@\" DELIVERYNOTE=\"%@\" ADDRESS=\"%@\" />", address.title, address.notes, address.fullAddress];
         
-        orderString=[NSString stringWithFormat:@"<CHECKREQUESTS><ADDCHECK EXTCHECKID=\"ASAAN\" READYTIME=\"%@\" NOTE=\"%@\" ORDERMODE=\"@ORDER_MODE\">%@%@%@</ADDCHECK></CHECKREQUESTS>",orderTime, self.orderInProgress.specialInstructions, contactString, deliveryString, str];
+        orderString=[NSString stringWithFormat:@"<CHECKREQUESTS><ADDCHECK EXTCHECKID=\"ASAAN\" READYTIME=\"%@\" GUESTCOUNT=\"%d\" NOTE=\"%@\" ORDERMODE=\"@ORDER_MODE\">%@%@%@</ADDCHECK></CHECKREQUESTS>",orderTime, self.orderInProgress.partySize, self.orderInProgress.specialInstructions, contactString, deliveryString, str];
     }
     else
-        orderString=[NSString stringWithFormat:@"<CHECKREQUESTS><ADDCHECK EXTCHECKID=\"ASAAN\" READYTIME=\"%@\" NOTE=\"%@\" ORDERMODE=\"@ORDER_MODE\">%@%@</ADDCHECK></CHECKREQUESTS>",orderTime, self.orderInProgress.specialInstructions, contactString, str];
+        orderString=[NSString stringWithFormat:@"<CHECKREQUESTS><ADDCHECK EXTCHECKID=\"ASAAN\" READYTIME=\"%@\" GUESTCOUNT=\"%d\" NOTE=\"%@\" ORDERMODE=\"@ORDER_MODE\">%@%@</ADDCHECK></CHECKREQUESTS>",orderTime, self.orderInProgress.partySize, self.orderInProgress.specialInstructions, contactString, str];
     
     NSLog(@"%@",orderString);
     
@@ -501,6 +479,46 @@
     return [UtilCalls isDistanceBetweenPointA:first AndPointB:second withinRange:self.orderInProgress.selectedStore.deliveryDistance.intValue];
 }
 
+- (Boolean)AreDeliveryRequirementsValid
+{
+    if (self.orderInProgress.orderType == [DeliveryOrCarryoutViewController ORDERTYPE_DELIVERY])
+    {
+        if (![self isDefaultUserAddressValidForStoreDelivery])
+        {
+            AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+            if (appDelegate.globalObjectHolder.defaultUserAddress != nil)
+            {
+                __block Boolean bReturn = NO;
+                typeof(self) weakSelf = self;
+                NSString *errMsg = [NSString stringWithFormat:@"%@ does not deliver to your %@. what do you want to do?", self.orderInProgress.selectedStore.name, appDelegate.globalObjectHolder.defaultUserAddress.title];
+                [UIAlertView showWithTitle:@"Address outside delivery range" message:errMsg cancelButtonTitle:@"Switch to Carryout" otherButtonTitles:@[@"Change Address", @"Cancel"]
+                                  tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex)
+                 {
+                     if (buttonIndex == [alertView cancelButtonIndex])
+                     {
+                         weakSelf.orderInProgress.orderType = [DeliveryOrCarryoutViewController ORDERTYPE_CARRYOUT];
+                         bReturn = YES;
+                     }
+                     else if (buttonIndex == 0)
+                     {
+                         [weakSelf performSegueWithIdentifier:@"segueOrderSummaryToSelectAddress" sender:weakSelf];
+                         bReturn = NO;
+                     }
+                     else
+                         bReturn = NO;
+                 }];
+                return bReturn;
+            }
+            else
+            {
+                [self performSegueWithIdentifier:@"segueOrderSummaryToSelectAddress" sender:self];
+                return NO;
+            }
+        }
+    }
+    return YES;
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -533,5 +551,31 @@
 
 - (IBAction)unwindToOrderSummary:(UIStoryboardSegue *)unwindSegue
 {
+    UIViewController *cc = [unwindSegue sourceViewController];
+    
+    //segueunwindSelectPaymentToOrderSummary
+    if ([cc isKindOfClass:[SelectPaymentTableViewController class]])
+    {
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+        if(appDelegate.globalObjectHolder.defaultUserCard == nil)
+            return;
+        
+        if (self.bInPlaceOrderMode)
+        {
+            if (![self AreDeliveryRequirementsValid])
+                return;
+            [self placeOrder:self];
+        }
+    }
+    //segueunwindSelectAddressToOrderSummary
+    if ([cc isKindOfClass:[SelectAddressTableViewController class]])
+    {
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+        if(appDelegate.globalObjectHolder.defaultUserAddress == nil)
+            return;
+        
+        if (self.bInPlaceOrderMode)
+            [self placeOrder:self];
+    }
 }
 @end

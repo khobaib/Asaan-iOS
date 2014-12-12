@@ -187,7 +187,10 @@
             tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex)
             {
                 if (buttonIndex == [alertView cancelButtonIndex])
+                {
+                    hud.hidden = YES;
                     return;
+                }
                 else
                 {
                     GTLUserendpointUserAddress *userAddress = [[GTLUserendpointUserAddress alloc]init];

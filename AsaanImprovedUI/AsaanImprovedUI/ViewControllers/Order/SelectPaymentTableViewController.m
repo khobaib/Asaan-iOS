@@ -49,6 +49,7 @@
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor goldColor]};
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {

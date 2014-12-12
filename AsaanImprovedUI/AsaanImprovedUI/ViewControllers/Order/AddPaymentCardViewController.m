@@ -165,7 +165,7 @@
                 if (!error)
                 {
                     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-                    [appDelegate.globalObjectHolder addCardToUserCards:self.savedUserCard];
+                    [appDelegate.globalObjectHolder addCardToUserCards:object];
                     [self.navigationController popViewControllerAnimated:YES];
                 } else
                     [[[UIAlertView alloc]initWithTitle:@"Error" message:[error.userInfo description] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];

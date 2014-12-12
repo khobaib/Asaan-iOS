@@ -52,6 +52,7 @@
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor goldColor]};
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     self.userAddresses = appDelegate.globalObjectHolder.userAddresses;
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {

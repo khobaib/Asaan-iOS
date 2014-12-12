@@ -12,6 +12,7 @@
 #import "Stripe.h"
 #import <QuartzCore/QuartzCore.h>
 #import <CoreData/CoreData.h>
+#import <ParseCrashReporting/ParseCrashReporting.h>
 
 @interface AppDelegate ()
 
@@ -19,10 +20,16 @@
 
 @implementation AppDelegate
 
+- (void)crash {
+//    [NSException raise:NSGenericException format:@"Everything is ok. This is just a test crash."];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    // Enable Crash Reporting
     
+    [ParseCrashReporting enable];
+
     // ****************************************************************************
     // Uncomment and fill in with your Parse credentials:
     // [Parse setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
@@ -73,7 +80,7 @@
                                                          UIRemoteNotificationTypeAlert |
                                                          UIRemoteNotificationTypeSound)];
     }
-
+[self performSelector:@selector(crash) withObject:nil afterDelay:5.0];
     return YES;
 }
 

@@ -91,7 +91,7 @@
 - (void) addAddressToUserAddresses:(GTLUserendpointUserAddress *)address
 {
     NSMutableArray *newAddresses = [[NSMutableArray alloc]init];//[NSMutableArray arrayWithArray:self.userAddresses.items];
-    for (GTLUserendpointUserAddress *object in self.userCards)
+    for (GTLUserendpointUserAddress *object in self.userAddresses)
         [newAddresses addObject:object];
     [newAddresses addObject:address];
     GTLUserendpointUserAddressCollection *addresses = [[GTLUserendpointUserAddressCollection alloc] init];

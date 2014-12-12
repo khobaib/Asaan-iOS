@@ -17,6 +17,4 @@
 
 @interface AddPaymentCardViewController : BaseViewController
 
-@property (strong, nonatomic) GTLUserendpointUserCard *savedUserCard;
-
 @end

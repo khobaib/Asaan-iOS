@@ -478,10 +478,10 @@
             </objects>
             <point key="canvasLocation" x="145" y="375"/>
         </scene>
-        <!--DeliveryAddress-->
+        <!--SelectAddress-->
         <scene sceneID="rbs-yS-6OT">
             <objects>
-                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="yA3-i5-l3p" userLabel="DeliveryAddress" customClass="SelectAddressTableViewController" sceneMemberID="viewController">
+                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="yA3-i5-l3p" userLabel="SelectAddress" customClass="SelectAddressTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="3Ma-Sw-79i">
                         <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -529,9 +529,11 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="3Ma-Sw-79i" id="QyD-ym-SXy"/>
+                        <segue destination="lZh-R2-TVP" kind="unwind" identifier="segueunwindSelectAddressToOrderSummary" unwindAction="unwindToOrderSummary:" id="pmE-6x-WD8"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JPM-hP-lKt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="lZh-R2-TVP" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="859" y="1869"/>
         </scene>
@@ -912,7 +914,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" restorationIdentifier="CCInfo" translatesAutoresizingMaskIntoConstraints="NO" id="qUf-cq-SyV" customClass="PTKView">
-                                <rect key="frame" x="24" y="282" width="552" height="36"/>
+                                <rect key="frame" x="32" y="61" width="536" height="36"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="DAl-lZ-Q8E"/>
@@ -926,14 +928,48 @@
                                     </mask>
                                 </variation>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use Asaan to easily pay the check." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sZ1-gv-31k">
+                                <rect key="frame" x="32" y="28" width="536" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="fbq-dZ-wkd"/>
+                                    <constraint firstAttribute="height" constant="40" id="syB-zt-BRA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                <color key="textColor" red="0.79607843140000001" green="0.59607843140000005" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="fbq-dZ-wkd"/>
+                                        <exclude reference="syB-zt-BRA"/>
+                                    </mask>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="sZ1-gv-31k" firstAttribute="top" secondItem="ZCx-lD-K82" secondAttribute="bottom" constant="8" symbolic="YES" id="1JW-Vc-HGe"/>
                             <constraint firstAttribute="centerY" secondItem="qUf-cq-SyV" secondAttribute="centerY" id="9gd-m8-rj6"/>
+                            <constraint firstItem="sZ1-gv-31k" firstAttribute="centerX" secondItem="qUf-cq-SyV" secondAttribute="centerX" id="Cur-AR-H6r"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="qUf-cq-SyV" secondAttribute="trailing" constant="16" id="DMa-ej-0aq"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="sZ1-gv-31k" secondAttribute="trailing" constant="16" id="HoN-Dl-eQR"/>
                             <constraint firstAttribute="trailingMargin" secondItem="qUf-cq-SyV" secondAttribute="trailing" constant="8" id="RqS-FY-cAq"/>
+                            <constraint firstItem="qUf-cq-SyV" firstAttribute="leading" secondItem="SP5-vP-NGG" secondAttribute="leadingMargin" constant="16" id="VE6-59-Zsl"/>
+                            <constraint firstItem="sZ1-gv-31k" firstAttribute="leading" secondItem="SP5-vP-NGG" secondAttribute="leadingMargin" constant="16" id="Wxl-5D-ySk"/>
                             <constraint firstAttribute="centerX" secondItem="qUf-cq-SyV" secondAttribute="centerX" id="aAH-P5-C4o"/>
+                            <constraint firstItem="sZ1-gv-31k" firstAttribute="leading" secondItem="SP5-vP-NGG" secondAttribute="leadingMargin" constant="40" id="bfl-iE-fnM"/>
                             <constraint firstItem="qUf-cq-SyV" firstAttribute="leading" secondItem="SP5-vP-NGG" secondAttribute="leadingMargin" constant="8" id="gZ9-bj-mN9"/>
+                            <constraint firstItem="qUf-cq-SyV" firstAttribute="top" secondItem="sZ1-gv-31k" secondAttribute="bottom" constant="16" id="pJd-7K-iyB"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Cur-AR-H6r"/>
+                                <exclude reference="bfl-iE-fnM"/>
+                                <exclude reference="9gd-m8-rj6"/>
+                                <exclude reference="RqS-FY-cAq"/>
+                                <exclude reference="aAH-P5-C4o"/>
+                                <exclude reference="gZ9-bj-mN9"/>
+                            </mask>
+                        </variation>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="Add Payment Method" id="FOG-CU-Sf3">
@@ -2495,10 +2531,10 @@
             </objects>
             <point key="canvasLocation" x="121" y="-2795"/>
         </scene>
-        <!--PaymentSelection View Controller-->
+        <!--SelectPayment View Controller-->
         <scene sceneID="PwL-Of-7dL">
             <objects>
-                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="Rba-OY-hsV" userLabel="PaymentSelection View Controller" customClass="SelectPaymentTableViewController" sceneMemberID="viewController">
+                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="Rba-OY-hsV" userLabel="SelectPayment View Controller" customClass="SelectPaymentTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="zSb-Zk-7Ad">
                         <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2513,29 +2549,45 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" tag="501" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="visa.png" translatesAutoresizingMaskIntoConstraints="NO" id="h7m-K0-fCF">
-                                            <rect key="frame" x="8" y="12" width="20" height="20"/>
+                                            <rect key="frame" x="16" y="12" width="20" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="20" id="UyH-38-bWD"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="502" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1hl-aI-heE">
-                                            <rect key="frame" x="36" y="13" width="120" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="502" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1hl-aI-heE">
+                                            <rect key="frame" x="44" y="12" width="41" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="120" id="sUf-7k-7NB"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="sUf-7k-7NB"/>
+                                                </mask>
+                                            </variation>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstItem="h7m-K0-fCF" firstAttribute="top" secondItem="gjv-Sv-ttL" secondAttribute="topMargin" constant="4" id="5nG-UM-pxW"/>
-                                        <constraint firstItem="h7m-K0-fCF" firstAttribute="leading" secondItem="gjv-Sv-ttL" secondAttribute="leadingMargin" id="Er9-Dq-7m2"/>
+                                        <constraint firstAttribute="centerX" secondItem="h7m-K0-fCF" secondAttribute="centerX" id="CWT-1v-C2h"/>
+                                        <constraint firstItem="h7m-K0-fCF" firstAttribute="leading" secondItem="gjv-Sv-ttL" secondAttribute="leadingMargin" constant="8" id="Er9-Dq-7m2"/>
+                                        <constraint firstAttribute="centerY" secondItem="1hl-aI-heE" secondAttribute="centerY" id="G1D-H1-508"/>
                                         <constraint firstItem="1hl-aI-heE" firstAttribute="top" secondItem="gjv-Sv-ttL" secondAttribute="topMargin" constant="5" id="Vhl-CD-e4U"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="1hl-aI-heE" secondAttribute="bottom" constant="1" id="byM-Rb-kSx"/>
                                         <constraint firstItem="1hl-aI-heE" firstAttribute="leading" secondItem="h7m-K0-fCF" secondAttribute="trailing" constant="8" symbolic="YES" id="nrM-5j-JtZ"/>
+                                        <constraint firstItem="h7m-K0-fCF" firstAttribute="centerY" secondItem="1hl-aI-heE" secondAttribute="centerY" id="yVg-e6-0B0"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="5nG-UM-pxW"/>
+                                            <exclude reference="CWT-1v-C2h"/>
+                                            <exclude reference="Vhl-CD-e4U"/>
+                                            <exclude reference="byM-Rb-kSx"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
                             </tableViewCell>
@@ -2555,9 +2607,11 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="zSb-Zk-7Ad" id="KE3-oD-cBS"/>
+                        <segue destination="SId-lv-sVW" kind="unwind" identifier="segueunwindSelectPaymentToOrderSummary" unwindAction="unwindToOrderSummary:" id="Yux-yi-K2R"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x4O-M5-Zhi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="SId-lv-sVW" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-566" y="1869"/>
         </scene>

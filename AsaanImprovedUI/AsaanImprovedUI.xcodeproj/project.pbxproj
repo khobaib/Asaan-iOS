@@ -38,6 +38,11 @@
 		37909B6F1A23828000649827 /* SignupProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37909B691A23828000649827 /* SignupProfileViewController.m */; };
 		37909B701A23828000649827 /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37909B6B1A23828000649827 /* SignupViewController.m */; };
 		D404EDBB1A13149A000285F2 /* UIColor+AsaanBackgroundColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D404EDBA1A13149A000285F2 /* UIColor+AsaanBackgroundColor.m */; };
+		D40DF36E1A3A976700C67088 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D40DF36D1A3A976700C67088 /* libsqlite3.0.dylib */; };
+		D40DF3701A3A97A000C67088 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D40DF36F1A3A97A000C67088 /* ParseCrashReporting.framework */; };
+		D40DF3731A3A9DD000C67088 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D40DF3721A3A9DD000C67088 /* ParseCrashReporting.framework */; };
+		D40DF3761A3A9FFC00C67088 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D40DF3741A3A9FFC00C67088 /* libstdc++.6.0.9.dylib */; };
+		D40DF3771A3A9FFC00C67088 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D40DF3751A3A9FFC00C67088 /* libstdc++.6.dylib */; };
 		D41D32161A11DD9300EA49B6 /* addCard.png in Resources */ = {isa = PBXBuildFile; fileRef = D41D31FF1A11DD9300EA49B6 /* addCard.png */; };
 		D41D32171A11DD9300EA49B6 /* address.png in Resources */ = {isa = PBXBuildFile; fileRef = D41D32001A11DD9300EA49B6 /* address.png */; };
 		D41D32181A11DD9300EA49B6 /* address2.png in Resources */ = {isa = PBXBuildFile; fileRef = D41D32011A11DD9300EA49B6 /* address2.png */; };
@@ -320,6 +325,11 @@
 		6ACE37C455484AD859AD8D7B /* libPods-AsaanImprovedUI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AsaanImprovedUI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D404EDB91A13149A000285F2 /* UIColor+AsaanBackgroundColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+AsaanBackgroundColor.h"; path = "HelperClasses/UIColor+AsaanBackgroundColor.h"; sourceTree = "<group>"; };
 		D404EDBA1A13149A000285F2 /* UIColor+AsaanBackgroundColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+AsaanBackgroundColor.m"; path = "HelperClasses/UIColor+AsaanBackgroundColor.m"; sourceTree = "<group>"; };
+		D40DF36D1A3A976700C67088 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		D40DF36F1A3A97A000C67088 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseCrashReporting.framework; path = AsaanImprovedUI/frameworks/ParseCrashReporting.framework; sourceTree = "<group>"; };
+		D40DF3721A3A9DD000C67088 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseCrashReporting.framework; path = AsaanImprovedUI/frameworks/ParseCrashReporting.framework; sourceTree = "<group>"; };
+		D40DF3741A3A9FFC00C67088 /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
+		D40DF3751A3A9FFC00C67088 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		D41D31FF1A11DD9300EA49B6 /* addCard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addCard.png; sourceTree = "<group>"; };
 		D41D32001A11DD9300EA49B6 /* address.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = address.png; sourceTree = "<group>"; };
 		D41D32011A11DD9300EA49B6 /* address2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = address2.png; sourceTree = "<group>"; };
@@ -671,6 +681,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D40DF3761A3A9FFC00C67088 /* libstdc++.6.0.9.dylib in Frameworks */,
+				D40DF3771A3A9FFC00C67088 /* libstdc++.6.dylib in Frameworks */,
+				D40DF36E1A3A976700C67088 /* libsqlite3.0.dylib in Frameworks */,
 				D449EB941A1BDDD800879383 /* ImageIO.framework in Frameworks */,
 				D449EB921A1BDDB200879383 /* Foundation.framework in Frameworks */,
 				D449EB8F1A1BDDA500879383 /* AddressBook.framework in Frameworks */,
@@ -697,9 +710,11 @@
 				D4522BB51A166675002EFA92 /* AudioToolbox.framework in Frameworks */,
 				D4522B3E1A165DAE002EFA92 /* FacebookSDK.framework in Frameworks */,
 				D449EB1D1A1BCDB600879383 /* GoogleOpenSource.framework in Frameworks */,
+				D40DF3701A3A97A000C67088 /* ParseCrashReporting.framework in Frameworks */,
 				D4522B3F1A165DAE002EFA92 /* Parse.framework in Frameworks */,
 				D4522B401A165DAE002EFA92 /* ParseFacebookUtils.framework in Frameworks */,
 				D4522B411A165DAE002EFA92 /* ParseUI.framework in Frameworks */,
+				D40DF3731A3A9DD000C67088 /* ParseCrashReporting.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1060,6 +1075,7 @@
 		D4522BCA1A1668BC002EFA92 /* frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D40DF3721A3A9DD000C67088 /* ParseCrashReporting.framework */,
 				D449EB931A1BDDD800879383 /* ImageIO.framework */,
 				D449EB911A1BDDB200879383 /* Foundation.framework */,
 				D449EB8D1A1BDDA500879383 /* AddressBook.framework */,
@@ -1263,9 +1279,9 @@
 				D4DEC1D01A321F160075281E /* AddAddressTableViewController.h */,
 				D4DEC1D11A321F160075281E /* AddAddressTableViewController.m */,
 				D4DEC1D31A321F630075281E /* AddPaymentCardViewController.h */,
+				D4DEC1D41A321F630075281E /* AddPaymentCardViewController.m */,
 				D4B7A6341A35299200D72BC4 /* OrderSummaryViewController.h */,
 				D4B7A6351A35299200D72BC4 /* OrderSummaryViewController.m */,
-				D4DEC1D41A321F630075281E /* AddPaymentCardViewController.m */,
 				D4DEC1D61A321FB70075281E /* SelectPaymentTableViewController.h */,
 				D4DEC1D71A321FB70075281E /* SelectPaymentTableViewController.m */,
 			);
@@ -1396,6 +1412,10 @@
 		EFEC7E676E0C2F9960DA289C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D40DF3741A3A9FFC00C67088 /* libstdc++.6.0.9.dylib */,
+				D40DF3751A3A9FFC00C67088 /* libstdc++.6.dylib */,
+				D40DF36F1A3A97A000C67088 /* ParseCrashReporting.framework */,
+				D40DF36D1A3A976700C67088 /* libsqlite3.0.dylib */,
 				6ACE37C455484AD859AD8D7B /* libPods-AsaanImprovedUI.a */,
 			);
 			name = Frameworks;
@@ -1411,6 +1431,7 @@
 				D4F2759B1A0C021800CEC95A /* Sources */,
 				D4F2759C1A0C021800CEC95A /* Frameworks */,
 				D4F2759D1A0C021800CEC95A /* Resources */,
+				D40DF3711A3A9C2F00C67088 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1523,6 +1544,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D40DF3711A3A9C2F00C67088 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=/usr/local/bin:$PATH\ncd /Users/niravsaraiya/Development/Asaan-iOS/AsaanImprovedUI/parse\n\nparse symbols \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D4F2759B1A0C021800CEC95A /* Sources */ = {
