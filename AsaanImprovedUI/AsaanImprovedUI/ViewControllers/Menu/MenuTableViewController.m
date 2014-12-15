@@ -47,6 +47,8 @@ const NSUInteger MenuFluentPagingTablePageSize = 50;
 @property (strong, nonatomic) NSMutableArray *menuSegmentHolders;
 @property (strong, nonatomic) GTLStoreendpointStoreMenuItem *selectedMenuItem;
 
+@property (nonatomic) CGFloat cellHeight;
+
 - (void) showOrderSummaryPressed;
 
 @end
@@ -84,6 +86,8 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didChangePreferredContentSize:)
                                                  name:UIContentSizeCategoryDidChangeNotification object:nil];
+    
+    self.cellHeight = 150;
 }
 
 - (void)dealloc
@@ -103,7 +107,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     self.navigationController.navigationBar.barTintColor = [UIColor asaanBackgroundColor];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor goldColor]};
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
@@ -143,33 +147,6 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
 #pragma mark === Private Methods ===
 #pragma mark -
 
-
-
-#pragma mark -
-#pragma mark === Actions ===
-#pragma mark -
-
-- (void)didChangePreferredContentSize:(NSNotification *)notification
-{
-    [self.tableView reloadData];
-}
-
-- (IBAction)segmentControllerValueChanged:(id)sender
-{
-    MenuSegmentHolder *oldMenuSegmentHolder = [_menuSegmentHolders objectAtIndex:_segmentedControlSelectedIndex];
-    NSIndexPath *firstVisibleIndexPath = [[self.tableView indexPathsForVisibleRows] objectAtIndex:0];
-    oldMenuSegmentHolder.topRowIndex = firstVisibleIndexPath;
-    
-    _segmentedControlSelectedIndex = _segmentedControl.selectedSegmentIndex;
-    MenuSegmentHolder *newMenuSegmentHolder = [_menuSegmentHolders objectAtIndex:_segmentedControlSelectedIndex];
-    firstVisibleIndexPath = newMenuSegmentHolder.topRowIndex;
-    
-    [_tableView scrollToRowAtIndexPath:firstVisibleIndexPath
-                      atScrollPosition:UITableViewScrollPositionTop
-                              animated:NO];
-    [_tableView reloadData];
-}
-
 - (void)setupMenuSegmentController {
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -187,7 +164,9 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
         
         [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointMenusAndMenuItems *object,NSError *error)
          {
-             if(!error && object.menuItems.count > 0 && object.menusAndSubmenus.count > 0){
+             if(!error && object.menuItems.count > 0 && object.menusAndSubmenus.count > 0)
+             {
+                 [self setTableHeightBasedOnLargestMenuItemIn:object.menuItems];
                  GTLStoreendpointStoreMenuItem *menuItem = [object.menuItems firstObject];
                  for (GTLStoreendpointStoreMenuHierarchy *menu in object.menusAndSubmenus)
                  {
@@ -251,6 +230,44 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
              hud.hidden = YES;
          }];
     }
+}
+
+- (void) setTableHeightBasedOnLargestMenuItemIn:(NSArray *)menuItems // of GTLStoreendpointStoreMenuItem
+{
+    long size = 0;
+    for (GTLStoreendpointStoreMenuItem *object in menuItems)
+        if ((object.shortDescription.length*2 + object.longDescription.length) > size)
+            size = object.shortDescription.length*2 + object.longDescription.length;
+    
+    if (size > 80)
+        self.cellHeight = 200;
+    else
+        self.cellHeight = 150;
+}
+
+#pragma mark -
+#pragma mark === Actions ===
+#pragma mark -
+
+- (void)didChangePreferredContentSize:(NSNotification *)notification
+{
+    [self.tableView reloadData];
+}
+
+- (IBAction)segmentControllerValueChanged:(id)sender
+{
+    MenuSegmentHolder *oldMenuSegmentHolder = [_menuSegmentHolders objectAtIndex:_segmentedControlSelectedIndex];
+    NSIndexPath *firstVisibleIndexPath = [[self.tableView indexPathsForVisibleRows] objectAtIndex:0];
+    oldMenuSegmentHolder.topRowIndex = firstVisibleIndexPath;
+    
+    _segmentedControlSelectedIndex = _segmentedControl.selectedSegmentIndex;
+    MenuSegmentHolder *newMenuSegmentHolder = [_menuSegmentHolders objectAtIndex:_segmentedControlSelectedIndex];
+    firstVisibleIndexPath = newMenuSegmentHolder.topRowIndex;
+    
+    [_tableView scrollToRowAtIndexPath:firstVisibleIndexPath
+                      atScrollPosition:UITableViewScrollPositionTop
+                              animated:NO];
+    [_tableView reloadData];
 }
 
 #pragma mark -
@@ -339,6 +356,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
         menuSegmentHolder = [_menuSegmentHolders objectAtIndex:_segmentedControl.selectedSegmentIndex];
     else
         menuSegmentHolder = [_menuSegmentHolders firstObject];
+    
     return menuSegmentHolder.subMenus.count;
 }
 
@@ -372,16 +390,15 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     cell.descriptionLabel.text = nil;
     cell.todaysOrdersLabels.text = nil;
     cell.likesLabel.text = nil;
-    cell.likeImageView.image = nil;
     cell.priceLabel.text = nil;
     cell.mostOrderedLabel.text = nil;
+    cell.reviewsLabel.text = nil;
     
     id dataObject = menuSegmentHolder.provider.dataObjects[rowIndex];
     if ([dataObject isKindOfClass:[NSNull class]])
         return cell;
     
     GTLStoreendpointStoreMenuItem *menuItem = dataObject;
-    
     cell.titleLabel.text = menuItem.shortDescription;
     cell.descriptionLabel.text = menuItem.longDescription;
     cell.priceLabel.text = [UtilCalls amountToString:menuItem.price];
@@ -390,6 +407,14 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     cell.itemImageView.tag = rowIndex - indexPath.section - 1;
     
     NSLog(@"Test yy %d %ld %ld", submenu.menuItemPosition.intValue, (long)indexPath.row, (long)indexPath.section);
+    
+    cell.itemImageView.layer.cornerRadius = cell.itemImageView.frame.size.width / 2;
+    cell.itemImageView.clipsToBounds = YES;
+    cell.itemImageView.layer.borderWidth = 1.0f;
+    cell.itemImageView.layer.borderColor = [UIColor whiteColor].CGColor;
+    
+    // NOTE: Rounded rect
+    // self.profileImageView.layer.cornerRadius = 10.0f;
     
     if (IsEmpty(menuItem.thumbnailUrl) == false)
     {
@@ -454,55 +479,16 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     }
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    MenuSegmentHolder *menuSegmentHolder;
-//    if (_menuSegmentHolders.count > 1)
-//        menuSegmentHolder = [_menuSegmentHolders objectAtIndex:_segmentedControl.selectedSegmentIndex];
-//    else
-//        menuSegmentHolder = [_menuSegmentHolders firstObject];
-//
-//    NSLog(@"heightForRowAtIndexPath index = %d", indexPath.row);
-//    id dataObject = menuSegmentHolder.provider.dataObjects[indexPath.row];
-//    UITableViewCell *cell;
-//
-//    if ([dataObject isKindOfClass:[NSNull class]])
-//    {
-//        [self configureSubMenuCell:self.prototypeSubMenuCell forRowAtIndexPath:indexPath withItem:dataObject];
-//        cell = self.prototypeSubMenuCell;
-//    }
-//    else
-//    {
-//        GTLStoreendpointStoreMenuItem *menuItem = dataObject;
-//
-//        if (menuItem.level.intValue == 1)
-//        {
-//            [self configureSubMenuCell:self.prototypeSubMenuCell forRowAtIndexPath:indexPath withItem:menuItem];
-//            cell = self.prototypeSubMenuCell;
-//        }
-//        else
-//        {
-//            [self configureMenuItemCell:self.prototypeMenuItemCell forRowAtIndexPath:indexPath withItem:menuItem];
-//            cell = self.prototypeMenuItemCell;
-//        }
-//    }
-//
-//    // Need to set the width of the prototype cell to the width of the table view
-//    // as this will change when the device is rotated.
-//
-//    cell.bounds = CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.tableView.bounds), CGRectGetHeight(cell.bounds));
-//
-//    [cell layoutIfNeeded];
-//
-//    CGSize size = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-//    return size.height+1;
-//}
-
-
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return UITableViewAutomaticDimension;
+    return self.cellHeight;
 }
+//
+//
+//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return UITableViewAutomaticDimension;
+//}
 
 #pragma mark -
 #pragma mark === MWPhotoBrowserDelegate ===

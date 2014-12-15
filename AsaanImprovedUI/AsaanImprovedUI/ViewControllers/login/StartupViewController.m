@@ -10,6 +10,7 @@
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import "MBProgressHUD.h"
 #import "InlineCalls.h"
+#import "UIColor+AsaanGoldColor.h"
 
 @interface StartupViewController ()
 {
@@ -29,7 +30,13 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [self.navigationController setNavigationBarHidden:YES];
+    [self.navigationController setNavigationBarHidden:NO];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
+    [self.navigationItem setHidesBackButton:YES];
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
 }
 
 - (void)viewDidAppear:(BOOL)animated {

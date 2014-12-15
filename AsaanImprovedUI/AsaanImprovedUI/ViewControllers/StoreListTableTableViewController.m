@@ -83,8 +83,11 @@ const NSUInteger FluentPagingTablePageSize = 20;
     else{
         // Load GAE Objects on startup
         GlobalObjectHolder *objectHolder = appDelegate.globalObjectHolder;
-        [objectHolder loadUserCardsFromServer];
-        [objectHolder loadUserAddressesFromServer];
+        
+        if (objectHolder.userCards == nil)
+            [objectHolder loadUserCardsFromServer];
+        if (objectHolder.userAddresses == nil)
+            [objectHolder loadUserAddressesFromServer];
     }
     
     [self.navigationController setNavigationBarHidden:NO];
@@ -93,7 +96,7 @@ const NSUInteger FluentPagingTablePageSize = 20;
     self.navigationController.navigationBar.barTintColor = [UIColor asaanBackgroundColor];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor : [UIColor goldColor]};
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     
     GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
     if (goh.orderInProgress != nil)
@@ -213,13 +216,12 @@ const NSUInteger FluentPagingTablePageSize = 20;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StoreListCell" forIndexPath:indexPath];
 
-    UIImageView *imgBackground = (UIImageView *)[cell viewWithTag:400];
+    UIImageView *imgBackground = (UIImageView *)[cell viewWithTag:701];
     UILabel *txtName=(UILabel *)[cell viewWithTag:500];
     UILabel *txtTrophy=(UILabel *)[cell viewWithTag:501];
     UILabel *txtCuisine=(UILabel *)[cell viewWithTag:502];
-    UILabel *txtVisits=(UILabel *)[cell viewWithTag:504];
-    UILabel *txtLikes=(UILabel *)[cell viewWithTag:506];
-    UILabel *txtRecommends=(UILabel *)[cell viewWithTag:508];
+//    UILabel *txtVisits=(UILabel *)[cell viewWithTag:504];
+//    UILabel *txtLikes=(UILabel *)[cell viewWithTag:506];
     
     UIButton *btnCall = (UIButton*)[cell viewWithTag:601];
     UIButton *btnMenu = (UIButton*)[cell viewWithTag:602];
@@ -230,20 +232,12 @@ const NSUInteger FluentPagingTablePageSize = 20;
     [btnMenu addTarget:self action:@selector(showMenu:) forControlEvents:UIControlEventTouchUpInside];
     [btnOrder addTarget:self action:@selector(placeOrder:) forControlEvents:UIControlEventTouchUpInside];
     [btnReserve addTarget:self action:@selector(reserveTable:) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIImageView *imgVisits = (UIImageView*)[cell viewWithTag:503];
-    imgVisits.hidden = true;
-    UIImageView *imgLikes = (UIImageView*)[cell viewWithTag:505];
-    imgLikes.hidden = true;
-    UIImageView *imgRecommends = (UIImageView*)[cell viewWithTag:507];
-    imgRecommends.hidden = true;
 
     txtName.text = nil;
     txtTrophy.text = nil;
     txtCuisine.text = nil;
-    txtVisits.text = nil;
-    txtLikes.text = nil;
-    txtRecommends.text = nil;
+//    txtVisits.text = nil;
+//    txtLikes.text = nil;
     
     id dataObject = self.dataProvider.dataObjects[indexPath.row];
     if ([dataObject isKindOfClass:[NSNull class]]) {

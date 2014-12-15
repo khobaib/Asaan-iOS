@@ -34,11 +34,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *orderTime;
 @property (weak, nonatomic) IBOutlet UILabel *partySize;
 
-@property (nonatomic) NSInteger minOrderTime;
-@property (nonatomic) NSInteger timeIncrementInterval;
-@property (nonatomic) NSInteger timeDecrementInterval;
-@property (nonatomic) NSInteger minPartySize;
-@property (nonatomic) NSInteger currPartySize;
+@property (nonatomic) long minOrderTime;
+@property (nonatomic) long timeIncrementInterval;
+@property (nonatomic) long timeDecrementInterval;
+@property (nonatomic) long minPartySize;
+@property (nonatomic) long currPartySize;
 @property (nonatomic) NSDate *currOrderTime;
 
 @property (nonatomic) Boolean bIsSeekingDeliveryAddress;
@@ -55,7 +55,7 @@
     [super viewDidLoad];
     
     self.minPartySize = self.currPartySize = 1;
-    self.partySize.text = [NSString stringWithFormat:@"%d", self.currPartySize];
+    self.partySize.text = [NSString stringWithFormat:@"%ld", self.currPartySize];
     self.minOrderTime = 3600;
     self.timeIncrementInterval = 900; // 15 min
     self.timeDecrementInterval = -900; // 15 min
@@ -66,6 +66,7 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"hh:mm a"];
     self.orderTime.text = [dateFormatter stringFromDate: self.currOrderTime];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -77,7 +78,7 @@
     self.navigationController.navigationBar.barTintColor = [UIColor asaanBackgroundColor];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor : [UIColor goldColor]};
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     
     if (self.selectedStore.providesDelivery.boolValue == NO)
     {
@@ -123,6 +124,21 @@
         [self performSegueWithIdentifier:@"segueStartOrderToMenu" sender:self];
     }
     
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 40)];
+    /* Create custom view to display section header... */
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, tableView.frame.size.width, 20)];
+    [label setFont:[UIFont boldSystemFontOfSize:14]];
+    [label setTextColor:[UIColor colorWithRed:255.0 green:255.0 blue:255.0 alpha:1.0]];
+    label.text = @"Let's get your order started";
+    
+    /* Section header is in 0th index... */
+    [view addSubview:label];
+    [view setBackgroundColor:[UIColor colorWithRed:48/255.0 green:25/255.0 blue:25/255.0 alpha:1.0]]; //your background color...
+    return view;
 }
 
 #pragma mark - Action Buttons

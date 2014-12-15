@@ -52,7 +52,7 @@
     self.navigationController.navigationBar.barTintColor = [UIColor asaanBackgroundColor];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor : [UIColor goldColor]};
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     
     // Prevent keyboard from showing by default
     [self.ptkView endEditing:YES];

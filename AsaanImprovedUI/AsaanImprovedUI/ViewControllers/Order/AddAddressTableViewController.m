@@ -60,7 +60,7 @@
     self.navigationController.navigationBar.barTintColor = [UIColor asaanBackgroundColor];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor : [UIColor goldColor]};
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     
     UIColor *color = [UIColor lightTextColor];
     self.addressTitle.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Home" attributes:@{NSForegroundColorAttributeName: color}];
