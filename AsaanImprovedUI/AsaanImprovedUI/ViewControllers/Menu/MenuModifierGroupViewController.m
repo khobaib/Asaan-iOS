@@ -247,7 +247,7 @@
         [self.btnAddToOrder setTitle:[NSString stringWithFormat:@"Change Order - %@", self.txtAmount.text] forState:UIControlStateNormal];
     else
         [self.btnAddToOrder setTitle:[NSString stringWithFormat:@"Add to Order - %@", self.txtAmount.text] forState:UIControlStateNormal];
-    self.txtQty.text = [NSString stringWithFormat:@"%d", _onlineOrderSelectedMenuItem.qty];
+    self.txtQty.text = [NSString stringWithFormat:@"%lu", (unsigned long)_onlineOrderSelectedMenuItem.qty];
 }
 - (IBAction)decQty:(id)sender
 {
@@ -261,7 +261,7 @@
             [self.btnAddToOrder setTitle:[NSString stringWithFormat:@"Change Order - %@", self.txtAmount.text] forState:UIControlStateNormal];
         else
             [self.btnAddToOrder setTitle:[NSString stringWithFormat:@"Add to Order - %@", self.txtAmount.text] forState:UIControlStateNormal];
-        self.txtQty.text = [NSString stringWithFormat:@"%d", _onlineOrderSelectedMenuItem.qty];
+        self.txtQty.text = [NSString stringWithFormat:@"%lu", (unsigned long)_onlineOrderSelectedMenuItem.qty];
     }
     
 }

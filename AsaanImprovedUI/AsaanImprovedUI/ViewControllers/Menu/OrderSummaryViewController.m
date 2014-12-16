@@ -89,7 +89,7 @@
     NSString *str = @"<ITEMREQUESTS>";
     for (OnlineOrderSelectedMenuItem *object in self.orderInProgress.selectedMenuItems)
     {
-        NSString *itemString=[NSString stringWithFormat:@"<ADDITEM QTY=\"%d\" ITEMID=\"%@\" >",object.qty,object.selectedItem.menuItemPOSId];
+        NSString *itemString=[NSString stringWithFormat:@"<ADDITEM QTY=\"%lu\" ITEMID=\"%@\" >",(unsigned long)object.qty,object.selectedItem.menuItemPOSId];
         str=[str stringByAppendingString:itemString];
         for (OnlineOrderSelectedModifierGroup *modGroup in object.selectedModifierGroups)
         {
@@ -230,7 +230,7 @@
     UITableViewCell *cell;
     if (self.orderInProgress.selectedMenuItems.count <= indexPath.row)
     {
-        int realIndex = indexPath.row - self.orderInProgress.selectedMenuItems.count;
+        int realIndex = (int)(indexPath.row - self.orderInProgress.selectedMenuItems.count);
         cell = [self cellForAdditionalRowAtIndex:realIndex forTable:tableView forIndexPath:indexPath];
     }
     else
@@ -244,7 +244,7 @@
         if (onlineOrderSelectedMenuItem != nil)
         {
             txtMenuItemName.text = onlineOrderSelectedMenuItem.selectedItem.shortDescription;
-            txtQty.text = [NSString stringWithFormat:@"%d", onlineOrderSelectedMenuItem.qty];
+            txtQty.text = [NSString stringWithFormat:@"%lu", (unsigned long)onlineOrderSelectedMenuItem.qty];
             NSNumber *amount = [[NSNumber alloc] initWithLong:onlineOrderSelectedMenuItem.amount];
             txtAmount.text = [UtilCalls amountToString:amount];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

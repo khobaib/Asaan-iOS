@@ -28,8 +28,8 @@ const NSTimeInterval DataLoadingOperationDuration1 = 0.3;
     
     self.indexes = indexes;
 
-    int firstPosition = indexes.firstIndex;
-    int maxResult = indexes.count;
+    int firstPosition = (int)indexes.firstIndex;
+    int maxResult = (int)indexes.count;
     
     if (self)
     {

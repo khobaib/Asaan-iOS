@@ -171,11 +171,11 @@
 - (IBAction)decPartySize:(id)sender
 {
     if (self.currPartySize > self.minPartySize)
-        self.partySize.text = [NSString stringWithFormat:@"%d", --self.currPartySize];
+        self.partySize.text = [NSString stringWithFormat:@"%ld", --self.currPartySize];
 }
 - (IBAction)incPartySize:(id)sender
 {
-    self.partySize.text = [NSString stringWithFormat:@"%d", ++self.currPartySize];
+    self.partySize.text = [NSString stringWithFormat:@"%ld", ++self.currPartySize];
 }
 
 #pragma mark - Navigation

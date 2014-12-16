@@ -195,7 +195,7 @@
                 _ddListTableViewHeight = MAX_ROWS_SHOWED * ROW_HEIGHT;
             }
             else {
-                _ddListTableViewHeight = _data.count * ROW_HEIGHT;
+                _ddListTableViewHeight = (int)_data.count * ROW_HEIGHT;
             }
         }
     }

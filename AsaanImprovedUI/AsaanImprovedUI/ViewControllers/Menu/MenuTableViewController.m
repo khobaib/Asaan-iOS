@@ -406,8 +406,6 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     cell.delegate = self;
     cell.itemImageView.tag = rowIndex - indexPath.section - 1;
     
-    NSLog(@"Test yy %d %ld %ld", submenu.menuItemPosition.intValue, (long)indexPath.row, (long)indexPath.section);
-    
     cell.itemImageView.layer.cornerRadius = cell.itemImageView.frame.size.width / 2;
     cell.itemImageView.clipsToBounds = YES;
     cell.itemImageView.layer.borderWidth = 1.0f;
@@ -540,8 +538,6 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
         section += 1;
     }
     
-    NSLog(@"Test %lu %d %d", (unsigned long)index, sum, section);
-    
     //    GTLStoreendpointStoreMenuHierarchy *submenu = [menuSegmentHolder.subMenus objectAtIndex:section];
     NSInteger rowIndex = section + index + 1;
     id dataObject = menuSegmentHolder.provider.dataObjects[rowIndex];
@@ -649,8 +645,6 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
 - (void)menuItemCell:(MenuItemCell *)menuItemCell didClickedItemImage:(UIImageView *)sender
 {
     
-    NSLog(@"Test gh %lu ", sender.tag);
-    
     // Create browser (must be done each time photo browser is
     // displayed. Photo browser objects cannot be re-used)
     MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
@@ -680,7 +674,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
 #warning Use this to go to ordercontroller and here 'index' starts from 0;
 - (void)menuMWCaptionView:(MenuMWCaptionView *)menuMWCaptionView didClickedOrderButtonAtIndex:(NSUInteger)index {
     
-    NSLog(@"Tapped order button at index : %u", index);
+    NSLog(@"Tapped order button at index : %lu", (unsigned long)index);
 }
 
 #pragma mark - Navigation
