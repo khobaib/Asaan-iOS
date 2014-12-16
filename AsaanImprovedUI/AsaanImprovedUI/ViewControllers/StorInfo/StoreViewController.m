@@ -7,9 +7,13 @@
 //
 
 #import "StoreViewController.h"
-#import "ContainerViewController.h"
 
-@interface StoreViewController ()
+#import "ContainerViewController.h"
+#import "HistoryViewController.h"
+#import "InfoViewController.h"
+#import "ReviewsViewController.h"
+
+@interface StoreViewController () <ContainerViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (nonatomic, strong) ContainerViewController *containerViewController;
@@ -36,18 +40,32 @@
     if ([segue.identifier isEqualToString:@"embedContainerStore"]) {
         
         self.containerViewController = segue.destinationViewController;
-        self.containerViewController.segueIdentifierFirst   = @"historySegue";
-        self.containerViewController.segueIdentifierSecond  = @"storeInfoSegue";
-        self.containerViewController.segueIdentifierThird  = @"reviewsSegue";
+        self.containerViewController.segues   = @[@"historySegue", @"storeInfoSegue", @"reviewsSegue"];
         
-        self.containerViewController.initialSegueIdentifier = self.containerViewController.segueIdentifierSecond;
+        self.containerViewController.initialIndex = 1;
+        self.containerViewController.delegate = self;
     }
 }
+
 #pragma mark - Actions
 - (IBAction)segmentedValueChanged:(id)sender {
     
     UISegmentedControl *seg = sender;
     [self.containerViewController swapViewControllers:(int)seg.selectedSegmentIndex];
+}
+
+#pragma mark - ContainerViewControllerDelegate
+- (void)containerViewController:(ContainerViewController *)containerViewController willShowViewController:(UIViewController*)viewController {
+
+    if ([viewController isKindOfClass:[InfoViewController class]]) {
+        ((InfoViewController *)viewController).selectedStore = self.selectedStore;
+    }
+    else if ([viewController isKindOfClass:[HistoryViewController class]]) {
+        ((HistoryViewController *)viewController).selectedStore = self.selectedStore;
+    }
+    else if ([viewController isKindOfClass:[ReviewsViewController class]]) {
+        ((ReviewsViewController *)viewController).selectedStore = self.selectedStore;
+    }
 }
 
 @end

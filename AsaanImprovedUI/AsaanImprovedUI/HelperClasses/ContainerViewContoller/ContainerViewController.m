@@ -10,8 +10,6 @@
 
 @interface ContainerViewController ()
 
-@property (nonatomic, strong) NSString *currentSegueIdentifier;
-
 @property (assign, nonatomic) BOOL transitionInProgress;
 
 @end
@@ -23,15 +21,19 @@
     [super viewDidLoad];
     
     _transitionInProgress = NO;
-    if (_initialSegueIdentifier == nil) {
-        _initialSegueIdentifier = _segueIdentifierFirst;
+    
+    if (_segues && _segues.count > 0 && [_segues[_initialIndex] isKindOfClass:[NSString class]]) {
+        [self performSegueWithIdentifier:_segues[_initialIndex] sender:nil];
     }
-    [self performSegueWithIdentifier:_initialSegueIdentifier sender:nil];
 
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(containerViewController:willShowViewController:)]) {
+        [self.delegate containerViewController:self willShowViewController:segue.destinationViewController];
+    }
     
     // If we're going to the first view controller.
     if (self.childViewControllers.count == 0) {
@@ -72,8 +74,10 @@
     }
     
     self.transitionInProgress = YES;
-    self.currentSegueIdentifier = (selectedIndex == 0) ? self.segueIdentifierFirst : ((selectedIndex == 1) ? self.segueIdentifierSecond : self.segueIdentifierThird);
-    [self performSegueWithIdentifier:self.currentSegueIdentifier sender:nil];
+    
+    if (_segues && _segues.count > 0 && [_segues[selectedIndex] isKindOfClass:[NSString class]]) {
+        [self performSegueWithIdentifier:_segues[selectedIndex] sender:nil];
+    }
 }
 
 @end

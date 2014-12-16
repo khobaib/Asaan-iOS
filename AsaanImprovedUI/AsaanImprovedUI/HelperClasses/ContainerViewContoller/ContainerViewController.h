@@ -8,13 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+@class ContainerViewController;
+@protocol ContainerViewControllerDelegate <NSObject>
+
+- (void)containerViewController:(ContainerViewController *)containerViewController willShowViewController:(UIViewController*)viewController;
+
+@end
+
 @interface ContainerViewController : UIViewController
 
-@property (nonatomic, strong) NSString *segueIdentifierFirst;
-@property (nonatomic, strong) NSString *segueIdentifierSecond;
-@property (nonatomic, strong) NSString *segueIdentifierThird;
+@property (nonatomic, strong) NSArray *segues;
+@property (nonatomic, assign) NSUInteger initialIndex;
 
-@property (nonatomic, strong) NSString *initialSegueIdentifier;
+@property (nonatomic, weak) id<ContainerViewControllerDelegate> delegate;
 
 - (void)swapViewControllers:(int)selectedIndex;
 

@@ -24,6 +24,8 @@
 #import "DeliveryOrCarryoutViewController.h"
 #import "UIAlertView+Blocks.h"
 
+#import "StoreViewController.h"
+
 const NSUInteger FluentPagingTablePreloadMargin = 5;
 const NSUInteger FluentPagingTablePageSize = 20;
 
@@ -297,6 +299,17 @@ const NSUInteger FluentPagingTablePageSize = 20;
 - (void)drawCellBackgroundImage:(PFObject *)imageObject {
 }
 
+#pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    _selectedStore = self.dataProvider.dataObjects[indexPath.row];
+    if ([_selectedStore isKindOfClass:[NSNull class]]) {
+        _selectedStore = nil;
+    }
+    
+    [self performSegueWithIdentifier:@"StoreListToStoreSegue" sender:self];
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -318,6 +331,11 @@ const NSUInteger FluentPagingTablePageSize = 20;
         // Pass any objects to the view controller here, like...
         [controller setSelectedStore:_selectedStore];
         [controller setBCalledFromStoreList:YES];
+    }
+    else if ([[segue identifier] isEqualToString:@"StoreListToStoreSegue"]) {
+        
+        StoreViewController *storeViewController = segue.destinationViewController;
+        [storeViewController setSelectedStore:_selectedStore];
     }
 }
 

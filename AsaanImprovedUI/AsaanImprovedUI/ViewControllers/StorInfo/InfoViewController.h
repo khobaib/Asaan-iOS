@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GTLStoreendpoint.h"
 
 @interface InfoViewController : UITableViewController
+
+@property (nonatomic, strong) GTLStoreendpointStore *selectedStore;
 
 @end

@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GTLStoreendpoint.h"
 
 @interface ReviewsViewController : UIViewController
+
+@property (nonatomic, strong) GTLStoreendpointStore *selectedStore;
 
 @end

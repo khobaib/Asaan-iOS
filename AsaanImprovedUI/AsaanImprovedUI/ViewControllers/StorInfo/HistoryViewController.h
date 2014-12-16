@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GTLStoreendpoint.h"
 
 @interface HistoryViewController : UIViewController
+
+@property (nonatomic, strong) GTLStoreendpointStore *selectedStore;
 
 @end

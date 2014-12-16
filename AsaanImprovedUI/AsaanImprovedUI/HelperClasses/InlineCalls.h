@@ -10,9 +10,16 @@
 #define AsaanImprovedUI_InlineCalls_h
 
 static inline Boolean IsEmpty(NSString *string) {
-    string = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    return string == nil
-    || ([string length] == 0);
+    
+    if (string && ![[string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] isEqualToString:@""]) {
+        return false;
+    }
+    
+    return true;
+    
+//    string = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+//    return string == nil
+//    || ([string length] == 0);
 }
 
 #endif
