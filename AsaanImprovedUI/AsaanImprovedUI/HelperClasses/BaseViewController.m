@@ -105,7 +105,6 @@
     _baseScrollView.contentInset = contentInsets;
     _baseScrollView.scrollIndicatorInsets = contentInsets;
     
-    NSLog(@"Hello");
     // If active text field is hidden by keyboard, scroll it so it's visible
     // Your app might not need or want this behavior.
     CGRect aRect = _frameRect;

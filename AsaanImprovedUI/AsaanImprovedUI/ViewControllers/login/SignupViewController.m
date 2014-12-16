@@ -12,7 +12,8 @@
 #import "InlineCalls.h"
 #import "MBProgressHUD.h"
 
-@interface SignupViewController ()
+@interface SignupViewController () <UITextFieldDelegate>
+
 @property (weak, nonatomic) IBOutlet UITextField *txtEmail;
 @property (weak, nonatomic) IBOutlet UITextField *txtPassword;
 @property (weak, nonatomic) IBOutlet UIScrollView *signupScrollView;
@@ -89,5 +90,18 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == self.txtPassword) {
+        [self signup:self];
+    }
+    else {
+        [super textFieldShouldReturn:textField];
+    }
+    
+    return YES;
+}
 
 @end

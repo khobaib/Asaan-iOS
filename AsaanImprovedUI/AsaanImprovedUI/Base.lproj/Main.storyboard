@@ -2090,8 +2090,8 @@
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="fb_logo" translatesAutoresizingMaskIntoConstraints="NO" id="S6F-Rg-H6r">
-                                                    <rect key="frame" x="337" y="7" width="29" height="29"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fb_logo" translatesAutoresizingMaskIntoConstraints="NO" id="S6F-Rg-H6r">
+                                                    <rect key="frame" x="337" y="6" width="29" height="29"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -2688,11 +2688,11 @@
                                 <rect key="frame" x="0.0" y="325" width="600" height="47"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XrD-RQ-n1e">
-                                        <rect key="frame" x="22" y="16" width="42" height="15"/>
+                                        <rect key="frame" x="22" y="16" width="78" height="15"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="1Ja-yl-S8e"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="JUE-jW-51P"/>
-                                            <constraint firstAttribute="width" constant="42" id="NjH-ik-6g5"/>
+                                            <constraint firstAttribute="width" constant="78" id="NjH-ik-6g5"/>
                                             <constraint firstAttribute="width" constant="42" id="P9T-Vg-76R"/>
                                             <constraint firstAttribute="height" constant="21" id="oP6-Kd-imu"/>
                                         </constraints>
@@ -2708,7 +2708,7 @@
                                         </variation>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="name@example.com" translatesAutoresizingMaskIntoConstraints="NO" id="2Tn-Ci-nFA">
-                                        <rect key="frame" x="112" y="16" width="120" height="15"/>
+                                        <rect key="frame" x="112" y="16" width="468" height="15"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -2732,6 +2732,7 @@
                                 <constraints>
                                     <constraint firstItem="XrD-RQ-n1e" firstAttribute="top" secondItem="o9u-RU-Lao" secondAttribute="top" constant="20" id="27V-2n-W43"/>
                                     <constraint firstItem="XrD-RQ-n1e" firstAttribute="leading" secondItem="o9u-RU-Lao" secondAttribute="leading" constant="22" id="4fI-Ke-Jt2"/>
+                                    <constraint firstAttribute="trailing" secondItem="2Tn-Ci-nFA" secondAttribute="trailing" constant="20" id="6i9-Us-npd"/>
                                     <constraint firstItem="2Tn-Ci-nFA" firstAttribute="baseline" secondItem="XrD-RQ-n1e" secondAttribute="baseline" id="Abt-0s-wcq"/>
                                     <constraint firstAttribute="bottom" secondItem="2Tn-Ci-nFA" secondAttribute="bottom" constant="16" id="EnP-6x-Cl9"/>
                                     <constraint firstItem="XrD-RQ-n1e" firstAttribute="leading" secondItem="o9u-RU-Lao" secondAttribute="leading" constant="22" id="HXQ-aK-oCC"/>
@@ -2742,7 +2743,7 @@
                                     <constraint firstItem="XrD-RQ-n1e" firstAttribute="bottom" secondItem="2Tn-Ci-nFA" secondAttribute="bottom" id="a4C-ub-cCv"/>
                                     <constraint firstItem="2Tn-Ci-nFA" firstAttribute="centerY" secondItem="o9u-RU-Lao" secondAttribute="centerY" id="eXe-lM-dGU"/>
                                     <constraint firstAttribute="bottom" secondItem="XrD-RQ-n1e" secondAttribute="bottom" constant="16" id="eqZ-E6-18y"/>
-                                    <constraint firstItem="2Tn-Ci-nFA" firstAttribute="leading" secondItem="XrD-RQ-n1e" secondAttribute="trailing" constant="48" id="fPg-XM-gUp"/>
+                                    <constraint firstItem="2Tn-Ci-nFA" firstAttribute="leading" secondItem="XrD-RQ-n1e" secondAttribute="trailing" constant="12" id="fPg-XM-gUp"/>
                                     <constraint firstAttribute="trailing" secondItem="2Tn-Ci-nFA" secondAttribute="trailing" constant="36" id="gi5-WT-KYE"/>
                                 </constraints>
                                 <variation key="default">
@@ -2778,7 +2779,7 @@
                                         </variation>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Min 8 characters" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kc0-N0-4w2">
-                                        <rect key="frame" x="110" y="16" width="98" height="15"/>
+                                        <rect key="frame" x="110" y="16" width="470" height="15"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -2799,12 +2800,12 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="kc0-N0-4w2" secondAttribute="trailing" constant="20" id="AnJ-6q-Ez7"/>
                                     <constraint firstItem="kc0-N0-4w2" firstAttribute="top" secondItem="Tpq-hY-hQo" secondAttribute="top" constant="16" id="Anr-BE-rjO"/>
                                     <constraint firstItem="kc0-N0-4w2" firstAttribute="baseline" secondItem="FTs-NW-rAJ" secondAttribute="firstBaseline" id="G8m-2K-JF3"/>
                                     <constraint firstItem="FTs-NW-rAJ" firstAttribute="top" secondItem="Tpq-hY-hQo" secondAttribute="top" constant="16" id="IEs-Tx-z8T"/>
                                     <constraint firstItem="kc0-N0-4w2" firstAttribute="leading" secondItem="FTs-NW-rAJ" secondAttribute="trailing" constant="12" id="QTe-C7-8FV"/>
                                     <constraint firstItem="FTs-NW-rAJ" firstAttribute="bottom" secondItem="kc0-N0-4w2" secondAttribute="bottom" id="VAf-K1-IFJ"/>
-                                    <constraint firstItem="kc0-N0-4w2" firstAttribute="leading" secondItem="FTs-NW-rAJ" secondAttribute="trailing" constant="12" id="jIs-lr-SHz"/>
                                     <constraint firstAttribute="centerY" secondItem="kc0-N0-4w2" secondAttribute="centerY" id="jTb-Xp-Iq6"/>
                                     <constraint firstAttribute="bottom" secondItem="FTs-NW-rAJ" secondAttribute="bottom" constant="16" id="m4b-90-irg"/>
                                     <constraint firstAttribute="bottom" secondItem="kc0-N0-4w2" secondAttribute="bottom" constant="16" id="pOq-7D-1Un"/>
@@ -3144,7 +3145,6 @@
                                 <connections>
                                     <action selector="txtEmailEditingDidEnd:" destination="R5v-TP-HjQ" eventType="editingDidEnd" id="z8Q-pB-dcI"/>
                                     <outlet property="delegate" destination="21r-c1-Wg5" id="cST-Wg-SRG"/>
-                                    <outlet property="nextTextField" destination="kc0-N0-4w2" id="ct3-Dt-aHq"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your email to reset password." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L89-yx-Np0">
@@ -3836,11 +3836,11 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="g5V-KY-zil"/>
+        <segue reference="33i-hP-PSJ"/>
         <segue reference="cQG-s7-LJm"/>
         <segue reference="Gdu-gg-Yxg"/>
+        <segue reference="MkO-xh-gwn"/>
         <segue reference="MeC-Bq-6yp"/>
-        <segue reference="33i-hP-PSJ"/>
-        <segue reference="BxH-0j-lGN"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

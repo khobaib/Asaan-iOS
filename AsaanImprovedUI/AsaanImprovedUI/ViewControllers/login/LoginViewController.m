@@ -12,7 +12,8 @@
 #import <Parse/Parse.h>
 #import "InlineCalls.h"
 
-@interface LoginViewController ()
+@interface LoginViewController () <UITextFieldDelegate>
+
     @property (weak, nonatomic) IBOutlet UITextField *txtEmail;
     @property (weak, nonatomic) IBOutlet UITextField *txtPassword;
     @property (weak, nonatomic) IBOutlet UIScrollView *loginScrollView;
@@ -88,6 +89,19 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
-*/
+ */
+
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == self.txtPassword) {
+        [self login:self];
+    }
+    else {
+        [super textFieldShouldReturn:textField];
+    }
+    
+    return YES;
+}
 
 @end

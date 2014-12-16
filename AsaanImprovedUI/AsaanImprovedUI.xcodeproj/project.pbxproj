@@ -322,6 +322,7 @@
 		37909B6B1A23828000649827 /* SignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupViewController.m; sourceTree = "<group>"; };
 		37909B6C1A23828000649827 /* StartupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartupViewController.h; sourceTree = "<group>"; };
 		37C90E151A2897B500077FAA /* AsaanConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AsaanConstants.h; path = HelperClasses/AsaanConstants.h; sourceTree = "<group>"; };
+		37D161C51A40069F002EAA3C /* Asaan-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Asaan-Prefix.pch"; sourceTree = "<group>"; };
 		6ACE37C455484AD859AD8D7B /* libPods-AsaanImprovedUI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AsaanImprovedUI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D404EDB91A13149A000285F2 /* UIColor+AsaanBackgroundColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+AsaanBackgroundColor.h"; path = "HelperClasses/UIColor+AsaanBackgroundColor.h"; sourceTree = "<group>"; };
 		D404EDBA1A13149A000285F2 /* UIColor+AsaanBackgroundColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+AsaanBackgroundColor.m"; path = "HelperClasses/UIColor+AsaanBackgroundColor.m"; sourceTree = "<group>"; };
@@ -1353,6 +1354,7 @@
 		D4F275A21A0C021800CEC95A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				37D161C51A40069F002EAA3C /* Asaan-Prefix.pch */,
 				D4464B1A1A36138100206728 /* OnlineOrder */,
 				D4EDD4131A33EE6700C82006 /* Extension.h */,
 				D4EDD4141A33EE6700C82006 /* Extension.m */,
@@ -1858,6 +1860,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/AsaanImprovedUI/frameworks";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AsaanImprovedUI/Asaan-Prefix.pch";
 				GTL_BUILT_AS_FRAMEWORK = 1;
 				INFOPLIST_FILE = AsaanImprovedUI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -1876,6 +1880,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/AsaanImprovedUI/frameworks";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AsaanImprovedUI/Asaan-Prefix.pch";
 				GTL_BUILT_AS_FRAMEWORK = 1;
 				INFOPLIST_FILE = AsaanImprovedUI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
