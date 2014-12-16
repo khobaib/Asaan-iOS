@@ -33,10 +33,17 @@
 		3709EAC31A31804E0060B49B /* PSTGridLayoutSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3709EAB61A31804E0060B49B /* PSTGridLayoutSection.m */; };
 		3709EAC71A31C8420060B49B /* MenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3709EAC61A31C8420060B49B /* MenuTableViewController.m */; };
 		3709EACD1A31C8DA0060B49B /* MenuItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3709EACC1A31C8DA0060B49B /* MenuItemCell.m */; };
+		370BFF571A40379D00F612EE /* ContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 370BFF561A40379D00F612EE /* ContainerViewController.m */; };
+		370BFF5B1A403A1800F612EE /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 370BFF5A1A403A1800F612EE /* HistoryViewController.m */; };
+		370BFF5E1A403A2B00F612EE /* ReviewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 370BFF5D1A403A2B00F612EE /* ReviewsViewController.m */; };
+		370BFF611A403A3900F612EE /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 370BFF601A403A3900F612EE /* InfoViewController.m */; };
+		370BFF641A403E3900F612EE /* EmptySegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 370BFF631A403E3900F612EE /* EmptySegue.m */; };
+		370BFF671A403F0600F612EE /* StoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 370BFF661A403F0600F612EE /* StoreViewController.m */; };
 		37909B6D1A23828000649827 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37909B651A23828000649827 /* LoginViewController.m */; };
 		37909B6E1A23828000649827 /* PaymentInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37909B671A23828000649827 /* PaymentInfoViewController.m */; };
 		37909B6F1A23828000649827 /* SignupProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37909B691A23828000649827 /* SignupProfileViewController.m */; };
 		37909B701A23828000649827 /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37909B6B1A23828000649827 /* SignupViewController.m */; };
+		37D161C91A402FDA002EAA3C /* SDSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D161C81A402FDA002EAA3C /* SDSegmentedControl.m */; };
 		D404EDBB1A13149A000285F2 /* UIColor+AsaanBackgroundColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D404EDBA1A13149A000285F2 /* UIColor+AsaanBackgroundColor.m */; };
 		D40DF36E1A3A976700C67088 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D40DF36D1A3A976700C67088 /* libsqlite3.0.dylib */; };
 		D40DF3701A3A97A000C67088 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D40DF36F1A3A97A000C67088 /* ParseCrashReporting.framework */; };
@@ -312,6 +319,18 @@
 		3709EAC61A31C8420060B49B /* MenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTableViewController.m; sourceTree = "<group>"; };
 		3709EACB1A31C8DA0060B49B /* MenuItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuItemCell.h; sourceTree = "<group>"; };
 		3709EACC1A31C8DA0060B49B /* MenuItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuItemCell.m; sourceTree = "<group>"; };
+		370BFF551A40379D00F612EE /* ContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerViewController.h; sourceTree = "<group>"; };
+		370BFF561A40379D00F612EE /* ContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainerViewController.m; sourceTree = "<group>"; };
+		370BFF591A403A1800F612EE /* HistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryViewController.h; sourceTree = "<group>"; };
+		370BFF5A1A403A1800F612EE /* HistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
+		370BFF5C1A403A2B00F612EE /* ReviewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewsViewController.h; sourceTree = "<group>"; };
+		370BFF5D1A403A2B00F612EE /* ReviewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewsViewController.m; sourceTree = "<group>"; };
+		370BFF5F1A403A3900F612EE /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
+		370BFF601A403A3900F612EE /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
+		370BFF621A403E3900F612EE /* EmptySegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptySegue.h; sourceTree = "<group>"; };
+		370BFF631A403E3900F612EE /* EmptySegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptySegue.m; sourceTree = "<group>"; };
+		370BFF651A403F0600F612EE /* StoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreViewController.h; sourceTree = "<group>"; };
+		370BFF661A403F0600F612EE /* StoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreViewController.m; sourceTree = "<group>"; };
 		37909B641A23828000649827 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		37909B651A23828000649827 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		37909B661A23828000649827 /* PaymentInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentInfoViewController.h; sourceTree = "<group>"; };
@@ -323,6 +342,8 @@
 		37909B6C1A23828000649827 /* StartupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartupViewController.h; sourceTree = "<group>"; };
 		37C90E151A2897B500077FAA /* AsaanConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AsaanConstants.h; path = HelperClasses/AsaanConstants.h; sourceTree = "<group>"; };
 		37D161C51A40069F002EAA3C /* Asaan-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Asaan-Prefix.pch"; sourceTree = "<group>"; };
+		37D161C71A402FDA002EAA3C /* SDSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSegmentedControl.h; sourceTree = "<group>"; };
+		37D161C81A402FDA002EAA3C /* SDSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSegmentedControl.m; sourceTree = "<group>"; };
 		6ACE37C455484AD859AD8D7B /* libPods-AsaanImprovedUI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AsaanImprovedUI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D404EDB91A13149A000285F2 /* UIColor+AsaanBackgroundColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+AsaanBackgroundColor.h"; path = "HelperClasses/UIColor+AsaanBackgroundColor.h"; sourceTree = "<group>"; };
 		D404EDBA1A13149A000285F2 /* UIColor+AsaanBackgroundColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+AsaanBackgroundColor.m"; path = "HelperClasses/UIColor+AsaanBackgroundColor.m"; sourceTree = "<group>"; };
@@ -682,6 +703,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D449EB841A1BDD4000879383 /* MapKit.framework in Frameworks */,
 				D40DF3761A3A9FFC00C67088 /* libstdc++.6.0.9.dylib in Frameworks */,
 				D40DF3771A3A9FFC00C67088 /* libstdc++.6.dylib in Frameworks */,
 				D40DF36E1A3A976700C67088 /* libsqlite3.0.dylib in Frameworks */,
@@ -694,7 +716,6 @@
 				D449EB8A1A1BDD6F00879383 /* CoreMotion.framework in Frameworks */,
 				D449EB881A1BDD6500879383 /* CoreText.framework in Frameworks */,
 				D449EB861A1BDD5B00879383 /* MediaPlayer.framework in Frameworks */,
-				D449EB841A1BDD4000879383 /* MapKit.framework in Frameworks */,
 				D4522BBF1A1667BA002EFA92 /* QuartzCore.framework in Frameworks */,
 				D449EB801A1BDD0400879383 /* Social.framework in Frameworks */,
 				D449EB7E1A1BDCFC00879383 /* CoreData.framework in Frameworks */,
@@ -811,6 +832,33 @@
 			path = Menu;
 			sourceTree = "<group>";
 		};
+		370BFF541A40379D00F612EE /* ContainerViewContoller */ = {
+			isa = PBXGroup;
+			children = (
+				370BFF621A403E3900F612EE /* EmptySegue.h */,
+				370BFF631A403E3900F612EE /* EmptySegue.m */,
+				370BFF551A40379D00F612EE /* ContainerViewController.h */,
+				370BFF561A40379D00F612EE /* ContainerViewController.m */,
+			);
+			name = ContainerViewContoller;
+			path = HelperClasses/ContainerViewContoller;
+			sourceTree = "<group>";
+		};
+		370BFF581A4039CF00F612EE /* StorInfo */ = {
+			isa = PBXGroup;
+			children = (
+				370BFF5F1A403A3900F612EE /* InfoViewController.h */,
+				370BFF601A403A3900F612EE /* InfoViewController.m */,
+				370BFF591A403A1800F612EE /* HistoryViewController.h */,
+				370BFF5A1A403A1800F612EE /* HistoryViewController.m */,
+				370BFF5C1A403A2B00F612EE /* ReviewsViewController.h */,
+				370BFF5D1A403A2B00F612EE /* ReviewsViewController.m */,
+				370BFF651A403F0600F612EE /* StoreViewController.h */,
+				370BFF661A403F0600F612EE /* StoreViewController.m */,
+			);
+			path = StorInfo;
+			sourceTree = "<group>";
+		};
 		37909B631A23828000649827 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -829,6 +877,15 @@
 			);
 			name = Login;
 			path = login;
+			sourceTree = "<group>";
+		};
+		37D161C61A402FDA002EAA3C /* SDSegmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+				37D161C71A402FDA002EAA3C /* SDSegmentedControl.h */,
+				37D161C81A402FDA002EAA3C /* SDSegmentedControl.m */,
+			);
+			path = SDSegmentedControl;
 			sourceTree = "<group>";
 		};
 		D41D31FE1A11DD9300EA49B6 /* images */ = {
@@ -973,6 +1030,7 @@
 		D4522ACB1A15264F002EFA92 /* library */ = {
 			isa = PBXGroup;
 			children = (
+				37D161C61A402FDA002EAA3C /* SDSegmentedControl */,
 				D4EDD41A1A33EEDC00C82006 /* UIActivityIndicator-for-SDWebImage */,
 				D4AC51841A33BB5100F2484F /* UIAlertViewWithBlocks */,
 				3709EA9A1A31804E0060B49B /* PSTCollectionView */,
@@ -1119,6 +1177,7 @@
 				D4DEC1C91A3211780075281E /* Order */,
 				3709EAC41A31C8420060B49B /* Menu */,
 				37909B631A23828000649827 /* Login */,
+				370BFF581A4039CF00F612EE /* StorInfo */,
 				D449EB961A1BF01300879383 /* StoreListTableTableViewController.h */,
 				D449EB971A1BF01300879383 /* StoreListTableTableViewController.m */,
 			);
@@ -1354,6 +1413,7 @@
 		D4F275A21A0C021800CEC95A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				370BFF541A40379D00F612EE /* ContainerViewContoller */,
 				37D161C51A40069F002EAA3C /* Asaan-Prefix.pch */,
 				D4464B1A1A36138100206728 /* OnlineOrder */,
 				D4EDD4131A33EE6700C82006 /* Extension.h */,
@@ -1604,6 +1664,7 @@
 				D449EB771A1BCDEB00879383 /* GTLUserendpointUserCardCollection.m in Sources */,
 				D449EB641A1BCDEB00879383 /* GTLStoreendpointStore.m in Sources */,
 				37909B701A23828000649827 /* SignupViewController.m in Sources */,
+				370BFF641A403E3900F612EE /* EmptySegue.m in Sources */,
 				D449EB741A1BCDEB00879383 /* GTLUserendpointConstants.m in Sources */,
 				D449EB611A1BCDEB00879383 /* GTLStoreendpointConstants.m in Sources */,
 				D4464B201A36138100206728 /* OnlineOrderSelectedMenuItem.m in Sources */,
@@ -1617,6 +1678,7 @@
 				D4DEC1CF1A321EE80075281E /* SelectAddressTableViewController.m in Sources */,
 				D4A8C18D1A263B1800DA344A /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				3709EAB71A31804E0060B49B /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */,
+				370BFF571A40379D00F612EE /* ContainerViewController.m in Sources */,
 				D49A7A821A3552550052522E /* MenuModifierTableViewController.m in Sources */,
 				D449EB5D1A1BCDEB00879383 /* GTLQueryUserendpoint.m in Sources */,
 				D43EED071A1F9EC5000C4FE5 /* DataLoadingOperation.m in Sources */,
@@ -1638,6 +1700,7 @@
 				D4A6A3941A17D175003F3EAB /* SHSPhoneTextField.m in Sources */,
 				D4DEC1D81A321FB70075281E /* SelectPaymentTableViewController.m in Sources */,
 				3709EA981A31802A0060B49B /* MWZoomingScrollView.m in Sources */,
+				370BFF5B1A403A1800F612EE /* HistoryViewController.m in Sources */,
 				D449EB6C1A1BCDEB00879383 /* GTLStoreendpointStoreMenuItemModifier.m in Sources */,
 				D4A8C1A11A263B1800DA344A /* UIButton+WebCache.m in Sources */,
 				D4EAF9E91A12ACB20078FA9C /* UIColor+AsaanGoldColor.m in Sources */,
@@ -1650,6 +1713,7 @@
 				D4B7A6311A35193800D72BC4 /* GlobalObjectHolder.m in Sources */,
 				3709EA971A31802A0060B49B /* MWTapDetectingView.m in Sources */,
 				D4522B1F1A15264F002EFA92 /* PTKCardNumber.m in Sources */,
+				370BFF611A403A3900F612EE /* InfoViewController.m in Sources */,
 				D449EB751A1BCDEB00879383 /* GTLUserendpointUser.m in Sources */,
 				3709EAC71A31C8420060B49B /* MenuTableViewController.m in Sources */,
 				D4F275A81A0C021800CEC95A /* AppDelegate.m in Sources */,
@@ -1687,10 +1751,13 @@
 				3709EABA1A31804E0060B49B /* PSTCollectionViewController.m in Sources */,
 				D4522B1D1A15264F002EFA92 /* PTKCardCVC.m in Sources */,
 				D449EB5E1A1BCDEB00879383 /* GTLServiceStoreendpoint.m in Sources */,
+				370BFF5E1A403A2B00F612EE /* ReviewsViewController.m in Sources */,
+				370BFF671A403F0600F612EE /* StoreViewController.m in Sources */,
 				D4A8C19B1A263B1800DA344A /* SDWebImageCompat.m in Sources */,
 				D4E8072F1A1D8BAA008E343C /* GTLStoreendpointStoreMenuCombined.m in Sources */,
 				37909B6F1A23828000649827 /* SignupProfileViewController.m in Sources */,
 				D4522B281A15264F002EFA92 /* STPUtils.m in Sources */,
+				37D161C91A402FDA002EAA3C /* SDSegmentedControl.m in Sources */,
 				D4AC51831A325DCA00F2484F /* GTLUserendpointUserAddressCollection.m in Sources */,
 				D4522B1B1A15264F002EFA92 /* PTKAddressZip.m in Sources */,
 				3709EA961A31802A0060B49B /* MWTapDetectingImageView.m in Sources */,
