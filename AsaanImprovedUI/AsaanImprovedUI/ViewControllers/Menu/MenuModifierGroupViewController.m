@@ -18,7 +18,7 @@
 #import "OnlineOrderSelectedModifierGroup.h"
 
 
-@interface MenuModifierGroupViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface MenuModifierGroupViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *txtMenuItemName;
 @property (weak, nonatomic) IBOutlet UILabel *txtAmount;
 @property (weak, nonatomic) IBOutlet UILabel *txtQty;
@@ -29,6 +29,7 @@
 @property (strong, nonatomic) NSIndexPath *selectedRow;
 @property (strong, nonatomic) OnlineOrderSelectedMenuItem *onlineOrderSelectedMenuItem;
 @property (strong, nonatomic) GTLStoreendpointMenuItemModifiersAndGroups *gtlModifiersAndGroups;
+@property(nonatomic) UITapGestureRecognizer *tap;
 
 @end
 
@@ -89,6 +90,41 @@
     self.navigationItem.title = _onlineOrderSelectedMenuItem.selectedItem.shortDescription;
     if (_onlineOrderSelectedMenuItem.selectedItem.hasModifiers.boolValue == true)
         [self getModifierGroupsAndModifiers];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardDidShowNotification
+                                                  object:nil];
+    
+    [self.view endEditing:YES];
+}
+
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self.view endEditing:YES];
+    return YES;
+}
+
+-(void)dismissKeyboard {
+    [self.view endEditing:YES];
+    [self.view removeGestureRecognizer:_tap];
+}
+
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    _tap = [[UITapGestureRecognizer alloc]
+            initWithTarget:self
+            action:@selector(dismissKeyboard)];
+    
+    [self.view addGestureRecognizer:_tap];
 }
 
 - (void) getModifierGroupsAndModifiers

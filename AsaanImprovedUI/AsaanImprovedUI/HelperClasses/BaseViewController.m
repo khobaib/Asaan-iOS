@@ -69,6 +69,7 @@
     
     [self.view endEditing:YES];
 }
+
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     _baseScrollView.contentSize = _frameRect.size;

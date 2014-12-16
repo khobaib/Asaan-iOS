@@ -676,7 +676,7 @@
 		D4EDD41E1A33EEDC00C82006 /* UIImageView+UIActivityIndicatorForSDWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+UIActivityIndicatorForSDWebImage.m"; sourceTree = "<group>"; };
 		D4EDD4221A33EF1100C82006 /* MenuMWCaptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuMWCaptionView.h; sourceTree = "<group>"; };
 		D4EDD4231A33EF1100C82006 /* MenuMWCaptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuMWCaptionView.m; sourceTree = "<group>"; };
-		D4F2759F1A0C021800CEC95A /* AsaanImprovedUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AsaanImprovedUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4F2759F1A0C021800CEC95A /* Asaan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Asaan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4F275A31A0C021800CEC95A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4F275A41A0C021800CEC95A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D4F275A61A0C021800CEC95A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1388,7 +1388,7 @@
 		D4F275A01A0C021800CEC95A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D4F2759F1A0C021800CEC95A /* AsaanImprovedUI.app */,
+				D4F2759F1A0C021800CEC95A /* Asaan.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1501,7 +1501,7 @@
 			);
 			name = AsaanImprovedUI;
 			productName = AsaanImprovedUI;
-			productReference = D4F2759F1A0C021800CEC95A /* AsaanImprovedUI.app */;
+			productReference = D4F2759F1A0C021800CEC95A /* Asaan.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1923,7 +1923,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/AsaanImprovedUI/frameworks";
@@ -1933,7 +1933,7 @@
 				INFOPLIST_FILE = AsaanImprovedUI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Asaan;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1943,7 +1943,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/AsaanImprovedUI/frameworks";
@@ -1953,7 +1953,7 @@
 				INFOPLIST_FILE = AsaanImprovedUI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Asaan;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
