@@ -21,7 +21,8 @@
 #import "UIColor+AsaanGoldColor.h"
 #import "UIAlertView+Blocks.h"
 
-@interface AddAddressTableViewController () <DropdownViewDelegate>
+@interface AddAddressTableViewController () <DropdownViewDelegate, UITextFieldDelegate>
+
 @property (weak, nonatomic) IBOutlet UITextField *addressTitle;
 @property (weak, nonatomic) IBOutlet UITextField *streetAddress;
 @property (weak, nonatomic) IBOutlet UITextField *city;
@@ -76,14 +77,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)replacementString
-//{
-//    if ([textField isEqual:self.zip]) {
-//        return [self cardAddressZIPShouldChangeCharactersInRange:range replacementString:replacementString];
-//    }
-//    
-//    return YES;
-//}
 - (PTKUSAddressZip *)addressZip
 {
     return [PTKUSAddressZip addressZipWithString:self.zip.text];
@@ -262,5 +255,32 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
+    
+    UITextField *next = theTextField.nextTextField;
+    if (next) {
+        [next becomeFirstResponder];
+    } else {
+        [self.view endEditing:YES];
+    }
+    
+    if (theTextField == self.other) {
+        [self addDeliveryAddressClicked:self];
+    }
+    
+    return YES;
+}
+
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)replacementString
+{
+    if ([textField isEqual:self.zip]) {
+        return [self cardAddressZIPShouldChangeCharactersInRange:range replacementString:replacementString];
+    }
+
+    return YES;
+}
 
 @end

@@ -97,11 +97,8 @@
     if (textField == self.txtPassword) {
         [self signup:self];
     }
-    else {
-        [super textFieldShouldReturn:textField];
-    }
     
-    return YES;
+    return [super textFieldShouldReturn:textField];
 }
 
 @end

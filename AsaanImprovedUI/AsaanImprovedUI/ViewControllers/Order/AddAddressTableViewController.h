@@ -11,6 +11,8 @@
 #import "GTLUserendpointUserAddress.h"
 
 @interface AddAddressTableViewController : UITableViewController
+
 @property (strong, nonatomic) GTLStoreendpointStore *selectedStore;
 @property (strong, nonatomic) GTLUserendpointUserAddress *savedUserAddress;
+
 @end
