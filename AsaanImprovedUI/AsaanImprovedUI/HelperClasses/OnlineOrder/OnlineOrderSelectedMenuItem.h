@@ -19,4 +19,5 @@
 @property NSUInteger price;
 @property NSUInteger amount;
 @property NSUInteger qty;
+@property NSString *specialInstructions;
 @end

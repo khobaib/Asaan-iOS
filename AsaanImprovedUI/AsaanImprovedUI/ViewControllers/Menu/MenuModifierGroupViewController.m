@@ -63,12 +63,15 @@
             _onlineOrderSelectedMenuItem.qty = currentSelectedMenu.qty;
             _onlineOrderSelectedMenuItem.price = currentSelectedMenu.price;
             _onlineOrderSelectedMenuItem.amount = currentSelectedMenu.amount;
+            _onlineOrderSelectedMenuItem.specialInstructions = currentSelectedMenu.specialInstructions;
             self.gtlModifiersAndGroups = _onlineOrderSelectedMenuItem.allModifiersAndGroups = currentSelectedMenu.allModifiersAndGroups;
         }
     }
     self.txtMenuItemName.text = _onlineOrderSelectedMenuItem.selectedItem.shortDescription;
     NSNumber *amount = [[NSNumber alloc] initWithLong:_onlineOrderSelectedMenuItem.amount];
     _onlineOrderSelectedMenuItem.amount = amount.longValue;
+    self.txtQty.text = [NSString stringWithFormat:@"%lu", (unsigned long)_onlineOrderSelectedMenuItem.qty];
+    self.txtSpecialInstructions.text = _onlineOrderSelectedMenuItem.specialInstructions;
     self.txtAmount.text = [UtilCalls amountToString:amount];
     if (self.bInEditMode == YES)
         [self.btnAddToOrder setTitle:[NSString stringWithFormat:@"Change Order - %@", self.txtAmount.text] forState:UIControlStateNormal];
@@ -308,6 +311,7 @@
     
     if (self.bInEditMode == YES)
     {
+        orderInProgress.specialInstructions = self.txtSpecialInstructions.text;
         [orderInProgress.selectedMenuItems replaceObjectAtIndex:self.selectedIndex withObject:self.onlineOrderSelectedMenuItem];
         [self performSegueWithIdentifier:@"unwindModifierGroupToOrderSummary" sender:self];
         return;
@@ -320,11 +324,13 @@
         orderInProgress.orderType = self.orderType;
         orderInProgress.orderTime = self.orderTime;
         orderInProgress.partySize = self.partySize;
+        orderInProgress.specialInstructions = self.txtSpecialInstructions.text;
         [orderInProgress.selectedMenuItems addObject:self.onlineOrderSelectedMenuItem];
         [self performSegueWithIdentifier:@"segueunwindModifierGroupToMenu" sender:self];
     }
     else
     {
+        orderInProgress.specialInstructions = self.txtSpecialInstructions.text;
         [orderInProgress.selectedMenuItems addObject:self.onlineOrderSelectedMenuItem];
         [self performSegueWithIdentifier:@"segueunwindModifierGroupToMenu" sender:self];
     }

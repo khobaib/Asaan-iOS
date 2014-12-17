@@ -46,7 +46,7 @@
     [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
     [numberFormatter setMaximumFractionDigits:2];
     [numberFormatter setRoundingMode:NSNumberFormatterRoundFloor];
-    float fVal = [number floatValue]/10000;
+    float fVal = [number floatValue]/1000000;
     return [numberFormatter stringFromNumber:[NSNumber numberWithFloat:fVal]];
 }
 

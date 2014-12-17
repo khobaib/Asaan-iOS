@@ -335,7 +335,7 @@
             
             txtMenuItemName.text = @"Gratuity (Default: 15%)";
             txtQty.text = nil;
-            NSNumber *percentAmount = [[NSNumber alloc] initWithLong:([self subTotal]*15)];
+            NSNumber *percentAmount = [[NSNumber alloc] initWithLong:([self subTotal]*1500)];
             txtAmount.text = [UtilCalls percentAmountToString:percentAmount];
             cell.accessoryType = UITableViewCellAccessoryNone;
             break;
@@ -365,7 +365,7 @@
             
             txtMenuItemName.text = @"Order Total";
             txtQty.text = nil;
-            NSNumber *amount = [[NSNumber alloc] initWithLong:([self subTotal]*100 + [self subTotal]*15 + [self taxPercentAmount])];
+            NSNumber *amount = [[NSNumber alloc] initWithLong:(([self subTotal]*100 + [self subTotal]*15)*100 + [self taxPercentAmount])];
             txtAmount.text = [UtilCalls percentAmountToString:amount];
             cell.accessoryType = UITableViewCellAccessoryNone;
             break;
@@ -380,7 +380,7 @@
             
             txtMenuItemName.text = @"Delivery";
             txtQty.text = nil;
-            NSNumber *amount = [[NSNumber alloc] initWithLong:(5)];
+            NSNumber *amount = [[NSNumber alloc] initWithLong:(500)];
             txtAmount.text = [UtilCalls amountToString:amount];
             cell.accessoryType = UITableViewCellAccessoryNone;
             break;
@@ -395,7 +395,12 @@
             
             txtMenuItemName.text = @"Amount Due";
             txtQty.text = nil;
-            NSNumber *amount = [[NSNumber alloc] initWithLong:([self subTotal]*100 + [self subTotal]*15 + [self taxPercentAmount] + 5*100)];
+            NSNumber *amount;
+            if (self.orderInProgress.orderType == 0)
+                amount = [[NSNumber alloc] initWithLong:(([self subTotal]*100 + [self subTotal]*15)*100 + [self taxPercentAmount])];
+            else
+                amount = [[NSNumber alloc] initWithLong:(([self subTotal]*100 + [self subTotal]*15 + 5*100*100)*100 + [self taxPercentAmount])];
+            
             txtAmount.text = [UtilCalls percentAmountToString:amount];
             cell.accessoryType = UITableViewCellAccessoryNone;
             break;
