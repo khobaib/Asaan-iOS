@@ -39,6 +39,9 @@
 		370BFF611A403A3900F612EE /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 370BFF601A403A3900F612EE /* InfoViewController.m */; };
 		370BFF641A403E3900F612EE /* EmptySegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 370BFF631A403E3900F612EE /* EmptySegue.m */; };
 		370BFF671A403F0600F612EE /* StoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 370BFF661A403F0600F612EE /* StoreViewController.m */; };
+		375C2FC71A590A2700FED6C0 /* SlidingMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 375C2FC61A590A2700FED6C0 /* SlidingMenuViewController.m */; };
+		375C2FCD1A591AA200FED6C0 /* UpdateInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 375C2FCC1A591AA200FED6C0 /* UpdateInfoViewController.m */; };
+		375C2FD01A591EA600FED6C0 /* AddFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 375C2FCF1A591EA600FED6C0 /* AddFriendViewController.m */; };
 		37909B6D1A23828000649827 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37909B651A23828000649827 /* LoginViewController.m */; };
 		37909B6E1A23828000649827 /* PaymentInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37909B671A23828000649827 /* PaymentInfoViewController.m */; };
 		37909B6F1A23828000649827 /* SignupProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37909B691A23828000649827 /* SignupProfileViewController.m */; };
@@ -155,7 +158,6 @@
 		D4522B2B1A15264F002EFA92 /* textfield.png in Resources */ = {isa = PBXBuildFile; fileRef = D4522B031A15264F002EFA92 /* textfield.png */; };
 		D4522B2C1A15264F002EFA92 /* textfield@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4522B041A15264F002EFA92 /* textfield@2x.png */; };
 		D4522B2D1A15264F002EFA92 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4522B071A15264F002EFA92 /* SWRevealViewController.m */; };
-		D4522B301A153BC2002EFA92 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4522B2F1A153BC2002EFA92 /* MenuViewController.m */; };
 		D4522B331A155977002EFA92 /* reveal-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D4522B311A155977002EFA92 /* reveal-icon.png */; };
 		D4522B341A155977002EFA92 /* reveal-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4522B321A155977002EFA92 /* reveal-icon@2x.png */; };
 		D4522B3E1A165DAE002EFA92 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4522B391A165DAE002EFA92 /* FacebookSDK.framework */; };
@@ -331,6 +333,12 @@
 		370BFF631A403E3900F612EE /* EmptySegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptySegue.m; sourceTree = "<group>"; };
 		370BFF651A403F0600F612EE /* StoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreViewController.h; sourceTree = "<group>"; };
 		370BFF661A403F0600F612EE /* StoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreViewController.m; sourceTree = "<group>"; };
+		375C2FC51A590A2700FED6C0 /* SlidingMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidingMenuViewController.h; sourceTree = "<group>"; };
+		375C2FC61A590A2700FED6C0 /* SlidingMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlidingMenuViewController.m; sourceTree = "<group>"; };
+		375C2FCB1A591AA200FED6C0 /* UpdateInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateInfoViewController.h; sourceTree = "<group>"; };
+		375C2FCC1A591AA200FED6C0 /* UpdateInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateInfoViewController.m; sourceTree = "<group>"; };
+		375C2FCE1A591EA600FED6C0 /* AddFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendViewController.h; sourceTree = "<group>"; };
+		375C2FCF1A591EA600FED6C0 /* AddFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendViewController.m; sourceTree = "<group>"; };
 		37909B641A23828000649827 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		37909B651A23828000649827 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		37909B661A23828000649827 /* PaymentInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentInfoViewController.h; sourceTree = "<group>"; };
@@ -510,8 +518,6 @@
 		D4522B041A15264F002EFA92 /* textfield@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "textfield@2x.png"; sourceTree = "<group>"; };
 		D4522B061A15264F002EFA92 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		D4522B071A15264F002EFA92 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
-		D4522B2E1A153BC2002EFA92 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
-		D4522B2F1A153BC2002EFA92 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		D4522B311A155977002EFA92 /* reveal-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reveal-icon.png"; sourceTree = "<group>"; };
 		D4522B321A155977002EFA92 /* reveal-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reveal-icon@2x.png"; sourceTree = "<group>"; };
 		D4522B381A165DAE002EFA92 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = AsaanImprovedUI/frameworks/Bolts.framework; sourceTree = "<group>"; };
@@ -1123,8 +1129,6 @@
 			children = (
 				D4522B311A155977002EFA92 /* reveal-icon.png */,
 				D4522B321A155977002EFA92 /* reveal-icon@2x.png */,
-				D4522B2E1A153BC2002EFA92 /* MenuViewController.h */,
-				D4522B2F1A153BC2002EFA92 /* MenuViewController.m */,
 				D4522B061A15264F002EFA92 /* SWRevealViewController.h */,
 				D4522B071A15264F002EFA92 /* SWRevealViewController.m */,
 			);
@@ -1180,6 +1184,12 @@
 				370BFF581A4039CF00F612EE /* StorInfo */,
 				D449EB961A1BF01300879383 /* StoreListTableTableViewController.h */,
 				D449EB971A1BF01300879383 /* StoreListTableTableViewController.m */,
+				375C2FC51A590A2700FED6C0 /* SlidingMenuViewController.h */,
+				375C2FC61A590A2700FED6C0 /* SlidingMenuViewController.m */,
+				375C2FCB1A591AA200FED6C0 /* UpdateInfoViewController.h */,
+				375C2FCC1A591AA200FED6C0 /* UpdateInfoViewController.m */,
+				375C2FCE1A591EA600FED6C0 /* AddFriendViewController.h */,
+				375C2FCF1A591EA600FED6C0 /* AddFriendViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1733,6 +1743,7 @@
 				D49A3AC01A26C450008BC180 /* StartupViewController.m in Sources */,
 				3709EABB1A31804E0060B49B /* PSTCollectionViewData.m in Sources */,
 				D449EB761A1BCDEB00879383 /* GTLUserendpointUserCard.m in Sources */,
+				375C2FCD1A591AA200FED6C0 /* UpdateInfoViewController.m in Sources */,
 				3709EABE1A31804E0060B49B /* PSTCollectionViewLayout.m in Sources */,
 				3709EABC1A31804E0060B49B /* PSTCollectionViewFlowLayout.m in Sources */,
 				3709EABD1A31804E0060B49B /* PSTCollectionViewItemKey.m in Sources */,
@@ -1742,10 +1753,10 @@
 				37909B6D1A23828000649827 /* LoginViewController.m in Sources */,
 				D4A8C1911A263B1800DA344A /* UIProgressView+AFNetworking.m in Sources */,
 				D449EB981A1BF01300879383 /* StoreListTableTableViewController.m in Sources */,
+				375C2FC71A590A2700FED6C0 /* SlidingMenuViewController.m in Sources */,
 				D449EB651A1BCDEB00879383 /* GTLStoreendpointStoreCollection.m in Sources */,
 				D4A8C1841A263B1800DA344A /* AFNetworkReachabilityManager.m in Sources */,
 				D4DEC1C41A2FF3050075281E /* GTLStoreendpointAsaanLong.m in Sources */,
-				D4522B301A153BC2002EFA92 /* MenuViewController.m in Sources */,
 				D4522B1C1A15264F002EFA92 /* PTKCard.m in Sources */,
 				D4F275AB1A0C021800CEC95A /* AsaanImprovedUI.xcdatamodeld in Sources */,
 				3709EABA1A31804E0060B49B /* PSTCollectionViewController.m in Sources */,
@@ -1787,6 +1798,7 @@
 				3709EA911A31802A0060B49B /* MWGridCell.m in Sources */,
 				D4E807321A1D8BAA008E343C /* GTLStoreendpointStoreStatsCollection.m in Sources */,
 				D4A8C1A31A263B1800DA344A /* UIImage+MultiFormat.m in Sources */,
+				375C2FD01A591EA600FED6C0 /* AddFriendViewController.m in Sources */,
 				D449EB6D1A1BCDEB00879383 /* GTLStoreendpointStoreMenuItemModifierGroup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

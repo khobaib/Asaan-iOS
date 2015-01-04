@@ -15,4 +15,7 @@
 + (NSString *) percentAmountToString:(NSNumber*)number;
 + (Boolean)isDistanceBetweenPointA:(CLLocation*)first AndPointB:(CLLocation *)second withinRange:(NSUInteger)range;
 
+
++ (void)slidingMenuSetupWith:(UIViewController *)viewController withItem:(UIBarButtonItem *)revealButtonItem;
+
 @end
