@@ -25,16 +25,20 @@
 #import "UIAlertView+Blocks.h"
 
 #import "StoreViewController.h"
+#import "UtilCalls.h"
 
 const NSUInteger FluentPagingTablePreloadMargin = 5;
 const NSUInteger FluentPagingTablePageSize = 20;
 
 @interface StoreListTableTableViewController ()<DataProviderDelegate>
-    @property (nonatomic, strong) MBProgressHUD *hud;
-    @property (strong, nonatomic) IBOutlet UITableView *tableView;
-    @property (nonatomic) int startPosition;
-    @property (nonatomic) int maxResult;
-    @property (weak, nonatomic) GTLStoreendpointStore *selectedStore;
+
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *revealButtonItem;
+@property (nonatomic, strong) MBProgressHUD *hud;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic) int startPosition;
+@property (nonatomic) int maxResult;
+@property (weak, nonatomic) GTLStoreendpointStore *selectedStore;
+
 @end
 
 @implementation StoreListTableTableViewController
@@ -44,8 +48,10 @@ const NSUInteger FluentPagingTablePageSize = 20;
 @synthesize dataProvider = _dataProvider;
 @synthesize selectedStore = _selectedStore;
 
+#pragma mark - View Life-cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [UtilCalls slidingMenuSetupWith:self withItem:self.revealButtonItem];
     
     typeof(self) weakSelf = self;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
@@ -122,14 +128,15 @@ const NSUInteger FluentPagingTablePageSize = 20;
     }
 }
 
-- (void) showOrderSummaryPressed
-{
-    [self performSegueWithIdentifier:@"segueStoreListToOrderSummary" sender:self];
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Private Methods
+- (void) showOrderSummaryPressed
+{
+    [self performSegueWithIdentifier:@"segueStoreListToOrderSummary" sender:self];
 }
 
 #pragma mark - Data controller delegate

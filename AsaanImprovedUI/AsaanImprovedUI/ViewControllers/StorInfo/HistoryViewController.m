@@ -8,7 +8,9 @@
 
 #import "HistoryViewController.h"
 
-@interface HistoryViewController ()
+@interface HistoryViewController () <UITableViewDataSource, UITabBarDelegate>
+
+@property (weak, nonatomic) IBOutlet UITableView *historyListTableView;
 
 @end
 
@@ -33,5 +35,30 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return 3;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StoreOrderHistoryCell" forIndexPath:indexPath];
+    
+    UILabel *txtName=(UILabel *)[cell viewWithTag:101];
+    if (indexPath.row == 0) {
+        txtName.text = @"NOV 21, 2014";
+    }
+    else if (indexPath.row == 1) {
+        txtName.text = @"NOV 29, 2014";
+    }
+    else if (indexPath.row == 2) {
+        txtName.text = @"DEC 13, 2014";
+    }
+    
+    return cell;
+}
+
+#pragma mark - UITableViewDelegate
 
 @end

@@ -62,4 +62,16 @@
     else
         return YES;
 }
+
++ (void)slidingMenuSetupWith:(UIViewController *)viewController withItem:(UIBarButtonItem *)revealButtonItem
+{
+    SWRevealViewController *revealViewController = viewController.revealViewController;
+    if ( revealViewController && viewController && revealButtonItem )
+    {
+        [revealButtonItem setTarget: viewController.revealViewController];
+        [revealButtonItem setAction: @selector( revealToggle: )];
+        [viewController.navigationController.navigationBar addGestureRecognizer: viewController.revealViewController.panGestureRecognizer];
+    }
+}
+
 @end
