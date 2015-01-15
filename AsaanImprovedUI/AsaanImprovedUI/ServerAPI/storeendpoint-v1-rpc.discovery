@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"9mnLCPwbyZOHH18t8ExzO2gqgTk/GzeUDaQvReMrzh2_nPZdazCZ9w4\"",
+ "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/0vECLN7iEED96puMUoiwoCAuR1c\"",
  "discoveryVersion": "v1",
  "id": "storeendpoint:v1",
  "name": "storeendpoint",
@@ -82,6 +82,39 @@
     }
    }
   },
+  "AsaanLongString": {
+   "id": "AsaanLongString",
+   "type": "object",
+   "properties": {
+    "strValue": {
+     "type": "string"
+    }
+   }
+  },
+  "MenuItemAndStats": {
+   "id": "MenuItemAndStats",
+   "type": "object",
+   "properties": {
+    "menuItem": {
+     "$ref": "StoreMenuItem"
+    },
+    "stats": {
+     "$ref": "StoreItemStats"
+    }
+   }
+  },
+  "MenuItemAndStatsCollection": {
+   "id": "MenuItemAndStatsCollection",
+   "type": "object",
+   "properties": {
+    "items": {
+     "type": "array",
+     "items": {
+      "$ref": "MenuItemAndStats"
+     }
+    }
+   }
+  },
   "MenuItemModifiersAndGroups": {
    "id": "MenuItemModifiersAndGroups",
    "type": "object",
@@ -107,7 +140,7 @@
     "menuItems": {
      "type": "array",
      "items": {
-      "$ref": "StoreMenuItem"
+      "$ref": "MenuItemAndStats"
      }
     },
     "menusAndSubmenus": {
@@ -232,6 +265,30 @@
     }
    }
   },
+  "StoreAndStats": {
+   "id": "StoreAndStats",
+   "type": "object",
+   "properties": {
+    "stats": {
+     "$ref": "StoreStats"
+    },
+    "store": {
+     "$ref": "Store"
+    }
+   }
+  },
+  "StoreAndStatsCollection": {
+   "id": "StoreAndStatsCollection",
+   "type": "object",
+   "properties": {
+    "items": {
+     "type": "array",
+     "items": {
+      "$ref": "StoreAndStats"
+     }
+    }
+   }
+  },
   "StoreCollection": {
    "id": "StoreCollection",
    "type": "object",
@@ -241,6 +298,111 @@
      "items": {
       "$ref": "Store"
      }
+    }
+   }
+  },
+  "StoreDiscount": {
+   "id": "StoreDiscount",
+   "type": "object",
+   "properties": {
+    "code": {
+     "type": "string"
+    },
+    "dates": {
+     "type": "string"
+    },
+    "daysOfWeek": {
+     "type": "string"
+    },
+    "id": {
+     "type": "string",
+     "format": "int64"
+    },
+    "percentOrAmount": {
+     "type": "boolean"
+    },
+    "posDiscountId": {
+     "type": "string",
+     "format": "int64"
+    },
+    "storeId": {
+     "type": "string",
+     "format": "int64"
+    },
+    "times": {
+     "type": "string"
+    },
+    "title": {
+     "type": "string"
+    },
+    "value": {
+     "type": "string",
+     "format": "int64"
+    }
+   }
+  },
+  "StoreDiscountArray": {
+   "id": "StoreDiscountArray",
+   "type": "object",
+   "properties": {
+    "storeDiscounts": {
+     "type": "array",
+     "items": {
+      "$ref": "StoreDiscount"
+     }
+    }
+   }
+  },
+  "StoreDiscountCollection": {
+   "id": "StoreDiscountCollection",
+   "type": "object",
+   "properties": {
+    "items": {
+     "type": "array",
+     "items": {
+      "$ref": "StoreDiscount"
+     }
+    }
+   }
+  },
+  "StoreItemStats": {
+   "id": "StoreItemStats",
+   "type": "object",
+   "properties": {
+    "dislikes": {
+     "type": "string",
+     "format": "int64"
+    },
+    "id": {
+     "type": "string",
+     "format": "int64"
+    },
+    "likes": {
+     "type": "string",
+     "format": "int64"
+    },
+    "menuItemPOSId": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "menuPOSId": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "mostFrequentlyOrdered": {
+     "type": "boolean"
+    },
+    "orders": {
+     "type": "string",
+     "format": "int64"
+    },
+    "storeId": {
+     "type": "string",
+     "format": "int64"
+    },
+    "subMenuPOSId": {
+     "type": "integer",
+     "format": "int32"
     }
    }
   },
@@ -599,8 +761,8 @@
      "format": "int32"
     },
     "posintCheckId": {
-     "type": "integer",
-     "format": "int32"
+     "type": "string",
+     "format": "int64"
     },
     "serviceCharge": {
      "type": "string",
@@ -830,6 +992,25 @@
     "https://www.googleapis.com/auth/userinfo.email"
    ]
   },
+  "storeendpoint.getStoreDiscounts": {
+   "id": "storeendpoint.getStoreDiscounts",
+   "parameters": {
+    "storeId": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    }
+   },
+   "parameterOrder": [
+    "storeId"
+   ],
+   "returns": {
+    "$ref": "StoreDiscountCollection"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
   "storeendpoint.getStoreMenuHierarchyAndItems": {
    "id": "storeendpoint.getStoreMenuHierarchyAndItems",
    "parameters": {
@@ -948,7 +1129,7 @@
     "maxResult"
    ],
    "returns": {
-    "$ref": "StoreMenuItemCollection"
+    "$ref": "MenuItemAndStatsCollection"
    },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"
@@ -980,6 +1161,31 @@
    ],
    "returns": {
     "$ref": "StoreMenuHierarchyCollection"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.getStoreOrder": {
+   "id": "storeendpoint.getStoreOrder",
+   "parameters": {
+    "POSIntCheckId": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    },
+    "storeId": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    }
+   },
+   "parameterOrder": [
+    "storeId",
+    "POSIntCheckId"
+   ],
+   "returns": {
+    "$ref": "StoreOrder"
    },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"
@@ -1067,17 +1273,41 @@
     "https://www.googleapis.com/auth/userinfo.email"
    ]
   },
+  "storeendpoint.getStoresWithStats": {
+   "id": "storeendpoint.getStoresWithStats",
+   "parameters": {
+    "firstPosition": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    },
+    "maxResult": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    }
+   },
+   "parameterOrder": [
+    "firstPosition",
+    "maxResult"
+   ],
+   "returns": {
+    "$ref": "StoreAndStatsCollection"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
   "storeendpoint.placeOrder": {
    "id": "storeendpoint.placeOrder",
    "parameters": {
-    "order": {
-     "type": "string",
-     "required": true
-    },
     "orderMode": {
      "type": "integer",
      "required": true,
      "format": "int32"
+    },
+    "resource": {
+     "$ref": "AsaanLongString"
     },
     "storeId": {
      "type": "string",
@@ -1086,12 +1316,12 @@
     }
    },
    "parameterOrder": [
+    "resource",
     "storeId",
-    "orderMode",
-    "order"
+    "orderMode"
    ],
    "returns": {
-    "$ref": "StoreOrder"
+    "$ref": "AsaanLong"
    },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"
@@ -1111,6 +1341,40 @@
     "https://www.googleapis.com/auth/userinfo.email"
    ]
   },
+  "storeendpoint.replaceStoreDiscounts": {
+   "id": "storeendpoint.replaceStoreDiscounts",
+   "parameters": {
+    "resource": {
+     "$ref": "StoreDiscountArray"
+    }
+   },
+   "parameterOrder": [
+    "resource"
+   ],
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.saveOrUpdateOrdersFromPOS": {
+   "id": "storeendpoint.saveOrUpdateOrdersFromPOS",
+   "parameters": {
+    "resource": {
+     "$ref": "AsaanLongString"
+    },
+    "storeId": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    }
+   },
+   "parameterOrder": [
+    "resource",
+    "storeId"
+   ],
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
   "storeendpoint.saveStore": {
    "id": "storeendpoint.saveStore",
    "parameters": {
@@ -1124,6 +1388,20 @@
    "returns": {
     "$ref": "Store"
    },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.saveStoreDiscount": {
+   "id": "storeendpoint.saveStoreDiscount",
+   "parameters": {
+    "resource": {
+     "$ref": "StoreDiscount"
+    }
+   },
+   "parameterOrder": [
+    "resource"
+   ],
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"
    ]

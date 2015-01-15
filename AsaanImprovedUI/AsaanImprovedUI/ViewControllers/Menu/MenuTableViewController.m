@@ -45,7 +45,7 @@ const NSUInteger MenuFluentPagingTablePageSize = 50;
 @property (nonatomic) int startPosition;
 @property (nonatomic) int maxResult;
 @property (strong, nonatomic) NSMutableArray *menuSegmentHolders;
-@property (strong, nonatomic) GTLStoreendpointStoreMenuItem *selectedMenuItem;
+@property (strong, nonatomic) GTLStoreendpointMenuItemAndStats *selectedMenuItem;
 
 @property (nonatomic) CGFloat cellHeight;
 
@@ -167,7 +167,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
              if(!error && object.menuItems.count > 0 && object.menusAndSubmenus.count > 0)
              {
                  [self setTableHeightBasedOnLargestMenuItemIn:object.menuItems];
-                 GTLStoreendpointStoreMenuItem *menuItem = [object.menuItems firstObject];
+                 GTLStoreendpointMenuItemAndStats *menuItemAndStats = [object.menuItems firstObject];
                  for (GTLStoreendpointStoreMenuHierarchy *menu in object.menusAndSubmenus)
                  {
                      if (menu.level.intValue == 0)
@@ -190,7 +190,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
                          menuSegmentHolder.provider.automaticPreloadMargin = MenuFluentPagingTablePreloadMargin;
                          menuSegmentHolder.topRowIndex = [NSIndexPath indexPathForRow:0 inSection:0];
                          [_menuSegmentHolders addObject:menuSegmentHolder];
-                         if (menu.menuPOSId.longValue == menuItem.menuPOSId.longValue)
+                         if (menu.menuPOSId.longValue == menuItemAndStats.menuItem.menuPOSId.longValue)
                              [menuSegmentHolder.provider setInitialObjects:object.menuItems ForPage:0];
                      }
                  }
@@ -232,12 +232,12 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     }
 }
 
-- (void) setTableHeightBasedOnLargestMenuItemIn:(NSArray *)menuItems // of GTLStoreendpointStoreMenuItem
+- (void) setTableHeightBasedOnLargestMenuItemIn:(NSArray *)menuItems // of GTLStoreendpointMenuItemAndStats
 {
     long size = 0;
-    for (GTLStoreendpointStoreMenuItem *object in menuItems)
-        if ((object.shortDescription.length*2 + object.longDescription.length) > size)
-            size = object.shortDescription.length*2 + object.longDescription.length;
+    for (GTLStoreendpointMenuItemAndStats *object in menuItems)
+        if ((object.menuItem.shortDescription.length*2 + object.menuItem.longDescription.length) > size)
+            size = object.menuItem.shortDescription.length*2 + object.menuItem.longDescription.length;
     
     if (size > 80)
         self.cellHeight = 200;
@@ -398,10 +398,10 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     if ([dataObject isKindOfClass:[NSNull class]])
         return cell;
     
-    GTLStoreendpointStoreMenuItem *menuItem = dataObject;
-    cell.titleLabel.text = menuItem.shortDescription;
-    cell.descriptionLabel.text = menuItem.longDescription;
-    cell.priceLabel.text = [UtilCalls amountToString:menuItem.price];
+    GTLStoreendpointMenuItemAndStats *menuItemAndStats = dataObject;
+    cell.titleLabel.text = menuItemAndStats.menuItem.shortDescription;
+    cell.descriptionLabel.text = menuItemAndStats.menuItem.longDescription;
+    cell.priceLabel.text = [UtilCalls amountToString:menuItemAndStats.menuItem.price];
     
     cell.delegate = self;
     cell.itemImageView.tag = rowIndex - indexPath.section - 1;
@@ -414,10 +414,10 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     // NOTE: Rounded rect
     // self.profileImageView.layer.cornerRadius = 10.0f;
     
-    if (IsEmpty(menuItem.thumbnailUrl) == false)
+    if (IsEmpty(menuItemAndStats.menuItem.thumbnailUrl) == false)
     {
-        //        [cell.itemPFImageView sd_setImageWithURL:[NSURL URLWithString:menuItem.thumbnailUrl]];
-        [cell.itemImageView setImageWithURL:[NSURL URLWithString:menuItem.thumbnailUrl]
+        //        [cell.itemPFImageView sd_setImageWithURL:[NSURL URLWithString:menuItemAndStats.menuItem.thumbnailUrl]];
+        [cell.itemImageView setImageWithURL:[NSURL URLWithString:menuItemAndStats.menuItem.thumbnailUrl]
                              placeholderImage:[UIImage imageWithColor:RGBA(0.0, 0.0, 0.0, 0.5)]
                                     completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                         if (error) {
@@ -544,13 +544,13 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     if ([dataObject isKindOfClass:[NSNull class]])
         return nil;
     
-    GTLStoreendpointStoreMenuItem *menuItem = dataObject;
+    GTLStoreendpointMenuItemAndStats *menuItemAndStats = dataObject;
     MWPhoto *photo = nil;
     
-    if (IsEmpty(menuItem.imageUrl) == false)
+    if (IsEmpty(menuItemAndStats.menuItem.imageUrl) == false)
     {
         //        photo = [MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm2.static.flickr.com/1224/1011283712_5750c5ba8e_b.jpg"]];
-        photo = [MWPhoto photoWithURL:[NSURL URLWithString:menuItem.imageUrl]];
+        photo = [MWPhoto photoWithURL:[NSURL URLWithString:menuItemAndStats.menuItem.imageUrl]];
     }
     else {
         photo = [MWPhoto photoWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"no_image_big" ofType:@"png"]]];
@@ -593,13 +593,13 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     if ([dataObject isKindOfClass:[NSNull class]])
         return nil;
     
-    GTLStoreendpointStoreMenuItem *menuItem = dataObject;
+    GTLStoreendpointMenuItemAndStats *menuItemAndStats = dataObject;
     MWPhoto *photo = nil;
     
-    if (IsEmpty(menuItem.imageUrl) == false)
+    if (IsEmpty(menuItemAndStats.menuItem.imageUrl) == false)
     {
         //        photo = [MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm2.static.flickr.com/1224/1011283712_5750c5ba8e_b.jpg"]];
-        photo = [MWPhoto photoWithURL:[NSURL URLWithString:menuItem.imageUrl]];
+        photo = [MWPhoto photoWithURL:[NSURL URLWithString:menuItemAndStats.menuItem.imageUrl]];
     }
     else {
         photo = [MWPhoto photoWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"no_image_big" ofType:@"png"]]];
@@ -608,19 +608,19 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     
     MenuMWCaptionView *captionView = [[MenuMWCaptionView alloc] initWithPhoto:photo];
     
-    NSString *string = menuItem.shortDescription;
+    NSString *string = menuItemAndStats.menuItem.shortDescription;
     if (string && ![string isEqualToString:@""]) {
         captionView.textTitle = string;
         
         //        captionView.textTitle = [NSString stringWithFormat:@"stringstringstringstringstringstring stringstringstringstring kjkljakjlkfjalkjlkjf \n jlkajlkdjfkj"];
     }
     
-    string = [UtilCalls amountToString:menuItem.price];
+    string = [UtilCalls amountToString:menuItemAndStats.menuItem.price];
     if (string && ![string isEqualToString:@""]) {
         captionView.textPrice = string;
     }
     
-    string = menuItem.longDescription;
+    string = menuItemAndStats.menuItem.longDescription;
     if (string && ![string isEqualToString:@""]) {
         captionView.textDescription = string;
     }
@@ -690,7 +690,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     {
         MenuModifierGroupViewController *controller = [segue destinationViewController];
         [controller setSelectedStore:self.selectedStore];
-        [controller setSelectedMenuItem:self.selectedMenuItem];
+        [controller setSelectedMenuItem:self.selectedMenuItem.menuItem];
         [controller setOrderTime:self.orderTime];
         [controller setOrderType:self.orderType];
         [controller setPartySize:self.partySize];

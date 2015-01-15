@@ -119,7 +119,7 @@
 		D449EB901A1BDDA500879383 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D449EB8E1A1BDDA500879383 /* AddressBookUI.framework */; };
 		D449EB921A1BDDB200879383 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D449EB911A1BDDB200879383 /* Foundation.framework */; };
 		D449EB941A1BDDD800879383 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D449EB931A1BDDD800879383 /* ImageIO.framework */; };
-		D449EB981A1BF01300879383 /* StoreListTableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D449EB971A1BF01300879383 /* StoreListTableTableViewController.m */; };
+		D449EB981A1BF01300879383 /* StoreListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D449EB971A1BF01300879383 /* StoreListTableViewController.m */; };
 		D4522B081A15264F002EFA92 /* amex.png in Resources */ = {isa = PBXBuildFile; fileRef = D4522ACE1A15264F002EFA92 /* amex.png */; };
 		D4522B091A15264F002EFA92 /* amex@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4522ACF1A15264F002EFA92 /* amex@2x.png */; };
 		D4522B0A1A15264F002EFA92 /* cvc-amex.png in Resources */ = {isa = PBXBuildFile; fileRef = D4522AD01A15264F002EFA92 /* cvc-amex.png */; };
@@ -176,6 +176,15 @@
 		D4522BC71A166802002EFA92 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4522BC61A166802002EFA92 /* SystemConfiguration.framework */; };
 		D4522BC91A166811002EFA92 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4522BC81A166811002EFA92 /* UIKit.framework */; };
 		D46D0FAB1A13B2920072A413 /* UITextField+Extender.m in Sources */ = {isa = PBXBuildFile; fileRef = D46D0FAA1A13B2920072A413 /* UITextField+Extender.m */; };
+		D477996F1A65BA1800386430 /* GTLStoreendpointStoreDiscount.m in Sources */ = {isa = PBXBuildFile; fileRef = D477996C1A65BA1800386430 /* GTLStoreendpointStoreDiscount.m */; };
+		D47799701A65BA1800386430 /* GTLStoreendpointStoreDiscountCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = D477996E1A65BA1800386430 /* GTLStoreendpointStoreDiscountCollection.m */; };
+		D47799731A66127100386430 /* GTLStoreendpointAsaanLongString.m in Sources */ = {isa = PBXBuildFile; fileRef = D47799721A66127100386430 /* GTLStoreendpointAsaanLongString.m */; };
+		D47799781A66E00F00386430 /* GTLStoreendpointMenuItemAndStats.m in Sources */ = {isa = PBXBuildFile; fileRef = D47799751A66E00F00386430 /* GTLStoreendpointMenuItemAndStats.m */; };
+		D47799791A66E00F00386430 /* GTLStoreendpointMenuItemAndStatsCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = D47799771A66E00F00386430 /* GTLStoreendpointMenuItemAndStatsCollection.m */; };
+		D47799821A66E03800386430 /* GTLStoreendpointStoreAndStats.m in Sources */ = {isa = PBXBuildFile; fileRef = D477997B1A66E03800386430 /* GTLStoreendpointStoreAndStats.m */; };
+		D47799831A66E03800386430 /* GTLStoreendpointStoreAndStatsCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = D477997D1A66E03800386430 /* GTLStoreendpointStoreAndStatsCollection.m */; };
+		D47799841A66E03800386430 /* GTLStoreendpointStoreDiscountArray.m in Sources */ = {isa = PBXBuildFile; fileRef = D477997F1A66E03800386430 /* GTLStoreendpointStoreDiscountArray.m */; };
+		D47799851A66E03800386430 /* GTLStoreendpointStoreItemStats.m in Sources */ = {isa = PBXBuildFile; fileRef = D47799811A66E03800386430 /* GTLStoreendpointStoreItemStats.m */; };
 		D49A3ABB1A267F49008BC180 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = D49A3ABA1A267F49008BC180 /* back.png */; };
 		D49A3ABF1A26C450008BC180 /* RetrievePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D49A3ABD1A26C450008BC180 /* RetrievePasswordViewController.m */; };
 		D49A3AC01A26C450008BC180 /* StartupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D49A3ABE1A26C450008BC180 /* StartupViewController.m */; };
@@ -459,8 +468,8 @@
 		D449EB8E1A1BDDA500879383 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		D449EB911A1BDDB200879383 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D449EB931A1BDDD800879383 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
-		D449EB961A1BF01300879383 /* StoreListTableTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreListTableTableViewController.h; sourceTree = "<group>"; };
-		D449EB971A1BF01300879383 /* StoreListTableTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreListTableTableViewController.m; sourceTree = "<group>"; };
+		D449EB961A1BF01300879383 /* StoreListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreListTableViewController.h; sourceTree = "<group>"; };
+		D449EB971A1BF01300879383 /* StoreListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreListTableViewController.m; sourceTree = "<group>"; };
 		D4522ACE1A15264F002EFA92 /* amex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = amex.png; sourceTree = "<group>"; };
 		D4522ACF1A15264F002EFA92 /* amex@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "amex@2x.png"; sourceTree = "<group>"; };
 		D4522AD01A15264F002EFA92 /* cvc-amex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cvc-amex.png"; sourceTree = "<group>"; };
@@ -538,6 +547,24 @@
 		D4522BC81A166811002EFA92 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D46D0FA91A13B2920072A413 /* UITextField+Extender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITextField+Extender.h"; path = "HelperClasses/UITextField+Extender.h"; sourceTree = "<group>"; };
 		D46D0FAA1A13B2920072A413 /* UITextField+Extender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITextField+Extender.m"; path = "HelperClasses/UITextField+Extender.m"; sourceTree = "<group>"; };
+		D477996B1A65BA1800386430 /* GTLStoreendpointStoreDiscount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreDiscount.h; sourceTree = "<group>"; };
+		D477996C1A65BA1800386430 /* GTLStoreendpointStoreDiscount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreDiscount.m; sourceTree = "<group>"; };
+		D477996D1A65BA1800386430 /* GTLStoreendpointStoreDiscountCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreDiscountCollection.h; sourceTree = "<group>"; };
+		D477996E1A65BA1800386430 /* GTLStoreendpointStoreDiscountCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreDiscountCollection.m; sourceTree = "<group>"; };
+		D47799711A66127100386430 /* GTLStoreendpointAsaanLongString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointAsaanLongString.h; sourceTree = "<group>"; };
+		D47799721A66127100386430 /* GTLStoreendpointAsaanLongString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointAsaanLongString.m; sourceTree = "<group>"; };
+		D47799741A66E00F00386430 /* GTLStoreendpointMenuItemAndStats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointMenuItemAndStats.h; sourceTree = "<group>"; };
+		D47799751A66E00F00386430 /* GTLStoreendpointMenuItemAndStats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointMenuItemAndStats.m; sourceTree = "<group>"; };
+		D47799761A66E00F00386430 /* GTLStoreendpointMenuItemAndStatsCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointMenuItemAndStatsCollection.h; sourceTree = "<group>"; };
+		D47799771A66E00F00386430 /* GTLStoreendpointMenuItemAndStatsCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointMenuItemAndStatsCollection.m; sourceTree = "<group>"; };
+		D477997A1A66E03800386430 /* GTLStoreendpointStoreAndStats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreAndStats.h; sourceTree = "<group>"; };
+		D477997B1A66E03800386430 /* GTLStoreendpointStoreAndStats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreAndStats.m; sourceTree = "<group>"; };
+		D477997C1A66E03800386430 /* GTLStoreendpointStoreAndStatsCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreAndStatsCollection.h; sourceTree = "<group>"; };
+		D477997D1A66E03800386430 /* GTLStoreendpointStoreAndStatsCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreAndStatsCollection.m; sourceTree = "<group>"; };
+		D477997E1A66E03800386430 /* GTLStoreendpointStoreDiscountArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreDiscountArray.h; sourceTree = "<group>"; };
+		D477997F1A66E03800386430 /* GTLStoreendpointStoreDiscountArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreDiscountArray.m; sourceTree = "<group>"; };
+		D47799801A66E03800386430 /* GTLStoreendpointStoreItemStats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreItemStats.h; sourceTree = "<group>"; };
+		D47799811A66E03800386430 /* GTLStoreendpointStoreItemStats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreItemStats.m; sourceTree = "<group>"; };
 		D49A3ABA1A267F49008BC180 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		D49A3ABC1A26C450008BC180 /* RetrievePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RetrievePasswordViewController.h; sourceTree = "<group>"; };
 		D49A3ABD1A26C450008BC180 /* RetrievePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RetrievePasswordViewController.m; sourceTree = "<group>"; };
@@ -850,7 +877,7 @@
 			path = HelperClasses/ContainerViewContoller;
 			sourceTree = "<group>";
 		};
-		370BFF581A4039CF00F612EE /* StorInfo */ = {
+		370BFF581A4039CF00F612EE /* StoreInfo */ = {
 			isa = PBXGroup;
 			children = (
 				370BFF5F1A403A3900F612EE /* InfoViewController.h */,
@@ -862,6 +889,7 @@
 				370BFF651A403F0600F612EE /* StoreViewController.h */,
 				370BFF661A403F0600F612EE /* StoreViewController.m */,
 			);
+			name = StoreInfo;
 			path = StorInfo;
 			sourceTree = "<group>";
 		};
@@ -968,6 +996,24 @@
 		D449EB201A1BCDEB00879383 /* ServerAPI */ = {
 			isa = PBXGroup;
 			children = (
+				D477997A1A66E03800386430 /* GTLStoreendpointStoreAndStats.h */,
+				D477997B1A66E03800386430 /* GTLStoreendpointStoreAndStats.m */,
+				D477997C1A66E03800386430 /* GTLStoreendpointStoreAndStatsCollection.h */,
+				D477997D1A66E03800386430 /* GTLStoreendpointStoreAndStatsCollection.m */,
+				D477997E1A66E03800386430 /* GTLStoreendpointStoreDiscountArray.h */,
+				D477997F1A66E03800386430 /* GTLStoreendpointStoreDiscountArray.m */,
+				D47799801A66E03800386430 /* GTLStoreendpointStoreItemStats.h */,
+				D47799811A66E03800386430 /* GTLStoreendpointStoreItemStats.m */,
+				D47799741A66E00F00386430 /* GTLStoreendpointMenuItemAndStats.h */,
+				D47799751A66E00F00386430 /* GTLStoreendpointMenuItemAndStats.m */,
+				D47799761A66E00F00386430 /* GTLStoreendpointMenuItemAndStatsCollection.h */,
+				D47799771A66E00F00386430 /* GTLStoreendpointMenuItemAndStatsCollection.m */,
+				D47799711A66127100386430 /* GTLStoreendpointAsaanLongString.h */,
+				D47799721A66127100386430 /* GTLStoreendpointAsaanLongString.m */,
+				D477996B1A65BA1800386430 /* GTLStoreendpointStoreDiscount.h */,
+				D477996C1A65BA1800386430 /* GTLStoreendpointStoreDiscount.m */,
+				D477996D1A65BA1800386430 /* GTLStoreendpointStoreDiscountCollection.h */,
+				D477996E1A65BA1800386430 /* GTLStoreendpointStoreDiscountCollection.m */,
 				D4DEC1C21A2FF3050075281E /* GTLStoreendpointAsaanLong.h */,
 				D4DEC1C31A2FF3050075281E /* GTLStoreendpointAsaanLong.m */,
 				D4E807271A1D8BAA008E343C /* GTLStoreendpointStoreMenuCombined.h */,
@@ -1181,9 +1227,9 @@
 				D4DEC1C91A3211780075281E /* Order */,
 				3709EAC41A31C8420060B49B /* Menu */,
 				37909B631A23828000649827 /* Login */,
-				370BFF581A4039CF00F612EE /* StorInfo */,
-				D449EB961A1BF01300879383 /* StoreListTableTableViewController.h */,
-				D449EB971A1BF01300879383 /* StoreListTableTableViewController.m */,
+				370BFF581A4039CF00F612EE /* StoreInfo */,
+				D449EB961A1BF01300879383 /* StoreListTableViewController.h */,
+				D449EB971A1BF01300879383 /* StoreListTableViewController.m */,
 				375C2FC51A590A2700FED6C0 /* SlidingMenuViewController.h */,
 				375C2FC61A590A2700FED6C0 /* SlidingMenuViewController.m */,
 				375C2FCB1A591AA200FED6C0 /* UpdateInfoViewController.h */,
@@ -1652,6 +1698,7 @@
 				3709EA951A31802A0060B49B /* MWPhotoBrowser.m in Sources */,
 				D449EB6F1A1BCDEB00879383 /* GTLStoreendpointStoreOwnerCollection.m in Sources */,
 				D4DEC1D51A321F630075281E /* AddPaymentCardViewController.m in Sources */,
+				D47799781A66E00F00386430 /* GTLStoreendpointMenuItemAndStats.m in Sources */,
 				D4522B2A1A15264F002EFA92 /* StripeError.m in Sources */,
 				3709EACD1A31C8DA0060B49B /* MenuItemCell.m in Sources */,
 				D449EB631A1BCDEB00879383 /* GTLStoreendpointMenusAndMenuItems.m in Sources */,
@@ -1692,6 +1739,7 @@
 				D49A7A821A3552550052522E /* MenuModifierTableViewController.m in Sources */,
 				D449EB5D1A1BCDEB00879383 /* GTLQueryUserendpoint.m in Sources */,
 				D43EED071A1F9EC5000C4FE5 /* DataLoadingOperation.m in Sources */,
+				D47799731A66127100386430 /* GTLStoreendpointAsaanLongString.m in Sources */,
 				D4AC51821A325DCA00F2484F /* GTLUserendpointUserAddress.m in Sources */,
 				D43EED101A1FC0A2000C4FE5 /* StoreLoadingOperation.m in Sources */,
 				D4A8C1A01A263B1800DA344A /* SDWebImagePrefetcher.m in Sources */,
@@ -1701,6 +1749,7 @@
 				D4EAF9E71A12ACB20078FA9C /* BaseViewController.m in Sources */,
 				D4A8C19E1A263B1800DA344A /* SDWebImageDownloaderOperation.m in Sources */,
 				D4A8C1861A263B1800DA344A /* AFURLConnectionOperation.m in Sources */,
+				D47799791A66E00F00386430 /* GTLStoreendpointMenuItemAndStatsCollection.m in Sources */,
 				D449EB621A1BCDEB00879383 /* GTLStoreendpointMenuItemModifiersAndGroups.m in Sources */,
 				D4A8C1811A263B1800DA344A /* AFHTTPRequestOperation.m in Sources */,
 				D4B7A62E1A35104200D72BC4 /* MenuModifierGroupViewController.m in Sources */,
@@ -1734,6 +1783,7 @@
 				D4A8C1A51A263B1800DA344A /* UIImageView+WebCache.m in Sources */,
 				D4522B221A15264F002EFA92 /* PTKUSAddressZip.m in Sources */,
 				3709EA921A31802A0060B49B /* MWGridViewController.m in Sources */,
+				D47799841A66E03800386430 /* GTLStoreendpointStoreDiscountArray.m in Sources */,
 				D4522B241A15264F002EFA92 /* STPAPIConnection.m in Sources */,
 				D4FEF6F81A243FA000A41303 /* MenuItemLoadingOperation.m in Sources */,
 				D4522B2D1A15264F002EFA92 /* SWRevealViewController.m in Sources */,
@@ -1751,8 +1801,9 @@
 				D449EB5C1A1BCDEB00879383 /* GTLQueryStoreendpoint.m in Sources */,
 				D4EDD4241A33EF1100C82006 /* MenuMWCaptionView.m in Sources */,
 				37909B6D1A23828000649827 /* LoginViewController.m in Sources */,
+				D47799831A66E03800386430 /* GTLStoreendpointStoreAndStatsCollection.m in Sources */,
 				D4A8C1911A263B1800DA344A /* UIProgressView+AFNetworking.m in Sources */,
-				D449EB981A1BF01300879383 /* StoreListTableTableViewController.m in Sources */,
+				D449EB981A1BF01300879383 /* StoreListTableViewController.m in Sources */,
 				375C2FC71A590A2700FED6C0 /* SlidingMenuViewController.m in Sources */,
 				D449EB651A1BCDEB00879383 /* GTLStoreendpointStoreCollection.m in Sources */,
 				D4A8C1841A263B1800DA344A /* AFNetworkReachabilityManager.m in Sources */,
@@ -1770,6 +1821,8 @@
 				D4522B281A15264F002EFA92 /* STPUtils.m in Sources */,
 				37D161C91A402FDA002EAA3C /* SDSegmentedControl.m in Sources */,
 				D4AC51831A325DCA00F2484F /* GTLUserendpointUserAddressCollection.m in Sources */,
+				D47799851A66E03800386430 /* GTLStoreendpointStoreItemStats.m in Sources */,
+				D477996F1A65BA1800386430 /* GTLStoreendpointStoreDiscount.m in Sources */,
 				D4522B1B1A15264F002EFA92 /* PTKAddressZip.m in Sources */,
 				3709EA961A31802A0060B49B /* MWTapDetectingImageView.m in Sources */,
 				D4A8C1961A263B1800DA344A /* README.mdown in Sources */,
@@ -1796,9 +1849,11 @@
 				D4E807311A1D8BAA008E343C /* GTLStoreendpointStoreStats.m in Sources */,
 				D4522B201A15264F002EFA92 /* PTKComponent.m in Sources */,
 				3709EA911A31802A0060B49B /* MWGridCell.m in Sources */,
+				D47799701A65BA1800386430 /* GTLStoreendpointStoreDiscountCollection.m in Sources */,
 				D4E807321A1D8BAA008E343C /* GTLStoreendpointStoreStatsCollection.m in Sources */,
 				D4A8C1A31A263B1800DA344A /* UIImage+MultiFormat.m in Sources */,
 				375C2FD01A591EA600FED6C0 /* AddFriendViewController.m in Sources */,
+				D47799821A66E03800386430 /* GTLStoreendpointStoreAndStats.m in Sources */,
 				D449EB6D1A1BCDEB00879383 /* GTLStoreendpointStoreMenuItemModifierGroup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1936,8 +1991,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Khobaib Chowdhury (HK8YVC6C79)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Khobaib Chowdhury (HK8YVC6C79)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/AsaanImprovedUI/frameworks";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AsaanImprovedUI/Asaan-Prefix.pch";
@@ -1946,7 +2001,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Asaan;
-				PROVISIONING_PROFILE = "578875d7-a7b0-42c1-8bea-e1507602ed90";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1956,8 +2011,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Khobaib Chowdhury (HK8YVC6C79)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Khobaib Chowdhury (HK8YVC6C79)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/AsaanImprovedUI/frameworks";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AsaanImprovedUI/Asaan-Prefix.pch";
@@ -1966,7 +2021,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Asaan;
-				PROVISIONING_PROFILE = "578875d7-a7b0-42c1-8bea-e1507602ed90";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

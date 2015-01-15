@@ -17,7 +17,7 @@
 @property (strong, nonatomic) GTLStoreendpointStore *selectedStore;
 @property (strong, nonatomic) GTLStoreendpointStoreMenuItem *selectedMenuItem;
 @property (nonatomic) int orderType;
-@property (nonatomic) NSInteger partySize;
+@property (nonatomic) int partySize;
 @property (nonatomic) NSDate *orderTime;
 
 @property (nonatomic) Boolean bInEditMode;

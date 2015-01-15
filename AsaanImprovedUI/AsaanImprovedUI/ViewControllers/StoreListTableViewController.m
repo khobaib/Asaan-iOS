@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Nirav Saraiya. All rights reserved.
 //
 
-#import "StoreListTableTableViewController.h"
+#import "StoreListTableViewController.h"
 #import "MBProgressHUD.h"
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
@@ -30,18 +30,18 @@
 const NSUInteger FluentPagingTablePreloadMargin = 5;
 const NSUInteger FluentPagingTablePageSize = 20;
 
-@interface StoreListTableTableViewController ()<DataProviderDelegate>
+@interface StoreListTableViewController ()<DataProviderDelegate>
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *revealButtonItem;
 @property (nonatomic, strong) MBProgressHUD *hud;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) int startPosition;
 @property (nonatomic) int maxResult;
-@property (weak, nonatomic) GTLStoreendpointStore *selectedStore;
+@property (weak, nonatomic) GTLStoreendpointStoreAndStats *selectedStore;
 
 @end
 
-@implementation StoreListTableTableViewController
+@implementation StoreListTableViewController
 @synthesize tableView = _tableView;
 @synthesize startPosition = _startPosition;
 @synthesize maxResult = _maxResult;
@@ -191,9 +191,8 @@ const NSUInteger FluentPagingTablePageSize = 20;
     [self setSelectedStoreFromSender:sender];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     OnlineOrderDetails *orderInProgress = appDelegate.globalObjectHolder.orderInProgress;
-    if (orderInProgress != nil && orderInProgress.selectedStore.identifier.longValue != self.selectedStore.identifier.longValue)
+    if (orderInProgress != nil && orderInProgress.selectedStore.identifier.longValue != self.selectedStore.store.identifier.longValue)
     {
-        typeof(self) weakSelf = self;
         NSString *errMsg = @"You are starting an order at a new restaurant. Do you want to cancel your other order?";
         [UIAlertView showWithTitle:@"Cancel your order?" message:errMsg cancelButtonTitle:@"No" otherButtonTitles:@[@"Yes"]
                           tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex)
@@ -226,11 +225,12 @@ const NSUInteger FluentPagingTablePageSize = 20;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StoreListCell" forIndexPath:indexPath];
 
     UIImageView *imgBackground = (UIImageView *)[cell viewWithTag:701];
+    UIView *statsView = (UIView *)[cell viewWithTag:702];
     UILabel *txtName=(UILabel *)[cell viewWithTag:500];
     UILabel *txtTrophy=(UILabel *)[cell viewWithTag:501];
     UILabel *txtCuisine=(UILabel *)[cell viewWithTag:502];
-//    UILabel *txtVisits=(UILabel *)[cell viewWithTag:504];
-//    UILabel *txtLikes=(UILabel *)[cell viewWithTag:506];
+    UILabel *txtVisits=(UILabel *)[cell viewWithTag:504];
+    UILabel *txtLikes=(UILabel *)[cell viewWithTag:506];
     
     UIButton *btnCall = (UIButton*)[cell viewWithTag:601];
     UIButton *btnMenu = (UIButton*)[cell viewWithTag:602];
@@ -245,8 +245,9 @@ const NSUInteger FluentPagingTablePageSize = 20;
     txtName.text = nil;
     txtTrophy.text = nil;
     txtCuisine.text = nil;
-//    txtVisits.text = nil;
-//    txtLikes.text = nil;
+    txtVisits.text = nil;
+    txtLikes.text = nil;
+    statsView.hidden = true;
     
     id dataObject = self.dataProvider.dataObjects[indexPath.row];
     if ([dataObject isKindOfClass:[NSNull class]]) {
@@ -264,41 +265,47 @@ const NSUInteger FluentPagingTablePageSize = 20;
     btnOrder.enabled = true;
     btnReserve.enabled = true;
 
-    GTLStoreendpointStore *store = dataObject;
-    if (store != nil) {
-        
-        if (IsEmpty(store.backgroundImageUrl) == false)
-            [imgBackground sd_setImageWithURL:[NSURL URLWithString:store.backgroundImageUrl]];
+    GTLStoreendpointStoreAndStats *storeAndStats = dataObject;
+    if (storeAndStats != nil)
+    {
+        if (IsEmpty(storeAndStats.store.backgroundImageUrl) == false)
+            [imgBackground sd_setImageWithURL:[NSURL URLWithString:storeAndStats.store.backgroundImageUrl]];
 
-        NSLog(@"name = %@, torphy = %@, cuisine = %@", store.name, store.trophies.firstObject, store.subType);
-        txtName.text = store.name;
-        txtTrophy.text = store.trophies.firstObject;
-        txtCuisine.text = store.subType;
-    }
-//    if (self.storeStatsList.count > indexPath.row)
-//    {
-//        GTLStoreendpointStoreStats *storeStats = [self.storeStatsList objectAtIndex:indexPath.row];
-//        if (storeStats.visits.longValue > 0){
-//            txtVisits.text = [UtilCalls formattedNumber:storeStats.visits];
-//            imgVisits.hidden = false;
-//        }
-//        long reviewCount = storeStats.dislikes.longValue + storeStats.likes.longValue;
-//        if (reviewCount > 0){
-//            NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-//            [numberFormatter setNumberStyle:NSNumberFormatterPercentStyle];
-//            int iPercent = (int)(storeStats.likes.longValue*100/reviewCount);
-//            NSNumber *likePercent = [NSNumber numberWithInt:iPercent];
-//            NSString *strReviews = [UtilCalls formattedNumber:[NSNumber numberWithLong:reviewCount]];
-//            NSString *strLikePercent = [UtilCalls formattedNumber:likePercent];
-//            txtLikes.text = [[[strLikePercent stringByAppendingString:@"%("] stringByAppendingString:strReviews] stringByAppendingString:@")"];
-//            imgLikes.hidden = false;
-//        }
+        NSLog(@"name = %@, torphy = %@, cuisine = %@", storeAndStats.store.name, storeAndStats.store.trophies.firstObject, storeAndStats.store.subType);
+        txtName.text = storeAndStats.store.name;
+        txtTrophy.text = storeAndStats.store.trophies.firstObject;
+        txtCuisine.text = storeAndStats.store.subType;
+        if (storeAndStats.stats.visits.longValue > 0)
+        {
+            NSString *strVisitCount = [UtilCalls formattedNumber:storeAndStats.stats.visits];
+            NSString *str = [NSString stringWithFormat:@"Serves: %@+ per Wk", strVisitCount];
+            NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
+            
+            // Set font, notice the range is for the whole string
+            UIFont *font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
+            [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(8, [strVisitCount length]+1)]; // extend larger font to "+" as well
+            [txtVisits setAttributedText:attributedString];
+            statsView.hidden = false;
+        }
+        
+        long reviewCount = storeAndStats.stats.dislikes.longValue + storeAndStats.stats.likes.longValue;
+        if (reviewCount > 0)
+        {
+            NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+            [numberFormatter setNumberStyle:NSNumberFormatterPercentStyle];
+            int iPercent = (int)(storeAndStats.stats.likes.longValue*100/reviewCount);
+            NSNumber *likePercent = [NSNumber numberWithInt:iPercent];
+            NSString *strReviews = [UtilCalls formattedNumber:[NSNumber numberWithLong:reviewCount]];
+            NSString *strLikePercent = [UtilCalls formattedNumber:likePercent];
+            txtLikes.text = [[[strLikePercent stringByAppendingString:@"%("] stringByAppendingString:strReviews] stringByAppendingString:@")"];
+            statsView.hidden = false;
+        }
 //        
 //        if (storeStats.recommendations.longValue > 0){
 //            txtRecommends.text = [UtilCalls formattedNumber:storeStats.recommendations];
 //            imgRecommends.hidden = false;
 //        }
-//    }
+    }
     
     return cell;
 }
@@ -329,20 +336,20 @@ const NSUInteger FluentPagingTablePageSize = 20;
         // Get reference to the destination view controller
         MenuTableViewController *controller = [segue destinationViewController];
         // Pass any objects to the view controller here, like...
-        [controller setSelectedStore:_selectedStore];
+        [controller setSelectedStore:_selectedStore.store];
     }
     else if ([[segue identifier] isEqualToString:@"seguePlaceOnlineOrder"])
     {
         // Get reference to the destination view controller
         DeliveryOrCarryoutViewController *controller = [segue destinationViewController];
         // Pass any objects to the view controller here, like...
-        [controller setSelectedStore:_selectedStore];
+        [controller setSelectedStore:_selectedStore.store];
         [controller setBCalledFromStoreList:YES];
     }
     else if ([[segue identifier] isEqualToString:@"StoreListToStoreSegue"]) {
         
         StoreViewController *storeViewController = segue.destinationViewController;
-        [storeViewController setSelectedStore:_selectedStore];
+        [storeViewController setSelectedStore:_selectedStore.store];
     }
 }
 

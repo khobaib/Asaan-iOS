@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "DataReceiver.h"
 
-@interface StoreListTableTableViewController : UITableViewController <DataReceiver>
+@interface StoreListTableViewController : UITableViewController <DataReceiver>
 
 @end

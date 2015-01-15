@@ -9,6 +9,7 @@
 #import "SlidingMenuViewController.h"
 
 #import "AddFriendViewController.h"
+#import <Parse/Parse.h>
 
 @implementation SMTableViewCell1
 @end
@@ -27,7 +28,7 @@
     [super viewDidLoad];
     
     _menu = @[@"Stores", @"Profile", @"Friends", @"Cart", @"Order History", @"Logout"];
-    _menuSegue = @[@"SMToStoreListSegue", @"SMToUpdateProfile", @"SMToFriendsSegue", @"SMToUpdateProfile", @"", @""];
+    _menuSegue = @[@"SMToStoreListSegue", @"SMToUpdateProfile", @"SMToFriendsSegue", @"SMToUpdateProfile", @"", @"segueUnwindSlidingMenuToStoreList"];
     
     NSAssert(_menu.count == _menuSegue.count, @"Menu and MenuSegue length should be equal.");
     
@@ -76,6 +77,11 @@
 
     if ([_menuSegue[indexPath.row] isEqualToString:@""]) {
         return;
+    }
+    if ([_menuSegue[indexPath.row] isEqualToString:@"segueUnwindSlidingMenuToStoreList"]) {
+        PFUser *currentUser = [PFUser currentUser];
+        if (currentUser)
+            [PFUser logOut];
     }
     [self performSegueWithIdentifier:_menuSegue[indexPath.row] sender:self];
 }

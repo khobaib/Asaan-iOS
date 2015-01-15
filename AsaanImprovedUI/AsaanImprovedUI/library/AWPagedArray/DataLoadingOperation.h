@@ -14,8 +14,6 @@
 
 //@property (nonatomic, readonly) NSIndexSet *indexes;
 
-- (instancetype)initWithStartPosition:(int)startPosition maxResult:(int)maxResult;
-
 - (instancetype)initWithIndexes:(NSIndexSet *)indexes;
 
 @property (nonatomic) NSIndexSet *indexes;

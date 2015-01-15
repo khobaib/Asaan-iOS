@@ -37,9 +37,9 @@ const NSTimeInterval DataLoadingOperationDuration2 = 0.3;
             GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
             NSUInteger firstPosition = indexes.firstIndex;
             NSUInteger maxResult = indexes.count;
-            GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoresWithFirstPosition:firstPosition maxResult:maxResult];
+            GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoresWithStatsWithFirstPosition:firstPosition maxResult:maxResult];
             
-            [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreCollection *object,NSError *error)
+            [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreAndStatsCollection *object,NSError *error)
             {
                 if(!error)
                     [weakSelf setDataPage:[object.items mutableCopy]];

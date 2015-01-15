@@ -40,7 +40,7 @@ const NSTimeInterval DataLoadingOperationDuration1 = 0.3;
             GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
             GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreMenuItemsForMenuWithStoreId:storeId menuPOSId:menuPOSId firstPosition:firstPosition maxResult:maxResult];
             
-            [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreMenuItemCollection *object,NSError *error){
+            [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointMenuItemAndStatsCollection *object,NSError *error){
                 if(!error)
                     [weakSelf setDataPage:[object.items mutableCopy]];
                 else

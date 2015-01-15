@@ -47,8 +47,8 @@
 @implementation DeliveryOrCarryoutViewController
 @synthesize selectedStore = _selectedStore;
 
-+ (int) ORDERTYPE_CARRYOUT { return 0;}
-+ (int) ORDERTYPE_DELIVERY { return 1;}
++ (int) ORDERTYPE_CARRYOUT { return 1;}
++ (int) ORDERTYPE_DELIVERY { return 2;}
 
 
 - (void)viewDidLoad {

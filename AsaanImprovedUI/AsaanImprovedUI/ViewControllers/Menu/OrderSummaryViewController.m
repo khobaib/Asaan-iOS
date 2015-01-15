@@ -25,6 +25,7 @@
 #import "SelectAddressTableViewController.h"
 #import "SelectPaymentTableViewController.h"
 #import "InlineCalls.h"
+#import "GTLStoreendpointAsaanLongString.h"
 
 @interface OrderSummaryViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -132,7 +133,10 @@
     
     NSLog(@"%@",orderString);
     
-    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForPlaceOrderWithStoreId:self.orderInProgress.selectedStore.identifier.longValue orderMode:self.orderInProgress.orderType order:orderString];
+    GTLStoreendpointAsaanLongString *als = [[GTLStoreendpointAsaanLongString alloc]init];
+    [als setStrValue:orderString];
+    
+    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForPlaceOrderWithObject:als storeId:self.orderInProgress.selectedStore.identifier.longValue orderMode:self.orderInProgress.orderType];
     
     //[query setCustomParameter:@"hmHAJvHvKYmilfOqgUnc22tf/RL5GLmPbcFBg02d6wm+ZB1o3f7RKYqmB31+DGoH9Ad3s3WP99n587qDZ5tm+w==" forKey:@"asaan-auth-token"];
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
