@@ -54,7 +54,7 @@ const NSUInteger FluentPagingTablePageSize = 20;
     [super viewDidLoad];
     [UtilCalls slidingMenuSetupWith:self withItem:self.revealButtonItem];
     
-    typeof(self) weakSelf = self;
+    __weak __typeof(self) weakSelf = self;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
     GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreCount];

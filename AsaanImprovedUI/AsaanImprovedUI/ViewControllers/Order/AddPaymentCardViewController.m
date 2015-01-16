@@ -116,7 +116,7 @@
 
 - (void)saveCardAtGAE {
     
-    typeof(self) weakSelf = self;
+    __weak __typeof(self) weakSelf = self;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     GTLServiceUserendpoint *gtlUserService= [appDelegate gtlUserService];
     

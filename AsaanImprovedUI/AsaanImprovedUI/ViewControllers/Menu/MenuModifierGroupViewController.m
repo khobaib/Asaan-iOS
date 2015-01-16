@@ -133,7 +133,7 @@
 - (void) getModifierGroupsAndModifiers
 {
     if (_gtlModifiersAndGroups != nil) return;
-    typeof(self) weakSelf = self;
+    __weak __typeof(self) weakSelf = self;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
     GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreMenuItemModifiersWithStoreId:_onlineOrderSelectedMenuItem.selectedStore.identifier.longValue menuItemPOSId:_onlineOrderSelectedMenuItem.selectedItem.menuItemPOSId.longValue];

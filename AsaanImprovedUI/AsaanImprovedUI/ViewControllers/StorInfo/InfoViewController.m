@@ -62,15 +62,19 @@
         
         if (!IsEmpty(self.selectedStore.backgroundImageUrl)) {
             
+            __weak __typeof__(self) weakSelf = self;
             [self.restaurantImageView sd_setImageWithURL:[NSURL URLWithString:self.selectedStore.backgroundImageUrl]
                                         placeholderImage:nil
                                                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
              {
-                 [self.cellHeightArray replaceObjectAtIndex:0 withObject:[NSNumber numberWithInteger:[[UIScreen mainScreen] bounds].size.width * image.size.height / image.size.width]];
-                 
-                 // This code forces UITableView to reload cell sizes only, but not cell contents
-                 [self.tableView beginUpdates];
-                 [self.tableView endUpdates];
+                 if (!error && image && weakSelf &&  weakSelf.tableView) {
+                     
+                     [weakSelf.cellHeightArray replaceObjectAtIndex:0 withObject:[NSNumber numberWithInteger:[[UIScreen mainScreen] bounds].size.width * image.size.height / image.size.width]];
+                     
+                     // This code forces UITableView to reload cell sizes only, but not cell contents
+                     [weakSelf.tableView beginUpdates];
+                     [weakSelf.tableView endUpdates];
+                 }
              }];
         }
             

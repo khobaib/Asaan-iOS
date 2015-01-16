@@ -145,7 +145,7 @@
     [query setAdditionalHTTPHeaders:dic];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    typeof(self) weakSelf = self;
+    __weak __typeof(self) weakSelf = self;
     GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
     [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreMenuItem *object,NSError *error)
     {
@@ -173,7 +173,7 @@
 }
 - (IBAction)cancelOrder:(id)sender
 {
-    typeof(self) weakSelf = self;
+    __weak __typeof(self) weakSelf = self;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     NSString *errMsg = [NSString stringWithFormat:@"Do you want to cancel your current order at %@?", self.orderInProgress.selectedStore.name];
     [UIAlertView showWithTitle:@"Cancel your order?" message:errMsg cancelButtonTitle:@"No" otherButtonTitles:@[@"Yes"]
@@ -498,7 +498,7 @@
             if (appDelegate.globalObjectHolder.defaultUserAddress != nil)
             {
                 __block Boolean bReturn = NO;
-                typeof(self) weakSelf = self;
+                __weak __typeof(self) weakSelf = self;
                 NSString *errMsg = [NSString stringWithFormat:@"%@ does not deliver to your %@. what do you want to do?", self.orderInProgress.selectedStore.name, appDelegate.globalObjectHolder.defaultUserAddress.title];
                 [UIAlertView showWithTitle:@"Address outside delivery range" message:errMsg cancelButtonTitle:@"Switch to Carryout" otherButtonTitles:@[@"Change Address", @"Cancel"]
                                   tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex)

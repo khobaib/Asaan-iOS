@@ -33,7 +33,7 @@ const NSTimeInterval DataLoadingOperationDuration1 = 0.3;
     
     if (self)
     {
-        typeof(self) weakSelf = self;
+        __weak __typeof(self) weakSelf = self;
         _bDataLoaded = false;
         [self addExecutionBlock:^{
             AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];

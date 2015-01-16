@@ -25,7 +25,7 @@
 
 - (void) loadUserAddressesFromServer
 {
-    typeof(self) weakSelf = self;
+    __weak __typeof(self) weakSelf = self;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     GTLServiceUserendpoint *gtlUserService= [appDelegate gtlUserService];
     GTLQueryUserendpoint *query = [GTLQueryUserendpoint queryForGetUserAddresses];
@@ -44,7 +44,7 @@
 
 - (void) loadUserCardsFromServer
 {
-    typeof(self) weakSelf = self;
+    __weak __typeof(self) weakSelf = self;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     GTLServiceUserendpoint *gtlUserService= [appDelegate gtlUserService];
     GTLQueryUserendpoint *query = [GTLQueryUserendpoint queryForGetUserCards];
