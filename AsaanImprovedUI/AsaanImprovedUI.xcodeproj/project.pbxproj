@@ -39,6 +39,7 @@
 		370BFF611A403A3900F612EE /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 370BFF601A403A3900F612EE /* InfoViewController.m */; };
 		370BFF641A403E3900F612EE /* EmptySegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 370BFF631A403E3900F612EE /* EmptySegue.m */; };
 		370BFF671A403F0600F612EE /* StoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 370BFF661A403F0600F612EE /* StoreViewController.m */; };
+		373FC8401A698A5500F2BC53 /* StoreListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 373FC83F1A698A5500F2BC53 /* StoreListTableViewCell.m */; };
 		375C2FC71A590A2700FED6C0 /* SlidingMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 375C2FC61A590A2700FED6C0 /* SlidingMenuViewController.m */; };
 		375C2FCD1A591AA200FED6C0 /* UpdateInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 375C2FCC1A591AA200FED6C0 /* UpdateInfoViewController.m */; };
 		375C2FD01A591EA600FED6C0 /* AddFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 375C2FCF1A591EA600FED6C0 /* AddFriendViewController.m */; };
@@ -342,6 +343,8 @@
 		370BFF631A403E3900F612EE /* EmptySegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptySegue.m; sourceTree = "<group>"; };
 		370BFF651A403F0600F612EE /* StoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreViewController.h; sourceTree = "<group>"; };
 		370BFF661A403F0600F612EE /* StoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreViewController.m; sourceTree = "<group>"; };
+		373FC83E1A698A5400F2BC53 /* StoreListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreListTableViewCell.h; sourceTree = "<group>"; };
+		373FC83F1A698A5500F2BC53 /* StoreListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreListTableViewCell.m; sourceTree = "<group>"; };
 		375C2FC51A590A2700FED6C0 /* SlidingMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidingMenuViewController.h; sourceTree = "<group>"; };
 		375C2FC61A590A2700FED6C0 /* SlidingMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlidingMenuViewController.m; sourceTree = "<group>"; };
 		375C2FCB1A591AA200FED6C0 /* UpdateInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateInfoViewController.h; sourceTree = "<group>"; };
@@ -1230,6 +1233,8 @@
 				370BFF581A4039CF00F612EE /* StoreInfo */,
 				D449EB961A1BF01300879383 /* StoreListTableViewController.h */,
 				D449EB971A1BF01300879383 /* StoreListTableViewController.m */,
+				373FC83E1A698A5400F2BC53 /* StoreListTableViewCell.h */,
+				373FC83F1A698A5500F2BC53 /* StoreListTableViewCell.m */,
 				375C2FC51A590A2700FED6C0 /* SlidingMenuViewController.h */,
 				375C2FC61A590A2700FED6C0 /* SlidingMenuViewController.m */,
 				375C2FCB1A591AA200FED6C0 /* UpdateInfoViewController.h */,
@@ -1735,6 +1740,7 @@
 				D4DEC1CF1A321EE80075281E /* SelectAddressTableViewController.m in Sources */,
 				D4A8C18D1A263B1800DA344A /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				3709EAB71A31804E0060B49B /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */,
+				373FC8401A698A5500F2BC53 /* StoreListTableViewCell.m in Sources */,
 				370BFF571A40379D00F612EE /* ContainerViewController.m in Sources */,
 				D49A7A821A3552550052522E /* MenuModifierTableViewController.m in Sources */,
 				D449EB5D1A1BCDEB00879383 /* GTLQueryUserendpoint.m in Sources */,
@@ -1991,8 +1997,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Khobaib Chowdhury (HK8YVC6C79)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Khobaib Chowdhury (HK8YVC6C79)";
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/AsaanImprovedUI/frameworks";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AsaanImprovedUI/Asaan-Prefix.pch";
@@ -2001,7 +2007,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Asaan;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "578875d7-a7b0-42c1-8bea-e1507602ed90";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2011,8 +2017,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Khobaib Chowdhury (HK8YVC6C79)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Khobaib Chowdhury (HK8YVC6C79)";
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/AsaanImprovedUI/frameworks";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AsaanImprovedUI/Asaan-Prefix.pch";
@@ -2021,7 +2027,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Asaan;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "578875d7-a7b0-42c1-8bea-e1507602ed90";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

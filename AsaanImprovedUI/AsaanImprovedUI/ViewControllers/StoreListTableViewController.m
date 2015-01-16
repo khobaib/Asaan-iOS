@@ -25,6 +25,7 @@
 #import "UIAlertView+Blocks.h"
 
 #import "StoreViewController.h"
+#import "StoreListTableViewCell.h"
 #import "UtilCalls.h"
 
 const NSUInteger FluentPagingTablePreloadMargin = 5;
@@ -167,28 +168,118 @@ const NSUInteger FluentPagingTablePageSize = 20;
     [self.hud hide:NO];
 }
 
-#pragma mark - Table view data source
-
+#pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    StoreListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StoreListCell" forIndexPath:indexPath];
+    cell.tag = indexPath.row;
+    
+    id dataObject = self.dataProvider.dataObjects[indexPath.row];
+    if ([dataObject isKindOfClass:[NSNull class]]) {
+        
+        cell.callButton.enabled = false;
+        cell.menuButton.enabled = false;
+        cell.orderOnlineButton.enabled = false;
+        cell.reserveButton.enabled = false;
+        
+        return cell;
+    }
+    
+    [cell.callButton addTarget:self action:@selector(callStore:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.menuButton addTarget:self action:@selector(showMenu:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.orderOnlineButton addTarget:self action:@selector(placeOrder:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.reserveButton addTarget:self action:@selector(reserveTable:) forControlEvents:UIControlEventTouchUpInside];
+    
+    cell.callButton.enabled = true;
+    cell.menuButton.enabled = true;
+    cell.orderOnlineButton.enabled = true;
+    cell.reserveButton.enabled = true;
+    
+    GTLStoreendpointStoreAndStats *storeAndStats = dataObject;
+    if (storeAndStats != nil)
+    {
+        if (IsEmpty(storeAndStats.store.backgroundImageUrl) == false)
+            [cell.bgImageView sd_setImageWithURL:[NSURL URLWithString:storeAndStats.store.backgroundImageUrl]];
+        
+        NSLog(@"name = %@, torphy = %@, cuisine = %@", storeAndStats.store.name, storeAndStats.store.trophies.firstObject, storeAndStats.store.subType);
+        cell.restaurantLabel.text = storeAndStats.store.name;
+        cell.trophyLabel.text = storeAndStats.store.trophies.firstObject;
+        cell.cuisineLabel.text = storeAndStats.store.subType;
+        if (storeAndStats.stats.visits.longValue > 0)
+        {
+            NSString *strVisitCount = [UtilCalls formattedNumber:storeAndStats.stats.visits];
+            NSString *str = [NSString stringWithFormat:@"Serves: %@+ per Wk", strVisitCount];
+            NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
+            
+            // Set font, notice the range is for the whole string
+            UIFont *font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
+            [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(8, [strVisitCount length]+1)]; // extend larger font to "+" as well
+            [cell.visitLabel setAttributedText:attributedString];
+            cell.statsView.hidden = false;
+        }
+        
+        long reviewCount = storeAndStats.stats.dislikes.longValue + storeAndStats.stats.likes.longValue;
+        if (reviewCount > 0)
+        {
+            NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+            [numberFormatter setNumberStyle:NSNumberFormatterPercentStyle];
+            int iPercent = (int)(storeAndStats.stats.likes.longValue*100/reviewCount);
+            NSNumber *likePercent = [NSNumber numberWithInt:iPercent];
+            NSString *strReviews = [UtilCalls formattedNumber:[NSNumber numberWithLong:reviewCount]];
+            NSString *strLikePercent = [UtilCalls formattedNumber:likePercent];
+            cell.likeLabel.text = [[[strLikePercent stringByAppendingString:@"%("] stringByAppendingString:strReviews] stringByAppendingString:@")"];
+            cell.statsView.hidden = false;
+        }
+        //
+        //        if (storeStats.recommendations.longValue > 0){
+        //            txtRecommends.text = [UtilCalls formattedNumber:storeStats.recommendations];
+        //            imgRecommends.hidden = false;
+        //        }
+    }
+    
+    return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataProvider.dataObjects.count;
 }
 
-- (void) callStore:(UIButton *)sender
-{
-    [self setSelectedStoreFromSender:sender];
+#pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    _selectedStore = self.dataProvider.dataObjects[indexPath.row];
+    if ([_selectedStore isKindOfClass:[NSNull class]]) {
+        _selectedStore = nil;
+    }
+    
+    [self performSegueWithIdentifier:@"StoreListToStoreSegue" sender:self];
 }
-- (void) showMenu:(UIButton *)sender
+
+#pragma mark - Actions
+- (IBAction) callStore:(UIButton *)sender
 {
-    [self setSelectedStoreFromSender:sender];
+    _selectedStore = self.dataProvider.dataObjects[sender.tag];
+}
+
+- (IBAction)chatWithStore:(UIButton *)sender
+{
+    _selectedStore = self.dataProvider.dataObjects[sender.tag];
+
+}
+
+- (IBAction) showMenu:(UIButton *)sender
+{
+    _selectedStore = self.dataProvider.dataObjects[sender.tag];
     [self performSegueWithIdentifier:@"segueMenu" sender:sender];
 }
-- (void) placeOrder:(UIButton *)sender
+
+- (IBAction) placeOrder:(UIButton *)sender
 {
-    [self setSelectedStoreFromSender:sender];
+    _selectedStore = self.dataProvider.dataObjects[sender.tag];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     OnlineOrderDetails *orderInProgress = appDelegate.globalObjectHolder.orderInProgress;
     if (orderInProgress != nil && orderInProgress.selectedStore.identifier.longValue != self.selectedStore.store.identifier.longValue)
@@ -205,127 +296,13 @@ const NSUInteger FluentPagingTablePageSize = 20;
     }
     [self performSegueWithIdentifier:@"seguePlaceOnlineOrder" sender:sender];
 }
-- (void) reserveTable:(UIButton *)sender
+
+- (IBAction) reserveTable:(UIButton *)sender
 {
-    [self setSelectedStoreFromSender:sender];
-}
-
-- (void) setSelectedStoreFromSender:(UIView *)sender
-{
-    UIView *view = sender;
-    while (view != nil && ![view isKindOfClass:[UITableViewCell class]]) {
-        view = [view superview];
-    }
-    UITableViewCell *cell = (UITableViewCell *)view;
-    NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
-    _selectedStore = self.dataProvider.dataObjects[indexPath.row];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StoreListCell" forIndexPath:indexPath];
-
-    UIImageView *imgBackground = (UIImageView *)[cell viewWithTag:701];
-    UIView *statsView = (UIView *)[cell viewWithTag:702];
-    UILabel *txtName=(UILabel *)[cell viewWithTag:500];
-    UILabel *txtTrophy=(UILabel *)[cell viewWithTag:501];
-    UILabel *txtCuisine=(UILabel *)[cell viewWithTag:502];
-    UILabel *txtVisits=(UILabel *)[cell viewWithTag:504];
-    UILabel *txtLikes=(UILabel *)[cell viewWithTag:506];
-    
-    UIButton *btnCall = (UIButton*)[cell viewWithTag:601];
-    UIButton *btnMenu = (UIButton*)[cell viewWithTag:602];
-    UIButton *btnOrder = (UIButton*)[cell viewWithTag:603];
-    UIButton *btnReserve = (UIButton*)[cell viewWithTag:604];
-    
-    [btnCall addTarget:self action:@selector(callStore:) forControlEvents:UIControlEventTouchUpInside];
-    [btnMenu addTarget:self action:@selector(showMenu:) forControlEvents:UIControlEventTouchUpInside];
-    [btnOrder addTarget:self action:@selector(placeOrder:) forControlEvents:UIControlEventTouchUpInside];
-    [btnReserve addTarget:self action:@selector(reserveTable:) forControlEvents:UIControlEventTouchUpInside];
-
-    txtName.text = nil;
-    txtTrophy.text = nil;
-    txtCuisine.text = nil;
-    txtVisits.text = nil;
-    txtLikes.text = nil;
-    statsView.hidden = true;
-    
-    id dataObject = self.dataProvider.dataObjects[indexPath.row];
-    if ([dataObject isKindOfClass:[NSNull class]]) {
-        
-        btnCall.enabled = false;
-        btnMenu.enabled = false;
-        btnOrder.enabled = false;
-        btnReserve.enabled = false;
-        
-        return cell;
-    }
-    
-    btnCall.enabled = true;
-    btnMenu.enabled = true;
-    btnOrder.enabled = true;
-    btnReserve.enabled = true;
-
-    GTLStoreendpointStoreAndStats *storeAndStats = dataObject;
-    if (storeAndStats != nil)
-    {
-        if (IsEmpty(storeAndStats.store.backgroundImageUrl) == false)
-            [imgBackground sd_setImageWithURL:[NSURL URLWithString:storeAndStats.store.backgroundImageUrl]];
-
-        NSLog(@"name = %@, torphy = %@, cuisine = %@", storeAndStats.store.name, storeAndStats.store.trophies.firstObject, storeAndStats.store.subType);
-        txtName.text = storeAndStats.store.name;
-        txtTrophy.text = storeAndStats.store.trophies.firstObject;
-        txtCuisine.text = storeAndStats.store.subType;
-        if (storeAndStats.stats.visits.longValue > 0)
-        {
-            NSString *strVisitCount = [UtilCalls formattedNumber:storeAndStats.stats.visits];
-            NSString *str = [NSString stringWithFormat:@"Serves: %@+ per Wk", strVisitCount];
-            NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
-            
-            // Set font, notice the range is for the whole string
-            UIFont *font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
-            [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(8, [strVisitCount length]+1)]; // extend larger font to "+" as well
-            [txtVisits setAttributedText:attributedString];
-            statsView.hidden = false;
-        }
-        
-        long reviewCount = storeAndStats.stats.dislikes.longValue + storeAndStats.stats.likes.longValue;
-        if (reviewCount > 0)
-        {
-            NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-            [numberFormatter setNumberStyle:NSNumberFormatterPercentStyle];
-            int iPercent = (int)(storeAndStats.stats.likes.longValue*100/reviewCount);
-            NSNumber *likePercent = [NSNumber numberWithInt:iPercent];
-            NSString *strReviews = [UtilCalls formattedNumber:[NSNumber numberWithLong:reviewCount]];
-            NSString *strLikePercent = [UtilCalls formattedNumber:likePercent];
-            txtLikes.text = [[[strLikePercent stringByAppendingString:@"%("] stringByAppendingString:strReviews] stringByAppendingString:@")"];
-            statsView.hidden = false;
-        }
-//        
-//        if (storeStats.recommendations.longValue > 0){
-//            txtRecommends.text = [UtilCalls formattedNumber:storeStats.recommendations];
-//            imgRecommends.hidden = false;
-//        }
-    }
-    
-    return cell;
-}
-
-- (void)drawCellBackgroundImage:(PFObject *)imageObject {
-}
-
-#pragma mark - UITableViewDelegate
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    _selectedStore = self.dataProvider.dataObjects[indexPath.row];
-    if ([_selectedStore isKindOfClass:[NSNull class]]) {
-        _selectedStore = nil;
-    }
-    
-    [self performSegueWithIdentifier:@"StoreListToStoreSegue" sender:self];
+    _selectedStore = self.dataProvider.dataObjects[sender.tag];
 }
 
 #pragma mark - Navigation
-
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].

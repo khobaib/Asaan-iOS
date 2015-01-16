@@ -22,7 +22,7 @@
                         <color key="sectionIndexBackgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexTrackingBackgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="StoreListCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="StoreListCell" id="Csa-Sc-eig" userLabel="StoreListCell">
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="StoreListCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="StoreListCell" id="Csa-Sc-eig" userLabel="StoreListCell" customClass="StoreListTableViewCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Csa-Sc-eig" id="0Vp-ZX-jTV">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -321,6 +321,20 @@
                                     </variation>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="bgImageView" destination="Zl0-xV-8Bm" id="jEd-Zv-plK"/>
+                                    <outlet property="callButton" destination="D2P-kX-6tk" id="8z4-bf-p3h"/>
+                                    <outlet property="chatButton" destination="UP7-89-KUC" id="WWt-mc-qSe"/>
+                                    <outlet property="cuisineLabel" destination="DAE-we-pLa" id="zGQ-1u-SX9"/>
+                                    <outlet property="likeLabel" destination="Pux-qJ-eUh" id="df3-Jw-WbJ"/>
+                                    <outlet property="menuButton" destination="Hmy-OZ-KFG" id="gdB-nv-xNW"/>
+                                    <outlet property="orderOnlineButton" destination="6Df-HL-xmB" id="ZZF-Mn-3t6"/>
+                                    <outlet property="reserveButton" destination="446-4e-Cv5" id="acx-dn-A7V"/>
+                                    <outlet property="restaurantLabel" destination="WO4-GC-tgd" id="AI6-7L-NIZ"/>
+                                    <outlet property="statsView" destination="SYE-Cm-mzM" id="Q7b-CV-3zl"/>
+                                    <outlet property="trophyLabel" destination="AI5-Sz-XDI" id="4tQ-ct-ggD"/>
+                                    <outlet property="visitLabel" destination="3Nf-rn-ebf" id="ZaX-eY-bqK"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
