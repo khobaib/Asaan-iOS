@@ -27,9 +27,7 @@
 #import "StoreListTableViewCell.h"
 #import "UtilCalls.h"
 
-//#import "GroupView.h"
 #import "messages.h"
-//#import "utilities.h"
 #import "ChatView.h"
 #import "ChatConstants.h"
 
@@ -50,8 +48,6 @@ const NSUInteger FluentPagingTablePageSize = 20;
 
 // Chat Test
 @property (strong, nonatomic) UITabBarController *tabBarController;
-
-//@property (strong, nonatomic) GroupView *groupView;
 
 @end
 
@@ -114,13 +110,13 @@ const NSUInteger FluentPagingTablePageSize = 20;
             [objectHolder loadUserAddressesFromServer];
     }
     
-    [self.navigationController setNavigationBarHidden:NO];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
-                                                  forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.barTintColor = [UIColor asaanBackgroundColor];
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
-    self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+//    [self.navigationController setNavigationBarHidden:NO];
+//    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+//                                                  forBarMetrics:UIBarMetricsDefault];
+//    self.navigationController.navigationBar.barTintColor = [UIColor asaanBackgroundColor];
+//    self.navigationController.navigationBar.shadowImage = [UIImage new];
+//    self.navigationController.navigationBar.translucent = NO;
+//    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     
     GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
     if (goh.orderInProgress != nil)
@@ -285,7 +281,6 @@ const NSUInteger FluentPagingTablePageSize = 20;
 
 - (void)gotoChatView:(PFObject *)chatroom
 {
-//    PFObject *chatroom = chatrooms[indexPath.row];
     NSString *roomId = chatroom.objectId;
     //---------------------------------------------------------------------------------------------------------------------------------------------
     CreateMessageItem([PFUser currentUser], roomId, chatroom[PF_CHATROOMS_NAME]);
@@ -355,56 +350,6 @@ const NSUInteger FluentPagingTablePageSize = 20;
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self gotoChatGroup:[NSString stringWithFormat:@"%@:%@", _selectedStore.store.name, _selectedStore.store.beaconId]];
-    
-//    PFQuery *query = [PFQuery queryWithClassName:PF_CHATROOMS_CLASS_NAME];
-//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
-//     {
-//         if (error == nil)
-//         {
-//             if (!objects && objects.count > 0) {
-//                 PFObject *chatroom = objects[0];
-//                 [self gotoChatView:chatroom];
-//             }
-//             else {
-//                 
-//                 PFObject *object = [PFObject objectWithClassName:PF_CHATROOMS_CLASS_NAME];
-//                 object[PF_CHATROOMS_NAME] = [NSString stringWithFormat:@"%@:%@", _selectedStore.store.name, _selectedStore.store.beaconId];
-//                 [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
-//                  {
-//                      if (error == nil)
-//                      {
-//                          PFQuery *query = [PFQuery queryWithClassName:PF_CHATROOMS_CLASS_NAME];
-//                          [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
-//                           {
-//                               if (error == nil)
-//                               {
-//                                   PFObject *chatroom = objects[0];
-//                                   [self gotoChatView:chatroom];
-//                               }
-//                               else {
-//                                   [ProgressHUD showError:@"Network erro 3."];
-//                                   
-//                                   [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-//                               }
-//                           }];
-//                      }
-//                      else {
-//                          [ProgressHUD showError:@"Network error 2."];
-//                          
-//                          [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-//                      }
-//                  }];
-//             }
-//         }
-//         else {
-//             [ProgressHUD showError:@"Network error 1."];
-//             
-//             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-//         }
-//     }];
-    
-//    self.groupView = [[GroupView alloc] init];
-//    [self.navigationController pushViewController:self.groupView animated:YES];
 }
 
 - (IBAction) showMenu:(UIButton *)sender

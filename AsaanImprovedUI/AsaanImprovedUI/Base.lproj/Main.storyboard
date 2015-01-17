@@ -2395,18 +2395,17 @@
                         <segue destination="Ch1-Dm-2UI" kind="custom" identifier="SMToStoreListSegue" customClass="SWRevealViewControllerSeguePushController" id="0LS-Vd-kxy"/>
                         <segue destination="j4y-PH-ScB" kind="custom" identifier="SMToUpdateProfile" customClass="SWRevealViewControllerSeguePushController" id="3UL-rX-Xbw"/>
                         <segue destination="0sr-8M-0Ou" kind="custom" identifier="SMToFriendsSegue" customClass="SWRevealViewControllerSeguePushController" id="BJb-Oo-Ybq"/>
-                        <segue destination="e3h-ed-gya" kind="unwind" identifier="segueUnwindSlidingMenuToStoreList" unwindAction="unwindToStoreList:" id="wvh-Ub-VsE"/>
+                        <segue destination="tiB-M1-3eT" kind="custom" identifier="SMToChatHistory" customClass="SWRevealViewControllerSeguePushController" id="ZuF-qJ-3oq"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s24-6a-OpC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="e3h-ed-gya" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-2524" y="4096"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="bJf-NC-CCI">
             <objects>
-                <navigationController id="0sr-8M-0Ou" sceneMemberID="viewController">
+                <navigationController autoresizesArchivedViewToFullSize="NO" extendedLayoutIncludesOpaqueBars="YES" id="0sr-8M-0Ou" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9RU-dC-j53">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -2419,10 +2418,58 @@
             </objects>
             <point key="canvasLocation" x="135" y="5024"/>
         </scene>
+        <!--Root View Controller-->
+        <scene sceneID="5fl-Pp-g6b">
+            <objects>
+                <tableViewController id="wiP-rK-hc1" customClass="GroupView" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="RGI-lV-cmL">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="wfa-eS-obZ">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wfa-eS-obZ" id="rA4-7x-VHE">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="wiP-rK-hc1" id="y2Z-FE-Pls"/>
+                            <outlet property="delegate" destination="wiP-rK-hc1" id="46L-eR-Y2A"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="Lxf-dc-N4L">
+                        <barButtonItem key="leftBarButtonItem" image="reveal-icon.png" id="iJu-3V-oJ0"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="revealBarButtonItem" destination="iJu-3V-oJ0" id="KcN-mg-JDx"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j7r-T2-aF6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="859" y="5960"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="K5B-jO-u2H">
+            <objects>
+                <navigationController autoresizesArchivedViewToFullSize="NO" extendedLayoutIncludesOpaqueBars="YES" id="tiB-M1-3eT" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bOk-oq-UAY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="wiP-rK-hc1" kind="relationship" relationship="rootViewController" id="PeM-PR-vkh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nIQ-t7-Gag" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="135" y="5960"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="uhY-GR-2X0">
             <objects>
-                <navigationController storyboardIdentifier="NavigationControllerColor" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="j4y-PH-ScB" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavigationControllerColor" autoresizesArchivedViewToFullSize="NO" extendedLayoutIncludesOpaqueBars="YES" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="j4y-PH-ScB" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="KfF-W9-YId">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -4422,9 +4469,9 @@
         <image name="visa.png" width="32" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="F9u-xN-ecY"/>
         <segue reference="0LS-Vd-kxy"/>
         <segue reference="MsC-Iz-V6n"/>
-        <segue reference="F9u-xN-ecY"/>
         <segue reference="g5V-KY-zil"/>
         <segue reference="33i-hP-PSJ"/>
         <segue reference="t2R-Le-XNf"/>

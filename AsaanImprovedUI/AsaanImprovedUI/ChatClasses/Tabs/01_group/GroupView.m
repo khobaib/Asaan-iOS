@@ -19,6 +19,8 @@
 #import "GroupView.h"
 #import "ChatView.h"
 
+#import "UtilCalls.h"
+
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 @interface GroupView()
 {
@@ -47,10 +49,11 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
 	[super viewDidLoad];
-	self.title = @"Group";
+    self.title = @"Group";
+    [UtilCalls slidingMenuSetupWith:self withItem:self.revealBarButtonItem];
 	//---------------------------------------------------------------------------------------------------------------------------------------------
-	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"New" style:UIBarButtonItemStylePlain target:self
-																			 action:@selector(actionNew)];
+//	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"New" style:UIBarButtonItemStylePlain target:self
+//																			 action:@selector(actionNew)];
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	self.tableView.tableFooterView = [[UIView alloc] init];
 	//---------------------------------------------------------------------------------------------------------------------------------------------

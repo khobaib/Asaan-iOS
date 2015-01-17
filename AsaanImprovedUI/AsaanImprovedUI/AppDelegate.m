@@ -14,6 +14,8 @@
 #import <CoreData/CoreData.h>
 #import <ParseCrashReporting/ParseCrashReporting.h>
 
+#import "UIColor+AsaanBackgroundColor.h"
+
 @interface AppDelegate ()
 
 @end
@@ -82,6 +84,14 @@
     }
     
     [self performSelector:@selector(crash) withObject:nil afterDelay:5.0];
+    
+    
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setHidden:NO];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor asaanBackgroundColor]];
+    [[UINavigationBar appearance] setShadowImage:[UIImage new]];
+    [[UINavigationBar appearance] setTranslucent:NO];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     
     return YES;
 }

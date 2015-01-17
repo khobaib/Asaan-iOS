@@ -9,10 +9,19 @@
 #import "SlidingMenuViewController.h"
 
 #import "AddFriendViewController.h"
+#import "GroupView.h"
 #import <Parse/Parse.h>
 
 @implementation SMTableViewCell1
 @end
+
+#define SEGUE_SMToStoreList         @"SMToStoreListSegue"
+#define SEGUE_SMToUpdateProfile     @"SMToUpdateProfile"
+#define SEGUE_SMToChatHistory       @"SMToChatHistory"
+#define SEGUE_SMToFriends           @"SMToFriendsSegue"
+#define SEGUE_SMToCart              SEGUE_SMToUpdateProfile
+#define SEGUE_SMToOrderHistory      @""
+#define SEGUE_UnwindToStoreList     @"UnwindToStoreList"
 
 @interface SlidingMenuViewController () {
 
@@ -27,8 +36,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _menu = @[@"Stores", @"Profile", @"Friends", @"Cart", @"Order History", @"Logout"];
-    _menuSegue = @[@"SMToStoreListSegue", @"SMToUpdateProfile", @"SMToFriendsSegue", @"SMToUpdateProfile", @"", @"segueUnwindSlidingMenuToStoreList"];
+    _menu = @[@"Stores", @"Profile", @"Chat History", @"Friends", @"Cart", @"Order History", @"Logout"];
+    _menuSegue = @[SEGUE_SMToStoreList, SEGUE_SMToUpdateProfile, SEGUE_SMToChatHistory, SEGUE_SMToFriends, SEGUE_SMToUpdateProfile, SEGUE_SMToOrderHistory, SEGUE_UnwindToStoreList];
     
     NSAssert(_menu.count == _menuSegue.count, @"Menu and MenuSegue length should be equal.");
     
@@ -74,16 +83,26 @@
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    NSLog(@"Test %@", _menuSegue[indexPath.row]);
     if ([_menuSegue[indexPath.row] isEqualToString:@""]) {
         return;
     }
-    if ([_menuSegue[indexPath.row] isEqualToString:@"segueUnwindSlidingMenuToStoreList"]) {
+//    else if ([_menuSegue[indexPath.row] isEqualToString:SEGUE_SMToChatHistory]) {
+//        
+//        SWRevealViewController *revealViewController = self.revealViewController;
+//        GroupView *groupView = [[GroupView alloc] init];
+//        [(UINavigationController *)revealViewController.frontViewController pushViewController:groupView animated:YES];
+//    }
+    else if ([_menuSegue[indexPath.row] isEqualToString:SEGUE_UnwindToStoreList]) {
         PFUser *currentUser = [PFUser currentUser];
         if (currentUser)
             [PFUser logOut];
+        
+        [self performSegueWithIdentifier:SEGUE_SMToStoreList sender:self];
     }
-    [self performSegueWithIdentifier:_menuSegue[indexPath.row] sender:self];
+    else {
+        [self performSegueWithIdentifier:_menuSegue[indexPath.row] sender:self];
+    }
 }
 
 @end
