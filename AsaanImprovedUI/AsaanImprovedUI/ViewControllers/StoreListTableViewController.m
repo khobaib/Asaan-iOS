@@ -28,6 +28,12 @@
 #import "StoreListTableViewCell.h"
 #import "UtilCalls.h"
 
+#import "NavigationController.h"
+#import "GroupView.h"
+#import "PrivateView.h"
+#import "MessagesView.h"
+#import "ProfileView.h"
+
 const NSUInteger FluentPagingTablePreloadMargin = 5;
 const NSUInteger FluentPagingTablePageSize = 20;
 
@@ -39,6 +45,14 @@ const NSUInteger FluentPagingTablePageSize = 20;
 @property (nonatomic) int startPosition;
 @property (nonatomic) int maxResult;
 @property (weak, nonatomic) GTLStoreendpointStoreAndStats *selectedStore;
+
+// Chat Test
+@property (strong, nonatomic) UITabBarController *tabBarController;
+
+@property (strong, nonatomic) GroupView *groupView;
+@property (strong, nonatomic) PrivateView *privateView;
+@property (strong, nonatomic) MessagesView *messagesView;
+@property (strong, nonatomic) ProfileView *profileView;
 
 @end
 
@@ -182,6 +196,7 @@ const NSUInteger FluentPagingTablePageSize = 20;
     if ([dataObject isKindOfClass:[NSNull class]]) {
         
         cell.callButton.enabled = false;
+        cell.chatButton.enabled = false;
         cell.menuButton.enabled = false;
         cell.orderOnlineButton.enabled = false;
         cell.reserveButton.enabled = false;
@@ -190,11 +205,13 @@ const NSUInteger FluentPagingTablePageSize = 20;
     }
     
     [cell.callButton addTarget:self action:@selector(callStore:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.chatButton addTarget:self action:@selector(chatWithStore:) forControlEvents:UIControlEventTouchUpInside];
     [cell.menuButton addTarget:self action:@selector(showMenu:) forControlEvents:UIControlEventTouchUpInside];
     [cell.orderOnlineButton addTarget:self action:@selector(placeOrder:) forControlEvents:UIControlEventTouchUpInside];
     [cell.reserveButton addTarget:self action:@selector(reserveTable:) forControlEvents:UIControlEventTouchUpInside];
     
     cell.callButton.enabled = true;
+    cell.chatButton.enabled = true;
     cell.menuButton.enabled = true;
     cell.orderOnlineButton.enabled = true;
     cell.reserveButton.enabled = true;
@@ -268,7 +285,26 @@ const NSUInteger FluentPagingTablePageSize = 20;
 - (IBAction)chatWithStore:(UIButton *)sender
 {
     _selectedStore = self.dataProvider.dataObjects[sender.tag];
+    
+    
+    
+    self.groupView = [[GroupView alloc] init];
+//    self.privateView = [[PrivateView alloc] init];
+//    self.messagesView = [[MessagesView alloc] init];
+//    self.profileView = [[ProfileView alloc] init];
+    
+//    NavigationController *navController1 = [[NavigationController alloc] initWithRootViewController:self.groupView];
+//    NavigationController *navController2 = [[NavigationController alloc] initWithRootViewController:self.privateView];
+//    NavigationController *navController3 = [[NavigationController alloc] initWithRootViewController:self.messagesView];
+//    NavigationController *navController4 = [[NavigationController alloc] initWithRootViewController:self.profileView];
+//    
+//    self.tabBarController = [[UITabBarController alloc] init];
+//    self.tabBarController.viewControllers = [NSArray arrayWithObjects:navController1, navController2, navController3, navController4, nil];
+//    self.tabBarController.tabBar.translucent = NO;
+//    self.tabBarController.selectedIndex = 0;
 
+    [self.navigationController pushViewController:self.groupView animated:YES];
+//    [self addChildViewController:self.tabBarController];
 }
 
 - (IBAction) showMenu:(UIButton *)sender

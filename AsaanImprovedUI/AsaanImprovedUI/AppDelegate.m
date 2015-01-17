@@ -29,7 +29,7 @@
     // Enable Crash Reporting
     
     [ParseCrashReporting enable];
-
+    
     // ****************************************************************************
     // Uncomment and fill in with your Parse credentials:
     // [Parse setApplicationId:@"your_application_id" clientKey:@"your_client_key"];
@@ -43,7 +43,7 @@
     [PFFacebookUtils initializeFacebook];
     [Stripe setDefaultPublishableKey:@"pk_test_hlpADPUOWaxn6uN0aATgLivW"];
     
-//    [PFUser enableAutomaticUser];
+    //    [PFUser enableAutomaticUser];
     
     PFACL *defaultACL = [PFACL ACL];
     
@@ -80,7 +80,9 @@
                                                          UIRemoteNotificationTypeAlert |
                                                          UIRemoteNotificationTypeSound)];
     }
-[self performSelector:@selector(crash) withObject:nil afterDelay:5.0];
+    
+    [self performSelector:@selector(crash) withObject:nil afterDelay:5.0];
+    
     return YES;
 }
 
@@ -88,12 +90,20 @@
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
-    return [PFFacebookUtils handleOpenURL:url];
+    
+    return [FBAppCall handleOpenURL:url
+                  sourceApplication:sourceApplication
+                        withSession:[PFFacebookUtils session]];
 }
 
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken {
-    [PFPush storeDeviceToken:newDeviceToken];
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    [PFPush storeDeviceToken:deviceToken];
     [PFPush subscribeToChannelInBackground:@"" target:self selector:@selector(subscribeFinished:error:)];
+    
+#warning TODO
+//    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+//    [currentInstallation setDeviceTokenFromData:deviceToken];
+//    [currentInstallation saveInBackground];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
@@ -111,6 +121,9 @@
     if (application.applicationState == UIApplicationStateInactive) {
         [PFAnalytics trackAppOpenedWithRemoteNotificationPayload:userInfo];
     }
+    
+#warning TODO
+//    [self performSelector:@selector(refreshMessagesView) withObject:nil afterDelay:4.0];
 }
 
 ///////////////////////////////////////////////////////////
@@ -124,6 +137,10 @@
 }
 
 #pragma mark - ()
+- (void)refreshMessagesView
+{
+//    [self.messagesView loadMessages];
+}
 
 - (void)subscribeFinished:(NSNumber *)result error:(NSError *)error {
     if ([result boolValue]) {
@@ -149,6 +166,8 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    [FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
