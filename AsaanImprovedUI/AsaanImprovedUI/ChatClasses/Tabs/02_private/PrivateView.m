@@ -16,14 +16,13 @@
 #import <Parse/Parse.h>
 #import "ProgressHUD.h"
 
-#import "AppConstant.h"
+#import "ChatConstants.h"
 #import "messages.h"
 #import "utilities.h"
 
 #import "PrivateView.h"
 #import "ChatView.h"
 #import "SearchView.h"
-#import "NavigationController.h"
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 @interface PrivateView()
@@ -92,9 +91,11 @@
 - (void)actionSearch
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
-	SearchView *searchView = [[SearchView alloc] init];
-	NavigationController *navController = [[NavigationController alloc] initWithRootViewController:searchView];
-	[self presentViewController:navController animated:YES completion:nil];
+#warning TODO
+    [[[NSException alloc] initWithName:@"Uncomment" reason:@"Uncomment the following lines." userInfo:nil] raise];
+//	SearchView *searchView = [[SearchView alloc] init];
+//	NavigationController *navController = [[NavigationController alloc] initWithRootViewController:searchView];
+//	[self presentViewController:navController animated:YES completion:nil];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------

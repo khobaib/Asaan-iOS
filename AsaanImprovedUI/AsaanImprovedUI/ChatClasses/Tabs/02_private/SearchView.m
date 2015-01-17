@@ -12,7 +12,7 @@
 #import <Parse/Parse.h>
 #import "ProgressHUD.h"
 
-#import "AppConstant.h"
+#import "ChatConstants.h"
 #import "messages.h"
 #import "utilities.h"
 

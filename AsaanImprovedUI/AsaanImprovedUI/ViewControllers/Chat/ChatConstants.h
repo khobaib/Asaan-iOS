@@ -1,19 +1,13 @@
 //
-// Copyright (c) 2014 Related Code - http://relatedcode.com
+//  ChatConstants.h
+//  AsaanImprovedUI
 //
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
+//  Created by Hasan Ibna Akbar on 1/17/15.
+//  Copyright (c) 2015 Nirav Saraiya. All rights reserved.
+//
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------
-#define HEXCOLOR(c) [UIColor colorWithRed:((c>>24)&0xFF)/255.0 green:((c>>16)&0xFF)/255.0 blue:((c>>8)&0xFF)/255.0 alpha:((c)&0xFF)/255.0]
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------
-#define		DEFAULT_TAB							0
+#ifndef AsaanImprovedUI_ChatConstants_h
+#define AsaanImprovedUI_ChatConstants_h
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 #define		MESSAGE_INVITE						@"Check out NotificationChat. You can download here: https://github.com/relatedcode/NotificationChat"
@@ -58,3 +52,5 @@
 #define		NOTIFICATION_APP_STARTED			@"NCAppStarted"
 #define		NOTIFICATION_USER_LOGGED_IN			@"NCUserLoggedIn"
 #define		NOTIFICATION_USER_LOGGED_OUT		@"NCUserLoggedOut"
+
+#endif

@@ -96,7 +96,6 @@
 		375D0FCA1A6996CE0016C293 /* tab_messages@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 375D0FC31A6996CE0016C293 /* tab_messages@2x.png */; };
 		375D0FCB1A6996CE0016C293 /* tab_private@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 375D0FC41A6996CE0016C293 /* tab_private@2x.png */; };
 		375D0FCC1A6996CE0016C293 /* tab_profile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 375D0FC51A6996CE0016C293 /* tab_profile@2x.png */; };
-		375D0FFF1A69F5550016C293 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 375D0FD21A69F5550016C293 /* NavigationController.m */; };
 		375D10001A69F5550016C293 /* ChatView.m in Sources */ = {isa = PBXBuildFile; fileRef = 375D0FD51A69F5550016C293 /* ChatView.m */; };
 		375D10011A69F5550016C293 /* GroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 375D0FD91A69F5550016C293 /* GroupView.m */; };
 		375D10021A69F5550016C293 /* PrivateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 375D0FDC1A69F5550016C293 /* PrivateView.m */; };
@@ -109,12 +108,6 @@
 		375D10091A69F5550016C293 /* MessagesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 375D0FE71A69F5550016C293 /* MessagesView.xib */; };
 		375D100A1A69F5550016C293 /* ProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 375D0FEA1A69F5550016C293 /* ProfileView.m */; };
 		375D100B1A69F5550016C293 /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 375D0FEB1A69F5550016C293 /* ProfileView.xib */; };
-		375D100C1A69F5550016C293 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 375D0FEE1A69F5550016C293 /* LoginView.m */; };
-		375D100D1A69F5550016C293 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 375D0FEF1A69F5550016C293 /* LoginView.xib */; };
-		375D100E1A69F5550016C293 /* RegisterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 375D0FF11A69F5550016C293 /* RegisterView.m */; };
-		375D100F1A69F5550016C293 /* RegisterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 375D0FF21A69F5550016C293 /* RegisterView.xib */; };
-		375D10101A69F5550016C293 /* WelcomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 375D0FF41A69F5550016C293 /* WelcomeView.m */; };
-		375D10111A69F5550016C293 /* WelcomeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 375D0FF51A69F5550016C293 /* WelcomeView.xib */; };
 		375D10121A69F5550016C293 /* camera.m in Sources */ = {isa = PBXBuildFile; fileRef = 375D0FF81A69F5550016C293 /* camera.m */; };
 		375D10131A69F5550016C293 /* messages.m in Sources */ = {isa = PBXBuildFile; fileRef = 375D0FFA1A69F5550016C293 /* messages.m */; };
 		375D10141A69F5550016C293 /* pushnotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 375D0FFC1A69F5550016C293 /* pushnotification.m */; };
@@ -538,8 +531,6 @@
 		375D0FC41A6996CE0016C293 /* tab_private@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_private@2x.png"; sourceTree = "<group>"; };
 		375D0FC51A6996CE0016C293 /* tab_profile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_profile@2x.png"; sourceTree = "<group>"; };
 		375D0FCD1A69982A0016C293 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		375D0FD11A69F5550016C293 /* NavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationController.h; sourceTree = "<group>"; };
-		375D0FD21A69F5550016C293 /* NavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationController.m; sourceTree = "<group>"; };
 		375D0FD41A69F5550016C293 /* ChatView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatView.h; sourceTree = "<group>"; };
 		375D0FD51A69F5550016C293 /* ChatView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatView.m; sourceTree = "<group>"; };
 		375D0FD81A69F5550016C293 /* GroupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupView.h; sourceTree = "<group>"; };
@@ -559,15 +550,6 @@
 		375D0FE91A69F5550016C293 /* ProfileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileView.h; sourceTree = "<group>"; };
 		375D0FEA1A69F5550016C293 /* ProfileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileView.m; sourceTree = "<group>"; };
 		375D0FEB1A69F5550016C293 /* ProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
-		375D0FED1A69F5550016C293 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
-		375D0FEE1A69F5550016C293 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
-		375D0FEF1A69F5550016C293 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
-		375D0FF01A69F5550016C293 /* RegisterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterView.h; sourceTree = "<group>"; };
-		375D0FF11A69F5550016C293 /* RegisterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterView.m; sourceTree = "<group>"; };
-		375D0FF21A69F5550016C293 /* RegisterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterView.xib; sourceTree = "<group>"; };
-		375D0FF31A69F5550016C293 /* WelcomeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeView.h; sourceTree = "<group>"; };
-		375D0FF41A69F5550016C293 /* WelcomeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeView.m; sourceTree = "<group>"; };
-		375D0FF51A69F5550016C293 /* WelcomeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WelcomeView.xib; sourceTree = "<group>"; };
 		375D0FF71A69F5550016C293 /* camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = camera.h; sourceTree = "<group>"; };
 		375D0FF81A69F5550016C293 /* camera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = camera.m; sourceTree = "<group>"; };
 		375D0FF91A69F5550016C293 /* messages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = messages.h; sourceTree = "<group>"; };
@@ -576,7 +558,7 @@
 		375D0FFC1A69F5550016C293 /* pushnotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pushnotification.m; sourceTree = "<group>"; };
 		375D0FFD1A69F5550016C293 /* utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utilities.h; sourceTree = "<group>"; };
 		375D0FFE1A69F5550016C293 /* utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = utilities.m; sourceTree = "<group>"; };
-		375D10161A69F5BF0016C293 /* AppConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppConstant.h; sourceTree = "<group>"; };
+		377110EC1A6AB4B90091CCE7 /* ChatConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatConstants.h; sourceTree = "<group>"; };
 		37909B641A23828000649827 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		37909B651A23828000649827 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		37909B661A23828000649827 /* PaymentInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentInfoViewController.h; sourceTree = "<group>"; };
@@ -1321,23 +1303,11 @@
 		375D0FCF1A69F5550016C293 /* ChatClasses */ = {
 			isa = PBXGroup;
 			children = (
-				375D10161A69F5BF0016C293 /* AppConstant.h */,
-				375D0FD01A69F5550016C293 /* Application */,
 				375D0FD31A69F5550016C293 /* Chat */,
 				375D0FD61A69F5550016C293 /* Tabs */,
-				375D0FEC1A69F5550016C293 /* User */,
 				375D0FF61A69F5550016C293 /* Utilities */,
 			);
 			path = ChatClasses;
-			sourceTree = "<group>";
-		};
-		375D0FD01A69F5550016C293 /* Application */ = {
-			isa = PBXGroup;
-			children = (
-				375D0FD11A69F5550016C293 /* NavigationController.h */,
-				375D0FD21A69F5550016C293 /* NavigationController.m */,
-			);
-			path = Application;
 			sourceTree = "<group>";
 		};
 		375D0FD31A69F5550016C293 /* Chat */ = {
@@ -1405,22 +1375,6 @@
 			path = 04_profile;
 			sourceTree = "<group>";
 		};
-		375D0FEC1A69F5550016C293 /* User */ = {
-			isa = PBXGroup;
-			children = (
-				375D0FED1A69F5550016C293 /* LoginView.h */,
-				375D0FEE1A69F5550016C293 /* LoginView.m */,
-				375D0FEF1A69F5550016C293 /* LoginView.xib */,
-				375D0FF01A69F5550016C293 /* RegisterView.h */,
-				375D0FF11A69F5550016C293 /* RegisterView.m */,
-				375D0FF21A69F5550016C293 /* RegisterView.xib */,
-				375D0FF31A69F5550016C293 /* WelcomeView.h */,
-				375D0FF41A69F5550016C293 /* WelcomeView.m */,
-				375D0FF51A69F5550016C293 /* WelcomeView.xib */,
-			);
-			path = User;
-			sourceTree = "<group>";
-		};
 		375D0FF61A69F5550016C293 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -1434,6 +1388,14 @@
 				375D0FFE1A69F5550016C293 /* utilities.m */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		377110EB1A6AB48B0091CCE7 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				377110EC1A6AB4B90091CCE7 /* ChatConstants.h */,
+			);
+			path = Chat;
 			sourceTree = "<group>";
 		};
 		37909B631A23828000649827 /* Login */ = {
@@ -1771,6 +1733,7 @@
 		D4522BE41A1679F2002EFA92 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				377110EB1A6AB48B0091CCE7 /* Chat */,
 				D4DEC1C91A3211780075281E /* Order */,
 				3709EAC41A31C8420060B49B /* Menu */,
 				37909B631A23828000649827 /* Login */,
@@ -2122,7 +2085,7 @@
 				TargetAttributes = {
 					D4F2759E1A0C021800CEC95A = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = 7742T5X57N;
+						DevelopmentTeam = V39QP9S6S6;
 					};
 				};
 			};
@@ -2188,12 +2151,9 @@
 				D41D32281A11DD9300EA49B6 /* personePlaceholder.png in Resources */,
 				D4522B151A15264F002EFA92 /* mastercard@2x.png in Resources */,
 				375D0F9A1A6996610016C293 /* JSQMessagesViewController.xib in Resources */,
-				375D100D1A69F5550016C293 /* LoginView.xib in Resources */,
 				D4F275B11A0C021800CEC95A /* Main.storyboard in Resources */,
 				3709EA941A31802A0060B49B /* MWPhotoBrowser.bundle in Resources */,
 				D41D32161A11DD9300EA49B6 /* addCard.png in Resources */,
-				375D100F1A69F5550016C293 /* RegisterView.xib in Resources */,
-				375D10111A69F5550016C293 /* WelcomeView.xib in Resources */,
 				D41D32291A11DD9300EA49B6 /* Phone.png in Resources */,
 				D4522B0E1A15264F002EFA92 /* diners.png in Resources */,
 				D4522B331A155977002EFA92 /* reveal-icon.png in Resources */,
@@ -2288,7 +2248,6 @@
 				3709EA951A31802A0060B49B /* MWPhotoBrowser.m in Sources */,
 				375D0FB31A6996610016C293 /* JSQMessagesLabel.m in Sources */,
 				375D10131A69F5550016C293 /* messages.m in Sources */,
-				375D10101A69F5550016C293 /* WelcomeView.m in Sources */,
 				D449EB6F1A1BCDEB00879383 /* GTLStoreendpointStoreOwnerCollection.m in Sources */,
 				D4DEC1D51A321F630075281E /* AddPaymentCardViewController.m in Sources */,
 				D47799781A66E00F00386430 /* GTLStoreendpointMenuItemAndStats.m in Sources */,
@@ -2303,7 +2262,6 @@
 				375D0FB61A6996610016C293 /* JSQMessagesMediaPlaceholderView.m in Sources */,
 				D4ED02871A1EA08A000AB270 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				D4A8C18B1A263B1800DA344A /* README.md in Sources */,
-				375D0FFF1A69F5550016C293 /* NavigationController.m in Sources */,
 				D4522B251A15264F002EFA92 /* STPBankAccount.m in Sources */,
 				375D0F9E1A6996610016C293 /* JSQMessagesTimestampFormatter.m in Sources */,
 				D4A8C1881A263B1800DA344A /* AFURLResponseSerialization.m in Sources */,
@@ -2423,7 +2381,6 @@
 				3709EABD1A31804E0060B49B /* PSTCollectionViewItemKey.m in Sources */,
 				D4A6A3931A17D175003F3EAB /* SHSPhoneNumberFormatter.m in Sources */,
 				D449EB5C1A1BCDEB00879383 /* GTLQueryStoreendpoint.m in Sources */,
-				375D100E1A69F5550016C293 /* RegisterView.m in Sources */,
 				D4EDD4241A33EF1100C82006 /* MenuMWCaptionView.m in Sources */,
 				375D0FAB1A6996610016C293 /* JSQMessagesCollectionView.m in Sources */,
 				37909B6D1A23828000649827 /* LoginViewController.m in Sources */,
@@ -2440,7 +2397,6 @@
 				D4522B1C1A15264F002EFA92 /* PTKCard.m in Sources */,
 				D4F275AB1A0C021800CEC95A /* AsaanImprovedUI.xcdatamodeld in Sources */,
 				3709EABA1A31804E0060B49B /* PSTCollectionViewController.m in Sources */,
-				375D100C1A69F5550016C293 /* LoginView.m in Sources */,
 				D4522B1D1A15264F002EFA92 /* PTKCardCVC.m in Sources */,
 				D449EB5E1A1BCDEB00879383 /* GTLServiceStoreendpoint.m in Sources */,
 				370BFF5E1A403A2B00F612EE /* ReviewsViewController.m in Sources */,
@@ -2664,7 +2620,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Asaan;
-				PROVISIONING_PROFILE = "578875d7-a7b0-42c1-8bea-e1507602ed90";
+				PROVISIONING_PROFILE = "4e98dbe4-c04e-4301-af76-473d8058c749";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2684,7 +2640,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Asaan;
-				PROVISIONING_PROFILE = "578875d7-a7b0-42c1-8bea-e1507602ed90";
+				PROVISIONING_PROFILE = "4e98dbe4-c04e-4301-af76-473d8058c749";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

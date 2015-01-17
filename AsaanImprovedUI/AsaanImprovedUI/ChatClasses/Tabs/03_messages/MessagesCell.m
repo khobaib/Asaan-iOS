@@ -12,7 +12,7 @@
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
 
-#import "AppConstant.h"
+#import "ChatConstants.h"
 #import "utilities.h"
 
 #import "MessagesCell.h"

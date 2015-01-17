@@ -12,7 +12,7 @@
 #import <Parse/Parse.h>
 #import "ProgressHUD.h"
 
-#import "AppConstant.h"
+#import "ChatConstants.h"
 #import "camera.h"
 #import "messages.h"
 #import "pushnotification.h"
@@ -55,7 +55,7 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
 	[super viewDidLoad];
-	self.title = @"Chat";
+    self.title = roomId;//@"Chat";
 
 	users = [[NSMutableArray alloc] init];
 	messages = [[NSMutableArray alloc] init];
@@ -142,6 +142,12 @@
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	if (object[PF_CHAT_PICTURE] == nil)
 	{
+#warning TODO : ADDED this condition by me
+        NSLog(@"User : %@", user[PF_USER_FULLNAME]);
+        if (!user[PF_USER_FULLNAME]) {
+            user[PF_USER_FULLNAME] = user.username;
+        }
+        
 		JSQMessage *message = [[JSQMessage alloc] initWithSenderId:user.objectId senderDisplayName:user[PF_USER_FULLNAME]
 																	  date:object.createdAt text:object[PF_CHAT_TEXT]];
 		[messages addObject:message];

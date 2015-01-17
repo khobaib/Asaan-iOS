@@ -13,7 +13,7 @@
 #import <ParseUI/ParseUI.h>
 #import "ProgressHUD.h"
 
-#import "AppConstant.h"
+#import "ChatConstants.h"
 #import "camera.h"
 #import "pushnotification.h"
 #import "utilities.h"

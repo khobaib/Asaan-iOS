@@ -11,7 +11,7 @@
 
 #import <Parse/Parse.h>
 
-#import "AppConstant.h"
+#import "ChatConstants.h"
 
 #import "pushnotification.h"
 

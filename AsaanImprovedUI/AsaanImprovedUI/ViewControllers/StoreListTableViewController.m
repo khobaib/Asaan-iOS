@@ -7,7 +7,6 @@
 //
 
 #import "StoreListTableViewController.h"
-#import "MBProgressHUD.h"
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
 #import "GTLStoreendpoint.h"
@@ -28,11 +27,14 @@
 #import "StoreListTableViewCell.h"
 #import "UtilCalls.h"
 
-#import "NavigationController.h"
-#import "GroupView.h"
-#import "PrivateView.h"
-#import "MessagesView.h"
-#import "ProfileView.h"
+//#import "GroupView.h"
+#import "messages.h"
+//#import "utilities.h"
+#import "ChatView.h"
+#import "ChatConstants.h"
+
+#import "MBProgressHUD.h"
+#import "ProgressHUD.h"
 
 const NSUInteger FluentPagingTablePreloadMargin = 5;
 const NSUInteger FluentPagingTablePageSize = 20;
@@ -49,10 +51,7 @@ const NSUInteger FluentPagingTablePageSize = 20;
 // Chat Test
 @property (strong, nonatomic) UITabBarController *tabBarController;
 
-@property (strong, nonatomic) GroupView *groupView;
-@property (strong, nonatomic) PrivateView *privateView;
-@property (strong, nonatomic) MessagesView *messagesView;
-@property (strong, nonatomic) ProfileView *profileView;
+//@property (strong, nonatomic) GroupView *groupView;
 
 @end
 
@@ -104,6 +103,8 @@ const NSUInteger FluentPagingTablePageSize = 20;
         return;
     }
     else{
+        currentUser[PF_USER_FULLNAME] = currentUser.username;
+        
         // Load GAE Objects on startup
         GlobalObjectHolder *objectHolder = appDelegate.globalObjectHolder;
         
@@ -282,29 +283,128 @@ const NSUInteger FluentPagingTablePageSize = 20;
     _selectedStore = self.dataProvider.dataObjects[sender.tag];
 }
 
+- (void)gotoChatView:(PFObject *)chatroom
+{
+//    PFObject *chatroom = chatrooms[indexPath.row];
+    NSString *roomId = chatroom.objectId;
+    //---------------------------------------------------------------------------------------------------------------------------------------------
+    CreateMessageItem([PFUser currentUser], roomId, chatroom[PF_CHATROOMS_NAME]);
+    //---------------------------------------------------------------------------------------------------------------------------------------------
+    ChatView *chatView = [[ChatView alloc] initWith:roomId];
+    chatView.hidesBottomBarWhenPushed = YES;
+    
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    [self.navigationController pushViewController:chatView animated:YES];
+}
+
+- (void)gotoChatGroup:(NSString *)groupName
+{
+    NSLog(@"Chat : %@", groupName);
+    PFQuery *query = [PFQuery queryWithClassName:PF_CHATROOMS_CLASS_NAME];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+     {
+         NSLog(@"Chatroom count : %d", objects.count);
+         if (error == nil)
+         {
+             PFObject *chatroom = nil;
+             if (objects && objects.count > 0) {
+                 for (PFObject *c in objects) {
+                     NSLog(@"Chatroom 1 : %@", c[PF_CHATROOMS_NAME]);
+                     if ([c[PF_CHATROOMS_NAME] isEqualToString:groupName]) {
+                         chatroom = c;
+                         break;
+                     }
+                 }
+             }
+             
+             if (chatroom) {
+                 NSLog(@"Chatroom 2 : %@", chatroom);
+                 [self gotoChatView:chatroom];
+             }
+             else {
+                 
+                 NSLog(@"Chatroom creation : %@", groupName);
+                 PFObject *object = [PFObject objectWithClassName:PF_CHATROOMS_CLASS_NAME];
+                 object[PF_CHATROOMS_NAME] = groupName;
+                 [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+                  {
+                      if (error == nil)
+                      {
+                          NSLog(@"Chatroom after creation : %@", groupName);
+                          [self gotoChatGroup:groupName];
+                      }
+                      else {
+                          [ProgressHUD showError:@"Network error 2."];
+                          
+                          [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                      }
+                  }];
+             }
+         }
+         else {
+             [ProgressHUD showError:@"Network error 1."];
+             
+             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+         }
+     }];
+}
+
 - (IBAction)chatWithStore:(UIButton *)sender
 {
     _selectedStore = self.dataProvider.dataObjects[sender.tag];
     
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self gotoChatGroup:[NSString stringWithFormat:@"%@:%@", _selectedStore.store.name, _selectedStore.store.beaconId]];
     
+//    PFQuery *query = [PFQuery queryWithClassName:PF_CHATROOMS_CLASS_NAME];
+//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+//     {
+//         if (error == nil)
+//         {
+//             if (!objects && objects.count > 0) {
+//                 PFObject *chatroom = objects[0];
+//                 [self gotoChatView:chatroom];
+//             }
+//             else {
+//                 
+//                 PFObject *object = [PFObject objectWithClassName:PF_CHATROOMS_CLASS_NAME];
+//                 object[PF_CHATROOMS_NAME] = [NSString stringWithFormat:@"%@:%@", _selectedStore.store.name, _selectedStore.store.beaconId];
+//                 [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+//                  {
+//                      if (error == nil)
+//                      {
+//                          PFQuery *query = [PFQuery queryWithClassName:PF_CHATROOMS_CLASS_NAME];
+//                          [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+//                           {
+//                               if (error == nil)
+//                               {
+//                                   PFObject *chatroom = objects[0];
+//                                   [self gotoChatView:chatroom];
+//                               }
+//                               else {
+//                                   [ProgressHUD showError:@"Network erro 3."];
+//                                   
+//                                   [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+//                               }
+//                           }];
+//                      }
+//                      else {
+//                          [ProgressHUD showError:@"Network error 2."];
+//                          
+//                          [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+//                      }
+//                  }];
+//             }
+//         }
+//         else {
+//             [ProgressHUD showError:@"Network error 1."];
+//             
+//             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+//         }
+//     }];
     
-    self.groupView = [[GroupView alloc] init];
-//    self.privateView = [[PrivateView alloc] init];
-//    self.messagesView = [[MessagesView alloc] init];
-//    self.profileView = [[ProfileView alloc] init];
-    
-//    NavigationController *navController1 = [[NavigationController alloc] initWithRootViewController:self.groupView];
-//    NavigationController *navController2 = [[NavigationController alloc] initWithRootViewController:self.privateView];
-//    NavigationController *navController3 = [[NavigationController alloc] initWithRootViewController:self.messagesView];
-//    NavigationController *navController4 = [[NavigationController alloc] initWithRootViewController:self.profileView];
-//    
-//    self.tabBarController = [[UITabBarController alloc] init];
-//    self.tabBarController.viewControllers = [NSArray arrayWithObjects:navController1, navController2, navController3, navController4, nil];
-//    self.tabBarController.tabBar.translucent = NO;
-//    self.tabBarController.selectedIndex = 0;
-
-    [self.navigationController pushViewController:self.groupView animated:YES];
-//    [self addChildViewController:self.tabBarController];
+//    self.groupView = [[GroupView alloc] init];
+//    [self.navigationController pushViewController:self.groupView animated:YES];
 }
 
 - (IBAction) showMenu:(UIButton *)sender
