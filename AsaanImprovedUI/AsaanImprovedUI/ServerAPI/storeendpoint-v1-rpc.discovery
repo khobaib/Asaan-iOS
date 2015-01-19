@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/0vECLN7iEED96puMUoiwoCAuR1c\"",
+ "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/ODO739-EOsigUaZkDlyzaiqneFc\"",
  "discoveryVersion": "v1",
  "id": "storeendpoint:v1",
  "name": "storeendpoint",
@@ -939,6 +939,43 @@
   }
  },
  "methods": {
+  "storeendpoint.getMenuItemAndStatsForMenu": {
+   "id": "storeendpoint.getMenuItemAndStatsForMenu",
+   "parameters": {
+    "firstPosition": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    },
+    "maxResult": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    },
+    "menuPOSId": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    },
+    "storeId": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    }
+   },
+   "parameterOrder": [
+    "storeId",
+    "menuPOSId",
+    "firstPosition",
+    "maxResult"
+   ],
+   "returns": {
+    "$ref": "MenuItemAndStatsCollection"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
   "storeendpoint.getStatsForAllStores": {
    "id": "storeendpoint.getStatsForAllStores",
    "parameters": {
@@ -1093,43 +1130,6 @@
    ],
    "returns": {
     "$ref": "StoreMenuItemCollection"
-   },
-   "scopes": [
-    "https://www.googleapis.com/auth/userinfo.email"
-   ]
-  },
-  "storeendpoint.getStoreMenuItemsForMenu": {
-   "id": "storeendpoint.getStoreMenuItemsForMenu",
-   "parameters": {
-    "firstPosition": {
-     "type": "integer",
-     "required": true,
-     "format": "int32"
-    },
-    "maxResult": {
-     "type": "integer",
-     "required": true,
-     "format": "int32"
-    },
-    "menuPOSId": {
-     "type": "integer",
-     "required": true,
-     "format": "int32"
-    },
-    "storeId": {
-     "type": "string",
-     "required": true,
-     "format": "int64"
-    }
-   },
-   "parameterOrder": [
-    "storeId",
-    "menuPOSId",
-    "firstPosition",
-    "maxResult"
-   ],
-   "returns": {
-    "$ref": "MenuItemAndStatsCollection"
    },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"

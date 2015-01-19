@@ -38,7 +38,7 @@ const NSTimeInterval DataLoadingOperationDuration1 = 0.3;
         [self addExecutionBlock:^{
             AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
             GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-            GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreMenuItemsForMenuWithStoreId:storeId menuPOSId:menuPOSId firstPosition:firstPosition maxResult:maxResult];
+            GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetMenuItemAndStatsForMenuWithStoreId:storeId menuPOSId:menuPOSId firstPosition:firstPosition maxResult:maxResult];
             
             [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointMenuItemAndStatsCollection *object,NSError *error){
                 if(!error)

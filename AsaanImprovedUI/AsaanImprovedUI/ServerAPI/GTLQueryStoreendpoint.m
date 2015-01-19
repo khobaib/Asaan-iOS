@@ -51,6 +51,20 @@
 #pragma mark Service level methods
 // These create a GTLQueryStoreendpoint object.
 
++ (id)queryForGetMenuItemAndStatsForMenuWithStoreId:(long long)storeId
+                                          menuPOSId:(NSInteger)menuPOSId
+                                      firstPosition:(NSInteger)firstPosition
+                                          maxResult:(NSInteger)maxResult {
+  NSString *methodName = @"storeendpoint.getMenuItemAndStatsForMenu";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.storeId = storeId;
+  query.menuPOSId = menuPOSId;
+  query.firstPosition = firstPosition;
+  query.maxResult = maxResult;
+  query.expectedObjectClass = [GTLStoreendpointMenuItemAndStatsCollection class];
+  return query;
+}
+
 + (id)queryForGetStatsForAllStoresWithFirstPosition:(NSInteger)firstPosition
                                           maxResult:(NSInteger)maxResult {
   NSString *methodName = @"storeendpoint.getStatsForAllStores";
@@ -115,20 +129,6 @@
   query.firstPosition = firstPosition;
   query.maxResult = maxResult;
   query.expectedObjectClass = [GTLStoreendpointStoreMenuItemCollection class];
-  return query;
-}
-
-+ (id)queryForGetStoreMenuItemsForMenuWithStoreId:(long long)storeId
-                                        menuPOSId:(NSInteger)menuPOSId
-                                    firstPosition:(NSInteger)firstPosition
-                                        maxResult:(NSInteger)maxResult {
-  NSString *methodName = @"storeendpoint.getStoreMenuItemsForMenu";
-  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
-  query.storeId = storeId;
-  query.menuPOSId = menuPOSId;
-  query.firstPosition = firstPosition;
-  query.maxResult = maxResult;
-  query.expectedObjectClass = [GTLStoreendpointMenuItemAndStatsCollection class];
   return query;
 }
 

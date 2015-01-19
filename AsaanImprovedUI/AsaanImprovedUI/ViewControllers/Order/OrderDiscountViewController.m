@@ -43,6 +43,9 @@
     
     // Prevent keyboard from showing by default
     [self.txtDiscountCode endEditing:YES];
+//    UIColor *color = [UIColor darkTextColor];
+//    self.txtDiscountCode.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Enter Discount Code" attributes:@{NSForegroundColorAttributeName: color}];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -68,6 +71,7 @@
             NSString *foundResponse = [NSString stringWithFormat:@"%@ - %@", self.txtDiscountCode.text, discount.title];
             AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
             appDelegate.globalObjectHolder.orderInProgress.selectedDiscount = discount;
+            self.txtDiscountCode.text = foundResponse;
             return;
         }
     }

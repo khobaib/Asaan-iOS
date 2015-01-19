@@ -58,6 +58,15 @@
 #pragma mark Service level methods
 // These create a GTLQueryStoreendpoint object.
 
+// Method: storeendpoint.getMenuItemAndStatsForMenu
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
+// Fetches a GTLStoreendpointMenuItemAndStatsCollection.
++ (id)queryForGetMenuItemAndStatsForMenuWithStoreId:(long long)storeId
+                                          menuPOSId:(NSInteger)menuPOSId
+                                      firstPosition:(NSInteger)firstPosition
+                                          maxResult:(NSInteger)maxResult;
+
 // Method: storeendpoint.getStatsForAllStores
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
@@ -105,15 +114,6 @@
 + (id)queryForGetStoreMenuItemsWithStoreId:(long long)storeId
                              firstPosition:(NSInteger)firstPosition
                                  maxResult:(NSInteger)maxResult;
-
-// Method: storeendpoint.getStoreMenuItemsForMenu
-//  Authorization scope(s):
-//   kGTLAuthScopeStoreendpointUserinfoEmail
-// Fetches a GTLStoreendpointMenuItemAndStatsCollection.
-+ (id)queryForGetStoreMenuItemsForMenuWithStoreId:(long long)storeId
-                                        menuPOSId:(NSInteger)menuPOSId
-                                    firstPosition:(NSInteger)firstPosition
-                                        maxResult:(NSInteger)maxResult;
 
 // Method: storeendpoint.getStoreMenus
 //  Authorization scope(s):

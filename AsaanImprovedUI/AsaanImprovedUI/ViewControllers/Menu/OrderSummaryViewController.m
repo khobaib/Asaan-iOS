@@ -469,8 +469,8 @@
             
             txtMenuItemName.text = @"Amount Due";
             txtQty.text = nil;
-            NSNumber *amount;
             
+            NSNumber *amount = [[NSNumber alloc] initWithLong:[self finalAmount]];
             txtAmount.text = [UtilCalls percentAmountToString:amount];
             cell.accessoryType = UITableViewCellAccessoryNone;
             break;
@@ -539,6 +539,8 @@
         [self performSegueWithIdentifier:@"segueOrderSummaryToSelectAddress" sender:self];
     else if (cell.tag == 702)
         [self performSegueWithIdentifier:@"segueOrderSummaryToSelectPaymentMode" sender:self];
+    else if (cell.tag == 703)
+        [self performSegueWithIdentifier:@"segueOrderSummaryToAddDiscount" sender:self];
 }
 
 - (Boolean) isDefaultUserAddressValidForStoreDelivery

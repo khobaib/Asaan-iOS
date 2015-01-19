@@ -1172,11 +1172,7 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Add Discount Code" id="ewX-Ef-QPZ">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="gST-9N-Lk3">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Add Discount Code" id="ewX-Ef-QPZ"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="txtDiscountCode" destination="TxE-W8-j6N" id="AOt-Dm-R66"/>
@@ -1543,13 +1539,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="501" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k6M-yG-snu">
-                                                    <rect key="frame" x="16" y="15" width="56" height="14"/>
+                                                    <rect key="frame" x="16" y="15.5" width="56" height="13.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="503" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$12.95" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V51-mu-2OW">
-                                                    <rect key="frame" x="469" y="15" width="50" height="14"/>
+                                                    <rect key="frame" x="477" y="15.5" width="50" height="13.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="50" id="cFO-j3-U6n"/>
                                                         <constraint firstAttribute="width" constant="100" id="s0E-oN-par"/>
@@ -1564,7 +1560,7 @@
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="502" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ocu-ss-03w">
-                                                    <rect key="frame" x="441" y="15" width="20" height="14"/>
+                                                    <rect key="frame" x="449" y="15.5" width="20" height="13.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="RH3-jK-76X"/>
                                                     </constraints>
@@ -1575,7 +1571,7 @@
                                             </subviews>
                                             <color key="backgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="V51-mu-2OW" secondAttribute="trailing" constant="8" id="C6s-yF-siK"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="V51-mu-2OW" secondAttribute="trailing" id="C6s-yF-siK"/>
                                                 <constraint firstAttribute="centerY" secondItem="ocu-ss-03w" secondAttribute="centerY" id="E9j-Pf-Pti"/>
                                                 <constraint firstItem="ocu-ss-03w" firstAttribute="top" secondItem="k6M-yG-snu" secondAttribute="top" id="GTW-gt-Pl5"/>
                                                 <constraint firstItem="V51-mu-2OW" firstAttribute="leading" secondItem="ocu-ss-03w" secondAttribute="trailing" constant="8" id="H2u-f5-LW9"/>
@@ -4550,8 +4546,8 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="kk2-Lu-CM6"/>
                                         <exclude reference="g37-DP-vLO"/>
+                                        <exclude reference="kk2-Lu-CM6"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -4566,8 +4562,8 @@
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="fgQ-Kx-FDC"/>
                                         <exclude reference="W5t-cs-pVk"/>
+                                        <exclude reference="fgQ-Kx-FDC"/>
                                     </mask>
                                 </variation>
                             </label>
@@ -4589,12 +4585,12 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="J4P-RD-Oft"/>
                                 <exclude reference="5e6-HI-g3F"/>
-                                <exclude reference="kaa-N1-Wrl"/>
-                                <exclude reference="rka-ZD-i3G"/>
+                                <exclude reference="J4P-RD-Oft"/>
                                 <exclude reference="UOY-nh-rBQ"/>
+                                <exclude reference="kaa-N1-Wrl"/>
                                 <exclude reference="nWw-a5-2RS"/>
+                                <exclude reference="rka-ZD-i3G"/>
                             </mask>
                         </variation>
                     </view>
