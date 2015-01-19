@@ -15,6 +15,7 @@
 
 @property (strong, nonatomic) GTLStoreendpointStore *selectedStore;
 @property (strong, nonatomic) NSMutableArray *selectedMenuItems; //OnlineOrderSelectedMenuItem
+@property (strong, nonatomic) GTLStoreendpointStoreDiscount *selectedDiscount;
 @property (nonatomic) int orderType;
 @property (nonatomic) int partySize;
 @property (strong, nonatomic) NSDate *orderTime;
