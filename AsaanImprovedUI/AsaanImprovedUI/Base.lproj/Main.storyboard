@@ -4302,7 +4302,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <segue destination="QcQ-Hq-HW2" kind="show" id="EBi-2D-Js4"/>
+                                            <segue destination="QcQ-Hq-HW2" kind="show" identifier="InfoToMapVCSegue" id="EBi-2D-Js4"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="160" id="hhY-js-Wsa">
@@ -4468,10 +4468,10 @@
             </objects>
             <point key="canvasLocation" x="1835" y="-1374"/>
         </scene>
-        <!--View Controller-->
+        <!--Store Map View Controller-->
         <scene sceneID="ook-QR-C1U">
             <objects>
-                <viewController id="QcQ-Hq-HW2" sceneMemberID="viewController">
+                <viewController id="QcQ-Hq-HW2" customClass="StoreMapViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="X8C-LK-TwW"/>
                         <viewControllerLayoutGuide type="bottom" id="T0d-sG-Srf"/>
@@ -4482,6 +4482,9 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="yjE-IF-LBP">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <connections>
+                                    <outlet property="delegate" destination="QcQ-Hq-HW2" id="p6t-Ro-1gT"/>
+                                </connections>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -4492,6 +4495,9 @@
                             <constraint firstItem="yjE-IF-LBP" firstAttribute="leading" secondItem="heZ-GD-4Au" secondAttribute="leading" id="zGC-Iy-Pbu"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="storeMapView" destination="yjE-IF-LBP" id="NDF-aC-Zne"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="142-us-f60" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
