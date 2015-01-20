@@ -111,6 +111,8 @@
 		375D10131A69F5550016C293 /* messages.m in Sources */ = {isa = PBXBuildFile; fileRef = 375D0FFA1A69F5550016C293 /* messages.m */; };
 		375D10141A69F5550016C293 /* pushnotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 375D0FFC1A69F5550016C293 /* pushnotification.m */; };
 		375D10151A69F5550016C293 /* utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 375D0FFE1A69F5550016C293 /* utilities.m */; };
+		378D9AE51A6EAAEB0031F61F /* StoreMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 378D9AE41A6EAAEB0031F61F /* StoreMapViewController.m */; };
+		378D9AE81A6EAF370031F61F /* StoreLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 378D9AE71A6EAF370031F61F /* StoreLocation.m */; };
 		37909B6D1A23828000649827 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37909B651A23828000649827 /* LoginViewController.m */; };
 		37909B6E1A23828000649827 /* PaymentInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37909B671A23828000649827 /* PaymentInfoViewController.m */; };
 		37909B6F1A23828000649827 /* SignupProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37909B691A23828000649827 /* SignupProfileViewController.m */; };
@@ -564,6 +566,10 @@
 		375D0FFD1A69F5550016C293 /* utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utilities.h; sourceTree = "<group>"; };
 		375D0FFE1A69F5550016C293 /* utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = utilities.m; sourceTree = "<group>"; };
 		377110EC1A6AB4B90091CCE7 /* ChatConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatConstants.h; sourceTree = "<group>"; };
+		378D9AE31A6EAAEB0031F61F /* StoreMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreMapViewController.h; sourceTree = "<group>"; };
+		378D9AE41A6EAAEB0031F61F /* StoreMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreMapViewController.m; sourceTree = "<group>"; };
+		378D9AE61A6EAF370031F61F /* StoreLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreLocation.h; sourceTree = "<group>"; };
+		378D9AE71A6EAF370031F61F /* StoreLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreLocation.m; sourceTree = "<group>"; };
 		37909B641A23828000649827 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		37909B651A23828000649827 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		37909B661A23828000649827 /* PaymentInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentInfoViewController.h; sourceTree = "<group>"; };
@@ -2122,7 +2128,7 @@
 				TargetAttributes = {
 					D4F2759E1A0C021800CEC95A = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = 7742T5X57N;
+						DevelopmentTeam = V39QP9S6S6;
 					};
 				};
 			};
@@ -2338,6 +2344,7 @@
 				3709EAB71A31804E0060B49B /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */,
 				373FC8401A698A5500F2BC53 /* StoreListTableViewCell.m in Sources */,
 				375D0FA11A6996610016C293 /* JSQMessagesCollectionViewFlowLayoutInvalidationContext.m in Sources */,
+				378D9AE81A6EAF370031F61F /* StoreLocation.m in Sources */,
 				370BFF571A40379D00F612EE /* ContainerViewController.m in Sources */,
 				375D0FA01A6996610016C293 /* JSQMessagesCollectionViewFlowLayout.m in Sources */,
 				375D0FB71A6996610016C293 /* JSQMessagesToolbarContentView.m in Sources */,
@@ -2442,6 +2449,7 @@
 				3709EABA1A31804E0060B49B /* PSTCollectionViewController.m in Sources */,
 				D4522B1D1A15264F002EFA92 /* PTKCardCVC.m in Sources */,
 				D449EB5E1A1BCDEB00879383 /* GTLServiceStoreendpoint.m in Sources */,
+				378D9AE51A6EAAEB0031F61F /* StoreMapViewController.m in Sources */,
 				370BFF5E1A403A2B00F612EE /* ReviewsViewController.m in Sources */,
 				375D10141A69F5550016C293 /* pushnotification.m in Sources */,
 				370BFF671A403F0600F612EE /* StoreViewController.m in Sources */,
@@ -2654,8 +2662,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Khobaib Chowdhury (HK8YVC6C79)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Khobaib Chowdhury (HK8YVC6C79)";
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/AsaanImprovedUI/frameworks";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AsaanImprovedUI/Asaan-Prefix.pch";
@@ -2664,7 +2672,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Asaan;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "fddc8ebc-eae7-426f-ba79-21c38b65e8ea";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2674,8 +2682,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Khobaib Chowdhury (HK8YVC6C79)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Khobaib Chowdhury (HK8YVC6C79)";
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/AsaanImprovedUI/frameworks";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AsaanImprovedUI/Asaan-Prefix.pch";
@@ -2684,7 +2692,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Asaan;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "fddc8ebc-eae7-426f-ba79-21c38b65e8ea";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
