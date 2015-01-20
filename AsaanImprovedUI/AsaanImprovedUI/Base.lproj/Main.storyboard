@@ -2432,7 +2432,7 @@
                             <color key="tintColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SlidingMenuCell" id="nCT-yy-Ivr" customClass="SMTableViewCell1">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SlidingMenuCell" id="nCT-yy-Ivr" customClass="SMTableViewCell1">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nCT-yy-Ivr" id="Fjv-9y-gOY">
                                     <autoresizingMask key="autoresizingMask"/>
