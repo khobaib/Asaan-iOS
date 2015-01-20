@@ -9,7 +9,7 @@
 #import "StoreViewController.h"
 
 #import "ContainerViewController.h"
-#import "HistoryViewController.h"
+#import "OrderHistoryTableViewController.h"
 #import "InfoViewController.h"
 #import "ReviewsViewController.h"
 
@@ -60,8 +60,8 @@
     if ([viewController isKindOfClass:[InfoViewController class]]) {
         ((InfoViewController *)viewController).selectedStore = self.selectedStore;
     }
-    else if ([viewController isKindOfClass:[HistoryViewController class]]) {
-        ((HistoryViewController *)viewController).selectedStore = self.selectedStore;
+    else if ([viewController isKindOfClass:[OrderHistoryTableViewController class]]) {
+        ((OrderHistoryTableViewController *)viewController).selectedStore = self.selectedStore;
     }
     else if ([viewController isKindOfClass:[ReviewsViewController class]]) {
         ((ReviewsViewController *)viewController).selectedStore = self.selectedStore;

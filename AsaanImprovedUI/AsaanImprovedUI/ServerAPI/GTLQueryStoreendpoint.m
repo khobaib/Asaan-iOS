@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryStoreendpoint (28 custom class methods, 9 custom properties)
+//   GTLQueryStoreendpoint (29 custom class methods, 12 custom properties)
 
 #import "GTLQueryStoreendpoint.h"
 
@@ -22,6 +22,7 @@
 #import "GTLStoreendpointMenuItemAndStatsCollection.h"
 #import "GTLStoreendpointMenuItemModifiersAndGroups.h"
 #import "GTLStoreendpointMenusAndMenuItems.h"
+#import "GTLStoreendpointOrderReviewAndItemReviews.h"
 #import "GTLStoreendpointStore.h"
 #import "GTLStoreendpointStoreAndStatsCollection.h"
 #import "GTLStoreendpointStoreCollection.h"
@@ -36,6 +37,7 @@
 #import "GTLStoreendpointStoreMenuItemModifier.h"
 #import "GTLStoreendpointStoreMenuItemModifierGroup.h"
 #import "GTLStoreendpointStoreOrder.h"
+#import "GTLStoreendpointStoreOrderCollection.h"
 #import "GTLStoreendpointStoreOwner.h"
 #import "GTLStoreendpointStoreOwnerCollection.h"
 #import "GTLStoreendpointStorePOSConnection.h"
@@ -44,8 +46,8 @@
 
 @implementation GTLQueryStoreendpoint
 
-@dynamic fields, firstPosition, maxResult, menuItemPOSId, menuPOSId, menuType,
-         orderMode, POSIntCheckId, storeId;
+@dynamic fields, firstPosition, guestCount, maxResult, menuItemPOSId, menuPOSId,
+         menuType, orderId, orderMode, storeId, storeName, userId;
 
 #pragma mark -
 #pragma mark Service level methods
@@ -62,6 +64,16 @@
   query.firstPosition = firstPosition;
   query.maxResult = maxResult;
   query.expectedObjectClass = [GTLStoreendpointMenuItemAndStatsCollection class];
+  return query;
+}
+
++ (id)queryForGetReviewsForUserAndOrderWithUserId:(long long)userId
+                                          orderId:(long long)orderId {
+  NSString *methodName = @"storeendpoint.getReviewsForUserAndOrder";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.userId = userId;
+  query.orderId = orderId;
+  query.expectedObjectClass = [GTLStoreendpointOrderReviewAndItemReviews class];
   return query;
 }
 
@@ -144,13 +156,15 @@
   return query;
 }
 
-+ (id)queryForGetStoreOrderWithStoreId:(long long)storeId
-                         POSIntCheckId:(long long)POSIntCheckId {
-  NSString *methodName = @"storeendpoint.getStoreOrder";
++ (id)queryForGetStoreOrdersByUserWithUserId:(long long)userId
+                               firstPosition:(NSInteger)firstPosition
+                                   maxResult:(NSInteger)maxResult {
+  NSString *methodName = @"storeendpoint.getStoreOrdersByUser";
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
-  query.storeId = storeId;
-  query.POSIntCheckId = POSIntCheckId;
-  query.expectedObjectClass = [GTLStoreendpointStoreOrder class];
+  query.userId = userId;
+  query.firstPosition = firstPosition;
+  query.maxResult = maxResult;
+  query.expectedObjectClass = [GTLStoreendpointStoreOrderCollection class];
   return query;
 }
 
@@ -200,7 +214,9 @@
 
 + (id)queryForPlaceOrderWithObject:(GTLStoreendpointAsaanLongString *)object
                            storeId:(long long)storeId
-                         orderMode:(NSInteger)orderMode {
+                         orderMode:(NSInteger)orderMode
+                        guestCount:(NSInteger)guestCount
+                         storeName:(NSString *)storeName {
   if (object == nil) {
     GTL_DEBUG_ASSERT(object != nil, @"%@ got a nil object", NSStringFromSelector(_cmd));
     return nil;
@@ -210,7 +226,9 @@
   query.bodyObject = object;
   query.storeId = storeId;
   query.orderMode = orderMode;
-  query.expectedObjectClass = [GTLStoreendpointAsaanLong class];
+  query.guestCount = guestCount;
+  query.storeName = storeName;
+  query.expectedObjectClass = [GTLStoreendpointStoreOrder class];
   return query;
 }
 
@@ -237,7 +255,8 @@
 }
 
 + (id)queryForSaveOrUpdateOrdersFromPOSWithObject:(GTLStoreendpointAsaanLongString *)object
-                                          storeId:(long long)storeId {
+                                          storeId:(long long)storeId
+                                        storeName:(NSString *)storeName {
   if (object == nil) {
     GTL_DEBUG_ASSERT(object != nil, @"%@ got a nil object", NSStringFromSelector(_cmd));
     return nil;
@@ -246,6 +265,7 @@
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
   query.bodyObject = object;
   query.storeId = storeId;
+  query.storeName = storeName;
   return query;
 }
 

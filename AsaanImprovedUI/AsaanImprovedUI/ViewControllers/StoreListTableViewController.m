@@ -110,6 +110,14 @@ const NSUInteger FluentPagingTablePageSize = 20;
             [objectHolder loadUserAddressesFromServer];
     }
     
+    [self.navigationController setNavigationBarHidden:NO];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.barTintColor = [UIColor asaanBackgroundColor];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+    
     GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
     if (goh.orderInProgress != nil)
     {
@@ -130,6 +138,33 @@ const NSUInteger FluentPagingTablePageSize = 20;
         UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:button];
         self.navigationItem.rightBarButtonItem = item;
     }
+    
+    NSNumber *number = [NSNumber numberWithLong:125l];
+    
+    [self scheduleNotificationWithItem:number interval:10];
+}
+
+- (void)scheduleNotificationWithItem:(NSNumber *)item interval:(int)seconds {
+    UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+    if (localNotif == nil)
+        return;
+    NSDate *date = [NSDate date];
+    localNotif.fireDate = [date dateByAddingTimeInterval:seconds];
+    localNotif.timeZone = [NSTimeZone defaultTimeZone];
+    
+    localNotif.alertBody = @"How was Kama Bistro?";
+    localNotif.alertAction = NSLocalizedString(@"Review", nil);
+    
+    localNotif.soundName = UILocalNotificationDefaultSoundName;
+    localNotif.applicationIconBadgeNumber = 1;
+    
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
+        localNotif.category = @"REVIEW_CATEGORY";
+
+    NSDictionary *infoDict = [NSDictionary dictionaryWithObject:item forKey:@"REVIEW_ORDER"];
+    localNotif.userInfo = infoDict;
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
 }
 
 - (void)didReceiveMemoryWarning {

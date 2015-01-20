@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStore (0 custom class methods, 32 custom properties)
+//   GTLStoreendpointStore (0 custom class methods, 33 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLObject.h"
@@ -39,6 +39,7 @@
 // Remapped to 'descriptionProperty' to avoid NSObject's 'description'.
 @property (copy) NSString *descriptionProperty;
 
+@property (copy) NSString *executiveChef;
 @property (copy) NSString *fbUrl;
 @property (copy) NSString *gplusUrl;
 @property (copy) NSString *hours;

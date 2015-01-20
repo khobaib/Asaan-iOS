@@ -29,6 +29,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     // Enable Crash Reporting
+    NSLog(@"Inside didFinishLaunchingWithOptions 1");
     
     [ParseCrashReporting enable];
     
@@ -72,7 +73,7 @@
                                                         UIUserNotificationTypeBadge |
                                                         UIUserNotificationTypeSound);
         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
-                                                                                 categories:nil];
+                                                                                 categories:[self createNotificationCategories]];
         [application registerUserNotificationSettings:settings];
         [application registerForRemoteNotifications];
     } else
@@ -83,16 +84,28 @@
                                                          UIRemoteNotificationTypeSound)];
     }
     
-    [[UINavigationBar appearance] setHidden:NO];
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage new]
-                                                  forBarMetrics:UIBarMetricsDefault];
-    [UINavigationBar appearance].barTintColor = [UIColor asaanBackgroundColor];
-    [UINavigationBar appearance].shadowImage = [UIImage new];
-    [UINavigationBar appearance].translucent = NO;
-    [UINavigationBar appearance].titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+//    [[UINavigationBar appearance] setHidden:NO];
+//    [[UINavigationBar appearance] setBackgroundImage:[UIImage new]
+//                                                  forBarMetrics:UIBarMetricsDefault];
+//    [UINavigationBar appearance].barTintColor = [UIColor asaanBackgroundColor];
+//    [UINavigationBar appearance].shadowImage = [UIImage new];
+//    [UINavigationBar appearance].translucent = NO;
+//    [UINavigationBar appearance].titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+//    
+//    [self performSelector:@selector(crash) withObject:nil afterDelay:5.0];
     
-    [self performSelector:@selector(crash) withObject:nil afterDelay:5.0];
-        
+//[self performSelector:@selector(crash) withObject:nil afterDelay:5.0];
+    UILocalNotification *localNotif =
+    [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    if (localNotif) {
+        NSString *itemName = [localNotif.userInfo objectForKey:@"REVIEW_ORDER"];
+        NSLog(@"Inside didFinishLaunchingWithOptions");
+//        [viewController displayItem:itemName];  // custom method
+        application.applicationIconBadgeNumber = localNotif.applicationIconBadgeNumber-1;
+    }
+//    [window addSubview:viewController.view];
+//    [window makeKeyAndVisible];
+
     return YES;
 }
 
@@ -106,8 +119,117 @@
                         withSession:[PFFacebookUtils session]];
 }
 
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    [PFPush storeDeviceToken:deviceToken];
+    - (void)application:(UIApplication *)app didReceiveLocalNotification:(UILocalNotification *)notification {
+    NSString *itemName = [notification.userInfo objectForKey:@"REVIEW_ORDER"];
+    NSLog(@"Inside didReceiveLocalNotification");
+//    [viewController displayItem:itemName];  // custom method
+    app.applicationIconBadgeNumber = notification.applicationIconBadgeNumber - 1;
+}
+
+- (void)application:(UIApplication *) application
+    handleActionWithIdentifier: (NSString *) identifier
+    forLocalNotification: (NSDictionary *) notification completionHandler: (void (^)()) completionHandler {
+    if ([identifier isEqualToString: @"REVIEW_IDENTIFIER"])
+        [self handleReviewActionWithNotification:notification];
+    else if ([identifier isEqualToString: @"REMIND_LATER_IDENTIFIER"])
+        [self handleRemindActionWithNotification:notification];
+
+    // Must be called when finished
+    completionHandler();
+}
+
+- (void)handleReviewActionWithNotification:(NSDictionary *) notification {
+    NSLog(@"Inside handleReviewActionWithNotification");
+}
+
+- (void)handleRemindActionWithNotification:(NSDictionary *) notification {
+    NSLog(@"Inside handleRemindActionWithNotification");
+}
+
+- (NSSet *)createNotificationCategories {
+    // First create the category
+    UIMutableUserNotificationCategory *reviewCategory =
+    [[UIMutableUserNotificationCategory alloc] init];
+    
+    // Identifier to include in your push payload and local notification
+    reviewCategory.identifier = @"REVIEW_CATEGORY";
+    
+    // Add the actions to the category and set the action context
+    [reviewCategory setActions:@[[self defineOrderReviewAction], [self defineOrderRemindLaterAction], [self defineDeclineAction]]
+                    forContext:UIUserNotificationActionContextDefault];
+    
+    // Set the actions to present in a minimal context
+    [reviewCategory setActions:@[[self defineOrderReviewAction], [self defineDeclineAction]]
+                    forContext:UIUserNotificationActionContextMinimal];
+    NSSet *categories = [NSSet setWithObjects:reviewCategory, nil];
+    return categories;
+}
+
+- (UIMutableUserNotificationAction *)defineOrderReviewAction {
+    UIMutableUserNotificationAction *reviewAction =
+    [[UIMutableUserNotificationAction alloc] init];
+    
+    // Define an ID string to be passed back to your app when you handle the action
+    reviewAction.identifier = @"REVIEW_IDENTIFIER";
+    
+    // Localized string displayed in the action button
+    reviewAction.title = @"Review";
+    
+    // If you need to show UI, choose foreground
+    reviewAction.activationMode = UIUserNotificationActivationModeForeground;
+    
+    // Destructive actions display in red
+    reviewAction.destructive = NO;
+    
+    // Set whether the action requires the user to authenticate
+    reviewAction.authenticationRequired = NO;
+    return reviewAction;
+}
+
+- (UIMutableUserNotificationAction *)defineOrderRemindLaterAction {
+    UIMutableUserNotificationAction *remindLaterAction =
+    [[UIMutableUserNotificationAction alloc] init];
+    
+    // Define an ID string to be passed back to your app when you handle the action
+    remindLaterAction.identifier = @"REMIND_LATER_IDENTIFIER";
+    
+    // Localized string displayed in the action button
+    remindLaterAction.title = @"Later";
+    
+    // If you need to show UI, choose foreground
+    remindLaterAction.activationMode = UIUserNotificationActivationModeBackground;
+    
+    // Destructive actions display in red
+    remindLaterAction.destructive = NO;
+    
+    // Set whether the action requires the user to authenticate
+    remindLaterAction.authenticationRequired = NO;
+    return remindLaterAction;
+}
+
+- (UIMutableUserNotificationAction *)defineDeclineAction {
+    UIMutableUserNotificationAction *remindLaterAction =
+    [[UIMutableUserNotificationAction alloc] init];
+    
+    // Define an ID string to be passed back to your app when you handle the action
+    remindLaterAction.identifier = @"DECLINE_IDENTIFIER";
+    
+    // Localized string displayed in the action button
+    remindLaterAction.title = @"Skip";
+    
+    // If you need to show UI, choose foreground
+    remindLaterAction.activationMode = UIUserNotificationActivationModeBackground;
+    
+    // Destructive actions display in red
+    remindLaterAction.destructive = NO;
+    
+    // Set whether the action requires the user to authenticate
+    remindLaterAction.authenticationRequired = NO;
+    return remindLaterAction;
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken {
+    [PFPush storeDeviceToken:newDeviceToken];
     [PFPush subscribeToChannelInBackground:@"" target:self selector:@selector(subscribeFinished:error:)];
     
 #warning TODO

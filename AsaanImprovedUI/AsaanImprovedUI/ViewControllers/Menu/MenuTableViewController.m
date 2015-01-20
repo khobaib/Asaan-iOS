@@ -403,6 +403,12 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     cell.descriptionLabel.text = menuItemAndStats.menuItem.longDescription;
     cell.priceLabel.text = [UtilCalls amountToString:menuItemAndStats.menuItem.price];
     
+    if (menuItemAndStats.stats.mostFrequentlyOrdered != nil && menuItemAndStats.stats.mostFrequentlyOrdered.boolValue == TRUE)
+        cell.mostOrderedLabel.text = @"Most Frequently Ordered";
+    
+    if (menuItemAndStats.stats.orders != nil && menuItemAndStats.stats.orders.longValue > 0)
+        cell.todaysOrdersLabels.text = [NSString stringWithFormat:@"Orders: %@", [UtilCalls formattedNumber:menuItemAndStats.stats.orders]];
+    
     cell.delegate = self;
     cell.itemImageView.tag = rowIndex - indexPath.section - 1;
     

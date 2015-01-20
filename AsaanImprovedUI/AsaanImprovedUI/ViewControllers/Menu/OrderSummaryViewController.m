@@ -140,7 +140,7 @@
     GTLStoreendpointAsaanLongString *als = [[GTLStoreendpointAsaanLongString alloc]init];
     [als setStrValue:orderString];
     
-    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForPlaceOrderWithObject:als storeId:self.orderInProgress.selectedStore.identifier.longValue orderMode:self.orderInProgress.orderType];
+    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForPlaceOrderWithObject:als storeId:self.orderInProgress.selectedStore.identifier.longValue orderMode:self.orderInProgress.orderType guestCount:self.orderInProgress.partySize storeName:self.orderInProgress.selectedStore.name];
     
     //[query setCustomParameter:@"hmHAJvHvKYmilfOqgUnc22tf/RL5GLmPbcFBg02d6wm+ZB1o3f7RKYqmB31+DGoH9Ad3s3WP99n587qDZ5tm+w==" forKey:@"asaan-auth-token"];
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
