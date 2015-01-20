@@ -84,15 +84,16 @@
                                                          UIRemoteNotificationTypeSound)];
     }
     
-//    [[UINavigationBar appearance] setHidden:NO];
-//    [[UINavigationBar appearance] setBackgroundImage:[UIImage new]
-//                                                  forBarMetrics:UIBarMetricsDefault];
-//    [UINavigationBar appearance].barTintColor = [UIColor asaanBackgroundColor];
-//    [UINavigationBar appearance].shadowImage = [UIImage new];
-//    [UINavigationBar appearance].translucent = NO;
-//    [UINavigationBar appearance].titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
-//    
-//    [self performSelector:@selector(crash) withObject:nil afterDelay:5.0];
+    if (SYSTEM_VERSION_GREATER_THAN(@"8.0")) {
+        [[UINavigationBar appearance] setHidden:NO];
+        [UINavigationBar appearance].translucent = NO;
+    }
+    
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage new]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    [UINavigationBar appearance].barTintColor = [UIColor asaanBackgroundColor];
+    [UINavigationBar appearance].shadowImage = [UIImage new];
+    [UINavigationBar appearance].titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     
 //[self performSelector:@selector(crash) withObject:nil afterDelay:5.0];
     UILocalNotification *localNotif =
