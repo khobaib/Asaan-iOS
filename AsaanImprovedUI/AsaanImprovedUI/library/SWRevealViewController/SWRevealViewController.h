@@ -311,6 +311,12 @@ typedef NS_ENUM(NSInteger, SWRevealToggleAnimationType)
 @property (strong, nonatomic) UIView *frontOverlayView;
 @property (assign, nonatomic) BOOL shouldUseFrontViewOverlay;
 
+// ***************************************************************************** //
+// Added by bdpothik ( bd.pothik@gmail.com)
+// To avoid Spring animation while new viewcontroller is selected, 'shouldUseDoubleAnimationOnVCChange' has to be made NO. Default is YES.
+// ***************************************************************************** //
+@property (assign, nonatomic) BOOL shouldUseDoubleAnimationOnVCChange;
+
 /* The class properly handles all the relevant calls to appearance methods on the contained controllers.
    Moreover you can assign a delegate to let the class inform you on positions and animation activity */
 

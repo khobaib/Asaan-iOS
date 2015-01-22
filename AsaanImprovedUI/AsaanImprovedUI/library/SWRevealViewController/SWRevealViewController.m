@@ -648,6 +648,7 @@ const int FrontViewPositionNone = 0xff;
     _draggableBorderWidth = 0.0f;
     _clipsViewsToBounds = NO;
     _extendsPointInsideHit = NO;
+    _shouldUseDoubleAnimationOnVCChange = YES;
 }
 
 
@@ -1381,7 +1382,9 @@ const int FrontViewPositionNone = 0xff;
     __weak SWRevealViewController *theSelf = self;
     if ( animated )
     {
-        _enqueue( [theSelf _setFrontViewPosition:preReplacementPosition withDuration:firstDuration] );
+        if (self.shouldUseDoubleAnimationOnVCChange) {
+            _enqueue( [theSelf _setFrontViewPosition:preReplacementPosition withDuration:firstDuration] );
+        }
         _enqueue( [theSelf _performTransitionOperation:SWRevealControllerOperationReplaceFrontController withViewController:newFrontViewController animated:NO] );
         _enqueue( [theSelf _setFrontViewPosition:FrontViewPositionLeft withDuration:duration] );
     }
@@ -1746,6 +1749,7 @@ const int FrontViewPositionNone = 0xff;
     [coder encodeDouble:_draggableBorderWidth forKey:@"_draggableBorderWidth"];
     [coder encodeBool:_clipsViewsToBounds forKey:@"_clipsViewsToBounds"];
     [coder encodeBool:_extendsPointInsideHit forKey:@"_extendsPointInsideHit"];
+    [coder encodeBool:_shouldUseDoubleAnimationOnVCChange forKey:@"_shouldUseDoubleAnimationOnVCChange"];
     
     [coder encodeObject:_rearViewController forKey:@"_rearViewController"];
     [coder encodeObject:_frontViewController forKey:@"_frontViewController"];
@@ -1784,6 +1788,7 @@ const int FrontViewPositionNone = 0xff;
     _draggableBorderWidth = [coder decodeDoubleForKey:@"_draggableBorderWidth"];
     _clipsViewsToBounds = [coder decodeBoolForKey:@"_clipsViewsToBounds"];
     _extendsPointInsideHit = [coder decodeBoolForKey:@"_extendsPointInsideHit"];
+    _shouldUseDoubleAnimationOnVCChange = [coder decodeBoolForKey:@"_shouldUseDoubleAnimationOnVCChange"];
 
     [self setRearViewController:[coder decodeObjectForKey:@"_rearViewController"]];
     [self setFrontViewController:[coder decodeObjectForKey:@"_frontViewController"]];
