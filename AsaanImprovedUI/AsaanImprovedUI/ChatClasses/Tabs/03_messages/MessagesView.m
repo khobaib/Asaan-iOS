@@ -198,7 +198,7 @@
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	PFObject *message = messages[indexPath.row];
-	ChatView *chatView = [[ChatView alloc] initWith:message[PF_MESSAGES_ROOMID]];
+	ChatView *chatView = [[ChatView alloc] initWith:message[PF_MESSAGES_ROOMID] title:message[PF_MESSAGES_ROOMID]];
 	chatView.hidesBottomBarWhenPushed = YES;
 	[self.navigationController pushViewController:chatView animated:YES];
 }

@@ -25,7 +25,7 @@
 	NSTimer *timer;
 	BOOL isLoading;
 
-	NSString *roomId;
+    NSString *roomId;
 
 	NSMutableArray *users;
 	NSMutableArray *messages;
@@ -42,11 +42,12 @@
 @implementation ChatView
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-- (id)initWith:(NSString *)roomId_
+- (id)initWith:(NSString *)roomId_ title:(NSString *)title_
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
 	self = [super init];
-	roomId = roomId_;
+    roomId = roomId_;
+    self.title = title_;//@"Chat";
 	return self;
 }
 
@@ -55,7 +56,6 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
 	[super viewDidLoad];
-    self.title = roomId;//@"Chat";
 
 	users = [[NSMutableArray alloc] init];
 	messages = [[NSMutableArray alloc] init];

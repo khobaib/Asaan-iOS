@@ -15,6 +15,6 @@
 @interface ChatView : JSQMessagesViewController <UIActionSheetDelegate, UIImagePickerControllerDelegate>
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 
-- (id)initWith:(NSString *)roomId_;
+- (id)initWith:(NSString *)roomId_ title:(NSString *)title_;
 
 @end

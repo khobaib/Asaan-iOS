@@ -284,7 +284,7 @@
 		PFUser *user2 = users2[indexPath.row];
 		NSString *roomId = StartPrivateChat(user1, user2);
 		//-----------------------------------------------------------------------------------------------------------------------------------------
-		ChatView *chatView = [[ChatView alloc] initWith:roomId];
+		ChatView *chatView = [[ChatView alloc] initWith:roomId title:roomId];
 		chatView.hidesBottomBarWhenPushed = YES;
 		[self.navigationController pushViewController:chatView animated:YES];
 	}
