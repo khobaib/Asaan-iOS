@@ -160,7 +160,7 @@
 	if (cell == nil) cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"GroupChatCell"];
 
 	PFObject *chatroom = chatrooms[indexPath.row];
-	cell.textLabel.text = [[chatroom[PF_CHATROOMS_NAME] componentsSeparatedByString:@"@"] objectAtIndex:0];
+	cell.textLabel.text = [[chatroom[PF_CHATROOMS_NAME] componentsSeparatedByString:@"$$"] objectAtIndex:0];
 	if (cell.detailTextLabel.text == nil) cell.detailTextLabel.text = @" ";
 	cell.detailTextLabel.textColor = [UIColor lightGrayColor];
 
@@ -195,7 +195,7 @@
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	CreateMessageItem([PFUser currentUser], roomId, chatroom[PF_CHATROOMS_NAME]);
 	//---------------------------------------------------------------------------------------------------------------------------------------------
-	ChatView *chatView = [[ChatView alloc] initWith:roomId title:[[chatroom[PF_CHATROOMS_NAME] componentsSeparatedByString:@"@"] objectAtIndex:0]];
+	ChatView *chatView = [[ChatView alloc] initWith:roomId title:[[chatroom[PF_CHATROOMS_NAME] componentsSeparatedByString:@"$$"] objectAtIndex:0]];
 	chatView.hidesBottomBarWhenPushed = YES;
 	[self.navigationController pushViewController:chatView animated:YES];
 }

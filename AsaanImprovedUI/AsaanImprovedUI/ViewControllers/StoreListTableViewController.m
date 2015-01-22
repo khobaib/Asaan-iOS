@@ -312,7 +312,7 @@ const NSUInteger FluentPagingTablePageSize = 20;
     //---------------------------------------------------------------------------------------------------------------------------------------------
     CreateMessageItem([PFUser currentUser], roomId, chatroom[PF_CHATROOMS_NAME]);
     //---------------------------------------------------------------------------------------------------------------------------------------------
-    ChatView *chatView = [[ChatView alloc] initWith:roomId title:[[chatroom[PF_CHATROOMS_NAME] componentsSeparatedByString:@"@"] objectAtIndex:0]];
+    ChatView *chatView = [[ChatView alloc] initWith:roomId title:[[chatroom[PF_CHATROOMS_NAME] componentsSeparatedByString:@"$$"] objectAtIndex:0]];
     chatView.hidesBottomBarWhenPushed = YES;
     
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -377,7 +377,7 @@ const NSUInteger FluentPagingTablePageSize = 20;
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     PFUser *user = [PFUser currentUser];
-    [self gotoChatGroup:[NSString stringWithFormat:@"%@@%@:%@", _selectedStore.store.name, user.email, _selectedStore.store.identifier]];
+    [self gotoChatGroup:[NSString stringWithFormat:@"%@$$%@$$%@", _selectedStore.store.name, user.email, _selectedStore.store.identifier]];
 }
 
 - (IBAction) showMenu:(UIButton *)sender

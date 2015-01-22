@@ -82,7 +82,7 @@
 //        NSLog(@"name = %@, torphy = %@, cuisine = %@", _selectedStore.name, _selectedStore.trophies.firstObject, _selectedStore.subType);
         
         self.restaurantName.text = _selectedStore.name;
-        self.chefName.text = @"Mr. HHH";
+        self.chefName.text = _selectedStore.executiveChef;
         self.cuisineName.text = _selectedStore.subType;
         
         NSMutableString *trophies = [[NSMutableString alloc] initWithString:@""];
