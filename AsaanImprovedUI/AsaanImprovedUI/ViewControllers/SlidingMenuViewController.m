@@ -10,6 +10,7 @@
 
 #import "AddFriendViewController.h"
 #import "GroupView.h"
+#import "AppDelegate.h"
 #import <Parse/Parse.h>
 
 @implementation SMTableViewCell1
@@ -36,12 +37,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _menu = @[@"Stores", @"Profile", @"Chat History", @"Friends", @"Cart", @"Order History", @"Logout"];
-    _menuSegue = @[SEGUE_SMToStoreList, SEGUE_SMToUpdateProfile, SEGUE_SMToChatHistory, SEGUE_SMToFriends, SEGUE_SMToUpdateProfile, SEGUE_SMToOrderHistory, SEGUE_UnwindToStoreList];
-    
-    NSAssert(_menu.count == _menuSegue.count, @"Menu and MenuSegue length should be equal.");
+//    _menu = @[@"Stores", @"Profile", @"Chat History", @"Friends", @"Pending Orders", @"Order History", @"Logout"];
+//    _menuSegue = @[SEGUE_SMToStoreList, SEGUE_SMToUpdateProfile, SEGUE_SMToChatHistory, SEGUE_SMToFriends, SEGUE_SMToUpdateProfile, SEGUE_SMToOrderHistory, SEGUE_UnwindToStoreList];
+//    
+//    NSAssert(_menu.count == _menuSegue.count, @"Menu and MenuSegue length should be equal.");
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    if (appDelegate.globalObjectHolder.orderInProgress != nil) {
+        
+        _menu = @[@"Stores", @"Profile", @"Chat History", @"Friends", @"Pending Order", @"Order History", @"Logout"];
+        _menuSegue = @[SEGUE_SMToStoreList, SEGUE_SMToUpdateProfile, SEGUE_SMToChatHistory, SEGUE_SMToFriends, SEGUE_SMToCart, SEGUE_SMToOrderHistory, SEGUE_UnwindToStoreList];
+    }
+    else {
+        
+        _menu = @[@"Stores", @"Profile", @"Chat History", @"Friends", @"Order History", @"Logout"];
+        _menuSegue = @[SEGUE_SMToStoreList, SEGUE_SMToUpdateProfile, SEGUE_SMToChatHistory, SEGUE_SMToFriends, SEGUE_SMToOrderHistory, SEGUE_UnwindToStoreList];
+    }
+    
+    NSAssert(_menu.count == _menuSegue.count, @"Menu and MenuSegue length should be equal.");
 }
 
 - (void)didReceiveMemoryWarning {
