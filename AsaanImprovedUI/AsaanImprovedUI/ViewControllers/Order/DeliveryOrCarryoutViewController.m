@@ -16,7 +16,6 @@
 #import "GTLUserendpointUserAddress.h"
 #import "GTLUserendpointUserCard.h"
 #import "GTLUserendpointUserCardCollection.h"
-#import "AsaanConstants.h"
 #import "AppDelegate.h"
 #import "PTKCardType.h"
 #import <Parse/Parse.h>

@@ -3,7 +3,7 @@
  */
 
 //
-//  GTLStoreendpointStoreOrderCollection.h
+//  GTLStoreendpointGETCHECKDETAILS.h
 //
 
 // ----------------------------------------------------------------------------
@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStoreOrderCollection (0 custom class methods, 1 custom properties)
+//   GTLStoreendpointGETCHECKDETAILS (0 custom class methods, 2 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLObject.h"
@@ -21,16 +21,14 @@
   #import "GTLObject.h"
 #endif
 
-@class GTLStoreendpointStoreOrder;
+@class GTLStoreendpointCHECK;
 
 // ----------------------------------------------------------------------------
 //
-//   GTLStoreendpointStoreOrderCollection
+//   GTLStoreendpointGETCHECKDETAILS
 //
 
-// This class supports NSFastEnumeration over its "items" property. It also
-// supports -itemAtIndex: to retrieve individual objects from "items".
-
-@interface GTLStoreendpointStoreOrderCollection : GTLCollectionObject
-@property (retain) NSArray *items;  // of GTLStoreendpointStoreOrder
+@interface GTLStoreendpointGETCHECKDETAILS : GTLObject
+@property (retain) GTLStoreendpointCHECK *check;
+@property (retain) NSNumber *intcheckid;  // intValue
 @end

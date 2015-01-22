@@ -12,6 +12,8 @@
 #import "GroupView.h"
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
+#import "AppDelegate.h"
+#import "UIView+Toast.h"
 
 @implementation SMTableViewCell1
 @end
@@ -20,8 +22,8 @@
 #define SEGUE_SMToUpdateProfile     @"SMToUpdateProfile"
 #define SEGUE_SMToChatHistory       @"SMToChatHistory"
 #define SEGUE_SMToFriends           @"SMToFriendsSegue"
-#define SEGUE_SMToCart              SEGUE_SMToUpdateProfile
-#define SEGUE_SMToOrderHistory      @""
+#define SEGUE_SMToCart              @"segueSMToOrderSummary"
+#define SEGUE_SMToOrderHistory      @"segueSMToOrderHistory"
 #define SEGUE_UnwindToStoreList     @"UnwindToStoreList"
 
 @interface SlidingMenuViewController () {
@@ -37,10 +39,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    _menu = @[@"Stores", @"Profile", @"Chat History", @"Friends", @"Pending Orders", @"Order History", @"Logout"];
-//    _menuSegue = @[SEGUE_SMToStoreList, SEGUE_SMToUpdateProfile, SEGUE_SMToChatHistory, SEGUE_SMToFriends, SEGUE_SMToUpdateProfile, SEGUE_SMToOrderHistory, SEGUE_UnwindToStoreList];
-//    
-//    NSAssert(_menu.count == _menuSegue.count, @"Menu and MenuSegue length should be equal.");
+    _menu = @[@"Stores", @"Profile", @"Chat History", @"Friends", @"Pending Orders", @"Order History", @"Logout"];
+    _menuSegue = @[SEGUE_SMToStoreList, SEGUE_SMToUpdateProfile, SEGUE_SMToChatHistory, SEGUE_SMToFriends, SEGUE_SMToCart, SEGUE_SMToOrderHistory, SEGUE_UnwindToStoreList];
+    
+    NSAssert(_menu.count == _menuSegue.count, @"Menu and MenuSegue length should be equal.");
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
@@ -118,6 +120,14 @@
             [PFUser logOut];
         
         [self performSegueWithIdentifier:SEGUE_SMToStoreList sender:self];
+    }
+    else if ([_menuSegue[indexPath.row] isEqualToString:SEGUE_SMToCart]) {
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+        GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
+        if (goh.orderInProgress != nil)
+            [self performSegueWithIdentifier:_menuSegue[indexPath.row] sender:self];
+        else
+            [self.view makeToast:@"No pending order is available."];
     }
     else {
         [self performSegueWithIdentifier:_menuSegue[indexPath.row] sender:self];

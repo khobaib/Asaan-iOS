@@ -11,11 +11,16 @@
 @interface UtilCalls : NSObject
 
 + (NSString *) formattedNumber:(NSNumber*) number;
++ (NSString *) rawAmountToString:(NSNumber*)number;
 + (NSString *) amountToString:(NSNumber*)number;
 + (NSString *) percentAmountToString:(NSNumber*)number;
 + (Boolean)isDistanceBetweenPointA:(CLLocation*)first AndPointB:(CLLocation *)second withinRange:(NSUInteger)range;
 
 
 + (void)slidingMenuSetupWith:(UIViewController *)viewController withItem:(UIBarButtonItem *)revealButtonItem;
+
++ (NSNumber *) stringToNumber:(NSString*)string;
+
++ (NSString *) getAuthTokenForCurrentUser;
 
 @end

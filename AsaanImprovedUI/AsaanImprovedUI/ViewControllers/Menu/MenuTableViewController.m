@@ -191,12 +191,12 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
                          menuSegmentHolder.topRowIndex = [NSIndexPath indexPathForRow:0 inSection:0];
                          [_menuSegmentHolders addObject:menuSegmentHolder];
                          if (menu.menuPOSId.longValue == menuItemAndStats.menuItem.menuPOSId.longValue)
-                             [menuSegmentHolder.provider setInitialObjects:object.menuItems ForPage:0];
+                             [menuSegmentHolder.provider setInitialObjects:object.menuItems ForPage:1];
                      }
                  }
                  
              }else{
-                 NSLog(@"StoreLoadingOperation Error:%@",[error userInfo]);
+                 NSLog(@"MenusAndMenuItems Error:%@",[error userInfo]);
              }
              
              if (_menuSegmentHolders.count == 1)

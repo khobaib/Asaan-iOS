@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "UtilCalls.h"
+#import <Parse/Parse.h>
+
+@interface UtilCalls()
+@end
 
 @implementation UtilCalls
 
@@ -30,6 +34,16 @@
         return [numberFormatter stringFromNumber:number];
 }
 
++ (NSString *) rawAmountToString:(NSNumber*)number
+{
+    NSNumberFormatter * numberFormatter = [[NSNumberFormatter new] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [numberFormatter setMaximumFractionDigits:2];
+    [numberFormatter setRoundingMode:NSNumberFormatterRoundFloor];
+    float fVal = [number floatValue];
+    return [numberFormatter stringFromNumber:[NSNumber numberWithFloat:fVal]];
+}
+
 + (NSString *) amountToString:(NSNumber*)number
 {
     NSNumberFormatter * numberFormatter = [[NSNumberFormatter new] init];
@@ -48,6 +62,13 @@
     [numberFormatter setRoundingMode:NSNumberFormatterRoundFloor];
     float fVal = [number floatValue]/1000000;
     return [numberFormatter stringFromNumber:[NSNumber numberWithFloat:fVal]];
+}
+
++ (NSNumber *) stringToNumber:(NSString*)string
+{
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    f.numberStyle = NSNumberFormatterRoundCeiling;
+    return [f numberFromString:string];
 }
 
 
@@ -74,6 +95,20 @@
         [revealButtonItem setAction: @selector( revealToggle: )];
         [viewController.navigationController.navigationBar addGestureRecognizer: viewController.revealViewController.panGestureRecognizer];
     }
+}
+
++ (NSString *) getAuthTokenForCurrentUser
+{
+    PFUser *user = [PFUser currentUser];
+    
+    if (user != nil)
+    {
+        NSString *authToken = user [@"authToken"];
+        NSString *email = user [@"email"];
+        NSLog(@"Auth token = %@ for user %@", authToken, email);
+        return authToken;
+    }
+    return nil;
 }
 
 @end

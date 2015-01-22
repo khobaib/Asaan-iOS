@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "GTLStoreendpoint.h"
+#import "DataReceiver.h"
 
-@interface OrderHistoryTableViewController : UITableViewController
+@interface OrderHistoryTableViewController : UITableViewController <DataReceiver>
 
 @property (nonatomic, strong) GTLStoreendpointStore *selectedStore;
 

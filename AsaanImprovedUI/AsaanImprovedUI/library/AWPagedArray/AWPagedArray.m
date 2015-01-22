@@ -126,6 +126,15 @@
         
         [objects addObjectsFromArray:page];
     }
+//
+//    int pageIndex = 1;
+//    for (__strong NSArray *page in _pages)
+//    {
+//        if (!page)
+//            page = [self _placeholdersForPage:pageIndex];
+//        [objects addObjectsFromArray:page];
+//        pageIndex++;
+//    }
     
     _proxiedArray = objects;
 }

@@ -126,7 +126,6 @@
 		D41B03E81A6EC1C100FCB9CC /* GTLStoreendpointItemReview.m in Sources */ = {isa = PBXBuildFile; fileRef = D41B03E11A6EC1C100FCB9CC /* GTLStoreendpointItemReview.m */; };
 		D41B03E91A6EC1C100FCB9CC /* GTLStoreendpointOrderReview.m in Sources */ = {isa = PBXBuildFile; fileRef = D41B03E31A6EC1C100FCB9CC /* GTLStoreendpointOrderReview.m */; };
 		D41B03EA1A6EC1C100FCB9CC /* GTLStoreendpointOrderReviewAndItemReviews.m in Sources */ = {isa = PBXBuildFile; fileRef = D41B03E51A6EC1C100FCB9CC /* GTLStoreendpointOrderReviewAndItemReviews.m */; };
-		D41B03EB1A6EC1C100FCB9CC /* GTLStoreendpointStoreOrderCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = D41B03E71A6EC1C100FCB9CC /* GTLStoreendpointStoreOrderCollection.m */; };
 		D41B03F11A6EC5B900FCB9CC /* StoreMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41B03EF1A6EC5B900FCB9CC /* StoreMapViewController.m */; };
 		D41D32161A11DD9300EA49B6 /* addCard.png in Resources */ = {isa = PBXBuildFile; fileRef = D41D31FF1A11DD9300EA49B6 /* addCard.png */; };
 		D41D32171A11DD9300EA49B6 /* address.png in Resources */ = {isa = PBXBuildFile; fileRef = D41D32001A11DD9300EA49B6 /* address.png */; };
@@ -260,6 +259,25 @@
 		D47799841A66E03800386430 /* GTLStoreendpointStoreDiscountArray.m in Sources */ = {isa = PBXBuildFile; fileRef = D477997F1A66E03800386430 /* GTLStoreendpointStoreDiscountArray.m */; };
 		D47799851A66E03800386430 /* GTLStoreendpointStoreItemStats.m in Sources */ = {isa = PBXBuildFile; fileRef = D47799811A66E03800386430 /* GTLStoreendpointStoreItemStats.m */; };
 		D47799891A6966E500386430 /* OrderHistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D47799881A6966E500386430 /* OrderHistoryTableViewController.m */; };
+		D4828CB21A71AD6100C80E92 /* GTLStoreendpointCHECK.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CA31A71AD6100C80E92 /* GTLStoreendpointCHECK.m */; };
+		D4828CB31A71AD6100C80E92 /* GTLStoreendpointDISCOUNT.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CA51A71AD6100C80E92 /* GTLStoreendpointDISCOUNT.m */; };
+		D4828CB41A71AD6100C80E92 /* GTLStoreendpointDISCOUNTS.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CA71A71AD6100C80E92 /* GTLStoreendpointDISCOUNTS.m */; };
+		D4828CB51A71AD6100C80E92 /* GTLStoreendpointENTRIES.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CA91A71AD6100C80E92 /* GTLStoreendpointENTRIES.m */; };
+		D4828CB61A71AD6100C80E92 /* GTLStoreendpointENTRY.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CAB1A71AD6100C80E92 /* GTLStoreendpointENTRY.m */; };
+		D4828CB71A71AD6100C80E92 /* GTLStoreendpointGETCHECKDETAILS.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CAD1A71AD6100C80E92 /* GTLStoreendpointGETCHECKDETAILS.m */; };
+		D4828CB81A71AD6100C80E92 /* GTLStoreendpointGetCheckDetailsPOSResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CAF1A71AD6100C80E92 /* GTLStoreendpointGetCheckDetailsPOSResponse.m */; };
+		D4828CB91A71AD6100C80E92 /* GTLStoreendpointStoreOrderListAndCount.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CB11A71AD6100C80E92 /* GTLStoreendpointStoreOrderListAndCount.m */; };
+		D4828CBB1A71ADD200C80E92 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D4828CBA1A71ADD200C80E92 /* libz.dylib */; };
+		D4828CBE1A71ADE500C80E92 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D4828CBC1A71ADE500C80E92 /* libxml2.2.dylib */; };
+		D4828CBF1A71ADE500C80E92 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D4828CBD1A71ADE500C80E92 /* libxml2.dylib */; };
+		D4828CC41A71AE6300C80E92 /* OrderForStoreLoadingOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CC11A71AE6300C80E92 /* OrderForStoreLoadingOperation.m */; };
+		D4828CC51A71AE6300C80E92 /* OrderLoadingOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CC31A71AE6300C80E92 /* OrderLoadingOperation.m */; };
+		D4828CC71A71AE9A00C80E92 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CC61A71AE9A00C80E92 /* Constants.m */; };
+		D4828CCB1A71AF1700C80E92 /* OrderItemSummaryFromPOS.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CCA1A71AF1700C80E92 /* OrderItemSummaryFromPOS.m */; };
+		D4828CD51A71AF7400C80E92 /* OrderedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CCE1A71AF7400C80E92 /* OrderedDictionary.m */; };
+		D4828CD61A71AF7400C80E92 /* RXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CD11A71AF7400C80E92 /* RXMLElement.m */; };
+		D4828CD71A71AF7400C80E92 /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CD41A71AF7400C80E92 /* UIView+Toast.m */; };
+		D4828CDA1A71B07B00C80E92 /* OrderHistorySummaryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CD91A71B07B00C80E92 /* OrderHistorySummaryTableViewController.m */; };
 		D49A3ABB1A267F49008BC180 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = D49A3ABA1A267F49008BC180 /* back.png */; };
 		D49A3ABF1A26C450008BC180 /* RetrievePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D49A3ABD1A26C450008BC180 /* RetrievePasswordViewController.m */; };
 		D49A3AC01A26C450008BC180 /* StartupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D49A3ABE1A26C450008BC180 /* StartupViewController.m */; };
@@ -565,7 +583,6 @@
 		37909B6C1A23828000649827 /* StartupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartupViewController.h; sourceTree = "<group>"; };
 		37C587581A714BDE00825E76 /* StoreLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreLocation.m; sourceTree = "<group>"; };
 		37C587591A714BDE00825E76 /* StoreLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreLocation.h; sourceTree = "<group>"; };
-		37C90E151A2897B500077FAA /* AsaanConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AsaanConstants.h; path = HelperClasses/AsaanConstants.h; sourceTree = "<group>"; };
 		37D161C51A40069F002EAA3C /* Asaan-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Asaan-Prefix.pch"; sourceTree = "<group>"; };
 		37D161C71A402FDA002EAA3C /* SDSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSegmentedControl.h; sourceTree = "<group>"; };
 		37D161C81A402FDA002EAA3C /* SDSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSegmentedControl.m; sourceTree = "<group>"; };
@@ -585,8 +602,6 @@
 		D41B03E31A6EC1C100FCB9CC /* GTLStoreendpointOrderReview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointOrderReview.m; sourceTree = "<group>"; };
 		D41B03E41A6EC1C100FCB9CC /* GTLStoreendpointOrderReviewAndItemReviews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointOrderReviewAndItemReviews.h; sourceTree = "<group>"; };
 		D41B03E51A6EC1C100FCB9CC /* GTLStoreendpointOrderReviewAndItemReviews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointOrderReviewAndItemReviews.m; sourceTree = "<group>"; };
-		D41B03E61A6EC1C100FCB9CC /* GTLStoreendpointStoreOrderCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreOrderCollection.h; sourceTree = "<group>"; };
-		D41B03E71A6EC1C100FCB9CC /* GTLStoreendpointStoreOrderCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreOrderCollection.m; sourceTree = "<group>"; };
 		D41B03EE1A6EC5B900FCB9CC /* StoreMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreMapViewController.h; sourceTree = "<group>"; };
 		D41B03EF1A6EC5B900FCB9CC /* StoreMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreMapViewController.m; sourceTree = "<group>"; };
 		D41D31FF1A11DD9300EA49B6 /* addCard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addCard.png; sourceTree = "<group>"; };
@@ -785,9 +800,43 @@
 		D477997F1A66E03800386430 /* GTLStoreendpointStoreDiscountArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreDiscountArray.m; sourceTree = "<group>"; };
 		D47799801A66E03800386430 /* GTLStoreendpointStoreItemStats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreItemStats.h; sourceTree = "<group>"; };
 		D47799811A66E03800386430 /* GTLStoreendpointStoreItemStats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreItemStats.m; sourceTree = "<group>"; };
-		D47799861A68A1D500386430 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		D47799871A6966E500386430 /* OrderHistoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderHistoryTableViewController.h; sourceTree = "<group>"; };
 		D47799881A6966E500386430 /* OrderHistoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderHistoryTableViewController.m; sourceTree = "<group>"; };
+		D4828CA21A71AD6100C80E92 /* GTLStoreendpointCHECK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointCHECK.h; sourceTree = "<group>"; };
+		D4828CA31A71AD6100C80E92 /* GTLStoreendpointCHECK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointCHECK.m; sourceTree = "<group>"; };
+		D4828CA41A71AD6100C80E92 /* GTLStoreendpointDISCOUNT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointDISCOUNT.h; sourceTree = "<group>"; };
+		D4828CA51A71AD6100C80E92 /* GTLStoreendpointDISCOUNT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointDISCOUNT.m; sourceTree = "<group>"; };
+		D4828CA61A71AD6100C80E92 /* GTLStoreendpointDISCOUNTS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointDISCOUNTS.h; sourceTree = "<group>"; };
+		D4828CA71A71AD6100C80E92 /* GTLStoreendpointDISCOUNTS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointDISCOUNTS.m; sourceTree = "<group>"; };
+		D4828CA81A71AD6100C80E92 /* GTLStoreendpointENTRIES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointENTRIES.h; sourceTree = "<group>"; };
+		D4828CA91A71AD6100C80E92 /* GTLStoreendpointENTRIES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointENTRIES.m; sourceTree = "<group>"; };
+		D4828CAA1A71AD6100C80E92 /* GTLStoreendpointENTRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointENTRY.h; sourceTree = "<group>"; };
+		D4828CAB1A71AD6100C80E92 /* GTLStoreendpointENTRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointENTRY.m; sourceTree = "<group>"; };
+		D4828CAC1A71AD6100C80E92 /* GTLStoreendpointGETCHECKDETAILS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointGETCHECKDETAILS.h; sourceTree = "<group>"; };
+		D4828CAD1A71AD6100C80E92 /* GTLStoreendpointGETCHECKDETAILS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointGETCHECKDETAILS.m; sourceTree = "<group>"; };
+		D4828CAE1A71AD6100C80E92 /* GTLStoreendpointGetCheckDetailsPOSResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointGetCheckDetailsPOSResponse.h; sourceTree = "<group>"; };
+		D4828CAF1A71AD6100C80E92 /* GTLStoreendpointGetCheckDetailsPOSResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointGetCheckDetailsPOSResponse.m; sourceTree = "<group>"; };
+		D4828CB01A71AD6100C80E92 /* GTLStoreendpointStoreOrderListAndCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreOrderListAndCount.h; sourceTree = "<group>"; };
+		D4828CB11A71AD6100C80E92 /* GTLStoreendpointStoreOrderListAndCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreOrderListAndCount.m; sourceTree = "<group>"; };
+		D4828CBA1A71ADD200C80E92 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		D4828CBC1A71ADE500C80E92 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
+		D4828CBD1A71ADE500C80E92 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		D4828CC01A71AE6300C80E92 /* OrderForStoreLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderForStoreLoadingOperation.h; sourceTree = "<group>"; };
+		D4828CC11A71AE6300C80E92 /* OrderForStoreLoadingOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderForStoreLoadingOperation.m; sourceTree = "<group>"; };
+		D4828CC21A71AE6300C80E92 /* OrderLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderLoadingOperation.h; sourceTree = "<group>"; };
+		D4828CC31A71AE6300C80E92 /* OrderLoadingOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderLoadingOperation.m; sourceTree = "<group>"; };
+		D4828CC61A71AE9A00C80E92 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Constants.m; path = HelperClasses/Constants.m; sourceTree = "<group>"; };
+		D4828CC81A71AEF500C80E92 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = HelperClasses/Constants.h; sourceTree = "<group>"; };
+		D4828CC91A71AF1700C80E92 /* OrderItemSummaryFromPOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderItemSummaryFromPOS.h; sourceTree = "<group>"; };
+		D4828CCA1A71AF1700C80E92 /* OrderItemSummaryFromPOS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderItemSummaryFromPOS.m; sourceTree = "<group>"; };
+		D4828CCD1A71AF7400C80E92 /* OrderedDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderedDictionary.h; sourceTree = "<group>"; };
+		D4828CCE1A71AF7400C80E92 /* OrderedDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderedDictionary.m; sourceTree = "<group>"; };
+		D4828CD01A71AF7400C80E92 /* RXMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXMLElement.h; sourceTree = "<group>"; };
+		D4828CD11A71AF7400C80E92 /* RXMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXMLElement.m; sourceTree = "<group>"; };
+		D4828CD31A71AF7400C80E92 /* UIView+Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Toast.h"; sourceTree = "<group>"; };
+		D4828CD41A71AF7400C80E92 /* UIView+Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Toast.m"; sourceTree = "<group>"; };
+		D4828CD81A71B07B00C80E92 /* OrderHistorySummaryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderHistorySummaryTableViewController.h; sourceTree = "<group>"; };
+		D4828CD91A71B07B00C80E92 /* OrderHistorySummaryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderHistorySummaryTableViewController.m; sourceTree = "<group>"; };
 		D49A3ABA1A267F49008BC180 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		D49A3ABC1A26C450008BC180 /* RetrievePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RetrievePasswordViewController.h; sourceTree = "<group>"; };
 		D49A3ABD1A26C450008BC180 /* RetrievePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RetrievePasswordViewController.m; sourceTree = "<group>"; };
@@ -918,8 +967,8 @@
 		D4ED028C1A1EA7DB000AB270 /* UtilCalls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UtilCalls.h; path = HelperClasses/UtilCalls.h; sourceTree = "<group>"; };
 		D4EDD4131A33EE6700C82006 /* Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Extension.h; path = HelperClasses/Extension.h; sourceTree = "<group>"; };
 		D4EDD4141A33EE6700C82006 /* Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Extension.m; path = HelperClasses/Extension.m; sourceTree = "<group>"; };
-		D4EDD4161A33EE7D00C82006 /* no_image_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = no_image_big.png; path = AsaanImprovedUI/images/no_image_big.png; sourceTree = "<group>"; };
-		D4EDD4171A33EE7D00C82006 /* no_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = no_image.png; path = AsaanImprovedUI/images/no_image.png; sourceTree = "<group>"; };
+		D4EDD4161A33EE7D00C82006 /* no_image_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = no_image_big.png; sourceTree = "<group>"; };
+		D4EDD4171A33EE7D00C82006 /* no_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = no_image.png; sourceTree = "<group>"; };
 		D4EDD41D1A33EEDC00C82006 /* UIImageView+UIActivityIndicatorForSDWebImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+UIActivityIndicatorForSDWebImage.h"; sourceTree = "<group>"; };
 		D4EDD41E1A33EEDC00C82006 /* UIImageView+UIActivityIndicatorForSDWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+UIActivityIndicatorForSDWebImage.m"; sourceTree = "<group>"; };
 		D4EDD4221A33EF1100C82006 /* MenuMWCaptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuMWCaptionView.h; sourceTree = "<group>"; };
@@ -951,6 +1000,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4828CBE1A71ADE500C80E92 /* libxml2.2.dylib in Frameworks */,
+				D4828CBF1A71ADE500C80E92 /* libxml2.dylib in Frameworks */,
+				D4828CBB1A71ADD200C80E92 /* libz.dylib in Frameworks */,
 				D40DF3761A3A9FFC00C67088 /* libstdc++.6.0.9.dylib in Frameworks */,
 				D40DF3771A3A9FFC00C67088 /* libstdc++.6.dylib in Frameworks */,
 				D40DF36E1A3A976700C67088 /* libsqlite3.0.dylib in Frameworks */,
@@ -1105,6 +1157,8 @@
 				370BFF661A403F0600F612EE /* StoreViewController.m */,
 				D47799871A6966E500386430 /* OrderHistoryTableViewController.h */,
 				D47799881A6966E500386430 /* OrderHistoryTableViewController.m */,
+				D4828CD81A71B07B00C80E92 /* OrderHistorySummaryTableViewController.h */,
+				D4828CD91A71B07B00C80E92 /* OrderHistorySummaryTableViewController.m */,
 			);
 			name = StoreInfo;
 			path = StorInfo;
@@ -1441,6 +1495,8 @@
 				D4B7A6321A35288600D72BC4 /* cart.png */,
 				D49A3ABA1A267F49008BC180 /* back.png */,
 				D41D31FF1A11DD9300EA49B6 /* addCard.png */,
+				D4EDD4161A33EE7D00C82006 /* no_image_big.png */,
+				D4EDD4171A33EE7D00C82006 /* no_image.png */,
 				D41D32001A11DD9300EA49B6 /* address.png */,
 				D41D32011A11DD9300EA49B6 /* address2.png */,
 				D41D32021A11DD9300EA49B6 /* asaanLogin.png */,
@@ -1483,6 +1539,10 @@
 		D43EED0D1A1FC0A2000C4FE5 /* AWPagedArrayLoadingOperations */ = {
 			isa = PBXGroup;
 			children = (
+				D4828CC01A71AE6300C80E92 /* OrderForStoreLoadingOperation.h */,
+				D4828CC11A71AE6300C80E92 /* OrderForStoreLoadingOperation.m */,
+				D4828CC21A71AE6300C80E92 /* OrderLoadingOperation.h */,
+				D4828CC31A71AE6300C80E92 /* OrderLoadingOperation.m */,
 				D43EED0E1A1FC0A2000C4FE5 /* StoreLoadingOperation.h */,
 				D43EED0F1A1FC0A2000C4FE5 /* StoreLoadingOperation.m */,
 				D4FEF6F71A243FA000A41303 /* MenuItemLoadingOperation.m */,
@@ -1498,6 +1558,8 @@
 				D4464B1B1A36138100206728 /* OnlineOrderDetails.h */,
 				D4464B1C1A36138100206728 /* OnlineOrderDetails.m */,
 				D4464B1D1A36138100206728 /* OnlineOrderSelectedMenuItem.h */,
+				D4828CC91A71AF1700C80E92 /* OrderItemSummaryFromPOS.h */,
+				D4828CCA1A71AF1700C80E92 /* OrderItemSummaryFromPOS.m */,
 				D4464B1E1A36138100206728 /* OnlineOrderSelectedMenuItem.m */,
 				D4464B211A361A4E00206728 /* OnlineOrderSelectedModifierGroup.h */,
 				D4464B221A361A4E00206728 /* OnlineOrderSelectedModifierGroup.m */,
@@ -1509,14 +1571,28 @@
 		D449EB201A1BCDEB00879383 /* ServerAPI */ = {
 			isa = PBXGroup;
 			children = (
+				D4828CA21A71AD6100C80E92 /* GTLStoreendpointCHECK.h */,
+				D4828CA31A71AD6100C80E92 /* GTLStoreendpointCHECK.m */,
+				D4828CA41A71AD6100C80E92 /* GTLStoreendpointDISCOUNT.h */,
+				D4828CA51A71AD6100C80E92 /* GTLStoreendpointDISCOUNT.m */,
+				D4828CA61A71AD6100C80E92 /* GTLStoreendpointDISCOUNTS.h */,
+				D4828CA71A71AD6100C80E92 /* GTLStoreendpointDISCOUNTS.m */,
+				D4828CA81A71AD6100C80E92 /* GTLStoreendpointENTRIES.h */,
+				D4828CA91A71AD6100C80E92 /* GTLStoreendpointENTRIES.m */,
+				D4828CAA1A71AD6100C80E92 /* GTLStoreendpointENTRY.h */,
+				D4828CAB1A71AD6100C80E92 /* GTLStoreendpointENTRY.m */,
+				D4828CAC1A71AD6100C80E92 /* GTLStoreendpointGETCHECKDETAILS.h */,
+				D4828CAD1A71AD6100C80E92 /* GTLStoreendpointGETCHECKDETAILS.m */,
+				D4828CAE1A71AD6100C80E92 /* GTLStoreendpointGetCheckDetailsPOSResponse.h */,
+				D4828CAF1A71AD6100C80E92 /* GTLStoreendpointGetCheckDetailsPOSResponse.m */,
+				D4828CB01A71AD6100C80E92 /* GTLStoreendpointStoreOrderListAndCount.h */,
+				D4828CB11A71AD6100C80E92 /* GTLStoreendpointStoreOrderListAndCount.m */,
 				D41B03E01A6EC1C100FCB9CC /* GTLStoreendpointItemReview.h */,
 				D41B03E11A6EC1C100FCB9CC /* GTLStoreendpointItemReview.m */,
 				D41B03E21A6EC1C100FCB9CC /* GTLStoreendpointOrderReview.h */,
 				D41B03E31A6EC1C100FCB9CC /* GTLStoreendpointOrderReview.m */,
 				D41B03E41A6EC1C100FCB9CC /* GTLStoreendpointOrderReviewAndItemReviews.h */,
 				D41B03E51A6EC1C100FCB9CC /* GTLStoreendpointOrderReviewAndItemReviews.m */,
-				D41B03E61A6EC1C100FCB9CC /* GTLStoreendpointStoreOrderCollection.h */,
-				D41B03E71A6EC1C100FCB9CC /* GTLStoreendpointStoreOrderCollection.m */,
 				D477997A1A66E03800386430 /* GTLStoreendpointStoreAndStats.h */,
 				D477997B1A66E03800386430 /* GTLStoreendpointStoreAndStats.m */,
 				D477997C1A66E03800386430 /* GTLStoreendpointStoreAndStatsCollection.h */,
@@ -1603,6 +1679,9 @@
 		D4522ACB1A15264F002EFA92 /* library */ = {
 			isa = PBXGroup;
 			children = (
+				D4828CCC1A71AF7400C80E92 /* OrderedDictionary */,
+				D4828CCF1A71AF7400C80E92 /* RaptureXML */,
+				D4828CD21A71AF7400C80E92 /* Toast */,
 				375D0F1B1A6996610016C293 /* JSQMessagesViewController */,
 				375D0F881A6996610016C293 /* JSQSystemSoundPlayer */,
 				375D0F8C1A6996610016C293 /* ProgressHUD */,
@@ -1765,6 +1844,33 @@
 				375C2FCF1A591EA600FED6C0 /* AddFriendViewController.m */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		D4828CCC1A71AF7400C80E92 /* OrderedDictionary */ = {
+			isa = PBXGroup;
+			children = (
+				D4828CCD1A71AF7400C80E92 /* OrderedDictionary.h */,
+				D4828CCE1A71AF7400C80E92 /* OrderedDictionary.m */,
+			);
+			path = OrderedDictionary;
+			sourceTree = "<group>";
+		};
+		D4828CCF1A71AF7400C80E92 /* RaptureXML */ = {
+			isa = PBXGroup;
+			children = (
+				D4828CD01A71AF7400C80E92 /* RXMLElement.h */,
+				D4828CD11A71AF7400C80E92 /* RXMLElement.m */,
+			);
+			path = RaptureXML;
+			sourceTree = "<group>";
+		};
+		D4828CD21A71AF7400C80E92 /* Toast */ = {
+			isa = PBXGroup;
+			children = (
+				D4828CD31A71AF7400C80E92 /* UIView+Toast.h */,
+				D4828CD41A71AF7400C80E92 /* UIView+Toast.m */,
+			);
+			path = Toast;
 			sourceTree = "<group>";
 		};
 		D4A6A3841A17D175003F3EAB /* SHSPhoneComponents */ = {
@@ -1951,8 +2057,6 @@
 		D4F275961A0C021800CEC95A = {
 			isa = PBXGroup;
 			children = (
-				D4EDD4161A33EE7D00C82006 /* no_image_big.png */,
-				D4EDD4171A33EE7D00C82006 /* no_image.png */,
 				D449EB201A1BCDEB00879383 /* ServerAPI */,
 				D4522BCA1A1668BC002EFA92 /* frameworks */,
 				D4F275A11A0C021800CEC95A /* AsaanImprovedUI */,
@@ -1991,6 +2095,7 @@
 		D4F275A21A0C021800CEC95A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D4828CC81A71AEF500C80E92 /* Constants.h */,
 				370BFF541A40379D00F612EE /* ContainerViewContoller */,
 				37D161C51A40069F002EAA3C /* Asaan-Prefix.pch */,
 				D4464B1A1A36138100206728 /* OnlineOrder */,
@@ -2013,10 +2118,9 @@
 				D404EDBA1A13149A000285F2 /* UIColor+AsaanBackgroundColor.m */,
 				D46D0FA91A13B2920072A413 /* UITextField+Extender.h */,
 				D46D0FAA1A13B2920072A413 /* UITextField+Extender.m */,
-				37C90E151A2897B500077FAA /* AsaanConstants.h */,
 				D4B7A62F1A35193800D72BC4 /* GlobalObjectHolder.h */,
 				D4B7A6301A35193800D72BC4 /* GlobalObjectHolder.m */,
-				D47799861A68A1D500386430 /* Constants.h */,
+				D4828CC61A71AE9A00C80E92 /* Constants.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -2053,6 +2157,9 @@
 		EFEC7E676E0C2F9960DA289C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D4828CBC1A71ADE500C80E92 /* libxml2.2.dylib */,
+				D4828CBD1A71ADE500C80E92 /* libxml2.dylib */,
+				D4828CBA1A71ADD200C80E92 /* libz.dylib */,
 				375D0FCD1A69982A0016C293 /* libsqlite3.dylib */,
 				D40DF3741A3A9FFC00C67088 /* libstdc++.6.0.9.dylib */,
 				D40DF3751A3A9FFC00C67088 /* libstdc++.6.dylib */,
@@ -2095,7 +2202,7 @@
 				TargetAttributes = {
 					D4F2759E1A0C021800CEC95A = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = V39QP9S6S6;
+						DevelopmentTeam = 7742T5X57N;
 					};
 				};
 			};
@@ -2239,6 +2346,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4522B261A15264F002EFA92 /* STPCard.m in Sources */,
+				D4828CB31A71AD6100C80E92 /* GTLStoreendpointDISCOUNT.m in Sources */,
 				D43EECFE1A1F91B1000C4FE5 /* AWPagedArray.m in Sources */,
 				37909B6E1A23828000649827 /* PaymentInfoViewController.m in Sources */,
 				D449EB5F1A1BCDEB00879383 /* GTLServiceUserendpoint.m in Sources */,
@@ -2246,14 +2354,15 @@
 				375D0FA81A6996610016C293 /* JSQPhotoMediaItem.m in Sources */,
 				D4A6A3911A17D175003F3EAB /* SHSPhoneLogic.m in Sources */,
 				D46D0FAB1A13B2920072A413 /* UITextField+Extender.m in Sources */,
+				D4828CB51A71AD6100C80E92 /* GTLStoreendpointENTRIES.m in Sources */,
 				D4464B231A361A4E00206728 /* OnlineOrderSelectedModifierGroup.m in Sources */,
+				D4828CC71A71AE9A00C80E92 /* Constants.m in Sources */,
 				D4A8C1871A263B1800DA344A /* AFURLRequestSerialization.m in Sources */,
 				D4A6A3901A17D175003F3EAB /* SHSFlagAccessoryView.m in Sources */,
 				3709EAC01A31804E0060B49B /* PSTGridLayoutInfo.m in Sources */,
 				375D10061A69F5550016C293 /* MessagesCell.m in Sources */,
 				3709EA951A31802A0060B49B /* MWPhotoBrowser.m in Sources */,
 				375D0FB31A6996610016C293 /* JSQMessagesLabel.m in Sources */,
-				D41B03EB1A6EC1C100FCB9CC /* GTLStoreendpointStoreOrderCollection.m in Sources */,
 				375D10131A69F5550016C293 /* messages.m in Sources */,
 				D449EB6F1A1BCDEB00879383 /* GTLStoreendpointStoreOwnerCollection.m in Sources */,
 				D4DEC1D51A321F630075281E /* AddPaymentCardViewController.m in Sources */,
@@ -2264,12 +2373,14 @@
 				D449EB631A1BCDEB00879383 /* GTLStoreendpointMenusAndMenuItems.m in Sources */,
 				D4A8C18C1A263B1800DA344A /* AFNetworkActivityIndicatorManager.m in Sources */,
 				375D10011A69F5550016C293 /* GroupView.m in Sources */,
+				D4828CCB1A71AF1700C80E92 /* OrderItemSummaryFromPOS.m in Sources */,
 				D449EB691A1BCDEB00879383 /* GTLStoreendpointStoreMenuHierarchyCollection.m in Sources */,
 				3709EAC21A31804E0060B49B /* PSTGridLayoutRow.m in Sources */,
 				375D0FB61A6996610016C293 /* JSQMessagesMediaPlaceholderView.m in Sources */,
 				D4ED02871A1EA08A000AB270 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				D4522B251A15264F002EFA92 /* STPBankAccount.m in Sources */,
 				375D0F9E1A6996610016C293 /* JSQMessagesTimestampFormatter.m in Sources */,
+				D4828CB91A71AD6100C80E92 /* GTLStoreendpointStoreOrderListAndCount.m in Sources */,
 				D4A8C1881A263B1800DA344A /* AFURLResponseSerialization.m in Sources */,
 				D449EB6E1A1BCDEB00879383 /* GTLStoreendpointStoreOwner.m in Sources */,
 				D4ED02881A1EA08A000AB270 /* UIScrollView+SVPullToRefresh.m in Sources */,
@@ -2286,6 +2397,8 @@
 				D449EB641A1BCDEB00879383 /* GTLStoreendpointStore.m in Sources */,
 				37909B701A23828000649827 /* SignupViewController.m in Sources */,
 				370BFF641A403E3900F612EE /* EmptySegue.m in Sources */,
+				D4828CB21A71AD6100C80E92 /* GTLStoreendpointCHECK.m in Sources */,
+				D4828CC51A71AE6300C80E92 /* OrderLoadingOperation.m in Sources */,
 				D41B03EA1A6EC1C100FCB9CC /* GTLStoreendpointOrderReviewAndItemReviews.m in Sources */,
 				D449EB741A1BCDEB00879383 /* GTLUserendpointConstants.m in Sources */,
 				D449EB611A1BCDEB00879383 /* GTLStoreendpointConstants.m in Sources */,
@@ -2315,6 +2428,7 @@
 				D4AC51821A325DCA00F2484F /* GTLUserendpointUserAddress.m in Sources */,
 				D43EED101A1FC0A2000C4FE5 /* StoreLoadingOperation.m in Sources */,
 				375D0FAD1A6996610016C293 /* JSQMessagesCollectionViewCellIncoming.m in Sources */,
+				D4828CB61A71AD6100C80E92 /* GTLStoreendpointENTRY.m in Sources */,
 				D4A8C1A01A263B1800DA344A /* SDWebImagePrefetcher.m in Sources */,
 				3709EAC31A31804E0060B49B /* PSTGridLayoutSection.m in Sources */,
 				D4EDD4151A33EE6700C82006 /* Extension.m in Sources */,
@@ -2335,11 +2449,13 @@
 				D4A6A3941A17D175003F3EAB /* SHSPhoneTextField.m in Sources */,
 				375D0F931A6996610016C293 /* NSString+JSQMessages.m in Sources */,
 				D4DEC1D81A321FB70075281E /* SelectPaymentTableViewController.m in Sources */,
+				D4828CC41A71AE6300C80E92 /* OrderForStoreLoadingOperation.m in Sources */,
 				3709EA981A31802A0060B49B /* MWZoomingScrollView.m in Sources */,
 				D449EB6C1A1BCDEB00879383 /* GTLStoreendpointStoreMenuItemModifier.m in Sources */,
 				375D0FB91A6996610016C293 /* JSQMessagesTypingIndicatorFooterView.m in Sources */,
 				D4A8C1A11A263B1800DA344A /* UIButton+WebCache.m in Sources */,
 				D4EAF9E91A12ACB20078FA9C /* UIColor+AsaanGoldColor.m in Sources */,
+				D4828CB41A71AD6100C80E92 /* GTLStoreendpointDISCOUNTS.m in Sources */,
 				D404EDBB1A13149A000285F2 /* UIColor+AsaanBackgroundColor.m in Sources */,
 				D4A8C1A61A263B1800DA344A /* UIView+WebCacheOperation.m in Sources */,
 				375D0FA61A6996610016C293 /* JSQMessagesAvatarImage.m in Sources */,
@@ -2360,6 +2476,7 @@
 				D449EB751A1BCDEB00879383 /* GTLUserendpointUser.m in Sources */,
 				375D0FB41A6996610016C293 /* JSQMessagesLoadEarlierHeaderView.m in Sources */,
 				3709EAC71A31C8420060B49B /* MenuTableViewController.m in Sources */,
+				D4828CB71A71AD6100C80E92 /* GTLStoreendpointGETCHECKDETAILS.m in Sources */,
 				D4F275A81A0C021800CEC95A /* AppDelegate.m in Sources */,
 				D4B7A6361A35299200D72BC4 /* OrderSummaryViewController.m in Sources */,
 				D4522B231A15264F002EFA92 /* PTKView.m in Sources */,
@@ -2381,6 +2498,7 @@
 				D4A8C1851A263B1800DA344A /* AFSecurityPolicy.m in Sources */,
 				D4A8C1951A263B1800DA344A /* MBProgressHUD.m in Sources */,
 				D49A3AC01A26C450008BC180 /* StartupViewController.m in Sources */,
+				D4828CD51A71AF7400C80E92 /* OrderedDictionary.m in Sources */,
 				3709EABB1A31804E0060B49B /* PSTCollectionViewData.m in Sources */,
 				D449EB761A1BCDEB00879383 /* GTLUserendpointUserCard.m in Sources */,
 				375C2FCD1A591AA200FED6C0 /* UpdateInfoViewController.m in Sources */,
@@ -2437,11 +2555,14 @@
 				D4464B1F1A36138100206728 /* OnlineOrderDetails.m in Sources */,
 				D4A8C1831A263B1800DA344A /* AFHTTPSessionManager.m in Sources */,
 				D4A8C18F1A263B1800DA344A /* UIButton+AFNetworking.m in Sources */,
+				D4828CDA1A71B07B00C80E92 /* OrderHistorySummaryTableViewController.m in Sources */,
 				D4522B211A15264F002EFA92 /* PTKTextField.m in Sources */,
+				D4828CB81A71AD6100C80E92 /* GTLStoreendpointGetCheckDetailsPOSResponse.m in Sources */,
 				D4A8C19C1A263B1800DA344A /* SDWebImageDecoder.m in Sources */,
 				D449EB6A1A1BCDEB00879383 /* GTLStoreendpointStoreMenuItem.m in Sources */,
 				D4522B291A15264F002EFA92 /* Stripe.m in Sources */,
 				3709EA8F1A31802A0060B49B /* DACircularProgressView.m in Sources */,
+				D4828CD71A71AF7400C80E92 /* UIView+Toast.m in Sources */,
 				375D0FAA1A6996610016C293 /* JSQMessagesCellTextView.m in Sources */,
 				3709EAB91A31804E0060B49B /* PSTCollectionViewCell.m in Sources */,
 				D4A8C1991A263B1800DA344A /* NSData+ImageContentType.m in Sources */,
@@ -2459,6 +2580,7 @@
 				375C2FD01A591EA600FED6C0 /* AddFriendViewController.m in Sources */,
 				D47799821A66E03800386430 /* GTLStoreendpointStoreAndStats.m in Sources */,
 				D449EB6D1A1BCDEB00879383 /* GTLStoreendpointStoreMenuItemModifierGroup.m in Sources */,
+				D4828CD61A71AF7400C80E92 /* RXMLElement.m in Sources */,
 				375D0FB21A6996610016C293 /* JSQMessagesInputToolbar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2618,17 +2740,23 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Khobaib Chowdhury (HK8YVC6C79)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Khobaib Chowdhury (HK8YVC6C79)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/AsaanImprovedUI/frameworks";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AsaanImprovedUI/Asaan-Prefix.pch";
 				GTL_BUILT_AS_FRAMEWORK = 1;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/AsaanImprovedUI/frameworks/GoogleOpenSource.framework/Headers",
+					"$(SDK_DIR)/usr/include/libxml2",
+				);
 				INFOPLIST_FILE = AsaanImprovedUI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Asaan;
-				PROVISIONING_PROFILE = "fddc8ebc-eae7-426f-ba79-21c38b65e8ea";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2638,17 +2766,23 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Khobaib Chowdhury (HK8YVC6C79)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Khobaib Chowdhury (HK8YVC6C79)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/AsaanImprovedUI/frameworks";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AsaanImprovedUI/Asaan-Prefix.pch";
 				GTL_BUILT_AS_FRAMEWORK = 1;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/AsaanImprovedUI/frameworks/GoogleOpenSource.framework/Headers",
+					"$(SDK_DIR)/usr/include/libxml2",
+				);
 				INFOPLIST_FILE = AsaanImprovedUI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Asaan;
-				PROVISIONING_PROFILE = "fddc8ebc-eae7-426f-ba79-21c38b65e8ea";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

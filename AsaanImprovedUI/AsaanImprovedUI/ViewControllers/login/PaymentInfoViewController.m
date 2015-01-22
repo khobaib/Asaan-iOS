@@ -19,7 +19,7 @@
 #import "UIColor+AsaanBackgroundColor.h"
 #import "DropdownView.h"
 #import "MBProgressHUD.h"
-#import "AsaanConstants.h"
+#import "UtilCalls.h"
 
 @interface PaymentInfoViewController () <PTKViewDelegate, DropdownViewDelegate>
 
@@ -154,7 +154,7 @@
             GTLQueryUserendpoint *query = [GTLQueryUserendpoint queryForSaveUserCardWithObject:card];
             
             NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-            dic[USER_AUTH_TOKEN_HEADER_NAME] = [PFUser currentUser][@"authToken"];
+            dic[USER_AUTH_TOKEN_HEADER_NAME]=[UtilCalls getAuthTokenForCurrentUser];
             [query setAdditionalHTTPHeaders:dic];
             
             [userService executeQuery:query completionHandler:^(GTLServiceTicket * ticket,GTLUserendpointUserCard *object, NSError *error ) {

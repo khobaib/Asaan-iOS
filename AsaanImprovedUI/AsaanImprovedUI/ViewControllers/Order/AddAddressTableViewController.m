@@ -16,10 +16,10 @@
 #import "InlineCalls.h"
 #import "MBProgressHUD.h"
 #import "AppDelegate.h"
-#import "AsaanConstants.h"
 #import <Parse/Parse.h>
 #import "UIColor+AsaanGoldColor.h"
 #import "UIAlertView+Blocks.h"
+#import "UtilCalls.h"
 
 @interface AddAddressTableViewController () <DropdownViewDelegate, UITextFieldDelegate>
 
@@ -209,7 +209,7 @@
                     GTLQueryUserendpoint *query = [GTLQueryUserendpoint queryForSaveUserAddressWithObject:userAddress];
                     
                     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-                    dic[USER_AUTH_TOKEN_HEADER_NAME] = [PFUser currentUser][@"authToken"];
+                    dic[USER_AUTH_TOKEN_HEADER_NAME] = [UtilCalls getAuthTokenForCurrentUser];
                     [query setAdditionalHTTPHeaders:dic];
                     [gtlUserService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error)
                      {

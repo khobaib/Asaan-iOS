@@ -40,7 +40,7 @@
     if ([segue.identifier isEqualToString:@"embedContainerStore"]) {
         
         self.containerViewController = segue.destinationViewController;
-        self.containerViewController.segues   = @[@"historySegue", @"storeInfoSegue", @"reviewsSegue"];
+        self.containerViewController.segues   = @[@"segueContainerToOrderHistory", @"storeInfoSegue", @"reviewsSegue"];
         
         self.containerViewController.initialIndex = 1;
         self.containerViewController.delegate = self;

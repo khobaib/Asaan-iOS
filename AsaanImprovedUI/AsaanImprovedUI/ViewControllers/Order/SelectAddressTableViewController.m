@@ -14,7 +14,6 @@
 #import "UIColor+AsaanBackgroundColor.h"
 #import "AppDelegate.h"
 #import "MBProgressHUD.h"
-#import "AsaanConstants.h"
 #import <Parse/Parse.h>
 #include "UtilCalls.h"
 

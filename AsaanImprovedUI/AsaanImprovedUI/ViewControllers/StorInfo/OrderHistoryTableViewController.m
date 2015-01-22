@@ -7,21 +7,130 @@
 //
 
 #import "OrderHistoryTableViewController.h"
+#import "OrderHistorySummaryTableViewController.h"
+#import "DataProvider.h"
+#import "AppDelegate.h"
+#import "MBProgressHUD.h"
+#import "OrderForStoreLoadingOperation.h"
+#import "OrderLoadingOperation.h"
+#import <Parse/Parse.h>
+#import <ParseUI/ParseUI.h>
+#import "UtilCalls.h"
 
-@interface OrderHistoryTableViewController ()
+@interface OrderHistoryTableViewController ()<DataProviderDelegate>
+@property (nonatomic) int startPosition;
+@property (nonatomic) int maxResult;
+@property (nonatomic, strong) MBProgressHUD *hud;
+@property (nonatomic, strong) GTLStoreendpointStoreOrder *selectedOrder;
 
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 @end
 
 @implementation OrderHistoryTableViewController
+@synthesize startPosition = _startPosition;
+@synthesize maxResult = _maxResult;
+@synthesize dataProvider = _dataProvider;
+@synthesize selectedStore = _selectedStore;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self setupOrderHistoryData];
+    
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)setupOrderHistoryData {
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.labelText = @"Please Wait";
+    hud.hidden = NO;
+    
+    if (self)
+    {
+        __weak __typeof(self) weakSelf = self;
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+        GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
+        GTLQueryStoreendpoint *query;
+        
+        if (self.selectedStore != nil)
+            query = [GTLQueryStoreendpoint queryForGetStoreOrdersByUserAndStoreWithStoreId:self.selectedStore.identifier.longValue firstPosition:0 maxResult:FluentPagingTablePageSize];
+        else
+            query = [GTLQueryStoreendpoint queryForGetStoreOrdersByUserWithFirstPosition:0 maxResult:FluentPagingTablePageSize];
+        NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
+        dic[USER_AUTH_TOKEN_HEADER_NAME]=[UtilCalls getAuthTokenForCurrentUser];
+        
+        [query setAdditionalHTTPHeaders:dic];       
+        
+        [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreOrderListAndCount *object,NSError *error)
+        {
+             if(!error)
+             {
+                 if (object.orders.count > 0)
+                 {
+                     _dataProvider = [[DataProvider alloc] initWithPageSize:object.orders.count itemCount:object.count.longValue];
+                     _dataProvider.delegate = weakSelf;
+                     _dataProvider.shouldLoadAutomatically = YES;
+                     _dataProvider.automaticPreloadMargin = FluentPagingTablePreloadMargin;
+                    [_dataProvider setInitialObjects:object.orders ForPage:1];
+                 }
+             }else{
+                 NSLog(@"setupOrderHistoryData Error:%@",[error userInfo]);
+             }
+             [weakSelf.tableView reloadData];
+             hud.hidden = YES;
+         }];
+    }
+}
+
+#pragma mark -
+#pragma mark  === DataProviderDelegate ===
+#pragma mark -
+
+- (void)dataProvider:(DataProvider *)dataProvider didLoadDataAtIndexes:(NSIndexSet *)indexes
+{
+    
+    NSMutableArray *indexPathsToReload = [NSMutableArray array];
+    
+    [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+        
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:idx inSection:0];
+        
+        if ([self.tableView.indexPathsForVisibleRows containsObject:indexPath]) {
+            [indexPathsToReload addObject:indexPath];
+        }
+    }];
+    
+    if (indexPathsToReload.count > 0) {
+        [self.tableView reloadRowsAtIndexPaths:indexPathsToReload withRowAnimation:UITableViewRowAnimationFade];
+    }
+    [self.hud hide:YES];
+}
+
+- (DataLoadingOperation *) getDataLoadingOperationForPage:(NSUInteger)page indexes:(NSIndexSet *)indexes
+{
+    if (self.selectedStore != nil)
+    {
+        OrderForStoreLoadingOperation *milo = [[OrderForStoreLoadingOperation alloc] initWithIndexes:indexes storeId:self.selectedStore.identifier.longValue];
+        return milo;
+    }
+    else
+    {
+        OrderLoadingOperation *milo = [[OrderLoadingOperation alloc] initWithIndexes:indexes];
+        return milo;
+    }
+}
+
+- (void)dataProvider:(DataProvider *)dataProvider willLoadDataAtIndexes:(NSIndexSet *)indexes
+{
+    [self.hud hide:NO];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,69 +141,52 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return self.dataProvider.dataObjects.count;
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"OrderCell" forIndexPath:indexPath];
+    cell.tag = indexPath.row;
     
-    // Configure the cell...
+    UILabel *txtTitle=(UILabel *)[cell viewWithTag:501];
+    UILabel *txtSubtitle=(UILabel *)[cell viewWithTag:502];
+    txtTitle.text = nil;
+    txtSubtitle.text = nil;
+    GTLStoreendpointStoreOrder *order = self.dataProvider.dataObjects[indexPath.row];
+    if (![order isKindOfClass:[NSNull class]])
+    {
+        txtTitle.text = order.storeName;
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+        [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+        
+        NSDate *date = [NSDate dateWithTimeIntervalSince1970:order.createdDate.longValue/1000];
+        
+        txtSubtitle.text = [dateFormatter stringFromDate:date];
+    }
     
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.selectedOrder = self.dataProvider.dataObjects[indexPath.row];
+    [self performSegueWithIdentifier:@"segueOrderHistoryToOrderSummary" sender:self];
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([[segue identifier] isEqualToString:@"segueOrderHistoryToOrderSummary"])
+    {
+        OrderHistorySummaryTableViewController *controller = [segue destinationViewController];
+        [controller setSelectedOrder:self.selectedOrder];
+    }
 }
-*/
 
 @end

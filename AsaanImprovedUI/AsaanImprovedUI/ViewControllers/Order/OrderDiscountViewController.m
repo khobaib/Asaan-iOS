@@ -10,10 +10,10 @@
 #import "UIColor+AsaanGoldColor.h"
 #import "UIColor+AsaanBackgroundColor.h"
 #import "AppDelegate.h"
-#import "AsaanConstants.h"
 #import <Parse/Parse.h>
 #import "GTLStoreendpoint.h"
 #import "InlineCalls.h"
+#import "UtilCalls.h"
 
 @interface OrderDiscountViewController ()
 
@@ -85,7 +85,7 @@
     GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetStoreDiscountsWithStoreId:appDelegate.globalObjectHolder.orderInProgress.selectedStore.identifier.longValue];
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    dic[USER_AUTH_TOKEN_HEADER_NAME] = [PFUser currentUser][@"authToken"];
+    dic[USER_AUTH_TOKEN_HEADER_NAME] = [UtilCalls getAuthTokenForCurrentUser];
     [query setAdditionalHTTPHeaders:dic];
     [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error)
      {

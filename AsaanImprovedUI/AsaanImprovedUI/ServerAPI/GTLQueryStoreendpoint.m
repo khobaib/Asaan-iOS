@@ -13,12 +13,13 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryStoreendpoint (29 custom class methods, 12 custom properties)
+//   GTLQueryStoreendpoint (31 custom class methods, 12 custom properties)
 
 #import "GTLQueryStoreendpoint.h"
 
 #import "GTLStoreendpointAsaanLong.h"
 #import "GTLStoreendpointAsaanLongString.h"
+#import "GTLStoreendpointGetCheckDetailsPOSResponse.h"
 #import "GTLStoreendpointMenuItemAndStatsCollection.h"
 #import "GTLStoreendpointMenuItemModifiersAndGroups.h"
 #import "GTLStoreendpointMenusAndMenuItems.h"
@@ -37,7 +38,7 @@
 #import "GTLStoreendpointStoreMenuItemModifier.h"
 #import "GTLStoreendpointStoreMenuItemModifierGroup.h"
 #import "GTLStoreendpointStoreOrder.h"
-#import "GTLStoreendpointStoreOrderCollection.h"
+#import "GTLStoreendpointStoreOrderListAndCount.h"
 #import "GTLStoreendpointStoreOwner.h"
 #import "GTLStoreendpointStoreOwnerCollection.h"
 #import "GTLStoreendpointStorePOSConnection.h"
@@ -52,6 +53,13 @@
 #pragma mark -
 #pragma mark Service level methods
 // These create a GTLQueryStoreendpoint object.
+
++ (id)queryForGetCheckDetailsPOSResponseEmptyObject {
+  NSString *methodName = @"storeendpoint.getCheckDetailsPOSResponseEmptyObject";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.expectedObjectClass = [GTLStoreendpointGetCheckDetailsPOSResponse class];
+  return query;
+}
 
 + (id)queryForGetMenuItemAndStatsForMenuWithStoreId:(long long)storeId
                                           menuPOSId:(NSInteger)menuPOSId
@@ -156,15 +164,25 @@
   return query;
 }
 
-+ (id)queryForGetStoreOrdersByUserWithUserId:(long long)userId
-                               firstPosition:(NSInteger)firstPosition
-                                   maxResult:(NSInteger)maxResult {
++ (id)queryForGetStoreOrdersByUserWithFirstPosition:(NSInteger)firstPosition
+                                          maxResult:(NSInteger)maxResult {
   NSString *methodName = @"storeendpoint.getStoreOrdersByUser";
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
-  query.userId = userId;
   query.firstPosition = firstPosition;
   query.maxResult = maxResult;
-  query.expectedObjectClass = [GTLStoreendpointStoreOrderCollection class];
+  query.expectedObjectClass = [GTLStoreendpointStoreOrderListAndCount class];
+  return query;
+}
+
++ (id)queryForGetStoreOrdersByUserAndStoreWithStoreId:(long long)storeId
+                                        firstPosition:(NSInteger)firstPosition
+                                            maxResult:(NSInteger)maxResult {
+  NSString *methodName = @"storeendpoint.getStoreOrdersByUserAndStore";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.storeId = storeId;
+  query.firstPosition = firstPosition;
+  query.maxResult = maxResult;
+  query.expectedObjectClass = [GTLStoreendpointStoreOrderListAndCount class];
   return query;
 }
 

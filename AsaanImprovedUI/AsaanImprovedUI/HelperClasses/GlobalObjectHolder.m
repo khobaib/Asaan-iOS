@@ -8,8 +8,8 @@
 
 #import "GlobalObjectHolder.h"
 #import "AppDelegate.h"
-#import "AsaanConstants.h"
 #import <Parse/Parse.h>
+#import "UtilCalls.h"
 
 @implementation GlobalObjectHolder
 @synthesize orderInProgress = _orderInProgress;
@@ -31,7 +31,7 @@
     GTLQueryUserendpoint *query = [GTLQueryUserendpoint queryForGetUserAddresses];
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    dic[USER_AUTH_TOKEN_HEADER_NAME] = [PFUser currentUser][@"authToken"];
+    dic[USER_AUTH_TOKEN_HEADER_NAME] = [UtilCalls getAuthTokenForCurrentUser];
     [query setAdditionalHTTPHeaders:dic];
     [gtlUserService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error)
      {
@@ -50,7 +50,7 @@
     GTLQueryUserendpoint *query = [GTLQueryUserendpoint queryForGetUserCards];
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    dic[USER_AUTH_TOKEN_HEADER_NAME] = [PFUser currentUser][@"authToken"];
+    dic[USER_AUTH_TOKEN_HEADER_NAME] = [UtilCalls getAuthTokenForCurrentUser];
     [query setAdditionalHTTPHeaders:dic];
     [gtlUserService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error)
      {

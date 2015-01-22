@@ -34,9 +34,6 @@
 #import "MBProgressHUD.h"
 #import "ProgressHUD.h"
 
-const NSUInteger FluentPagingTablePreloadMargin = 5;
-const NSUInteger FluentPagingTablePageSize = 20;
-
 @interface StoreListTableViewController ()<DataProviderDelegate>
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *revealButtonItem;

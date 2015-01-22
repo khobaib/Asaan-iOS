@@ -44,7 +44,7 @@ const NSTimeInterval DataLoadingOperationDuration1 = 0.3;
                 if(!error)
                     [weakSelf setDataPage:[object.items mutableCopy]];
                 else
-                    NSLog(@"StoreLoadingOperation Error:%@",[error userInfo]);
+                    NSLog(@"MenuItemLoadingOperation Error:%@",[error userInfo]);
                 
                 weakSelf.bDataLoaded = true;
             }];

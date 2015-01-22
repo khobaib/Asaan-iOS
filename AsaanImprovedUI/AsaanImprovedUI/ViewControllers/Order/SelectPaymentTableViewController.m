@@ -13,7 +13,6 @@
 #import "AppDelegate.h"
 #import "MBProgressHUD.h"
 #import "PTKCardType.h"
-#import "AsaanConstants.h"
 #import <Parse/Parse.h>
 
 @interface SelectPaymentTableViewController ()

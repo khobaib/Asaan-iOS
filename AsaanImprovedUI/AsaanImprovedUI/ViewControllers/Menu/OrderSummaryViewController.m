@@ -87,11 +87,11 @@
     if (![self AreDeliveryRequirementsValid])
         return;
     
-    NSString *str = @"<ITEMREQUESTS>";
+    NSString *strItems = @"<ITEMREQUESTS>";
     for (OnlineOrderSelectedMenuItem *object in self.orderInProgress.selectedMenuItems)
     {
         NSString *itemString=[NSString stringWithFormat:@"<ADDITEM QTY=\"%lu\" ITEMID=\"%@\" >",(unsigned long)object.qty,object.selectedItem.menuItemPOSId];
-        str=[str stringByAppendingString:itemString];
+        strItems=[strItems stringByAppendingString:itemString];
         for (OnlineOrderSelectedModifierGroup *modGroup in object.selectedModifierGroups)
         {
             for (int i = 0; i < modGroup.selectedModifierIndexes.count; i++)
@@ -101,13 +101,13 @@
                 {
                     GTLStoreendpointStoreMenuItemModifier *modifier = [modGroup.modifiers objectAtIndex:i];
                     NSString *modString=[NSString stringWithFormat:@"<MODITEM QTY=\"1\" ITEMID=\"%@\" />",modifier.modifierPOSId];
-                    str=[str stringByAppendingString:modString];
+                    strItems=[strItems stringByAppendingString:modString];
                 }
             }
         }
-        str=[str stringByAppendingString:@"</ADDITEM>"];
+        strItems=[strItems stringByAppendingString:@"</ADDITEM>"];
     }
-    str=[str stringByAppendingString:@"</ITEMREQUESTS>"];
+    strItems=[strItems stringByAppendingString:@"</ITEMREQUESTS>"];
     
     //NSString *contactString=[NSString stringWithFormat:@"<CONTACT FIRSTNAME=\"%@\" LASTNAME=\"%@\" PHONE1=\"%@\" PHONE2=\"8012345678\" COMPANY=\"TEST CO\" DEPT=\"DEPT 123\" />"];
     
@@ -118,9 +118,17 @@
     [dateFormatter setDateFormat:@"hh:mm a"];
     NSString *orderTime = [dateFormatter stringFromDate: self.orderInProgress.orderTime];
     
-    NSUInteger discountId = 0;
+    NSString *discountStr = @"DISCOUNTNUM=\"0\"";
     if (self.orderInProgress.selectedDiscount != nil)
-        discountId = self.orderInProgress.selectedDiscount.posDiscountId.longValue;
+    {
+        NSUInteger discountId = self.orderInProgress.selectedDiscount.posDiscountId.longValue;
+        NSString *discountAmtOrPercent = [UtilCalls amountToString:[NSNumber numberWithLong:self.orderInProgress.selectedDiscount.value.longValue]];
+        discountStr = [NSString stringWithFormat:@"DISCOUNTNUM=\"%ld\" DISCOUNTAMTORPERCENT=\"%@\"", discountId, discountAmtOrPercent];
+    }
+    
+    NSString *gratuityStr = @"SERVICECHARGES=\"0\"";
+    if ([self gratuity] > 0)
+        gratuityStr = [NSString stringWithFormat:@"SERVICECHARGES=\"%@\"", [UtilCalls percentAmountToString:[NSNumber numberWithLong:[self gratuity]]]];
     
     NSString *orderString;
     if (self.orderInProgress.orderType == [DeliveryOrCarryoutViewController ORDERTYPE_DELIVERY])
@@ -130,10 +138,10 @@
         GTLUserendpointUserAddress *address = appDelegate.globalObjectHolder.defaultUserAddress;
         NSString *deliveryString=[NSString stringWithFormat:@"<DELIVERY DELIVERYACCT=\"%@\" DELIVERYNOTE=\"%@\" ADDRESS=\"%@\" />", address.title, address.notes, address.fullAddress];
         
-        orderString=[NSString stringWithFormat:@"<CHECKREQUESTS><ADDCHECK EXTCHECKID=\"ASAAN\" READYTIME=\"%@\" GUESTCOUNT=\"%d\" DISCOUNT=\"%ld\" NOTE=\"%@\" ORDERMODE=\"@ORDER_MODE\">%@%@%@</ADDCHECK></CHECKREQUESTS>",orderTime, self.orderInProgress.partySize, discountId, self.orderInProgress.specialInstructions, contactString, deliveryString, str];
+        orderString=[NSString stringWithFormat:@"<CHECKREQUESTS><ADDCHECK EXTCHECKID=\"ASAAN\" READYTIME=\"%@\" GUESTCOUNT=\"%d\" %@ %@ NOTE=\"%@\" ORDERMODE=\"@ORDER_MODE\">%@%@%@</ADDCHECK></CHECKREQUESTS>",orderTime, self.orderInProgress.partySize, discountStr, gratuityStr, self.orderInProgress.specialInstructions, contactString, deliveryString, strItems];
     }
     else
-        orderString=[NSString stringWithFormat:@"<CHECKREQUESTS><ADDCHECK EXTCHECKID=\"ASAAN\" READYTIME=\"%@\" GUESTCOUNT=\"%d\" DISCOUNT=\"%ld\" NOTE=\"%@\" ORDERMODE=\"@ORDER_MODE\">%@%@</ADDCHECK></CHECKREQUESTS>",orderTime, self.orderInProgress.partySize, discountId, self.orderInProgress.specialInstructions, contactString, str];
+        orderString=[NSString stringWithFormat:@"<CHECKREQUESTS><ADDCHECK EXTCHECKID=\"ASAAN\" READYTIME=\"%@\" GUESTCOUNT=\"%d\" %@ %@ NOTE=\"%@\" ORDERMODE=\"@ORDER_MODE\">%@%@</ADDCHECK></CHECKREQUESTS>",orderTime, self.orderInProgress.partySize, discountStr, gratuityStr, self.orderInProgress.specialInstructions, contactString, strItems];
     
     NSLog(@"%@",orderString);
     
@@ -144,7 +152,7 @@
     
     //[query setCustomParameter:@"hmHAJvHvKYmilfOqgUnc22tf/RL5GLmPbcFBg02d6wm+ZB1o3f7RKYqmB31+DGoH9Ad3s3WP99n587qDZ5tm+w==" forKey:@"asaan-auth-token"];
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
-    dic[@"asaan-auth-token"]=[PFUser currentUser][@"authToken"];
+    dic[USER_AUTH_TOKEN_HEADER_NAME]=[UtilCalls getAuthTokenForCurrentUser];
     
     [query setAdditionalHTTPHeaders:dic];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];

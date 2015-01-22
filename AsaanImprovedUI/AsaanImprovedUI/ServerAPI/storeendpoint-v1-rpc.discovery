@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/UYtd0x5kN3Wa31bYC_ASSD2gyZA\"",
+ "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/6GDtY6mHk4bWgBWHPjsQGH_f8n8\"",
  "discoveryVersion": "v1",
  "id": "storeendpoint:v1",
  "name": "storeendpoint",
@@ -88,6 +88,158 @@
    "properties": {
     "strValue": {
      "type": "string"
+    }
+   }
+  },
+  "CHECK": {
+   "id": "CHECK",
+   "type": "object",
+   "properties": {
+    "completetotal": {
+     "type": "number",
+     "format": "float"
+    },
+    "discounts": {
+     "$ref": "DISCOUNTS"
+    },
+    "employee": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "employeecheckname": {
+     "type": "string"
+    },
+    "entries": {
+     "$ref": "ENTRIES"
+    },
+    "guestcount": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "id": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "payments": {
+     "type": "string"
+    },
+    "servicecharges": {
+     "type": "number",
+     "format": "float"
+    },
+    "subtotal": {
+     "type": "number",
+     "format": "float"
+    },
+    "tablenumber": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "tax": {
+     "type": "number",
+     "format": "float"
+    }
+   }
+  },
+  "DISCOUNT": {
+   "id": "DISCOUNT",
+   "type": "object",
+   "properties": {
+    "amount": {
+     "type": "number",
+     "format": "float"
+    },
+    "desc": {
+     "type": "string"
+    },
+    "value": {
+     "type": "string"
+    }
+   }
+  },
+  "DISCOUNTS": {
+   "id": "DISCOUNTS",
+   "type": "object",
+   "properties": {
+    "discount": {
+     "type": "array",
+     "items": {
+      "$ref": "DISCOUNT"
+     }
+    }
+   }
+  },
+  "ENTRIES": {
+   "id": "ENTRIES",
+   "type": "object",
+   "properties": {
+    "entry": {
+     "type": "array",
+     "items": {
+      "$ref": "ENTRY"
+     }
+    }
+   }
+  },
+  "ENTRY": {
+   "id": "ENTRY",
+   "type": "object",
+   "properties": {
+    "dispname": {
+     "type": "string"
+    },
+    "entrytype": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "id": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "itemid": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "ordermode": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "parententry": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "price": {
+     "type": "number",
+     "format": "float"
+    },
+    "quantity": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "value": {
+     "type": "string"
+    }
+   }
+  },
+  "GETCHECKDETAILS": {
+   "id": "GETCHECKDETAILS",
+   "type": "object",
+   "properties": {
+    "check": {
+     "$ref": "CHECK"
+    },
+    "intcheckid": {
+     "type": "integer",
+     "format": "int32"
+    }
+   }
+  },
+  "GetCheckDetailsPOSResponse": {
+   "id": "GetCheckDetailsPOSResponse",
+   "type": "object",
+   "properties": {
+    "getcheckdetails": {
+     "$ref": "GETCHECKDETAILS"
     }
    }
   },
@@ -812,6 +964,10 @@
      "type": "string",
      "format": "int64"
     },
+    "deliveryFee": {
+     "type": "string",
+     "format": "int64"
+    },
     "discount": {
      "type": "string",
      "format": "int64"
@@ -852,6 +1008,10 @@
      "type": "integer",
      "format": "int32"
     },
+    "orderTotal": {
+     "type": "string",
+     "format": "int64"
+    },
     "poscheckId": {
      "type": "integer",
      "format": "int32"
@@ -888,11 +1048,15 @@
     }
    }
   },
-  "StoreOrderCollection": {
-   "id": "StoreOrderCollection",
+  "StoreOrderListAndCount": {
+   "id": "StoreOrderListAndCount",
    "type": "object",
    "properties": {
-    "items": {
+    "count": {
+     "type": "string",
+     "format": "int64"
+    },
+    "orders": {
      "type": "array",
      "items": {
       "$ref": "StoreOrder"
@@ -1050,6 +1214,15 @@
   }
  },
  "methods": {
+  "storeendpoint.getCheckDetailsPOSResponseEmptyObject": {
+   "id": "storeendpoint.getCheckDetailsPOSResponseEmptyObject",
+   "returns": {
+    "$ref": "GetCheckDetailsPOSResponse"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
   "storeendpoint.getMenuItemAndStatsForMenu": {
    "id": "storeendpoint.getMenuItemAndStatsForMenu",
    "parameters": {
@@ -1314,20 +1487,45 @@
      "type": "integer",
      "required": true,
      "format": "int32"
+    }
+   },
+   "parameterOrder": [
+    "firstPosition",
+    "maxResult"
+   ],
+   "returns": {
+    "$ref": "StoreOrderListAndCount"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.getStoreOrdersByUserAndStore": {
+   "id": "storeendpoint.getStoreOrdersByUserAndStore",
+   "parameters": {
+    "firstPosition": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
     },
-    "userId": {
+    "maxResult": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    },
+    "storeId": {
      "type": "string",
      "required": true,
      "format": "int64"
     }
    },
    "parameterOrder": [
-    "userId",
+    "storeId",
     "firstPosition",
     "maxResult"
    ],
    "returns": {
-    "$ref": "StoreOrderCollection"
+    "$ref": "StoreOrderListAndCount"
    },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"

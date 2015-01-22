@@ -3,7 +3,7 @@
  */
 
 //
-//  GTLStoreendpointStoreOrderCollection.m
+//  GTLStoreendpointDISCOUNTS.m
 //
 
 // ----------------------------------------------------------------------------
@@ -13,24 +13,24 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStoreOrderCollection (0 custom class methods, 1 custom properties)
+//   GTLStoreendpointDISCOUNTS (0 custom class methods, 1 custom properties)
 
-#import "GTLStoreendpointStoreOrderCollection.h"
+#import "GTLStoreendpointDISCOUNTS.h"
 
-#import "GTLStoreendpointStoreOrder.h"
+#import "GTLStoreendpointDISCOUNT.h"
 
 // ----------------------------------------------------------------------------
 //
-//   GTLStoreendpointStoreOrderCollection
+//   GTLStoreendpointDISCOUNTS
 //
 
-@implementation GTLStoreendpointStoreOrderCollection
-@dynamic items;
+@implementation GTLStoreendpointDISCOUNTS
+@dynamic discount;
 
 + (NSDictionary *)arrayPropertyToClassMap {
   NSDictionary *map =
-    [NSDictionary dictionaryWithObject:[GTLStoreendpointStoreOrder class]
-                                forKey:@"items"];
+    [NSDictionary dictionaryWithObject:[GTLStoreendpointDISCOUNT class]
+                                forKey:@"discount"];
   return map;
 }
 

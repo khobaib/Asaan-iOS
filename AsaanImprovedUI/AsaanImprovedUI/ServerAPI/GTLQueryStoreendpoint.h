@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryStoreendpoint (29 custom class methods, 12 custom properties)
+//   GTLQueryStoreendpoint (31 custom class methods, 12 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLQuery.h"
@@ -60,6 +60,12 @@
 #pragma mark -
 #pragma mark Service level methods
 // These create a GTLQueryStoreendpoint object.
+
+// Method: storeendpoint.getCheckDetailsPOSResponseEmptyObject
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
+// Fetches a GTLStoreendpointGetCheckDetailsPOSResponse.
++ (id)queryForGetCheckDetailsPOSResponseEmptyObject;
 
 // Method: storeendpoint.getMenuItemAndStatsForMenu
 //  Authorization scope(s):
@@ -136,10 +142,17 @@
 // Method: storeendpoint.getStoreOrdersByUser
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
-// Fetches a GTLStoreendpointStoreOrderCollection.
-+ (id)queryForGetStoreOrdersByUserWithUserId:(long long)userId
-                               firstPosition:(NSInteger)firstPosition
-                                   maxResult:(NSInteger)maxResult;
+// Fetches a GTLStoreendpointStoreOrderListAndCount.
++ (id)queryForGetStoreOrdersByUserWithFirstPosition:(NSInteger)firstPosition
+                                          maxResult:(NSInteger)maxResult;
+
+// Method: storeendpoint.getStoreOrdersByUserAndStore
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
+// Fetches a GTLStoreendpointStoreOrderListAndCount.
++ (id)queryForGetStoreOrdersByUserAndStoreWithStoreId:(long long)storeId
+                                        firstPosition:(NSInteger)firstPosition
+                                            maxResult:(NSInteger)maxResult;
 
 // Method: storeendpoint.getStoreOwners
 //  Authorization scope(s):
