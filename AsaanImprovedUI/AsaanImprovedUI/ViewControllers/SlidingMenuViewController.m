@@ -126,7 +126,7 @@
         GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
         if (goh.orderInProgress != nil)
             [self performSegueWithIdentifier:_menuSegue[indexPath.row] sender:self];
-        else
+        else 
             [self.view makeToast:@"No pending order is available."];
     }
     else {

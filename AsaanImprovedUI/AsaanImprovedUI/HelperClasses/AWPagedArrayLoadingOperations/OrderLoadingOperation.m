@@ -18,7 +18,7 @@
 @implementation OrderLoadingOperation
 @synthesize bDataLoaded = _bDataLoaded;
 
-const NSTimeInterval DataLoadingOperationDuration2 = 0.3;
+const NSTimeInterval DataLoadingOperationDuration2_2 = 0.3;
 
 - (instancetype)initWithIndexes:(NSIndexSet *)indexes{
     
@@ -48,7 +48,7 @@ const NSTimeInterval DataLoadingOperationDuration2 = 0.3;
             }];
             
             while (weakSelf.bDataLoaded == false)
-                [NSThread sleepForTimeInterval:DataLoadingOperationDuration2];
+                [NSThread sleepForTimeInterval:DataLoadingOperationDuration2_2];
             
         }];
     }
