@@ -96,7 +96,6 @@
         return;
     }
     else{
-        currentUser[PF_USER_FULLNAME] = currentUser.username;
         
         // Load GAE Objects on startup
         GlobalObjectHolder *objectHolder = appDelegate.globalObjectHolder;
@@ -374,7 +373,7 @@
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     PFUser *user = [PFUser currentUser];
-    [self gotoChatGroup:[NSString stringWithFormat:@"%@$$%@$$%@", _selectedStore.store.name, user.email, _selectedStore.store.identifier]];
+    [self gotoChatGroup:[NSString stringWithFormat:@"%@$$%@$$%@", _selectedStore.store.name, user.objectId, _selectedStore.store.identifier]];
 }
 
 - (IBAction) showMenu:(UIButton *)sender

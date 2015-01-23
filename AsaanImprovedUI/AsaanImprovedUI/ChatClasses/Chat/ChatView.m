@@ -142,11 +142,6 @@
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	if (object[PF_CHAT_PICTURE] == nil)
 	{
-#warning TODO : ADDED this condition by me
-        NSLog(@"User : %@", user[PF_USER_FULLNAME]);
-        if (!user[PF_USER_FULLNAME]) {
-            user[PF_USER_FULLNAME] = user.username;
-        }
         
 		JSQMessage *message = [[JSQMessage alloc] initWithSenderId:user.objectId senderDisplayName:user[PF_USER_FULLNAME]
 																	  date:object.createdAt text:object[PF_CHAT_TEXT]];
