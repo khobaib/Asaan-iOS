@@ -152,7 +152,7 @@ const NSTimeInterval XMLLoadingOperationDuration = 0.3;
         return 0;
     
     long count = 0;
-    if (self.selectedOrder.discount.longValue > 0)
+    if (self.selectedOrder.discount.longValue != 0)
         count = self.finalItems.count + 5;
     else
         count = self.finalItems.count + 4;
@@ -194,7 +194,7 @@ const NSTimeInterval XMLLoadingOperationDuration = 0.3;
 
 - (UITableViewCell *)cellForAdditionalRowAtIndex:(int)index forTable:(UITableView *)tableView forIndexPath:indexPath
 {
-    if (ceilf(self.selectedOrder.discount.floatValue) == 0.0)
+    if (self.selectedOrder.discount.longValue == 0)
         index++;
     
     UITableViewCell *cell;
