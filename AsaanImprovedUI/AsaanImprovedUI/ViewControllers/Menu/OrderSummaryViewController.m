@@ -26,6 +26,7 @@
 #import "SelectPaymentTableViewController.h"
 #import "InlineCalls.h"
 #import "GTLStoreendpointAsaanLongString.h"
+#import "UtilCalls.h"
 
 @interface OrderSummaryViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -33,6 +34,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnAdd;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnEdit;
 @property (strong, nonatomic) MenuTableViewController *itemInputController;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *revealButtonItem;
 
 @property (nonatomic) Boolean bInPlaceOrderMode;
 
@@ -44,8 +46,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    
+    if (self.navigationController.viewControllers[0] != self) {
+        self.navigationItem.leftBarButtonItem = nil;
+    }
+    else {
+        [UtilCalls slidingMenuSetupWith:self withItem:self.revealButtonItem];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
