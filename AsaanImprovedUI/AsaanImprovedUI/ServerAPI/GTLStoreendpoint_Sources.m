@@ -28,6 +28,7 @@
 #import "GTLStoreendpointGETCHECKDETAILS.m"
 #import "GTLStoreendpointGetCheckDetailsPOSResponse.m"
 #import "GTLStoreendpointItemReview.m"
+#import "GTLStoreendpointItemReviewsArray.m"
 #import "GTLStoreendpointMenuItemAndStats.m"
 #import "GTLStoreendpointMenuItemAndStatsCollection.m"
 #import "GTLStoreendpointMenuItemModifiersAndGroups.m"

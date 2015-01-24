@@ -35,6 +35,7 @@
                       [GTLStoreendpointGETCHECKDETAILS class],
                       [GTLStoreendpointGetCheckDetailsPOSResponse class],
                       [GTLStoreendpointItemReview class],
+                      [GTLStoreendpointItemReviewsArray class],
                       [GTLStoreendpointMenuItemAndStats class],
                       [GTLStoreendpointMenuItemAndStatsCollection class],
                       [GTLStoreendpointMenuItemModifiersAndGroups class],

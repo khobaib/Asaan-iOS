@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointOrderReview (0 custom class methods, 10 custom properties)
+//   GTLStoreendpointOrderReview (0 custom class methods, 9 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLObject.h"
@@ -30,7 +30,6 @@
 @property (copy) NSString *comments;
 @property (retain) NSNumber *createdDate;  // longLongValue
 @property (retain) NSNumber *foodLike;  // intValue
-@property (retain) NSNumber *hasItemReviews;  // boolValue
 
 // identifier property maps to 'id' in JSON (to avoid Objective C's 'id').
 @property (retain) NSNumber *identifier;  // longLongValue

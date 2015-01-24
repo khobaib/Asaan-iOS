@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryStoreendpoint (31 custom class methods, 12 custom properties)
+//   GTLQueryStoreendpoint (33 custom class methods, 11 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLQuery.h"
@@ -22,6 +22,8 @@
 #endif
 
 @class GTLStoreendpointAsaanLongString;
+@class GTLStoreendpointItemReviewsArray;
+@class GTLStoreendpointOrderReview;
 @class GTLStoreendpointStore;
 @class GTLStoreendpointStoreDiscount;
 @class GTLStoreendpointStoreDiscountArray;
@@ -55,7 +57,6 @@
 @property (assign) NSInteger orderMode;
 @property (assign) long long storeId;
 @property (copy) NSString *storeName;
-@property (assign) long long userId;
 
 #pragma mark -
 #pragma mark Service level methods
@@ -76,12 +77,11 @@
                                       firstPosition:(NSInteger)firstPosition
                                           maxResult:(NSInteger)maxResult;
 
-// Method: storeendpoint.getReviewsForUserAndOrder
+// Method: storeendpoint.getReviewForCurrentUserAndOrder
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 // Fetches a GTLStoreendpointOrderReviewAndItemReviews.
-+ (id)queryForGetReviewsForUserAndOrderWithUserId:(long long)userId
-                                          orderId:(long long)orderId;
++ (id)queryForGetReviewForCurrentUserAndOrderWithOrderId:(long long)orderId;
 
 // Method: storeendpoint.getStatsForAllStores
 //  Authorization scope(s):
@@ -139,20 +139,20 @@
                          firstPosition:(NSInteger)firstPosition
                              maxResult:(NSInteger)maxResult;
 
-// Method: storeendpoint.getStoreOrdersByUser
+// Method: storeendpoint.getStoreOrdersForCurrentUser
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 // Fetches a GTLStoreendpointStoreOrderListAndCount.
-+ (id)queryForGetStoreOrdersByUserWithFirstPosition:(NSInteger)firstPosition
-                                          maxResult:(NSInteger)maxResult;
++ (id)queryForGetStoreOrdersForCurrentUserWithFirstPosition:(NSInteger)firstPosition
+                                                  maxResult:(NSInteger)maxResult;
 
-// Method: storeendpoint.getStoreOrdersByUserAndStore
+// Method: storeendpoint.getStoreOrdersForCurrentUserAndStore
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 // Fetches a GTLStoreendpointStoreOrderListAndCount.
-+ (id)queryForGetStoreOrdersByUserAndStoreWithStoreId:(long long)storeId
-                                        firstPosition:(NSInteger)firstPosition
-                                            maxResult:(NSInteger)maxResult;
++ (id)queryForGetStoreOrdersForCurrentUserAndStoreWithStoreId:(long long)storeId
+                                                firstPosition:(NSInteger)firstPosition
+                                                    maxResult:(NSInteger)maxResult;
 
 // Method: storeendpoint.getStoreOwners
 //  Authorization scope(s):
@@ -224,6 +224,11 @@
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 + (id)queryForSaveStoreDiscountWithObject:(GTLStoreendpointStoreDiscount *)object;
 
+// Method: storeendpoint.saveStoreItemReviews
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
++ (id)queryForSaveStoreItemReviewsWithObject:(GTLStoreendpointItemReviewsArray *)object;
+
 // Method: storeendpoint.saveStoreMenuCombined
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
@@ -252,6 +257,11 @@
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 // Fetches a GTLStoreendpointStoreMenuItemModifierGroup.
 + (id)queryForSaveStoreMenuItemModifierGroupWithObject:(GTLStoreendpointStoreMenuItemModifierGroup *)object;
+
+// Method: storeendpoint.saveStoreOrderReview
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
++ (id)queryForSaveStoreOrderReviewWithObject:(GTLStoreendpointOrderReview *)object;
 
 // Method: storeendpoint.saveStoreOwner
 //  Authorization scope(s):

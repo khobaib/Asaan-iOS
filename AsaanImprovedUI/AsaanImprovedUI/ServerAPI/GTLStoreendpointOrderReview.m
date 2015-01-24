@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointOrderReview (0 custom class methods, 10 custom properties)
+//   GTLStoreendpointOrderReview (0 custom class methods, 9 custom properties)
 
 #import "GTLStoreendpointOrderReview.h"
 
@@ -23,8 +23,8 @@
 //
 
 @implementation GTLStoreendpointOrderReview
-@dynamic comments, createdDate, foodLike, hasItemReviews, identifier,
-         modifiedDate, orderId, serviceLike, storeId, userId;
+@dynamic comments, createdDate, foodLike, identifier, modifiedDate, orderId,
+         serviceLike, storeId, userId;
 
 + (NSDictionary *)propertyToJSONKeyMap {
   NSDictionary *map =

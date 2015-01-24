@@ -14,13 +14,11 @@
 #import "OrderedDictionary.h"
 
 @interface OrderHistorySummaryTableViewController ()
-@property (nonatomic) Boolean bDataLoaded;
 @property (nonatomic, strong) NSMutableArray *finalItems;
 
 @end
 
 @implementation OrderHistorySummaryTableViewController
-@synthesize bDataLoaded = _bDataLoaded;
 
 const NSTimeInterval XMLLoadingOperationDuration = 0.3;
 
@@ -52,8 +50,6 @@ const NSTimeInterval XMLLoadingOperationDuration = 0.3;
 
     int position = 0;
     NSArray *allEntries = [[[[rootXML child:@"GETCHECKDETAILS"] child:@"CHECK"] child:@"ENTRIES"] children:@"ENTRY"];
-    
-    int count = allEntries.count;
     
     for (RXMLElement *entry in allEntries)
     {
@@ -293,14 +289,13 @@ const NSTimeInterval XMLLoadingOperationDuration = 0.3;
     return headerCell;
 }
 
-/*
-#pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([[segue identifier] isEqualToString:@"segueOrderHistorySummaryToReview"])
+    {
+        OrderHistorySummaryTableViewController *controller = [segue destinationViewController];
+        [controller setSelectedOrder:self.selectedOrder];
+    }
 }
-*/
-
 @end

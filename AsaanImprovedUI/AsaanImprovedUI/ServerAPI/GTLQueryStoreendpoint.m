@@ -13,16 +13,18 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryStoreendpoint (31 custom class methods, 12 custom properties)
+//   GTLQueryStoreendpoint (33 custom class methods, 11 custom properties)
 
 #import "GTLQueryStoreendpoint.h"
 
 #import "GTLStoreendpointAsaanLong.h"
 #import "GTLStoreendpointAsaanLongString.h"
 #import "GTLStoreendpointGetCheckDetailsPOSResponse.h"
+#import "GTLStoreendpointItemReviewsArray.h"
 #import "GTLStoreendpointMenuItemAndStatsCollection.h"
 #import "GTLStoreendpointMenuItemModifiersAndGroups.h"
 #import "GTLStoreendpointMenusAndMenuItems.h"
+#import "GTLStoreendpointOrderReview.h"
 #import "GTLStoreendpointOrderReviewAndItemReviews.h"
 #import "GTLStoreendpointStore.h"
 #import "GTLStoreendpointStoreAndStatsCollection.h"
@@ -48,7 +50,7 @@
 @implementation GTLQueryStoreendpoint
 
 @dynamic fields, firstPosition, guestCount, maxResult, menuItemPOSId, menuPOSId,
-         menuType, orderId, orderMode, storeId, storeName, userId;
+         menuType, orderId, orderMode, storeId, storeName;
 
 #pragma mark -
 #pragma mark Service level methods
@@ -75,11 +77,9 @@
   return query;
 }
 
-+ (id)queryForGetReviewsForUserAndOrderWithUserId:(long long)userId
-                                          orderId:(long long)orderId {
-  NSString *methodName = @"storeendpoint.getReviewsForUserAndOrder";
++ (id)queryForGetReviewForCurrentUserAndOrderWithOrderId:(long long)orderId {
+  NSString *methodName = @"storeendpoint.getReviewForCurrentUserAndOrder";
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
-  query.userId = userId;
   query.orderId = orderId;
   query.expectedObjectClass = [GTLStoreendpointOrderReviewAndItemReviews class];
   return query;
@@ -164,9 +164,9 @@
   return query;
 }
 
-+ (id)queryForGetStoreOrdersByUserWithFirstPosition:(NSInteger)firstPosition
-                                          maxResult:(NSInteger)maxResult {
-  NSString *methodName = @"storeendpoint.getStoreOrdersByUser";
++ (id)queryForGetStoreOrdersForCurrentUserWithFirstPosition:(NSInteger)firstPosition
+                                                  maxResult:(NSInteger)maxResult {
+  NSString *methodName = @"storeendpoint.getStoreOrdersForCurrentUser";
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
   query.firstPosition = firstPosition;
   query.maxResult = maxResult;
@@ -174,10 +174,10 @@
   return query;
 }
 
-+ (id)queryForGetStoreOrdersByUserAndStoreWithStoreId:(long long)storeId
-                                        firstPosition:(NSInteger)firstPosition
-                                            maxResult:(NSInteger)maxResult {
-  NSString *methodName = @"storeendpoint.getStoreOrdersByUserAndStore";
++ (id)queryForGetStoreOrdersForCurrentUserAndStoreWithStoreId:(long long)storeId
+                                                firstPosition:(NSInteger)firstPosition
+                                                    maxResult:(NSInteger)maxResult {
+  NSString *methodName = @"storeendpoint.getStoreOrdersForCurrentUserAndStore";
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
   query.storeId = storeId;
   query.firstPosition = firstPosition;
@@ -310,6 +310,17 @@
   return query;
 }
 
++ (id)queryForSaveStoreItemReviewsWithObject:(GTLStoreendpointItemReviewsArray *)object {
+  if (object == nil) {
+    GTL_DEBUG_ASSERT(object != nil, @"%@ got a nil object", NSStringFromSelector(_cmd));
+    return nil;
+  }
+  NSString *methodName = @"storeendpoint.saveStoreItemReviews";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.bodyObject = object;
+  return query;
+}
+
 + (id)queryForSaveStoreMenuCombinedWithObject:(GTLStoreendpointStoreMenuCombined *)object {
   if (object == nil) {
     GTL_DEBUG_ASSERT(object != nil, @"%@ got a nil object", NSStringFromSelector(_cmd));
@@ -366,6 +377,17 @@
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
   query.bodyObject = object;
   query.expectedObjectClass = [GTLStoreendpointStoreMenuItemModifierGroup class];
+  return query;
+}
+
++ (id)queryForSaveStoreOrderReviewWithObject:(GTLStoreendpointOrderReview *)object {
+  if (object == nil) {
+    GTL_DEBUG_ASSERT(object != nil, @"%@ got a nil object", NSStringFromSelector(_cmd));
+    return nil;
+  }
+  NSString *methodName = @"storeendpoint.saveStoreOrderReview";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.bodyObject = object;
   return query;
 }
 

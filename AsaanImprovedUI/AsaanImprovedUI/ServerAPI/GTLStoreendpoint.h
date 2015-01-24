@@ -25,6 +25,7 @@
 #import "GTLStoreendpointGETCHECKDETAILS.h"
 #import "GTLStoreendpointGetCheckDetailsPOSResponse.h"
 #import "GTLStoreendpointItemReview.h"
+#import "GTLStoreendpointItemReviewsArray.h"
 #import "GTLStoreendpointMenuItemAndStats.h"
 #import "GTLStoreendpointMenuItemAndStatsCollection.h"
 #import "GTLStoreendpointMenuItemModifiersAndGroups.h"

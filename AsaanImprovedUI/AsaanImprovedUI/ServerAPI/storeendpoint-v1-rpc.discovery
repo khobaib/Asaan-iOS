@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/6GDtY6mHk4bWgBWHPjsQGH_f8n8\"",
+ "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/CKzw4DN8KanAe4lqVxzZ5D4Sqlo\"",
  "discoveryVersion": "v1",
  "id": "storeendpoint:v1",
  "name": "storeendpoint",
@@ -267,13 +267,29 @@
      "type": "string",
      "format": "int64"
     },
-    "orderReviewId": {
+    "orderId": {
      "type": "string",
      "format": "int64"
     },
     "storeId": {
      "type": "string",
      "format": "int64"
+    },
+    "userId": {
+     "type": "string",
+     "format": "int64"
+    }
+   }
+  },
+  "ItemReviewsArray": {
+   "id": "ItemReviewsArray",
+   "type": "object",
+   "properties": {
+    "itemReviews": {
+     "type": "array",
+     "items": {
+      "$ref": "ItemReview"
+     }
     }
    }
   },
@@ -351,9 +367,6 @@
     "foodLike": {
      "type": "integer",
      "format": "int32"
-    },
-    "hasItemReviews": {
-     "type": "boolean"
     },
     "id": {
      "type": "string",
@@ -1260,22 +1273,16 @@
     "https://www.googleapis.com/auth/userinfo.email"
    ]
   },
-  "storeendpoint.getReviewsForUserAndOrder": {
-   "id": "storeendpoint.getReviewsForUserAndOrder",
+  "storeendpoint.getReviewForCurrentUserAndOrder": {
+   "id": "storeendpoint.getReviewForCurrentUserAndOrder",
    "parameters": {
     "orderId": {
-     "type": "string",
-     "required": true,
-     "format": "int64"
-    },
-    "userId": {
      "type": "string",
      "required": true,
      "format": "int64"
     }
    },
    "parameterOrder": [
-    "userId",
     "orderId"
    ],
    "returns": {
@@ -1475,8 +1482,8 @@
     "https://www.googleapis.com/auth/userinfo.email"
    ]
   },
-  "storeendpoint.getStoreOrdersByUser": {
-   "id": "storeendpoint.getStoreOrdersByUser",
+  "storeendpoint.getStoreOrdersForCurrentUser": {
+   "id": "storeendpoint.getStoreOrdersForCurrentUser",
    "parameters": {
     "firstPosition": {
      "type": "integer",
@@ -1500,8 +1507,8 @@
     "https://www.googleapis.com/auth/userinfo.email"
    ]
   },
-  "storeendpoint.getStoreOrdersByUserAndStore": {
-   "id": "storeendpoint.getStoreOrdersByUserAndStore",
+  "storeendpoint.getStoreOrdersForCurrentUserAndStore": {
+   "id": "storeendpoint.getStoreOrdersForCurrentUserAndStore",
    "parameters": {
     "firstPosition": {
      "type": "integer",
@@ -1762,6 +1769,20 @@
     "https://www.googleapis.com/auth/userinfo.email"
    ]
   },
+  "storeendpoint.saveStoreItemReviews": {
+   "id": "storeendpoint.saveStoreItemReviews",
+   "parameters": {
+    "resource": {
+     "$ref": "ItemReviewsArray"
+    }
+   },
+   "parameterOrder": [
+    "resource"
+   ],
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
   "storeendpoint.saveStoreMenuCombined": {
    "id": "storeendpoint.saveStoreMenuCombined",
    "parameters": {
@@ -1840,6 +1861,20 @@
    "returns": {
     "$ref": "StoreMenuItemModifierGroup"
    },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.saveStoreOrderReview": {
+   "id": "storeendpoint.saveStoreOrderReview",
+   "parameters": {
+    "resource": {
+     "$ref": "OrderReview"
+    }
+   },
+   "parameterOrder": [
+    "resource"
+   ],
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"
    ]

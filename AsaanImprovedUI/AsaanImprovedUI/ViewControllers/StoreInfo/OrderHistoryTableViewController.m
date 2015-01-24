@@ -16,6 +16,7 @@
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
 #import "UtilCalls.h"
+#import "Constants.h"
 
 @interface OrderHistoryTableViewController ()<DataProviderDelegate>
 @property (nonatomic) int startPosition;
@@ -61,9 +62,9 @@
         GTLQueryStoreendpoint *query;
         
         if (self.selectedStore != nil)
-            query = [GTLQueryStoreendpoint queryForGetStoreOrdersByUserAndStoreWithStoreId:self.selectedStore.identifier.longValue firstPosition:0 maxResult:FluentPagingTablePageSize];
+            query = [GTLQueryStoreendpoint queryForGetStoreOrdersForCurrentUserAndStoreWithStoreId:self.selectedStore.identifier.longValue firstPosition:0 maxResult:FluentPagingTablePageSize];
         else
-            query = [GTLQueryStoreendpoint queryForGetStoreOrdersByUserWithFirstPosition:0 maxResult:FluentPagingTablePageSize];
+            query = [GTLQueryStoreendpoint queryForGetStoreOrdersForCurrentUserWithFirstPosition:0 maxResult:FluentPagingTablePageSize];
         NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
         dic[USER_AUTH_TOKEN_HEADER_NAME]=[UtilCalls getAuthTokenForCurrentUser];
         
