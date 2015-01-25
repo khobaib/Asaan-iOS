@@ -30,6 +30,7 @@
 #import "messages.h"
 #import "ChatView.h"
 #import "ChatConstants.h"
+#import "ChatTabBarController.H"
 
 #import "MBProgressHUD.h"
 #import "ProgressHUD.h"
@@ -308,11 +309,21 @@
     //---------------------------------------------------------------------------------------------------------------------------------------------
     CreateMessageItem([PFUser currentUser], roomId, chatroom[PF_CHATROOMS_NAME]);
     //---------------------------------------------------------------------------------------------------------------------------------------------
-    ChatView *chatView = [[ChatView alloc] initWith:roomId title:[[chatroom[PF_CHATROOMS_NAME] componentsSeparatedByString:@"$$"] objectAtIndex:0]];
-    chatView.hidesBottomBarWhenPushed = YES;
+    ChatTabBarController *frontController = [[ChatTabBarController alloc] init];
+    frontController.parentNavigationController = self.navigationController;
+    
+    frontController.chatView.roomId = roomId;
+    frontController.title = [[chatroom[PF_CHATROOMS_NAME] componentsSeparatedByString:@"$$"] objectAtIndex:0];
+    frontController.selectedIndex = 1;
     
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-    [self.navigationController pushViewController:chatView animated:YES];
+    [self.navigationController pushViewController:frontController animated:YES];
+//    
+//    ChatView *chatView = [[ChatView alloc] initWith:roomId title:[[chatroom[PF_CHATROOMS_NAME] componentsSeparatedByString:@"$$"] objectAtIndex:0]];
+//    chatView.hidesBottomBarWhenPushed = YES;
+//    
+//    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+//    [self.navigationController pushViewController:chatView animated:YES];
 }
 
 - (void)gotoChatGroup:(NSString *)groupName

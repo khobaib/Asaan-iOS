@@ -9,11 +9,11 @@
 #import "SlidingMenuViewController.h"
 
 #import "AddFriendViewController.h"
-#import "GroupView.h"
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
 #import "AppDelegate.h"
 #import "UIView+Toast.h"
+#import "ChatTabBarController.h"
 
 @implementation SMTableViewCell1
 @end
@@ -128,6 +128,14 @@
             [self performSegueWithIdentifier:_menuSegue[indexPath.row] sender:self];
         else 
             [self.view makeToast:@"No pending order is available."];
+    }
+    else if ([_menuSegue[indexPath.row] isEqualToString:SEGUE_SMToChatHistory]) {
+        
+        SWRevealViewController *revealController = self.revealViewController;
+        ChatTabBarController *frontController = [[ChatTabBarController alloc] init];
+        frontController.selectedIndex = 0;
+        
+        [revealController pushFrontViewController:frontController animated:YES];
     }
     else {
         [self performSegueWithIdentifier:_menuSegue[indexPath.row] sender:self];

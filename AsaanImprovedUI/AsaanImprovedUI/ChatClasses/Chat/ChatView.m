@@ -25,8 +25,6 @@
 	NSTimer *timer;
 	BOOL isLoading;
 
-    NSString *roomId;
-
 	NSMutableArray *users;
 	NSMutableArray *messages;
 	NSMutableDictionary *avatars;
@@ -41,12 +39,26 @@
 
 @implementation ChatView
 
+// Added by bdpothik
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self)
+    {
+        [self.tabBarItem setImage:[UIImage imageNamed:@"tab_messages"]];
+//        self.tabBarItem.title = @"Group";
+    }
+    return self;
+}
+
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 - (id)initWith:(NSString *)roomId_ title:(NSString *)title_
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
 	self = [super init];
-    roomId = roomId_;
+    self.roomId = roomId_;
     self.title = title_;//@"Chat";
 	return self;
 }
@@ -55,7 +67,8 @@
 - (void)viewDidLoad
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
-	[super viewDidLoad];
+    [super viewDidLoad];
+//    self.title = @"Groups";
 
 	users = [[NSMutableArray alloc] init];
 	messages = [[NSMutableArray alloc] init];
@@ -74,7 +87,20 @@
 	isLoading = NO;
 	[self loadMessages];
 
-	ClearMessageCounter(roomId);
+	ClearMessageCounter(self.roomId);
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    self.tabBarItem.title = @"Message";
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    [super viewWillDisappear:animated];
+    
+    [timer invalidate];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -87,12 +113,12 @@
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-- (void)viewWillDisappear:(BOOL)animated
-//-------------------------------------------------------------------------------------------------------------------------------------------------
-{
-	[super viewWillDisappear:animated];
-	[timer invalidate];
-}
+//- (void)viewWillDisappear:(BOOL)animated
+////-------------------------------------------------------------------------------------------------------------------------------------------------
+//{
+//	[super viewWillDisappear:animated];
+//	[timer invalidate];
+//}
 
 #pragma mark - Backend methods
 
@@ -106,7 +132,7 @@
 		JSQMessage *message_last = [messages lastObject];
 
 		PFQuery *query = [PFQuery queryWithClassName:PF_CHAT_CLASS_NAME];
-		[query whereKey:PF_CHAT_ROOMID equalTo:roomId];
+		[query whereKey:PF_CHAT_ROOMID equalTo:self.roomId];
 		if (message_last != nil) [query whereKey:PF_CHAT_CREATEDAT greaterThan:message_last.date];
 		[query includeKey:PF_CHAT_USER];
 		[query orderByDescending:PF_CHAT_CREATEDAT];
@@ -185,7 +211,7 @@
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	PFObject *object = [PFObject objectWithClassName:PF_CHAT_CLASS_NAME];
 	object[PF_CHAT_USER] = [PFUser currentUser];
-	object[PF_CHAT_ROOMID] = roomId;
+	object[PF_CHAT_ROOMID] = self.roomId;
 	object[PF_CHAT_TEXT] = text;
 	if (filePicture != nil) object[PF_CHAT_PICTURE] = filePicture;
 	[object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
@@ -198,8 +224,8 @@
 		else [ProgressHUD showError:@"Network error."];;
 	}];
 	//---------------------------------------------------------------------------------------------------------------------------------------------
-	SendPushNotification(roomId, text);
-	UpdateMessageCounter(roomId, text);
+	SendPushNotification(self.roomId, text);
+	UpdateMessageCounter(self.roomId, text);
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	[self finishSendingMessage];
 }

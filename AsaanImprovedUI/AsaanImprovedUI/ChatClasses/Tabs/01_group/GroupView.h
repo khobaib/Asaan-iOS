@@ -12,6 +12,7 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 @interface GroupView : UITableViewController <UIAlertViewDelegate>
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *revealBarButtonItem;
+
+@property (strong, nonatomic) NSMutableArray *chatrooms;
 
 @end

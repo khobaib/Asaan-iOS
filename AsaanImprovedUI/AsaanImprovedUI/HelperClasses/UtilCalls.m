@@ -89,6 +89,7 @@
     SWRevealViewController *revealViewController = viewController.revealViewController;
     revealViewController.shouldUseFrontViewOverlay = YES;
     revealViewController.shouldUseDoubleAnimationOnVCChange = NO;
+    
     if ( revealViewController && viewController && revealButtonItem )
     {
         [revealButtonItem setTarget: viewController.revealViewController];

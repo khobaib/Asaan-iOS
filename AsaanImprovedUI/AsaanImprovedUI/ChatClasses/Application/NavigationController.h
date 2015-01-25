@@ -9,14 +9,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "JSQMessages.h"
+#import <UIKit/UIKit.h>
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-@interface ChatView : JSQMessagesViewController <UIActionSheetDelegate, UIImagePickerControllerDelegate>
-//-------------------------------------------------------------------------------------------------------------------------------------------------
+@interface NavigationController : UINavigationController
 
-@property(nonatomic, strong) NSString *roomId;
-
-- (id)initWith:(NSString *)roomId_ title:(NSString *)title_;
+@property (weak, nonatomic) UINavigationController *parentNavigationController;
 
 @end
