@@ -10,13 +10,14 @@
 
 @interface OrderItemSummaryFromPOS : NSObject
 
-@property long entryId;
-@property long posMenuItemId;
-@property long parentEntryId;
+@property int entryId;
+@property int posMenuItemId;
+@property int parentEntryId;
 @property int position;
 @property int qty;
-@property double price;
+@property float price;
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *desc;
+@property short like;
 
 @end

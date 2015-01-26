@@ -301,6 +301,8 @@
 - (IBAction) callStore:(UIButton *)sender
 {
     _selectedStore = self.dataProvider.dataObjects[sender.tag];
+    NSString *number = [NSString stringWithFormat:@"telprompt://%@", self.selectedStore.store.phone];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:number]];
 }
 
 - (void)gotoChatView:(PFObject *)chatroom

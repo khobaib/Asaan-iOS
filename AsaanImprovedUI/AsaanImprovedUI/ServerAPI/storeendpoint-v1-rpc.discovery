@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/CKzw4DN8KanAe4lqVxzZ5D4Sqlo\"",
+ "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/WNrksN8RTZ83o-djJ0Dt8CTI66o\"",
  "discoveryVersion": "v1",
  "id": "storeendpoint:v1",
  "name": "storeendpoint",
@@ -255,9 +255,12 @@
      "type": "string",
      "format": "int64"
     },
-    "like": {
+    "itemLike": {
      "type": "integer",
      "format": "int32"
+    },
+    "itemName": {
+     "type": "string"
     },
     "menuItemPOSId": {
      "type": "integer",

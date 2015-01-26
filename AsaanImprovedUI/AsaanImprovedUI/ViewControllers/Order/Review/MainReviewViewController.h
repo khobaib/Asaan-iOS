@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "GTLStoreendpointStoreOrder.h"
+#import "GTLStoreendpointOrderReviewAndItemReviews.h"
 
 @interface MainReviewViewController : UIViewController
 @property (nonatomic, strong) GTLStoreendpointStoreOrder *selectedOrder;
+@property (strong, nonatomic) GTLStoreendpointOrderReviewAndItemReviews *reviewAndItems;
 @end

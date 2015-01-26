@@ -8,17 +8,14 @@
 
 #import "MainReviewViewController.h"
 #import "ReviewItemsTableViewController.h"
-#import "ReviewSliderView.h"
 #import "AppDelegate.h"
 #import "UtilCalls.h"
-#import "MBProgressHUD.h"
 
 
 @interface MainReviewViewController()
-@property (weak, nonatomic) IBOutlet ReviewSliderView *foodReviewSlider;
-@property (weak, nonatomic) IBOutlet ReviewSliderView *serviceReviewSlider;
+@property (weak, nonatomic) IBOutlet UISlider *foodReviewSlider;
+@property (weak, nonatomic) IBOutlet UISlider *serviceReviewSlider;
 @property (weak, nonatomic) IBOutlet UITextView *txtReview;
-@property (strong, nonatomic) GTLStoreendpointOrderReviewAndItemReviews *reviewAndItems;
 @end
 
 @implementation MainReviewViewController
@@ -27,43 +24,16 @@
     [super viewDidLoad];
     if (self.selectedOrder == nil)
         return;
-    [self getOrderReview];
     [[self.txtReview layer] setBorderColor:[[UIColor grayColor] CGColor]];
     [[self.txtReview layer] setBorderWidth:2.3];
     [[self.txtReview layer] setCornerRadius:15];
-}
-- (void) getOrderReview
-{
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeIndeterminate;
-    hud.labelText = @"Please Wait";
-    hud.hidden = NO;
-    if (self)
+    
+    if (self.reviewAndItems != nil)
     {
-        __weak __typeof(self) weakSelf = self;
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-        GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-        GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetReviewForCurrentUserAndOrderWithOrderId:self.selectedOrder.identifier.longValue];
-        NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
-        dic[USER_AUTH_TOKEN_HEADER_NAME]=[UtilCalls getAuthTokenForCurrentUser];
-        
-        [query setAdditionalHTTPHeaders:dic];
-        
-        [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointOrderReviewAndItemReviews *object,NSError *error)
-         {
-             if(!error)
-             {
-                 weakSelf.reviewAndItems = object;
-                 self.foodReviewSlider.value = self.reviewAndItems.orderReview.foodLike.floatValue/100;
-                 self.serviceReviewSlider.value = self.reviewAndItems.orderReview.serviceLike.floatValue/100;
-                 self.txtReview.text = self.reviewAndItems.orderReview.comments;
-             }else{
-                 NSLog(@"getOrderReview Error:%@",[error userInfo]);
-             }
-             hud.hidden = YES;
-         }];
+        self.foodReviewSlider.value = self.reviewAndItems.orderReview.foodLike.floatValue/100;
+        self.serviceReviewSlider.value = self.reviewAndItems.orderReview.serviceLike.floatValue/100;
+        self.txtReview.text = self.reviewAndItems.orderReview.comments;
     }
-
 }
 
 - (IBAction)foodReviewSliderValueChanged:(id)sender

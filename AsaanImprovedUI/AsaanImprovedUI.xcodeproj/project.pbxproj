@@ -274,7 +274,6 @@
 		D4828CD61A71AF7400C80E92 /* RXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CD11A71AF7400C80E92 /* RXMLElement.m */; };
 		D4828CD71A71AF7400C80E92 /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CD41A71AF7400C80E92 /* UIView+Toast.m */; };
 		D4828CE21A72B5B800C80E92 /* MainReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CE11A72B5B800C80E92 /* MainReviewViewController.m */; };
-		D4828CE51A72BA4300C80E92 /* ReviewSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CE41A72BA4300C80E92 /* ReviewSliderView.m */; };
 		D4828CF51A72BE4B00C80E92 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CE81A72BE4B00C80E92 /* InfoViewController.m */; };
 		D4828CF61A72BE4B00C80E92 /* OrderHistorySummaryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CEA1A72BE4B00C80E92 /* OrderHistorySummaryTableViewController.m */; };
 		D4828CF71A72BE4B00C80E92 /* OrderHistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CEC1A72BE4B00C80E92 /* OrderHistoryTableViewController.m */; };
@@ -835,8 +834,6 @@
 		D4828CD41A71AF7400C80E92 /* UIView+Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Toast.m"; sourceTree = "<group>"; };
 		D4828CE01A72B5B800C80E92 /* MainReviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainReviewViewController.h; sourceTree = "<group>"; };
 		D4828CE11A72B5B800C80E92 /* MainReviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainReviewViewController.m; sourceTree = "<group>"; };
-		D4828CE31A72BA4300C80E92 /* ReviewSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewSliderView.h; sourceTree = "<group>"; };
-		D4828CE41A72BA4300C80E92 /* ReviewSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewSliderView.m; sourceTree = "<group>"; };
 		D4828CE71A72BE4B00C80E92 /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
 		D4828CE81A72BE4B00C80E92 /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
 		D4828CE91A72BE4B00C80E92 /* OrderHistorySummaryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderHistorySummaryTableViewController.h; sourceTree = "<group>"; };
@@ -1888,8 +1885,6 @@
 			children = (
 				D4828CE01A72B5B800C80E92 /* MainReviewViewController.h */,
 				D4828CE11A72B5B800C80E92 /* MainReviewViewController.m */,
-				D4828CE31A72BA4300C80E92 /* ReviewSliderView.h */,
-				D4828CE41A72BA4300C80E92 /* ReviewSliderView.m */,
 				D4828CFC1A7358A400C80E92 /* ReviewItemsTableViewController.h */,
 				D4828CFD1A7358A400C80E92 /* ReviewItemsTableViewController.m */,
 			);
@@ -2416,7 +2411,6 @@
 				3709EACD1A31C8DA0060B49B /* MenuItemCell.m in Sources */,
 				D4828D011A735BA100C80E92 /* GTLStoreendpointItemReviewsArray.m in Sources */,
 				375D0FA71A6996610016C293 /* JSQMessagesBubbleImage.m in Sources */,
-				D4828CE51A72BA4300C80E92 /* ReviewSliderView.m in Sources */,
 				D449EB631A1BCDEB00879383 /* GTLStoreendpointMenusAndMenuItems.m in Sources */,
 				D4A8C18C1A263B1800DA344A /* AFNetworkActivityIndicatorManager.m in Sources */,
 				375D10011A69F5550016C293 /* GroupView.m in Sources */,

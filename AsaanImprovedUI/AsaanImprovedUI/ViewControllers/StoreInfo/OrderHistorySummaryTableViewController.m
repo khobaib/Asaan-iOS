@@ -12,25 +12,33 @@
 #import "OrderItemSummaryFromPOS.h"
 #import "RXMLElement.h"
 #import "OrderedDictionary.h"
+#import "GTLStoreendpointOrderReviewAndItemReviews.h"
+#import "MBProgressHUD.h"
+#import "AppDelegate.h"
+#import "MainReviewViewController.h"
 
 @interface OrderHistorySummaryTableViewController ()
 @property (nonatomic, strong) NSMutableArray *finalItems;
+@property (strong, nonatomic) GTLStoreendpointOrderReviewAndItemReviews *reviewAndItems;
+@property (strong, nonatomic) UIImage *imgLike;
+@property (strong, nonatomic) UIImage *imgDislike;
 
 @end
 
 @implementation OrderHistorySummaryTableViewController
 
-const NSTimeInterval XMLLoadingOperationDuration = 0.3;
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
+    self.imgLike = [UIImage imageNamed:@"ic_good_rating"];
+    self.imgDislike = [UIImage imageNamed:@"ic_bad_rating"];
+//    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+
+//    self.tableView.tableFooterView.hidden = YES;
     if (self.selectedOrder != nil)
     {
         [self parsePOSCheckDetails];
-        [self.tableView reloadData];
+        [self getOrderReview];
     }
     
     // Uncomment the following line to preserve selection between presentations.
@@ -38,6 +46,74 @@ const NSTimeInterval XMLLoadingOperationDuration = 0.3;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void) getOrderReview
+{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.labelText = @"Please Wait";
+    hud.hidden = NO;
+    if (self)
+    {
+        __weak __typeof(self) weakSelf = self;
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+        GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
+        GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetReviewForCurrentUserAndOrderWithOrderId:self.selectedOrder.identifier.longValue];
+        NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
+        dic[USER_AUTH_TOKEN_HEADER_NAME]=[UtilCalls getAuthTokenForCurrentUser];
+        
+        [query setAdditionalHTTPHeaders:dic];
+        
+        [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointOrderReviewAndItemReviews *object,NSError *error)
+         {
+             if(!error)
+             {
+                 weakSelf.reviewAndItems = object;
+                 if ([self orderHasAlreadyBeenReviewed] == false)
+                     weakSelf.navigationItem.rightBarButtonItem.title = @"Review";
+                 else
+                     weakSelf.navigationItem.rightBarButtonItem.title = @"";
+                 [weakSelf.tableView reloadData];
+             }else{
+                 NSLog(@"getOrderReview Error:%@",[error userInfo]);
+             }
+             hud.hidden = YES;
+         }];
+    }
+    
+}
+
+- (Boolean) orderHasAlreadyBeenReviewed
+{
+    if (self.reviewAndItems == nil || self.reviewAndItems.orderReview == nil)
+        return false;
+
+    if ((self.reviewAndItems.itemReviews == nil || self.reviewAndItems.itemReviews.count == 0) &&
+        (self.reviewAndItems.orderReview.foodLike.shortValue == 0 && self.reviewAndItems.orderReview.serviceLike.shortValue == 0 &&
+         IsEmpty(self.reviewAndItems.orderReview.comments) == true))
+        return false;
+        
+    return true;
+}
+
+- (UIImage *) getOrderItemReviewLikeDislikeImageForMenuItem:(int)menuItemPOSId
+{
+    if ([self orderHasAlreadyBeenReviewed] == false)
+        return nil;
+    if (self.reviewAndItems.itemReviews == nil || self.reviewAndItems.itemReviews.count == 0)
+        return nil;
+    for (GTLStoreendpointItemReview *itemReview in self.reviewAndItems.itemReviews)
+    {
+        if (itemReview.menuItemPOSId.intValue == menuItemPOSId)
+        {
+            if (itemReview.itemLike.shortValue <= 40)
+                return self.imgDislike;
+            if (itemReview.itemLike.shortValue >= 60)
+                return self.imgLike;
+        }
+    }
+    return nil;
 }
 
 - (MutableOrderedDictionary *)getCheckItemsFromXML:(NSString *)strPOSCheckDetails
@@ -54,12 +130,12 @@ const NSTimeInterval XMLLoadingOperationDuration = 0.3;
     for (RXMLElement *entry in allEntries)
     {
          OrderItemSummaryFromPOS *orderItemSummaryFromPOS = [[OrderItemSummaryFromPOS alloc]init];
-         orderItemSummaryFromPOS.posMenuItemId = [UtilCalls stringToNumber:[entry attribute:@"ITEMID"]].longValue;
+         orderItemSummaryFromPOS.posMenuItemId = [UtilCalls stringToNumber:[entry attribute:@"ITEMID"]].intValue;
          orderItemSummaryFromPOS.qty = [UtilCalls stringToNumber:[entry attribute:@"QUANTITY"]].intValue;
-         orderItemSummaryFromPOS.price = [UtilCalls stringToNumber:[entry attribute:@"PRICE"]].doubleValue;
+         orderItemSummaryFromPOS.price = [UtilCalls stringToNumber:[entry attribute:@"PRICE"]].floatValue;
          orderItemSummaryFromPOS.name = [entry attribute:@"DISP_NAME"];
-         orderItemSummaryFromPOS.parentEntryId = [UtilCalls stringToNumber:[entry attribute:@"PARENTENTRY"]].longValue;
-         orderItemSummaryFromPOS.entryId = [UtilCalls stringToNumber:[entry attribute:@"ID"]].longValue;
+         orderItemSummaryFromPOS.parentEntryId = [UtilCalls stringToNumber:[entry attribute:@"PARENTENTRY"]].intValue;
+         orderItemSummaryFromPOS.entryId = [UtilCalls stringToNumber:[entry attribute:@"ID"]].intValue;
          orderItemSummaryFromPOS.position = position++;
 
          [items setObject:orderItemSummaryFromPOS forKey:[NSNumber numberWithLong:orderItemSummaryFromPOS.entryId]];
@@ -117,7 +193,7 @@ const NSTimeInterval XMLLoadingOperationDuration = 0.3;
         for (int i = 0; i < items.count; i++)
         {
             OrderItemSummaryFromPOS *item = [items objectAtIndex:i];
-            NSString *key = [NSString stringWithFormat:@"%ld_%@_%@", item.posMenuItemId, [UtilCalls rawAmountToString:[NSNumber numberWithDouble:item.price]], item.desc];
+            NSString *key = [NSString stringWithFormat:@"%d_%@_%@", item.posMenuItemId, [UtilCalls rawAmountToString:[NSNumber numberWithDouble:item.price]], item.desc];
             OrderItemSummaryFromPOS *duplicateItem = [combinedItems objectForKey:key];
             if (duplicateItem != nil)
                 duplicateItem.qty++;
@@ -170,10 +246,12 @@ const NSTimeInterval XMLLoadingOperationDuration = 0.3;
         UILabel *txtQty = (UILabel *)[cell viewWithTag:502];
         UILabel *txtAmount = (UILabel *)[cell viewWithTag:503];
         UILabel *txtDesc = (UILabel *)[cell viewWithTag:504];
+        UIImageView *imgLike = (UIImageView *)[cell viewWithTag:505];
         txtDesc.text = nil;
         txtMenuItemName.text = nil;
         txtQty.text = nil;
         txtAmount.text = nil;
+        imgLike.image = nil;
         
         OrderItemSummaryFromPOS *item = [self.finalItems objectAtIndex:indexPath.row];
         if (item != nil)
@@ -182,6 +260,7 @@ const NSTimeInterval XMLLoadingOperationDuration = 0.3;
             txtQty.text = [NSString stringWithFormat:@"%d", item.qty];
             txtAmount.text = [NSString stringWithFormat:@"%@", [UtilCalls rawAmountToString:[NSNumber numberWithDouble:item.price]]];
             txtDesc.text = item.desc;
+            imgLike.image = [self getOrderItemReviewLikeDislikeImageForMenuItem:item.posMenuItemId];
         }
     }
     
@@ -194,76 +273,46 @@ const NSTimeInterval XMLLoadingOperationDuration = 0.3;
         index++;
     
     UITableViewCell *cell;
+    cell = [tableView dequeueReusableCellWithIdentifier:@"MenuItemCell" forIndexPath:indexPath];
+    UILabel *txtMenuItemName = (UILabel *)[cell viewWithTag:501];
+    UILabel *txtQty = (UILabel *)[cell viewWithTag:502];
+    UILabel *txtAmount = (UILabel *)[cell viewWithTag:503];
+    UILabel *txtDesc = (UILabel *)[cell viewWithTag:504];
+    UIImageView *imgLike = (UIImageView *)[cell viewWithTag:505];
+    txtDesc.text = nil;
+    txtQty.text = nil;
+    imgLike.image = nil;
+
     switch (index)
     {
         case 0: // Discount
         {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"MenuItemCell" forIndexPath:indexPath];
-            UILabel *txtMenuItemName = (UILabel *)[cell viewWithTag:501];
-            UILabel *txtQty = (UILabel *)[cell viewWithTag:502];
-            UILabel *txtAmount = (UILabel *)[cell viewWithTag:503];
-            UILabel *txtDesc = (UILabel *)[cell viewWithTag:504];
-            txtDesc.text = nil;
             cell.tag = 703;
-            txtQty.text = nil;
             txtAmount.text = [NSString stringWithFormat:@"%@-", [UtilCalls amountToString:self.selectedOrder.discount]];
             txtMenuItemName.text = [NSString stringWithFormat:@"Discount %@", self.selectedOrder.discountDescription];
             break;
         }
         case 1: // Subtotal
         {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"MenuItemCell" forIndexPath:indexPath];
-            UILabel *txtMenuItemName = (UILabel *)[cell viewWithTag:501];
-            UILabel *txtQty = (UILabel *)[cell viewWithTag:502];
-            UILabel *txtAmount = (UILabel *)[cell viewWithTag:503];
-            UILabel *txtDesc = (UILabel *)[cell viewWithTag:504];
-            txtDesc.text = nil;
-            
             txtMenuItemName.text = @"Subtotal";
-            txtQty.text = nil;
             txtAmount.text = [NSString stringWithFormat:@"%@", [UtilCalls amountToString:self.selectedOrder.subTotal]];
             break;
         }
         case 2: // Gratuity
         {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"MenuItemCell" forIndexPath:indexPath];
-            UILabel *txtMenuItemName = (UILabel *)[cell viewWithTag:501];
-            UILabel *txtQty = (UILabel *)[cell viewWithTag:502];
-            UILabel *txtAmount = (UILabel *)[cell viewWithTag:503];
-            UILabel *txtDesc = (UILabel *)[cell viewWithTag:504];
-            txtDesc.text = nil;
-            
             txtMenuItemName.text = @"Gratuity";
-            txtQty.text = nil;
             txtAmount.text = [NSString stringWithFormat:@"%@", [UtilCalls amountToString:self.selectedOrder.serviceCharge]];
             break;
         }
         case 3: // Tax
         {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"MenuItemCell" forIndexPath:indexPath];
-            UILabel *txtMenuItemName = (UILabel *)[cell viewWithTag:501];
-            UILabel *txtQty = (UILabel *)[cell viewWithTag:502];
-            UILabel *txtAmount = (UILabel *)[cell viewWithTag:503];
-            UILabel *txtDesc = (UILabel *)[cell viewWithTag:504];
-            txtDesc.text = nil;
-            
             txtMenuItemName.text = @"Tax";
-            txtQty.text = nil;
             txtAmount.text = [NSString stringWithFormat:@"%@", [UtilCalls amountToString:self.selectedOrder.tax]];
             break;
         }
         case 4: // Amount Due
         {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"MenuItemCell" forIndexPath:indexPath];
-            UILabel *txtMenuItemName = (UILabel *)[cell viewWithTag:501];
-            UILabel *txtQty = (UILabel *)[cell viewWithTag:502];
-            UILabel *txtAmount = (UILabel *)[cell viewWithTag:503];
-            UILabel *txtDesc = (UILabel *)[cell viewWithTag:504];
-            txtDesc.text = nil;
-            
             txtMenuItemName.text = @"Amount Due";
-            txtQty.text = nil;
-            
             txtAmount.text = [NSString stringWithFormat:@"%@", [UtilCalls amountToString:self.selectedOrder.finalTotal]];
             break;
         }
@@ -289,13 +338,44 @@ const NSTimeInterval XMLLoadingOperationDuration = 0.3;
     return headerCell;
 }
 
+-(UIView *) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    if ([self orderHasAlreadyBeenReviewed] == false)
+        return [[UIView alloc] initWithFrame:CGRectZero];
+    
+    UITableViewCell *footerCell = [tableView dequeueReusableCellWithIdentifier:@"FooterCell"];
+    UIImageView *imgFoodLike = (UIImageView *)[footerCell viewWithTag:502];
+    UIImageView *imgServiceLike = (UIImageView *)[footerCell viewWithTag:503];
+    UITextView *txtReview = (UITextView *)[footerCell viewWithTag:504];
+    
+    imgFoodLike.image = nil;
+    imgServiceLike.image = nil;
+    txtReview.text = nil;
+    txtReview.editable = false;
+    
+    if (self.reviewAndItems.orderReview.foodLike.shortValue <= 40)
+        imgFoodLike.image = self.imgDislike;
+    else if (self.reviewAndItems.orderReview.foodLike.shortValue >= 60)
+        imgFoodLike.image = self.imgLike;
+    
+    if (self.reviewAndItems.orderReview.serviceLike.shortValue <= 40)
+        imgServiceLike.image = self.imgDislike;
+    else if (self.reviewAndItems.orderReview.serviceLike.shortValue >= 60)
+        imgServiceLike.image = self.imgLike;
+    
+    txtReview.text = self.reviewAndItems.orderReview.comments;
+
+    return footerCell;
+}
+
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"segueOrderHistorySummaryToReview"])
     {
-        OrderHistorySummaryTableViewController *controller = [segue destinationViewController];
+        MainReviewViewController *controller = [segue destinationViewController];
         [controller setSelectedOrder:self.selectedOrder];
+        controller.reviewAndItems = self.reviewAndItems;
     }
 }
 @end
