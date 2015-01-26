@@ -84,10 +84,29 @@
 
 	avatarImageBlank = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"chat_blank"] diameter:30.0];
 
-	isLoading = NO;
-	[self loadMessages];
+//	isLoading = NO;
+//	[self loadMessages];
 
-	ClearMessageCounter(self.roomId);
+//	ClearMessageCounter(self.roomId);
+}
+
+- (void)setRoomId:(NSString *)roomId {
+
+    NSLog(@"hh");
+    if (roomId && (!_roomId || ![_roomId isEqualToString:roomId])) {
+        _roomId = roomId;
+        NSLog(@"hhg");
+        
+        messages = [[NSMutableArray alloc] init];
+        
+        [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+        [self.collectionView reloadData];
+        
+        isLoading = NO;
+        [self loadMessages];
+        
+        ClearMessageCounter(self.roomId);
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
