@@ -52,13 +52,6 @@
     [super viewDidLoad];
     self.title = @"Groups";
     self.tabBarItem.title = @"Groups";
-    
-//    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon"] style:UIBarButtonItemStylePlain target:nil action:nil];
-    
-//    [UtilCalls slidingMenuSetupWith:self withItem:self.revealBarButtonItem];
-	//---------------------------------------------------------------------------------------------------------------------------------------------
-//	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"New" style:UIBarButtonItemStylePlain target:self
-//																			 action:@selector(actionNew)];
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	self.tableView.tableFooterView = [[UIView alloc] init];
 	//---------------------------------------------------------------------------------------------------------------------------------------------

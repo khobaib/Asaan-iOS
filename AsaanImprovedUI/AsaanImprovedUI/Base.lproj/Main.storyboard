@@ -343,11 +343,8 @@
                         </connections>
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" title="ASAAN" id="h0o-YY-T31">
-                        <barButtonItem key="leftBarButtonItem" image="reveal-icon.png" style="plain" id="cLf-cp-yR9" customClass="BBBadgeBarButtonItem"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="ASAAN" id="h0o-YY-T31"/>
                     <connections>
-                        <outlet property="revealButtonItem" destination="cLf-cp-yR9" id="Mhj-tY-n03"/>
                         <outlet property="tableView" destination="iLr-wH-RNn" id="ZuM-cD-V5M"/>
                         <segue destination="eRi-F6-0Pv" kind="show" identifier="segueReveal" id="Tad-Vz-OyK"/>
                         <segue destination="2nl-tz-z8l" kind="show" identifier="segueMenu" id="F9u-xN-ecY"/>
@@ -1703,13 +1700,10 @@
                         </variation>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Title" id="E6n-DN-QZx">
-                        <barButtonItem key="leftBarButtonItem" image="reveal-icon.png" style="plain" id="OBy-GL-r2s"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Title" id="E6n-DN-QZx"/>
                     <connections>
                         <outlet property="btnAdd" destination="bD4-eq-fWS" id="4Rc-fJ-TkA"/>
                         <outlet property="btnEdit" destination="OEu-kb-Tan" id="8Hn-dd-hvL"/>
-                        <outlet property="revealButtonItem" destination="OBy-GL-r2s" id="iyE-aQ-ITx"/>
                         <outlet property="tableView" destination="NzV-NJ-IC1" id="NsG-Ud-GlD"/>
                         <segue destination="OEM-gH-M5m" kind="unwind" identifier="segueUnwindOrderSummaryToStoreList" unwindAction="unwindToStoreList:" id="x4C-so-2tk"/>
                         <segue destination="P54-c4-lKt" kind="show" identifier="segueOrderSummaryToModifierGroup" id="33i-hP-PSJ"/>
@@ -2405,12 +2399,7 @@
                             <outlet property="delegate" destination="tng-5w-RmX" id="7UP-IY-Ycw"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Update your info" id="4Mi-ec-MDg">
-                        <barButtonItem key="leftBarButtonItem" image="reveal-icon.png" id="uwf-pN-0QV"/>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="revealButtonItem" destination="uwf-pN-0QV" id="tAl-Ae-sK3"/>
-                    </connections>
+                    <navigationItem key="navigationItem" title="Update your info" id="4Mi-ec-MDg"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eB1-Et-AML" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <barButtonItem image="back" id="8zT-a1-6BH"/>
@@ -3139,9 +3128,7 @@
                             <outlet property="delegate" destination="wiP-rK-hc1" id="46L-eR-Y2A"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="Lxf-dc-N4L">
-                        <barButtonItem key="leftBarButtonItem" image="reveal-icon.png" id="iJu-3V-oJ0"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="Lxf-dc-N4L"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j7r-T2-aF6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -4680,12 +4667,8 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Add Friends" id="B9O-O3-zaF">
-                        <barButtonItem key="leftBarButtonItem" image="reveal-icon.png" style="plain" id="PkQ-Ef-YMH"/>
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="VHi-91-OZj"/>
                     </navigationItem>
-                    <connections>
-                        <outlet property="revealButtonItem" destination="PkQ-Ef-YMH" id="2n8-rX-ou7"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mTh-le-Tfy" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Afg-U3-58M">
@@ -5200,7 +5183,6 @@
         <image name="ic_good_rating" width="40" height="40"/>
         <image name="money.png" width="91" height="55"/>
         <image name="person-profile-photo" width="316" height="316"/>
-        <image name="reveal-icon.png" width="22" height="17"/>
         <image name="startup1" width="1241" height="827"/>
         <image name="startup2" width="320" height="240"/>
         <image name="startup3" width="1241" height="939"/>
@@ -5209,12 +5191,12 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="0LS-Vd-kxy"/>
-        <segue reference="F9u-xN-ecY"/>
-        <segue reference="g5V-KY-zil"/>
-        <segue reference="UrJ-ne-Kfy"/>
-        <segue reference="t2R-Le-XNf"/>
-        <segue reference="33i-hP-PSJ"/>
         <segue reference="MsC-Iz-V6n"/>
+        <segue reference="g5V-KY-zil"/>
+        <segue reference="WgG-9g-jiE"/>
+        <segue reference="33i-hP-PSJ"/>
+        <segue reference="t2R-Le-XNf"/>
+        <segue reference="UrJ-ne-Kfy"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

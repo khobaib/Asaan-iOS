@@ -34,11 +34,9 @@
 
 #import "MBProgressHUD.h"
 #import "ProgressHUD.h"
-#import "BBBadgeBarButtonItem.h"
 
 @interface StoreListTableViewController ()<DataProviderDelegate>
 
-@property (weak, nonatomic) IBOutlet BBBadgeBarButtonItem *revealButtonItem;
 @property (nonatomic, strong) MBProgressHUD *hud;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) int startPosition;
@@ -60,9 +58,8 @@
 #pragma mark - View Life-cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.revealButtonItem.badgeValue = @"2";
-    self.revealButtonItem.shouldHideBadgeAtZero = NO;
-    [UtilCalls slidingMenuSetupWith:self withItem:self.revealButtonItem];
+    
+    [UtilCalls getSlidingMenuBarButtonSetupWith:self];
     
     __weak __typeof(self) weakSelf = self;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
@@ -246,7 +243,7 @@
         if (IsEmpty(storeAndStats.store.backgroundImageUrl) == false)
             [cell.bgImageView sd_setImageWithURL:[NSURL URLWithString:storeAndStats.store.backgroundImageUrl]];
         
-        NSLog(@"name = %@, torphy = %@, cuisine = %@", storeAndStats.store.name, storeAndStats.store.trophies.firstObject, storeAndStats.store.subType);
+//        NSLog(@"name = %@, torphy = %@, cuisine = %@", storeAndStats.store.name, storeAndStats.store.trophies.firstObject, storeAndStats.store.subType);
         cell.restaurantLabel.text = storeAndStats.store.name;
         cell.trophyLabel.text = storeAndStats.store.trophies.firstObject;
         cell.cuisineLabel.text = storeAndStats.store.subType;

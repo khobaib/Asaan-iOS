@@ -11,15 +11,13 @@
 
 @interface UpdateInfoViewController ()
 
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *revealButtonItem;
-
 @end
 
 @implementation UpdateInfoViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [UtilCalls slidingMenuSetupWith:self withItem:self.revealButtonItem];
+    [UtilCalls getSlidingMenuBarButtonSetupWith:self];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

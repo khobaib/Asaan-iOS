@@ -2,10 +2,16 @@
 //  BBBadgeBarButtonItem.m
 //
 //  Created by Tanguy Aladenise on 07/02/14.
+//  Modified by Hasan Ibna Akbar on 27/01/15.
 //  Copyright (c) 2014 Riverie, Inc. All rights reserved.
 //
 
 #import "BBBadgeBarButtonItem.h"
+
+NSString * const BBBadgeIncreaseNotification = @"BBBadgeIncreaseNotification";
+NSString * const BBBadgeResetItemNotification = @"BBBadgeResetItemNotification";
+
+NSString * const BBUserInfoBadgeKey = @"BBUserInfoBadgeKey";
 
 @interface BBBadgeBarButtonItem()
 
@@ -29,6 +35,11 @@
     return self;
 }
 
+- (void)dealloc {
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)initializer
 {
     // Default design initialization
@@ -43,9 +54,37 @@
     self.shouldAnimateBadge = YES;
     // Avoids badge to be clipped when animating its scale
     self.customView.clipsToBounds = NO;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receiveBadgeNotification:)
+                                                 name:BBBadgeIncreaseNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receiveBadgeNotification:)
+                                                 name:BBBadgeResetItemNotification
+                                               object:nil];
 }
 
 #pragma mark - Utility methods
+
+- (void)receiveBadgeNotification:(NSNotification *) notification
+{
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        
+        if ([[notification name] isEqualToString:BBBadgeIncreaseNotification]) {
+            
+//            NSNumber *number = notification.userInfo[BBUserInfoBadgeKey];
+//            int badge = [number ? number : [NSNumber numberWithInteger:0] intValue];
+//            badge = (badge > 0 ? badge : 0);
+            int badge = [self.badgeValue intValue] + 1;
+            self.badgeValue = [NSString stringWithFormat:@"%d", badge];
+        }
+        else if (([[notification name] isEqualToString:BBBadgeResetItemNotification])) {
+            self.badgeValue = @"0";
+        }
+    }];
+}
 
 // Handle badge display when its properties have been changed (color, font, ...)
 - (void)refreshBadge
@@ -129,6 +168,10 @@
 
 - (void)setBadgeValue:(NSString *)badgeValue
 {
+    if (_badgeValue && badgeValue && [_badgeValue isEqualToString:badgeValue]) {
+        return;
+    }
+    
     // Set new value
     _badgeValue = badgeValue;
 

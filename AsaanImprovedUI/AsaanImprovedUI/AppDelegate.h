@@ -12,7 +12,8 @@
 #import "GTLUserendpoint.h"
 #import "GlobalObjectHolder.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@class SWRevealViewControllerDelegate;
+@interface AppDelegate : UIResponder <UIApplicationDelegate, SWRevealViewControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

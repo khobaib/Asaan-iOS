@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TDBadgedCell.h"
 
-@interface SMTableViewCell1 : UITableViewCell
+@interface SMTableViewCell1 : TDBadgedCell
 
 @property (nonatomic) IBOutlet UILabel *titleLabel;
 

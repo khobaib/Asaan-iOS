@@ -951,7 +951,7 @@ const int FrontViewPositionNone = 0xff;
 #pragma mark - Provided acction methods
 
 - (IBAction)revealToggle:(id)sender
-{    
+{
     [self revealToggleAnimated:YES];
 }
 

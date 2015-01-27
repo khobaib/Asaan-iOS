@@ -98,13 +98,23 @@
     SMTableViewCell1 *cell = [tableView dequeueReusableCellWithIdentifier: CellIdentifier forIndexPath: indexPath];
     
     cell.titleLabel.text = _menu[indexPath.row];
+    cell.badgeRightOffset = 70;
+    cell.badgeColor = [UIColor redColor];
+    cell.badgeTextColor = [UIColor whiteColor];
+    
+    if ([_menuSegue[indexPath.row] isEqualToString:SEGUE_SMToChatHistory]) {
+        cell.badgeString = @"2";
+    }
+    else {
+        cell.badgeString = @"";
+    }
     
     return cell;
 }
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"Test %@", _menuSegue[indexPath.row]);
+//    NSLog(@"Test %@", _menuSegue[indexPath.row]);
     if ([_menuSegue[indexPath.row] isEqualToString:@""]) {
         return;
     }

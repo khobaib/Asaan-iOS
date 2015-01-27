@@ -15,6 +15,8 @@
 #import <ParseCrashReporting/ParseCrashReporting.h>
 
 #import "UIColor+AsaanBackgroundColor.h"
+#import "SWRevealViewController.h"
+#import "BBBadgeBarButtonItem.h"
 
 @interface AppDelegate ()
 
@@ -74,6 +76,8 @@
                                                         UIUserNotificationTypeSound);
         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
                                                                                  categories:[self createNotificationCategories]];
+//        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
+//                                                                                 categories:nil];
         [application registerUserNotificationSettings:settings];
         [application registerForRemoteNotifications];
     } else
@@ -100,7 +104,7 @@
     [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (localNotif) {
         NSString *itemName = [localNotif.userInfo objectForKey:@"REVIEW_ORDER"];
-        NSLog(@"Inside didFinishLaunchingWithOptions");
+        NSLog(@"Inside didFinishLaunchingWithOptions %@", localNotif.userInfo);
 //        [viewController displayItem:itemName];  // custom method
         application.applicationIconBadgeNumber = localNotif.applicationIconBadgeNumber-1;
     }
@@ -120,16 +124,20 @@
                         withSession:[PFFacebookUtils session]];
 }
 
-    - (void)application:(UIApplication *)app didReceiveLocalNotification:(UILocalNotification *)notification {
+#pragma mark - Handle Local Notification
+- (void)application:(UIApplication *)app didReceiveLocalNotification:(UILocalNotification *)notification {
+
     NSString *itemName = [notification.userInfo objectForKey:@"REVIEW_ORDER"];
-    NSLog(@"Inside didReceiveLocalNotification");
+    NSLog(@"Inside didReceiveLocalNotification :%@", notification.userInfo);
 //    [viewController displayItem:itemName];  // custom method
     app.applicationIconBadgeNumber = notification.applicationIconBadgeNumber - 1;
+    
+#warning QUERY : Should we increase badge value of slidin-icon on receiving Local Notificaion?
+    [[NSNotificationCenter defaultCenter] postNotificationName:BBBadgeIncreaseNotification object:self userInfo:@{BBUserInfoBadgeKey : [NSNumber numberWithInteger:app.applicationIconBadgeNumber]}];
 }
 
-- (void)application:(UIApplication *) application
-    handleActionWithIdentifier: (NSString *) identifier
-    forLocalNotification: (NSDictionary *) notification completionHandler: (void (^)()) completionHandler {
+- (void)application:(UIApplication *) application handleActionWithIdentifier:(NSString *) identifier forLocalNotification:(NSDictionary *) notification completionHandler:(void (^)()) completionHandler {
+    
     if ([identifier isEqualToString: @"REVIEW_IDENTIFIER"])
         [self handleReviewActionWithNotification:notification];
     else if ([identifier isEqualToString: @"REMIND_LATER_IDENTIFIER"])
@@ -140,17 +148,16 @@
 }
 
 - (void)handleReviewActionWithNotification:(NSDictionary *) notification {
-    NSLog(@"Inside handleReviewActionWithNotification");
+    NSLog(@"Inside handleReviewActionWithNotification %@", notification);
 }
 
 - (void)handleRemindActionWithNotification:(NSDictionary *) notification {
-    NSLog(@"Inside handleRemindActionWithNotification");
+    NSLog(@"Inside handleRemindActionWithNotification %@", notification);
 }
 
 - (NSSet *)createNotificationCategories {
     // First create the category
-    UIMutableUserNotificationCategory *reviewCategory =
-    [[UIMutableUserNotificationCategory alloc] init];
+    UIMutableUserNotificationCategory *reviewCategory = [[UIMutableUserNotificationCategory alloc] init];
     
     // Identifier to include in your push payload and local notification
     reviewCategory.identifier = @"REVIEW_CATEGORY";
@@ -167,8 +174,7 @@
 }
 
 - (UIMutableUserNotificationAction *)defineOrderReviewAction {
-    UIMutableUserNotificationAction *reviewAction =
-    [[UIMutableUserNotificationAction alloc] init];
+    UIMutableUserNotificationAction *reviewAction = [[UIMutableUserNotificationAction alloc] init];
     
     // Define an ID string to be passed back to your app when you handle the action
     reviewAction.identifier = @"REVIEW_IDENTIFIER";
@@ -188,8 +194,7 @@
 }
 
 - (UIMutableUserNotificationAction *)defineOrderRemindLaterAction {
-    UIMutableUserNotificationAction *remindLaterAction =
-    [[UIMutableUserNotificationAction alloc] init];
+    UIMutableUserNotificationAction *remindLaterAction = [[UIMutableUserNotificationAction alloc] init];
     
     // Define an ID string to be passed back to your app when you handle the action
     remindLaterAction.identifier = @"REMIND_LATER_IDENTIFIER";
@@ -209,8 +214,7 @@
 }
 
 - (UIMutableUserNotificationAction *)defineDeclineAction {
-    UIMutableUserNotificationAction *remindLaterAction =
-    [[UIMutableUserNotificationAction alloc] init];
+    UIMutableUserNotificationAction *remindLaterAction = [[UIMutableUserNotificationAction alloc] init];
     
     // Define an ID string to be passed back to your app when you handle the action
     remindLaterAction.identifier = @"DECLINE_IDENTIFIER";
@@ -229,13 +233,15 @@
     return remindLaterAction;
 }
 
+#pragma mark - Push Notification
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken {
+    
     [PFPush storeDeviceToken:newDeviceToken];
     [PFPush subscribeToChannelInBackground:@"" target:self selector:@selector(subscribeFinished:error:)];
     
 #warning TODO
 //    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
-//    [currentInstallation setDeviceTokenFromData:deviceToken];
+//    [currentInstallation setDeviceTokenFromData:newDeviceToken];
 //    [currentInstallation saveInBackground];
 }
 
@@ -247,16 +253,17 @@
         NSLog(@"application:didFailToRegisterForRemoteNotificationsWithError: %@", error);
     }
 }
-
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    
+    NSLog(@"Inside 'application:didReceiveRemoteNotification:' - %@", userInfo);
     [PFPush handlePush:userInfo];
     
     if (application.applicationState == UIApplicationStateInactive) {
         [PFAnalytics trackAppOpenedWithRemoteNotificationPayload:userInfo];
     }
     
-#warning TODO
-//    [self performSelector:@selector(refreshMessagesView) withObject:nil afterDelay:4.0];
+#warning QUERY : Should we increase badge value of slidin-icon on receiving Local Notificaion?
+    [[NSNotificationCenter defaultCenter] postNotificationName:BBBadgeIncreaseNotification object:self userInfo:@{BBUserInfoBadgeKey : [NSNumber numberWithInteger:application.applicationIconBadgeNumber]}];
 }
 
 ///////////////////////////////////////////////////////////
@@ -264,17 +271,13 @@
 ///////////////////////////////////////////////////////////
  - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandle
 {
+    NSLog(@"Inside 'application:didReceiveRemoteNotification:fetchCompletionHandler:' - %@", userInfo);
      if (application.applicationState == UIApplicationStateInactive) {
          [PFAnalytics trackAppOpenedWithRemoteNotificationPayload:userInfo];
      }
 }
 
-#pragma mark - ()
-- (void)refreshMessagesView
-{
-//    [self.messagesView loadMessages];
-}
-
+#pragma mark - 
 - (void)subscribeFinished:(NSNumber *)result error:(NSError *)error {
     if ([result boolValue]) {
         NSLog(@"ParseStarterProject successfully subscribed to push notifications on the broadcast channel.");
@@ -415,6 +418,12 @@
             abort();
         }
     }
+}
+
+#pragma mark - SWRevealViewControllerDelegate
+- (void)revealController:(SWRevealViewController *)revealController didMoveToPosition:(FrontViewPosition)position {
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:BBBadgeResetItemNotification object:self];
 }
 
 @end

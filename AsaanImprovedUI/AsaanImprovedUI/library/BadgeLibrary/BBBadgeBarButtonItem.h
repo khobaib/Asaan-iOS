@@ -2,10 +2,15 @@
 //  BBBadgeBarButtonItem.h
 //
 //  Created by Tanguy Aladenise on 07/02/14.
+//  Modified by Hasan Ibna Akbar on 27/01/15.
 //  Copyright (c) 2014 Riverie, Inc. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+
+extern NSString * const BBBadgeIncreaseNotification;
+extern NSString * const BBBadgeResetItemNotification;
+extern NSString * const BBUserInfoBadgeKey;
 
 @interface BBBadgeBarButtonItem : UIBarButtonItem
 

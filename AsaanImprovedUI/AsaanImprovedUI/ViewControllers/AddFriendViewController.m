@@ -11,8 +11,6 @@
 
 @interface AddFriendViewController ()
 
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *revealButtonItem;
-
 @end
 
 @implementation AddFriendViewController
@@ -21,7 +19,8 @@
     [super viewDidLoad];
     
     if (_showSlidingMenuButton) {
-        [UtilCalls slidingMenuSetupWith:self withItem:self.revealButtonItem];
+        
+        [UtilCalls getSlidingMenuBarButtonSetupWith:self];
     }
     else {
         self.navigationItem.rightBarButtonItem = nil;

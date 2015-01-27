@@ -8,7 +8,6 @@
 
 #import "ChatTabBarController.h"
 
-//#import "SWRevealViewController.h"
 #import "NavigationController.h"
 #import "GroupView.h"
 #import "ChatView.h"
@@ -18,8 +17,6 @@
 
     BOOL userHasCompletedAction;
 }
-
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *revealButtonItem;
 
 @end
 
@@ -64,16 +61,8 @@
         [navController2 setNavigationBarHidden:YES animated:NO];
     }
     else {
-        
-        UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon"] style:UIBarButtonItemStylePlain target:nil action:nil];
-        self.groupView.navigationItem.leftBarButtonItem = revealButtonItem;
-        
-        [UtilCalls slidingMenuSetupWith:self.groupView withItem:revealButtonItem];
-        
-        revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon"] style:UIBarButtonItemStylePlain target:nil action:nil];
-        self.chatView.navigationItem.leftBarButtonItem = revealButtonItem;
-        
-        [UtilCalls slidingMenuSetupWith:self.chatView withItem:revealButtonItem];
+        [UtilCalls getSlidingMenuBarButtonSetupWith:self.groupView];
+        [UtilCalls getSlidingMenuBarButtonSetupWith:self.chatView];
     }
 }
 

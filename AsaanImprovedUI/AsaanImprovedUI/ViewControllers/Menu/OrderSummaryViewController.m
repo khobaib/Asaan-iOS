@@ -34,7 +34,6 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnAdd;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnEdit;
 @property (strong, nonatomic) MenuTableViewController *itemInputController;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *revealButtonItem;
 
 @property (nonatomic) Boolean bInPlaceOrderMode;
 
@@ -53,7 +52,7 @@
         self.navigationItem.leftBarButtonItem = nil;
     }
     else {
-        [UtilCalls slidingMenuSetupWith:self withItem:self.revealButtonItem];
+        [UtilCalls getSlidingMenuBarButtonSetupWith:self];
     }
 }
 

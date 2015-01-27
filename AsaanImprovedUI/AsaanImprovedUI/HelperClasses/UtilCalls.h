@@ -16,7 +16,7 @@
 + (NSString *) percentAmountToString:(NSNumber*)number;
 + (Boolean)isDistanceBetweenPointA:(CLLocation*)first AndPointB:(CLLocation *)second withinRange:(NSUInteger)range;
 
-
++ (UIBarButtonItem *)getSlidingMenuBarButtonSetupWith:(UIViewController *)viewController;
 + (void)slidingMenuSetupWith:(UIViewController *)viewController withItem:(UIBarButtonItem *)revealButtonItem;
 
 + (NSNumber *) stringToNumber:(NSString*)string;
