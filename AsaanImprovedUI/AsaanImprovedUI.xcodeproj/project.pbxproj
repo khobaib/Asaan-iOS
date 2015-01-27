@@ -111,6 +111,7 @@
 		37909B6E1A23828000649827 /* PaymentInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37909B671A23828000649827 /* PaymentInfoViewController.m */; };
 		37909B6F1A23828000649827 /* SignupProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37909B691A23828000649827 /* SignupProfileViewController.m */; };
 		37909B701A23828000649827 /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37909B6B1A23828000649827 /* SignupViewController.m */; };
+		37B96F2E1A75FC6B000A01F0 /* BBBadgeBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 37B96F2D1A75FC6B000A01F0 /* BBBadgeBarButtonItem.m */; };
 		37D066761A748BAE0075DBFE /* ChatTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D066751A748BAE0075DBFE /* ChatTabBarController.m */; };
 		37D0667A1A7494D30075DBFE /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D066791A7494D30075DBFE /* NavigationController.m */; };
 		37D161C91A402FDA002EAA3C /* SDSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D161C81A402FDA002EAA3C /* SDSegmentedControl.m */; };
@@ -580,6 +581,8 @@
 		37909B6A1A23828000649827 /* SignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupViewController.h; sourceTree = "<group>"; };
 		37909B6B1A23828000649827 /* SignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupViewController.m; sourceTree = "<group>"; };
 		37909B6C1A23828000649827 /* StartupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartupViewController.h; sourceTree = "<group>"; };
+		37B96F2C1A75FC6B000A01F0 /* BBBadgeBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBBadgeBarButtonItem.h; sourceTree = "<group>"; };
+		37B96F2D1A75FC6B000A01F0 /* BBBadgeBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBBadgeBarButtonItem.m; sourceTree = "<group>"; };
 		37D066741A748BAE0075DBFE /* ChatTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatTabBarController.h; sourceTree = "<group>"; };
 		37D066751A748BAE0075DBFE /* ChatTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatTabBarController.m; sourceTree = "<group>"; };
 		37D066781A7494D30075DBFE /* NavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationController.h; sourceTree = "<group>"; };
@@ -1475,6 +1478,15 @@
 			path = login;
 			sourceTree = "<group>";
 		};
+		37B96F2B1A75FC6B000A01F0 /* BBBadgeBarButtonItem */ = {
+			isa = PBXGroup;
+			children = (
+				37B96F2C1A75FC6B000A01F0 /* BBBadgeBarButtonItem.h */,
+				37B96F2D1A75FC6B000A01F0 /* BBBadgeBarButtonItem.m */,
+			);
+			path = BBBadgeBarButtonItem;
+			sourceTree = "<group>";
+		};
 		37D066771A7494D30075DBFE /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -1686,6 +1698,7 @@
 		D4522ACB1A15264F002EFA92 /* library */ = {
 			isa = PBXGroup;
 			children = (
+				37B96F2B1A75FC6B000A01F0 /* BBBadgeBarButtonItem */,
 				D4828CCC1A71AF7400C80E92 /* OrderedDictionary */,
 				D4828CCF1A71AF7400C80E92 /* RaptureXML */,
 				D4828CD21A71AF7400C80E92 /* Toast */,
@@ -2516,6 +2529,7 @@
 				D4B7A6311A35193800D72BC4 /* GlobalObjectHolder.m in Sources */,
 				3709EA971A31802A0060B49B /* MWTapDetectingView.m in Sources */,
 				375D0F991A6996610016C293 /* JSQMessagesViewController.m in Sources */,
+				37B96F2E1A75FC6B000A01F0 /* BBBadgeBarButtonItem.m in Sources */,
 				D4522B1F1A15264F002EFA92 /* PTKCardNumber.m in Sources */,
 				375D0F971A6996610016C293 /* UIView+JSQMessages.m in Sources */,
 				375D0F941A6996610016C293 /* UIColor+JSQMessages.m in Sources */,

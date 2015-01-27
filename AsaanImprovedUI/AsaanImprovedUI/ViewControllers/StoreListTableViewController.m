@@ -34,10 +34,11 @@
 
 #import "MBProgressHUD.h"
 #import "ProgressHUD.h"
+#import "BBBadgeBarButtonItem.h"
 
 @interface StoreListTableViewController ()<DataProviderDelegate>
 
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *revealButtonItem;
+@property (weak, nonatomic) IBOutlet BBBadgeBarButtonItem *revealButtonItem;
 @property (nonatomic, strong) MBProgressHUD *hud;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) int startPosition;
@@ -59,6 +60,8 @@
 #pragma mark - View Life-cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.revealButtonItem.badgeValue = @"2";
+    self.revealButtonItem.shouldHideBadgeAtZero = NO;
     [UtilCalls slidingMenuSetupWith:self withItem:self.revealButtonItem];
     
     __weak __typeof(self) weakSelf = self;
@@ -330,17 +333,15 @@
 
 - (void)gotoChatGroup:(NSString *)groupName
 {
-    NSLog(@"Chat : %@", groupName);
     PFQuery *query = [PFQuery queryWithClassName:PF_CHATROOMS_CLASS_NAME];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
      {
-         NSLog(@"Chatroom count : %d", objects.count);
          if (error == nil)
          {
              PFObject *chatroom = nil;
              if (objects && objects.count > 0) {
                  for (PFObject *c in objects) {
-                     NSLog(@"Chatroom 1 : %@", c[PF_CHATROOMS_NAME]);
+                     
                      if ([c[PF_CHATROOMS_NAME] isEqualToString:groupName]) {
                          chatroom = c;
                          break;
@@ -349,19 +350,16 @@
              }
              
              if (chatroom) {
-                 NSLog(@"Chatroom 2 : %@", chatroom);
                  [self gotoChatView:chatroom];
              }
              else {
                  
-                 NSLog(@"Chatroom creation : %@", groupName);
                  PFObject *object = [PFObject objectWithClassName:PF_CHATROOMS_CLASS_NAME];
                  object[PF_CHATROOMS_NAME] = groupName;
                  [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
                   {
                       if (error == nil)
                       {
-                          NSLog(@"Chatroom after creation : %@", groupName);
                           [self gotoChatGroup:groupName];
                       }
                       else {

@@ -92,10 +92,8 @@
 
 - (void)setRoomId:(NSString *)roomId {
 
-    NSLog(@"hh");
     if (roomId && (!_roomId || ![_roomId isEqualToString:roomId])) {
         _roomId = roomId;
-        NSLog(@"hhg");
         
         messages = [[NSMutableArray alloc] init];
         
