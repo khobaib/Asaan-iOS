@@ -15,8 +15,10 @@
 @interface ChatView : JSQMessagesViewController <UIActionSheetDelegate, UIImagePickerControllerDelegate>
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 
-@property(nonatomic, strong) NSString *roomId;
+@property long roomOrMembershipId;
+@property Boolean isStore;
 
-- (id)initWith:(NSString *)roomId_ title:(NSString *)title_;
+- (id)initWith:(long)Id_ title:(NSString *)title_;
+- (void)setRoomOrStoreChatMembershipId:(long)roomOrStoreChatMemberId isStore:(Boolean)isStore_;
 
 @end

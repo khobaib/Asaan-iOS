@@ -3,7 +3,7 @@
  */
 
 //
-//  GTLStoreendpointDISCOUNTS.m
+//  GTLStoreendpointChatRoom.m
 //
 
 // ----------------------------------------------------------------------------
@@ -13,24 +13,22 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointDISCOUNTS (0 custom class methods, 1 custom properties)
+//   GTLStoreendpointChatRoom (0 custom class methods, 6 custom properties)
 
-#import "GTLStoreendpointDISCOUNTS.h"
-
-#import "GTLStoreendpointDISCOUNT.h"
+#import "GTLStoreendpointChatRoom.h"
 
 // ----------------------------------------------------------------------------
 //
-//   GTLStoreendpointDISCOUNTS
+//   GTLStoreendpointChatRoom
 //
 
-@implementation GTLStoreendpointDISCOUNTS
-@dynamic discount;
+@implementation GTLStoreendpointChatRoom
+@dynamic createdDate, identifier, modifiedDate, name, storeId, userId;
 
-+ (NSDictionary *)arrayPropertyToClassMap {
++ (NSDictionary *)propertyToJSONKeyMap {
   NSDictionary *map =
-    [NSDictionary dictionaryWithObject:[GTLStoreendpointDISCOUNT class]
-                                forKey:@"discount"];
+    [NSDictionary dictionaryWithObject:@"id"
+                                forKey:@"identifier"];
   return map;
 }
 

@@ -3,7 +3,7 @@
  */
 
 //
-//  GTLStoreendpointGetCheckDetailsPOSResponse.h
+//  GTLStoreendpointChatMessagesAndUsers.h
 //
 
 // ----------------------------------------------------------------------------
@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointGetCheckDetailsPOSResponse (0 custom class methods, 1 custom properties)
+//   GTLStoreendpointChatMessagesAndUsers (0 custom class methods, 2 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLObject.h"
@@ -21,13 +21,15 @@
   #import "GTLObject.h"
 #endif
 
-@class GTLStoreendpointGETCHECKDETAILS;
+@class GTLStoreendpointChatMessage;
+@class GTLStoreendpointChatUser;
 
 // ----------------------------------------------------------------------------
 //
-//   GTLStoreendpointGetCheckDetailsPOSResponse
+//   GTLStoreendpointChatMessagesAndUsers
 //
 
-@interface GTLStoreendpointGetCheckDetailsPOSResponse : GTLObject
-@property (retain) GTLStoreendpointGETCHECKDETAILS *getcheckdetails;
+@interface GTLStoreendpointChatMessagesAndUsers : GTLObject
+@property (retain) NSArray *chatMessages;  // of GTLStoreendpointChatMessage
+@property (retain) NSArray *chatUsers;  // of GTLStoreendpointChatUser
 @end

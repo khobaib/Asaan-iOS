@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/WNrksN8RTZ83o-djJ0Dt8CTI66o\"",
+ "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/cgiwCqouuXVNPMPXmTw2tUvTMLw\"",
  "discoveryVersion": "v1",
  "id": "storeendpoint:v1",
  "name": "storeendpoint",
@@ -91,155 +91,131 @@
     }
    }
   },
-  "CHECK": {
-   "id": "CHECK",
+  "ChatMessage": {
+   "id": "ChatMessage",
    "type": "object",
    "properties": {
-    "completetotal": {
-     "type": "number",
-     "format": "float"
+    "createdDate": {
+     "type": "string",
+     "format": "int64"
     },
-    "discounts": {
-     "$ref": "DISCOUNTS"
-    },
-    "employee": {
-     "type": "integer",
-     "format": "int32"
-    },
-    "employeecheckname": {
+    "fileMessage": {
      "type": "string"
-    },
-    "entries": {
-     "$ref": "ENTRIES"
-    },
-    "guestcount": {
-     "type": "integer",
-     "format": "int32"
     },
     "id": {
-     "type": "integer",
-     "format": "int32"
+     "type": "string",
+     "format": "int64"
     },
-    "payments": {
+    "modifiedDate": {
+     "type": "string",
+     "format": "int64"
+    },
+    "roomId": {
+     "type": "string",
+     "format": "int64"
+    },
+    "txtMessage": {
      "type": "string"
     },
-    "servicecharges": {
-     "type": "number",
-     "format": "float"
-    },
-    "subtotal": {
-     "type": "number",
-     "format": "float"
-    },
-    "tablenumber": {
-     "type": "integer",
-     "format": "int32"
-    },
-    "tax": {
-     "type": "number",
-     "format": "float"
+    "userId": {
+     "type": "string",
+     "format": "int64"
     }
    }
   },
-  "DISCOUNT": {
-   "id": "DISCOUNT",
+  "ChatMessagesAndUsers": {
+   "id": "ChatMessagesAndUsers",
    "type": "object",
    "properties": {
-    "amount": {
-     "type": "number",
-     "format": "float"
-    },
-    "desc": {
-     "type": "string"
-    },
-    "value": {
-     "type": "string"
-    }
-   }
-  },
-  "DISCOUNTS": {
-   "id": "DISCOUNTS",
-   "type": "object",
-   "properties": {
-    "discount": {
+    "chatMessages": {
      "type": "array",
      "items": {
-      "$ref": "DISCOUNT"
+      "$ref": "ChatMessage"
+     }
+    },
+    "chatUsers": {
+     "type": "array",
+     "items": {
+      "$ref": "ChatUser"
      }
     }
    }
   },
-  "ENTRIES": {
-   "id": "ENTRIES",
+  "ChatRoom": {
+   "id": "ChatRoom",
    "type": "object",
    "properties": {
-    "entry": {
+    "createdDate": {
+     "type": "string",
+     "format": "int64"
+    },
+    "id": {
+     "type": "string",
+     "format": "int64"
+    },
+    "modifiedDate": {
+     "type": "string",
+     "format": "int64"
+    },
+    "name": {
+     "type": "string"
+    },
+    "storeId": {
+     "type": "string",
+     "format": "int64"
+    },
+    "userId": {
+     "type": "string",
+     "format": "int64"
+    }
+   }
+  },
+  "ChatRoomsAndStoreChatMemberships": {
+   "id": "ChatRoomsAndStoreChatMemberships",
+   "type": "object",
+   "properties": {
+    "chatRooms": {
      "type": "array",
      "items": {
-      "$ref": "ENTRY"
+      "$ref": "ChatRoom"
+     }
+    },
+    "storeChatMemberships": {
+     "type": "array",
+     "items": {
+      "$ref": "StoreChatTeam"
      }
     }
    }
   },
-  "ENTRY": {
-   "id": "ENTRY",
+  "ChatUser": {
+   "id": "ChatUser",
    "type": "object",
    "properties": {
-    "dispname": {
+    "name": {
      "type": "string"
     },
-    "entrytype": {
-     "type": "integer",
-     "format": "int32"
-    },
-    "id": {
-     "type": "integer",
-     "format": "int32"
-    },
-    "itemid": {
-     "type": "integer",
-     "format": "int32"
-    },
-    "ordermode": {
-     "type": "integer",
-     "format": "int32"
-    },
-    "parententry": {
-     "type": "integer",
-     "format": "int32"
-    },
-    "price": {
-     "type": "number",
-     "format": "float"
-    },
-    "quantity": {
-     "type": "integer",
-     "format": "int32"
-    },
-    "value": {
+    "objectId": {
      "type": "string"
+    },
+    "profilePhotoUrl": {
+     "type": "string"
+    },
+    "userId": {
+     "type": "string",
+     "format": "int64"
     }
    }
   },
-  "GETCHECKDETAILS": {
-   "id": "GETCHECKDETAILS",
+  "ChatUserArray": {
+   "id": "ChatUserArray",
    "type": "object",
    "properties": {
-    "check": {
-     "$ref": "CHECK"
-    },
-    "intcheckid": {
-     "type": "integer",
-     "format": "int32"
-    }
-   }
-  },
-  "GetCheckDetailsPOSResponse": {
-   "id": "GetCheckDetailsPOSResponse",
-   "type": "object",
-   "properties": {
-    "getcheckdetails": {
-     "$ref": "GETCHECKDETAILS"
+    "chatUsers": {
+     "type": "array",
+     "items": {
+      "$ref": "ChatUser"
+     }
     }
    }
   },
@@ -549,6 +525,59 @@
      "type": "array",
      "items": {
       "$ref": "StoreAndStats"
+     }
+    }
+   }
+  },
+  "StoreChatMemberArray": {
+   "id": "StoreChatMemberArray",
+   "type": "object",
+   "properties": {
+    "storeChatMembers": {
+     "type": "array",
+     "items": {
+      "$ref": "StoreChatTeam"
+     }
+    }
+   }
+  },
+  "StoreChatTeam": {
+   "id": "StoreChatTeam",
+   "type": "object",
+   "properties": {
+    "createdDate": {
+     "type": "string",
+     "format": "int64"
+    },
+    "id": {
+     "type": "string",
+     "format": "int64"
+    },
+    "modifiedDate": {
+     "type": "string",
+     "format": "int64"
+    },
+    "storeId": {
+     "type": "string",
+     "format": "int64"
+    },
+    "storeName": {
+     "type": "string"
+    },
+    "userId": {
+     "type": "string",
+     "format": "int64"
+    }
+   }
+  },
+  "StoreChatTeamCollection": {
+   "id": "StoreChatTeamCollection",
+   "type": "object",
+   "properties": {
+    "items": {
+     "type": "array",
+     "items": {
+      "$ref": "StoreChatTeam"
      }
     }
    }
@@ -1230,10 +1259,71 @@
   }
  },
  "methods": {
-  "storeendpoint.getCheckDetailsPOSResponseEmptyObject": {
-   "id": "storeendpoint.getCheckDetailsPOSResponseEmptyObject",
+  "storeendpoint.getChatMessagesForStoreOrRoom": {
+   "id": "storeendpoint.getChatMessagesForStoreOrRoom",
+   "parameters": {
+    "firstPosition": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    },
+    "isStore": {
+     "type": "boolean",
+     "required": true
+    },
+    "maxResult": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    },
+    "modifiedDate": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    },
+    "roomOrStoreId": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    }
+   },
+   "parameterOrder": [
+    "roomOrStoreId",
+    "modifiedDate",
+    "isStore",
+    "firstPosition",
+    "maxResult"
+   ],
    "returns": {
-    "$ref": "GetCheckDetailsPOSResponse"
+    "$ref": "ChatMessagesAndUsers"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.getChatRoomsAndMembershipsForUser": {
+   "id": "storeendpoint.getChatRoomsAndMembershipsForUser",
+   "returns": {
+    "$ref": "ChatRoomsAndStoreChatMemberships"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.getChatUsersForRoom": {
+   "id": "storeendpoint.getChatUsersForRoom",
+   "parameters": {
+    "roomId": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    }
+   },
+   "parameterOrder": [
+    "roomId"
+   ],
+   "returns": {
+    "$ref": "ChatUserArray"
    },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"
@@ -1334,6 +1424,25 @@
    ],
    "returns": {
     "$ref": "Store"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.getStoreChatMembers": {
+   "id": "storeendpoint.getStoreChatMembers",
+   "parameters": {
+    "storeId": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    }
+   },
+   "parameterOrder": [
+    "storeId"
+   ],
+   "returns": {
+    "$ref": "StoreChatTeamCollection"
    },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"
@@ -1702,6 +1811,20 @@
     "https://www.googleapis.com/auth/userinfo.email"
    ]
   },
+  "storeendpoint.replaceStoreChatGroup": {
+   "id": "storeendpoint.replaceStoreChatGroup",
+   "parameters": {
+    "resource": {
+     "$ref": "StoreChatMemberArray"
+    }
+   },
+   "parameterOrder": [
+    "resource"
+   ],
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
   "storeendpoint.replaceStoreDiscounts": {
    "id": "storeendpoint.replaceStoreDiscounts",
    "parameters": {
@@ -1712,6 +1835,40 @@
    "parameterOrder": [
     "resource"
    ],
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.saveChatMessage": {
+   "id": "storeendpoint.saveChatMessage",
+   "parameters": {
+    "resource": {
+     "$ref": "ChatMessage"
+    }
+   },
+   "parameterOrder": [
+    "resource"
+   ],
+   "returns": {
+    "$ref": "ChatMessage"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.saveChatRoom": {
+   "id": "storeendpoint.saveChatRoom",
+   "parameters": {
+    "resource": {
+     "$ref": "ChatRoom"
+    }
+   },
+   "parameterOrder": [
+    "resource"
+   ],
+   "returns": {
+    "$ref": "ChatRoom"
+   },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"
    ]

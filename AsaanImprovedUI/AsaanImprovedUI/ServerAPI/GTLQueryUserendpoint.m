@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryUserendpoint (7 custom class methods, 2 custom properties)
+//   GTLQueryUserendpoint (8 custom class methods, 2 custom properties)
 
 #import "GTLQueryUserendpoint.h"
 
@@ -30,6 +30,13 @@
 #pragma mark -
 #pragma mark Service level methods
 // These create a GTLQueryUserendpoint object.
+
++ (id)queryForGetCurrentUser {
+  NSString *methodName = @"userendpoint.getCurrentUser";
+  GTLQueryUserendpoint *query = [self queryWithMethodName:methodName];
+  query.expectedObjectClass = [GTLUserendpointUser class];
+  return query;
+}
 
 + (id)queryForGetUserAddresses {
   NSString *methodName = @"userendpoint.getUserAddresses";

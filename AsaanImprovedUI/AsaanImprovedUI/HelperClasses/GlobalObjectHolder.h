@@ -12,6 +12,7 @@
 #import "GTLUserendpointUserCard.h"
 #import "GTLUserendpointUserAddressCollection.h"
 #import "GTLUserendpointUserCardCollection.h"
+#import "GTLUserendpointUser.h"
 
 @interface GlobalObjectHolder : NSObject
 @property (strong, nonatomic) OnlineOrderDetails *orderInProgress;
@@ -19,12 +20,14 @@
 @property (strong, nonatomic) GTLUserendpointUserCardCollection *userCards;
 @property (strong, nonatomic) GTLUserendpointUserCard *defaultUserCard;
 @property (strong, nonatomic) GTLUserendpointUserAddress *defaultUserAddress;
+@property (strong, nonatomic) GTLUserendpointUser *currentUser;
 
 - (OnlineOrderDetails *)createOrderInProgress;
 - (void) removeOrderInProgress;
 
 - (void) loadUserAddressesFromServer;
 - (void) loadUserCardsFromServer;
+- (void) loadCurrentUserFromServer;
 
 - (void) addCardToUserCards:(GTLUserendpointUserCard *)card;
 - (void) addAddressToUserAddresses:(GTLUserendpointUserAddress *)address;

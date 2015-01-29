@@ -13,6 +13,9 @@
 @interface GroupView : UITableViewController <UIAlertViewDelegate>
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 
-@property (strong, nonatomic) NSMutableArray *chatrooms;
+//@property (strong, nonatomic) NSMutableArray *chatrooms;
+
+- (void)showChatRoomForStore:(long)storeId WithName:(NSString *)storeName;
+
 
 @end

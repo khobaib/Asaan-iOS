@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
 #import "UtilCalls.h"
+#import "Constants.h"
 
 @implementation GlobalObjectHolder
 @synthesize orderInProgress = _orderInProgress;
@@ -72,6 +73,24 @@
          {
              NSLog(@"Asaan Server Call Failed: getUserCards - error:%@", error.userInfo);
          }
+     }];
+}
+- (void) loadCurrentUserFromServer
+{
+    __weak __typeof(self) weakSelf = self;
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    GTLServiceUserendpoint *gtlUserService= [appDelegate gtlUserService];
+    GTLQueryUserendpoint *query = [GTLQueryUserendpoint queryForGetCurrentUser];
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    dic[USER_AUTH_TOKEN_HEADER_NAME] = [UtilCalls getAuthTokenForCurrentUser];
+    [query setAdditionalHTTPHeaders:dic];
+    [gtlUserService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLUserendpointUser *object, NSError *error)
+     {
+         if (!error)
+             weakSelf.currentUser = object;
+         else
+             NSLog(@"Asaan Server Call Failed: getCurrentUser - error:%@", error.userInfo);
      }];
 }
 

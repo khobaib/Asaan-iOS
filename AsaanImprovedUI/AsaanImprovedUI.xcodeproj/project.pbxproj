@@ -93,18 +93,7 @@
 		375D0FCC1A6996CE0016C293 /* tab_profile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 375D0FC51A6996CE0016C293 /* tab_profile@2x.png */; };
 		375D10001A69F5550016C293 /* ChatView.m in Sources */ = {isa = PBXBuildFile; fileRef = 375D0FD51A69F5550016C293 /* ChatView.m */; };
 		375D10011A69F5550016C293 /* GroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 375D0FD91A69F5550016C293 /* GroupView.m */; };
-		375D10021A69F5550016C293 /* PrivateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 375D0FDC1A69F5550016C293 /* PrivateView.m */; };
-		375D10031A69F5550016C293 /* PrivateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 375D0FDD1A69F5550016C293 /* PrivateView.xib */; };
-		375D10041A69F5550016C293 /* SearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 375D0FDF1A69F5550016C293 /* SearchView.m */; };
-		375D10051A69F5550016C293 /* SearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 375D0FE01A69F5550016C293 /* SearchView.xib */; };
-		375D10061A69F5550016C293 /* MessagesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 375D0FE31A69F5550016C293 /* MessagesCell.m */; };
-		375D10071A69F5550016C293 /* MessagesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 375D0FE41A69F5550016C293 /* MessagesCell.xib */; };
-		375D10081A69F5550016C293 /* MessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 375D0FE61A69F5550016C293 /* MessagesView.m */; };
-		375D10091A69F5550016C293 /* MessagesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 375D0FE71A69F5550016C293 /* MessagesView.xib */; };
-		375D100A1A69F5550016C293 /* ProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 375D0FEA1A69F5550016C293 /* ProfileView.m */; };
-		375D100B1A69F5550016C293 /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 375D0FEB1A69F5550016C293 /* ProfileView.xib */; };
 		375D10121A69F5550016C293 /* camera.m in Sources */ = {isa = PBXBuildFile; fileRef = 375D0FF81A69F5550016C293 /* camera.m */; };
-		375D10131A69F5550016C293 /* messages.m in Sources */ = {isa = PBXBuildFile; fileRef = 375D0FFA1A69F5550016C293 /* messages.m */; };
 		375D10141A69F5550016C293 /* pushnotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 375D0FFC1A69F5550016C293 /* pushnotification.m */; };
 		375D10151A69F5550016C293 /* utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 375D0FFE1A69F5550016C293 /* utilities.m */; };
 		37909B6D1A23828000649827 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37909B651A23828000649827 /* LoginViewController.m */; };
@@ -258,13 +247,6 @@
 		D47799831A66E03800386430 /* GTLStoreendpointStoreAndStatsCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = D477997D1A66E03800386430 /* GTLStoreendpointStoreAndStatsCollection.m */; };
 		D47799841A66E03800386430 /* GTLStoreendpointStoreDiscountArray.m in Sources */ = {isa = PBXBuildFile; fileRef = D477997F1A66E03800386430 /* GTLStoreendpointStoreDiscountArray.m */; };
 		D47799851A66E03800386430 /* GTLStoreendpointStoreItemStats.m in Sources */ = {isa = PBXBuildFile; fileRef = D47799811A66E03800386430 /* GTLStoreendpointStoreItemStats.m */; };
-		D4828CB21A71AD6100C80E92 /* GTLStoreendpointCHECK.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CA31A71AD6100C80E92 /* GTLStoreendpointCHECK.m */; };
-		D4828CB31A71AD6100C80E92 /* GTLStoreendpointDISCOUNT.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CA51A71AD6100C80E92 /* GTLStoreendpointDISCOUNT.m */; };
-		D4828CB41A71AD6100C80E92 /* GTLStoreendpointDISCOUNTS.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CA71A71AD6100C80E92 /* GTLStoreendpointDISCOUNTS.m */; };
-		D4828CB51A71AD6100C80E92 /* GTLStoreendpointENTRIES.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CA91A71AD6100C80E92 /* GTLStoreendpointENTRIES.m */; };
-		D4828CB61A71AD6100C80E92 /* GTLStoreendpointENTRY.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CAB1A71AD6100C80E92 /* GTLStoreendpointENTRY.m */; };
-		D4828CB71A71AD6100C80E92 /* GTLStoreendpointGETCHECKDETAILS.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CAD1A71AD6100C80E92 /* GTLStoreendpointGETCHECKDETAILS.m */; };
-		D4828CB81A71AD6100C80E92 /* GTLStoreendpointGetCheckDetailsPOSResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CAF1A71AD6100C80E92 /* GTLStoreendpointGetCheckDetailsPOSResponse.m */; };
 		D4828CB91A71AD6100C80E92 /* GTLStoreendpointStoreOrderListAndCount.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CB11A71AD6100C80E92 /* GTLStoreendpointStoreOrderListAndCount.m */; };
 		D4828CBB1A71ADD200C80E92 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D4828CBA1A71ADD200C80E92 /* libz.dylib */; };
 		D4828CBE1A71ADE500C80E92 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D4828CBC1A71ADE500C80E92 /* libxml2.2.dylib */; };
@@ -286,6 +268,15 @@
 		D4828CFB1A72BE4B00C80E92 /* StoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CF41A72BE4B00C80E92 /* StoreViewController.m */; };
 		D4828CFE1A7358A400C80E92 /* ReviewItemsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CFD1A7358A400C80E92 /* ReviewItemsTableViewController.m */; };
 		D4828D011A735BA100C80E92 /* GTLStoreendpointItemReviewsArray.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828D001A735BA100C80E92 /* GTLStoreendpointItemReviewsArray.m */; };
+		D4828D121A78389900C80E92 /* GTLStoreendpointChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828D031A78389900C80E92 /* GTLStoreendpointChatMessage.m */; };
+		D4828D131A78389900C80E92 /* GTLStoreendpointChatMessagesAndUsers.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828D051A78389900C80E92 /* GTLStoreendpointChatMessagesAndUsers.m */; };
+		D4828D141A78389900C80E92 /* GTLStoreendpointChatRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828D071A78389900C80E92 /* GTLStoreendpointChatRoom.m */; };
+		D4828D151A78389900C80E92 /* GTLStoreendpointChatRoomsAndStoreChatMemberships.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828D091A78389900C80E92 /* GTLStoreendpointChatRoomsAndStoreChatMemberships.m */; };
+		D4828D161A78389900C80E92 /* GTLStoreendpointChatUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828D0B1A78389900C80E92 /* GTLStoreendpointChatUser.m */; };
+		D4828D181A78389900C80E92 /* GTLStoreendpointStoreChatMemberArray.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828D0F1A78389900C80E92 /* GTLStoreendpointStoreChatMemberArray.m */; };
+		D4828D1C1A78A25A00C80E92 /* GTLStoreendpointChatUserArray.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828D1B1A78A25A00C80E92 /* GTLStoreendpointChatUserArray.m */; };
+		D4828D211A79313400C80E92 /* GTLStoreendpointStoreChatTeam.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828D1E1A79313400C80E92 /* GTLStoreendpointStoreChatTeam.m */; };
+		D4828D221A79313400C80E92 /* GTLStoreendpointStoreChatTeamCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828D201A79313400C80E92 /* GTLStoreendpointStoreChatTeamCollection.m */; };
 		D49A3ABB1A267F49008BC180 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = D49A3ABA1A267F49008BC180 /* back.png */; };
 		D49A3ABF1A26C450008BC180 /* RetrievePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D49A3ABD1A26C450008BC180 /* RetrievePasswordViewController.m */; };
 		D49A3AC01A26C450008BC180 /* StartupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D49A3ABE1A26C450008BC180 /* StartupViewController.m */; };
@@ -550,25 +541,8 @@
 		375D0FD51A69F5550016C293 /* ChatView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatView.m; sourceTree = "<group>"; };
 		375D0FD81A69F5550016C293 /* GroupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupView.h; sourceTree = "<group>"; };
 		375D0FD91A69F5550016C293 /* GroupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupView.m; sourceTree = "<group>"; };
-		375D0FDB1A69F5550016C293 /* PrivateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateView.h; sourceTree = "<group>"; };
-		375D0FDC1A69F5550016C293 /* PrivateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateView.m; sourceTree = "<group>"; };
-		375D0FDD1A69F5550016C293 /* PrivateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrivateView.xib; sourceTree = "<group>"; };
-		375D0FDE1A69F5550016C293 /* SearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchView.h; sourceTree = "<group>"; };
-		375D0FDF1A69F5550016C293 /* SearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchView.m; sourceTree = "<group>"; };
-		375D0FE01A69F5550016C293 /* SearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchView.xib; sourceTree = "<group>"; };
-		375D0FE21A69F5550016C293 /* MessagesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesCell.h; sourceTree = "<group>"; };
-		375D0FE31A69F5550016C293 /* MessagesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesCell.m; sourceTree = "<group>"; };
-		375D0FE41A69F5550016C293 /* MessagesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagesCell.xib; sourceTree = "<group>"; };
-		375D0FE51A69F5550016C293 /* MessagesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesView.h; sourceTree = "<group>"; };
-		375D0FE61A69F5550016C293 /* MessagesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesView.m; sourceTree = "<group>"; };
-		375D0FE71A69F5550016C293 /* MessagesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagesView.xib; sourceTree = "<group>"; };
-		375D0FE91A69F5550016C293 /* ProfileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileView.h; sourceTree = "<group>"; };
-		375D0FEA1A69F5550016C293 /* ProfileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileView.m; sourceTree = "<group>"; };
-		375D0FEB1A69F5550016C293 /* ProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
 		375D0FF71A69F5550016C293 /* camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = camera.h; sourceTree = "<group>"; };
 		375D0FF81A69F5550016C293 /* camera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = camera.m; sourceTree = "<group>"; };
-		375D0FF91A69F5550016C293 /* messages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = messages.h; sourceTree = "<group>"; };
-		375D0FFA1A69F5550016C293 /* messages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = messages.m; sourceTree = "<group>"; };
 		375D0FFB1A69F5550016C293 /* pushnotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pushnotification.h; sourceTree = "<group>"; };
 		375D0FFC1A69F5550016C293 /* pushnotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pushnotification.m; sourceTree = "<group>"; };
 		375D0FFD1A69F5550016C293 /* utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utilities.h; sourceTree = "<group>"; };
@@ -806,20 +780,6 @@
 		D477997F1A66E03800386430 /* GTLStoreendpointStoreDiscountArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreDiscountArray.m; sourceTree = "<group>"; };
 		D47799801A66E03800386430 /* GTLStoreendpointStoreItemStats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreItemStats.h; sourceTree = "<group>"; };
 		D47799811A66E03800386430 /* GTLStoreendpointStoreItemStats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreItemStats.m; sourceTree = "<group>"; };
-		D4828CA21A71AD6100C80E92 /* GTLStoreendpointCHECK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointCHECK.h; sourceTree = "<group>"; };
-		D4828CA31A71AD6100C80E92 /* GTLStoreendpointCHECK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointCHECK.m; sourceTree = "<group>"; };
-		D4828CA41A71AD6100C80E92 /* GTLStoreendpointDISCOUNT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointDISCOUNT.h; sourceTree = "<group>"; };
-		D4828CA51A71AD6100C80E92 /* GTLStoreendpointDISCOUNT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointDISCOUNT.m; sourceTree = "<group>"; };
-		D4828CA61A71AD6100C80E92 /* GTLStoreendpointDISCOUNTS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointDISCOUNTS.h; sourceTree = "<group>"; };
-		D4828CA71A71AD6100C80E92 /* GTLStoreendpointDISCOUNTS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointDISCOUNTS.m; sourceTree = "<group>"; };
-		D4828CA81A71AD6100C80E92 /* GTLStoreendpointENTRIES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointENTRIES.h; sourceTree = "<group>"; };
-		D4828CA91A71AD6100C80E92 /* GTLStoreendpointENTRIES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointENTRIES.m; sourceTree = "<group>"; };
-		D4828CAA1A71AD6100C80E92 /* GTLStoreendpointENTRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointENTRY.h; sourceTree = "<group>"; };
-		D4828CAB1A71AD6100C80E92 /* GTLStoreendpointENTRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointENTRY.m; sourceTree = "<group>"; };
-		D4828CAC1A71AD6100C80E92 /* GTLStoreendpointGETCHECKDETAILS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointGETCHECKDETAILS.h; sourceTree = "<group>"; };
-		D4828CAD1A71AD6100C80E92 /* GTLStoreendpointGETCHECKDETAILS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointGETCHECKDETAILS.m; sourceTree = "<group>"; };
-		D4828CAE1A71AD6100C80E92 /* GTLStoreendpointGetCheckDetailsPOSResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointGetCheckDetailsPOSResponse.h; sourceTree = "<group>"; };
-		D4828CAF1A71AD6100C80E92 /* GTLStoreendpointGetCheckDetailsPOSResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointGetCheckDetailsPOSResponse.m; sourceTree = "<group>"; };
 		D4828CB01A71AD6100C80E92 /* GTLStoreendpointStoreOrderListAndCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreOrderListAndCount.h; sourceTree = "<group>"; };
 		D4828CB11A71AD6100C80E92 /* GTLStoreendpointStoreOrderListAndCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreOrderListAndCount.m; sourceTree = "<group>"; };
 		D4828CBA1A71ADD200C80E92 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -859,6 +819,24 @@
 		D4828CFD1A7358A400C80E92 /* ReviewItemsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewItemsTableViewController.m; sourceTree = "<group>"; };
 		D4828CFF1A735BA100C80E92 /* GTLStoreendpointItemReviewsArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointItemReviewsArray.h; sourceTree = "<group>"; };
 		D4828D001A735BA100C80E92 /* GTLStoreendpointItemReviewsArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointItemReviewsArray.m; sourceTree = "<group>"; };
+		D4828D021A78389900C80E92 /* GTLStoreendpointChatMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointChatMessage.h; sourceTree = "<group>"; };
+		D4828D031A78389900C80E92 /* GTLStoreendpointChatMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointChatMessage.m; sourceTree = "<group>"; };
+		D4828D041A78389900C80E92 /* GTLStoreendpointChatMessagesAndUsers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointChatMessagesAndUsers.h; sourceTree = "<group>"; };
+		D4828D051A78389900C80E92 /* GTLStoreendpointChatMessagesAndUsers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointChatMessagesAndUsers.m; sourceTree = "<group>"; };
+		D4828D061A78389900C80E92 /* GTLStoreendpointChatRoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointChatRoom.h; sourceTree = "<group>"; };
+		D4828D071A78389900C80E92 /* GTLStoreendpointChatRoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointChatRoom.m; sourceTree = "<group>"; };
+		D4828D081A78389900C80E92 /* GTLStoreendpointChatRoomsAndStoreChatMemberships.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointChatRoomsAndStoreChatMemberships.h; sourceTree = "<group>"; };
+		D4828D091A78389900C80E92 /* GTLStoreendpointChatRoomsAndStoreChatMemberships.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointChatRoomsAndStoreChatMemberships.m; sourceTree = "<group>"; };
+		D4828D0A1A78389900C80E92 /* GTLStoreendpointChatUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointChatUser.h; sourceTree = "<group>"; };
+		D4828D0B1A78389900C80E92 /* GTLStoreendpointChatUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointChatUser.m; sourceTree = "<group>"; };
+		D4828D0E1A78389900C80E92 /* GTLStoreendpointStoreChatMemberArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreChatMemberArray.h; sourceTree = "<group>"; };
+		D4828D0F1A78389900C80E92 /* GTLStoreendpointStoreChatMemberArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreChatMemberArray.m; sourceTree = "<group>"; };
+		D4828D1A1A78A25A00C80E92 /* GTLStoreendpointChatUserArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointChatUserArray.h; sourceTree = "<group>"; };
+		D4828D1B1A78A25A00C80E92 /* GTLStoreendpointChatUserArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointChatUserArray.m; sourceTree = "<group>"; };
+		D4828D1D1A79313400C80E92 /* GTLStoreendpointStoreChatTeam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreChatTeam.h; sourceTree = "<group>"; };
+		D4828D1E1A79313400C80E92 /* GTLStoreendpointStoreChatTeam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreChatTeam.m; sourceTree = "<group>"; };
+		D4828D1F1A79313400C80E92 /* GTLStoreendpointStoreChatTeamCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreChatTeamCollection.h; sourceTree = "<group>"; };
+		D4828D201A79313400C80E92 /* GTLStoreendpointStoreChatTeamCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreChatTeamCollection.m; sourceTree = "<group>"; };
 		D49A3ABA1A267F49008BC180 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		D49A3ABC1A26C450008BC180 /* RetrievePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RetrievePasswordViewController.h; sourceTree = "<group>"; };
 		D49A3ABD1A26C450008BC180 /* RetrievePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RetrievePasswordViewController.m; sourceTree = "<group>"; };
@@ -1385,9 +1363,6 @@
 			isa = PBXGroup;
 			children = (
 				375D0FD71A69F5550016C293 /* 01_group */,
-				375D0FDA1A69F5550016C293 /* 02_private */,
-				375D0FE11A69F5550016C293 /* 03_messages */,
-				375D0FE81A69F5550016C293 /* 04_profile */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -1401,49 +1376,11 @@
 			path = 01_group;
 			sourceTree = "<group>";
 		};
-		375D0FDA1A69F5550016C293 /* 02_private */ = {
-			isa = PBXGroup;
-			children = (
-				375D0FDB1A69F5550016C293 /* PrivateView.h */,
-				375D0FDC1A69F5550016C293 /* PrivateView.m */,
-				375D0FDD1A69F5550016C293 /* PrivateView.xib */,
-				375D0FDE1A69F5550016C293 /* SearchView.h */,
-				375D0FDF1A69F5550016C293 /* SearchView.m */,
-				375D0FE01A69F5550016C293 /* SearchView.xib */,
-			);
-			path = 02_private;
-			sourceTree = "<group>";
-		};
-		375D0FE11A69F5550016C293 /* 03_messages */ = {
-			isa = PBXGroup;
-			children = (
-				375D0FE21A69F5550016C293 /* MessagesCell.h */,
-				375D0FE31A69F5550016C293 /* MessagesCell.m */,
-				375D0FE41A69F5550016C293 /* MessagesCell.xib */,
-				375D0FE51A69F5550016C293 /* MessagesView.h */,
-				375D0FE61A69F5550016C293 /* MessagesView.m */,
-				375D0FE71A69F5550016C293 /* MessagesView.xib */,
-			);
-			path = 03_messages;
-			sourceTree = "<group>";
-		};
-		375D0FE81A69F5550016C293 /* 04_profile */ = {
-			isa = PBXGroup;
-			children = (
-				375D0FE91A69F5550016C293 /* ProfileView.h */,
-				375D0FEA1A69F5550016C293 /* ProfileView.m */,
-				375D0FEB1A69F5550016C293 /* ProfileView.xib */,
-			);
-			path = 04_profile;
-			sourceTree = "<group>";
-		};
 		375D0FF61A69F5550016C293 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
 				375D0FF71A69F5550016C293 /* camera.h */,
 				375D0FF81A69F5550016C293 /* camera.m */,
-				375D0FF91A69F5550016C293 /* messages.h */,
-				375D0FFA1A69F5550016C293 /* messages.m */,
 				375D0FFB1A69F5550016C293 /* pushnotification.h */,
 				375D0FFC1A69F5550016C293 /* pushnotification.m */,
 				375D0FFD1A69F5550016C293 /* utilities.h */,
@@ -1594,22 +1531,26 @@
 		D449EB201A1BCDEB00879383 /* ServerAPI */ = {
 			isa = PBXGroup;
 			children = (
+				D4828D1D1A79313400C80E92 /* GTLStoreendpointStoreChatTeam.h */,
+				D4828D1E1A79313400C80E92 /* GTLStoreendpointStoreChatTeam.m */,
+				D4828D1F1A79313400C80E92 /* GTLStoreendpointStoreChatTeamCollection.h */,
+				D4828D201A79313400C80E92 /* GTLStoreendpointStoreChatTeamCollection.m */,
+				D4828D1A1A78A25A00C80E92 /* GTLStoreendpointChatUserArray.h */,
+				D4828D1B1A78A25A00C80E92 /* GTLStoreendpointChatUserArray.m */,
+				D4828D021A78389900C80E92 /* GTLStoreendpointChatMessage.h */,
+				D4828D031A78389900C80E92 /* GTLStoreendpointChatMessage.m */,
+				D4828D041A78389900C80E92 /* GTLStoreendpointChatMessagesAndUsers.h */,
+				D4828D051A78389900C80E92 /* GTLStoreendpointChatMessagesAndUsers.m */,
+				D4828D061A78389900C80E92 /* GTLStoreendpointChatRoom.h */,
+				D4828D071A78389900C80E92 /* GTLStoreendpointChatRoom.m */,
+				D4828D081A78389900C80E92 /* GTLStoreendpointChatRoomsAndStoreChatMemberships.h */,
+				D4828D091A78389900C80E92 /* GTLStoreendpointChatRoomsAndStoreChatMemberships.m */,
+				D4828D0A1A78389900C80E92 /* GTLStoreendpointChatUser.h */,
+				D4828D0B1A78389900C80E92 /* GTLStoreendpointChatUser.m */,
+				D4828D0E1A78389900C80E92 /* GTLStoreendpointStoreChatMemberArray.h */,
+				D4828D0F1A78389900C80E92 /* GTLStoreendpointStoreChatMemberArray.m */,
 				D4828CFF1A735BA100C80E92 /* GTLStoreendpointItemReviewsArray.h */,
 				D4828D001A735BA100C80E92 /* GTLStoreendpointItemReviewsArray.m */,
-				D4828CA21A71AD6100C80E92 /* GTLStoreendpointCHECK.h */,
-				D4828CA31A71AD6100C80E92 /* GTLStoreendpointCHECK.m */,
-				D4828CA41A71AD6100C80E92 /* GTLStoreendpointDISCOUNT.h */,
-				D4828CA51A71AD6100C80E92 /* GTLStoreendpointDISCOUNT.m */,
-				D4828CA61A71AD6100C80E92 /* GTLStoreendpointDISCOUNTS.h */,
-				D4828CA71A71AD6100C80E92 /* GTLStoreendpointDISCOUNTS.m */,
-				D4828CA81A71AD6100C80E92 /* GTLStoreendpointENTRIES.h */,
-				D4828CA91A71AD6100C80E92 /* GTLStoreendpointENTRIES.m */,
-				D4828CAA1A71AD6100C80E92 /* GTLStoreendpointENTRY.h */,
-				D4828CAB1A71AD6100C80E92 /* GTLStoreendpointENTRY.m */,
-				D4828CAC1A71AD6100C80E92 /* GTLStoreendpointGETCHECKDETAILS.h */,
-				D4828CAD1A71AD6100C80E92 /* GTLStoreendpointGETCHECKDETAILS.m */,
-				D4828CAE1A71AD6100C80E92 /* GTLStoreendpointGetCheckDetailsPOSResponse.h */,
-				D4828CAF1A71AD6100C80E92 /* GTLStoreendpointGetCheckDetailsPOSResponse.m */,
 				D4828CB01A71AD6100C80E92 /* GTLStoreendpointStoreOrderListAndCount.h */,
 				D4828CB11A71AD6100C80E92 /* GTLStoreendpointStoreOrderListAndCount.m */,
 				D41B03E01A6EC1C100FCB9CC /* GTLStoreendpointItemReview.h */,
@@ -2261,7 +2202,7 @@
 				TargetAttributes = {
 					D4F2759E1A0C021800CEC95A = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = V39QP9S6S6;
+						DevelopmentTeam = 7742T5X57N;
 					};
 				};
 			};
@@ -2306,7 +2247,6 @@
 				D41D321F1A11DD9300EA49B6 /* fbbutton.png in Resources */,
 				D4522B181A15264F002EFA92 /* visa.png in Resources */,
 				D4522B081A15264F002EFA92 /* amex.png in Resources */,
-				375D100B1A69F5550016C293 /* ProfileView.xib in Resources */,
 				375D0FB51A6996610016C293 /* JSQMessagesLoadEarlierHeaderView.xib in Resources */,
 				D4522B0D1A15264F002EFA92 /* cvc@2x.png in Resources */,
 				D4522B1A1A15264F002EFA92 /* gradient@2x.png in Resources */,
@@ -2321,7 +2261,6 @@
 				375D0FBA1A6996610016C293 /* JSQMessagesTypingIndicatorFooterView.xib in Resources */,
 				375D0FC91A6996CE0016C293 /* tab_group@2x.png in Resources */,
 				D4522B161A15264F002EFA92 /* placeholder.png in Resources */,
-				375D10091A69F5550016C293 /* MessagesView.xib in Resources */,
 				D4522B0A1A15264F002EFA92 /* cvc-amex.png in Resources */,
 				D41D32281A11DD9300EA49B6 /* personePlaceholder.png in Resources */,
 				D4522B151A15264F002EFA92 /* mastercard@2x.png in Resources */,
@@ -2346,7 +2285,6 @@
 				D4522B101A15264F002EFA92 /* discover.png in Resources */,
 				375D0FBC1A6996610016C293 /* ProgressHUD.bundle in Resources */,
 				D41D321D1A11DD9300EA49B6 /* edit.png in Resources */,
-				375D10051A69F5550016C293 /* SearchView.xib in Resources */,
 				D41D321C1A11DD9300EA49B6 /* contacts.png in Resources */,
 				D4522B191A15264F002EFA92 /* visa@2x.png in Resources */,
 				D4FF319E1A20513400C241CA /* drop_up.png in Resources */,
@@ -2359,7 +2297,6 @@
 				D4522B121A15264F002EFA92 /* jcb.png in Resources */,
 				D4F275B61A0C021800CEC95A /* LaunchScreen.xib in Resources */,
 				375D0FB01A6996610016C293 /* JSQMessagesCollectionViewCellOutgoing.xib in Resources */,
-				375D10031A69F5550016C293 /* PrivateView.xib in Resources */,
 				375D0FC61A6996CE0016C293 /* chat_blank@2x.png in Resources */,
 				D41D321E1A11DD9300EA49B6 /* F_icon.svg.png in Resources */,
 				D4EDD4181A33EE7D00C82006 /* no_image_big.png in Resources */,
@@ -2367,7 +2304,6 @@
 				D41D32261A11DD9300EA49B6 /* nextPage.png in Resources */,
 				D4522B131A15264F002EFA92 /* jcb@2x.png in Resources */,
 				D49A3ABB1A267F49008BC180 /* back.png in Resources */,
-				375D10071A69F5550016C293 /* MessagesCell.xib in Resources */,
 				D4EDD4191A33EE7D00C82006 /* no_image.png in Resources */,
 				37DEE0341A781F0700DBDB32 /* TDBadgedCell.h in Resources */,
 				D41D32221A11DD9300EA49B6 /* landingpage.png in Resources */,
@@ -2406,7 +2342,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4522B261A15264F002EFA92 /* STPCard.m in Sources */,
-				D4828CB31A71AD6100C80E92 /* GTLStoreendpointDISCOUNT.m in Sources */,
 				D43EECFE1A1F91B1000C4FE5 /* AWPagedArray.m in Sources */,
 				37909B6E1A23828000649827 /* PaymentInfoViewController.m in Sources */,
 				D449EB5F1A1BCDEB00879383 /* GTLServiceUserendpoint.m in Sources */,
@@ -2414,16 +2349,13 @@
 				375D0FA81A6996610016C293 /* JSQPhotoMediaItem.m in Sources */,
 				D4A6A3911A17D175003F3EAB /* SHSPhoneLogic.m in Sources */,
 				D46D0FAB1A13B2920072A413 /* UITextField+Extender.m in Sources */,
-				D4828CB51A71AD6100C80E92 /* GTLStoreendpointENTRIES.m in Sources */,
 				D4464B231A361A4E00206728 /* OnlineOrderSelectedModifierGroup.m in Sources */,
 				D4828CC71A71AE9A00C80E92 /* Constants.m in Sources */,
 				D4A8C1871A263B1800DA344A /* AFURLRequestSerialization.m in Sources */,
 				D4A6A3901A17D175003F3EAB /* SHSFlagAccessoryView.m in Sources */,
 				3709EAC01A31804E0060B49B /* PSTGridLayoutInfo.m in Sources */,
-				375D10061A69F5550016C293 /* MessagesCell.m in Sources */,
 				3709EA951A31802A0060B49B /* MWPhotoBrowser.m in Sources */,
 				375D0FB31A6996610016C293 /* JSQMessagesLabel.m in Sources */,
-				375D10131A69F5550016C293 /* messages.m in Sources */,
 				D449EB6F1A1BCDEB00879383 /* GTLStoreendpointStoreOwnerCollection.m in Sources */,
 				D4DEC1D51A321F630075281E /* AddPaymentCardViewController.m in Sources */,
 				D47799781A66E00F00386430 /* GTLStoreendpointMenuItemAndStats.m in Sources */,
@@ -2460,7 +2392,7 @@
 				D449EB641A1BCDEB00879383 /* GTLStoreendpointStore.m in Sources */,
 				37909B701A23828000649827 /* SignupViewController.m in Sources */,
 				370BFF641A403E3900F612EE /* EmptySegue.m in Sources */,
-				D4828CB21A71AD6100C80E92 /* GTLStoreendpointCHECK.m in Sources */,
+				D4828D131A78389900C80E92 /* GTLStoreendpointChatMessagesAndUsers.m in Sources */,
 				D4828CC51A71AE6300C80E92 /* OrderLoadingOperation.m in Sources */,
 				D41B03EA1A6EC1C100FCB9CC /* GTLStoreendpointOrderReviewAndItemReviews.m in Sources */,
 				D449EB741A1BCDEB00879383 /* GTLUserendpointConstants.m in Sources */,
@@ -2478,6 +2410,7 @@
 				D4828CF71A72BE4B00C80E92 /* OrderHistoryTableViewController.m in Sources */,
 				375D0F951A6996610016C293 /* UIDevice+JSQMessages.m in Sources */,
 				D4DEC1CF1A321EE80075281E /* SelectAddressTableViewController.m in Sources */,
+				D4828D1C1A78A25A00C80E92 /* GTLStoreendpointChatUserArray.m in Sources */,
 				D4A8C18D1A263B1800DA344A /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				3709EAB71A31804E0060B49B /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */,
 				373FC8401A698A5500F2BC53 /* StoreListTableViewCell.m in Sources */,
@@ -2488,11 +2421,11 @@
 				D49A7A821A3552550052522E /* MenuModifierTableViewController.m in Sources */,
 				D449EB5D1A1BCDEB00879383 /* GTLQueryUserendpoint.m in Sources */,
 				D43EED071A1F9EC5000C4FE5 /* DataLoadingOperation.m in Sources */,
+				D4828D211A79313400C80E92 /* GTLStoreendpointStoreChatTeam.m in Sources */,
 				D47799731A66127100386430 /* GTLStoreendpointAsaanLongString.m in Sources */,
 				D4AC51821A325DCA00F2484F /* GTLUserendpointUserAddress.m in Sources */,
 				D43EED101A1FC0A2000C4FE5 /* StoreLoadingOperation.m in Sources */,
 				375D0FAD1A6996610016C293 /* JSQMessagesCollectionViewCellIncoming.m in Sources */,
-				D4828CB61A71AD6100C80E92 /* GTLStoreendpointENTRY.m in Sources */,
 				D4A8C1A01A263B1800DA344A /* SDWebImagePrefetcher.m in Sources */,
 				3709EAC31A31804E0060B49B /* PSTGridLayoutSection.m in Sources */,
 				D4EDD4151A33EE6700C82006 /* Extension.m in Sources */,
@@ -2506,11 +2439,11 @@
 				D4A8C1861A263B1800DA344A /* AFURLConnectionOperation.m in Sources */,
 				D47799791A66E00F00386430 /* GTLStoreendpointMenuItemAndStatsCollection.m in Sources */,
 				D41B03E81A6EC1C100FCB9CC /* GTLStoreendpointItemReview.m in Sources */,
-				375D100A1A69F5550016C293 /* ProfileView.m in Sources */,
 				D449EB621A1BCDEB00879383 /* GTLStoreendpointMenuItemModifiersAndGroups.m in Sources */,
 				D4A8C1811A263B1800DA344A /* AFHTTPRequestOperation.m in Sources */,
 				D4B7A62E1A35104200D72BC4 /* MenuModifierGroupViewController.m in Sources */,
 				D4AC51871A33BB5100F2484F /* UIAlertView+Blocks.m in Sources */,
+				D4828D121A78389900C80E92 /* GTLStoreendpointChatMessage.m in Sources */,
 				D449EB701A1BCDEB00879383 /* GTLStoreendpointStorePOSConnection.m in Sources */,
 				D4A8C1901A263B1800DA344A /* UIImageView+AFNetworking.m in Sources */,
 				D4A6A3941A17D175003F3EAB /* SHSPhoneTextField.m in Sources */,
@@ -2518,11 +2451,11 @@
 				D4DEC1D81A321FB70075281E /* SelectPaymentTableViewController.m in Sources */,
 				D4828CC41A71AE6300C80E92 /* OrderForStoreLoadingOperation.m in Sources */,
 				3709EA981A31802A0060B49B /* MWZoomingScrollView.m in Sources */,
+				D4828D161A78389900C80E92 /* GTLStoreendpointChatUser.m in Sources */,
 				D449EB6C1A1BCDEB00879383 /* GTLStoreendpointStoreMenuItemModifier.m in Sources */,
 				375D0FB91A6996610016C293 /* JSQMessagesTypingIndicatorFooterView.m in Sources */,
 				D4A8C1A11A263B1800DA344A /* UIButton+WebCache.m in Sources */,
 				D4EAF9E91A12ACB20078FA9C /* UIColor+AsaanGoldColor.m in Sources */,
-				D4828CB41A71AD6100C80E92 /* GTLStoreendpointDISCOUNTS.m in Sources */,
 				D404EDBB1A13149A000285F2 /* UIColor+AsaanBackgroundColor.m in Sources */,
 				D4A8C1A61A263B1800DA344A /* UIView+WebCacheOperation.m in Sources */,
 				37D0667A1A7494D30075DBFE /* NavigationController.m in Sources */,
@@ -2539,16 +2472,16 @@
 				375D0F991A6996610016C293 /* JSQMessagesViewController.m in Sources */,
 				37DEE0331A781F0700DBDB32 /* BBBadgeBarButtonItem.m in Sources */,
 				D4522B1F1A15264F002EFA92 /* PTKCardNumber.m in Sources */,
+				D4828D181A78389900C80E92 /* GTLStoreendpointStoreChatMemberArray.m in Sources */,
 				375D0F971A6996610016C293 /* UIView+JSQMessages.m in Sources */,
+				D4828D221A79313400C80E92 /* GTLStoreendpointStoreChatTeamCollection.m in Sources */,
 				375D0F941A6996610016C293 /* UIColor+JSQMessages.m in Sources */,
 				D449EB751A1BCDEB00879383 /* GTLUserendpointUser.m in Sources */,
 				375D0FB41A6996610016C293 /* JSQMessagesLoadEarlierHeaderView.m in Sources */,
 				3709EAC71A31C8420060B49B /* MenuTableViewController.m in Sources */,
-				D4828CB71A71AD6100C80E92 /* GTLStoreendpointGETCHECKDETAILS.m in Sources */,
 				D4F275A81A0C021800CEC95A /* AppDelegate.m in Sources */,
 				D4B7A6361A35299200D72BC4 /* OrderSummaryViewController.m in Sources */,
 				D4522B231A15264F002EFA92 /* PTKView.m in Sources */,
-				375D10021A69F5550016C293 /* PrivateView.m in Sources */,
 				3709EA931A31802A0060B49B /* MWPhoto.m in Sources */,
 				D4F275A51A0C021800CEC95A /* main.m in Sources */,
 				D4A8C1A51A263B1800DA344A /* UIImageView+WebCache.m in Sources */,
@@ -2585,7 +2518,6 @@
 				D449EB981A1BF01300879383 /* StoreListTableViewController.m in Sources */,
 				375D0FB11A6996610016C293 /* JSQMessagesComposerTextView.m in Sources */,
 				375C2FC71A590A2700FED6C0 /* SlidingMenuViewController.m in Sources */,
-				375D10081A69F5550016C293 /* MessagesView.m in Sources */,
 				D449EB651A1BCDEB00879383 /* GTLStoreendpointStoreCollection.m in Sources */,
 				375D10151A69F5550016C293 /* utilities.m in Sources */,
 				D4A8C1841A263B1800DA344A /* AFNetworkReachabilityManager.m in Sources */,
@@ -2596,6 +2528,7 @@
 				D4522B1D1A15264F002EFA92 /* PTKCardCVC.m in Sources */,
 				D449EB5E1A1BCDEB00879383 /* GTLServiceStoreendpoint.m in Sources */,
 				375D10141A69F5550016C293 /* pushnotification.m in Sources */,
+				D4828D141A78389900C80E92 /* GTLStoreendpointChatRoom.m in Sources */,
 				D4828CE21A72B5B800C80E92 /* MainReviewViewController.m in Sources */,
 				D4A8C19B1A263B1800DA344A /* SDWebImageCompat.m in Sources */,
 				D14C64111A6C66F70047475B /* OrderDiscountViewController.m in Sources */,
@@ -2623,7 +2556,6 @@
 				D4A8C1831A263B1800DA344A /* AFHTTPSessionManager.m in Sources */,
 				D4A8C18F1A263B1800DA344A /* UIButton+AFNetworking.m in Sources */,
 				D4522B211A15264F002EFA92 /* PTKTextField.m in Sources */,
-				D4828CB81A71AD6100C80E92 /* GTLStoreendpointGetCheckDetailsPOSResponse.m in Sources */,
 				D4A8C19C1A263B1800DA344A /* SDWebImageDecoder.m in Sources */,
 				D449EB6A1A1BCDEB00879383 /* GTLStoreendpointStoreMenuItem.m in Sources */,
 				D4522B291A15264F002EFA92 /* Stripe.m in Sources */,
@@ -2637,7 +2569,6 @@
 				D4E807311A1D8BAA008E343C /* GTLStoreendpointStoreStats.m in Sources */,
 				D4522B201A15264F002EFA92 /* PTKComponent.m in Sources */,
 				3709EA911A31802A0060B49B /* MWGridCell.m in Sources */,
-				375D10041A69F5550016C293 /* SearchView.m in Sources */,
 				D47799701A65BA1800386430 /* GTLStoreendpointStoreDiscountCollection.m in Sources */,
 				D4E807321A1D8BAA008E343C /* GTLStoreendpointStoreStatsCollection.m in Sources */,
 				375D10121A69F5550016C293 /* camera.m in Sources */,
@@ -2649,6 +2580,7 @@
 				D449EB6D1A1BCDEB00879383 /* GTLStoreendpointStoreMenuItemModifierGroup.m in Sources */,
 				D4828CD61A71AF7400C80E92 /* RXMLElement.m in Sources */,
 				375D0FB21A6996610016C293 /* JSQMessagesInputToolbar.m in Sources */,
+				D4828D151A78389900C80E92 /* GTLStoreendpointChatRoomsAndStoreChatMemberships.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

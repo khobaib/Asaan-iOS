@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryUserendpoint (7 custom class methods, 2 custom properties)
+//   GTLQueryUserendpoint (8 custom class methods, 2 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLQuery.h"
@@ -42,6 +42,12 @@
 #pragma mark -
 #pragma mark Service level methods
 // These create a GTLQueryUserendpoint object.
+
+// Method: userendpoint.getCurrentUser
+//  Authorization scope(s):
+//   kGTLAuthScopeUserendpointUserinfoEmail
+// Fetches a GTLUserendpointUser.
++ (id)queryForGetCurrentUser;
 
 // Method: userendpoint.getUserAddresses
 //  Authorization scope(s):

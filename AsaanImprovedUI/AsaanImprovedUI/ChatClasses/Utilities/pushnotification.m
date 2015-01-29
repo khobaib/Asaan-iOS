@@ -10,10 +10,12 @@
 // THE SOFTWARE.
 
 #import <Parse/Parse.h>
-
 #import "ChatConstants.h"
-
 #import "pushnotification.h"
+#import "AppDelegate.h"
+#import "GTLStoreendpoint.h"
+#import "UtilCalls.h"
+#import "Constants.h"
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 void ParsePushUserAssign(void)
@@ -46,26 +48,47 @@ void ParsePushUserResign(void)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-void SendPushNotification(NSString *roomId, NSString *text)
+void SendPushNotification(long roomId, NSString *text)
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
-	PFQuery *query = [PFQuery queryWithClassName:PF_MESSAGES_CLASS_NAME];
-	[query whereKey:PF_MESSAGES_ROOMID equalTo:roomId];
-	[query whereKey:PF_MESSAGES_USER notEqualTo:[PFUser currentUser]];
-	[query includeKey:PF_MESSAGES_USER];
-	[query setLimit:1000];
-
-	PFQuery *queryInstallation = [PFInstallation query];
-	[queryInstallation whereKey:PF_INSTALLATION_USER matchesKey:PF_MESSAGES_USER inQuery:query];
-
-	PFPush *push = [[PFPush alloc] init];
-	[push setQuery:queryInstallation];
-	[push setMessage:text];
-	[push sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
-	{
-		if (error != nil)
-		{
-			NSLog(@"SendPushNotification send error.");
-		}
-	}];
+//    __weak __typeof(self) weakSelf = self;
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
+    GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetChatUsersForRoomWithRoomId:roomId];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    dic[USER_AUTH_TOKEN_HEADER_NAME] = [UtilCalls getAuthTokenForCurrentUser];
+    [query setAdditionalHTTPHeaders:dic];
+    
+    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointChatUserArray *object,NSError *error)
+     {
+         if (error == nil)
+         {
+             NSMutableArray *userObjectIds = [[NSMutableArray alloc]init];
+             PFUser *user = [PFUser currentUser];
+             for (GTLStoreendpointChatUser *chatUser in object.chatUsers)
+                 if ([chatUser.objectId compare:user.objectId] != 0)
+                     [userObjectIds addObject:chatUser.objectId];
+             
+             PFQuery *query = [PFQuery queryWithClassName:PF_USER_CLASS_NAME];
+             [query whereKey:PF_USER_OBJECTID containedIn:userObjectIds];
+             
+             PFQuery *queryInstallation = [PFInstallation query];
+             [queryInstallation whereKey:PF_INSTALLATION_USER matchesQuery:query];
+             
+             PFPush *push = [[PFPush alloc] init];
+             [push setQuery:queryInstallation];
+             [push setMessage:text];
+             [push sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+              {
+                  if (error != nil)
+                  {
+                      NSLog(@"SendPushNotification send error:%ld, %@.", error.code, error.debugDescription);
+                  }
+              }];
+         }
+         else
+         {
+             NSLog(@"queryForGetChatUsersForRoomWithRoomId error:%ld, %@.", error.code, error.debugDescription);
+         }
+     }];
 }

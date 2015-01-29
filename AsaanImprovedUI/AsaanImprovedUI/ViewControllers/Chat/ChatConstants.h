@@ -26,7 +26,9 @@
 #define		PF_USER_PASSWORD					@"password"				//	String
 #define		PF_USER_EMAIL						@"email"				//	String
 #define		PF_USER_EMAILCOPY					@"emailCopy"			//	String
-#define		PF_USER_FULLNAME					@"firstName"			//	String
+#define		PF_USER_FULLNAME					@"fullName" 			//	String
+#define		PF_USER_FIRSTNAME					@"firstName" 			//	String
+#define		PF_USER_LASTNAME					@"lastName" 			//	String
 #define		PF_USER_FULLNAME_LOWER				@"fullname_lower"		//	String
 #define		PF_USER_FACEBOOKID					@"facebookId"			//	String
 #define		PF_USER_PICTURE						@"picture"				//	File

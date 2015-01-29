@@ -3,7 +3,7 @@
  */
 
 //
-//  GTLStoreendpointDISCOUNT.m
+//  GTLStoreendpointChatUserArray.h
 //
 
 // ----------------------------------------------------------------------------
@@ -13,15 +13,21 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointDISCOUNT (0 custom class methods, 3 custom properties)
+//   GTLStoreendpointChatUserArray (0 custom class methods, 1 custom properties)
 
-#import "GTLStoreendpointDISCOUNT.h"
+#if GTL_BUILT_AS_FRAMEWORK
+  #import "GTL/GTLObject.h"
+#else
+  #import "GTLObject.h"
+#endif
+
+@class GTLStoreendpointChatUser;
 
 // ----------------------------------------------------------------------------
 //
-//   GTLStoreendpointDISCOUNT
+//   GTLStoreendpointChatUserArray
 //
 
-@implementation GTLStoreendpointDISCOUNT
-@dynamic amount, desc, value;
+@interface GTLStoreendpointChatUserArray : GTLObject
+@property (retain) NSArray *chatUsers;  // of GTLStoreendpointChatUser
 @end

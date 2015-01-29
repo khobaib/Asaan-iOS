@@ -13,10 +13,7 @@
 #import "ChatView.h"
 #import "UtilCalls.h"
 
-@interface ChatTabBarController () <UITabBarControllerDelegate> {
-
-    BOOL userHasCompletedAction;
-}
+@interface ChatTabBarController () <UITabBarControllerDelegate>
 
 @end
 
@@ -50,7 +47,7 @@
     [super viewWillAppear:animated];
     
     self.groupView.tabBarItem.title = @"Groups";
-    self.chatView.tabBarItem.title = @"Message";
+    self.chatView.tabBarItem.title = @"Messages";
     
     navController1.parentNavigationController = self.parentNavigationController;
     navController2.parentNavigationController = self.parentNavigationController;
@@ -96,7 +93,7 @@
 
 -(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
     
-    if (self.selectedIndex == 0 && !self.chatView.roomId) {
+    if (self.selectedIndex == 0 && self.chatView.roomOrMembershipId == 0) {
         return NO;
     }
     return YES;

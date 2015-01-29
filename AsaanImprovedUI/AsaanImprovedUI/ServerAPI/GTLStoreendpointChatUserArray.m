@@ -3,7 +3,7 @@
  */
 
 //
-//  GTLStoreendpointENTRIES.m
+//  GTLStoreendpointChatUserArray.m
 //
 
 // ----------------------------------------------------------------------------
@@ -13,24 +13,24 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointENTRIES (0 custom class methods, 1 custom properties)
+//   GTLStoreendpointChatUserArray (0 custom class methods, 1 custom properties)
 
-#import "GTLStoreendpointENTRIES.h"
+#import "GTLStoreendpointChatUserArray.h"
 
-#import "GTLStoreendpointENTRY.h"
+#import "GTLStoreendpointChatUser.h"
 
 // ----------------------------------------------------------------------------
 //
-//   GTLStoreendpointENTRIES
+//   GTLStoreendpointChatUserArray
 //
 
-@implementation GTLStoreendpointENTRIES
-@dynamic entry;
+@implementation GTLStoreendpointChatUserArray
+@dynamic chatUsers;
 
 + (NSDictionary *)arrayPropertyToClassMap {
   NSDictionary *map =
-    [NSDictionary dictionaryWithObject:[GTLStoreendpointENTRY class]
-                                forKey:@"entry"];
+    [NSDictionary dictionaryWithObject:[GTLStoreendpointChatUser class]
+                                forKey:@"chatUsers"];
   return map;
 }
 

@@ -27,13 +27,13 @@
 #import "StoreListTableViewCell.h"
 #import "UtilCalls.h"
 
-#import "messages.h"
 #import "ChatView.h"
 #import "ChatConstants.h"
 #import "ChatTabBarController.H"
 
 #import "MBProgressHUD.h"
 #import "ProgressHUD.h"
+#import "Constants.h"
 
 @interface StoreListTableViewController ()<DataProviderDelegate>
 
@@ -100,7 +100,8 @@
         
         // Load GAE Objects on startup
         GlobalObjectHolder *objectHolder = appDelegate.globalObjectHolder;
-        
+        if (objectHolder.currentUser == nil)
+            [objectHolder loadCurrentUserFromServer];
         if (objectHolder.userCards == nil)
             [objectHolder loadUserCardsFromServer];
         if (objectHolder.userAddresses == nil)
@@ -305,83 +306,18 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:number]];
 }
 
-- (void)gotoChatView:(PFObject *)chatroom
+- (IBAction)chatWithStore:(UIButton *)sender
 {
-    NSString *roomId = chatroom.objectId;
-    //---------------------------------------------------------------------------------------------------------------------------------------------
-    CreateMessageItem([PFUser currentUser], roomId, chatroom[PF_CHATROOMS_NAME]);
-    //---------------------------------------------------------------------------------------------------------------------------------------------
+    _selectedStore = self.dataProvider.dataObjects[sender.tag];
+
     ChatTabBarController *frontController = [[ChatTabBarController alloc] init];
     frontController.parentNavigationController = self.navigationController;
+    frontController.selectedStore = self.selectedStore.store;
     
-    frontController.chatView.roomId = roomId;
-    frontController.title = [[chatroom[PF_CHATROOMS_NAME] componentsSeparatedByString:@"$$"] objectAtIndex:0];
     frontController.selectedIndex = 1;
     
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     [self.navigationController pushViewController:frontController animated:YES];
-//    
-//    ChatView *chatView = [[ChatView alloc] initWith:roomId title:[[chatroom[PF_CHATROOMS_NAME] componentsSeparatedByString:@"$$"] objectAtIndex:0]];
-//    chatView.hidesBottomBarWhenPushed = YES;
-//    
-//    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-//    [self.navigationController pushViewController:chatView animated:YES];
-}
-
-- (void)gotoChatGroup:(NSString *)groupName
-{
-    PFQuery *query = [PFQuery queryWithClassName:PF_CHATROOMS_CLASS_NAME];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
-     {
-         if (error == nil)
-         {
-             PFObject *chatroom = nil;
-             if (objects && objects.count > 0) {
-                 for (PFObject *c in objects) {
-                     
-                     if ([c[PF_CHATROOMS_NAME] isEqualToString:groupName]) {
-                         chatroom = c;
-                         break;
-                     }
-                 }
-             }
-             
-             if (chatroom) {
-                 [self gotoChatView:chatroom];
-             }
-             else {
-                 
-                 PFObject *object = [PFObject objectWithClassName:PF_CHATROOMS_CLASS_NAME];
-                 object[PF_CHATROOMS_NAME] = groupName;
-                 [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
-                  {
-                      if (error == nil)
-                      {
-                          [self gotoChatGroup:groupName];
-                      }
-                      else {
-                          [ProgressHUD showError:@"Network error 2."];
-                          
-                          [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                      }
-                  }];
-             }
-         }
-         else {
-             [ProgressHUD showError:@"Network error 1."];
-             
-             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-         }
-     }];
-}
-
-- (IBAction)chatWithStore:(UIButton *)sender
-{
-    _selectedStore = self.dataProvider.dataObjects[sender.tag];
-    
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    PFUser *user = [PFUser currentUser];
-    [self gotoChatGroup:[NSString stringWithFormat:@"%@$$%@$$%@", _selectedStore.store.name, user.objectId, _selectedStore.store.identifier]];
 }
 
 - (IBAction) showMenu:(UIButton *)sender

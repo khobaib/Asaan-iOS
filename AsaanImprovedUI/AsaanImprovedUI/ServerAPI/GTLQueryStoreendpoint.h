@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryStoreendpoint (33 custom class methods, 11 custom properties)
+//   GTLQueryStoreendpoint (39 custom class methods, 15 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLQuery.h"
@@ -22,9 +22,12 @@
 #endif
 
 @class GTLStoreendpointAsaanLongString;
+@class GTLStoreendpointChatMessage;
+@class GTLStoreendpointChatRoom;
 @class GTLStoreendpointItemReviewsArray;
 @class GTLStoreendpointOrderReview;
 @class GTLStoreendpointStore;
+@class GTLStoreendpointStoreChatMemberArray;
 @class GTLStoreendpointStoreDiscount;
 @class GTLStoreendpointStoreDiscountArray;
 @class GTLStoreendpointStoreMenuCombined;
@@ -49,12 +52,16 @@
 //
 @property (assign) NSInteger firstPosition;
 @property (assign) NSInteger guestCount;
+@property (assign) BOOL isStore;
 @property (assign) NSInteger maxResult;
 @property (assign) NSInteger menuItemPOSId;
 @property (assign) NSInteger menuPOSId;
 @property (assign) NSInteger menuType;
+@property (assign) long long modifiedDate;
 @property (assign) long long orderId;
 @property (assign) NSInteger orderMode;
+@property (assign) long long roomId;
+@property (assign) long long roomOrStoreId;
 @property (assign) long long storeId;
 @property (copy) NSString *storeName;
 
@@ -62,11 +69,27 @@
 #pragma mark Service level methods
 // These create a GTLQueryStoreendpoint object.
 
-// Method: storeendpoint.getCheckDetailsPOSResponseEmptyObject
+// Method: storeendpoint.getChatMessagesForStoreOrRoom
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
-// Fetches a GTLStoreendpointGetCheckDetailsPOSResponse.
-+ (id)queryForGetCheckDetailsPOSResponseEmptyObject;
+// Fetches a GTLStoreendpointChatMessagesAndUsers.
++ (id)queryForGetChatMessagesForStoreOrRoomWithRoomOrStoreId:(long long)roomOrStoreId
+                                                modifiedDate:(long long)modifiedDate
+                                                     isStore:(BOOL)isStore
+                                               firstPosition:(NSInteger)firstPosition
+                                                   maxResult:(NSInteger)maxResult;
+
+// Method: storeendpoint.getChatRoomsAndMembershipsForUser
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
+// Fetches a GTLStoreendpointChatRoomsAndStoreChatMemberships.
++ (id)queryForGetChatRoomsAndMembershipsForUser;
+
+// Method: storeendpoint.getChatUsersForRoom
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
+// Fetches a GTLStoreendpointChatUserArray.
++ (id)queryForGetChatUsersForRoomWithRoomId:(long long)roomId;
 
 // Method: storeendpoint.getMenuItemAndStatsForMenu
 //  Authorization scope(s):
@@ -95,6 +118,12 @@
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 // Fetches a GTLStoreendpointStore.
 + (id)queryForGetStoreWithStoreId:(long long)storeId;
+
+// Method: storeendpoint.getStoreChatMembers
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
+// Fetches a GTLStoreendpointStoreChatTeamCollection.
++ (id)queryForGetStoreChatMembersWithStoreId:(long long)storeId;
 
 // Method: storeendpoint.getStoreCount
 //  Authorization scope(s):
@@ -201,10 +230,27 @@
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 + (id)queryForRemoveStoreOwnerWithObject:(GTLStoreendpointStoreOwner *)object;
 
+// Method: storeendpoint.replaceStoreChatGroup
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
++ (id)queryForReplaceStoreChatGroupWithObject:(GTLStoreendpointStoreChatMemberArray *)object;
+
 // Method: storeendpoint.replaceStoreDiscounts
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 + (id)queryForReplaceStoreDiscountsWithObject:(GTLStoreendpointStoreDiscountArray *)object;
+
+// Method: storeendpoint.saveChatMessage
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
+// Fetches a GTLStoreendpointChatMessage.
++ (id)queryForSaveChatMessageWithObject:(GTLStoreendpointChatMessage *)object;
+
+// Method: storeendpoint.saveChatRoom
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
+// Fetches a GTLStoreendpointChatRoom.
++ (id)queryForSaveChatRoomWithObject:(GTLStoreendpointChatRoom *)object;
 
 // Method: storeendpoint.saveOrUpdateOrdersFromPOS
 //  Authorization scope(s):

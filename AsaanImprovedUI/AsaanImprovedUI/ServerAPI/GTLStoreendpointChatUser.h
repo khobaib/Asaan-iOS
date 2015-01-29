@@ -3,7 +3,7 @@
  */
 
 //
-//  GTLStoreendpointGETCHECKDETAILS.m
+//  GTLStoreendpointChatUser.h
 //
 
 // ----------------------------------------------------------------------------
@@ -13,17 +13,22 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointGETCHECKDETAILS (0 custom class methods, 2 custom properties)
+//   GTLStoreendpointChatUser (0 custom class methods, 4 custom properties)
 
-#import "GTLStoreendpointGETCHECKDETAILS.h"
-
-#import "GTLStoreendpointCHECK.h"
+#if GTL_BUILT_AS_FRAMEWORK
+  #import "GTL/GTLObject.h"
+#else
+  #import "GTLObject.h"
+#endif
 
 // ----------------------------------------------------------------------------
 //
-//   GTLStoreendpointGETCHECKDETAILS
+//   GTLStoreendpointChatUser
 //
 
-@implementation GTLStoreendpointGETCHECKDETAILS
-@dynamic check, intcheckid;
+@interface GTLStoreendpointChatUser : GTLObject
+@property (copy) NSString *name;
+@property (copy) NSString *objectId;
+@property (copy) NSString *profilePhotoUrl;
+@property (retain) NSNumber *userId;  // longLongValue
 @end

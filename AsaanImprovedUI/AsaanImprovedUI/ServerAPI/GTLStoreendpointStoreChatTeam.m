@@ -3,7 +3,7 @@
  */
 
 //
-//  GTLStoreendpointENTRY.m
+//  GTLStoreendpointStoreChatTeam.m
 //
 
 // ----------------------------------------------------------------------------
@@ -13,18 +13,17 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointENTRY (0 custom class methods, 9 custom properties)
+//   GTLStoreendpointStoreChatTeam (0 custom class methods, 6 custom properties)
 
-#import "GTLStoreendpointENTRY.h"
+#import "GTLStoreendpointStoreChatTeam.h"
 
 // ----------------------------------------------------------------------------
 //
-//   GTLStoreendpointENTRY
+//   GTLStoreendpointStoreChatTeam
 //
 
-@implementation GTLStoreendpointENTRY
-@dynamic dispname, entrytype, identifier, itemid, ordermode, parententry, price,
-         quantity, value;
+@implementation GTLStoreendpointStoreChatTeam
+@dynamic createdDate, identifier, modifiedDate, storeId, storeName, userId;
 
 + (NSDictionary *)propertyToJSONKeyMap {
   NSDictionary *map =

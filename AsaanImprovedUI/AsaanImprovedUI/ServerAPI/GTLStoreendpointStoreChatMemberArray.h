@@ -3,7 +3,7 @@
  */
 
 //
-//  GTLStoreendpointENTRIES.h
+//  GTLStoreendpointStoreChatMemberArray.h
 //
 
 // ----------------------------------------------------------------------------
@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointENTRIES (0 custom class methods, 1 custom properties)
+//   GTLStoreendpointStoreChatMemberArray (0 custom class methods, 1 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLObject.h"
@@ -21,13 +21,13 @@
   #import "GTLObject.h"
 #endif
 
-@class GTLStoreendpointENTRY;
+@class GTLStoreendpointStoreChatTeam;
 
 // ----------------------------------------------------------------------------
 //
-//   GTLStoreendpointENTRIES
+//   GTLStoreendpointStoreChatMemberArray
 //
 
-@interface GTLStoreendpointENTRIES : GTLObject
-@property (retain) NSArray *entry;  // of GTLStoreendpointENTRY
+@interface GTLStoreendpointStoreChatMemberArray : GTLObject
+@property (retain) NSArray *storeChatMembers;  // of GTLStoreendpointStoreChatTeam
 @end

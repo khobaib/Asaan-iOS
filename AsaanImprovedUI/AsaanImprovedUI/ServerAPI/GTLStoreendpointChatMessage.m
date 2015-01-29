@@ -3,7 +3,7 @@
  */
 
 //
-//  GTLStoreendpointCHECK.m
+//  GTLStoreendpointChatMessage.m
 //
 
 // ----------------------------------------------------------------------------
@@ -13,22 +13,18 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointCHECK (0 custom class methods, 12 custom properties)
+//   GTLStoreendpointChatMessage (0 custom class methods, 7 custom properties)
 
-#import "GTLStoreendpointCHECK.h"
-
-#import "GTLStoreendpointDISCOUNTS.h"
-#import "GTLStoreendpointENTRIES.h"
+#import "GTLStoreendpointChatMessage.h"
 
 // ----------------------------------------------------------------------------
 //
-//   GTLStoreendpointCHECK
+//   GTLStoreendpointChatMessage
 //
 
-@implementation GTLStoreendpointCHECK
-@dynamic completetotal, discounts, employee, employeecheckname, entries,
-         guestcount, identifier, payments, servicecharges, subtotal,
-         tablenumber, tax;
+@implementation GTLStoreendpointChatMessage
+@dynamic createdDate, fileMessage, identifier, modifiedDate, roomId, txtMessage,
+         userId;
 
 + (NSDictionary *)propertyToJSONKeyMap {
   NSDictionary *map =

@@ -3,7 +3,7 @@
  */
 
 //
-//  GTLStoreendpointENTRY.h
+//  GTLStoreendpointChatRoom.h
 //
 
 // ----------------------------------------------------------------------------
@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointENTRY (0 custom class methods, 9 custom properties)
+//   GTLStoreendpointChatRoom (0 custom class methods, 6 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLObject.h"
@@ -23,20 +23,17 @@
 
 // ----------------------------------------------------------------------------
 //
-//   GTLStoreendpointENTRY
+//   GTLStoreendpointChatRoom
 //
 
-@interface GTLStoreendpointENTRY : GTLObject
-@property (copy) NSString *dispname;
-@property (retain) NSNumber *entrytype;  // intValue
+@interface GTLStoreendpointChatRoom : GTLObject
+@property (retain) NSNumber *createdDate;  // longLongValue
 
 // identifier property maps to 'id' in JSON (to avoid Objective C's 'id').
-@property (retain) NSNumber *identifier;  // intValue
+@property (retain) NSNumber *identifier;  // longLongValue
 
-@property (retain) NSNumber *itemid;  // intValue
-@property (retain) NSNumber *ordermode;  // intValue
-@property (retain) NSNumber *parententry;  // intValue
-@property (retain) NSNumber *price;  // floatValue
-@property (retain) NSNumber *quantity;  // intValue
-@property (copy) NSString *value;
+@property (retain) NSNumber *modifiedDate;  // longLongValue
+@property (copy) NSString *name;
+@property (retain) NSNumber *storeId;  // longLongValue
+@property (retain) NSNumber *userId;  // longLongValue
 @end

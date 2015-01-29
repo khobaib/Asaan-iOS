@@ -13,13 +13,17 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryStoreendpoint (33 custom class methods, 11 custom properties)
+//   GTLQueryStoreendpoint (39 custom class methods, 15 custom properties)
 
 #import "GTLQueryStoreendpoint.h"
 
 #import "GTLStoreendpointAsaanLong.h"
 #import "GTLStoreendpointAsaanLongString.h"
-#import "GTLStoreendpointGetCheckDetailsPOSResponse.h"
+#import "GTLStoreendpointChatMessage.h"
+#import "GTLStoreendpointChatMessagesAndUsers.h"
+#import "GTLStoreendpointChatRoom.h"
+#import "GTLStoreendpointChatRoomsAndStoreChatMemberships.h"
+#import "GTLStoreendpointChatUserArray.h"
 #import "GTLStoreendpointItemReviewsArray.h"
 #import "GTLStoreendpointMenuItemAndStatsCollection.h"
 #import "GTLStoreendpointMenuItemModifiersAndGroups.h"
@@ -28,6 +32,8 @@
 #import "GTLStoreendpointOrderReviewAndItemReviews.h"
 #import "GTLStoreendpointStore.h"
 #import "GTLStoreendpointStoreAndStatsCollection.h"
+#import "GTLStoreendpointStoreChatMemberArray.h"
+#import "GTLStoreendpointStoreChatTeamCollection.h"
 #import "GTLStoreendpointStoreCollection.h"
 #import "GTLStoreendpointStoreDiscount.h"
 #import "GTLStoreendpointStoreDiscountArray.h"
@@ -49,17 +55,42 @@
 
 @implementation GTLQueryStoreendpoint
 
-@dynamic fields, firstPosition, guestCount, maxResult, menuItemPOSId, menuPOSId,
-         menuType, orderId, orderMode, storeId, storeName;
+@dynamic fields, firstPosition, guestCount, isStore, maxResult, menuItemPOSId,
+         menuPOSId, menuType, modifiedDate, orderId, orderMode, roomId,
+         roomOrStoreId, storeId, storeName;
 
 #pragma mark -
 #pragma mark Service level methods
 // These create a GTLQueryStoreendpoint object.
 
-+ (id)queryForGetCheckDetailsPOSResponseEmptyObject {
-  NSString *methodName = @"storeendpoint.getCheckDetailsPOSResponseEmptyObject";
++ (id)queryForGetChatMessagesForStoreOrRoomWithRoomOrStoreId:(long long)roomOrStoreId
+                                                modifiedDate:(long long)modifiedDate
+                                                     isStore:(BOOL)isStore
+                                               firstPosition:(NSInteger)firstPosition
+                                                   maxResult:(NSInteger)maxResult {
+  NSString *methodName = @"storeendpoint.getChatMessagesForStoreOrRoom";
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
-  query.expectedObjectClass = [GTLStoreendpointGetCheckDetailsPOSResponse class];
+  query.roomOrStoreId = roomOrStoreId;
+  query.modifiedDate = modifiedDate;
+  query.isStore = isStore;
+  query.firstPosition = firstPosition;
+  query.maxResult = maxResult;
+  query.expectedObjectClass = [GTLStoreendpointChatMessagesAndUsers class];
+  return query;
+}
+
++ (id)queryForGetChatRoomsAndMembershipsForUser {
+  NSString *methodName = @"storeendpoint.getChatRoomsAndMembershipsForUser";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.expectedObjectClass = [GTLStoreendpointChatRoomsAndStoreChatMemberships class];
+  return query;
+}
+
++ (id)queryForGetChatUsersForRoomWithRoomId:(long long)roomId {
+  NSString *methodName = @"storeendpoint.getChatUsersForRoom";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.roomId = roomId;
+  query.expectedObjectClass = [GTLStoreendpointChatUserArray class];
   return query;
 }
 
@@ -100,6 +131,14 @@
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
   query.storeId = storeId;
   query.expectedObjectClass = [GTLStoreendpointStore class];
+  return query;
+}
+
++ (id)queryForGetStoreChatMembersWithStoreId:(long long)storeId {
+  NSString *methodName = @"storeendpoint.getStoreChatMembers";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.storeId = storeId;
+  query.expectedObjectClass = [GTLStoreendpointStoreChatTeamCollection class];
   return query;
 }
 
@@ -261,6 +300,17 @@
   return query;
 }
 
++ (id)queryForReplaceStoreChatGroupWithObject:(GTLStoreendpointStoreChatMemberArray *)object {
+  if (object == nil) {
+    GTL_DEBUG_ASSERT(object != nil, @"%@ got a nil object", NSStringFromSelector(_cmd));
+    return nil;
+  }
+  NSString *methodName = @"storeendpoint.replaceStoreChatGroup";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.bodyObject = object;
+  return query;
+}
+
 + (id)queryForReplaceStoreDiscountsWithObject:(GTLStoreendpointStoreDiscountArray *)object {
   if (object == nil) {
     GTL_DEBUG_ASSERT(object != nil, @"%@ got a nil object", NSStringFromSelector(_cmd));
@@ -269,6 +319,30 @@
   NSString *methodName = @"storeendpoint.replaceStoreDiscounts";
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
   query.bodyObject = object;
+  return query;
+}
+
++ (id)queryForSaveChatMessageWithObject:(GTLStoreendpointChatMessage *)object {
+  if (object == nil) {
+    GTL_DEBUG_ASSERT(object != nil, @"%@ got a nil object", NSStringFromSelector(_cmd));
+    return nil;
+  }
+  NSString *methodName = @"storeendpoint.saveChatMessage";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.bodyObject = object;
+  query.expectedObjectClass = [GTLStoreendpointChatMessage class];
+  return query;
+}
+
++ (id)queryForSaveChatRoomWithObject:(GTLStoreendpointChatRoom *)object {
+  if (object == nil) {
+    GTL_DEBUG_ASSERT(object != nil, @"%@ got a nil object", NSStringFromSelector(_cmd));
+    return nil;
+  }
+  NSString *methodName = @"storeendpoint.saveChatRoom";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.bodyObject = object;
+  query.expectedObjectClass = [GTLStoreendpointChatRoom class];
   return query;
 }
 

@@ -10,29 +10,35 @@
 // THE SOFTWARE.
 
 #import <Parse/Parse.h>
+#import "AppDelegate.h"
+#import "GTLStoreendpoint.h"
 #import "ProgressHUD.h"
 
 #import "ChatConstants.h"
 #import "camera.h"
-#import "messages.h"
 #import "pushnotification.h"
 
 #import "ChatView.h"
+#import "SDWebImageManager.h"
+#import "Constants.h"
+#import "UtilCalls.h"
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 @interface ChatView()
 {
-	NSTimer *timer;
+//	NSTimer *timer;
 	BOOL isLoading;
 
 	NSMutableArray *users;
 	NSMutableArray *messages;
+    NSMutableArray *serverMessages;
 	NSMutableDictionary *avatars;
 
 	JSQMessagesBubbleImage *bubbleImageOutgoing;
 	JSQMessagesBubbleImage *bubbleImageIncoming;
 
 	JSQMessagesAvatarImage *avatarImageBlank;
+    GTLStoreendpointChatMessagesAndUsers *messagesAndUsers;
 }
 @end
 //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -54,12 +60,12 @@
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-- (id)initWith:(NSString *)roomId_ title:(NSString *)title_
+- (id)initWith:(long)Id_ title:(NSString *)title_
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
 	self = [super init];
-    self.roomId = roomId_;
-    self.title = title_;//@"Chat";
+    self.roomOrMembershipId = Id_;
+//    self.title = title_;//@"Chat";
 	return self;
 }
 
@@ -70,32 +76,30 @@
     [super viewDidLoad];
 //    self.title = @"Groups";
 
-	users = [[NSMutableArray alloc] init];
-	messages = [[NSMutableArray alloc] init];
-	avatars = [[NSMutableDictionary alloc] init];
-
 	PFUser *user = [PFUser currentUser];
 	self.senderId = user.objectId;
-	self.senderDisplayName = user[PF_USER_FULLNAME];
+    self.senderDisplayName = [NSString stringWithFormat:@"%@ %@",user[PF_USER_FIRSTNAME], user[PF_USER_LASTNAME]];
 
 	JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc] init];
 	bubbleImageOutgoing = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
 	bubbleImageIncoming = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
 
 	avatarImageBlank = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"chat_blank"] diameter:30.0];
-
-//	isLoading = NO;
-//	[self loadMessages];
-
-//	ClearMessageCounter(self.roomId);
 }
 
-- (void)setRoomId:(NSString *)roomId {
-
-    if (roomId && (!_roomId || ![_roomId isEqualToString:roomId])) {
-        _roomId = roomId;
+- (void)setRoomOrStoreChatMembershipId:(long)roomOrStoreChatMemberId isStore:(Boolean)isStore
+{
+    NSLog(@"hh");
+    if (roomOrStoreChatMemberId != self.roomOrMembershipId)
+    {
+        self.roomOrMembershipId = roomOrStoreChatMemberId;
+        self.isStore = isStore;
+        NSLog(@"hhg");
         
+        users = [[NSMutableArray alloc] init];
         messages = [[NSMutableArray alloc] init];
+        serverMessages = [[NSMutableArray alloc] init];
+        avatars = [[NSMutableDictionary alloc] init];
         
         [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
         [self.collectionView reloadData];
@@ -103,21 +107,11 @@
         isLoading = NO;
         [self loadMessages];
         
-        ClearMessageCounter(self.roomId);
+        if (isStore == true)
+            self.inputToolbar.hidden = true;
+        else
+            self.inputToolbar.hidden = false;
     }
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    self.tabBarItem.title = @"Message";
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    
-    [super viewWillDisappear:animated];
-    
-    [timer invalidate];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -125,17 +119,18 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
 	[super viewDidAppear:animated];
+    self.tabBarItem.title = @"Message";
 	self.collectionView.collectionViewLayout.springinessEnabled = YES;
-	timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(loadMessages) userInfo:nil repeats:YES];
+//	timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(loadMessages) userInfo:nil repeats:YES];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-//- (void)viewWillDisappear:(BOOL)animated
-////-------------------------------------------------------------------------------------------------------------------------------------------------
-//{
-//	[super viewWillDisappear:animated];
+- (void)viewWillDisappear:(BOOL)animated
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+{
+	[super viewWillDisappear:animated];
 //	[timer invalidate];
-//}
+}
 
 #pragma mark - Backend methods
 
@@ -143,71 +138,86 @@
 - (void)loadMessages
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
-	if (isLoading == NO)
-	{
-		isLoading = YES;
+    if (isLoading == NO)
+    {
+        isLoading = YES;
 		JSQMessage *message_last = [messages lastObject];
-
-		PFQuery *query = [PFQuery queryWithClassName:PF_CHAT_CLASS_NAME];
-		[query whereKey:PF_CHAT_ROOMID equalTo:self.roomId];
-		if (message_last != nil) [query whereKey:PF_CHAT_CREATEDAT greaterThan:message_last.date];
-		[query includeKey:PF_CHAT_USER];
-		[query orderByDescending:PF_CHAT_CREATEDAT];
-		[query setLimit:50];
-		[query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
-		{
-			if (error == nil)
-			{
-				self.automaticallyScrollsToMostRecentMessage = NO;
-				for (PFObject *object in [objects reverseObjectEnumerator])
-				{
-					[self addMessage:object];
-				}
-				if ([objects count] != 0)
-				{
-					[self finishReceivingMessage];
-					[self scrollToBottomAnimated:NO];
-				}
-				self.automaticallyScrollsToMostRecentMessage = YES;
-			}
-			else [ProgressHUD showError:@"Network error."];
-			isLoading = NO;
-		}];
-	}
+        
+        __weak __typeof(self) weakSelf = self;
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+        GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
+        GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetChatMessagesForStoreOrRoomWithRoomOrStoreId:weakSelf.roomOrMembershipId modifiedDate:message_last.date.timeIntervalSince1970 isStore:weakSelf.isStore firstPosition:0 maxResult:50];
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        dic[USER_AUTH_TOKEN_HEADER_NAME] = [UtilCalls getAuthTokenForCurrentUser];
+        [query setAdditionalHTTPHeaders:dic];
+       
+        [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointChatMessagesAndUsers *object,NSError *error)
+         {
+             if (!error)
+             {
+                self.automaticallyScrollsToMostRecentMessage = NO;
+                 
+                messagesAndUsers = object;
+                for (GTLStoreendpointChatMessage *message in [object.chatMessages reverseObjectEnumerator])
+                    [self addMessage:message];
+                if ([object.chatMessages count] != 0)
+                {
+                    [self finishReceivingMessage];
+                    [self scrollToBottomAnimated:NO];
+                }
+                self.automaticallyScrollsToMostRecentMessage = YES;
+             }
+             else
+             {
+                 NSLog(@"queryForGetChatRoomsAndMembershipsForUser error:%ld, %@", error.code, error.debugDescription);
+                 [ProgressHUD showError:@"Network error."];
+             }
+             isLoading = NO;
+         }];
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-- (void)addMessage:(PFObject *)object
+- (void)addMessage:(GTLStoreendpointChatMessage *)object
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
-	PFUser *user = object[PF_CHAT_USER];
-	[users addObject:user];
 	//---------------------------------------------------------------------------------------------------------------------------------------------
-	if (object[PF_CHAT_PICTURE] == nil)
+    GTLStoreendpointChatUser *chatUser;
+    for (GTLStoreendpointChatUser *user in messagesAndUsers.chatUsers)
+        if (object.userId.longValue == user.userId.longValue)
+        {
+            chatUser = user;
+            [users addObject:user];
+            break;
+        }
+    [serverMessages addObject:object];
+	if (object.fileMessage == nil)
 	{
-        
-		JSQMessage *message = [[JSQMessage alloc] initWithSenderId:user.objectId senderDisplayName:user[PF_USER_FULLNAME]
-																	  date:object.createdAt text:object[PF_CHAT_TEXT]];
+		JSQMessage *message = [[JSQMessage alloc] initWithSenderId:chatUser.objectId senderDisplayName:chatUser.name
+																	  date:[NSDate dateWithTimeIntervalSince1970:object.createdDate.longValue] text:object.txtMessage];
 		[messages addObject:message];
 	}
 	//---------------------------------------------------------------------------------------------------------------------------------------------
-	if (object[PF_CHAT_PICTURE] != nil)
+	if (object.fileMessage != nil)
 	{
 		JSQPhotoMediaItem *mediaItem = [[JSQPhotoMediaItem alloc] initWithImage:nil];
-		mediaItem.appliesMediaViewMaskAsOutgoing = [user.objectId isEqualToString:self.senderId];
+		mediaItem.appliesMediaViewMaskAsOutgoing = [chatUser.objectId isEqualToString:self.senderId];
 		JSQMessage *message =
-			[[JSQMessage alloc] initWithSenderId:user.objectId senderDisplayName:user[PF_USER_FULLNAME] date:object.createdAt media:mediaItem];
+			[[JSQMessage alloc] initWithSenderId:chatUser.objectId senderDisplayName:chatUser.name date:[NSDate dateWithTimeIntervalSince1970:object.createdDate.longValue] media:mediaItem];
 		[messages addObject:message];
 		//-----------------------------------------------------------------------------------------------------------------------------------------
-		PFFile *filePicture = object[PF_CHAT_PICTURE];
-		[filePicture getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error)
-		{
-			if (error == nil)
-			{
-				mediaItem.image = [UIImage imageWithData:imageData];
-				[self.collectionView reloadData];
-			}
-		}];
+        SDWebImageManager *manager = [SDWebImageManager sharedManager];
+        [manager downloadImageWithURL:[NSURL URLWithString:object.fileMessage] options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize)
+        {
+            // progress tracking code
+        } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL)
+        {
+            if (error == nil)
+            {
+                mediaItem.image = image;
+                [self.collectionView reloadData];
+            }
+        }];
 	}
 }
 
@@ -226,23 +236,38 @@
 		}];
 	}
 	//---------------------------------------------------------------------------------------------------------------------------------------------
-	PFObject *object = [PFObject objectWithClassName:PF_CHAT_CLASS_NAME];
-	object[PF_CHAT_USER] = [PFUser currentUser];
-	object[PF_CHAT_ROOMID] = self.roomId;
-	object[PF_CHAT_TEXT] = text;
-	if (filePicture != nil) object[PF_CHAT_PICTURE] = filePicture;
-	[object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
-	{
-		if (error == nil)
-		{
-			[JSQSystemSoundPlayer jsq_playMessageSentSound];
-			[self loadMessages];
-		}
-		else [ProgressHUD showError:@"Network error."];;
-	}];
-	//---------------------------------------------------------------------------------------------------------------------------------------------
-	SendPushNotification(self.roomId, text);
-	UpdateMessageCounter(self.roomId, text);
+    GTLStoreendpointChatMessage *newMessage = [[GTLStoreendpointChatMessage alloc]init];
+    
+    if (self.isStore == false)
+        newMessage.roomId = [NSNumber numberWithLong:self.roomOrMembershipId];
+    
+    newMessage.txtMessage = text;
+    newMessage.fileMessage = filePicture.url;
+
+    __weak __typeof(self) weakSelf = self;
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
+    GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForSaveChatMessageWithObject:newMessage];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    dic[USER_AUTH_TOKEN_HEADER_NAME] = [UtilCalls getAuthTokenForCurrentUser];
+    [query setAdditionalHTTPHeaders:dic];
+    
+    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointChatMessage *object,NSError *error)
+     {
+         if (error == nil)
+         {
+             [JSQSystemSoundPlayer jsq_playMessageSentSound];
+             [weakSelf loadMessages];
+         }
+         else
+         {
+             NSLog(@"queryForSaveChatMessageWithObject error:%ld, %@", error.code, error.debugDescription);
+             [ProgressHUD showError:@"Network error."];
+         }
+     }];
+
+    //---------------------------------------------------------------------------------------------------------------------------------------------
+	SendPushNotification(self.roomOrMembershipId, text);
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	[self finishSendingMessage];
 }
@@ -291,18 +316,21 @@
 					avatarImageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
-	PFUser *user = users[indexPath.item];
+	GTLStoreendpointChatUser *user = users[indexPath.item];
 	if (avatars[user.objectId] == nil)
 	{
-		PFFile *fileThumbnail = user[PF_USER_THUMBNAIL];
-		[fileThumbnail getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error)
-		{
-			if (error == nil)
-			{
-				avatars[user.objectId] = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageWithData:imageData] diameter:30.0];
-				[self.collectionView reloadData];
-			}
-		}];
+        SDWebImageManager *manager = [SDWebImageManager sharedManager];
+        [manager downloadImageWithURL:[NSURL URLWithString:user.profilePhotoUrl] options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize)
+         {
+             // progress tracking code
+         } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL)
+         {
+             if (error == nil)
+             {
+                 avatars[user.objectId] = [JSQMessagesAvatarImageFactory avatarImageWithImage:image diameter:30.0];
+                 [self.collectionView reloadData];
+             }
+         }];
 		return avatarImageBlank;
 	}
 	else return avatars[user.objectId];
@@ -435,6 +463,8 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
 	NSLog(@"didTapAvatarImageView");
+    GTLStoreendpointChatMessage *message = [serverMessages objectAtIndex:indexPath.row];
+    [self setRoomOrStoreChatMembershipId:message.roomId.longValue isStore:false];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -442,6 +472,8 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
 	NSLog(@"didTapMessageBubbleAtIndexPath");
+    GTLStoreendpointChatMessage *message = [serverMessages objectAtIndex:indexPath.row];
+    [self setRoomOrStoreChatMembershipId:message.roomId.longValue isStore:false];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -449,6 +481,8 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
 	NSLog(@"didTapCellAtIndexPath %@", NSStringFromCGPoint(touchLocation));
+    GTLStoreendpointChatMessage *message = [serverMessages objectAtIndex:indexPath.row];
+    [self setRoomOrStoreChatMembershipId:message.roomId.longValue isStore:false];
 }
 
 #pragma mark - UIActionSheetDelegate

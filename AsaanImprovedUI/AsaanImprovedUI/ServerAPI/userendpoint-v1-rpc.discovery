@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/7XYe5WE6P5CyBVIGYcdiewhc3FY\"",
+ "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/EDIPKGDXr-mhAvgfYJcf_9s9WAo\"",
  "discoveryVersion": "v1",
  "id": "userendpoint:v1",
  "name": "userendpoint",
@@ -304,6 +304,15 @@
   }
  },
  "methods": {
+  "userendpoint.getCurrentUser": {
+   "id": "userendpoint.getCurrentUser",
+   "returns": {
+    "$ref": "User"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
   "userendpoint.getUserAddresses": {
    "id": "userendpoint.getUserAddresses",
    "returns": {
