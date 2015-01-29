@@ -409,6 +409,18 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     if (menuItemAndStats.stats.orders != nil && menuItemAndStats.stats.orders.longValue > 0)
         cell.todaysOrdersLabels.text = [NSString stringWithFormat:@"Orders: %@", [UtilCalls formattedNumber:menuItemAndStats.stats.orders]];
     
+    long reviewCount = menuItemAndStats.stats.dislikes.longValue + menuItemAndStats.stats.likes.longValue;
+    if (reviewCount > 0)
+    {
+        NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+        [numberFormatter setNumberStyle:NSNumberFormatterPercentStyle];
+        int iPercent = (int)(menuItemAndStats.stats.likes.longValue*100/reviewCount);
+        NSNumber *likePercent = [NSNumber numberWithInt:iPercent];
+        NSString *strReviews = [UtilCalls formattedNumber:[NSNumber numberWithLong:reviewCount]];
+        NSString *strLikePercent = [UtilCalls formattedNumber:likePercent];
+        cell.reviewsLabel.text = [[[strLikePercent stringByAppendingString:@"%("] stringByAppendingString:strReviews] stringByAppendingString:@")"];
+    }
+
     cell.delegate = self;
     cell.itemImageView.tag = rowIndex - indexPath.section - 1;
     

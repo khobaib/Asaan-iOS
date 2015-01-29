@@ -2757,7 +2757,7 @@
                         <viewControllerLayoutGuide type="top" id="huh-O8-9Vv"/>
                         <viewControllerLayoutGuide type="bottom" id="liu-9i-sAp"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ufq-BB-qw4">
+                    <view key="view" contentMode="scaleToFill" id="ufq-BB-qw4" customClass="UIScrollView">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -2886,6 +2886,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="foodReviewSlider" destination="uFJ-Te-Uyl" id="IXR-uV-zKe"/>
+                        <outlet property="scrollView" destination="ufq-BB-qw4" id="M8n-Ot-dsp"/>
                         <outlet property="serviceReviewSlider" destination="BJd-wr-RCN" id="3C7-0b-yUM"/>
                         <outlet property="txtReview" destination="cV3-IG-eOq" id="kw5-ad-MlA"/>
                     </connections>

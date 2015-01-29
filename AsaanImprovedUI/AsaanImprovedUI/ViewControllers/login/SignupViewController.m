@@ -29,13 +29,7 @@
 }
 
 - (IBAction)signup:(id)sender {
-    
-    if (IsEmpty(_txtEmail.text) || IsEmpty(_txtPassword.text)) {
-        UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please Enter Email And Password." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        
-        [alert show];
-        return;
-    }
+    if ([self validateForm] == false) return;
     PFUser *user=[PFUser user];
     user.email = _txtEmail.text;
     user.username = _txtEmail.text;
@@ -56,6 +50,38 @@
             [alert show];
         }
     }];
+}
+
+- (Boolean) validateForm
+{
+    Boolean isFormValid = false;
+    if (IsEmpty(_txtEmail.text) == false)
+        isFormValid = true;
+
+    NSString *stricterFilterString = @"[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}";
+//    NSString *laxString = @".+@([A-Za-z0-9]+\\.)+[A-Za-z]{2}[A-Za-z]*";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", stricterFilterString];
+    isFormValid = [emailTest evaluateWithObject:_txtEmail.text];
+    
+    isFormValid = [_txtEmail.text containsString:@".."];
+    
+    if (isFormValid == false)
+    {
+        UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please Enter a valid Email Address." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        
+        [alert show];
+        return false;
+    }
+    
+    if (_txtPassword.text.length >= 6)
+    {
+        UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please Enter a valid. Passwords must be at least 6 characters." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        
+        [alert show];
+        return false;
+    }
+
+    return true;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

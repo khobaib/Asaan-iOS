@@ -120,10 +120,13 @@
 }
 
 - (IBAction)btnSaveClick:(id)sender {
-    if (IsEmpty(_txtFirstName.text) || IsEmpty(_txtLastName.text) || IsEmpty(_txtPhone.text)){
+    if (IsEmpty(_txtFirstName.text) || IsEmpty(_txtLastName.text) || IsEmpty(_txtPhone.text))
+    {
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please enter the name and phone number" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-    } else {
+    }
+    else
+    {
         PFUser *user=[PFUser currentUser];
         user[@"phone"]=_txtPhone.text;
         user[@"firstName"]=_txtFirstName.text;

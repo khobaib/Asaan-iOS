@@ -73,7 +73,7 @@
     }
     else {
         
-        [[[UIAlertView alloc]initWithTitle:@"Error" message:@"The card number you have enterd is not a valid card number" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+        [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Card number is not valid." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
         return;
     }
 }

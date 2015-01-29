@@ -15,6 +15,7 @@
 @interface MainReviewViewController()
 @property (weak, nonatomic) IBOutlet UISlider *foodReviewSlider;
 @property (weak, nonatomic) IBOutlet UISlider *serviceReviewSlider;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITextView *txtReview;
 @end
 
@@ -22,6 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [super setBaseScrollView:self.scrollView];
     if (self.selectedOrder == nil)
         return;
     [[self.txtReview layer] setBorderColor:[[UIColor grayColor] CGColor]];
@@ -34,6 +36,12 @@
         self.serviceReviewSlider.value = self.reviewAndItems.orderReview.serviceLike.floatValue/100;
         self.txtReview.text = self.reviewAndItems.orderReview.comments;
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    // Prevent keyboard from showing by default
+    [self.view endEditing:YES];
 }
 
 - (IBAction)foodReviewSliderValueChanged:(id)sender
