@@ -25,14 +25,12 @@
 @implementation AppDelegate
 
 - (void)crash {
-//    [NSException raise:NSGenericException format:@"Everything is ok. This is just a test crash."];
+    [NSException raise:NSGenericException format:@"Everything is ok. This is just a test crash."];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     // Enable Crash Reporting
-    NSLog(@"Inside didFinishLaunchingWithOptions 1");
-    
     [ParseCrashReporting enable];
     
     // ****************************************************************************
@@ -76,8 +74,6 @@
                                                         UIUserNotificationTypeSound);
         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
                                                                                  categories:[self createNotificationCategories]];
-//        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
-//                                                                                 categories:nil];
         [application registerUserNotificationSettings:settings];
         [application registerForRemoteNotifications];
     } else
@@ -99,7 +95,6 @@
     [UINavigationBar appearance].shadowImage = [UIImage new];
     [UINavigationBar appearance].titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     
-//[self performSelector:@selector(crash) withObject:nil afterDelay:5.0];
     UILocalNotification *localNotif =
     [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (localNotif) {
@@ -111,6 +106,7 @@
 //    [window addSubview:viewController.view];
 //    [window makeKeyAndVisible];
 
+//    [self performSelector:@selector(crash) withObject:nil afterDelay:10.0];
     return YES;
 }
 
@@ -132,7 +128,7 @@
 //    [viewController displayItem:itemName];  // custom method
     app.applicationIconBadgeNumber = notification.applicationIconBadgeNumber - 1;
     
-#warning QUERY : Should we increase badge value of slidin-icon on receiving Local Notificaion?
+#warning QUERY : Should we increase badge value of sliding-icon on receiving Local Notification?
     [[NSNotificationCenter defaultCenter] postNotificationName:BBBadgeIncreaseNotification object:self userInfo:@{BBUserInfoBadgeKey : [NSNumber numberWithInteger:app.applicationIconBadgeNumber]}];
 }
 
@@ -239,10 +235,9 @@
     [PFPush storeDeviceToken:newDeviceToken];
     [PFPush subscribeToChannelInBackground:@"" target:self selector:@selector(subscribeFinished:error:)];
     
-#warning TODO
-//    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
-//    [currentInstallation setDeviceTokenFromData:newDeviceToken];
-//    [currentInstallation saveInBackground];
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:newDeviceToken];
+    [currentInstallation saveInBackground];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
@@ -262,7 +257,7 @@
         [PFAnalytics trackAppOpenedWithRemoteNotificationPayload:userInfo];
     }
     
-#warning QUERY : Should we increase badge value of slidin-icon on receiving Local Notificaion?
+#warning QUERY : Should we increase badge value of sliding-icon on receiving Local Notification?
     [[NSNotificationCenter defaultCenter] postNotificationName:BBBadgeIncreaseNotification object:self userInfo:@{BBUserInfoBadgeKey : [NSNumber numberWithInteger:application.applicationIconBadgeNumber]}];
 }
 

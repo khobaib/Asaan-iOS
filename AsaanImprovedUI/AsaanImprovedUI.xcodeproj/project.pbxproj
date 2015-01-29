@@ -277,6 +277,7 @@
 		D4828D1C1A78A25A00C80E92 /* GTLStoreendpointChatUserArray.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828D1B1A78A25A00C80E92 /* GTLStoreendpointChatUserArray.m */; };
 		D4828D211A79313400C80E92 /* GTLStoreendpointStoreChatTeam.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828D1E1A79313400C80E92 /* GTLStoreendpointStoreChatTeam.m */; };
 		D4828D221A79313400C80E92 /* GTLStoreendpointStoreChatTeamCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828D201A79313400C80E92 /* GTLStoreendpointStoreChatTeamCollection.m */; };
+		D4828D241A7AA4D000C80E92 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4828D231A7AA4D000C80E92 /* Accounts.framework */; };
 		D49A3ABB1A267F49008BC180 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = D49A3ABA1A267F49008BC180 /* back.png */; };
 		D49A3ABF1A26C450008BC180 /* RetrievePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D49A3ABD1A26C450008BC180 /* RetrievePasswordViewController.m */; };
 		D49A3AC01A26C450008BC180 /* StartupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D49A3ABE1A26C450008BC180 /* StartupViewController.m */; };
@@ -837,6 +838,7 @@
 		D4828D1E1A79313400C80E92 /* GTLStoreendpointStoreChatTeam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreChatTeam.m; sourceTree = "<group>"; };
 		D4828D1F1A79313400C80E92 /* GTLStoreendpointStoreChatTeamCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreChatTeamCollection.h; sourceTree = "<group>"; };
 		D4828D201A79313400C80E92 /* GTLStoreendpointStoreChatTeamCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreChatTeamCollection.m; sourceTree = "<group>"; };
+		D4828D231A7AA4D000C80E92 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		D49A3ABA1A267F49008BC180 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		D49A3ABC1A26C450008BC180 /* RetrievePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RetrievePasswordViewController.h; sourceTree = "<group>"; };
 		D49A3ABD1A26C450008BC180 /* RetrievePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RetrievePasswordViewController.m; sourceTree = "<group>"; };
@@ -1000,6 +1002,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4828D241A7AA4D000C80E92 /* Accounts.framework in Frameworks */,
 				D4828CBE1A71ADE500C80E92 /* libxml2.2.dylib in Frameworks */,
 				D4828CBF1A71ADE500C80E92 /* libxml2.dylib in Frameworks */,
 				D4828CBB1A71ADD200C80E92 /* libz.dylib in Frameworks */,
@@ -2157,6 +2160,7 @@
 		EFEC7E676E0C2F9960DA289C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D4828D231A7AA4D000C80E92 /* Accounts.framework */,
 				D4828CBC1A71ADE500C80E92 /* libxml2.2.dylib */,
 				D4828CBD1A71ADE500C80E92 /* libxml2.dylib */,
 				D4828CBA1A71ADD200C80E92 /* libz.dylib */,
@@ -2332,7 +2336,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "";
+			shellScript = "export PATH=/usr/local/bin:$PATH\ncd $SRCROOT/AsaanImprovedUI/parse\n\nparse symbols \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
