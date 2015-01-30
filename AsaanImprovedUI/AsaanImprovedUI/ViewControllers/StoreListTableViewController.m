@@ -314,7 +314,7 @@
     frontController.parentNavigationController = self.navigationController;
     frontController.selectedStore = self.selectedStore.store;
     
-    frontController.selectedIndex = 1;
+    frontController.selectedIndex = 0;
     
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     [self.navigationController pushViewController:frontController animated:YES];

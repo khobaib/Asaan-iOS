@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="eRi-F6-0Pv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="eRi-F6-0Pv">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -1700,7 +1700,7 @@
                         </variation>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Title" id="E6n-DN-QZx"/>
+                    <navigationItem key="navigationItem" title="Order Summary" id="E6n-DN-QZx"/>
                     <connections>
                         <outlet property="btnAdd" destination="bD4-eq-fWS" id="4Rc-fJ-TkA"/>
                         <outlet property="btnEdit" destination="OEu-kb-Tan" id="8Hn-dd-hvL"/>
@@ -2513,7 +2513,7 @@
                         </connections>
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" id="2wu-v9-CMB"/>
+                    <navigationItem key="navigationItem" title="Order History" id="2wu-v9-CMB"/>
                     <connections>
                         <outlet property="tableView" destination="PdL-5D-4Wz" id="OqL-ad-AfM"/>
                         <segue destination="ZfF-w1-b3Z" kind="show" identifier="segueOrderHistoryToOrderSummary" id="8Xm-md-ZzJ"/>
@@ -2752,7 +2752,7 @@
         <!--ReviewMainViewController-->
         <scene sceneID="b8a-7e-S7D">
             <objects>
-                <viewController storyboardIdentifier="ReviewMainViewController" id="F9B-8I-GN3" userLabel="ReviewMainViewController" customClass="MainReviewViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ReviewMainViewController" extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" id="F9B-8I-GN3" userLabel="ReviewMainViewController" customClass="MainReviewViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="huh-O8-9Vv"/>
                         <viewControllerLayoutGuide type="bottom" id="liu-9i-sAp"/>
@@ -2876,6 +2876,7 @@
                             </mask>
                         </variation>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="How was Kama Bistro?" id="RU8-Nh-RoR">
                         <barButtonItem key="rightBarButtonItem" title="Next" id="qeo-P3-Djx">
                             <connections>
