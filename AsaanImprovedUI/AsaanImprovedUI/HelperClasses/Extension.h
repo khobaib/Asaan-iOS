@@ -57,6 +57,7 @@
 - (NSString *)urlEncodeUsingEncoding:(NSStringEncoding)encoding;
 - (BOOL)isNotEmpty;
 - (BOOL)isNotEmptyAndNotNull;
+- (BOOL)customContainsString:(NSString*)other;
 
 @end
 

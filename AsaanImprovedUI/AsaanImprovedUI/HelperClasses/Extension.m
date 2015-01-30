@@ -180,6 +180,11 @@
     }
 }
 
+- (BOOL)customContainsString:(NSString*)other {
+    NSRange range = [self rangeOfString:other];
+    return range.length != 0;
+}
+
 @end
 
 #pragma mark - NSNumber

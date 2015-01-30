@@ -11,6 +11,7 @@
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import "InlineCalls.h"
 #import "MBProgressHUD.h"
+#import "Extension.h"
 
 @interface SignupViewController () <UITextFieldDelegate>
 
@@ -63,7 +64,8 @@
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", stricterFilterString];
     isFormValid = [emailTest evaluateWithObject:_txtEmail.text];
     
-    isFormValid = [_txtEmail.text containsString:@".."];
+//    isFormValid = [_txtEmail.text containsString:@".."];
+//    isFormValid = [_txtEmail.text customContainsString:@".."];
     
     if (isFormValid == false)
     {
