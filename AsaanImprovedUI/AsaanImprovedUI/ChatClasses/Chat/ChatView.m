@@ -26,7 +26,7 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 @interface ChatView()
 {
-//	NSTimer *timer;
+	NSTimer *timer;
 	BOOL isLoading;
 
 	NSMutableArray *users;
@@ -121,7 +121,7 @@
 	[super viewDidAppear:animated];
     self.tabBarItem.title = @"Message";
 	self.collectionView.collectionViewLayout.springinessEnabled = YES;
-//	timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(loadMessages) userInfo:nil repeats:YES];
+	timer = [NSTimer scheduledTimerWithTimeInterval:15.0 target:self selector:@selector(loadMessages) userInfo:nil repeats:YES];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -129,7 +129,7 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
 	[super viewWillDisappear:animated];
-//	[timer invalidate];
+	[timer invalidate];
 }
 
 #pragma mark - Backend methods

@@ -47,6 +47,13 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if (self.selectedStore == nil)
+        [UtilCalls getSlidingMenuBarButtonSetupWith:self];
+}
+
 - (void)setupOrderHistoryData {
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];

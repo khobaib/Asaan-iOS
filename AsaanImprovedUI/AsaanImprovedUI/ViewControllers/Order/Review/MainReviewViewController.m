@@ -15,27 +15,32 @@
 @interface MainReviewViewController()
 @property (weak, nonatomic) IBOutlet UISlider *foodReviewSlider;
 @property (weak, nonatomic) IBOutlet UISlider *serviceReviewSlider;
-@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITextView *txtReview;
+@property (weak, nonatomic) IBOutlet UIScrollView *reviewScrollView;
 @end
 
 @implementation MainReviewViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [super setBaseScrollView:self.scrollView];
+    [super setBaseScrollView:self.reviewScrollView];
     if (self.selectedOrder == nil)
         return;
     [[self.txtReview layer] setBorderColor:[[UIColor grayColor] CGColor]];
     [[self.txtReview layer] setBorderWidth:2.3];
     [[self.txtReview layer] setCornerRadius:15];
     
-    if (self.reviewAndItems != nil)
-    {
+    self.txtReview.text = self.reviewAndItems.orderReview.comments;
+    if (self.reviewAndItems == nil || self.reviewAndItems.orderReview.foodLike.longValue == 0)
+        self.foodReviewSlider.value = 1.5;
+    else
         self.foodReviewSlider.value = self.reviewAndItems.orderReview.foodLike.floatValue/100;
+    if (self.reviewAndItems == nil || self.reviewAndItems.orderReview.serviceLike.longValue == 0)
+        self.serviceReviewSlider.value = 1.5;
+    else
         self.serviceReviewSlider.value = self.reviewAndItems.orderReview.serviceLike.floatValue/100;
-        self.txtReview.text = self.reviewAndItems.orderReview.comments;
-    }
+    
+    self.navigationItem.title = [NSString stringWithFormat:@"How was %@?", self.selectedOrder.storeName];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

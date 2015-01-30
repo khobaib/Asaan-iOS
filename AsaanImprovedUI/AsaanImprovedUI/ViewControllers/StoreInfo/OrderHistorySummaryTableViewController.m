@@ -16,6 +16,7 @@
 #import "MBProgressHUD.h"
 #import "AppDelegate.h"
 #import "MainReviewViewController.h"
+#import "Constants.h"
 
 @interface OrderHistorySummaryTableViewController ()
 @property (nonatomic, strong) NSMutableArray *finalItems;
@@ -71,9 +72,15 @@
              {
                  weakSelf.reviewAndItems = object;
                  if ([self orderHasAlreadyBeenReviewed] == false)
+                 {
                      weakSelf.navigationItem.rightBarButtonItem.title = @"Review";
+                     weakSelf.navigationItem.rightBarButtonItem.enabled = true;
+                 }
                  else
+                 {
                      weakSelf.navigationItem.rightBarButtonItem.title = @"";
+                     weakSelf.navigationItem.rightBarButtonItem.enabled = false;
+                 }
                  [weakSelf.tableView reloadData];
              }else{
                  NSLog(@"getOrderReview Error:%@",[error userInfo]);
@@ -107,9 +114,9 @@
     {
         if (itemReview.menuItemPOSId.intValue == menuItemPOSId)
         {
-            if (itemReview.itemLike.shortValue <= 40)
+            if (itemReview.itemLike.shortValue <= 140)
                 return self.imgDislike;
-            if (itemReview.itemLike.shortValue >= 60)
+            if (itemReview.itemLike.shortValue >= 160)
                 return self.imgLike;
         }
     }
@@ -353,14 +360,14 @@
     txtReview.text = nil;
     txtReview.editable = false;
     
-    if (self.reviewAndItems.orderReview.foodLike.shortValue <= 40)
+    if (self.reviewAndItems.orderReview.foodLike.shortValue <= 140)
         imgFoodLike.image = self.imgDislike;
-    else if (self.reviewAndItems.orderReview.foodLike.shortValue >= 60)
+    else if (self.reviewAndItems.orderReview.foodLike.shortValue >= 160)
         imgFoodLike.image = self.imgLike;
     
-    if (self.reviewAndItems.orderReview.serviceLike.shortValue <= 40)
+    if (self.reviewAndItems.orderReview.serviceLike.shortValue <= 140)
         imgServiceLike.image = self.imgDislike;
-    else if (self.reviewAndItems.orderReview.serviceLike.shortValue >= 60)
+    else if (self.reviewAndItems.orderReview.serviceLike.shortValue >= 160)
         imgServiceLike.image = self.imgLike;
     
     txtReview.text = self.reviewAndItems.orderReview.comments;

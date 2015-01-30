@@ -166,13 +166,17 @@
     UILabel *txtMenuItemName = (UILabel *)[cell viewWithTag:501];
     UISlider *sliderReview = (UISlider *)[cell viewWithTag:502];
     txtMenuItemName.text = nil;
-    sliderReview.value = 0.5;
+    sliderReview.value = 1.5;
 
     OrderItemSummaryFromPOS *item = [self.finalItems objectAtIndex:indexPath.row];
     if (item != nil)
     {
         sliderReview.tag = indexPath.row;
         txtMenuItemName.text = item.name;
+        if (item.like == 0)
+            sliderReview.value = 1.5;
+        else
+            sliderReview.value = [NSNumber numberWithLong:item.like].floatValue/100;
         [sliderReview addTarget:self action:@selector(reviewSliderValueChanged:) forControlEvents:UIControlEventValueChanged];
     }
     
