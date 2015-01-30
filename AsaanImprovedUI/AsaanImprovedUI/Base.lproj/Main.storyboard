@@ -2839,6 +2839,9 @@
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                         <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="F9B-8I-GN3" id="cgi-gE-41s"/>
+                                        </connections>
                                     </textView>
                                 </subviews>
                                 <constraints>

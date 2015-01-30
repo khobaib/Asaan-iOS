@@ -75,9 +75,19 @@
     [_baseScrollView layoutSubviews];
 }
 
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    
+    activeTextView = textView;
+}
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     activeField = textField;
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    
+    activeTextView = nil;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
@@ -111,6 +121,10 @@
     aRect.size.height -= _keyboardHeight;
     if (!CGRectContainsPoint(aRect, activeField.frame.origin) ) {
         [_baseScrollView scrollRectToVisible:activeField.frame animated:YES];
+    }
+    
+    if (!CGRectContainsPoint(aRect, activeTextView.frame.origin) ) {
+        [_baseScrollView scrollRectToVisible:activeTextView.frame animated:YES];
     }
 }
 

@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BaseViewController : UIViewController<UITextFieldDelegate>{
+@interface BaseViewController : UIViewController<UITextFieldDelegate, UITextViewDelegate>{
     UITextField *activeField;
+    UITextView *activeTextView;
 }
     @property(weak, nonatomic) UIScrollView* baseScrollView;
 
