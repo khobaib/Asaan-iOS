@@ -29,4 +29,6 @@
 
 @property (weak, nonatomic) IBOutlet id<MenuItemCellDelegate> delegate;
 
+@property (strong, nonatomic) NSIndexPath *indexPath;
+
 @end
