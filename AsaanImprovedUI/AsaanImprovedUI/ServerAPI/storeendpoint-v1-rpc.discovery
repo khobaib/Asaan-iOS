@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/cgiwCqouuXVNPMPXmTw2tUvTMLw\"",
+ "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/tZEUznKtI9noTKGMgPDlfB4GnHM\"",
  "discoveryVersion": "v1",
  "id": "storeendpoint:v1",
  "name": "storeendpoint",
@@ -411,11 +411,18 @@
     "city": {
      "type": "string"
     },
+    "claimed": {
+     "type": "boolean"
+    },
     "createdDate": {
      "type": "string",
      "format": "int64"
     },
     "deliveryDistance": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "deliveryFee": {
      "type": "integer",
      "format": "int32"
     },
@@ -469,6 +476,9 @@
     "providesDelivery": {
      "type": "boolean"
     },
+    "providesPreOrder": {
+     "type": "boolean"
+    },
     "rewardsDescription": {
      "type": "string"
     },
@@ -484,6 +494,12 @@
     },
     "subType": {
      "type": "string"
+    },
+    "supportsChat": {
+     "type": "boolean"
+    },
+    "supportsReservation": {
+     "type": "boolean"
     },
     "trophies": {
      "type": "array",

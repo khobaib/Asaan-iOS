@@ -120,9 +120,9 @@
 }
 
 - (IBAction)btnSaveClick:(id)sender {
-    if (IsEmpty(_txtFirstName.text) || IsEmpty(_txtLastName.text) || IsEmpty(_txtPhone.text))
+    if (IsEmpty(_txtFirstName.text) || IsEmpty(_txtLastName.text) || IsEmpty(_txtPhone.text) || _txtPhone.text.length < 10)
     {
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please enter the name and phone number" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please enter name and phone number" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }
     else

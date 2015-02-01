@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStore (0 custom class methods, 33 custom properties)
+//   GTLStoreendpointStore (0 custom class methods, 38 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLObject.h"
@@ -33,8 +33,10 @@
 @property (retain) NSNumber *beaconId;  // longLongValue
 @property (copy) NSString *bssid;
 @property (copy) NSString *city;
+@property (retain) NSNumber *claimed;  // boolValue
 @property (retain) NSNumber *createdDate;  // longLongValue
 @property (retain) NSNumber *deliveryDistance;  // intValue
+@property (retain) NSNumber *deliveryFee;  // intValue
 
 // Remapped to 'descriptionProperty' to avoid NSObject's 'description'.
 @property (copy) NSString *descriptionProperty;
@@ -56,11 +58,14 @@
 @property (retain) NSNumber *priceRange;  // intValue
 @property (retain) NSNumber *providesCarryout;  // boolValue
 @property (retain) NSNumber *providesDelivery;  // boolValue
+@property (retain) NSNumber *providesPreOrder;  // boolValue
 @property (copy) NSString *rewardsDescription;
 @property (retain) NSNumber *rewardsRate;  // intValue
 @property (copy) NSString *ssid;
 @property (copy) NSString *state;
 @property (copy) NSString *subType;
+@property (retain) NSNumber *supportsChat;  // boolValue
+@property (retain) NSNumber *supportsReservation;  // boolValue
 @property (retain) NSArray *trophies;  // of NSString
 @property (copy) NSString *twitterUrl;
 @property (copy) NSString *type;
