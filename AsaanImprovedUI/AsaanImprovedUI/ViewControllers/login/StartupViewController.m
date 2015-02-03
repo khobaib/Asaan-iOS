@@ -11,6 +11,7 @@
 #import "MBProgressHUD.h"
 #import "InlineCalls.h"
 #import "UIColor+AsaanGoldColor.h"
+#import "SignupProfileViewController.h"
 
 @interface StartupViewController ()
 {
@@ -46,11 +47,13 @@
 
     NSArray *permissions=@[@"public_profile", @"user_friends",@"email"];
     
+    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.labelText = @"Please Wait";
     hud.hidden=NO;
     [PFFacebookUtils logInWithPermissions:permissions block:^(PFUser *user, NSError *error) {
-        hud.hidden=YES;
+        
+        [hud hide:YES];
         if (!user) {
             UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
@@ -62,9 +65,12 @@
     }];
 
 }
+
 - (void)_loadData {
+    
+    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
-    hud.labelText = @"Please Wait";
+    hud.labelText = @"Gathering information from Facebook\nplease wait ...";
     
     FBRequest *request = [FBRequest requestForMe];
     
@@ -83,21 +89,24 @@
             user.username = user.email = userData[@"email"];
             
             [user saveInBackgroundWithBlock:^(BOOL complete,NSError *error){
-                hud.hidden=YES;
+                
+                [hud hide:YES];
                 if (!error){
                     NSString *strPhone = user[@"phone"];
                     if (IsEmpty(strPhone)){
                         [self performSegueWithIdentifier:@"segueStartupToPhoneFB" sender:self];
                     }
-                    else
-                        [self dismissViewControllerAnimated:YES completion:Nil];
+                    else {
+                        [self performSegueWithIdentifier:@"segueStartupToStoreList" sender:self];
+                    }
                 } else {
                     UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK"     otherButtonTitles:nil];
                     [alert show];
                 }
             }];
         }else{
-            hud.hidden=YES;
+            
+            [hud hide:YES];
             UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
         }

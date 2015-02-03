@@ -27,6 +27,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationItem.leftBarButtonItem = nil;
+    self.navigationItem.hidesBackButton = YES;
+    
     [super setBaseScrollView:_signupProfileScrollView];
     
     self.btnPhoto.layer.cornerRadius = self.btnPhoto.frame.size.width / 2;

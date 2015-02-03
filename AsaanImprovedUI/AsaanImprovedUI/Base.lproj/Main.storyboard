@@ -2051,7 +2051,7 @@
                         <viewControllerLayoutGuide type="bottom" id="8qz-5F-WwL"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="aru-Am-z8a">
-                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -3414,9 +3414,11 @@
                     </view>
                     <connections>
                         <segue destination="iob-Jr-Zqf" kind="show" identifier="segueStartupToPhoneFB" id="t2R-Le-XNf"/>
+                        <segue destination="4jT-di-mDu" kind="unwind" identifier="segueStartupToStoreList" unwindAction="unwindToStoreList:" id="u7p-zV-uZu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Skk-2e-Ynb" sceneMemberID="firstResponder"/>
+                <exit id="4jT-di-mDu" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-561" y="2686"/>
         </scene>
