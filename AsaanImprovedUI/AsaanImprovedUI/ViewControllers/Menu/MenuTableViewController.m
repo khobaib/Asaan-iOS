@@ -507,12 +507,6 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
 {
     return self.cellHeight;
 }
-//
-//
-//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return UITableViewAutomaticDimension;
-//}
 
 #pragma mark -
 #pragma mark === MWPhotoBrowserDelegate ===
@@ -564,7 +558,6 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
         section += 1;
     }
     
-    //    GTLStoreendpointStoreMenuHierarchy *submenu = [menuSegmentHolder.subMenus objectAtIndex:section];
     NSInteger rowIndex = section + index + 1;
     id dataObject = menuSegmentHolder.provider.dataObjects[rowIndex];
     if ([dataObject isKindOfClass:[NSNull class]])
@@ -613,7 +606,6 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
         section += 1;
     }
     
-    //    GTLStoreendpointStoreMenuHierarchy *submenu = [menuSegmentHolder.subMenus objectAtIndex:section];
     NSInteger rowIndex = section + index + 1;
     id dataObject = menuSegmentHolder.provider.dataObjects[rowIndex];
     if ([dataObject isKindOfClass:[NSNull class]])
@@ -678,9 +670,12 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
 //    captionView.textLikes = @"1800";
     
 #warning These are needed to enable/disable order button
-    captionView.index = index;
-    captionView.delegate = self;
-    captionView.enabledOrderButton = true;
+    if (self.bMenuIsInOrderMode) // Menu is in Order Mode
+    {
+        captionView.index = index;
+        captionView.delegate = self;
+        captionView.enabledOrderButton = true;
+    }
     
     return captionView;
 }
