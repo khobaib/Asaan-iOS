@@ -619,6 +619,9 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     if ([dataObject isKindOfClass:[NSNull class]])
         return nil;
     
+    // Selected Item
+    self.selectedMenuItem = dataObject;
+    
     GTLStoreendpointMenuItemAndStats *menuItemAndStats = dataObject;
     MWPhoto *photo = nil;
     
@@ -637,8 +640,6 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     NSString *string = menuItemAndStats.menuItem.shortDescription;
     if (string && ![string isEqualToString:@""]) {
         captionView.textTitle = string;
-        
-        //        captionView.textTitle = [NSString stringWithFormat:@"stringstringstringstringstringstring stringstringstringstring kjkljakjlkfjalkjlkjf \n jlkajlkdjfkj"];
     }
     
     string = [UtilCalls amountToString:menuItemAndStats.menuItem.price];
@@ -711,70 +712,16 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     [browser showNextPhotoAnimated:YES];
     [browser showPreviousPhotoAnimated:YES];
     [browser setCurrentPhotoIndex:sender.tag];
-    
-    // Selected Item
-    MenuSegmentHolder *menuSegmentHolder;
-    if (_menuSegmentHolders.count > 1)
-        menuSegmentHolder = [_menuSegmentHolders objectAtIndex:_segmentedControl.selectedSegmentIndex];
-    else
-        menuSegmentHolder = [_menuSegmentHolders firstObject];
-    
-    GTLStoreendpointStoreMenuHierarchy *submenu = [menuSegmentHolder.subMenus objectAtIndex:menuItemCell.indexPath.section];
-    NSInteger rowIndex = submenu.menuItemPosition.intValue + menuItemCell.indexPath.row + 1;
-    
-    id dataObject = menuSegmentHolder.provider.dataObjects[rowIndex];
-    if (![dataObject isKindOfClass:[NSNull class]])
-    {
-        self.selectedMenuItem = dataObject;
-//        [self performSegueWithIdentifier:@"segueMenuToModifierGroup" sender:self];
-    }
 }
 
 #pragma mark -
 #pragma mark === MenuMWCaptionViewDelegate ===
 #pragma mark -
 
-- (IBAction)addToOrder:(id)sender
-{
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    OnlineOrderDetails *orderInProgress = appDelegate.globalObjectHolder.orderInProgress;
-    
-//    if (self.bInEditMode == YES)
-//    {
-//        orderInProgress.specialInstructions = self.txtSpecialInstructions.text;
-//        [orderInProgress.selectedMenuItems replaceObjectAtIndex:self.selectedIndex withObject:self.onlineOrderSelectedMenuItem];
-//        [self performSegueWithIdentifier:@"unwindModifierGroupToOrderSummary" sender:self];
-//        return;
-//    }
-    
-    if (orderInProgress == nil)
-    {
-        orderInProgress = [appDelegate.globalObjectHolder createOrderInProgress];
-        orderInProgress.selectedStore = self.selectedStore;//_onlineOrderSelectedMenuItem.selectedStore;
-        orderInProgress.orderType = self.orderType;
-        orderInProgress.orderTime = self.orderTime;
-        orderInProgress.partySize = self.partySize;
-        orderInProgress.specialInstructions = @"";//self.txtSpecialInstructions.text;
-        [orderInProgress.selectedMenuItems addObject:self.selectedMenuItem];
-//        [self performSegueWithIdentifier:@"segueunwindModifierGroupToMenu" sender:self];
-        
-    }
-//    else
-//    {
-//        orderInProgress.specialInstructions = self.txtSpecialInstructions.text;
-//        [orderInProgress.selectedMenuItems addObject:self.onlineOrderSelectedMenuItem];
-//        [self performSegueWithIdentifier:@"segueunwindModifierGroupToMenu" sender:self];
-//    }
-    
-    NSArray *viewConrollers = [self.navigationController viewControllers];
-    [self.navigationController popToViewController:[viewConrollers objectAtIndex:[viewConrollers count]-2] animated:YES];
-}
-
 #warning Use this to go to ordercontroller and here 'index' starts from 0;
 - (void)menuMWCaptionView:(MenuMWCaptionView *)menuMWCaptionView didClickedOrderButtonAtIndex:(NSUInteger)index {
     
-    NSLog(@"Tapped order button at index : %lu", (unsigned long)index);
-//    [self addToOrder:self];
+//    NSLog(@"Tapped order button at index : %lu", (unsigned long)index);
     
     [self performSegueWithIdentifier:@"segueMenuToModifierGroup" sender:self];
 }
