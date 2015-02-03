@@ -27,6 +27,7 @@
 #import "InlineCalls.h"
 #import "GTLStoreendpointAsaanLongString.h"
 #import "UtilCalls.h"
+#import "NotificationUtils.h"
 
 @interface OrderSummaryViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -167,7 +168,7 @@
     
     __weak __typeof(self) weakSelf = self;
     GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreMenuItem *object,NSError *error)
+    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreOrder *object,NSError *error)
     {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         
@@ -179,6 +180,8 @@
             [appDelegate.globalObjectHolder removeOrderInProgress];
             UIAlertView *alert=[[UIAlertView alloc]initWithTitle:title message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
             [alert show];
+            NotificationUtils *notificationUtils = [[NotificationUtils alloc]init];
+            [notificationUtils scheduleNotificationWithOrder:object];
             [weakSelf performSegueWithIdentifier:@"segueUnwindOrderSummaryToStoreList" sender:weakSelf];
         }
         else
@@ -191,6 +194,7 @@
         }
     }];
 }
+
 - (IBAction)cancelOrder:(id)sender
 {
     __weak __typeof(self) weakSelf = self;
@@ -291,7 +295,10 @@
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
         [self.orderInProgress.selectedMenuItems removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        if (self.orderInProgress.selectedMenuItems.count > 0)
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        else
+            [tableView reloadData];
     }
 }
 - (NSUInteger)subTotalNoDiscount

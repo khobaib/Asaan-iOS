@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStore (0 custom class methods, 38 custom properties)
+//   GTLStoreendpointStore (0 custom class methods, 39 custom properties)
 
 #import "GTLStoreendpointStore.h"
 
@@ -26,8 +26,8 @@
 @dynamic address, backgroundImageUrl, backgroundThumbnailUrl, beaconId, bssid,
          city, claimed, createdDate, deliveryDistance, deliveryFee,
          descriptionProperty, executiveChef, fbUrl, gplusUrl, hours, identifier,
-         isActive, lat, lng, modifiedDate, name, phone, priceRange,
-         providesCarryout, providesDelivery, providesPreOrder,
+         isActive, lat, lng, minOrderAmtForDelivery, modifiedDate, name, phone,
+         priceRange, providesCarryout, providesDelivery, providesPreOrder,
          rewardsDescription, rewardsRate, ssid, state, subType, supportsChat,
          supportsReservation, trophies, twitterUrl, type, webSiteUrl, zip;
 

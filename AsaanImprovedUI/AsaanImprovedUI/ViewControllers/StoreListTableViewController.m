@@ -136,33 +136,6 @@
         UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:button];
         self.navigationItem.rightBarButtonItem = item;
     }
-    
-    NSNumber *number = [NSNumber numberWithLong:125l];
-    
-    [self scheduleNotificationWithItem:number interval:10];
-}
-
-- (void)scheduleNotificationWithItem:(NSNumber *)item interval:(int)seconds {
-    UILocalNotification *localNotif = [[UILocalNotification alloc] init];
-    if (localNotif == nil)
-        return;
-    NSDate *date = [NSDate date];
-    localNotif.fireDate = [date dateByAddingTimeInterval:seconds];
-    localNotif.timeZone = [NSTimeZone defaultTimeZone];
-    
-    localNotif.alertBody = @"How was Kama Bistro?";
-    localNotif.alertAction = NSLocalizedString(@"Review", nil);
-    
-    localNotif.soundName = UILocalNotificationDefaultSoundName;
-    localNotif.applicationIconBadgeNumber = 1;
-    
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
-        localNotif.category = @"REVIEW_CATEGORY";
-
-    NSDictionary *infoDict = [NSDictionary dictionaryWithObject:item forKey:@"REVIEW_ORDER"];
-    localNotif.userInfo = infoDict;
-    
-    [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -251,12 +224,12 @@
         if (storeAndStats.stats.visits.longValue > 0)
         {
             NSString *strVisitCount = [UtilCalls formattedNumber:storeAndStats.stats.visits];
-            NSString *str = [NSString stringWithFormat:@"Serves: %@+ per Wk", strVisitCount];
+            NSString *str = [NSString stringWithFormat:@"Serves: %@ per Wk", strVisitCount];
             NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
             
             // Set font, notice the range is for the whole string
             UIFont *font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
-            [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(8, [strVisitCount length]+1)]; // extend larger font to "+" as well
+            [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(8, [strVisitCount length])];
             [cell.visitLabel setAttributedText:attributedString];
             cell.statsView.hidden = false;
         }
@@ -268,9 +241,15 @@
             [numberFormatter setNumberStyle:NSNumberFormatterPercentStyle];
             int iPercent = (int)(storeAndStats.stats.likes.longValue*100/reviewCount);
             NSNumber *likePercent = [NSNumber numberWithInt:iPercent];
-            NSString *strReviews = [UtilCalls formattedNumber:[NSNumber numberWithLong:reviewCount]];
+            NSString *strReviewCount = [UtilCalls formattedNumber:[NSNumber numberWithLong:reviewCount/2]];
             NSString *strLikePercent = [UtilCalls formattedNumber:likePercent];
-            cell.likeLabel.text = [[[strLikePercent stringByAppendingString:@"%("] stringByAppendingString:strReviews] stringByAppendingString:@")"];
+            NSString *strLike = [NSString stringWithFormat:@"Likes: %@%% (%@)", strLikePercent, strReviewCount];
+            
+            // Set font, notice the range is for the whole string
+            UIFont *font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
+            NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:strLike];
+            [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(7, [strLikePercent length])];
+            [cell.likeLabel setAttributedText:attributedString];
             cell.statsView.hidden = false;
         }
         //

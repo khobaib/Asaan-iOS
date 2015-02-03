@@ -7,6 +7,7 @@
 //
 @import CoreLocation;
 #import <UIKit/UIKit.h>
+#import "GTLStoreendpointOrderReviewAndItemReviews.h"
 
 @interface UtilCalls : NSObject
 
@@ -22,5 +23,6 @@
 + (NSNumber *) stringToNumber:(NSString*)string;
 
 + (NSString *) getAuthTokenForCurrentUser;
++ (Boolean) orderHasAlreadyBeenReviewed:(GTLStoreendpointOrderReviewAndItemReviews *)reviewAndItems;
 
 @end

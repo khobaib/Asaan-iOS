@@ -329,11 +329,11 @@ static const CGFloat orderButtonHeight = 30;
     [_orderButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
     [_orderButton setTitleColor:[UIColor grayColor] forState:UIControlStateSelected];
     [_orderButton addTarget:self action:@selector(tappedOrderButton:) forControlEvents:UIControlEventTouchUpInside];
-    
-    CALayer *layer = _orderButton.layer;
-    layer.borderColor = [UIColor goldColor].CGColor;
-    layer.borderWidth = 2;
-    layer.cornerRadius = 5;
+//    
+//    CALayer *layer = _orderButton.layer;
+//    layer.borderColor = [UIColor goldColor].CGColor;
+//    layer.borderWidth = 2;
+//    layer.cornerRadius = 5;
     
     [self addSubview:_orderButton];
 }

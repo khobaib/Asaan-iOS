@@ -11,6 +11,7 @@
 #import "BBBadgeBarButtonItem.h"
 #import <Parse/Parse.h>
 #import "AppDelegate.h"
+#import "InlineCalls.h"
 
 @interface UtilCalls()
 @end
@@ -148,6 +149,19 @@
         return authToken;
     }
     return nil;
+}
+
++ (Boolean) orderHasAlreadyBeenReviewed:(GTLStoreendpointOrderReviewAndItemReviews *)reviewAndItems
+{
+    if (reviewAndItems == nil || reviewAndItems.orderReview == nil)
+        return false;
+    
+    if ((reviewAndItems.itemReviews == nil || reviewAndItems.itemReviews.count == 0) &&
+        (reviewAndItems.orderReview.foodLike.shortValue == 0 && reviewAndItems.orderReview.serviceLike.shortValue == 0 &&
+         IsEmpty(reviewAndItems.orderReview.comments) == true))
+        return false;
+    
+    return true;
 }
 
 @end

@@ -10,6 +10,7 @@
 #import <Foundation/Foundation.h>
 #import "GTMHTTPFetcher.h"
 #import "AppDelegate.h"
+#import "UtilCalls.h"
 
 @interface OrderForStoreLoadingOperation()
 @property (nonatomic) Boolean bDataLoaded;
@@ -37,6 +38,9 @@ const NSTimeInterval DataLoadingOperationDuration2_1 = 0.3;
             AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
             GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
             GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreOrdersForCurrentUserAndStoreWithStoreId:storeId firstPosition:firstPosition maxResult:maxResult];
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+            dic[USER_AUTH_TOKEN_HEADER_NAME] = [UtilCalls getAuthTokenForCurrentUser];
+            [query setAdditionalHTTPHeaders:dic];
             
             [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreOrderListAndCount *object,NSError *error){
                 if(!error)

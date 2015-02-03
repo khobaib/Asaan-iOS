@@ -17,6 +17,7 @@
 #import "AppDelegate.h"
 #import "MainReviewViewController.h"
 #import "Constants.h"
+#import "UtilCalls.h"
 
 @interface OrderHistorySummaryTableViewController ()
 @property (nonatomic, strong) NSMutableArray *finalItems;
@@ -71,7 +72,7 @@
              if(!error)
              {
                  weakSelf.reviewAndItems = object;
-                 if ([self orderHasAlreadyBeenReviewed] == false)
+                 if ([UtilCalls orderHasAlreadyBeenReviewed:weakSelf.reviewAndItems] == false)
                  {
                      weakSelf.navigationItem.rightBarButtonItem.title = @"Review";
                      weakSelf.navigationItem.rightBarButtonItem.enabled = true;
@@ -88,25 +89,11 @@
              hud.hidden = YES;
          }];
     }
-    
-}
-
-- (Boolean) orderHasAlreadyBeenReviewed
-{
-    if (self.reviewAndItems == nil || self.reviewAndItems.orderReview == nil)
-        return false;
-
-    if ((self.reviewAndItems.itemReviews == nil || self.reviewAndItems.itemReviews.count == 0) &&
-        (self.reviewAndItems.orderReview.foodLike.shortValue == 0 && self.reviewAndItems.orderReview.serviceLike.shortValue == 0 &&
-         IsEmpty(self.reviewAndItems.orderReview.comments) == true))
-        return false;
-        
-    return true;
 }
 
 - (UIImage *) getOrderItemReviewLikeDislikeImageForMenuItem:(int)menuItemPOSId
 {
-    if ([self orderHasAlreadyBeenReviewed] == false)
+    if ([UtilCalls orderHasAlreadyBeenReviewed:self.reviewAndItems] == false)
         return nil;
     if (self.reviewAndItems.itemReviews == nil || self.reviewAndItems.itemReviews.count == 0)
         return nil;
@@ -347,7 +334,7 @@
 
 -(UIView *) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    if ([self orderHasAlreadyBeenReviewed] == false)
+    if ([UtilCalls orderHasAlreadyBeenReviewed:self.reviewAndItems] == false)
         return [[UIView alloc] initWithFrame:CGRectZero];
     
     UITableViewCell *footerCell = [tableView dequeueReusableCellWithIdentifier:@"FooterCell"];
@@ -384,5 +371,9 @@
         [controller setSelectedOrder:self.selectedOrder];
         controller.reviewAndItems = self.reviewAndItems;
     }
+}
+
+- (IBAction)unwindToOrderHistorySummary:(UIStoryboardSegue *)unwindSegue
+{
 }
 @end

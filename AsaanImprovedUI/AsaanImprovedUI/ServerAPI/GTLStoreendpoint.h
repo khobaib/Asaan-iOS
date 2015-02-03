@@ -29,6 +29,7 @@
 #import "GTLStoreendpointMenuItemAndStatsCollection.h"
 #import "GTLStoreendpointMenuItemModifiersAndGroups.h"
 #import "GTLStoreendpointMenusAndMenuItems.h"
+#import "GTLStoreendpointOrderAndReviews.h"
 #import "GTLStoreendpointOrderReview.h"
 #import "GTLStoreendpointOrderReviewAndItemReviews.h"
 #import "GTLStoreendpointStore.h"

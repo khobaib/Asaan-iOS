@@ -18,6 +18,8 @@
 #import "GTLStoreendpointItemReviewsArray.h"
 #import "AppDelegate.h"
 #import "Constants.h"
+#import "OrderHistorySummaryTableViewController.h"
+#import "UIAlertView+Blocks.h"
 
 @interface ReviewItemsTableViewController ()
 @property (nonatomic, strong) NSMutableArray *finalItems;
@@ -214,9 +216,16 @@
          {
              if (error)
                  NSLog(@"saveItemReviews Error:%@",[error userInfo]);
+             else
+             {
+                 self.reviewAndItems.itemReviews = itemReviewsArray.itemReviews;
+                 NSString *reviewText = [NSString stringWithFormat:@"Thank you for reviewing %@.", self.selectedOrder.storeName];
+                 [UIAlertView showWithTitle:@"Thank you" message:reviewText cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                     [self dismissViewControllerAnimated:YES completion:nil];
+                 }];
+             }
          }];
     }
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

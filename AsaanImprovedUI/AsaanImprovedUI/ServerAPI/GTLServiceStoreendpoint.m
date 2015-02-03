@@ -39,6 +39,7 @@
                       [GTLStoreendpointMenuItemAndStatsCollection class],
                       [GTLStoreendpointMenuItemModifiersAndGroups class],
                       [GTLStoreendpointMenusAndMenuItems class],
+                      [GTLStoreendpointOrderAndReviews class],
                       [GTLStoreendpointOrderReview class],
                       [GTLStoreendpointOrderReviewAndItemReviews class],
                       [GTLStoreendpointStore class],

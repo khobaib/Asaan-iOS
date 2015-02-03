@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryStoreendpoint (39 custom class methods, 15 custom properties)
+//   GTLQueryStoreendpoint (40 custom class methods, 15 custom properties)
 
 #import "GTLQueryStoreendpoint.h"
 
@@ -28,6 +28,7 @@
 #import "GTLStoreendpointMenuItemAndStatsCollection.h"
 #import "GTLStoreendpointMenuItemModifiersAndGroups.h"
 #import "GTLStoreendpointMenusAndMenuItems.h"
+#import "GTLStoreendpointOrderAndReviews.h"
 #import "GTLStoreendpointOrderReview.h"
 #import "GTLStoreendpointOrderReviewAndItemReviews.h"
 #import "GTLStoreendpointStore.h"
@@ -105,6 +106,14 @@
   query.firstPosition = firstPosition;
   query.maxResult = maxResult;
   query.expectedObjectClass = [GTLStoreendpointMenuItemAndStatsCollection class];
+  return query;
+}
+
++ (id)queryForGetOrderAndReviewsByIdWithOrderId:(long long)orderId {
+  NSString *methodName = @"storeendpoint.getOrderAndReviewsById";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.orderId = orderId;
+  query.expectedObjectClass = [GTLStoreendpointOrderAndReviews class];
   return query;
 }
 

@@ -31,6 +31,7 @@
 #import "UIImageView+UIActivityIndicatorForSDWebImage.h"
 #import "Extension.h"
 #import "GlobalObjectHolder.h"
+#import "UIView+Toast.h"
 
 
 const NSUInteger MenuFluentPagingTablePreloadMargin = 5;
@@ -433,10 +434,14 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     // NOTE: Rounded rect
     // self.profileImageView.layer.cornerRadius = 10.0f;
     
-    if (IsEmpty(menuItemAndStats.menuItem.thumbnailUrl) == false)
+    NSString *strUrl = menuItemAndStats.menuItem.thumbnailUrl;
+    if (IsEmpty(menuItemAndStats.menuItem.thumbnailUrl) == true)
+        strUrl = menuItemAndStats.menuItem.imageUrl;
+    
+    if (IsEmpty(strUrl) == false)
     {
         //        [cell.itemPFImageView sd_setImageWithURL:[NSURL URLWithString:menuItemAndStats.menuItem.thumbnailUrl]];
-        [cell.itemImageView setImageWithURL:[NSURL URLWithString:menuItemAndStats.menuItem.thumbnailUrl]
+        [cell.itemImageView setImageWithURL:[NSURL URLWithString:strUrl ]
                              placeholderImage:[UIImage imageWithColor:RGBA(0.0, 0.0, 0.0, 0.5)]
                                     completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                         if (error) {
@@ -494,6 +499,8 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
             [self performSegueWithIdentifier:@"segueMenuToModifierGroup" sender:self];
         }
     }
+    else
+        [self.view makeToast:@"Please start an order from the \"Order Online\" button on the Store List."];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

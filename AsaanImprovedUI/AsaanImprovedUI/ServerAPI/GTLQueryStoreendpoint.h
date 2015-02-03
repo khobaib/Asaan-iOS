@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryStoreendpoint (39 custom class methods, 15 custom properties)
+//   GTLQueryStoreendpoint (40 custom class methods, 15 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLQuery.h"
@@ -99,6 +99,12 @@
                                           menuPOSId:(NSInteger)menuPOSId
                                       firstPosition:(NSInteger)firstPosition
                                           maxResult:(NSInteger)maxResult;
+
+// Method: storeendpoint.getOrderAndReviewsById
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
+// Fetches a GTLStoreendpointOrderAndReviews.
++ (id)queryForGetOrderAndReviewsByIdWithOrderId:(long long)orderId;
 
 // Method: storeendpoint.getReviewForCurrentUserAndOrder
 //  Authorization scope(s):

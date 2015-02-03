@@ -23,4 +23,5 @@
     #import "UITextField+Extender.h"
     #import "SWRevealViewController.h"
     #import "Constants.h"
+    #import "UIViewController+Utils.h"
 #endif

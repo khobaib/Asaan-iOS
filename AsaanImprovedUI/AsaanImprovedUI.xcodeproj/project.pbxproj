@@ -237,6 +237,9 @@
 		D4522BC51A1667F1002EFA92 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4522BC41A1667F1002EFA92 /* MobileCoreServices.framework */; };
 		D4522BC71A166802002EFA92 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4522BC61A166802002EFA92 /* SystemConfiguration.framework */; };
 		D4522BC91A166811002EFA92 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4522BC81A166811002EFA92 /* UIKit.framework */; };
+		D461544B1A7F2664003AE84D /* UIViewController+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = D461544A1A7F2664003AE84D /* UIViewController+Utils.m */; };
+		D46154501A7FC10C003AE84D /* NotificationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D461544F1A7FC10C003AE84D /* NotificationUtils.m */; };
+		D46154531A7FDFD4003AE84D /* GTLStoreendpointOrderAndReviews.m in Sources */ = {isa = PBXBuildFile; fileRef = D46154521A7FDFD4003AE84D /* GTLStoreendpointOrderAndReviews.m */; };
 		D46D0FAB1A13B2920072A413 /* UITextField+Extender.m in Sources */ = {isa = PBXBuildFile; fileRef = D46D0FAA1A13B2920072A413 /* UITextField+Extender.m */; };
 		D477996F1A65BA1800386430 /* GTLStoreendpointStoreDiscount.m in Sources */ = {isa = PBXBuildFile; fileRef = D477996C1A65BA1800386430 /* GTLStoreendpointStoreDiscount.m */; };
 		D47799701A65BA1800386430 /* GTLStoreendpointStoreDiscountCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = D477996E1A65BA1800386430 /* GTLStoreendpointStoreDiscountCollection.m */; };
@@ -761,6 +764,12 @@
 		D4522BC41A1667F1002EFA92 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		D4522BC61A166802002EFA92 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		D4522BC81A166811002EFA92 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		D46154491A7F2664003AE84D /* UIViewController+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+Utils.h"; path = "HelperClasses/UIViewController+Utils.h"; sourceTree = "<group>"; };
+		D461544A1A7F2664003AE84D /* UIViewController+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+Utils.m"; path = "HelperClasses/UIViewController+Utils.m"; sourceTree = "<group>"; };
+		D461544E1A7FC10C003AE84D /* NotificationUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationUtils.h; path = HelperClasses/NotificationUtils.h; sourceTree = "<group>"; };
+		D461544F1A7FC10C003AE84D /* NotificationUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NotificationUtils.m; path = HelperClasses/NotificationUtils.m; sourceTree = "<group>"; };
+		D46154511A7FDFD4003AE84D /* GTLStoreendpointOrderAndReviews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointOrderAndReviews.h; sourceTree = "<group>"; };
+		D46154521A7FDFD4003AE84D /* GTLStoreendpointOrderAndReviews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointOrderAndReviews.m; sourceTree = "<group>"; };
 		D46D0FA91A13B2920072A413 /* UITextField+Extender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITextField+Extender.h"; path = "HelperClasses/UITextField+Extender.h"; sourceTree = "<group>"; };
 		D46D0FAA1A13B2920072A413 /* UITextField+Extender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITextField+Extender.m"; path = "HelperClasses/UITextField+Extender.m"; sourceTree = "<group>"; };
 		D477996B1A65BA1800386430 /* GTLStoreendpointStoreDiscount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreDiscount.h; sourceTree = "<group>"; };
@@ -1534,6 +1543,8 @@
 		D449EB201A1BCDEB00879383 /* ServerAPI */ = {
 			isa = PBXGroup;
 			children = (
+				D46154511A7FDFD4003AE84D /* GTLStoreendpointOrderAndReviews.h */,
+				D46154521A7FDFD4003AE84D /* GTLStoreendpointOrderAndReviews.m */,
 				D4828D1D1A79313400C80E92 /* GTLStoreendpointStoreChatTeam.h */,
 				D4828D1E1A79313400C80E92 /* GTLStoreendpointStoreChatTeam.m */,
 				D4828D1F1A79313400C80E92 /* GTLStoreendpointStoreChatTeamCollection.h */,
@@ -2124,6 +2135,10 @@
 				D46D0FAA1A13B2920072A413 /* UITextField+Extender.m */,
 				D4B7A62F1A35193800D72BC4 /* GlobalObjectHolder.h */,
 				D4B7A6301A35193800D72BC4 /* GlobalObjectHolder.m */,
+				D46154491A7F2664003AE84D /* UIViewController+Utils.h */,
+				D461544A1A7F2664003AE84D /* UIViewController+Utils.m */,
+				D461544E1A7FC10C003AE84D /* NotificationUtils.h */,
+				D461544F1A7FC10C003AE84D /* NotificationUtils.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -2357,6 +2372,7 @@
 				D4828CF61A72BE4B00C80E92 /* OrderHistorySummaryTableViewController.m in Sources */,
 				D449EB691A1BCDEB00879383 /* GTLStoreendpointStoreMenuHierarchyCollection.m in Sources */,
 				3709EAC21A31804E0060B49B /* PSTGridLayoutRow.m in Sources */,
+				D461544B1A7F2664003AE84D /* UIViewController+Utils.m in Sources */,
 				375D0FB61A6996610016C293 /* JSQMessagesMediaPlaceholderView.m in Sources */,
 				D4ED02871A1EA08A000AB270 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				D4522B251A15264F002EFA92 /* STPBankAccount.m in Sources */,
@@ -2509,6 +2525,7 @@
 				375D10151A69F5550016C293 /* utilities.m in Sources */,
 				D4A8C1841A263B1800DA344A /* AFNetworkReachabilityManager.m in Sources */,
 				D4DEC1C41A2FF3050075281E /* GTLStoreendpointAsaanLong.m in Sources */,
+				D46154501A7FC10C003AE84D /* NotificationUtils.m in Sources */,
 				D4522B1C1A15264F002EFA92 /* PTKCard.m in Sources */,
 				D4F275AB1A0C021800CEC95A /* AsaanImprovedUI.xcdatamodeld in Sources */,
 				3709EABA1A31804E0060B49B /* PSTCollectionViewController.m in Sources */,
@@ -2553,6 +2570,7 @@
 				3709EAB91A31804E0060B49B /* PSTCollectionViewCell.m in Sources */,
 				D4A8C1991A263B1800DA344A /* NSData+ImageContentType.m in Sources */,
 				D449EB6B1A1BCDEB00879383 /* GTLStoreendpointStoreMenuItemCollection.m in Sources */,
+				D46154531A7FDFD4003AE84D /* GTLStoreendpointOrderAndReviews.m in Sources */,
 				D4E807311A1D8BAA008E343C /* GTLStoreendpointStoreStats.m in Sources */,
 				D4522B201A15264F002EFA92 /* PTKComponent.m in Sources */,
 				3709EA911A31802A0060B49B /* MWGridCell.m in Sources */,

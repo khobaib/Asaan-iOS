@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/tZEUznKtI9noTKGMgPDlfB4GnHM\"",
+ "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/3Oy0zj_tZ3WqSpmJft9mTNlO710\"",
  "discoveryVersion": "v1",
  "id": "storeendpoint:v1",
  "name": "storeendpoint",
@@ -332,6 +332,18 @@
     }
    }
   },
+  "OrderAndReviews": {
+   "id": "OrderAndReviews",
+   "type": "object",
+   "properties": {
+    "order": {
+     "$ref": "StoreOrder"
+    },
+    "orderAndItemsReview": {
+     "$ref": "OrderReviewAndItemReviews"
+    }
+   }
+  },
   "OrderReview": {
    "id": "OrderReview",
    "type": "object",
@@ -455,6 +467,10 @@
     "lng": {
      "type": "number",
      "format": "double"
+    },
+    "minOrderAmtForDelivery": {
+     "type": "integer",
+     "format": "int32"
     },
     "modifiedDate": {
      "type": "string",
@@ -1377,6 +1393,25 @@
    ],
    "returns": {
     "$ref": "MenuItemAndStatsCollection"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.getOrderAndReviewsById": {
+   "id": "storeendpoint.getOrderAndReviewsById",
+   "parameters": {
+    "orderId": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    }
+   },
+   "parameterOrder": [
+    "orderId"
+   ],
+   "returns": {
+    "$ref": "OrderAndReviews"
    },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"

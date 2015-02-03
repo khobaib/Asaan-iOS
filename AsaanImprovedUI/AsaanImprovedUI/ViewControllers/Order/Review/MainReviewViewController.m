@@ -10,6 +10,7 @@
 #import "ReviewItemsTableViewController.h"
 #import "AppDelegate.h"
 #import "UtilCalls.h"
+#import "NotificationUtils.h"
 
 
 @interface MainReviewViewController()
@@ -17,6 +18,9 @@
 @property (weak, nonatomic) IBOutlet UISlider *serviceReviewSlider;
 @property (weak, nonatomic) IBOutlet UITextView *txtReview;
 @property (weak, nonatomic) IBOutlet UIScrollView *reviewScrollView;
+
+- (void)backButtonPressed;
+
 @end
 
 @implementation MainReviewViewController
@@ -26,6 +30,7 @@
     [super setBaseScrollView:self.reviewScrollView];
     if (self.selectedOrder == nil)
         return;
+
     [[self.txtReview layer] setBorderColor:[[UIColor grayColor] CGColor]];
     [[self.txtReview layer] setBorderWidth:2.3];
     [[self.txtReview layer] setCornerRadius:15];
@@ -45,8 +50,29 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    if ([UtilCalls orderHasAlreadyBeenReviewed:self.reviewAndItems] == true)
+        [self backButtonPressed];
+    
+    [self.navigationController setNavigationBarHidden:NO];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed)];
+    self.navigationItem.leftBarButtonItem = backButton;
     // Prevent keyboard from showing by default
     [self.view endEditing:YES];
+    NotificationUtils *notificationUtils = [[NotificationUtils alloc]init];
+    [notificationUtils cancelNotificationWithOrder:self.selectedOrder.identifier];
+//    [UtilCalls getSlidingMenuBarButtonSetupWith:self];
+}
+
+- (void)backButtonPressed
+{
+    // write your code to prepare popview
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)foodReviewSliderValueChanged:(id)sender

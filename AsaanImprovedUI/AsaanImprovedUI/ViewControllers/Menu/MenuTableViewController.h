@@ -15,7 +15,7 @@
 @interface MenuTableViewController : UITableViewController <DataReceiver>
 @property (strong, nonatomic) GTLStoreendpointStore *selectedStore;
 @property (nonatomic) int orderType;
-@property (nonatomic) NSInteger partySize;
+@property (nonatomic) int partySize;
 @property (nonatomic) NSDate *orderTime;
 @property (nonatomic) Boolean bMenuIsInOrderMode;
 @end
