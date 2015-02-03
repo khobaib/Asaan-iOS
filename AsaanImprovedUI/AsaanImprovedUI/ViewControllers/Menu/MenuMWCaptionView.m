@@ -9,6 +9,7 @@
 #import "MenuMWCaptionView.h"
 
 #import "UIColor+AsaanGoldColor.h"
+#import "UIColor+AsaanBackgroundColor.h"
 
 #define trim(string) [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]
 #define enableLabel(label, title, enable) if (title && ![title isEqualToString:@""]) {  label.text = title; enable = YES; }
@@ -50,6 +51,7 @@ static const CGFloat orderButtonHeight = 30;
 - (void)layoutSubviews {
 
     [super layoutSubviews];
+    self.backgroundColor = [UIColor asaanBackgroundColor];
     
     // **************** Setup Short Description Label **************** //
     if (_enabledTitleLabel) {

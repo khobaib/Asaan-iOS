@@ -722,7 +722,6 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     if (![dataObject isKindOfClass:[NSNull class]])
     {
         self.selectedMenuItem = dataObject;
-        //        [self performSegueWithIdentifier:@"segueMenuToModifierGroup" sender:self];
     }
 }
 

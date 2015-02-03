@@ -13,6 +13,8 @@
 #import "DACircularProgressView.h"
 #import "MWPhotoBrowserPrivate.h"
 
+#import "UIColor+AsaanBackgroundColor.h"
+
 // Private methods and properties
 @interface MWZoomingScrollView () {
     
@@ -39,14 +41,14 @@
 		_tapView = [[MWTapDetectingView alloc] initWithFrame:self.bounds];
 		_tapView.tapDelegate = self;
 		_tapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-		_tapView.backgroundColor = [UIColor blackColor];
+        _tapView.backgroundColor = [UIColor asaanBackgroundColor];//[UIColor blackColor];
 		[self addSubview:_tapView];
 		
 		// Image view
 		_photoImageView = [[MWTapDetectingImageView alloc] initWithFrame:CGRectZero];
 		_photoImageView.tapDelegate = self;
 		_photoImageView.contentMode = UIViewContentModeCenter;
-		_photoImageView.backgroundColor = [UIColor blackColor];
+		_photoImageView.backgroundColor = [UIColor asaanBackgroundColor];//[UIColor blackColor];
 		[self addSubview:_photoImageView];
 		
 		// Loading indicator
@@ -70,7 +72,7 @@
                                                    object:nil];
         
 		// Setup
-		self.backgroundColor = [UIColor blackColor];
+		self.backgroundColor = [UIColor asaanBackgroundColor];//[UIColor blackColor];
 		self.delegate = self;
 		self.showsHorizontalScrollIndicator = NO;
 		self.showsVerticalScrollIndicator = NO;

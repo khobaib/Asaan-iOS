@@ -9,25 +9,30 @@
 #import "MWTapDetectingImageView.h"
 #import <UIKit/UIKit.h>
 
+#import "UIColor+AsaanBackgroundColor.h"
+
 @implementation MWTapDetectingImageView
 
 - (id)initWithFrame:(CGRect)frame {
 	if ((self = [super initWithFrame:frame])) {
 		self.userInteractionEnabled = YES;
+        self.backgroundColor = [UIColor asaanBackgroundColor];//[UIColor clearColor];
 	}
 	return self;
 }
 
 - (id)initWithImage:(UIImage *)image {
 	if ((self = [super initWithImage:image])) {
-		self.userInteractionEnabled = YES;
+        self.userInteractionEnabled = YES;
+        self.backgroundColor = [UIColor asaanBackgroundColor];//[UIColor clearColor];
 	}
 	return self;
 }
 
 - (id)initWithImage:(UIImage *)image highlightedImage:(UIImage *)highlightedImage {
 	if ((self = [super initWithImage:image highlightedImage:highlightedImage])) {
-		self.userInteractionEnabled = YES;
+        self.userInteractionEnabled = YES;
+        self.backgroundColor = [UIColor asaanBackgroundColor];//[UIColor clearColor];
 	}
 	return self;
 }

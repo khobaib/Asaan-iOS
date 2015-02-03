@@ -12,6 +12,8 @@
 #import "MWPhotoBrowserPrivate.h"
 #import "SDImageCache.h"
 
+#import "UIColor+AsaanBackgroundColor.h"
+
 #define PADDING                  10
 #define ACTION_SHEET_OLD_ACTIONS 2000
 
@@ -90,7 +92,6 @@
                                              selector:@selector(handleMWPhotoLoadingDidEndNotification:)
                                                  name:MWPHOTO_LOADING_DID_END_NOTIFICATION
                                                object:nil];
-    
 }
 
 - (void)dealloc {
@@ -145,7 +146,7 @@
     if (!_enableGrid) _startOnGrid = NO;
 	
 	// View
-	self.view.backgroundColor = [UIColor blackColor];
+	self.view.backgroundColor = [UIColor asaanBackgroundColor];//[UIColor blackColor];
     self.view.clipsToBounds = YES;
 	
 	// Setup paging scrolling view
@@ -156,7 +157,7 @@
 	_pagingScrollView.delegate = self;
 	_pagingScrollView.showsHorizontalScrollIndicator = NO;
 	_pagingScrollView.showsVerticalScrollIndicator = NO;
-	_pagingScrollView.backgroundColor = [UIColor blackColor];
+    _pagingScrollView.backgroundColor = [UIColor asaanBackgroundColor];//[UIColor blackColor];
     _pagingScrollView.contentSize = [self contentSizeForPagingScrollView];
 	[self.view addSubview:_pagingScrollView];
 	
@@ -448,11 +449,14 @@
     UINavigationBar *navBar = self.navigationController.navigationBar;
     navBar.tintColor = SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7") ? [UIColor whiteColor] : nil;
     if ([navBar respondsToSelector:@selector(setBarTintColor:)]) {
-        navBar.barTintColor = nil;
-        navBar.shadowImage = nil;
+//        navBar.barTintColor = nil;
+//        navBar.shadowImage = nil;
+        
+        navBar.barTintColor = [UIColor asaanBackgroundColor];
+        navBar.shadowImage = [UIImage new];
     }
-    navBar.translucent = YES;
-    navBar.barStyle = UIBarStyleBlackTranslucent;
+//    navBar.translucent = YES;
+//    navBar.barStyle = UIBarStyleBlackTranslucent;
     if ([[UINavigationBar class] respondsToSelector:@selector(appearance)]) {
         [navBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
         [navBar setBackgroundImage:nil forBarMetrics:UIBarMetricsLandscapePhone];

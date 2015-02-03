@@ -9,18 +9,23 @@
 #import "MWTapDetectingView.h"
 #import <UIKit/UIKit.h>
 
+#import "UIColor+AsaanBackgroundColor.h"
+
+
 @implementation MWTapDetectingView
 
 - (id)init {
 	if ((self = [super init])) {
 		self.userInteractionEnabled = YES;
+        self.backgroundColor = [UIColor asaanBackgroundColor];
 	}
 	return self;
 }
 
 - (id)initWithFrame:(CGRect)frame {
 	if ((self = [super initWithFrame:frame])) {
-		self.userInteractionEnabled = YES;
+        self.userInteractionEnabled = YES;
+        self.backgroundColor = [UIColor asaanBackgroundColor];
 	}
 	return self;
 }
