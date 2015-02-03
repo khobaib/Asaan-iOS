@@ -50,6 +50,30 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if (self.selectedOrder != nil && self.reviewAndItems == nil)
+    {
+        [self parsePOSCheckDetails];
+        [self getOrderReview];
+    }
+    else
+    {
+        if ([UtilCalls orderHasAlreadyBeenReviewed:self.reviewAndItems] == false)
+        {
+            self.navigationItem.rightBarButtonItem.title = @"Review";
+            self.navigationItem.rightBarButtonItem.enabled = true;
+        }
+        else
+        {
+            self.navigationItem.rightBarButtonItem.title = @"";
+            self.navigationItem.rightBarButtonItem.enabled = false;
+        }
+        [self.tableView reloadData];
+    }
+}
+
 - (void) getOrderReview
 {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -101,6 +125,8 @@
     {
         if (itemReview.menuItemPOSId.intValue == menuItemPOSId)
         {
+            if (itemReview.itemLike.shortValue == 0)
+                return nil;
             if (itemReview.itemLike.shortValue <= 140)
                 return self.imgDislike;
             if (itemReview.itemLike.shortValue >= 160)
@@ -342,17 +368,19 @@
     UIImageView *imgServiceLike = (UIImageView *)[footerCell viewWithTag:503];
     UITextView *txtReview = (UITextView *)[footerCell viewWithTag:504];
     
-    imgFoodLike.image = nil;
-    imgServiceLike.image = nil;
     txtReview.text = nil;
     txtReview.editable = false;
     
-    if (self.reviewAndItems.orderReview.foodLike.shortValue <= 140)
+    if (self.reviewAndItems.orderReview.foodLike.shortValue == 0)
+        imgFoodLike.image = nil;
+    else if (self.reviewAndItems.orderReview.foodLike.shortValue <= 140)
         imgFoodLike.image = self.imgDislike;
     else if (self.reviewAndItems.orderReview.foodLike.shortValue >= 160)
         imgFoodLike.image = self.imgLike;
     
-    if (self.reviewAndItems.orderReview.serviceLike.shortValue <= 140)
+    if (self.reviewAndItems.orderReview.serviceLike.shortValue == 0)
+        imgServiceLike.image = nil;
+    else if (self.reviewAndItems.orderReview.serviceLike.shortValue <= 140)
         imgServiceLike.image = self.imgDislike;
     else if (self.reviewAndItems.orderReview.serviceLike.shortValue >= 160)
         imgServiceLike.image = self.imgLike;

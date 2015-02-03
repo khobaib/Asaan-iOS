@@ -36,8 +36,8 @@
 @property (nonatomic) long minOrderTime;
 @property (nonatomic) long timeIncrementInterval;
 @property (nonatomic) long timeDecrementInterval;
-@property (nonatomic) long minPartySize;
-@property (nonatomic) long currPartySize;
+@property (nonatomic) int minPartySize;
+@property (nonatomic) int currPartySize;
 @property (nonatomic) NSDate *currOrderTime;
 
 @property (nonatomic) Boolean bIsSeekingDeliveryAddress;
@@ -54,7 +54,7 @@
     [super viewDidLoad];
     
     self.minPartySize = self.currPartySize = 1;
-    self.partySize.text = [NSString stringWithFormat:@"%ld", self.currPartySize];
+    self.partySize.text = [NSString stringWithFormat:@"%d", self.currPartySize];
     self.minOrderTime = 3600;
     self.timeIncrementInterval = 900; // 15 min
     self.timeDecrementInterval = -900; // 15 min
@@ -170,11 +170,11 @@
 - (IBAction)decPartySize:(id)sender
 {
     if (self.currPartySize > self.minPartySize)
-        self.partySize.text = [NSString stringWithFormat:@"%ld", --self.currPartySize];
+        self.partySize.text = [NSString stringWithFormat:@"%d", --self.currPartySize];
 }
 - (IBAction)incPartySize:(id)sender
 {
-    self.partySize.text = [NSString stringWithFormat:@"%ld", ++self.currPartySize];
+    self.partySize.text = [NSString stringWithFormat:@"%d", ++self.currPartySize];
 }
 
 #pragma mark - Navigation

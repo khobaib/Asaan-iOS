@@ -2900,6 +2900,7 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="How was Kama Bistro?" id="RU8-Nh-RoR">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="gIy-WZ-k4I"/>
                         <barButtonItem key="rightBarButtonItem" title="Next" id="qeo-P3-Djx">
                             <connections>
                                 <segue destination="JUm-9G-Auq" kind="show" identifier="segueReviewMainToReviewItems" id="bKt-1c-fq6"/>
@@ -5218,13 +5219,13 @@
         <image name="visa.png" width="32" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="0LS-Vd-kxy"/>
+        <segue reference="ZYN-FD-zL4"/>
         <segue reference="MsC-Iz-V6n"/>
         <segue reference="g5V-KY-zil"/>
-        <segue reference="WgG-9g-jiE"/>
-        <segue reference="33i-hP-PSJ"/>
-        <segue reference="t2R-Le-XNf"/>
         <segue reference="UrJ-ne-Kfy"/>
+        <segue reference="33i-hP-PSJ"/>
+        <segue reference="WgG-9g-jiE"/>
+        <segue reference="t2R-Le-XNf"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

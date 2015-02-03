@@ -13,5 +13,5 @@
 @interface ReviewItemsTableViewController : UITableViewController
 @property (nonatomic, strong) GTLStoreendpointStoreOrder *selectedOrder;
 @property (strong, nonatomic) GTLStoreendpointOrderReviewAndItemReviews *reviewAndItems;
-@property (strong, nonatomic) UIViewController *pvc;
+@property (nonatomic) Boolean presentedFromNotification;
 @end

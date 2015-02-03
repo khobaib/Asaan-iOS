@@ -137,7 +137,7 @@
     
     NSString *gratuityStr = @"SERVICECHARGES=\"0\"";
     if ([self gratuity] > 0)
-        gratuityStr = [NSString stringWithFormat:@"SERVICECHARGES=\"%@\"", [UtilCalls percentAmountToString:[NSNumber numberWithLong:[self gratuity]]]];
+        gratuityStr = [NSString stringWithFormat:@"<SERVICECHARGES ID=\"%d\" AMOUNT=\"%@\" REFERENCE=\"SVC CHRG FROM ASAAN\" />", 902, [UtilCalls percentAmountToStringNoCurrency:[NSNumber numberWithLong:[self gratuity]]]];
     
     NSString *orderString;
     if (self.orderInProgress.orderType == [DeliveryOrCarryoutViewController ORDERTYPE_DELIVERY])
@@ -147,10 +147,10 @@
         GTLUserendpointUserAddress *address = appDelegate.globalObjectHolder.defaultUserAddress;
         NSString *deliveryString=[NSString stringWithFormat:@"<DELIVERY DELIVERYACCT=\"%@\" DELIVERYNOTE=\"%@\" ADDRESS=\"%@\" />", address.title, address.notes, address.fullAddress];
         
-        orderString=[NSString stringWithFormat:@"<CHECKREQUESTS><ADDCHECK EXTCHECKID=\"ASAAN\" READYTIME=\"%@\" GUESTCOUNT=\"%d\" %@ %@ NOTE=\"%@\" ORDERMODE=\"@ORDER_MODE\">%@%@%@</ADDCHECK></CHECKREQUESTS>",orderTime, self.orderInProgress.partySize, discountStr, gratuityStr, self.orderInProgress.specialInstructions, contactString, deliveryString, strItems];
+        orderString=[NSString stringWithFormat:@"<CHECKREQUESTS><ADDCHECK EXTCHECKID=\"ASAAN\" READYTIME=\"%@\" GUESTCOUNT=\"%d\" %@ NOTE=\"%@\" ORDERMODE=\"@ORDER_MODE\">%@%@%@</ADDCHECK>%@</CHECKREQUESTS>",orderTime, self.orderInProgress.partySize, discountStr, self.orderInProgress.specialInstructions, contactString, deliveryString, strItems, gratuityStr];
     }
     else
-        orderString=[NSString stringWithFormat:@"<CHECKREQUESTS><ADDCHECK EXTCHECKID=\"ASAAN\" READYTIME=\"%@\" GUESTCOUNT=\"%d\" %@ %@ NOTE=\"%@\" ORDERMODE=\"@ORDER_MODE\">%@%@</ADDCHECK></CHECKREQUESTS>",orderTime, self.orderInProgress.partySize, discountStr, gratuityStr, self.orderInProgress.specialInstructions, contactString, strItems];
+        orderString=[NSString stringWithFormat:@"<CHECKREQUESTS><ADDCHECK EXTCHECKID=\"ASAAN\" READYTIME=\"%@\" GUESTCOUNT=\"%d\" %@ NOTE=\"%@\" ORDERMODE=\"@ORDER_MODE\">%@%@</ADDCHECK>%@</CHECKREQUESTS>",orderTime, self.orderInProgress.partySize, discountStr, self.orderInProgress.specialInstructions, contactString, strItems, gratuityStr];
     
     NSLog(@"%@",orderString);
     
@@ -247,7 +247,7 @@
     if (self.orderInProgress == nil || self.orderInProgress.selectedMenuItems == nil || self.orderInProgress.selectedMenuItems.count == 0)
         return 0;
     
-    if (self.orderInProgress.orderType == 0)
+    if (self.orderInProgress.orderType == DeliveryOrCarryoutViewController.ORDERTYPE_CARRYOUT)
         return self.orderInProgress.selectedMenuItems.count + 9;
     else
         return self.orderInProgress.selectedMenuItems.count + 11;
@@ -348,12 +348,13 @@
 
 - (NSUInteger)deliveryFee // $5 - fixed for now
 {
-    return 5000000;
+//    return 5000000;
+    return self.orderInProgress.selectedStore.deliveryFee.intValue*10000;
 }
 
 - (NSUInteger)finalAmount
 {
-    if (self.orderInProgress.orderType == 0)
+    if (self.orderInProgress.orderType == DeliveryOrCarryoutViewController.ORDERTYPE_CARRYOUT)
         return ([self subTotal] + [self gratuity] + [self taxAmount]);
     else
         return ([self subTotal] + [self gratuity] + [self taxAmount] + [self deliveryFee]);
@@ -374,9 +375,9 @@
 
 - (UITableViewCell *)cellForAdditionalRowAtIndex:(int)index forTable:(UITableView *)tableView forIndexPath:indexPath
 {
-    if (self.orderInProgress.orderType == 0 && index > 4)
+    if (self.orderInProgress.orderType == DeliveryOrCarryoutViewController.ORDERTYPE_CARRYOUT && index > 4)
         index++;
-    if (self.orderInProgress.orderType == 0 && index > 7)
+    if (self.orderInProgress.orderType == DeliveryOrCarryoutViewController.ORDERTYPE_CARRYOUT && index > 7)
         index++;
 
     UITableViewCell *cell;

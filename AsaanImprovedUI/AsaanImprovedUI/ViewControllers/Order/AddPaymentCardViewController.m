@@ -165,7 +165,8 @@
                 {
                     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
                     [appDelegate.globalObjectHolder addCardToUserCards:object];
-                    [self.navigationController popViewControllerAnimated:YES];
+//                    [self.navigationController popViewControllerAnimated:YES];
+                    [UtilCalls popFrom:self index:2 Animated:YES];
                 } else
                     [[[UIAlertView alloc]initWithTitle:@"Error" message:[error.userInfo description] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
             }];

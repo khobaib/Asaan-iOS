@@ -754,7 +754,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
         orderInProgress.orderType = self.orderType;
         orderInProgress.orderTime = self.orderTime;
         orderInProgress.partySize = self.partySize;
-        orderInProgress.specialInstructions = @"";//self.txtSpecialInstructions.text;
+//        orderInProgress.specialInstructions = @"";//self.txtSpecialInstructions.text;
         [orderInProgress.selectedMenuItems addObject:self.selectedMenuItem];
 //        [self performSegueWithIdentifier:@"segueunwindModifierGroupToMenu" sender:self];
         
@@ -797,6 +797,14 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
         [controller setOrderType:self.orderType];
         [controller setPartySize:self.partySize];
         [controller setBInEditMode:NO];
+    }
+    else if ([[segue identifier] isEqualToString:@"segueMenuToOrderSummary"])
+    {
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+        OnlineOrderDetails *orderInProgress = appDelegate.globalObjectHolder.orderInProgress;
+        orderInProgress.orderType = self.orderType;
+        orderInProgress.orderTime = self.orderTime;
+        orderInProgress.partySize = self.partySize;
     }
 }
 

@@ -60,22 +60,6 @@
     [super viewDidLoad];
     
     [UtilCalls getSlidingMenuBarButtonSetupWith:self];
-    
-    __weak __typeof(self) weakSelf = self;
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreCount];
-    
-    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointAsaanLong *object,NSError *error)
-     {
-         NSInteger pageSize = FluentPagingTablePageSize < object.longValue.longValue ? FluentPagingTablePageSize : object.longValue.longValue;
-         _dataProvider = [[DataProvider alloc] initWithPageSize:pageSize itemCount:object.longValue.longValue];
-         _dataProvider.delegate = weakSelf;
-         _dataProvider.shouldLoadAutomatically = YES;
-         _dataProvider.automaticPreloadMargin = FluentPagingTablePreloadMargin;
-         if ([weakSelf isViewLoaded])
-             [weakSelf.tableView reloadData];
-     }];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -108,13 +92,20 @@
             [objectHolder loadUserAddressesFromServer];
     }
     
-//    [self.navigationController setNavigationBarHidden:NO];
-//    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
-//                                                  forBarMetrics:UIBarMetricsDefault];
-//    self.navigationController.navigationBar.barTintColor = [UIColor asaanBackgroundColor];
-//    self.navigationController.navigationBar.shadowImage = [UIImage new];
-//    self.navigationController.navigationBar.translucent = NO;
-//    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+    __weak __typeof(self) weakSelf = self;
+    GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
+    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreCount];
+    
+    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointAsaanLong *object,NSError *error)
+     {
+         NSInteger pageSize = FluentPagingTablePageSize < object.longValue.longValue ? FluentPagingTablePageSize : object.longValue.longValue;
+         _dataProvider = [[DataProvider alloc] initWithPageSize:pageSize itemCount:object.longValue.longValue];
+         _dataProvider.delegate = weakSelf;
+         _dataProvider.shouldLoadAutomatically = YES;
+         _dataProvider.automaticPreloadMargin = FluentPagingTablePreloadMargin;
+         if ([weakSelf isViewLoaded])
+             [weakSelf.tableView reloadData];
+     }];
     
     GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
     if (goh.orderInProgress != nil)
@@ -125,17 +116,11 @@
         [button setFrame:CGRectMake(0, 0, 25, 25)];
         button.backgroundColor = [UIColor clearColor];
         
-//        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(3, 5, 50, 20)];
-//        [label setFont:[UIFont fontWithName:@"Arial-BoldMT" size:13]];
-//        [label setText:@"Order"];
-//        label.textAlignment = UITextAlignmentCenter;
-//        [label setTextColor:[UIColor whiteColor]];
-//        [label setBackgroundColor:[UIColor clearColor]];
-//        [button addSubview:label];
-        
         UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:button];
         self.navigationItem.rightBarButtonItem = item;
     }
+    else
+        self.navigationItem.rightBarButtonItem = nil;
 }
 
 - (void)didReceiveMemoryWarning {

@@ -67,6 +67,16 @@
     return [numberFormatter stringFromNumber:[NSNumber numberWithFloat:fVal]];
 }
 
++ (NSString *) percentAmountToStringNoCurrency:(NSNumber*)number
+{
+    NSNumberFormatter * numberFormatter = [[NSNumberFormatter new] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    [numberFormatter setMaximumFractionDigits:2];
+    [numberFormatter setRoundingMode:NSNumberFormatterRoundFloor];
+    float fVal = [number floatValue]/1000000;
+    return [numberFormatter stringFromNumber:[NSNumber numberWithFloat:fVal]];
+}
+
 + (NSNumber *) stringToNumber:(NSString*)string
 {
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
@@ -135,6 +145,30 @@
         [revealButtonItem setAction: @selector( revealToggle: )];
         [viewController.navigationController.navigationBar addGestureRecognizer: viewController.revealViewController.panGestureRecognizer];
     }
+}
+
++ (void) popFrom:(UIViewController *)childController ToViewController:(Class)parentControllerClass Animated:(BOOL)animated
+{
+    NSMutableArray *allViewControllers = [NSMutableArray arrayWithArray:[childController.navigationController viewControllers]];
+    for (UIViewController *aViewController in allViewControllers) {
+        if ([aViewController isKindOfClass:parentControllerClass]) {
+            [childController.navigationController popToViewController:aViewController animated:animated];
+        }
+    }
+}
+
++ (void) popFrom:(UIViewController *)childController index:(int)index Animated:(BOOL)animated
+{
+    NSMutableArray *allViewControllers = [NSMutableArray arrayWithArray:[childController.navigationController viewControllers]];
+    long count = allViewControllers.count;
+    
+    if (index > count - 1)
+        return;
+    
+    UIViewController *parentViewController = [allViewControllers objectAtIndex:(count -1 -index)];
+    
+    if (parentViewController != nil)
+        [childController.navigationController popToViewController:parentViewController animated:animated];
 }
 
 + (NSString *) getAuthTokenForCurrentUser

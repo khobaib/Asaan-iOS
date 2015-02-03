@@ -219,8 +219,9 @@
                              weakSelf.savedUserAddress = object;
                              AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
                              [appDelegate.globalObjectHolder addAddressToUserAddresses:weakSelf.savedUserAddress];
-                             [self.navigationController popViewControllerAnimated:YES];
-                         }
+//                             [self.navigationController popViewControllerAnimated:YES];
+                             [UtilCalls popFrom:self index:2 Animated:YES];
+                        }
                          else
                          {
                              NSString *errMsg = [NSString stringWithFormat:@"%@", [error userInfo]];

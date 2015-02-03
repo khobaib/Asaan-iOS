@@ -189,7 +189,7 @@
     NSMutableArray *reviewedItems = [[NSMutableArray alloc]init];
     for (OrderItemSummaryFromPOS *item in self.finalItems)
     {
-        if (item.like <= 40 || item.like >= 60)
+        if (item.like != 0)
         {
             GTLStoreendpointItemReview *itemReview = [[GTLStoreendpointItemReview alloc]init];
             itemReview.menuItemPOSId = [NSNumber numberWithInt:item.posMenuItemId];
@@ -220,8 +220,14 @@
              {
                  self.reviewAndItems.itemReviews = itemReviewsArray.itemReviews;
                  NSString *reviewText = [NSString stringWithFormat:@"Thank you for reviewing %@.", self.selectedOrder.storeName];
-                 [UIAlertView showWithTitle:@"Thank you" message:reviewText cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
-                     [self dismissViewControllerAnimated:YES completion:nil];
+                 [UIAlertView showWithTitle:@"Thank you" message:reviewText cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex)
+                 {
+                     if (self.presentedFromNotification == true)
+                         [self dismissViewControllerAnimated:YES completion:nil];
+                     else
+                         [UtilCalls popFrom:self index:2 Animated:YES];
+ //                        [self.navigationController popViewControllerAnimated:YES];
+ //                        [self.navigationController popToRootViewControllerAnimated:YES];
                  }];
              }
          }];

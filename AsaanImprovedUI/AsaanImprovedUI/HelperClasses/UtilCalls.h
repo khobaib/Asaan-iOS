@@ -15,10 +15,14 @@
 + (NSString *) rawAmountToString:(NSNumber*)number;
 + (NSString *) amountToString:(NSNumber*)number;
 + (NSString *) percentAmountToString:(NSNumber*)number;
++ (NSString *) percentAmountToStringNoCurrency:(NSNumber*)number;
 + (Boolean)isDistanceBetweenPointA:(CLLocation*)first AndPointB:(CLLocation *)second withinRange:(NSUInteger)range;
 
 + (UIBarButtonItem *)getSlidingMenuBarButtonSetupWith:(UIViewController *)viewController;
 + (void)slidingMenuSetupWith:(UIViewController *)viewController withItem:(UIBarButtonItem *)revealButtonItem;
+
++ (void) popFrom:(UIViewController *)childController ToViewController:(Class)parentControllerClass Animated:(BOOL)animated;
++ (void) popFrom:(UIViewController *)childController index:(int)index Animated:(BOOL)animated;
 
 + (NSNumber *) stringToNumber:(NSString*)string;
 

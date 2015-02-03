@@ -114,7 +114,8 @@
                      MainReviewViewController* pvc = [mainstoryboard instantiateViewControllerWithIdentifier:@"ReviewMainViewController"];
                      pvc.selectedOrder = object.order;
                      pvc.reviewAndItems = object.orderAndItemsReview;
-                     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:pvc];
+                     pvc.presentedFromNotification = true;
+                    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:pvc];
                      [[UIViewController currentViewController] presentViewController:navigationController animated:YES completion:nil];
                  }
                  else
