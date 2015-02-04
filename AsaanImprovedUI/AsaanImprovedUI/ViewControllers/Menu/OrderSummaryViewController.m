@@ -602,9 +602,10 @@
                      if (buttonIndex == [alertView cancelButtonIndex])
                      {
                          weakSelf.orderInProgress.orderType = [DeliveryOrCarryoutViewController ORDERTYPE_CARRYOUT];
+                         [weakSelf.tableView reloadData];
                          bReturn = YES;
                      }
-                     else if (buttonIndex == 0)
+                     else if (buttonIndex == 1)
                      {
                          [weakSelf performSegueWithIdentifier:@"segueOrderSummaryToSelectAddress" sender:weakSelf];
                          bReturn = NO;

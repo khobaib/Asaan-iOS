@@ -277,8 +277,24 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)replacementString
 {
-    if ([textField isEqual:self.zip]) {
-        return [self cardAddressZIPShouldChangeCharactersInRange:range replacementString:replacementString];
+    if ([textField isEqual:self.zip])
+    {
+        NSString *resultString = [self.zip.text stringByReplacingCharactersInRange:range withString:replacementString];
+        resultString = [PTKTextField textByRemovingUselessSpacesFromString:resultString];
+        PTKUSAddressZip *addressZIP = [PTKUSAddressZip addressZipWithString:resultString];
+        
+        // Restrict length
+        if (![addressZIP isPartiallyValid]) return NO;
+        
+        // Strip non-digits
+//        self.zip.text = [addressZIP string];
+        
+        if ([addressZIP isValid])
+        {
+            if (![addressZIP isPartiallyValid]) return NO;
+        }
+        else
+            return YES;
     }
 
     return YES;
