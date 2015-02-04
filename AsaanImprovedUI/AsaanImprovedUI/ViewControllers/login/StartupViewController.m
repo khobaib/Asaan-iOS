@@ -70,7 +70,7 @@
     
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
-    hud.labelText = @"Gathering information from Facebook\nplease wait ...";
+    hud.labelText = @"Gathering information from Facebook.Please wait ...";
     
     FBRequest *request = [FBRequest requestForMe];
     

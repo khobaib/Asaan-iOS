@@ -14,6 +14,7 @@
 + (NSString *) formattedNumber:(NSNumber*) number;
 + (NSString *) rawAmountToString:(NSNumber*)number;
 + (NSString *) amountToString:(NSNumber*)number;
++ (NSString *) amountToStringNoCurrency:(NSNumber*)number;
 + (NSString *) percentAmountToString:(NSNumber*)number;
 + (NSString *) percentAmountToStringNoCurrency:(NSNumber*)number;
 + (Boolean)isDistanceBetweenPointA:(CLLocation*)first AndPointB:(CLLocation *)second withinRange:(NSUInteger)range;

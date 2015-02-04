@@ -57,6 +57,16 @@
     return [numberFormatter stringFromNumber:[NSNumber numberWithFloat:fVal]];
 }
 
++ (NSString *) amountToStringNoCurrency:(NSNumber*)number
+{
+    NSNumberFormatter * numberFormatter = [[NSNumberFormatter new] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    [numberFormatter setMaximumFractionDigits:2];
+    [numberFormatter setRoundingMode:NSNumberFormatterRoundFloor];
+    float fVal = [number floatValue]/100;
+    return [numberFormatter stringFromNumber:[NSNumber numberWithFloat:fVal]];
+}
+
 + (NSString *) percentAmountToString:(NSNumber*)number
 {
     NSNumberFormatter * numberFormatter = [[NSNumberFormatter new] init];
