@@ -2199,6 +2199,7 @@
 				D4F2759B1A0C021800CEC95A /* Sources */,
 				D4F2759C1A0C021800CEC95A /* Frameworks */,
 				D4F2759D1A0C021800CEC95A /* Resources */,
+				D46154541A81DD61003AE84D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -2337,6 +2338,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D46154541A81DD61003AE84D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=/usr/local/bin:$PATH\n\ncd $SRCROOT/AsaanImprovedUI/parse\n\nparse symbols \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D4F2759B1A0C021800CEC95A /* Sources */ = {
