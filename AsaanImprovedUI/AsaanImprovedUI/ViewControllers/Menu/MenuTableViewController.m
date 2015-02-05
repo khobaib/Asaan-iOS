@@ -47,6 +47,7 @@ const NSUInteger MenuFluentPagingTablePageSize = 50;
 @property (nonatomic) int maxResult;
 @property (strong, nonatomic) NSMutableArray *menuSegmentHolders;
 @property (strong, nonatomic) GTLStoreendpointMenuItemAndStats *selectedMenuItem;
+@property (strong, nonatomic) NSMutableDictionary *allMenuStats;
 
 @property (nonatomic) CGFloat cellHeight;
 
@@ -155,6 +156,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     hud.labelText = @"Please Wait";
     hud.hidden = NO;
     _menuSegmentHolders = [[NSMutableArray alloc] init];
+    self.allMenuStats = [[NSMutableDictionary alloc] init];
     
     if (self)
     {
@@ -194,6 +196,11 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
                          if (menu.menuPOSId.longValue == menuItemAndStats.menuItem.menuPOSId.longValue)
                              [menuSegmentHolder.provider setInitialObjects:object.menuItems ForPage:1];
                      }
+                 }
+                 for (GTLStoreendpointStoreMenuStats *menuStats in object.menuStats)
+                 {
+                     NSString *key = [NSString stringWithFormat:@"%@_%@", menuStats.menuPOSId, menuStats.subMenuPOSId];
+                     [self.allMenuStats setObject:menuStats forKey:key];
                  }
                  
              }else{
@@ -404,7 +411,10 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     cell.descriptionLabel.text = menuItemAndStats.menuItem.longDescription;
     cell.priceLabel.text = [UtilCalls amountToString:menuItemAndStats.menuItem.price];
     
-    if (menuItemAndStats.stats.mostFrequentlyOrdered != nil && menuItemAndStats.stats.mostFrequentlyOrdered.boolValue == TRUE)
+    NSString *keyForMenuStats = [NSString stringWithFormat:@"%@_%@", menuItemAndStats.menuItem.menuPOSId, menuItemAndStats.menuItem.subMenuPOSId];
+    GTLStoreendpointStoreMenuStats *menuStats = [self.allMenuStats objectForKey:keyForMenuStats];
+    
+    if (menuStats.mostFrequentlyOrderedMenuItemPOSId.intValue == menuItemAndStats.menuItem.menuItemPOSId.intValue)
         cell.mostOrderedLabel.text = @"Most Frequently Ordered";
     
     if (menuItemAndStats.stats.orders != nil && menuItemAndStats.stats.orders.longValue > 0)
@@ -647,7 +657,11 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     if (menuItemAndStats.stats.orders != nil && menuItemAndStats.stats.orders.longValue > 0) {
         captionView.textTodaysOrders = [NSString stringWithFormat:@"%@ peoples ordered today.", [UtilCalls formattedNumber:menuItemAndStats.stats.orders]];
         
-        if (menuItemAndStats.stats.mostFrequentlyOrdered != nil && menuItemAndStats.stats.mostFrequentlyOrdered.boolValue == TRUE)
+        
+        NSString *keyForMenuStats = [NSString stringWithFormat:@"%@_%@", menuItemAndStats.menuItem.menuPOSId, menuItemAndStats.menuItem.subMenuPOSId];
+        GTLStoreendpointStoreMenuStats *menuStats = [self.allMenuStats objectForKey:keyForMenuStats];
+        
+        if (menuStats.mostFrequentlyOrderedMenuItemPOSId.intValue == menuItemAndStats.menuItem.menuItemPOSId.intValue)
             captionView.textMostOrdered = @"Most Frequently Ordered";
     }
     

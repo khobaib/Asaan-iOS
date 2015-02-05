@@ -3,7 +3,7 @@
  */
 
 //
-//  GTLStoreendpointStoreItemStats.m
+//  GTLStoreendpointStoreMenuStats.m
 //
 
 // ----------------------------------------------------------------------------
@@ -13,18 +13,19 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStoreItemStats (0 custom class methods, 7 custom properties)
+//   GTLStoreendpointStoreMenuStats (0 custom class methods, 7 custom properties)
 
-#import "GTLStoreendpointStoreItemStats.h"
+#import "GTLStoreendpointStoreMenuStats.h"
 
 // ----------------------------------------------------------------------------
 //
-//   GTLStoreendpointStoreItemStats
+//   GTLStoreendpointStoreMenuStats
 //
 
-@implementation GTLStoreendpointStoreItemStats
-@dynamic dislikes, identifier, likes, menuItemPOSId, orders, recommends,
-         storeId;
+@implementation GTLStoreendpointStoreMenuStats
+@dynamic identifier, menuPOSId, mostFrequentlyOrderedMenuItemPOSId,
+         mostLikedMenuItemPOSId, mostRecommendedMenuItemPOSId, storeId,
+         subMenuPOSId;
 
 + (NSDictionary *)propertyToJSONKeyMap {
   NSDictionary *map =

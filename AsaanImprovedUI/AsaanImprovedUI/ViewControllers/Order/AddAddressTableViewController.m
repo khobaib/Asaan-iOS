@@ -289,7 +289,7 @@
         // Strip non-digits
 //        self.zip.text = [addressZIP string];
         
-        if ([addressZIP isValid])
+        if (![addressZIP isValid])
         {
             if (![addressZIP isPartiallyValid]) return NO;
         }

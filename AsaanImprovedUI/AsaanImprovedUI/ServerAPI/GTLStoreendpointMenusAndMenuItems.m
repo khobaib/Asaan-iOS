@@ -13,12 +13,13 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointMenusAndMenuItems (0 custom class methods, 2 custom properties)
+//   GTLStoreendpointMenusAndMenuItems (0 custom class methods, 3 custom properties)
 
 #import "GTLStoreendpointMenusAndMenuItems.h"
 
 #import "GTLStoreendpointMenuItemAndStats.h"
 #import "GTLStoreendpointStoreMenuHierarchy.h"
+#import "GTLStoreendpointStoreMenuStats.h"
 
 // ----------------------------------------------------------------------------
 //
@@ -26,13 +27,14 @@
 //
 
 @implementation GTLStoreendpointMenusAndMenuItems
-@dynamic menuItems, menusAndSubmenus;
+@dynamic menuItems, menusAndSubmenus, menuStats;
 
 + (NSDictionary *)arrayPropertyToClassMap {
   NSDictionary *map =
     [NSDictionary dictionaryWithObjectsAndKeys:
       [GTLStoreendpointMenuItemAndStats class], @"menuItems",
       [GTLStoreendpointStoreMenuHierarchy class], @"menusAndSubmenus",
+      [GTLStoreendpointStoreMenuStats class], @"menuStats",
       nil];
   return map;
 }

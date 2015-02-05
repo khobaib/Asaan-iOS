@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointMenusAndMenuItems (0 custom class methods, 2 custom properties)
+//   GTLStoreendpointMenusAndMenuItems (0 custom class methods, 3 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLObject.h"
@@ -23,6 +23,7 @@
 
 @class GTLStoreendpointMenuItemAndStats;
 @class GTLStoreendpointStoreMenuHierarchy;
+@class GTLStoreendpointStoreMenuStats;
 
 // ----------------------------------------------------------------------------
 //
@@ -32,4 +33,5 @@
 @interface GTLStoreendpointMenusAndMenuItems : GTLObject
 @property (retain) NSArray *menuItems;  // of GTLStoreendpointMenuItemAndStats
 @property (retain) NSArray *menusAndSubmenus;  // of GTLStoreendpointStoreMenuHierarchy
+@property (retain) NSArray *menuStats;  // of GTLStoreendpointStoreMenuStats
 @end

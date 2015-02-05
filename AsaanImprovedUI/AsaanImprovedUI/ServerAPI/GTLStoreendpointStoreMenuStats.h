@@ -3,7 +3,7 @@
  */
 
 //
-//  GTLStoreendpointStoreItemStats.h
+//  GTLStoreendpointStoreMenuStats.h
 //
 
 // ----------------------------------------------------------------------------
@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStoreItemStats (0 custom class methods, 7 custom properties)
+//   GTLStoreendpointStoreMenuStats (0 custom class methods, 7 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLObject.h"
@@ -23,18 +23,18 @@
 
 // ----------------------------------------------------------------------------
 //
-//   GTLStoreendpointStoreItemStats
+//   GTLStoreendpointStoreMenuStats
 //
 
-@interface GTLStoreendpointStoreItemStats : GTLObject
-@property (retain) NSNumber *dislikes;  // longLongValue
+@interface GTLStoreendpointStoreMenuStats : GTLObject
 
 // identifier property maps to 'id' in JSON (to avoid Objective C's 'id').
 @property (retain) NSNumber *identifier;  // longLongValue
 
-@property (retain) NSNumber *likes;  // longLongValue
-@property (retain) NSNumber *menuItemPOSId;  // intValue
-@property (retain) NSNumber *orders;  // longLongValue
-@property (retain) NSNumber *recommends;  // longLongValue
+@property (retain) NSNumber *menuPOSId;  // intValue
+@property (retain) NSNumber *mostFrequentlyOrderedMenuItemPOSId;  // intValue
+@property (retain) NSNumber *mostLikedMenuItemPOSId;  // intValue
+@property (retain) NSNumber *mostRecommendedMenuItemPOSId;  // intValue
 @property (retain) NSNumber *storeId;  // longLongValue
+@property (retain) NSNumber *subMenuPOSId;  // intValue
 @end

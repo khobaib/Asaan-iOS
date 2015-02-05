@@ -50,6 +50,7 @@
 #import "GTLStoreendpointStoreMenuItemCollection.h"
 #import "GTLStoreendpointStoreMenuItemModifier.h"
 #import "GTLStoreendpointStoreMenuItemModifierGroup.h"
+#import "GTLStoreendpointStoreMenuStats.h"
 #import "GTLStoreendpointStoreOrder.h"
 #import "GTLStoreendpointStoreOrderListAndCount.h"
 #import "GTLStoreendpointStoreOwner.h"

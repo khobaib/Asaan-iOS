@@ -53,6 +53,7 @@
 #import "GTLStoreendpointStoreMenuItemCollection.m"
 #import "GTLStoreendpointStoreMenuItemModifier.m"
 #import "GTLStoreendpointStoreMenuItemModifierGroup.m"
+#import "GTLStoreendpointStoreMenuStats.m"
 #import "GTLStoreendpointStoreOrder.m"
 #import "GTLStoreendpointStoreOrderListAndCount.m"
 #import "GTLStoreendpointStoreOwner.m"

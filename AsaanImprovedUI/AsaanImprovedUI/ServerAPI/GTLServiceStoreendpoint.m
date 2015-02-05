@@ -60,6 +60,7 @@
                       [GTLStoreendpointStoreMenuItemCollection class],
                       [GTLStoreendpointStoreMenuItemModifier class],
                       [GTLStoreendpointStoreMenuItemModifierGroup class],
+                      [GTLStoreendpointStoreMenuStats class],
                       [GTLStoreendpointStoreOrder class],
                       [GTLStoreendpointStoreOrderListAndCount class],
                       [GTLStoreendpointStoreOwner class],

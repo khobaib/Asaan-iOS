@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/3Oy0zj_tZ3WqSpmJft9mTNlO710\"",
+ "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/GzCGVJyZGbcpJjT6CZ8IbB6RCEQ\"",
  "discoveryVersion": "v1",
  "id": "storeendpoint:v1",
  "name": "storeendpoint",
@@ -322,6 +322,12 @@
      "type": "array",
      "items": {
       "$ref": "MenuItemAndStats"
+     }
+    },
+    "menuStats": {
+     "type": "array",
+     "items": {
+      "$ref": "StoreMenuStats"
      }
     },
     "menusAndSubmenus": {
@@ -710,24 +716,17 @@
      "type": "integer",
      "format": "int32"
     },
-    "menuPOSId": {
-     "type": "integer",
-     "format": "int32"
-    },
-    "mostFrequentlyOrdered": {
-     "type": "boolean"
-    },
     "orders": {
+     "type": "string",
+     "format": "int64"
+    },
+    "recommends": {
      "type": "string",
      "format": "int64"
     },
     "storeId": {
      "type": "string",
      "format": "int64"
-    },
-    "subMenuPOSId": {
-     "type": "integer",
-     "format": "int32"
     }
    }
   },
@@ -1026,6 +1025,40 @@
     "storeId": {
      "type": "string",
      "format": "int64"
+    }
+   }
+  },
+  "StoreMenuStats": {
+   "id": "StoreMenuStats",
+   "type": "object",
+   "properties": {
+    "id": {
+     "type": "string",
+     "format": "int64"
+    },
+    "menuPOSId": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "mostFrequentlyOrderedMenuItemPOSId": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "mostLikedMenuItemPOSId": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "mostRecommendedMenuItemPOSId": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "storeId": {
+     "type": "string",
+     "format": "int64"
+    },
+    "subMenuPOSId": {
+     "type": "integer",
+     "format": "int32"
     }
    }
   },

@@ -145,6 +145,7 @@
 		D4464B1F1A36138100206728 /* OnlineOrderDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = D4464B1C1A36138100206728 /* OnlineOrderDetails.m */; };
 		D4464B201A36138100206728 /* OnlineOrderSelectedMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D4464B1E1A36138100206728 /* OnlineOrderSelectedMenuItem.m */; };
 		D4464B231A361A4E00206728 /* OnlineOrderSelectedModifierGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = D4464B221A361A4E00206728 /* OnlineOrderSelectedModifierGroup.m */; };
+		D44909151A827F7A00DC402C /* GTLStoreendpointStoreMenuStats.m in Sources */ = {isa = PBXBuildFile; fileRef = D44909141A827F7A00DC402C /* GTLStoreendpointStoreMenuStats.m */; };
 		D449EB1D1A1BCDB600879383 /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D449EB1A1A1BCDB600879383 /* GoogleOpenSource.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		D449EB1E1A1BCDB600879383 /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D449EB1B1A1BCDB600879383 /* GooglePlus.bundle */; };
 		D449EB1F1A1BCDB600879383 /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D449EB1C1A1BCDB600879383 /* GooglePlus.framework */; };
@@ -625,6 +626,8 @@
 		D4464B1E1A36138100206728 /* OnlineOrderSelectedMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnlineOrderSelectedMenuItem.m; sourceTree = "<group>"; };
 		D4464B211A361A4E00206728 /* OnlineOrderSelectedModifierGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnlineOrderSelectedModifierGroup.h; sourceTree = "<group>"; };
 		D4464B221A361A4E00206728 /* OnlineOrderSelectedModifierGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnlineOrderSelectedModifierGroup.m; sourceTree = "<group>"; };
+		D44909131A827F7A00DC402C /* GTLStoreendpointStoreMenuStats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreMenuStats.h; sourceTree = "<group>"; };
+		D44909141A827F7A00DC402C /* GTLStoreendpointStoreMenuStats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreMenuStats.m; sourceTree = "<group>"; };
 		D449EB1A1A1BCDB600879383 /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleOpenSource.framework; path = AsaanImprovedUI/frameworks/GoogleOpenSource.framework; sourceTree = "<group>"; };
 		D449EB1B1A1BCDB600879383 /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GooglePlus.bundle; path = AsaanImprovedUI/frameworks/GooglePlus.bundle; sourceTree = "<group>"; };
 		D449EB1C1A1BCDB600879383 /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GooglePlus.framework; path = AsaanImprovedUI/frameworks/GooglePlus.framework; sourceTree = "<group>"; };
@@ -1543,6 +1546,8 @@
 		D449EB201A1BCDEB00879383 /* ServerAPI */ = {
 			isa = PBXGroup;
 			children = (
+				D44909131A827F7A00DC402C /* GTLStoreendpointStoreMenuStats.h */,
+				D44909141A827F7A00DC402C /* GTLStoreendpointStoreMenuStats.m */,
 				D46154511A7FDFD4003AE84D /* GTLStoreendpointOrderAndReviews.h */,
 				D46154521A7FDFD4003AE84D /* GTLStoreendpointOrderAndReviews.m */,
 				D4828D1D1A79313400C80E92 /* GTLStoreendpointStoreChatTeam.h */,
@@ -2582,6 +2587,7 @@
 				D4522B291A15264F002EFA92 /* Stripe.m in Sources */,
 				3709EA8F1A31802A0060B49B /* DACircularProgressView.m in Sources */,
 				D4828CF91A72BE4B00C80E92 /* StoreLocation.m in Sources */,
+				D44909151A827F7A00DC402C /* GTLStoreendpointStoreMenuStats.m in Sources */,
 				D4828CD71A71AF7400C80E92 /* UIView+Toast.m in Sources */,
 				375D0FAA1A6996610016C293 /* JSQMessagesCellTextView.m in Sources */,
 				3709EAB91A31804E0060B49B /* PSTCollectionViewCell.m in Sources */,
