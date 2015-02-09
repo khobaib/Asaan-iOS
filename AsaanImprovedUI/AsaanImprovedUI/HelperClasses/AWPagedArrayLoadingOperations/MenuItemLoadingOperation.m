@@ -12,6 +12,7 @@
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
 #import "InlineCalls.h"
+#import "Constants.h"
 
 @interface MenuItemLoadingOperation()
 @property (nonatomic) Boolean bDataLoaded;
@@ -19,8 +20,6 @@
 
 @implementation MenuItemLoadingOperation
 @synthesize bDataLoaded = _bDataLoaded;
-
-const NSTimeInterval DataLoadingOperationDuration1 = 0.3;
 
 - (instancetype)initWithIndexes:(NSIndexSet *)indexes storeId:(long)storeId menuPOSId:(long)menuPOSId{
     
@@ -50,7 +49,7 @@ const NSTimeInterval DataLoadingOperationDuration1 = 0.3;
             }];
             
             while (weakSelf.bDataLoaded == false)
-                [NSThread sleepForTimeInterval:DataLoadingOperationDuration1];
+                [NSThread sleepForTimeInterval:DataLoadingOperationDuration];
             
         }];
     }

@@ -35,6 +35,7 @@
 #import "GTLStoreendpointOrderAndReviews.m"
 #import "GTLStoreendpointOrderReview.m"
 #import "GTLStoreendpointOrderReviewAndItemReviews.m"
+#import "GTLStoreendpointOrderReviewListAndCount.m"
 #import "GTLStoreendpointStore.m"
 #import "GTLStoreendpointStoreAndStats.m"
 #import "GTLStoreendpointStoreAndStatsCollection.m"

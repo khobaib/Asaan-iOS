@@ -49,20 +49,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    if (appDelegate.globalObjectHolder.orderInProgress != nil) {
-        
-        _menu = @[@"Stores", @"Profile", @"Chat History", @"Friends", @"Pending Order", @"Order History", @"Logout"];
-        _menuSegue = @[SEGUE_SMToStoreList, SEGUE_SMToUpdateProfile, SEGUE_SMToChatHistory, SEGUE_SMToFriends, SEGUE_SMToCart, SEGUE_SMToOrderHistory, SEGUE_UnwindToStoreList];
-    }
-    else {
-        
-        _menu = @[@"Stores", @"Profile", @"Chat History", @"Friends", @"Order History", @"Logout"];
-        _menuSegue = @[SEGUE_SMToStoreList, SEGUE_SMToUpdateProfile, SEGUE_SMToChatHistory, SEGUE_SMToFriends, SEGUE_SMToOrderHistory, SEGUE_UnwindToStoreList];
-    }
-    
-    NSAssert(_menu.count == _menuSegue.count, @"Menu and MenuSegue length should be equal.");
 }
 
 - (void)didReceiveMemoryWarning {
@@ -102,6 +88,13 @@
     cell.badgeColor = [UIColor redColor];
     cell.badgeTextColor = [UIColor whiteColor];
     
+    if ([_menuSegue[indexPath.row] isEqualToString:SEGUE_SMToCart])
+    {
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+        GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
+        if (goh.orderInProgress == nil)
+            cell.userInteractionEnabled = cell.titleLabel.enabled = NO;
+    }
     if ([_menuSegue[indexPath.row] isEqualToString:SEGUE_SMToChatHistory]) {
         cell.badgeString = @"2";
     }
@@ -127,7 +120,12 @@
     else if ([_menuSegue[indexPath.row] isEqualToString:SEGUE_UnwindToStoreList]) {
         PFUser *currentUser = [PFUser currentUser];
         if (currentUser)
+        {
             [PFUser logOut];
+            AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+            GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
+            [goh clearAllObjects];
+        }
         
         [self performSegueWithIdentifier:SEGUE_SMToStoreList sender:self];
     }

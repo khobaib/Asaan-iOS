@@ -10,3 +10,5 @@
 
 const NSUInteger FluentPagingTablePreloadMargin = 5;
 const NSUInteger FluentPagingTablePageSize = 20;
+const NSTimeInterval DataLoadingOperationDuration = 0.3;
+

@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryStoreendpoint (40 custom class methods, 15 custom properties)
+//   GTLQueryStoreendpoint (41 custom class methods, 15 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLQuery.h"
@@ -105,6 +105,14 @@
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 // Fetches a GTLStoreendpointOrderAndReviews.
 + (id)queryForGetOrderAndReviewsByIdWithOrderId:(long long)orderId;
+
+// Method: storeendpoint.getOrderReviewsForStore
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
+// Fetches a GTLStoreendpointOrderReviewListAndCount.
++ (id)queryForGetOrderReviewsForStoreWithStoreId:(long long)storeId
+                                   firstPosition:(NSInteger)firstPosition
+                                       maxResult:(NSInteger)maxResult;
 
 // Method: storeendpoint.getReviewForCurrentUserAndOrder
 //  Authorization scope(s):
@@ -274,6 +282,7 @@
 // Method: storeendpoint.saveStoreDiscount
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
+// Fetches a GTLStoreendpointStoreDiscount.
 + (id)queryForSaveStoreDiscountWithObject:(GTLStoreendpointStoreDiscount *)object;
 
 // Method: storeendpoint.saveStoreItemReviews
@@ -313,6 +322,7 @@
 // Method: storeendpoint.saveStoreOrderReview
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
+// Fetches a GTLStoreendpointOrderReview.
 + (id)queryForSaveStoreOrderReviewWithObject:(GTLStoreendpointOrderReview *)object;
 
 // Method: storeendpoint.saveStoreOwner

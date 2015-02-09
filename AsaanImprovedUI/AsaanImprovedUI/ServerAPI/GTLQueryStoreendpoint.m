@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryStoreendpoint (40 custom class methods, 15 custom properties)
+//   GTLQueryStoreendpoint (41 custom class methods, 15 custom properties)
 
 #import "GTLQueryStoreendpoint.h"
 
@@ -31,6 +31,7 @@
 #import "GTLStoreendpointOrderAndReviews.h"
 #import "GTLStoreendpointOrderReview.h"
 #import "GTLStoreendpointOrderReviewAndItemReviews.h"
+#import "GTLStoreendpointOrderReviewListAndCount.h"
 #import "GTLStoreendpointStore.h"
 #import "GTLStoreendpointStoreAndStatsCollection.h"
 #import "GTLStoreendpointStoreChatMemberArray.h"
@@ -114,6 +115,18 @@
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
   query.orderId = orderId;
   query.expectedObjectClass = [GTLStoreendpointOrderAndReviews class];
+  return query;
+}
+
++ (id)queryForGetOrderReviewsForStoreWithStoreId:(long long)storeId
+                                   firstPosition:(NSInteger)firstPosition
+                                       maxResult:(NSInteger)maxResult {
+  NSString *methodName = @"storeendpoint.getOrderReviewsForStore";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.storeId = storeId;
+  query.firstPosition = firstPosition;
+  query.maxResult = maxResult;
+  query.expectedObjectClass = [GTLStoreendpointOrderReviewListAndCount class];
   return query;
 }
 
@@ -390,6 +403,7 @@
   NSString *methodName = @"storeendpoint.saveStoreDiscount";
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
   query.bodyObject = object;
+  query.expectedObjectClass = [GTLStoreendpointStoreDiscount class];
   return query;
 }
 
@@ -471,6 +485,7 @@
   NSString *methodName = @"storeendpoint.saveStoreOrderReview";
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
   query.bodyObject = object;
+  query.expectedObjectClass = [GTLStoreendpointOrderReview class];
   return query;
 }
 

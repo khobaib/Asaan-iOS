@@ -12,12 +12,13 @@
 #import "UtilCalls.h"
 #import "NotificationUtils.h"
 #import "InlineCalls.h"
+#import "SZTextView.h"
 
 
 @interface MainReviewViewController()
 @property (weak, nonatomic) IBOutlet UISlider *foodReviewSlider;
 @property (weak, nonatomic) IBOutlet UISlider *serviceReviewSlider;
-@property (weak, nonatomic) IBOutlet UITextView *txtReview;
+@property (weak, nonatomic) IBOutlet SZTextView *txtReview;
 @property (weak, nonatomic) IBOutlet UIScrollView *reviewScrollView;
 
 @property (nonatomic) Boolean foodValueChanged;
@@ -39,6 +40,10 @@
     [[self.txtReview layer] setBorderColor:[[UIColor grayColor] CGColor]];
     [[self.txtReview layer] setBorderWidth:2.3];
     [[self.txtReview layer] setCornerRadius:15];
+    
+//    self.txtReview.placeholder = @"Tell us what made your experience memorable. Amazing food, excellent service or perfect ambiance? Tell us more ...";
+    UIColor *color = [UIColor grayColor];
+    self.txtReview.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Tell us what made your experience memorable. Amazing food, excellent service or perfect ambiance? Tell us more ..." attributes:@{NSForegroundColorAttributeName: color}];
     
     self.txtReview.text = self.reviewAndItems.orderReview.comments;
     if (self.reviewAndItems == nil || self.reviewAndItems.orderReview.foodLike.longValue == 0)
@@ -126,10 +131,12 @@
     
     [query setAdditionalHTTPHeaders:dic];
 
-    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error)
+    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointOrderReview *object, NSError *error)
      {
          if (error)
              NSLog(@"saveOrderReview Error:%@",[error userInfo]);
+         else
+             self.reviewAndItems.orderReview = object;
      }];
 }
 

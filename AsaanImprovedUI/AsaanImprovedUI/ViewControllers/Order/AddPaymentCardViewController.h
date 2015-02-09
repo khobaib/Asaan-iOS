@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GTLUserendpointUserCard.h"
-#include "BaseViewController.h"
+#import "BaseViewController.h"
 
 #import "GTLStoreendpoint.h"
 #import "GTLUserendpointUserAddress.h"

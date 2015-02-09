@@ -19,5 +19,7 @@
 
 extern const NSUInteger FluentPagingTablePreloadMargin;
 extern const NSUInteger FluentPagingTablePageSize;
+extern const NSTimeInterval DataLoadingOperationDuration;
+
 
 #endif

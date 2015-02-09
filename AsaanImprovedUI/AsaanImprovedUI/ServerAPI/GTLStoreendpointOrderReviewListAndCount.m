@@ -3,7 +3,7 @@
  */
 
 //
-//  GTLStoreendpointOrderReview.m
+//  GTLStoreendpointOrderReviewListAndCount.m
 //
 
 // ----------------------------------------------------------------------------
@@ -13,23 +13,24 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointOrderReview (0 custom class methods, 10 custom properties)
+//   GTLStoreendpointOrderReviewListAndCount (0 custom class methods, 2 custom properties)
+
+#import "GTLStoreendpointOrderReviewListAndCount.h"
 
 #import "GTLStoreendpointOrderReview.h"
 
 // ----------------------------------------------------------------------------
 //
-//   GTLStoreendpointOrderReview
+//   GTLStoreendpointOrderReviewListAndCount
 //
 
-@implementation GTLStoreendpointOrderReview
-@dynamic comments, createdDate, foodLike, identifier, modifiedDate, orderId,
-         serviceLike, storeId, userId, userName;
+@implementation GTLStoreendpointOrderReviewListAndCount
+@dynamic count, reviews;
 
-+ (NSDictionary *)propertyToJSONKeyMap {
++ (NSDictionary *)arrayPropertyToClassMap {
   NSDictionary *map =
-    [NSDictionary dictionaryWithObject:@"id"
-                                forKey:@"identifier"];
+    [NSDictionary dictionaryWithObject:[GTLStoreendpointOrderReview class]
+                                forKey:@"reviews"];
   return map;
 }
 

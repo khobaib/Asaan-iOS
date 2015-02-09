@@ -32,6 +32,7 @@
 #import "GTLStoreendpointOrderAndReviews.h"
 #import "GTLStoreendpointOrderReview.h"
 #import "GTLStoreendpointOrderReviewAndItemReviews.h"
+#import "GTLStoreendpointOrderReviewListAndCount.h"
 #import "GTLStoreendpointStore.h"
 #import "GTLStoreendpointStoreAndStats.h"
 #import "GTLStoreendpointStoreAndStatsCollection.h"

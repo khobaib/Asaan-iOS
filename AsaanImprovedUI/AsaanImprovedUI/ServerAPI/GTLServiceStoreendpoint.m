@@ -42,6 +42,7 @@
                       [GTLStoreendpointOrderAndReviews class],
                       [GTLStoreendpointOrderReview class],
                       [GTLStoreendpointOrderReviewAndItemReviews class],
+                      [GTLStoreendpointOrderReviewListAndCount class],
                       [GTLStoreendpointStore class],
                       [GTLStoreendpointStoreAndStats class],
                       [GTLStoreendpointStoreAndStatsCollection class],

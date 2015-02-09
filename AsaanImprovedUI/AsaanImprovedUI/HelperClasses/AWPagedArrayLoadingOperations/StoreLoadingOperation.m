@@ -12,6 +12,7 @@
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
 #import "InlineCalls.h"
+#import "Constants.h"
 
 @interface StoreLoadingOperation()
 @property (nonatomic) Boolean bDataLoaded;
@@ -19,8 +20,6 @@
 
 @implementation StoreLoadingOperation
 @synthesize bDataLoaded = _bDataLoaded;
-
-const NSTimeInterval DataLoadingOperationDuration2_3 = 0.3;
 
 - (instancetype)initWithIndexes:(NSIndexSet *)indexes{
     
@@ -50,7 +49,7 @@ const NSTimeInterval DataLoadingOperationDuration2_3 = 0.3;
             }];
             
             while (weakSelf.bDataLoaded == false)
-                [NSThread sleepForTimeInterval:DataLoadingOperationDuration2_3];
+                [NSThread sleepForTimeInterval:DataLoadingOperationDuration];
 
         }];
     }

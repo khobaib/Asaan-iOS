@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStoreStats (0 custom class methods, 10 custom properties)
+//   GTLStoreendpointStoreStats (0 custom class methods, 12 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLObject.h"
@@ -29,12 +29,14 @@
 @interface GTLStoreendpointStoreStats : GTLObject
 @property (retain) NSNumber *createdDate;  // longLongValue
 @property (retain) NSNumber *daysOfService;  // intValue
-@property (retain) NSNumber *dislikes;  // longLongValue
+@property (retain) NSNumber *foodDislikes;  // longLongValue
+@property (retain) NSNumber *foodLikes;  // longLongValue
 @property (retain) NSNumber *lastOrderPlacedDate;  // longLongValue
-@property (retain) NSNumber *likes;  // longLongValue
 @property (retain) NSNumber *modifiedDate;  // longLongValue
 @property (retain) NSNumber *orders;  // longLongValue
 @property (retain) NSNumber *recommendations;  // longLongValue
+@property (retain) NSNumber *serviceDislikes;  // longLongValue
+@property (retain) NSNumber *serviceLikes;  // longLongValue
 @property (retain) NSNumber *storeId;  // longLongValue
 @property (retain) NSNumber *visits;  // longLongValue
 @end

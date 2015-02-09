@@ -89,7 +89,14 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
                                              selector:@selector(didChangePreferredContentSize:)
                                                  name:UIContentSizeCategoryDidChangeNotification object:nil];
     
-    self.cellHeight = 150;
+//    self.cellHeight = 150;
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
+    {
+        self.tableView.estimatedRowHeight = 150;
+        self.tableView.rowHeight = UITableViewAutomaticDimension;
+    }
+    else
+        self.cellHeight = 150;
 }
 
 - (void)dealloc
@@ -242,6 +249,9 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
 
 - (void) setTableHeightBasedOnLargestMenuItemIn:(NSArray *)menuItems // of GTLStoreendpointMenuItemAndStats
 {
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
+        return;
+    
     long size = 0;
     for (GTLStoreendpointMenuItemAndStats *object in menuItems)
         if ((object.menuItem.shortDescription.length*2 + object.menuItem.longDescription.length) > size)
@@ -515,7 +525,10 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return self.cellHeight;
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
+        return UITableViewAutomaticDimension;
+    else
+        return self.cellHeight;
 }
 
 #pragma mark -

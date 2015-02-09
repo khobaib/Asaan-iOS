@@ -32,4 +32,6 @@
 - (void) addCardToUserCards:(GTLUserendpointUserCard *)card;
 - (void) addAddressToUserAddresses:(GTLUserendpointUserAddress *)address;
 
+- (void) clearAllObjects;
+
 @end

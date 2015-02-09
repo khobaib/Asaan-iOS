@@ -24,6 +24,7 @@
 @property (strong, nonatomic) GTLStoreendpointOrderReviewAndItemReviews *reviewAndItems;
 @property (strong, nonatomic) UIImage *imgLike;
 @property (strong, nonatomic) UIImage *imgDislike;
+@property (nonatomic) CGFloat cellHeight;
 
 @end
 
@@ -42,6 +43,14 @@
         [self parsePOSCheckDetails];
         [self getOrderReview];
     }
+    
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
+    {
+        self.tableView.estimatedRowHeight = 78;
+        self.tableView.rowHeight = UITableViewAutomaticDimension;
+    }
+    else
+        self.cellHeight = 78;
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -390,6 +399,13 @@
     return footerCell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
+        return UITableViewAutomaticDimension;
+    else
+        return self.cellHeight;
+}
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

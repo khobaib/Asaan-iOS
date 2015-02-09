@@ -25,7 +25,6 @@
 
 #import "StoreViewController.h"
 #import "StoreListTableViewCell.h"
-#import "UtilCalls.h"
 
 #import "ChatView.h"
 #import "ChatConstants.h"
@@ -210,32 +209,25 @@
         if (storeAndStats.stats.visits.longValue > 0)
         {
             NSString *strVisitCount = [UtilCalls formattedNumber:storeAndStats.stats.visits];
-            NSString *str = [NSString stringWithFormat:@"Serves: %@ per Wk", strVisitCount];
-            NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
-            
-            // Set font, notice the range is for the whole string
-            UIFont *font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
-            [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(8, [strVisitCount length])];
-            [cell.visitLabel setAttributedText:attributedString];
+            NSString *str = [NSString stringWithFormat:@"%@ Guests per Wk", strVisitCount];
+//            NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
+//            
+//            // Set font, notice the range is for the whole string
+//            UIFont *font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
+//            [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(8, [strVisitCount length])];
+//            [cell.visitLabel setAttributedText:attributedString];
+            cell.visitLabel.text = str;
             cell.statsView.hidden = false;
         }
-        
-        long reviewCount = storeAndStats.stats.dislikes.longValue + storeAndStats.stats.likes.longValue;
-        if (reviewCount > 0)
+
+        NSString *strLike = [UtilCalls getOverallReviewStringFromStats:storeAndStats];
+        if (!IsEmpty(strLike))
         {
-            NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-            [numberFormatter setNumberStyle:NSNumberFormatterPercentStyle];
-            int iPercent = (int)(storeAndStats.stats.likes.longValue*100/reviewCount);
-            NSNumber *likePercent = [NSNumber numberWithInt:iPercent];
-            NSString *strReviewCount = [UtilCalls formattedNumber:[NSNumber numberWithLong:reviewCount/2]];
-            NSString *strLikePercent = [UtilCalls formattedNumber:likePercent];
-            NSString *strLike = [NSString stringWithFormat:@"Likes: %@%% (%@)", strLikePercent, strReviewCount];
-            
-            // Set font, notice the range is for the whole string
-            UIFont *font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
-            NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:strLike];
-            [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(7, [strLikePercent length])];
-            [cell.likeLabel setAttributedText:attributedString];
+//            // Set font, notice the range is for the whole string
+//            UIFont *font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
+//            NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:strLike];
+//            [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(7, [strLikePercent length])];
+            cell.likeLabel.text = strLike;
             cell.statsView.hidden = false;
         }
         //
@@ -340,7 +332,7 @@
     else if ([[segue identifier] isEqualToString:@"StoreListToStoreSegue"]) {
         
         StoreViewController *storeViewController = segue.destinationViewController;
-        [storeViewController setSelectedStore:_selectedStore.store];
+        [storeViewController setSelectedStore:_selectedStore];
     }
 }
 

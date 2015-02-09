@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStoreStats (0 custom class methods, 10 custom properties)
+//   GTLStoreendpointStoreStats (0 custom class methods, 12 custom properties)
 
 #import "GTLStoreendpointStoreStats.h"
 
@@ -23,6 +23,7 @@
 //
 
 @implementation GTLStoreendpointStoreStats
-@dynamic createdDate, daysOfService, dislikes, lastOrderPlacedDate, likes,
-         modifiedDate, orders, recommendations, storeId, visits;
+@dynamic createdDate, daysOfService, foodDislikes, foodLikes,
+         lastOrderPlacedDate, modifiedDate, orders, recommendations,
+         serviceDislikes, serviceLikes, storeId, visits;
 @end

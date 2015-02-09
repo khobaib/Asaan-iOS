@@ -11,10 +11,10 @@
 #import <UIKit/UIKit.h>
 #import <CommonCrypto/CommonDigest.h>
 //#import <objc/runtime.h>
-#include <sys/socket.h>
-#include <sys/sysctl.h>
-#include <net/if.h>
-#include <net/if_dl.h>
+#import <sys/socket.h>
+#import <sys/sysctl.h>
+#import <net/if.h>
+#import <net/if_dl.h>
 
 #pragma mark - UIImage
 @implementation UIImage (ImageUtilities)

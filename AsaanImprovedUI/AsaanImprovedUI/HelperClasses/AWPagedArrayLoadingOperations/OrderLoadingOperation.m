@@ -10,6 +10,7 @@
 #import <Foundation/Foundation.h>
 #import "GTMHTTPFetcher.h"
 #import "AppDelegate.h"
+#import "Constants.h"
 
 @interface OrderLoadingOperation()
 @property (nonatomic) Boolean bDataLoaded;
@@ -17,8 +18,6 @@
 
 @implementation OrderLoadingOperation
 @synthesize bDataLoaded = _bDataLoaded;
-
-const NSTimeInterval DataLoadingOperationDuration2_2 = 0.3;
 
 - (instancetype)initWithIndexes:(NSIndexSet *)indexes{
     
@@ -48,7 +47,7 @@ const NSTimeInterval DataLoadingOperationDuration2_2 = 0.3;
             }];
             
             while (weakSelf.bDataLoaded == false)
-                [NSThread sleepForTimeInterval:DataLoadingOperationDuration2_2];
+                [NSThread sleepForTimeInterval:DataLoadingOperationDuration];
             
         }];
     }

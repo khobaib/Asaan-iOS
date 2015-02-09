@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/GzCGVJyZGbcpJjT6CZ8IbB6RCEQ\"",
+ "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/kiDTsWpwwwcviPI59e1xnBEV2Ug\"",
  "discoveryVersion": "v1",
  "id": "storeendpoint:v1",
  "name": "storeendpoint",
@@ -388,6 +388,9 @@
     "userId": {
      "type": "string",
      "format": "int64"
+    },
+    "userName": {
+     "type": "string"
     }
    }
   },
@@ -403,6 +406,22 @@
     },
     "orderReview": {
      "$ref": "OrderReview"
+    }
+   }
+  },
+  "OrderReviewListAndCount": {
+   "id": "OrderReviewListAndCount",
+   "type": "object",
+   "properties": {
+    "count": {
+     "type": "string",
+     "format": "int64"
+    },
+    "reviews": {
+     "type": "array",
+     "items": {
+      "$ref": "OrderReview"
+     }
     }
    }
   },
@@ -1276,15 +1295,15 @@
      "type": "integer",
      "format": "int32"
     },
-    "dislikes": {
+    "foodDislikes": {
+     "type": "string",
+     "format": "int64"
+    },
+    "foodLikes": {
      "type": "string",
      "format": "int64"
     },
     "lastOrderPlacedDate": {
-     "type": "string",
-     "format": "int64"
-    },
-    "likes": {
      "type": "string",
      "format": "int64"
     },
@@ -1297,6 +1316,14 @@
      "format": "int64"
     },
     "recommendations": {
+     "type": "string",
+     "format": "int64"
+    },
+    "serviceDislikes": {
+     "type": "string",
+     "format": "int64"
+    },
+    "serviceLikes": {
      "type": "string",
      "format": "int64"
     },
@@ -1445,6 +1472,37 @@
    ],
    "returns": {
     "$ref": "OrderAndReviews"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.getOrderReviewsForStore": {
+   "id": "storeendpoint.getOrderReviewsForStore",
+   "parameters": {
+    "firstPosition": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    },
+    "maxResult": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    },
+    "storeId": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    }
+   },
+   "parameterOrder": [
+    "storeId",
+    "firstPosition",
+    "maxResult"
+   ],
+   "returns": {
+    "$ref": "OrderReviewListAndCount"
    },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"
@@ -2009,6 +2067,9 @@
    "parameterOrder": [
     "resource"
    ],
+   "returns": {
+    "$ref": "StoreDiscount"
+   },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"
    ]
@@ -2119,6 +2180,9 @@
    "parameterOrder": [
     "resource"
    ],
+   "returns": {
+    "$ref": "OrderReview"
+   },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"
    ]

@@ -22,6 +22,16 @@
     return _orderInProgress;
 }
 
+- (void) clearAllObjects
+{
+    self.orderInProgress = nil;
+    self.userAddresses = nil;
+    self.userCards = nil;
+    self.defaultUserCard = nil;
+    self.defaultUserAddress = nil;
+    self.currentUser = nil;
+}
+
 - (void) removeOrderInProgress { _orderInProgress = nil; }
 
 - (void) loadUserAddressesFromServer

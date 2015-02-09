@@ -11,6 +11,6 @@
 
 @interface StoreViewController : UIViewController
 
-@property (nonatomic, strong) GTLStoreendpointStore *selectedStore;
+@property (nonatomic, strong) GTLStoreendpointStoreAndStats *selectedStore;
 
 @end

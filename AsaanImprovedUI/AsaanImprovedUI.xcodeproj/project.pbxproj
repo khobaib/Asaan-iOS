@@ -108,6 +108,10 @@
 		37DEE0351A781F0700DBDB32 /* TDBadgedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DEE0321A781F0700DBDB32 /* TDBadgedCell.m */; };
 		D14C64111A6C66F70047475B /* OrderDiscountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D14C64101A6C66F70047475B /* OrderDiscountViewController.m */; };
 		D404EDBB1A13149A000285F2 /* UIColor+AsaanBackgroundColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D404EDBA1A13149A000285F2 /* UIColor+AsaanBackgroundColor.m */; };
+		D40807A41A83FBC700D50F03 /* SZTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D40807A31A83FBC600D50F03 /* SZTextView.m */; };
+		D40807A71A841B2200D50F03 /* ReviewsSummaryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D40807A61A841B2200D50F03 /* ReviewsSummaryTableViewController.m */; };
+		D40807AA1A843E5E00D50F03 /* ReviewLoadingOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D40807A91A843E5E00D50F03 /* ReviewLoadingOperation.m */; };
+		D40807AD1A84481C00D50F03 /* GTLStoreendpointOrderReviewListAndCount.m in Sources */ = {isa = PBXBuildFile; fileRef = D40807AC1A84481C00D50F03 /* GTLStoreendpointOrderReviewListAndCount.m */; };
 		D40DF36E1A3A976700C67088 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D40DF36D1A3A976700C67088 /* libsqlite3.0.dylib */; };
 		D40DF3701A3A97A000C67088 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D40DF36F1A3A97A000C67088 /* ParseCrashReporting.framework */; };
 		D40DF3731A3A9DD000C67088 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D40DF3721A3A9DD000C67088 /* ParseCrashReporting.framework */; };
@@ -266,7 +270,6 @@
 		D4828CF51A72BE4B00C80E92 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CE81A72BE4B00C80E92 /* InfoViewController.m */; };
 		D4828CF61A72BE4B00C80E92 /* OrderHistorySummaryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CEA1A72BE4B00C80E92 /* OrderHistorySummaryTableViewController.m */; };
 		D4828CF71A72BE4B00C80E92 /* OrderHistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CEC1A72BE4B00C80E92 /* OrderHistoryTableViewController.m */; };
-		D4828CF81A72BE4B00C80E92 /* ReviewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CEE1A72BE4B00C80E92 /* ReviewsViewController.m */; };
 		D4828CF91A72BE4B00C80E92 /* StoreLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CF01A72BE4B00C80E92 /* StoreLocation.m */; };
 		D4828CFA1A72BE4B00C80E92 /* StoreMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CF21A72BE4B00C80E92 /* StoreMapViewController.m */; };
 		D4828CFB1A72BE4B00C80E92 /* StoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4828CF41A72BE4B00C80E92 /* StoreViewController.m */; };
@@ -578,6 +581,14 @@
 		D14C64101A6C66F70047475B /* OrderDiscountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDiscountViewController.m; sourceTree = "<group>"; };
 		D404EDB91A13149A000285F2 /* UIColor+AsaanBackgroundColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+AsaanBackgroundColor.h"; path = "HelperClasses/UIColor+AsaanBackgroundColor.h"; sourceTree = "<group>"; };
 		D404EDBA1A13149A000285F2 /* UIColor+AsaanBackgroundColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+AsaanBackgroundColor.m"; path = "HelperClasses/UIColor+AsaanBackgroundColor.m"; sourceTree = "<group>"; };
+		D40807A21A83FBC600D50F03 /* SZTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZTextView.h; sourceTree = "<group>"; };
+		D40807A31A83FBC600D50F03 /* SZTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZTextView.m; sourceTree = "<group>"; };
+		D40807A51A841B2200D50F03 /* ReviewsSummaryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewsSummaryTableViewController.h; sourceTree = "<group>"; };
+		D40807A61A841B2200D50F03 /* ReviewsSummaryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewsSummaryTableViewController.m; sourceTree = "<group>"; };
+		D40807A81A843E5E00D50F03 /* ReviewLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewLoadingOperation.h; sourceTree = "<group>"; };
+		D40807A91A843E5E00D50F03 /* ReviewLoadingOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewLoadingOperation.m; sourceTree = "<group>"; };
+		D40807AB1A84481C00D50F03 /* GTLStoreendpointOrderReviewListAndCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointOrderReviewListAndCount.h; sourceTree = "<group>"; };
+		D40807AC1A84481C00D50F03 /* GTLStoreendpointOrderReviewListAndCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointOrderReviewListAndCount.m; sourceTree = "<group>"; };
 		D40DF36D1A3A976700C67088 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		D40DF36F1A3A97A000C67088 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseCrashReporting.framework; path = AsaanImprovedUI/frameworks/ParseCrashReporting.framework; sourceTree = "<group>"; };
 		D40DF3721A3A9DD000C67088 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseCrashReporting.framework; path = AsaanImprovedUI/frameworks/ParseCrashReporting.framework; sourceTree = "<group>"; };
@@ -820,8 +831,6 @@
 		D4828CEA1A72BE4B00C80E92 /* OrderHistorySummaryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderHistorySummaryTableViewController.m; sourceTree = "<group>"; };
 		D4828CEB1A72BE4B00C80E92 /* OrderHistoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderHistoryTableViewController.h; sourceTree = "<group>"; };
 		D4828CEC1A72BE4B00C80E92 /* OrderHistoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderHistoryTableViewController.m; sourceTree = "<group>"; };
-		D4828CED1A72BE4B00C80E92 /* ReviewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewsViewController.h; sourceTree = "<group>"; };
-		D4828CEE1A72BE4B00C80E92 /* ReviewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewsViewController.m; sourceTree = "<group>"; };
 		D4828CEF1A72BE4B00C80E92 /* StoreLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreLocation.h; sourceTree = "<group>"; };
 		D4828CF01A72BE4B00C80E92 /* StoreLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreLocation.m; sourceTree = "<group>"; };
 		D4828CF11A72BE4B00C80E92 /* StoreMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreMapViewController.h; sourceTree = "<group>"; };
@@ -1463,6 +1472,15 @@
 			path = BadgeLibrary;
 			sourceTree = "<group>";
 		};
+		D40807A11A83FBC600D50F03 /* SZTextView */ = {
+			isa = PBXGroup;
+			children = (
+				D40807A21A83FBC600D50F03 /* SZTextView.h */,
+				D40807A31A83FBC600D50F03 /* SZTextView.m */,
+			);
+			path = SZTextView;
+			sourceTree = "<group>";
+		};
 		D41D31FE1A11DD9300EA49B6 /* images */ = {
 			isa = PBXGroup;
 			children = (
@@ -1522,6 +1540,8 @@
 				D43EED0F1A1FC0A2000C4FE5 /* StoreLoadingOperation.m */,
 				D4FEF6F71A243FA000A41303 /* MenuItemLoadingOperation.m */,
 				D4FEF6F91A243FBD00A41303 /* MenuItemLoadingOperation.h */,
+				D40807A81A843E5E00D50F03 /* ReviewLoadingOperation.h */,
+				D40807A91A843E5E00D50F03 /* ReviewLoadingOperation.m */,
 			);
 			name = AWPagedArrayLoadingOperations;
 			path = HelperClasses/AWPagedArrayLoadingOperations;
@@ -1546,6 +1566,8 @@
 		D449EB201A1BCDEB00879383 /* ServerAPI */ = {
 			isa = PBXGroup;
 			children = (
+				D40807AB1A84481C00D50F03 /* GTLStoreendpointOrderReviewListAndCount.h */,
+				D40807AC1A84481C00D50F03 /* GTLStoreendpointOrderReviewListAndCount.m */,
 				D44909131A827F7A00DC402C /* GTLStoreendpointStoreMenuStats.h */,
 				D44909141A827F7A00DC402C /* GTLStoreendpointStoreMenuStats.m */,
 				D46154511A7FDFD4003AE84D /* GTLStoreendpointOrderAndReviews.h */,
@@ -1664,6 +1686,7 @@
 		D4522ACB1A15264F002EFA92 /* library */ = {
 			isa = PBXGroup;
 			children = (
+				D40807A11A83FBC600D50F03 /* SZTextView */,
 				37DEE02E1A781F0700DBDB32 /* BadgeLibrary */,
 				D4828CCC1A71AF7400C80E92 /* OrderedDictionary */,
 				D4828CCF1A71AF7400C80E92 /* RaptureXML */,
@@ -1879,14 +1902,14 @@
 				D4828CEA1A72BE4B00C80E92 /* OrderHistorySummaryTableViewController.m */,
 				D4828CEB1A72BE4B00C80E92 /* OrderHistoryTableViewController.h */,
 				D4828CEC1A72BE4B00C80E92 /* OrderHistoryTableViewController.m */,
-				D4828CED1A72BE4B00C80E92 /* ReviewsViewController.h */,
-				D4828CEE1A72BE4B00C80E92 /* ReviewsViewController.m */,
 				D4828CEF1A72BE4B00C80E92 /* StoreLocation.h */,
 				D4828CF01A72BE4B00C80E92 /* StoreLocation.m */,
 				D4828CF11A72BE4B00C80E92 /* StoreMapViewController.h */,
 				D4828CF21A72BE4B00C80E92 /* StoreMapViewController.m */,
 				D4828CF31A72BE4B00C80E92 /* StoreViewController.h */,
 				D4828CF41A72BE4B00C80E92 /* StoreViewController.m */,
+				D40807A51A841B2200D50F03 /* ReviewsSummaryTableViewController.h */,
+				D40807A61A841B2200D50F03 /* ReviewsSummaryTableViewController.m */,
 			);
 			path = StoreInfo;
 			sourceTree = "<group>";
@@ -2398,6 +2421,7 @@
 				375D0FB61A6996610016C293 /* JSQMessagesMediaPlaceholderView.m in Sources */,
 				D4ED02871A1EA08A000AB270 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				D4522B251A15264F002EFA92 /* STPBankAccount.m in Sources */,
+				D40807A71A841B2200D50F03 /* ReviewsSummaryTableViewController.m in Sources */,
 				375D0F9E1A6996610016C293 /* JSQMessagesTimestampFormatter.m in Sources */,
 				D4828CB91A71AD6100C80E92 /* GTLStoreendpointStoreOrderListAndCount.m in Sources */,
 				D4A8C1881A263B1800DA344A /* AFURLResponseSerialization.m in Sources */,
@@ -2481,6 +2505,7 @@
 				375D0FB91A6996610016C293 /* JSQMessagesTypingIndicatorFooterView.m in Sources */,
 				D4A8C1A11A263B1800DA344A /* UIButton+WebCache.m in Sources */,
 				D4EAF9E91A12ACB20078FA9C /* UIColor+AsaanGoldColor.m in Sources */,
+				D40807A41A83FBC700D50F03 /* SZTextView.m in Sources */,
 				D404EDBB1A13149A000285F2 /* UIColor+AsaanBackgroundColor.m in Sources */,
 				D4A8C1A61A263B1800DA344A /* UIView+WebCacheOperation.m in Sources */,
 				37D0667A1A7494D30075DBFE /* NavigationController.m in Sources */,
@@ -2503,6 +2528,7 @@
 				375D0F941A6996610016C293 /* UIColor+JSQMessages.m in Sources */,
 				D449EB751A1BCDEB00879383 /* GTLUserendpointUser.m in Sources */,
 				375D0FB41A6996610016C293 /* JSQMessagesLoadEarlierHeaderView.m in Sources */,
+				D40807AA1A843E5E00D50F03 /* ReviewLoadingOperation.m in Sources */,
 				3709EAC71A31C8420060B49B /* MenuTableViewController.m in Sources */,
 				D4F275A81A0C021800CEC95A /* AppDelegate.m in Sources */,
 				D4B7A6361A35299200D72BC4 /* OrderSummaryViewController.m in Sources */,
@@ -2510,7 +2536,6 @@
 				3709EA931A31802A0060B49B /* MWPhoto.m in Sources */,
 				D4F275A51A0C021800CEC95A /* main.m in Sources */,
 				D4A8C1A51A263B1800DA344A /* UIImageView+WebCache.m in Sources */,
-				D4828CF81A72BE4B00C80E92 /* ReviewsViewController.m in Sources */,
 				D4522B221A15264F002EFA92 /* PTKUSAddressZip.m in Sources */,
 				3709EA921A31802A0060B49B /* MWGridViewController.m in Sources */,
 				D47799841A66E03800386430 /* GTLStoreendpointStoreDiscountArray.m in Sources */,
@@ -2585,6 +2610,7 @@
 				D4A8C19C1A263B1800DA344A /* SDWebImageDecoder.m in Sources */,
 				D449EB6A1A1BCDEB00879383 /* GTLStoreendpointStoreMenuItem.m in Sources */,
 				D4522B291A15264F002EFA92 /* Stripe.m in Sources */,
+				D40807AD1A84481C00D50F03 /* GTLStoreendpointOrderReviewListAndCount.m in Sources */,
 				3709EA8F1A31802A0060B49B /* DACircularProgressView.m in Sources */,
 				D4828CF91A72BE4B00C80E92 /* StoreLocation.m in Sources */,
 				D44909151A827F7A00DC402C /* GTLStoreendpointStoreMenuStats.m in Sources */,

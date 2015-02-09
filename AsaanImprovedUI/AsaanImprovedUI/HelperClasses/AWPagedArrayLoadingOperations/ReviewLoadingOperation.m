@@ -1,26 +1,29 @@
 //
-//  StoreOrderLoadingOperation.m
+//  ReviewLoadingOperation.m
 //  AsaanImprovedUI
 //
-//  Created by Nirav Saraiya on 1/20/15.
+//  Created by Nirav Saraiya on 2/5/15.
 //  Copyright (c) 2015 Nirav Saraiya. All rights reserved.
 //
 
-#import "OrderForStoreLoadingOperation.h"
+#import "ReviewLoadingOperation.h"
+
 #import <Foundation/Foundation.h>
 #import "GTMHTTPFetcher.h"
 #import "AppDelegate.h"
+#import "InlineCalls.h"
 #import "UtilCalls.h"
 #import "Constants.h"
 
-@interface OrderForStoreLoadingOperation()
+@interface ReviewLoadingOperation()
 @property (nonatomic) Boolean bDataLoaded;
 @end
 
-@implementation OrderForStoreLoadingOperation
+@implementation ReviewLoadingOperation
 @synthesize bDataLoaded = _bDataLoaded;
 
-- (instancetype)initWithIndexes:(NSIndexSet *)indexes storeId:(long)storeId{
+- (instancetype)initWithIndexes:(NSIndexSet *)indexes storeId:(long)storeId
+{
     
     self = [super initWithIndexes:indexes];
     
@@ -36,14 +39,14 @@
         [self addExecutionBlock:^{
             AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
             GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-            GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreOrdersForCurrentUserAndStoreWithStoreId:storeId firstPosition:firstPosition maxResult:maxResult];
+            GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetOrderReviewsForStoreWithStoreId:storeId firstPosition:firstPosition maxResult:maxResult];
             NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
             dic[USER_AUTH_TOKEN_HEADER_NAME] = [UtilCalls getAuthTokenForCurrentUser];
             [query setAdditionalHTTPHeaders:dic];
             
-            [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreOrderListAndCount *object,NSError *error){
+            [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointOrderReviewListAndCount *object,NSError *error){
                 if(!error)
-                    [weakSelf setDataPage:[object.orders mutableCopy]];
+                    [weakSelf setDataPage:[object.reviews mutableCopy]];
                 else
                     NSLog(@"OrderForStoreLoadingOperation Error:%@",[error userInfo]);
                 

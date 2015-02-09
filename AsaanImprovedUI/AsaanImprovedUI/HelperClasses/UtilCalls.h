@@ -8,6 +8,7 @@
 @import CoreLocation;
 #import <UIKit/UIKit.h>
 #import "GTLStoreendpointOrderReviewAndItemReviews.h"
+#import "GTLStoreendpointStoreAndStats.h"
 
 @interface UtilCalls : NSObject
 
@@ -29,5 +30,8 @@
 
 + (NSString *) getAuthTokenForCurrentUser;
 + (Boolean) orderHasAlreadyBeenReviewed:(GTLStoreendpointOrderReviewAndItemReviews *)reviewAndItems;
++ (NSString *) getOverallReviewStringFromStats:(GTLStoreendpointStoreAndStats *)storeAndStats;
++ (NSString *) getFoodReviewStringFromStats:(GTLStoreendpointStoreAndStats *)storeAndStats;
++ (NSString *) getServiceReviewStringFromStats:(GTLStoreendpointStoreAndStats *)storeAndStats;
 
 @end

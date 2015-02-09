@@ -8,7 +8,7 @@
 
 #import "DataLoadingOperation.h"
 
-const NSTimeInterval DataLoadingOperationDuration = 0.3;
+//const NSTimeInterval DataLoadingOperationDuration = 0.3;
 
 @implementation DataLoadingOperation
 @synthesize dataPage = _dataPage;

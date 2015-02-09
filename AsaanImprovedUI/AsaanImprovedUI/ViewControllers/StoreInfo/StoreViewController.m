@@ -11,7 +11,7 @@
 #import "ContainerViewController.h"
 #import "OrderHistoryTableViewController.h"
 #import "InfoViewController.h"
-#import "ReviewsViewController.h"
+#import "ReviewsSummaryTableViewController.h"
 
 @interface StoreViewController () <ContainerViewControllerDelegate>
 
@@ -58,13 +58,13 @@
 - (void)containerViewController:(ContainerViewController *)containerViewController willShowViewController:(UIViewController*)viewController {
 
     if ([viewController isKindOfClass:[InfoViewController class]]) {
-        ((InfoViewController *)viewController).selectedStore = self.selectedStore;
+        ((InfoViewController *)viewController).selectedStore = self.selectedStore.store;
     }
     else if ([viewController isKindOfClass:[OrderHistoryTableViewController class]]) {
-        ((OrderHistoryTableViewController *)viewController).selectedStore = self.selectedStore;
+        ((OrderHistoryTableViewController *)viewController).selectedStore = self.selectedStore.store;
     }
-    else if ([viewController isKindOfClass:[ReviewsViewController class]]) {
-        ((ReviewsViewController *)viewController).selectedStore = self.selectedStore;
+    else if ([viewController isKindOfClass:[ReviewsSummaryTableViewController class]]) {
+        ((ReviewsSummaryTableViewController *)viewController).selectedStore = self.selectedStore;
     }
 }
 

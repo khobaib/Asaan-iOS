@@ -130,7 +130,8 @@
     NSString *gratuityStr;
     if ([self gratuity] > 0)
     {
-        gratuityStr = [NSString stringWithFormat:@"<SERVICECHARGES ID=\"%d\" AMOUNT=\"%@\" REFERENCE=\"SVC CHRG FROM ASAAN\" />", 902, [UtilCalls percentAmountToStringNoCurrency:[NSNumber numberWithLong:[self gratuity]]]];
+//        gratuityStr = [NSString stringWithFormat:@"<SERVICECHARGES ID=\"%d\" AMOUNT=\"%@\" REFERENCE=\"SVC CHRG FROM ASAAN\" />", 902, [UtilCalls percentAmountToStringNoCurrency:[NSNumber numberWithLong:[self gratuity]]]];
+        gratuityStr = [NSString stringWithFormat:@"<SERVICECHARGES ID=\"%d\" AMOUNT=\"%@\" REFERENCE=\"SVC CHRG FROM ASAAN\" />", 901, [UtilCalls percentAmountToStringNoCurrency:[NSNumber numberWithLong:[self gratuity]]]];
         strItems=[strItems stringByAppendingString:gratuityStr];
     }
     
@@ -177,7 +178,7 @@
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         
         NSLog(@"%@",object);
-        if(error==nil)
+        if(error == nil && object.identifier != nil && object.identifier.longValue != 0)
         {
             NSString *title = [NSString stringWithFormat:@"Your Order - %@", self.orderInProgress.selectedStore.name];
             NSString *msg = [NSString stringWithFormat:@"Thank you - your order has been placed. If you need to make changes please call %@ immediately at %@.", weakSelf.orderInProgress.selectedStore.name, weakSelf.orderInProgress.selectedStore.phone];
