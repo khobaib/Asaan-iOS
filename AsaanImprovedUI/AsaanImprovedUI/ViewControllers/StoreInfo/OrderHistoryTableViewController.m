@@ -172,7 +172,7 @@
         [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
         [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
         
-        NSDate *date = [NSDate dateWithTimeIntervalSince1970:order.createdDate.longValue/1000];
+        NSDate *date = [NSDate dateWithTimeIntervalSince1970:order.createdDate.longLongValue/1000];
         
         txtSubtitle.text = [dateFormatter stringFromDate:date];
     }
