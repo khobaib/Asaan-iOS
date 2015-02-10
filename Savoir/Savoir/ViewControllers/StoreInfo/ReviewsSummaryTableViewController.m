@@ -216,7 +216,6 @@
         [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
         NSDate *date = [NSDate dateWithTimeIntervalSince1970:review.createdDate.longLongValue/1000];
         txtPersonNameAndDate.text = [NSString stringWithFormat:@"%@ %@", review.userName, [dateFormatter stringFromDate:date]];
-        
         UIImageView *imgFoodLike = (UIImageView *)[cell viewWithTag:502];
         UIImageView *imgServiceLike = (UIImageView *)[cell viewWithTag:503];
         if (review.foodLike.intValue > 0 && review.foodLike.intValue < 140)
