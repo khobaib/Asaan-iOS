@@ -13,10 +13,11 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryUserendpoint (8 custom class methods, 2 custom properties)
+//   GTLQueryUserendpoint (9 custom class methods, 3 custom properties)
 
 #import "GTLQueryUserendpoint.h"
 
+#import "GTLUserendpointChatUser.h"
 #import "GTLUserendpointUser.h"
 #import "GTLUserendpointUserAddress.h"
 #import "GTLUserendpointUserAddressCollection.h"
@@ -25,7 +26,7 @@
 
 @implementation GTLQueryUserendpoint
 
-@dynamic email, fields;
+@dynamic email, fields, phone;
 
 #pragma mark -
 #pragma mark Service level methods
@@ -50,6 +51,14 @@
   GTLQueryUserendpoint *query = [self queryWithMethodName:methodName];
   query.email = email;
   query.expectedObjectClass = [GTLUserendpointUser class];
+  return query;
+}
+
++ (id)queryForGetUserByPhoneWithPhone:(NSString *)phone {
+  NSString *methodName = @"userendpoint.getUserByPhone";
+  GTLQueryUserendpoint *query = [self queryWithMethodName:methodName];
+  query.phone = phone;
+  query.expectedObjectClass = [GTLUserendpointChatUser class];
   return query;
 }
 

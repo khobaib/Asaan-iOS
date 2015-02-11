@@ -300,10 +300,10 @@
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
         [self.orderInProgress.selectedMenuItems removeObjectAtIndex:indexPath.row];
-        if (self.orderInProgress.selectedMenuItems.count > 0)
-            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        else
-            [tableView reloadData];
+//        if (self.orderInProgress.selectedMenuItems.count > 0)
+//            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//        else
+        [tableView reloadData];
     }
 }
 - (NSUInteger)subTotalNoDiscount

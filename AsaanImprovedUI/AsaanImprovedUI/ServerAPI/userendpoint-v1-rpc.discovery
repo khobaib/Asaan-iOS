@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/EDIPKGDXr-mhAvgfYJcf_9s9WAo\"",
+ "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/yWJlKPARFohmgCKK5NGzOQE6WUM\"",
  "discoveryVersion": "v1",
  "id": "userendpoint:v1",
  "name": "userendpoint",
@@ -72,6 +72,28 @@
   }
  },
  "schemas": {
+  "ChatUser": {
+   "id": "ChatUser",
+   "type": "object",
+   "properties": {
+    "name": {
+     "type": "string"
+    },
+    "objectId": {
+     "type": "string"
+    },
+    "phone": {
+     "type": "string"
+    },
+    "profilePhotoUrl": {
+     "type": "string"
+    },
+    "userId": {
+     "type": "string",
+     "format": "int64"
+    }
+   }
+  },
   "User": {
    "id": "User",
    "type": "object",
@@ -335,6 +357,24 @@
    ],
    "returns": {
     "$ref": "User"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "userendpoint.getUserByPhone": {
+   "id": "userendpoint.getUserByPhone",
+   "parameters": {
+    "phone": {
+     "type": "string",
+     "required": true
+    }
+   },
+   "parameterOrder": [
+    "phone"
+   ],
+   "returns": {
+    "$ref": "ChatUser"
    },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"

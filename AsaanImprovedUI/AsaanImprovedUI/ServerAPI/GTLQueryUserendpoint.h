@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryUserendpoint (8 custom class methods, 2 custom properties)
+//   GTLQueryUserendpoint (9 custom class methods, 3 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLQuery.h"
@@ -38,6 +38,7 @@
 // Method-specific parameters; see the comments below for more information.
 //
 @property (copy) NSString *email;
+@property (copy) NSString *phone;
 
 #pragma mark -
 #pragma mark Service level methods
@@ -60,6 +61,12 @@
 //   kGTLAuthScopeUserendpointUserinfoEmail
 // Fetches a GTLUserendpointUser.
 + (id)queryForGetUserByEmailWithEmail:(NSString *)email;
+
+// Method: userendpoint.getUserByPhone
+//  Authorization scope(s):
+//   kGTLAuthScopeUserendpointUserinfoEmail
+// Fetches a GTLUserendpointChatUser.
++ (id)queryForGetUserByPhoneWithPhone:(NSString *)phone;
 
 // Method: userendpoint.getUserCards
 //  Authorization scope(s):

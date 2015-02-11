@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/n1kvom72q71udjjR2w1C6HAniNI\"",
+ "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/3ajxH-1Rvj8bAe4_bvlGTpnjYHI\"",
  "discoveryVersion": "v1",
  "id": "storeendpoint:v1",
  "name": "storeendpoint",
@@ -196,6 +196,9 @@
      "type": "string"
     },
     "objectId": {
+     "type": "string"
+    },
+    "phone": {
      "type": "string"
     },
     "profilePhotoUrl": {

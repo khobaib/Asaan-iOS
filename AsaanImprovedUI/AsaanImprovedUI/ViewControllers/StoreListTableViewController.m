@@ -22,6 +22,7 @@
 #import "MenuTableViewController.h"
 #import "DeliveryOrCarryoutViewController.h"
 #import "ReserveOrWaitlistTableViewController.h"
+#import "ClaimStoreViewController.h"
 #import "UIAlertView+Blocks.h"
 
 #import "StoreViewController.h"
@@ -179,7 +180,8 @@
         
         return cell;
     }
-    
+    GTLStoreendpointStoreAndStats *storeAndStats = dataObject;
+
     [cell.callButton addTarget:self action:@selector(callStore:) forControlEvents:UIControlEventTouchUpInside];
     [cell.chatButton addTarget:self action:@selector(chatWithStore:) forControlEvents:UIControlEventTouchUpInside];
     [cell.menuButton addTarget:self action:@selector(showMenu:) forControlEvents:UIControlEventTouchUpInside];
@@ -187,71 +189,77 @@
     [cell.reserveButton addTarget:self action:@selector(reserveTable:) forControlEvents:UIControlEventTouchUpInside];
     
     cell.callButton.enabled = true;
-    cell.chatButton.enabled = true;
-    cell.menuButton.enabled = true;
     
-    if (self.selectedStore.store.providesCarryout.boolValue == true || self.selectedStore.store.providesDelivery.boolValue == true || self.selectedStore.store.providesPreOrder.boolValue == true)
+    if (storeAndStats.store.claimed.boolValue == true)
     {
-        cell.orderOnlineButton.enabled = true;
-        [cell.orderOnlineButton setTitleColor:[UIColor goldColor] forState:UIControlStateNormal];
-    }
-    else
-    {
-        cell.orderOnlineButton.enabled = false;
-        [cell.orderOnlineButton setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
-    }
-
-    if (self.selectedStore.store.providesReservation.boolValue == true || self.selectedStore.store.providesWaitlist.boolValue == true)
-    {
-        cell.reserveButton.enabled = true;
-        [cell.reserveButton setTitleColor:[UIColor goldColor] forState:UIControlStateNormal];
-    }
-    else
-    {
-        cell.reserveButton.enabled = false;
-        [cell.reserveButton setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
-    }
-    
-    GTLStoreendpointStoreAndStats *storeAndStats = dataObject;
-    if (storeAndStats != nil)
-    {
-        if (IsEmpty(storeAndStats.store.backgroundImageUrl) == false)
-            [cell.bgImageView sd_setImageWithURL:[NSURL URLWithString:storeAndStats.store.backgroundImageUrl]];
+        cell.chatButton.enabled = true;
+        cell.menuButton.enabled = true;
         
-//        NSLog(@"name = %@, torphy = %@, cuisine = %@", storeAndStats.store.name, storeAndStats.store.trophies.firstObject, storeAndStats.store.subType);
-        cell.restaurantLabel.text = storeAndStats.store.name;
-        cell.trophyLabel.text = storeAndStats.store.trophies.firstObject;
-        cell.cuisineLabel.text = storeAndStats.store.subType;
-        if (storeAndStats.stats.visits.longValue > 0)
+        cell.chatButton.hidden = false;
+        cell.menuButton.hidden = false;
+        cell.orderOnlineButton.hidden = false;
+        [cell.reserveButton setTitle:@"Reserve" forState:UIControlStateNormal];
+
+        if (storeAndStats.store.providesCarryout.boolValue == true || storeAndStats.store.providesDelivery.boolValue == true || storeAndStats.store.providesPreOrder.boolValue == true)
         {
-            NSString *strVisitCount = [UtilCalls formattedNumber:storeAndStats.stats.visits];
-            NSString *str = [NSString stringWithFormat:@"%@ Guests per Wk", strVisitCount];
-//            NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
-//            
-//            // Set font, notice the range is for the whole string
-//            UIFont *font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
-//            [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(8, [strVisitCount length])];
-//            [cell.visitLabel setAttributedText:attributedString];
-            cell.visitLabel.text = str;
-            cell.statsView.hidden = false;
+            cell.orderOnlineButton.enabled = true;
+            [cell.orderOnlineButton setTitleColor:[UIColor goldColor] forState:UIControlStateNormal];
+        }
+        else
+        {
+            cell.orderOnlineButton.enabled = false;
+            [cell.orderOnlineButton setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
         }
 
-        NSString *strLike = [UtilCalls getOverallReviewStringFromStats:storeAndStats];
-        if (!IsEmpty(strLike))
+        if (storeAndStats.store.providesReservation.boolValue == true || storeAndStats.store.providesWaitlist.boolValue == true)
         {
-//            // Set font, notice the range is for the whole string
-//            UIFont *font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
-//            NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:strLike];
-//            [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(7, [strLikePercent length])];
-            cell.likeLabel.text = strLike;
-            cell.statsView.hidden = false;
+            cell.reserveButton.enabled = true;
+            [cell.reserveButton setTitleColor:[UIColor goldColor] forState:UIControlStateNormal];
         }
-        //
-        //        if (storeStats.recommendations.longValue > 0){
-        //            txtRecommends.text = [UtilCalls formattedNumber:storeStats.recommendations];
-        //            imgRecommends.hidden = false;
-        //        }
+        else
+        {
+            cell.reserveButton.enabled = false;
+            [cell.reserveButton setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+        }
     }
+    else
+    {
+        cell.chatButton.enabled = false;
+        cell.menuButton.enabled = false;
+        cell.orderOnlineButton.enabled = false;
+
+        cell.chatButton.hidden = true;
+        cell.menuButton.hidden = true;
+        cell.orderOnlineButton.hidden = true;
+
+        [cell.reserveButton setTitle:@"Claim Store" forState:UIControlStateNormal];
+    }
+    
+    if (IsEmpty(storeAndStats.store.backgroundImageUrl) == false)
+        [cell.bgImageView sd_setImageWithURL:[NSURL URLWithString:storeAndStats.store.backgroundImageUrl]];
+    
+    cell.restaurantLabel.text = storeAndStats.store.name;
+    cell.trophyLabel.text = storeAndStats.store.trophies.firstObject;
+    cell.cuisineLabel.text = storeAndStats.store.subType;
+    if (storeAndStats.stats.visits.longValue > 0)
+    {
+        NSString *strVisitCount = [UtilCalls formattedNumber:storeAndStats.stats.visits];
+        NSString *str = [NSString stringWithFormat:@"%@ Guests per Wk", strVisitCount];
+        cell.visitLabel.text = str;
+        cell.statsView.hidden = false;
+    }
+
+    NSString *strLike = [UtilCalls getOverallReviewStringFromStats:storeAndStats];
+    if (!IsEmpty(strLike))
+    {
+        cell.likeLabel.text = strLike;
+        cell.statsView.hidden = false;
+    }
+    //
+    //        if (storeStats.recommendations.longValue > 0){
+    //            txtRecommends.text = [UtilCalls formattedNumber:storeStats.recommendations];
+    //            imgRecommends.hidden = false;
+    //        }
     
     return cell;
 }
@@ -322,7 +330,10 @@
 - (IBAction) reserveTable:(UIButton *)sender
 {
     _selectedStore = self.dataProvider.dataObjects[sender.tag];
-    [self performSegueWithIdentifier:@"segueStoreListToReserve" sender:sender];
+    if (_selectedStore.store.claimed.boolValue == true)
+        [self performSegueWithIdentifier:@"segueStoreListToReserve" sender:sender];
+    else
+        [self performSegueWithIdentifier:@"segueStoreListToClaimStore" sender:sender];
 }
 
 #pragma mark - Navigation
@@ -355,6 +366,11 @@
         
         ReserveOrWaitlistTableViewController *viewController = segue.destinationViewController;
         [viewController setSelectedStore:_selectedStore.store];
+    }
+    else if ([[segue identifier] isEqualToString:@"segueStoreListToClaimStore"]) {
+        
+        ClaimStoreViewController *viewController = segue.destinationViewController;
+        viewController.selectedStore = self.selectedStore.store;
     }
 }
 

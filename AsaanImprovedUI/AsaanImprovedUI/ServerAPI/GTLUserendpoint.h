@@ -15,6 +15,7 @@
 
 #import "GTLUserendpointConstants.h"
 
+#import "GTLUserendpointChatUser.h"
 #import "GTLUserendpointUser.h"
 #import "GTLUserendpointUserAddress.h"
 #import "GTLUserendpointUserAddressCollection.h"

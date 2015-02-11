@@ -3,17 +3,17 @@
  */
 
 //
-//  GTLStoreendpointChatUser.h
+//  GTLUserendpointChatUser.h
 //
 
 // ----------------------------------------------------------------------------
 // NOTE: This file is generated from Google APIs Discovery Service.
 // Service:
-//   storeendpoint/v1
+//   userendpoint/v1
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointChatUser (0 custom class methods, 5 custom properties)
+//   GTLUserendpointChatUser (0 custom class methods, 5 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLObject.h"
@@ -23,10 +23,10 @@
 
 // ----------------------------------------------------------------------------
 //
-//   GTLStoreendpointChatUser
+//   GTLUserendpointChatUser
 //
 
-@interface GTLStoreendpointChatUser : GTLObject
+@interface GTLUserendpointChatUser : GTLObject
 @property (copy) NSString *name;
 @property (copy) NSString *objectId;
 @property (copy) NSString *phone;

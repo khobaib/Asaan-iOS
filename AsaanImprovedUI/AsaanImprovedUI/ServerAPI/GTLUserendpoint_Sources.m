@@ -18,6 +18,7 @@
 
 #import "GTLUserendpointConstants.m"
 
+#import "GTLUserendpointChatUser.m"
 #import "GTLUserendpointUser.m"
 #import "GTLUserendpointUserAddress.m"
 #import "GTLUserendpointUserAddressCollection.m"

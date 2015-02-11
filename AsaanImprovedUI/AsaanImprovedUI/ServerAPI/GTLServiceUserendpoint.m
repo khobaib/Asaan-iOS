@@ -25,6 +25,7 @@
 + (NSArray *)checkClasses {
   NSArray *classes = [NSArray arrayWithObjects:
                       [GTLQueryUserendpoint class],
+                      [GTLUserendpointChatUser class],
                       [GTLUserendpointUser class],
                       [GTLUserendpointUserAddress class],
                       [GTLUserendpointUserAddressCollection class],

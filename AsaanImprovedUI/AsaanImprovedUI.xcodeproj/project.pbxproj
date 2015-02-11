@@ -120,7 +120,9 @@
 		D40807C21A898CD400D50F03 /* GTLStoreendpointStoreWaitListQueueCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = D40807BE1A898CD400D50F03 /* GTLStoreendpointStoreWaitListQueueCollection.m */; };
 		D40807C31A898CD400D50F03 /* GTLStoreendpointStoreWaitlistSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = D40807C01A898CD400D50F03 /* GTLStoreendpointStoreWaitlistSummary.m */; };
 		D40807C61A89B37E00D50F03 /* GTLStoreendpointStoreWaitListQueueAndPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = D40807C51A89B37E00D50F03 /* GTLStoreendpointStoreWaitListQueueAndPosition.m */; };
-		D40807C91A8A82F500D50F03 /* ClaimStoreTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D40807C81A8A82F500D50F03 /* ClaimStoreTableViewController.m */; };
+		D40807CD1A8B112200D50F03 /* ClaimStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D40807CC1A8B112200D50F03 /* ClaimStoreViewController.m */; };
+		D40807D01A8B126500D50F03 /* PhoneSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D40807CF1A8B126500D50F03 /* PhoneSearchViewController.m */; };
+		D40807D41A8BB38A00D50F03 /* GTLUserendpointChatUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D40807D31A8BB38A00D50F03 /* GTLUserendpointChatUser.m */; };
 		D40DF36E1A3A976700C67088 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D40DF36D1A3A976700C67088 /* libsqlite3.0.dylib */; };
 		D40DF3701A3A97A000C67088 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D40DF36F1A3A97A000C67088 /* ParseCrashReporting.framework */; };
 		D40DF3731A3A9DD000C67088 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D40DF3721A3A9DD000C67088 /* ParseCrashReporting.framework */; };
@@ -614,8 +616,13 @@
 		D40807C01A898CD400D50F03 /* GTLStoreendpointStoreWaitlistSummary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreWaitlistSummary.m; sourceTree = "<group>"; };
 		D40807C41A89B37E00D50F03 /* GTLStoreendpointStoreWaitListQueueAndPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreWaitListQueueAndPosition.h; sourceTree = "<group>"; };
 		D40807C51A89B37E00D50F03 /* GTLStoreendpointStoreWaitListQueueAndPosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreWaitListQueueAndPosition.m; sourceTree = "<group>"; };
-		D40807C71A8A82F500D50F03 /* ClaimStoreTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClaimStoreTableViewController.h; path = StorePrivate/ClaimStoreTableViewController.h; sourceTree = "<group>"; };
-		D40807C81A8A82F500D50F03 /* ClaimStoreTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClaimStoreTableViewController.m; path = StorePrivate/ClaimStoreTableViewController.m; sourceTree = "<group>"; };
+		D40807CB1A8B112200D50F03 /* ClaimStoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClaimStoreViewController.h; sourceTree = "<group>"; };
+		D40807CC1A8B112200D50F03 /* ClaimStoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClaimStoreViewController.m; sourceTree = "<group>"; };
+		D40807CE1A8B126500D50F03 /* PhoneSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneSearchViewController.h; sourceTree = "<group>"; };
+		D40807CF1A8B126500D50F03 /* PhoneSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneSearchViewController.m; sourceTree = "<group>"; };
+		D40807D11A8BB02F00D50F03 /* PhoneSearchReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneSearchReceiver.h; sourceTree = "<group>"; };
+		D40807D21A8BB38A00D50F03 /* GTLUserendpointChatUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLUserendpointChatUser.h; sourceTree = "<group>"; };
+		D40807D31A8BB38A00D50F03 /* GTLUserendpointChatUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLUserendpointChatUser.m; sourceTree = "<group>"; };
 		D40DF36D1A3A976700C67088 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		D40DF36F1A3A97A000C67088 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseCrashReporting.framework; path = AsaanImprovedUI/frameworks/ParseCrashReporting.framework; sourceTree = "<group>"; };
 		D40DF3721A3A9DD000C67088 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseCrashReporting.framework; path = AsaanImprovedUI/frameworks/ParseCrashReporting.framework; sourceTree = "<group>"; };
@@ -1526,8 +1533,11 @@
 		D40807CA1A8A830100D50F03 /* StorePrivate */ = {
 			isa = PBXGroup;
 			children = (
-				D40807C71A8A82F500D50F03 /* ClaimStoreTableViewController.h */,
-				D40807C81A8A82F500D50F03 /* ClaimStoreTableViewController.m */,
+				D40807CB1A8B112200D50F03 /* ClaimStoreViewController.h */,
+				D40807CC1A8B112200D50F03 /* ClaimStoreViewController.m */,
+				D40807CE1A8B126500D50F03 /* PhoneSearchViewController.h */,
+				D40807CF1A8B126500D50F03 /* PhoneSearchViewController.m */,
+				D40807D11A8BB02F00D50F03 /* PhoneSearchReceiver.h */,
 			);
 			name = StorePrivate;
 			sourceTree = "<group>";
@@ -1617,6 +1627,8 @@
 		D449EB201A1BCDEB00879383 /* ServerAPI */ = {
 			isa = PBXGroup;
 			children = (
+				D40807D21A8BB38A00D50F03 /* GTLUserendpointChatUser.h */,
+				D40807D31A8BB38A00D50F03 /* GTLUserendpointChatUser.m */,
 				D40807C41A89B37E00D50F03 /* GTLStoreendpointStoreWaitListQueueAndPosition.h */,
 				D40807C51A89B37E00D50F03 /* GTLStoreendpointStoreWaitListQueueAndPosition.m */,
 				D40807BB1A898CD400D50F03 /* GTLStoreendpointStoreWaitListQueue.h */,
@@ -2449,6 +2461,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D40807D41A8BB38A00D50F03 /* GTLUserendpointChatUser.m in Sources */,
 				D4522B261A15264F002EFA92 /* STPCard.m in Sources */,
 				D43EECFE1A1F91B1000C4FE5 /* AWPagedArray.m in Sources */,
 				37909B6E1A23828000649827 /* PaymentInfoViewController.m in Sources */,
@@ -2533,7 +2546,6 @@
 				D40807C61A89B37E00D50F03 /* GTLStoreendpointStoreWaitListQueueAndPosition.m in Sources */,
 				D449EB5D1A1BCDEB00879383 /* GTLQueryUserendpoint.m in Sources */,
 				D43EED071A1F9EC5000C4FE5 /* DataLoadingOperation.m in Sources */,
-				D40807C91A8A82F500D50F03 /* ClaimStoreTableViewController.m in Sources */,
 				D4828D211A79313400C80E92 /* GTLStoreendpointStoreChatTeam.m in Sources */,
 				D47799731A66127100386430 /* GTLStoreendpointAsaanLongString.m in Sources */,
 				D4AC51821A325DCA00F2484F /* GTLUserendpointUserAddress.m in Sources */,
@@ -2553,6 +2565,7 @@
 				D4A8C1861A263B1800DA344A /* AFURLConnectionOperation.m in Sources */,
 				D47799791A66E00F00386430 /* GTLStoreendpointMenuItemAndStatsCollection.m in Sources */,
 				D41B03E81A6EC1C100FCB9CC /* GTLStoreendpointItemReview.m in Sources */,
+				D40807CD1A8B112200D50F03 /* ClaimStoreViewController.m in Sources */,
 				D449EB621A1BCDEB00879383 /* GTLStoreendpointMenuItemModifiersAndGroups.m in Sources */,
 				D4A8C1811A263B1800DA344A /* AFHTTPRequestOperation.m in Sources */,
 				D4B7A62E1A35104200D72BC4 /* MenuModifierGroupViewController.m in Sources */,
@@ -2653,6 +2666,7 @@
 				D4E8072F1A1D8BAA008E343C /* GTLStoreendpointStoreMenuCombined.m in Sources */,
 				37909B6F1A23828000649827 /* SignupProfileViewController.m in Sources */,
 				D4522B281A15264F002EFA92 /* STPUtils.m in Sources */,
+				D40807D01A8B126500D50F03 /* PhoneSearchViewController.m in Sources */,
 				37D161C91A402FDA002EAA3C /* SDSegmentedControl.m in Sources */,
 				D4AC51831A325DCA00F2484F /* GTLUserendpointUserAddressCollection.m in Sources */,
 				375D10001A69F5550016C293 /* ChatView.m in Sources */,
