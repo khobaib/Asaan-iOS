@@ -3,7 +3,7 @@
  */
 
 //
-//  GTLStoreendpointStoreAndStats.h
+//  GTLStoreendpointStoreWaitListQueueAndPosition.h
 //
 
 // ----------------------------------------------------------------------------
@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStoreAndStats (0 custom class methods, 3 custom properties)
+//   GTLStoreendpointStoreWaitListQueueAndPosition (0 custom class methods, 2 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLObject.h"
@@ -21,17 +21,14 @@
   #import "GTLObject.h"
 #endif
 
-@class GTLStoreendpointStore;
-@class GTLStoreendpointStoreStats;
-@class GTLStoreendpointStoreWaitlistSummary;
+@class GTLStoreendpointStoreWaitListQueue;
 
 // ----------------------------------------------------------------------------
 //
-//   GTLStoreendpointStoreAndStats
+//   GTLStoreendpointStoreWaitListQueueAndPosition
 //
 
-@interface GTLStoreendpointStoreAndStats : GTLObject
-@property (retain) GTLStoreendpointStoreStats *stats;
-@property (retain) GTLStoreendpointStore *store;
-@property (retain) GTLStoreendpointStoreWaitlistSummary *storeWaitListSummary;
+@interface GTLStoreendpointStoreWaitListQueueAndPosition : GTLObject
+@property (retain) NSNumber *partiesBeforeEntry;  // longLongValue
+@property (retain) GTLStoreendpointStoreWaitListQueue *queueEntry;
 @end

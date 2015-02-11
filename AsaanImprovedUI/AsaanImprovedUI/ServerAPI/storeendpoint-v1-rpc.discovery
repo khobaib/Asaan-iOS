@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/kiDTsWpwwwcviPI59e1xnBEV2Ug\"",
+ "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/n1kvom72q71udjjR2w1C6HAniNI\"",
  "discoveryVersion": "v1",
  "id": "storeendpoint:v1",
  "name": "storeendpoint",
@@ -514,10 +514,19 @@
     "providesCarryout": {
      "type": "boolean"
     },
+    "providesChat": {
+     "type": "boolean"
+    },
     "providesDelivery": {
      "type": "boolean"
     },
     "providesPreOrder": {
+     "type": "boolean"
+    },
+    "providesReservation": {
+     "type": "boolean"
+    },
+    "providesWaitlist": {
      "type": "boolean"
     },
     "rewardsDescription": {
@@ -535,12 +544,6 @@
     },
     "subType": {
      "type": "string"
-    },
-    "supportsChat": {
-     "type": "boolean"
-    },
-    "supportsReservation": {
-     "type": "boolean"
     },
     "trophies": {
      "type": "array",
@@ -571,6 +574,9 @@
     },
     "store": {
      "$ref": "Store"
+    },
+    "storeWaitListSummary": {
+     "$ref": "StoreWaitlistSummary"
     }
    }
   },
@@ -1348,6 +1354,135 @@
      }
     }
    }
+  },
+  "StoreWaitListQueue": {
+   "id": "StoreWaitListQueue",
+   "type": "object",
+   "properties": {
+    "createdDate": {
+     "type": "string",
+     "format": "int64"
+    },
+    "dateNotifiedAcknowledged": {
+     "type": "string",
+     "format": "int64"
+    },
+    "dateNotifiedTableIsReady": {
+     "type": "string",
+     "format": "int64"
+    },
+    "estTimeMax": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "estTimeMin": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "estimateChangedByStore": {
+     "type": "boolean"
+    },
+    "id": {
+     "type": "string",
+     "format": "int64"
+    },
+    "modifiedDate": {
+     "type": "string",
+     "format": "int64"
+    },
+    "partySize": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "status": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "storeId": {
+     "type": "string",
+     "format": "int64"
+    },
+    "storeName": {
+     "type": "string"
+    },
+    "userId": {
+     "type": "string",
+     "format": "int64"
+    },
+    "userName": {
+     "type": "string"
+    },
+    "userPhone": {
+     "type": "string"
+    },
+    "userProfilePhotoUrl": {
+     "type": "string"
+    }
+   }
+  },
+  "StoreWaitListQueueAndPosition": {
+   "id": "StoreWaitListQueueAndPosition",
+   "type": "object",
+   "properties": {
+    "partiesBeforeEntry": {
+     "type": "string",
+     "format": "int64"
+    },
+    "queueEntry": {
+     "$ref": "StoreWaitListQueue"
+    }
+   }
+  },
+  "StoreWaitListQueueCollection": {
+   "id": "StoreWaitListQueueCollection",
+   "type": "object",
+   "properties": {
+    "items": {
+     "type": "array",
+     "items": {
+      "$ref": "StoreWaitListQueue"
+     }
+    }
+   }
+  },
+  "StoreWaitlistSummary": {
+   "id": "StoreWaitlistSummary",
+   "type": "object",
+   "properties": {
+    "createdDate": {
+     "type": "string",
+     "format": "int64"
+    },
+    "modifiedDate": {
+     "type": "string",
+     "format": "int64"
+    },
+    "partiesOfSize1_2": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "partiesOfSize3_4": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "partiesOfSize5OrMore": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "storeId": {
+     "type": "string",
+     "format": "int64"
+    },
+    "waitTime1_2": {
+     "type": "string"
+    },
+    "waitTime3_4": {
+     "type": "string"
+    },
+    "waitTime5OrMore": {
+     "type": "string"
+    }
+   }
   }
  },
  "methods": {
@@ -1849,6 +1984,53 @@
     "https://www.googleapis.com/auth/userinfo.email"
    ]
   },
+  "storeendpoint.getStoreWaitListQueue": {
+   "id": "storeendpoint.getStoreWaitListQueue",
+   "parameters": {
+    "storeId": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    }
+   },
+   "parameterOrder": [
+    "storeId"
+   ],
+   "returns": {
+    "$ref": "StoreWaitListQueueCollection"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.getStoreWaitListQueueEntryForCurrentUser": {
+   "id": "storeendpoint.getStoreWaitListQueueEntryForCurrentUser",
+   "returns": {
+    "$ref": "StoreWaitListQueueAndPosition"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.getStoreWaitlistSummary": {
+   "id": "storeendpoint.getStoreWaitlistSummary",
+   "parameters": {
+    "storeId": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    }
+   },
+   "parameterOrder": [
+    "storeId"
+   ],
+   "returns": {
+    "$ref": "StoreWaitlistSummary"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
   "storeendpoint.getStores": {
    "id": "storeendpoint.getStores",
    "parameters": {
@@ -2209,6 +2391,37 @@
    "parameters": {
     "resource": {
      "$ref": "StorePOSConnection"
+    }
+   },
+   "parameterOrder": [
+    "resource"
+   ],
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.saveStoreWaitlistQueueEntry": {
+   "id": "storeendpoint.saveStoreWaitlistQueueEntry",
+   "parameters": {
+    "resource": {
+     "$ref": "StoreWaitListQueue"
+    }
+   },
+   "parameterOrder": [
+    "resource"
+   ],
+   "returns": {
+    "$ref": "StoreWaitListQueue"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.saveStoreWaitlistSummary": {
+   "id": "storeendpoint.saveStoreWaitlistSummary",
+   "parameters": {
+    "resource": {
+     "$ref": "StoreWaitlistSummary"
     }
    },
    "parameterOrder": [

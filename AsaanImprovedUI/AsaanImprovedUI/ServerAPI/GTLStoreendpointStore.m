@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStore (0 custom class methods, 39 custom properties)
+//   GTLStoreendpointStore (0 custom class methods, 40 custom properties)
 
 #import "GTLStoreendpointStore.h"
 
@@ -27,9 +27,10 @@
          city, claimed, createdDate, deliveryDistance, deliveryFee,
          descriptionProperty, executiveChef, fbUrl, gplusUrl, hours, identifier,
          isActive, lat, lng, minOrderAmtForDelivery, modifiedDate, name, phone,
-         priceRange, providesCarryout, providesDelivery, providesPreOrder,
-         rewardsDescription, rewardsRate, ssid, state, subType, supportsChat,
-         supportsReservation, trophies, twitterUrl, type, webSiteUrl, zip;
+         priceRange, providesCarryout, providesChat, providesDelivery,
+         providesPreOrder, providesReservation, providesWaitlist,
+         rewardsDescription, rewardsRate, ssid, state, subType, trophies,
+         twitterUrl, type, webSiteUrl, zip;
 
 + (NSDictionary *)propertyToJSONKeyMap {
   NSDictionary *map =

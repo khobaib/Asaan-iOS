@@ -30,9 +30,62 @@
     self.defaultUserCard = nil;
     self.defaultUserAddress = nil;
     self.currentUser = nil;
+    self.queueEntry = nil;
+}
+
+- (void) loadAllUserObjects
+{
+    if (self.currentUser == nil)
+    {
+        [self loadCurrentUserFromServer];
+        [self loadUserQueueEntry];
+    }
+    if (self.userCards == nil)
+        [self loadUserCardsFromServer];
+    if (self.userAddresses == nil)
+        [self loadUserAddressesFromServer];
 }
 
 - (void) removeOrderInProgress { _orderInProgress = nil; }
+- (void) removeWaitListQueueEntry
+{
+    self.queueEntry.status = [NSNumber numberWithInt:4]; // 4 = STATUS_CLOSED_CANCELLED_BY_CUSTOMER
+    __weak __typeof(self) weakSelf = self;
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
+    GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForSaveStoreWaitlistQueueEntryWithObject:self.queueEntry];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    dic[USER_AUTH_TOKEN_HEADER_NAME] = [UtilCalls getAuthTokenForCurrentUser];
+    [query setAdditionalHTTPHeaders:dic];
+    
+    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreWaitListQueue *queueEntry,NSError *error)
+     {
+         weakSelf.queueEntry = nil;
+         if (error)
+         {
+             NSLog(@"%@",[error userInfo]);
+         }
+     }];
+}
+
+- (void) loadUserQueueEntry
+{
+    __weak __typeof(self) weakSelf = self;
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
+    GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetStoreWaitListQueueEntryForCurrentUser];
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    dic[USER_AUTH_TOKEN_HEADER_NAME] = [UtilCalls getAuthTokenForCurrentUser];
+    [query setAdditionalHTTPHeaders:dic];
+    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreWaitListQueueAndPosition *object, NSError *error)
+     {
+         if (!error)
+             weakSelf.queueEntry = object.queueEntry;
+         else
+             NSLog(@"Asaan Server Call Failed: loadUserQueueEntry - error:%@", error.userInfo);
+     }];
+}
 
 - (void) loadUserAddressesFromServer
 {

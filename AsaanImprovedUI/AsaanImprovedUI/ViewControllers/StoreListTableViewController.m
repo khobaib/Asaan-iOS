@@ -21,6 +21,7 @@
 #import "UIImageView+WebCache.h"
 #import "MenuTableViewController.h"
 #import "DeliveryOrCarryoutViewController.h"
+#import "ReserveOrWaitlistTableViewController.h"
 #import "UIAlertView+Blocks.h"
 
 #import "StoreViewController.h"
@@ -99,12 +100,7 @@
         
         // Load GAE Objects on startup
         GlobalObjectHolder *objectHolder = appDelegate.globalObjectHolder;
-        if (objectHolder.currentUser == nil)
-            [objectHolder loadCurrentUserFromServer];
-        if (objectHolder.userCards == nil)
-            [objectHolder loadUserCardsFromServer];
-        if (objectHolder.userAddresses == nil)
-            [objectHolder loadUserAddressesFromServer];
+        [objectHolder loadAllUserObjects];
     }
     
     GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
@@ -193,8 +189,28 @@
     cell.callButton.enabled = true;
     cell.chatButton.enabled = true;
     cell.menuButton.enabled = true;
-    cell.orderOnlineButton.enabled = true;
-    cell.reserveButton.enabled = true;
+    
+    if (self.selectedStore.store.providesCarryout.boolValue == true || self.selectedStore.store.providesDelivery.boolValue == true || self.selectedStore.store.providesPreOrder.boolValue == true)
+    {
+        cell.orderOnlineButton.enabled = true;
+        [cell.orderOnlineButton setTitleColor:[UIColor goldColor] forState:UIControlStateNormal];
+    }
+    else
+    {
+        cell.orderOnlineButton.enabled = false;
+        [cell.orderOnlineButton setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    }
+
+    if (self.selectedStore.store.providesReservation.boolValue == true || self.selectedStore.store.providesWaitlist.boolValue == true)
+    {
+        cell.reserveButton.enabled = true;
+        [cell.reserveButton setTitleColor:[UIColor goldColor] forState:UIControlStateNormal];
+    }
+    else
+    {
+        cell.reserveButton.enabled = false;
+        [cell.reserveButton setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    }
     
     GTLStoreendpointStoreAndStats *storeAndStats = dataObject;
     if (storeAndStats != nil)
@@ -306,6 +322,7 @@
 - (IBAction) reserveTable:(UIButton *)sender
 {
     _selectedStore = self.dataProvider.dataObjects[sender.tag];
+    [self performSegueWithIdentifier:@"segueStoreListToReserve" sender:sender];
 }
 
 #pragma mark - Navigation
@@ -333,6 +350,11 @@
         
         StoreViewController *storeViewController = segue.destinationViewController;
         [storeViewController setSelectedStore:_selectedStore];
+    }
+    else if ([[segue identifier] isEqualToString:@"segueStoreListToReserve"]) {
+        
+        ReserveOrWaitlistTableViewController *viewController = segue.destinationViewController;
+        [viewController setSelectedStore:_selectedStore.store];
     }
 }
 

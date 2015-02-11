@@ -3,7 +3,7 @@
  */
 
 //
-//  GTLStoreendpointStoreAndStats.m
+//  GTLStoreendpointStoreWaitListQueueAndPosition.m
 //
 
 // ----------------------------------------------------------------------------
@@ -13,19 +13,17 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStoreAndStats (0 custom class methods, 3 custom properties)
+//   GTLStoreendpointStoreWaitListQueueAndPosition (0 custom class methods, 2 custom properties)
 
-#import "GTLStoreendpointStoreAndStats.h"
+#import "GTLStoreendpointStoreWaitListQueueAndPosition.h"
 
-#import "GTLStoreendpointStore.h"
-#import "GTLStoreendpointStoreStats.h"
-#import "GTLStoreendpointStoreWaitlistSummary.h"
+#import "GTLStoreendpointStoreWaitListQueue.h"
 
 // ----------------------------------------------------------------------------
 //
-//   GTLStoreendpointStoreAndStats
+//   GTLStoreendpointStoreWaitListQueueAndPosition
 //
 
-@implementation GTLStoreendpointStoreAndStats
-@dynamic stats, store, storeWaitListSummary;
+@implementation GTLStoreendpointStoreWaitListQueueAndPosition
+@dynamic partiesBeforeEntry, queueEntry;
 @end

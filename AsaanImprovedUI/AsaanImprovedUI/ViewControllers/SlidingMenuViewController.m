@@ -21,6 +21,7 @@
 #define SEGUE_SMToStoreList         @"SMToStoreListSegue"
 #define SEGUE_SMToUpdateProfile     @"SMToUpdateProfile"
 #define SEGUE_SMToChatHistory       @"SMToChatHistory"
+#define SEGUE_SMToWaitListStatus    @"segueSMToWaitListStatus"
 #define SEGUE_SMToFriends           @"SMToFriendsSegue"
 #define SEGUE_SMToCart              @"segueSMToOrderSummary"
 #define SEGUE_SMToOrderHistory      @"segueSMToOrderHistory"
@@ -39,8 +40,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _menu = @[@"Stores", @"Profile", @"Chat History", @"Friends", @"Pending Orders", @"Order History", @"Logout"];
-    _menuSegue = @[SEGUE_SMToStoreList, SEGUE_SMToUpdateProfile, SEGUE_SMToChatHistory, SEGUE_SMToFriends, SEGUE_SMToCart, SEGUE_SMToOrderHistory, SEGUE_UnwindToStoreList];
+    _menu = @[@"Stores", @"Profile", @"Chat History", @"Wait List Status", @"Friends", @"Pending Orders", @"Order History", @"Logout"];
+    _menuSegue = @[SEGUE_SMToStoreList, SEGUE_SMToUpdateProfile, SEGUE_SMToChatHistory, SEGUE_SMToWaitListStatus, SEGUE_SMToFriends, SEGUE_SMToCart, SEGUE_SMToOrderHistory, SEGUE_UnwindToStoreList];
     
     NSAssert(_menu.count == _menuSegue.count, @"Menu and MenuSegue length should be equal.");
     
@@ -94,7 +95,20 @@
         GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
         if (goh.orderInProgress == nil)
             cell.userInteractionEnabled = cell.titleLabel.enabled = NO;
+        else
+            cell.userInteractionEnabled = cell.titleLabel.enabled = YES;
     }
+    
+    if ([_menuSegue[indexPath.row] isEqualToString:SEGUE_SMToWaitListStatus])
+    {
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+        GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
+        if (goh.queueEntry == nil)
+            cell.userInteractionEnabled = cell.titleLabel.enabled = NO;
+        else
+            cell.userInteractionEnabled = cell.titleLabel.enabled = YES;
+    }
+
     if ([_menuSegue[indexPath.row] isEqualToString:SEGUE_SMToChatHistory]) {
         cell.badgeString = @"2";
     }

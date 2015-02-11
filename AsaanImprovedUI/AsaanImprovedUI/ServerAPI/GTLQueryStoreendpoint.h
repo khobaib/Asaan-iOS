@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryStoreendpoint (41 custom class methods, 15 custom properties)
+//   GTLQueryStoreendpoint (46 custom class methods, 15 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLQuery.h"
@@ -37,6 +37,8 @@
 @class GTLStoreendpointStoreMenuItemModifierGroup;
 @class GTLStoreendpointStoreOwner;
 @class GTLStoreendpointStorePOSConnection;
+@class GTLStoreendpointStoreWaitListQueue;
+@class GTLStoreendpointStoreWaitlistSummary;
 
 @interface GTLQueryStoreendpoint : GTLQuery
 
@@ -229,6 +231,24 @@
 + (id)queryForGetStoresWithStatsWithFirstPosition:(NSInteger)firstPosition
                                         maxResult:(NSInteger)maxResult;
 
+// Method: storeendpoint.getStoreWaitListQueue
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
+// Fetches a GTLStoreendpointStoreWaitListQueueCollection.
++ (id)queryForGetStoreWaitListQueueWithStoreId:(long long)storeId;
+
+// Method: storeendpoint.getStoreWaitListQueueEntryForCurrentUser
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
+// Fetches a GTLStoreendpointStoreWaitListQueueAndPosition.
++ (id)queryForGetStoreWaitListQueueEntryForCurrentUser;
+
+// Method: storeendpoint.getStoreWaitlistSummary
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
+// Fetches a GTLStoreendpointStoreWaitlistSummary.
++ (id)queryForGetStoreWaitlistSummaryWithStoreId:(long long)storeId;
+
 // Method: storeendpoint.placeOrder
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
@@ -335,5 +355,16 @@
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 + (id)queryForSaveStorePOSConnectionWithObject:(GTLStoreendpointStorePOSConnection *)object;
+
+// Method: storeendpoint.saveStoreWaitlistQueueEntry
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
+// Fetches a GTLStoreendpointStoreWaitListQueue.
++ (id)queryForSaveStoreWaitlistQueueEntryWithObject:(GTLStoreendpointStoreWaitListQueue *)object;
+
+// Method: storeendpoint.saveStoreWaitlistSummary
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
++ (id)queryForSaveStoreWaitlistSummaryWithObject:(GTLStoreendpointStoreWaitlistSummary *)object;
 
 @end

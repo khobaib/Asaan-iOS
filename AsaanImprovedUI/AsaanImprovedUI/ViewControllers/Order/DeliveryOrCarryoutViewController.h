@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "GTLStoreendpoint.h"
-#import "GTLUserendpointUserAddress.h"
 
 @interface DeliveryOrCarryoutViewController : UITableViewController
 @property (strong, nonatomic) GTLStoreendpointStore *selectedStore;

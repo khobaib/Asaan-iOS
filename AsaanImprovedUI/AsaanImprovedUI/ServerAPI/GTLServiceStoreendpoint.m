@@ -69,6 +69,10 @@
                       [GTLStoreendpointStorePOSConnection class],
                       [GTLStoreendpointStoreStats class],
                       [GTLStoreendpointStoreStatsCollection class],
+                      [GTLStoreendpointStoreWaitListQueue class],
+                      [GTLStoreendpointStoreWaitListQueueAndPosition class],
+                      [GTLStoreendpointStoreWaitListQueueCollection class],
+                      [GTLStoreendpointStoreWaitlistSummary class],
                       nil];
   return classes;
 }

@@ -21,17 +21,21 @@
 @property (strong, nonatomic) GTLUserendpointUserCard *defaultUserCard;
 @property (strong, nonatomic) GTLUserendpointUserAddress *defaultUserAddress;
 @property (strong, nonatomic) GTLUserendpointUser *currentUser;
+@property (strong, nonatomic) GTLStoreendpointStoreWaitListQueue *queueEntry;
 
 - (OnlineOrderDetails *)createOrderInProgress;
 - (void) removeOrderInProgress;
+- (void) removeWaitListQueueEntry;
 
 - (void) loadUserAddressesFromServer;
 - (void) loadUserCardsFromServer;
 - (void) loadCurrentUserFromServer;
+- (void) loadUserQueueEntry;
 
 - (void) addCardToUserCards:(GTLUserendpointUserCard *)card;
 - (void) addAddressToUserAddresses:(GTLUserendpointUserAddress *)address;
 
+- (void) loadAllUserObjects;
 - (void) clearAllObjects;
 
 @end

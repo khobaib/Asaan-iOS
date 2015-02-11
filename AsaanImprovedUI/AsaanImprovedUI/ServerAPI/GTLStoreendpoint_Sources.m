@@ -62,6 +62,10 @@
 #import "GTLStoreendpointStorePOSConnection.m"
 #import "GTLStoreendpointStoreStats.m"
 #import "GTLStoreendpointStoreStatsCollection.m"
+#import "GTLStoreendpointStoreWaitListQueue.m"
+#import "GTLStoreendpointStoreWaitListQueueAndPosition.m"
+#import "GTLStoreendpointStoreWaitListQueueCollection.m"
+#import "GTLStoreendpointStoreWaitlistSummary.m"
 
 #import "GTLQueryStoreendpoint.m"
 #import "GTLServiceStoreendpoint.m"

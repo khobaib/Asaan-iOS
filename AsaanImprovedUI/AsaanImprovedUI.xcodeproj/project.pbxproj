@@ -112,6 +112,15 @@
 		D40807A71A841B2200D50F03 /* ReviewsSummaryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D40807A61A841B2200D50F03 /* ReviewsSummaryTableViewController.m */; };
 		D40807AA1A843E5E00D50F03 /* ReviewLoadingOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D40807A91A843E5E00D50F03 /* ReviewLoadingOperation.m */; };
 		D40807AD1A84481C00D50F03 /* GTLStoreendpointOrderReviewListAndCount.m in Sources */ = {isa = PBXBuildFile; fileRef = D40807AC1A84481C00D50F03 /* GTLStoreendpointOrderReviewListAndCount.m */; };
+		D40807B01A89022000D50F03 /* ReserveOrWaitlistTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D40807AF1A89022000D50F03 /* ReserveOrWaitlistTableViewController.m */; };
+		D40807B41A89058300D50F03 /* ReserveTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D40807B31A89058300D50F03 /* ReserveTableViewController.m */; };
+		D40807B71A891F5500D50F03 /* WaitlistTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D40807B61A891F5500D50F03 /* WaitlistTableViewController.m */; };
+		D40807BA1A896AB500D50F03 /* WaitListStatusTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D40807B91A896AB500D50F03 /* WaitListStatusTableViewController.m */; };
+		D40807C11A898CD400D50F03 /* GTLStoreendpointStoreWaitListQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = D40807BC1A898CD400D50F03 /* GTLStoreendpointStoreWaitListQueue.m */; };
+		D40807C21A898CD400D50F03 /* GTLStoreendpointStoreWaitListQueueCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = D40807BE1A898CD400D50F03 /* GTLStoreendpointStoreWaitListQueueCollection.m */; };
+		D40807C31A898CD400D50F03 /* GTLStoreendpointStoreWaitlistSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = D40807C01A898CD400D50F03 /* GTLStoreendpointStoreWaitlistSummary.m */; };
+		D40807C61A89B37E00D50F03 /* GTLStoreendpointStoreWaitListQueueAndPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = D40807C51A89B37E00D50F03 /* GTLStoreendpointStoreWaitListQueueAndPosition.m */; };
+		D40807C91A8A82F500D50F03 /* ClaimStoreTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D40807C81A8A82F500D50F03 /* ClaimStoreTableViewController.m */; };
 		D40DF36E1A3A976700C67088 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D40DF36D1A3A976700C67088 /* libsqlite3.0.dylib */; };
 		D40DF3701A3A97A000C67088 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D40DF36F1A3A97A000C67088 /* ParseCrashReporting.framework */; };
 		D40DF3731A3A9DD000C67088 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D40DF3721A3A9DD000C67088 /* ParseCrashReporting.framework */; };
@@ -589,6 +598,24 @@
 		D40807A91A843E5E00D50F03 /* ReviewLoadingOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewLoadingOperation.m; sourceTree = "<group>"; };
 		D40807AB1A84481C00D50F03 /* GTLStoreendpointOrderReviewListAndCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointOrderReviewListAndCount.h; sourceTree = "<group>"; };
 		D40807AC1A84481C00D50F03 /* GTLStoreendpointOrderReviewListAndCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointOrderReviewListAndCount.m; sourceTree = "<group>"; };
+		D40807AE1A89022000D50F03 /* ReserveOrWaitlistTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReserveOrWaitlistTableViewController.h; path = Reserve/ReserveOrWaitlistTableViewController.h; sourceTree = "<group>"; };
+		D40807AF1A89022000D50F03 /* ReserveOrWaitlistTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReserveOrWaitlistTableViewController.m; path = Reserve/ReserveOrWaitlistTableViewController.m; sourceTree = "<group>"; };
+		D40807B21A89058300D50F03 /* ReserveTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReserveTableViewController.h; path = Reserve/ReserveTableViewController.h; sourceTree = "<group>"; };
+		D40807B31A89058300D50F03 /* ReserveTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReserveTableViewController.m; path = Reserve/ReserveTableViewController.m; sourceTree = "<group>"; };
+		D40807B51A891F5500D50F03 /* WaitlistTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WaitlistTableViewController.h; path = Reserve/WaitlistTableViewController.h; sourceTree = "<group>"; };
+		D40807B61A891F5500D50F03 /* WaitlistTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WaitlistTableViewController.m; path = Reserve/WaitlistTableViewController.m; sourceTree = "<group>"; };
+		D40807B81A896AB500D50F03 /* WaitListStatusTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WaitListStatusTableViewController.h; path = Reserve/WaitListStatusTableViewController.h; sourceTree = "<group>"; };
+		D40807B91A896AB500D50F03 /* WaitListStatusTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WaitListStatusTableViewController.m; path = Reserve/WaitListStatusTableViewController.m; sourceTree = "<group>"; };
+		D40807BB1A898CD400D50F03 /* GTLStoreendpointStoreWaitListQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreWaitListQueue.h; sourceTree = "<group>"; };
+		D40807BC1A898CD400D50F03 /* GTLStoreendpointStoreWaitListQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreWaitListQueue.m; sourceTree = "<group>"; };
+		D40807BD1A898CD400D50F03 /* GTLStoreendpointStoreWaitListQueueCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreWaitListQueueCollection.h; sourceTree = "<group>"; };
+		D40807BE1A898CD400D50F03 /* GTLStoreendpointStoreWaitListQueueCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreWaitListQueueCollection.m; sourceTree = "<group>"; };
+		D40807BF1A898CD400D50F03 /* GTLStoreendpointStoreWaitlistSummary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreWaitlistSummary.h; sourceTree = "<group>"; };
+		D40807C01A898CD400D50F03 /* GTLStoreendpointStoreWaitlistSummary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreWaitlistSummary.m; sourceTree = "<group>"; };
+		D40807C41A89B37E00D50F03 /* GTLStoreendpointStoreWaitListQueueAndPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreWaitListQueueAndPosition.h; sourceTree = "<group>"; };
+		D40807C51A89B37E00D50F03 /* GTLStoreendpointStoreWaitListQueueAndPosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreWaitListQueueAndPosition.m; sourceTree = "<group>"; };
+		D40807C71A8A82F500D50F03 /* ClaimStoreTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClaimStoreTableViewController.h; path = StorePrivate/ClaimStoreTableViewController.h; sourceTree = "<group>"; };
+		D40807C81A8A82F500D50F03 /* ClaimStoreTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClaimStoreTableViewController.m; path = StorePrivate/ClaimStoreTableViewController.m; sourceTree = "<group>"; };
 		D40DF36D1A3A976700C67088 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		D40DF36F1A3A97A000C67088 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseCrashReporting.framework; path = AsaanImprovedUI/frameworks/ParseCrashReporting.framework; sourceTree = "<group>"; };
 		D40DF3721A3A9DD000C67088 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseCrashReporting.framework; path = AsaanImprovedUI/frameworks/ParseCrashReporting.framework; sourceTree = "<group>"; };
@@ -1481,6 +1508,30 @@
 			path = SZTextView;
 			sourceTree = "<group>";
 		};
+		D40807B11A89022E00D50F03 /* Reserve */ = {
+			isa = PBXGroup;
+			children = (
+				D40807AE1A89022000D50F03 /* ReserveOrWaitlistTableViewController.h */,
+				D40807AF1A89022000D50F03 /* ReserveOrWaitlistTableViewController.m */,
+				D40807B21A89058300D50F03 /* ReserveTableViewController.h */,
+				D40807B31A89058300D50F03 /* ReserveTableViewController.m */,
+				D40807B51A891F5500D50F03 /* WaitlistTableViewController.h */,
+				D40807B61A891F5500D50F03 /* WaitlistTableViewController.m */,
+				D40807B81A896AB500D50F03 /* WaitListStatusTableViewController.h */,
+				D40807B91A896AB500D50F03 /* WaitListStatusTableViewController.m */,
+			);
+			name = Reserve;
+			sourceTree = "<group>";
+		};
+		D40807CA1A8A830100D50F03 /* StorePrivate */ = {
+			isa = PBXGroup;
+			children = (
+				D40807C71A8A82F500D50F03 /* ClaimStoreTableViewController.h */,
+				D40807C81A8A82F500D50F03 /* ClaimStoreTableViewController.m */,
+			);
+			name = StorePrivate;
+			sourceTree = "<group>";
+		};
 		D41D31FE1A11DD9300EA49B6 /* images */ = {
 			isa = PBXGroup;
 			children = (
@@ -1566,6 +1617,14 @@
 		D449EB201A1BCDEB00879383 /* ServerAPI */ = {
 			isa = PBXGroup;
 			children = (
+				D40807C41A89B37E00D50F03 /* GTLStoreendpointStoreWaitListQueueAndPosition.h */,
+				D40807C51A89B37E00D50F03 /* GTLStoreendpointStoreWaitListQueueAndPosition.m */,
+				D40807BB1A898CD400D50F03 /* GTLStoreendpointStoreWaitListQueue.h */,
+				D40807BC1A898CD400D50F03 /* GTLStoreendpointStoreWaitListQueue.m */,
+				D40807BD1A898CD400D50F03 /* GTLStoreendpointStoreWaitListQueueCollection.h */,
+				D40807BE1A898CD400D50F03 /* GTLStoreendpointStoreWaitListQueueCollection.m */,
+				D40807BF1A898CD400D50F03 /* GTLStoreendpointStoreWaitlistSummary.h */,
+				D40807C01A898CD400D50F03 /* GTLStoreendpointStoreWaitlistSummary.m */,
 				D40807AB1A84481C00D50F03 /* GTLStoreendpointOrderReviewListAndCount.h */,
 				D40807AC1A84481C00D50F03 /* GTLStoreendpointOrderReviewListAndCount.m */,
 				D44909131A827F7A00DC402C /* GTLStoreendpointStoreMenuStats.h */,
@@ -1851,6 +1910,8 @@
 				375C2FCC1A591AA200FED6C0 /* UpdateInfoViewController.m */,
 				375C2FCE1A591EA600FED6C0 /* AddFriendViewController.h */,
 				375C2FCF1A591EA600FED6C0 /* AddFriendViewController.m */,
+				D40807B11A89022E00D50F03 /* Reserve */,
+				D40807CA1A8A830100D50F03 /* StorePrivate */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -2448,6 +2509,7 @@
 				D449EB611A1BCDEB00879383 /* GTLStoreendpointConstants.m in Sources */,
 				D4464B201A36138100206728 /* OnlineOrderSelectedMenuItem.m in Sources */,
 				D4FF319F1A20513400C241CA /* DropdownView.m in Sources */,
+				D40807C31A898CD400D50F03 /* GTLStoreendpointStoreWaitlistSummary.m in Sources */,
 				375D0F9F1A6996610016C293 /* JSQMessagesToolbarButtonFactory.m in Sources */,
 				D4A8C19F1A263B1800DA344A /* SDWebImageManager.m in Sources */,
 				D4522B271A15264F002EFA92 /* STPToken.m in Sources */,
@@ -2468,8 +2530,10 @@
 				375D0FA01A6996610016C293 /* JSQMessagesCollectionViewFlowLayout.m in Sources */,
 				375D0FB71A6996610016C293 /* JSQMessagesToolbarContentView.m in Sources */,
 				D49A7A821A3552550052522E /* MenuModifierTableViewController.m in Sources */,
+				D40807C61A89B37E00D50F03 /* GTLStoreendpointStoreWaitListQueueAndPosition.m in Sources */,
 				D449EB5D1A1BCDEB00879383 /* GTLQueryUserendpoint.m in Sources */,
 				D43EED071A1F9EC5000C4FE5 /* DataLoadingOperation.m in Sources */,
+				D40807C91A8A82F500D50F03 /* ClaimStoreTableViewController.m in Sources */,
 				D4828D211A79313400C80E92 /* GTLStoreendpointStoreChatTeam.m in Sources */,
 				D47799731A66127100386430 /* GTLStoreendpointAsaanLongString.m in Sources */,
 				D4AC51821A325DCA00F2484F /* GTLUserendpointUserAddress.m in Sources */,
@@ -2484,6 +2548,7 @@
 				D4A8C19E1A263B1800DA344A /* SDWebImageDownloaderOperation.m in Sources */,
 				375D0FA31A6996610016C293 /* JSQLocationMediaItem.m in Sources */,
 				D4828CFB1A72BE4B00C80E92 /* StoreViewController.m in Sources */,
+				D40807BA1A896AB500D50F03 /* WaitListStatusTableViewController.m in Sources */,
 				D4828CFA1A72BE4B00C80E92 /* StoreMapViewController.m in Sources */,
 				D4A8C1861A263B1800DA344A /* AFURLConnectionOperation.m in Sources */,
 				D47799791A66E00F00386430 /* GTLStoreendpointMenuItemAndStatsCollection.m in Sources */,
@@ -2492,6 +2557,7 @@
 				D4A8C1811A263B1800DA344A /* AFHTTPRequestOperation.m in Sources */,
 				D4B7A62E1A35104200D72BC4 /* MenuModifierGroupViewController.m in Sources */,
 				D4AC51871A33BB5100F2484F /* UIAlertView+Blocks.m in Sources */,
+				D40807C21A898CD400D50F03 /* GTLStoreendpointStoreWaitListQueueCollection.m in Sources */,
 				D4828D121A78389900C80E92 /* GTLStoreendpointChatMessage.m in Sources */,
 				D449EB701A1BCDEB00879383 /* GTLStoreendpointStorePOSConnection.m in Sources */,
 				D4A8C1901A263B1800DA344A /* UIImageView+AFNetworking.m in Sources */,
@@ -2500,6 +2566,7 @@
 				D4DEC1D81A321FB70075281E /* SelectPaymentTableViewController.m in Sources */,
 				D4828CC41A71AE6300C80E92 /* OrderForStoreLoadingOperation.m in Sources */,
 				3709EA981A31802A0060B49B /* MWZoomingScrollView.m in Sources */,
+				D40807B71A891F5500D50F03 /* WaitlistTableViewController.m in Sources */,
 				D4828D161A78389900C80E92 /* GTLStoreendpointChatUser.m in Sources */,
 				D449EB6C1A1BCDEB00879383 /* GTLStoreendpointStoreMenuItemModifier.m in Sources */,
 				375D0FB91A6996610016C293 /* JSQMessagesTypingIndicatorFooterView.m in Sources */,
@@ -2591,6 +2658,7 @@
 				375D10001A69F5550016C293 /* ChatView.m in Sources */,
 				375D0F981A6996610016C293 /* JSQMessagesKeyboardController.m in Sources */,
 				D47799851A66E03800386430 /* GTLStoreendpointStoreItemStats.m in Sources */,
+				D40807B41A89058300D50F03 /* ReserveTableViewController.m in Sources */,
 				D477996F1A65BA1800386430 /* GTLStoreendpointStoreDiscount.m in Sources */,
 				375D0FBB1A6996610016C293 /* JSQSystemSoundPlayer.m in Sources */,
 				D4522B1B1A15264F002EFA92 /* PTKAddressZip.m in Sources */,
@@ -2624,6 +2692,7 @@
 				D4522B201A15264F002EFA92 /* PTKComponent.m in Sources */,
 				3709EA911A31802A0060B49B /* MWGridCell.m in Sources */,
 				D47799701A65BA1800386430 /* GTLStoreendpointStoreDiscountCollection.m in Sources */,
+				D40807C11A898CD400D50F03 /* GTLStoreendpointStoreWaitListQueue.m in Sources */,
 				D4E807321A1D8BAA008E343C /* GTLStoreendpointStoreStatsCollection.m in Sources */,
 				375D10121A69F5550016C293 /* camera.m in Sources */,
 				D4A8C1A31A263B1800DA344A /* UIImage+MultiFormat.m in Sources */,
@@ -2634,6 +2703,7 @@
 				D449EB6D1A1BCDEB00879383 /* GTLStoreendpointStoreMenuItemModifierGroup.m in Sources */,
 				D4828CD61A71AF7400C80E92 /* RXMLElement.m in Sources */,
 				375D0FB21A6996610016C293 /* JSQMessagesInputToolbar.m in Sources */,
+				D40807B01A89022000D50F03 /* ReserveOrWaitlistTableViewController.m in Sources */,
 				D4828D151A78389900C80E92 /* GTLStoreendpointChatRoomsAndStoreChatMemberships.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

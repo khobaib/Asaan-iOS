@@ -59,6 +59,10 @@
 #import "GTLStoreendpointStorePOSConnection.h"
 #import "GTLStoreendpointStoreStats.h"
 #import "GTLStoreendpointStoreStatsCollection.h"
+#import "GTLStoreendpointStoreWaitListQueue.h"
+#import "GTLStoreendpointStoreWaitListQueueAndPosition.h"
+#import "GTLStoreendpointStoreWaitListQueueCollection.h"
+#import "GTLStoreendpointStoreWaitlistSummary.h"
 
 #import "GTLQueryStoreendpoint.h"
 #import "GTLServiceStoreendpoint.h"
