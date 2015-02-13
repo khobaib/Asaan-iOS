@@ -63,7 +63,7 @@
     
     GTLStoreendpointStoreMenuItemModifier *modifier = [self.allModifiers objectAtIndex:indexPath.row];
     
-    if (modifier.price.longValue > 0)
+    if (modifier.price.longLongValue > 0)
         txtTitle.text = [[[modifier.shortDescription stringByAppendingString:@" ("] stringByAppendingString:[UtilCalls amountToString:modifier.price]] stringByAppendingString:@")"];
     else
         txtTitle.text = modifier.shortDescription;
@@ -90,7 +90,7 @@
             [self.allSelections addObject:bVal];
         }
     }
-    if (self.modifierGroup.modifierGroupMaximum.longValue <= 1)
+    if (self.modifierGroup.modifierGroupMaximum.longLongValue <= 1)
         [self tableView:tableView didSelectRowAtIndexPathForExclusive:indexPath];
     else
         [self tableView:tableView didSelectRowAtIndexPathForInclusive:indexPath];

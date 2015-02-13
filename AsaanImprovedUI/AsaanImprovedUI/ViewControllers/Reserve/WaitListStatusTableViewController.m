@@ -79,7 +79,7 @@
          weakSelf.navigationItem.title = object.queueEntry.storeName;
          if (!error)
          {
-             if (object.queueEntry.dateNotifiedTableIsReady.longValue > 0)
+             if (object.queueEntry.dateNotifiedTableIsReady.longLongValue > 0)
              {
                  NSString *str = [NSString stringWithFormat:@"Status: Table is ready. Please checkin with the host at %@ to be seated.", object.queueEntry.storeName];
                  NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
@@ -133,10 +133,10 @@
              weakSelf.txtPartiesBefore.text = [NSString stringWithFormat:@"Parties Ahead of You: %@", object.partiesBeforeEntry];
              NSCalendar *c = [NSCalendar currentCalendar];
              NSDate *d1 = [NSDate date];
-             NSDate *d2 = [NSDate dateWithTimeIntervalSince1970:object.queueEntry.createdDate.longValue*1000];//2012-06-22
+             NSDate *d2 = [NSDate dateWithTimeIntervalSince1970:object.queueEntry.createdDate.longLongValue*1000];//2012-06-22
              NSDateComponents *components = [c components:NSHourCalendarUnit fromDate:d2 toDate:d1 options:0];
              NSInteger diff = components.minute;
-             weakSelf.txtEstWaitTime.text = [NSString stringWithFormat:@"Estimated Wait Time: %ld - %ld min", (object.queueEntry.estTimeMin.longValue - diff), (object.queueEntry.estTimeMax.longValue - diff)];
+             weakSelf.txtEstWaitTime.text = [NSString stringWithFormat:@"Estimated Wait Time: %ld - %ld min", (object.queueEntry.estTimeMin.longLongValue - diff), (object.queueEntry.estTimeMax.longLongValue - diff)];
          }
          else
              NSLog(@"Asaan Server Call Failed: queryForGetStoreWaitListQueueEntryForCurrentUser - error:%@", error.userInfo);

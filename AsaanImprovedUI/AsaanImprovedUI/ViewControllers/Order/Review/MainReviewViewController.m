@@ -46,11 +46,11 @@
     self.txtReview.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Tell us what made your experience memorable. Amazing food, excellent service or perfect ambiance? Tell us more ..." attributes:@{NSForegroundColorAttributeName: color}];
     
     self.txtReview.text = self.reviewAndItems.orderReview.comments;
-    if (self.reviewAndItems == nil || self.reviewAndItems.orderReview.foodLike.longValue == 0)
+    if (self.reviewAndItems == nil || self.reviewAndItems.orderReview.foodLike.longLongValue == 0)
         self.foodReviewSlider.value = 1.5;
     else
         self.foodReviewSlider.value = self.reviewAndItems.orderReview.foodLike.floatValue/100;
-    if (self.reviewAndItems == nil || self.reviewAndItems.orderReview.serviceLike.longValue == 0)
+    if (self.reviewAndItems == nil || self.reviewAndItems.orderReview.serviceLike.longLongValue == 0)
         self.serviceReviewSlider.value = 1.5;
     else
         self.serviceReviewSlider.value = self.reviewAndItems.orderReview.serviceLike.floatValue/100;

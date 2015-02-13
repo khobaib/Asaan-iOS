@@ -170,7 +170,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
         __weak __typeof(self) weakSelf = self;
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
         GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-        GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreMenuHierarchyAndItemsWithStoreId:self.selectedStore.identifier.longValue menuType:0 maxResult:MenuFluentPagingTablePageSize];
+        GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreMenuHierarchyAndItemsWithStoreId:self.selectedStore.identifier.longLongValue menuType:0 maxResult:MenuFluentPagingTablePageSize];
         
         [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointMenusAndMenuItems *object,NSError *error)
          {
@@ -188,7 +188,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
                          
                          for (GTLStoreendpointStoreMenuHierarchy *submenu in object.menusAndSubmenus)
                          {
-                             if (submenu.level.intValue == 1 && submenu.menuPOSId.longValue == menu.menuPOSId.longValue)
+                             if (submenu.level.intValue == 1 && submenu.menuPOSId.longLongValue == menu.menuPOSId.longLongValue)
                              {
                                  [menuSegmentHolder.subMenus addObject:submenu];
                              }
@@ -200,7 +200,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
                          menuSegmentHolder.provider.automaticPreloadMargin = MenuFluentPagingTablePreloadMargin;
                          menuSegmentHolder.topRowIndex = [NSIndexPath indexPathForRow:0 inSection:0];
                          [_menuSegmentHolders addObject:menuSegmentHolder];
-                         if (menu.menuPOSId.longValue == menuItemAndStats.menuItem.menuPOSId.longValue)
+                         if (menu.menuPOSId.longLongValue == menuItemAndStats.menuItem.menuPOSId.longLongValue)
                              [menuSegmentHolder.provider setInitialObjects:object.menuItems ForPage:1];
                      }
                  }
@@ -350,8 +350,8 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
         menuSegmentHolder = [_menuSegmentHolders objectAtIndex:_segmentedControl.selectedSegmentIndex];
     else
         menuSegmentHolder = [_menuSegmentHolders firstObject];
-    long storeId = menuSegmentHolder.menu.storeId.longValue;
-    long menuPOSId = menuSegmentHolder.menu.menuPOSId.longValue;
+    long storeId = menuSegmentHolder.menu.storeId.longLongValue;
+    long menuPOSId = menuSegmentHolder.menu.menuPOSId.longLongValue;
     MenuItemLoadingOperation *milo = [[MenuItemLoadingOperation alloc] initWithIndexes:indexes storeId:storeId menuPOSId:menuPOSId];
     return milo;
 }
@@ -427,15 +427,15 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     if (menuStats.mostFrequentlyOrderedMenuItemPOSId.intValue == menuItemAndStats.menuItem.menuItemPOSId.intValue)
         cell.mostOrderedLabel.text = @"Most Frequently Ordered";
     
-    if (menuItemAndStats.stats.orders != nil && menuItemAndStats.stats.orders.longValue > 0)
+    if (menuItemAndStats.stats.orders != nil && menuItemAndStats.stats.orders.longLongValue > 0)
         cell.todaysOrdersLabels.text = [NSString stringWithFormat:@"Orders: %@", [UtilCalls formattedNumber:menuItemAndStats.stats.orders]];
     
-    long reviewCount = menuItemAndStats.stats.dislikes.longValue + menuItemAndStats.stats.likes.longValue;
+    long reviewCount = menuItemAndStats.stats.dislikes.longLongValue + menuItemAndStats.stats.likes.longLongValue;
     if (reviewCount > 0)
     {
         NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
         [numberFormatter setNumberStyle:NSNumberFormatterPercentStyle];
-        int iPercent = (int)(menuItemAndStats.stats.likes.longValue*100/reviewCount);
+        int iPercent = (int)(menuItemAndStats.stats.likes.longLongValue*100/reviewCount);
         NSNumber *likePercent = [NSNumber numberWithInt:iPercent];
         NSString *strReviews = [UtilCalls formattedNumber:[NSNumber numberWithLong:reviewCount]];
         NSString *strLikePercent = [UtilCalls formattedNumber:likePercent];
@@ -667,7 +667,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
         captionView.textDescription = string;
     }
     
-    if (menuItemAndStats.stats.orders != nil && menuItemAndStats.stats.orders.longValue > 0) {
+    if (menuItemAndStats.stats.orders != nil && menuItemAndStats.stats.orders.longLongValue > 0) {
         captionView.textTodaysOrders = [NSString stringWithFormat:@"%@ peoples ordered today.", [UtilCalls formattedNumber:menuItemAndStats.stats.orders]];
         
         
@@ -678,12 +678,12 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
             captionView.textMostOrdered = @"Most Frequently Ordered";
     }
     
-    long reviewCount = menuItemAndStats.stats.dislikes.longValue + menuItemAndStats.stats.likes.longValue;
+    long reviewCount = menuItemAndStats.stats.dislikes.longLongValue + menuItemAndStats.stats.likes.longLongValue;
     if (reviewCount > 0)
     {
         NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
         [numberFormatter setNumberStyle:NSNumberFormatterPercentStyle];
-        int iPercent = (int)(menuItemAndStats.stats.likes.longValue*100/reviewCount);
+        int iPercent = (int)(menuItemAndStats.stats.likes.longLongValue*100/reviewCount);
         NSNumber *likePercent = [NSNumber numberWithInt:iPercent];
         NSString *strReviews = [UtilCalls formattedNumber:[NSNumber numberWithLong:reviewCount]];
         NSString *strLikePercent = [UtilCalls formattedNumber:likePercent];

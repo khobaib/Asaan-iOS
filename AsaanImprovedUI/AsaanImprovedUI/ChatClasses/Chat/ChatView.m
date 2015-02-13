@@ -184,7 +184,7 @@
 	//---------------------------------------------------------------------------------------------------------------------------------------------
     GTLStoreendpointChatUser *chatUser;
     for (GTLStoreendpointChatUser *user in messagesAndUsers.chatUsers)
-        if (object.userId.longValue == user.userId.longValue)
+        if (object.userId.longLongValue == user.userId.longLongValue)
         {
             chatUser = user;
             [users addObject:user];
@@ -194,7 +194,7 @@
 	if (object.fileMessage == nil)
 	{
 		JSQMessage *message = [[JSQMessage alloc] initWithSenderId:chatUser.objectId senderDisplayName:chatUser.name
-																	  date:[NSDate dateWithTimeIntervalSince1970:object.createdDate.longValue] text:object.txtMessage];
+																	  date:[NSDate dateWithTimeIntervalSince1970:object.createdDate.longLongValue] text:object.txtMessage];
 		[messages addObject:message];
 	}
 	//---------------------------------------------------------------------------------------------------------------------------------------------
@@ -203,7 +203,7 @@
 		JSQPhotoMediaItem *mediaItem = [[JSQPhotoMediaItem alloc] initWithImage:nil];
 		mediaItem.appliesMediaViewMaskAsOutgoing = [chatUser.objectId isEqualToString:self.senderId];
 		JSQMessage *message =
-			[[JSQMessage alloc] initWithSenderId:chatUser.objectId senderDisplayName:chatUser.name date:[NSDate dateWithTimeIntervalSince1970:object.createdDate.longValue] media:mediaItem];
+			[[JSQMessage alloc] initWithSenderId:chatUser.objectId senderDisplayName:chatUser.name date:[NSDate dateWithTimeIntervalSince1970:object.createdDate.longLongValue] media:mediaItem];
 		[messages addObject:message];
 		//-----------------------------------------------------------------------------------------------------------------------------------------
         SDWebImageManager *manager = [SDWebImageManager sharedManager];
@@ -464,7 +464,7 @@
 {
 	NSLog(@"didTapAvatarImageView");
     GTLStoreendpointChatMessage *message = [serverMessages objectAtIndex:indexPath.row];
-    [self setRoomOrStoreChatMembershipId:message.roomId.longValue isStore:false];
+    [self setRoomOrStoreChatMembershipId:message.roomId.longLongValue isStore:false];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -473,7 +473,7 @@
 {
 	NSLog(@"didTapMessageBubbleAtIndexPath");
     GTLStoreendpointChatMessage *message = [serverMessages objectAtIndex:indexPath.row];
-    [self setRoomOrStoreChatMembershipId:message.roomId.longValue isStore:false];
+    [self setRoomOrStoreChatMembershipId:message.roomId.longLongValue isStore:false];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -482,7 +482,7 @@
 {
 	NSLog(@"didTapCellAtIndexPath %@", NSStringFromCGPoint(touchLocation));
     GTLStoreendpointChatMessage *message = [serverMessages objectAtIndex:indexPath.row];
-    [self setRoomOrStoreChatMembershipId:message.roomId.longValue isStore:false];
+    [self setRoomOrStoreChatMembershipId:message.roomId.longLongValue isStore:false];
 }
 
 #pragma mark - UIActionSheetDelegate

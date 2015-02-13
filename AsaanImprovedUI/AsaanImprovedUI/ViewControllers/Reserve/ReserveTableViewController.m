@@ -204,7 +204,7 @@
 {
     for (GTLStoreendpointStoreChatTeam *team in chatRoomsAndMemberships.storeChatMemberships)
     {
-        if (team.storeId.longValue == self.selectedStore.identifier.longValue)
+        if (team.storeId.longLongValue == self.selectedStore.identifier.longLongValue)
         {
             [self.view makeToast:@"Cannot send a reservation note to your own restaurant."];
             return;
@@ -212,7 +212,7 @@
     }
     for (GTLStoreendpointChatRoom *room in chatRoomsAndMemberships.chatRooms)
     {
-        if (room.storeId.longValue == self.selectedStore.identifier.longValue)
+        if (room.storeId.longLongValue == self.selectedStore.identifier.longLongValue)
         {
             [self createMessageAndSend:room.identifier];
             return;
@@ -221,7 +221,7 @@
     // Create a new Chat room for this user and store
     GTLStoreendpointChatRoom *newRoom = [[GTLStoreendpointChatRoom alloc]init];
     newRoom.name = self.selectedStore.name;
-    newRoom.storeId = [NSNumber numberWithLong:self.selectedStore.identifier.longValue];
+    newRoom.storeId = [NSNumber numberWithLong:self.selectedStore.identifier.longLongValue];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
     GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForSaveChatRoomWithObject:newRoom];
@@ -266,7 +266,7 @@
              NSString *msg = [NSString stringWithFormat:@"Thank you - your reservation request has been sent. If you need to make changes please call %@ immediately at %@.", weakSelf.selectedStore.name, weakSelf.selectedStore.phone];
              
              //---------------------------------------------------------------------------------------------------------------------------------------------
-             SendPushNotification(roomId.longValue, textMessage);
+             SendPushNotification(roomId.longLongValue, textMessage);
              //---------------------------------------------------------------------------------------------------------------------------------------------
 
              UIAlertView *alert=[[UIAlertView alloc]initWithTitle:title message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];

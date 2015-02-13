@@ -94,7 +94,7 @@
         __weak __typeof(self) weakSelf = self;
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
         GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-        GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetReviewForCurrentUserAndOrderWithOrderId:self.selectedOrder.identifier.longValue];
+        GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetReviewForCurrentUserAndOrderWithOrderId:self.selectedOrder.identifier.longLongValue];
         NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
         dic[USER_AUTH_TOKEN_HEADER_NAME]=[UtilCalls getAuthTokenForCurrentUser];
         
@@ -253,7 +253,7 @@
         return 0;
     
     long count = 0;
-    if (self.selectedOrder.discount.longValue != 0)
+    if (self.selectedOrder.discount.longLongValue != 0)
         count = self.finalItems.count + 5;
     else
         count = self.finalItems.count + 4;
@@ -298,7 +298,7 @@
 
 - (UITableViewCell *)cellForAdditionalRowAtIndex:(int)index forTable:(UITableView *)tableView forIndexPath:indexPath
 {
-    if (self.selectedOrder.discount.longValue == 0)
+    if (self.selectedOrder.discount.longLongValue == 0)
         index++;
     
     UITableViewCell *cell;
@@ -361,7 +361,7 @@
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
     
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:self.selectedOrder.createdDate.longValue/1000];
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:self.selectedOrder.createdDate.longLongValue/1000];
     
     txtSubtitle.text = [dateFormatter stringFromDate:date];
     return headerCell;

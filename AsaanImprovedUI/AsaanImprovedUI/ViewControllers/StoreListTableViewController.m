@@ -28,6 +28,7 @@
 
 #import "StoreViewController.h"
 #import "StoreListTableViewCell.h"
+#import "StoreWaitListViewController.h"
 
 #import "ChatView.h"
 #import "ChatConstants.h"
@@ -70,8 +71,8 @@
     
     [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointAsaanLong *object,NSError *error)
      {
-         NSInteger pageSize = FluentPagingTablePageSize < object.longValue.longValue ? FluentPagingTablePageSize : object.longValue.longValue;
-         _dataProvider = [[DataProvider alloc] initWithPageSize:pageSize itemCount:object.longValue.longValue];
+         NSInteger pageSize = FluentPagingTablePageSize < object.longValue.longLongValue ? FluentPagingTablePageSize : object.longValue.longLongValue;
+         _dataProvider = [[DataProvider alloc] initWithPageSize:pageSize itemCount:object.longValue.longLongValue];
          _dataProvider.delegate = weakSelf;
          _dataProvider.shouldLoadAutomatically = YES;
          _dataProvider.automaticPreloadMargin = FluentPagingTablePreloadMargin;
@@ -242,7 +243,7 @@
     cell.restaurantLabel.text = storeAndStats.store.name;
     cell.trophyLabel.text = storeAndStats.store.trophies.firstObject;
     cell.cuisineLabel.text = storeAndStats.store.subType;
-    if (storeAndStats.stats.visits.longValue > 0)
+    if (storeAndStats.stats.visits.longLongValue > 0)
     {
         NSString *strVisitCount = [UtilCalls formattedNumber:storeAndStats.stats.visits];
         NSString *str = [NSString stringWithFormat:@"%@ Guests per Wk", strVisitCount];
@@ -257,7 +258,7 @@
         cell.statsView.hidden = false;
     }
     //
-    //        if (storeStats.recommendations.longValue > 0){
+    //        if (storeStats.recommendations.longLongValue > 0){
     //            txtRecommends.text = [UtilCalls formattedNumber:storeStats.recommendations];
     //            imgRecommends.hidden = false;
     //        }
@@ -313,7 +314,7 @@
     _selectedStore = self.dataProvider.dataObjects[sender.tag];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     OnlineOrderDetails *orderInProgress = appDelegate.globalObjectHolder.orderInProgress;
-    if (orderInProgress != nil && orderInProgress.selectedStore.identifier.longValue != self.selectedStore.store.identifier.longValue)
+    if (orderInProgress != nil && orderInProgress.selectedStore.identifier.longLongValue != self.selectedStore.store.identifier.longLongValue)
     {
         NSString *errMsg = @"You are starting an order at a new restaurant. Do you want to cancel your other order?";
         [UIAlertView showWithTitle:@"Cancel your order?" message:errMsg cancelButtonTitle:@"No" otherButtonTitles:@[@"Yes"]
@@ -383,6 +384,11 @@
     else if ([[segue identifier] isEqualToString:@"segueStoreListToReserve"]) {
         
         ReserveOrWaitlistTableViewController *viewController = segue.destinationViewController;
+        [viewController setSelectedStore:_selectedStore.store];
+    } //
+    else if ([[segue identifier] isEqualToString:@"segueStoreListToStoreWaitList"]) {
+        
+        StoreWaitListViewController *viewController = segue.destinationViewController;
         [viewController setSelectedStore:_selectedStore.store];
     }
     else if ([[segue identifier] isEqualToString:@"segueStoreListToClaimStore"]) {

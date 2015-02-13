@@ -52,7 +52,7 @@
 //    __weak __typeof(self) weakSelf = self;
 //    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
 //    GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-//    GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetStoreChatMembersWithStoreId:self.selectedStore.identifier.longValue];
+//    GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetStoreChatMembersWithStoreId:self.selectedStore.identifier.longLongValue];
 //    NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
 //    dic[USER_AUTH_TOKEN_HEADER_NAME]=[UtilCalls getAuthTokenForCurrentUser];
 //    

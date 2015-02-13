@@ -44,7 +44,7 @@
 @property (copy) NSString *storeName;
 @property (retain) NSNumber *userId;  // longLongValue
 @property (copy) NSString *userName;
-@property (retain) NSNumber *userObjectId;  // longLongValue
+@property (copy) NSString *userObjectId;
 @property (copy) NSString *userPhone;
 @property (copy) NSString *userProfilePhotoUrl;
 @end

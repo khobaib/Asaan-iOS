@@ -121,8 +121,8 @@
     NSString *discountStr;
     if (self.orderInProgress.selectedDiscount != nil)
     {
-        NSUInteger discountId = self.orderInProgress.selectedDiscount.posDiscountId.longValue;
-        NSString *discountAmtOrPercent = [UtilCalls amountToStringNoCurrency:[NSNumber numberWithLong:self.orderInProgress.selectedDiscount.value.longValue]];
+        NSUInteger discountId = self.orderInProgress.selectedDiscount.posDiscountId.longLongValue;
+        NSString *discountAmtOrPercent = [UtilCalls amountToStringNoCurrency:[NSNumber numberWithLong:self.orderInProgress.selectedDiscount.value.longLongValue]];
         discountStr = [NSString stringWithFormat:@"<DISCOUNTS ID=\"%ld\" AMOUNT=\"%@\" REFERENCE=\"Discounts FROM ASAAN\" />", discountId, discountAmtOrPercent];
         strItems=[strItems stringByAppendingString:discountStr];
     }
@@ -162,7 +162,7 @@
     GTLStoreendpointAsaanLongString *als = [[GTLStoreendpointAsaanLongString alloc]init];
     [als setStrValue:orderString];
     
-    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForPlaceOrderWithObject:als storeId:self.orderInProgress.selectedStore.identifier.longValue orderMode:self.orderInProgress.orderType guestCount:self.orderInProgress.partySize storeName:self.orderInProgress.selectedStore.name];
+    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForPlaceOrderWithObject:als storeId:self.orderInProgress.selectedStore.identifier.longLongValue orderMode:self.orderInProgress.orderType guestCount:self.orderInProgress.partySize storeName:self.orderInProgress.selectedStore.name];
     
     //[query setCustomParameter:@"hmHAJvHvKYmilfOqgUnc22tf/RL5GLmPbcFBg02d6wm+ZB1o3f7RKYqmB31+DGoH9Ad3s3WP99n587qDZ5tm+w==" forKey:@"asaan-auth-token"];
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
@@ -178,7 +178,7 @@
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         
         NSLog(@"%@",object);
-        if(error == nil && object.identifier != nil && object.identifier.longValue != 0)
+        if(error == nil && object.identifier != nil && object.identifier.longLongValue != 0)
         {
             NSString *title = [NSString stringWithFormat:@"Your Order - %@", self.orderInProgress.selectedStore.name];
             NSString *msg = [NSString stringWithFormat:@"Thank you - your order has been placed. If you need to make changes please call %@ immediately at %@.", weakSelf.orderInProgress.selectedStore.name, weakSelf.orderInProgress.selectedStore.phone];
@@ -320,16 +320,16 @@
         return 0;
     
     if (self.orderInProgress.selectedDiscount.percentOrAmount.boolValue == true)
-        return [self subTotalNoDiscount] * discount.value.longValue;
+        return [self subTotalNoDiscount] * discount.value.longLongValue;
     else
-        return discount.value.longValue*10000;
+        return discount.value.longLongValue*10000;
 }
 
 - (NSUInteger)taxAmount // already * by 1000000
 {
     NSUInteger taxPercentAmount = 0;
     for (OnlineOrderSelectedMenuItem *onlineOrderSelectedMenuItem in self.orderInProgress.selectedMenuItems)
-        taxPercentAmount += onlineOrderSelectedMenuItem.amount * onlineOrderSelectedMenuItem.selectedItem.tax.longValue;
+        taxPercentAmount += onlineOrderSelectedMenuItem.amount * onlineOrderSelectedMenuItem.selectedItem.tax.longLongValue;
     return taxPercentAmount;
 }
 

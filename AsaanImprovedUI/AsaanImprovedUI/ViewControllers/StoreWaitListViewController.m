@@ -19,6 +19,7 @@
 #import "UIAlertView+Blocks.h"
 #import "UIView+Toast.h"
 #import "pushnotification.h"
+#import "AddToWaitListViewController.h"
 
 @interface StoreWaitListViewController ()<UITableViewDataSource, UITableViewDelegate, AddToWaitListReceiver>
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnEdit;
@@ -56,6 +57,7 @@
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
 
     self.allQueueEntries = [[NSMutableArray alloc]init];
+    [self loadWaitlistQueue];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -203,9 +205,9 @@
     
     NSCalendar *c = [NSCalendar currentCalendar];
     NSDate *d1 = [NSDate date];
-    NSDate *d2 = [NSDate dateWithTimeIntervalSince1970:entry.createdDate.longLongValue];//2012-06-22
-    NSDateComponents *components = [c components:NSHourCalendarUnit fromDate:d2 toDate:d1 options:0];
-    NSInteger diff = components.minute;
+    NSDate *d2 = [NSDate dateWithTimeIntervalSince1970:entry.createdDate.longLongValue/1000];//2012-06-22
+    NSDateComponents *components = [c components:NSHourCalendarUnit|NSMinuteCalendarUnit fromDate:d2 toDate:d1 options:0];
+    NSInteger diff = components.hour*60 + components.minute;
     
     txtTime.text = [NSString stringWithFormat:@"%d-%d(%ld)", entry.estTimeMin.intValue, entry.estTimeMax.intValue, (long)diff];
     if (diff < entry.estTimeMin.intValue)
@@ -315,6 +317,7 @@
     waitListQueueEntry.estTimeMin = [NSNumber numberWithInt:(time + 15)];
     waitListQueueEntry.estTimeMax = [NSNumber numberWithInt:(time + 30)];
     [self saveQueueEntry:waitListQueueEntry];
+    [self.tableView reloadData];
 }
 
 #pragma mark - Private Methods
@@ -345,6 +348,7 @@
 
 - (void)saveQueueEntry:(GTLStoreendpointStoreWaitListQueue *)entry
 {
+    self.isLoading = YES;
     __weak __typeof(self) weakSelf = self;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
@@ -370,18 +374,21 @@
          {
              NSLog(@"%@",[error userInfo]);
          }
+         self.isLoading = NO;
      }];
 
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"segueWaitListToAddToWaitList"])
+    {
+        AddToWaitListViewController *viewController = segue.destinationViewController;
+        viewController.receiver = self;
+    }
 }
-*/
 
 @end

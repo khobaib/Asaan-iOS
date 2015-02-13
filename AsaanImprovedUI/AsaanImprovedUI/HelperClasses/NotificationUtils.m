@@ -54,7 +54,7 @@
     for (UILocalNotification *localNotif in arrayOfLocalNotifications)
     {
         NSNumber *number = [localNotif.userInfo valueForKey:@"REVIEW_ORDER"];
-        if (number.longValue == orderId.longValue)
+        if (number.longLongValue == orderId.longLongValue)
         {
             //Cancelling local notification
             [[UIApplication sharedApplication] cancelLocalNotification:localNotif];
@@ -69,7 +69,7 @@
     NSNumber *orderId = [userInfo objectForKey:@"REVIEW_ORDER"];
     NSString *storeName = [userInfo objectForKey:@"REVIEW_STORE_NAME"];
     NSLog(@"Inside didReceiveLocalNotification :%@", userInfo);
-    if (orderId != nil && orderId.longValue > 0)
+    if (orderId != nil && orderId.longLongValue > 0)
     {
         self.notificationInfo = userInfo;
         NSString *reviewTitle = [NSString stringWithFormat:@"Review %@", storeName];
@@ -98,7 +98,7 @@
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
         NSNumber *orderId = [self.notificationInfo objectForKey:@"REVIEW_ORDER"];
         GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-        GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetOrderAndReviewsByIdWithOrderId:orderId.longValue];
+        GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetOrderAndReviewsByIdWithOrderId:orderId.longLongValue];
         NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
         dic[USER_AUTH_TOKEN_HEADER_NAME]=[UtilCalls getAuthTokenForCurrentUser];
         

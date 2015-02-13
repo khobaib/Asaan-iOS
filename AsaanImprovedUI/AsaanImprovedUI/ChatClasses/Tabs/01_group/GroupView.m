@@ -101,7 +101,7 @@
              {
                  ChatTabBarController *tabbarController = (ChatTabBarController *)self.navigationController.parentViewController;
                  if (tabbarController.selectedStore != nil)
-                     [self showChatRoomForStore:tabbarController.selectedStore.identifier.longValue WithName:tabbarController.selectedStore.name];
+                     [self showChatRoomForStore:tabbarController.selectedStore.identifier.longLongValue WithName:tabbarController.selectedStore.name];
              }
          }
          else
@@ -122,7 +122,7 @@
         if ([object isKindOfClass:[GTLStoreendpointChatRoom class]])
         {
             GTLStoreendpointChatRoom *room = object;
-            if (room.storeId.longValue == storeId)
+            if (room.storeId.longLongValue == storeId)
             {
                 NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
                 
@@ -135,7 +135,7 @@
         else if ([object isKindOfClass:[GTLStoreendpointStoreChatTeam class]])
         {
             GTLStoreendpointStoreChatTeam *team = object;
-            if (team.storeId.longValue == storeId)
+            if (team.storeId.longLongValue == storeId)
             {
                 NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
                 
@@ -295,13 +295,13 @@
     if ([object isKindOfClass:[GTLStoreendpointChatRoom class]])
     {
         GTLStoreendpointChatRoom *room = object;
-        roomOrMembershipId = room.identifier.longValue;
+        roomOrMembershipId = room.identifier.longLongValue;
         title = room.name;
     }
     else if ([object isKindOfClass:[GTLStoreendpointStoreChatTeam class]])
     {
         GTLStoreendpointStoreChatTeam *storeChatMember = object;
-        roomOrMembershipId = storeChatMember.storeId.longValue;
+        roomOrMembershipId = storeChatMember.storeId.longLongValue;
         title = storeChatMember.storeName;
         isStore = true;
     }

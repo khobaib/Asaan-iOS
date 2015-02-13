@@ -180,7 +180,7 @@
 {
     // Create a new Wait list queue entry for this user and store
     GTLStoreendpointStoreWaitListQueue *newEntry = [[GTLStoreendpointStoreWaitListQueue alloc]init];
-    newEntry.storeId = [NSNumber numberWithLong:self.selectedStore.identifier.longValue];
+    newEntry.storeId = [NSNumber numberWithLong:self.selectedStore.identifier.longLongValue];
     newEntry.storeName = self.selectedStore.name;
     int time = (self.storeWaitListSummary.partiesOfSize12.intValue + self.storeWaitListSummary.partiesOfSize34.intValue + self.storeWaitListSummary.partiesOfSize5OrMore.intValue)*2;
     newEntry.estTimeMin = [NSNumber numberWithInt:(time + 15)];

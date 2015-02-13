@@ -69,7 +69,7 @@
         GTLQueryStoreendpoint *query;
         
         if (self.selectedStore != nil)
-            query = [GTLQueryStoreendpoint queryForGetStoreOrdersForCurrentUserAndStoreWithStoreId:self.selectedStore.identifier.longValue firstPosition:0 maxResult:FluentPagingTablePageSize];
+            query = [GTLQueryStoreendpoint queryForGetStoreOrdersForCurrentUserAndStoreWithStoreId:self.selectedStore.identifier.longLongValue firstPosition:0 maxResult:FluentPagingTablePageSize];
         else
             query = [GTLQueryStoreendpoint queryForGetStoreOrdersForCurrentUserWithFirstPosition:0 maxResult:FluentPagingTablePageSize];
         NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
@@ -83,7 +83,7 @@
              {
                  if (object.orders.count > 0)
                  {
-                     _dataProvider = [[DataProvider alloc] initWithPageSize:object.orders.count itemCount:object.count.longValue];
+                     _dataProvider = [[DataProvider alloc] initWithPageSize:object.orders.count itemCount:object.count.longLongValue];
                      _dataProvider.delegate = weakSelf;
                      _dataProvider.shouldLoadAutomatically = YES;
                      _dataProvider.automaticPreloadMargin = FluentPagingTablePreloadMargin;
@@ -126,7 +126,7 @@
 {
     if (self.selectedStore != nil)
     {
-        OrderForStoreLoadingOperation *milo = [[OrderForStoreLoadingOperation alloc] initWithIndexes:indexes storeId:self.selectedStore.identifier.longValue];
+        OrderForStoreLoadingOperation *milo = [[OrderForStoreLoadingOperation alloc] initWithIndexes:indexes storeId:self.selectedStore.identifier.longLongValue];
         return milo;
     }
     else

@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/AqbLpAh38BysWoqybpN7QxohdLI\"",
+ "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/5gXU4d7gIbTTuOk_wu26SMp4uoI\"",
  "discoveryVersion": "v1",
  "id": "storeendpoint:v1",
  "name": "storeendpoint",
@@ -1416,8 +1416,7 @@
      "type": "string"
     },
     "userObjectId": {
-     "type": "string",
-     "format": "int64"
+     "type": "string"
     },
     "userPhone": {
      "type": "string"

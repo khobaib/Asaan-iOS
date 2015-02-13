@@ -28,6 +28,8 @@
 {
     [super viewDidLoad];
     self.txtPartySize.text = @"1";
+    [self.txtPhone.formatter setDefaultOutputPattern:@"(###) ###-####"];
+    self.txtPhone.formatter.prefix = @"+1 ";
 
     // Do any additional setup after loading the view.
 }
@@ -39,14 +41,14 @@
 
 - (IBAction)btnAddClick:(id)sender
 {
-    if (IsEmpty(self.txtPhone.text) || IsEmpty(self.txtName.text) || IsEmpty(self.txtPartySize.text))
+    if (IsEmpty(self.txtPhone.text) || IsEmpty(self.txtName.text) || IsEmpty(self.txtPartySize.text) || self.txtPartySize.text.intValue == 0)
     {
         [self.view makeToast:@"Please enter name, phone and party size"];
         return;
     }
         
     GTLStoreendpointStoreWaitListQueue *newEntry = [[GTLStoreendpointStoreWaitListQueue alloc]init];
-//    newEntry.storeId = [NSNumber numberWithLong:self.selectedStore.identifier.longValue];
+//    newEntry.storeId = [NSNumber numberWithLong:self.selectedStore.identifier.longLongValue];
 //    newEntry.storeName = self.selectedStore.name;
 //    int time = (self.storeWaitListSummary.partiesOfSize12.intValue + self.storeWaitListSummary.partiesOfSize34.intValue + self.storeWaitListSummary.partiesOfSize5OrMore.intValue)*2;
 //    newEntry.estTimeMin = [NSNumber numberWithInt:(time + 15)];
@@ -56,6 +58,7 @@
     newEntry.userName = self.txtName.text;
     newEntry.userPhone = self.txtPhone.text;
     [self.receiver setQueueEntry:newEntry];
+    [UtilCalls popFrom:self index:1 Animated:YES];
 }
 
 #pragma mark - UITextFieldDelegate

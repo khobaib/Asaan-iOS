@@ -47,7 +47,7 @@
         _onlineOrderSelectedMenuItem.selectedStore = self.selectedStore;
         _onlineOrderSelectedMenuItem.selectedModifierGroups = [[NSMutableArray alloc]init];
         _onlineOrderSelectedMenuItem.qty = 1;
-        _onlineOrderSelectedMenuItem.price = self.selectedMenuItem.price.longValue;
+        _onlineOrderSelectedMenuItem.price = self.selectedMenuItem.price.longLongValue;
         _onlineOrderSelectedMenuItem.amount = _onlineOrderSelectedMenuItem.price*_onlineOrderSelectedMenuItem.qty;
     }
     else
@@ -69,7 +69,7 @@
     }
     self.txtMenuItemName.text = _onlineOrderSelectedMenuItem.selectedItem.shortDescription;
     NSNumber *amount = [[NSNumber alloc] initWithLong:_onlineOrderSelectedMenuItem.amount];
-    _onlineOrderSelectedMenuItem.amount = amount.longValue;
+    _onlineOrderSelectedMenuItem.amount = amount.longLongValue;
     self.txtQty.text = [NSString stringWithFormat:@"%lu", (unsigned long)_onlineOrderSelectedMenuItem.qty];
     self.txtSpecialInstructions.text = _onlineOrderSelectedMenuItem.specialInstructions;
     self.txtAmount.text = [UtilCalls amountToString:amount];
@@ -136,9 +136,9 @@
     __weak __typeof(self) weakSelf = self;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreMenuItemModifiersWithStoreId:_onlineOrderSelectedMenuItem.selectedStore.identifier.longValue menuItemPOSId:_onlineOrderSelectedMenuItem.selectedItem.menuItemPOSId.longValue];
+    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreMenuItemModifiersWithStoreId:_onlineOrderSelectedMenuItem.selectedStore.identifier.longLongValue menuItemPOSId:_onlineOrderSelectedMenuItem.selectedItem.menuItemPOSId.longLongValue];
     
-    NSLog(@"storeid=%ld, menuitemposid=%ld", _onlineOrderSelectedMenuItem.selectedStore.identifier.longValue, _onlineOrderSelectedMenuItem.selectedItem.menuItemPOSId.longValue);
+    NSLog(@"storeid=%ld, menuitemposid=%ld", _onlineOrderSelectedMenuItem.selectedStore.identifier.longLongValue, _onlineOrderSelectedMenuItem.selectedItem.menuItemPOSId.longLongValue);
     
     [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error)
      {
@@ -162,7 +162,7 @@
 {
     if (_onlineOrderSelectedMenuItem.selectedModifierGroups.count > 0)
     {
-        long finalPrice = _onlineOrderSelectedMenuItem.selectedItem.price.longValue;
+        long finalPrice = _onlineOrderSelectedMenuItem.selectedItem.price.longLongValue;
         for (OnlineOrderSelectedModifierGroup *modifierGroup in _onlineOrderSelectedMenuItem.selectedModifierGroups)
         {
             for (int i = 0; i < modifierGroup.selectedModifierIndexes.count; i++)
@@ -171,8 +171,8 @@
                 if (isSelected.boolValue == YES)
                 {
                     GTLStoreendpointStoreMenuItemModifier *modifier = [modifierGroup.modifiers objectAtIndex:i];
-                    if (modifier.price.longValue > 0)
-                        finalPrice += modifier.price.longValue;
+                    if (modifier.price.longLongValue > 0)
+                        finalPrice += modifier.price.longLongValue;
                 }
             }
         }
@@ -198,7 +198,7 @@
     NSString *description;
     for (OnlineOrderSelectedModifierGroup *modifierGroup in _onlineOrderSelectedMenuItem.selectedModifierGroups)
     {
-        if (group.modifierGroupPOSId.longValue == modifierGroup.modifierGroup.modifierGroupPOSId.longValue)
+        if (group.modifierGroupPOSId.longLongValue == modifierGroup.modifierGroup.modifierGroupPOSId.longLongValue)
         {
             for (int i = 0; i < modifierGroup.selectedModifierIndexes.count; i++)
             {
@@ -206,7 +206,7 @@
                 if (isSelected.boolValue == YES)
                 {
                     GTLStoreendpointStoreMenuItemModifier *modifier = [modifierGroup.modifiers objectAtIndex:i];
-                    if (modifier.price.longValue > 0)
+                    if (modifier.price.longLongValue > 0)
                     {
                         if (IsEmpty(description) == false)
                             description = [description stringByAppendingString:[NSString stringWithFormat:@", %@ (+%@)", modifier.shortDescription, [UtilCalls amountToString:modifier.price]]];
@@ -269,7 +269,7 @@
     {
         _allModifiersForSelectedGroup = [[NSMutableArray alloc]init];
         for (GTLStoreendpointStoreMenuItemModifier *object in _gtlModifiersAndGroups.modifiers)
-            if (object.modifierGroupPOSId.longValue == _selectedModifierGroup.modifierGroupPOSId.longValue)
+            if (object.modifierGroupPOSId.longLongValue == _selectedModifierGroup.modifierGroupPOSId.longLongValue)
                 [_allModifiersForSelectedGroup addObject:object];
 
         [self performSegueWithIdentifier:@"segueGroupToModifier" sender:self];
@@ -355,7 +355,7 @@
         OnlineOrderSelectedModifierGroup *savedModifierGroup;
         for (OnlineOrderSelectedModifierGroup *object in _onlineOrderSelectedMenuItem.selectedModifierGroups)
         {
-            if (object.modifierGroup.modifierGroupPOSId.longValue == controller.modifierGroup.modifierGroupPOSId.longValue)
+            if (object.modifierGroup.modifierGroupPOSId.longLongValue == controller.modifierGroup.modifierGroupPOSId.longLongValue)
             {
                 savedModifierGroup = object;
                 break;
@@ -382,7 +382,7 @@
         Boolean bFound = NO;
         for (OnlineOrderSelectedModifierGroup *object in _onlineOrderSelectedMenuItem.selectedModifierGroups)
         {
-            if (object.modifierGroup.modifierGroupPOSId.longValue == controller.modifierGroup.modifierGroupPOSId.longValue)
+            if (object.modifierGroup.modifierGroupPOSId.longLongValue == controller.modifierGroup.modifierGroupPOSId.longLongValue)
             {
                 savedModifierGroup = object;
                 bFound = YES;

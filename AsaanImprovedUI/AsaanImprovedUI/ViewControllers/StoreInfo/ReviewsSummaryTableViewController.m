@@ -78,7 +78,7 @@
         GTLQueryStoreendpoint *query;
         
         if (self.selectedStore != nil)
-            query = [GTLQueryStoreendpoint queryForGetOrderReviewsForStoreWithStoreId:self.selectedStore.store.identifier.longValue firstPosition:0 maxResult:FluentPagingTablePageSize]; //queryForGetStoreOrdersForCurrentUserAndStoreWithStoreId:self.selectedStore.identifier.longValue firstPosition:0 maxResult:FluentPagingTablePageSize];
+            query = [GTLQueryStoreendpoint queryForGetOrderReviewsForStoreWithStoreId:self.selectedStore.store.identifier.longLongValue firstPosition:0 maxResult:FluentPagingTablePageSize]; //queryForGetStoreOrdersForCurrentUserAndStoreWithStoreId:self.selectedStore.identifier.longLongValue firstPosition:0 maxResult:FluentPagingTablePageSize];
         else
             query = [GTLQueryStoreendpoint queryForGetStoreOrdersForCurrentUserWithFirstPosition:0 maxResult:FluentPagingTablePageSize];
         NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
@@ -92,7 +92,7 @@
              {
                  if (object.reviews.count > 0)
                  {
-                     _dataProvider = [[DataProvider alloc] initWithPageSize:object.reviews.count itemCount:object.count.longValue];
+                     _dataProvider = [[DataProvider alloc] initWithPageSize:object.reviews.count itemCount:object.count.longLongValue];
                      _dataProvider.delegate = weakSelf;
                      _dataProvider.shouldLoadAutomatically = YES;
                      _dataProvider.automaticPreloadMargin = FluentPagingTablePreloadMargin;
@@ -213,7 +213,7 @@
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
         [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-        NSDate *date = [NSDate dateWithTimeIntervalSince1970:review.createdDate.longValue/1000];
+        NSDate *date = [NSDate dateWithTimeIntervalSince1970:review.createdDate.longLongValue/1000];
         txtPersonNameAndDate.text = [NSString stringWithFormat:@"%@ %@", review.userName, [dateFormatter stringFromDate:date]];
         
         UIImageView *imgFoodLike = (UIImageView *)[cell viewWithTag:502];
