@@ -47,7 +47,8 @@
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
-//    
+    self.allUsers = [[NSMutableArray alloc]init];
+//
 //    __weak __typeof(self) weakSelf = self;
 //    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
 //    GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
@@ -165,6 +166,9 @@
 {
     if (currentuser)
     {
+        for (GTLStoreendpointChatUser *chatUser in self.allUsers)
+            if ([chatUser.phone isEqualToString:currentuser.phone])
+                return;
         GTLStoreendpointChatUser *chatUser = [[GTLStoreendpointChatUser alloc]init];
         chatUser.name = currentuser.name;
         chatUser.phone = currentuser.phone;
@@ -197,8 +201,14 @@
     UIImageView *imgProfilePhoto = (UIImageView *)[cell viewWithTag:501];
     UILabel *txtName = (UILabel *)[cell viewWithTag:502];
     UILabel *txtPhone = (UILabel *)[cell viewWithTag:503];
+
+    // NOTE: Rounded rect
+    imgProfilePhoto.layer.cornerRadius = 10.0f;
+    imgProfilePhoto.clipsToBounds = YES;
+//    imgProfilePhoto.layer.borderWidth = 1.0f;
+//    imgProfilePhoto.layer.borderColor = [UIColor grayColor].CGColor;
     
-    GTLUserendpointChatUser *chatUser = [self.allUsers objectAtIndex:indexPath.row];
+    GTLStoreendpointChatUser *chatUser = [self.allUsers objectAtIndex:indexPath.row];
     
     if (IsEmpty(chatUser.profilePhotoUrl) == false && ![chatUser.profilePhotoUrl isEqualToString:@"undefined"])
     {

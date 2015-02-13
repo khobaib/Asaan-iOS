@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryStoreendpoint (46 custom class methods, 15 custom properties)
+//   GTLQueryStoreendpoint (47 custom class methods, 16 custom properties)
 
 #import "GTLQueryStoreendpoint.h"
 
@@ -62,8 +62,8 @@
 @implementation GTLQueryStoreendpoint
 
 @dynamic fields, firstPosition, guestCount, isStore, maxResult, menuItemPOSId,
-         menuPOSId, menuType, modifiedDate, orderId, orderMode, roomId,
-         roomOrStoreId, storeId, storeName;
+         menuPOSId, menuType, modifiedDate, orderId, orderMode, queuePosition,
+         roomId, roomOrStoreId, storeId, storeName;
 
 #pragma mark -
 #pragma mark Service level methods
@@ -164,6 +164,13 @@
   NSString *methodName = @"storeendpoint.getStoreChatMembers";
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
   query.storeId = storeId;
+  query.expectedObjectClass = [GTLStoreendpointStoreChatTeamCollection class];
+  return query;
+}
+
++ (id)queryForGetStoreChatTeamsForUser {
+  NSString *methodName = @"storeendpoint.getStoreChatTeamsForUser";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
   query.expectedObjectClass = [GTLStoreendpointStoreChatTeamCollection class];
   return query;
 }
@@ -307,14 +314,6 @@
   NSString *methodName = @"storeendpoint.getStoreWaitListQueueEntryForCurrentUser";
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
   query.expectedObjectClass = [GTLStoreendpointStoreWaitListQueueAndPosition class];
-  return query;
-}
-
-+ (id)queryForGetStoreWaitlistSummaryWithStoreId:(long long)storeId {
-  NSString *methodName = @"storeendpoint.getStoreWaitlistSummary";
-  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
-  query.storeId = storeId;
-  query.expectedObjectClass = [GTLStoreendpointStoreWaitlistSummary class];
   return query;
 }
 
@@ -547,6 +546,20 @@
   NSString *methodName = @"storeendpoint.saveStoreWaitlistQueueEntry";
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
   query.bodyObject = object;
+  query.expectedObjectClass = [GTLStoreendpointStoreWaitListQueue class];
+  return query;
+}
+
++ (id)queryForSaveStoreWaitlistQueueEntryByStoreEmployeeWithObject:(GTLStoreendpointStoreWaitListQueue *)object
+                                                     queuePosition:(NSInteger)queuePosition {
+  if (object == nil) {
+    GTL_DEBUG_ASSERT(object != nil, @"%@ got a nil object", NSStringFromSelector(_cmd));
+    return nil;
+  }
+  NSString *methodName = @"storeendpoint.saveStoreWaitlistQueueEntryByStoreEmployee";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.bodyObject = object;
+  query.queuePosition = queuePosition;
   query.expectedObjectClass = [GTLStoreendpointStoreWaitListQueue class];
   return query;
 }

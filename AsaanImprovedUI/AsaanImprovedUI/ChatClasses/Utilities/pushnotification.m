@@ -92,3 +92,25 @@ void SendPushNotification(long roomId, NSString *text)
          }
      }];
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+void SendPushNotification2(NSString *objectId, NSString *text)
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+{
+     PFQuery *query = [PFQuery queryWithClassName:PF_USER_CLASS_NAME];
+     [query whereKey:PF_USER_OBJECTID equalTo:objectId];
+     
+     PFQuery *queryInstallation = [PFInstallation query];
+     [queryInstallation whereKey:PF_INSTALLATION_USER matchesQuery:query];
+     
+     PFPush *push = [[PFPush alloc] init];
+     [push setQuery:queryInstallation];
+     [push setMessage:text];
+     [push sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+      {
+          if (error != nil)
+          {
+              NSLog(@"SendPushNotification send error:%ld, %@.", error.code, error.debugDescription);
+          }
+      }];
+}

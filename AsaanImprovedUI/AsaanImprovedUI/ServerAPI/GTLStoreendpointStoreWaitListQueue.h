@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStoreWaitListQueue (0 custom class methods, 16 custom properties)
+//   GTLStoreendpointStoreWaitListQueue (0 custom class methods, 17 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLObject.h"
@@ -44,6 +44,7 @@
 @property (copy) NSString *storeName;
 @property (retain) NSNumber *userId;  // longLongValue
 @property (copy) NSString *userName;
+@property (retain) NSNumber *userObjectId;  // longLongValue
 @property (copy) NSString *userPhone;
 @property (copy) NSString *userProfilePhotoUrl;
 @end

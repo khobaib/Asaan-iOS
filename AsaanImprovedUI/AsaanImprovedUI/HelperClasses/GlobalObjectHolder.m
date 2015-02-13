@@ -39,6 +39,7 @@
     {
         [self loadCurrentUserFromServer];
         [self loadUserQueueEntry];
+        [self loadUserStoreChatTeams];
     }
     if (self.userCards == nil)
         [self loadUserCardsFromServer];
@@ -84,6 +85,25 @@
              weakSelf.queueEntry = object.queueEntry;
          else
              NSLog(@"Asaan Server Call Failed: loadUserQueueEntry - error:%@", error.userInfo);
+     }];
+}
+
+- (void) loadUserStoreChatTeams
+{
+    __weak __typeof(self) weakSelf = self;
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
+    GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetStoreChatTeamsForUser];
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    dic[USER_AUTH_TOKEN_HEADER_NAME] = [UtilCalls getAuthTokenForCurrentUser];
+    [query setAdditionalHTTPHeaders:dic];
+    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreChatTeamCollection *object, NSError *error)
+     {
+         if (!error)
+             weakSelf.usersStoreChatTeamMemberships = object;
+         else
+             NSLog(@"Asaan Server Call Failed: loadUserStoreChatTeams - error:%@", error.userInfo);
      }];
 }
 

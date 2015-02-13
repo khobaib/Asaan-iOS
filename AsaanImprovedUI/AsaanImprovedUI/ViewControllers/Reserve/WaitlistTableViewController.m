@@ -87,58 +87,80 @@
     return label;
 }
 
-- (void) getStoreWaitTimes
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+- (void)getStoreWaitTimes
+//-------------------------------------------------------------------------------------------------------------------------------------------------
 {
     __weak __typeof(self) weakSelf = self;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-    GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetStoreWaitlistSummaryWithStoreId:self.selectedStore.identifier.longValue];
-    
+    GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetStoreWaitListQueueWithStoreId:self.selectedStore.identifier.longLongValue];
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     dic[USER_AUTH_TOKEN_HEADER_NAME] = [UtilCalls getAuthTokenForCurrentUser];
     [query setAdditionalHTTPHeaders:dic];
-    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreWaitlistSummary *object, NSError *error)
+    
+    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreWaitListQueueCollection *object,NSError *error)
      {
          if (!error)
          {
-             if (object.partiesOfSize12.intValue == 0)
-                 weakSelf.txt1_2.text = @"None";
-             else if (object.partiesOfSize12.intValue == 1)
-                 weakSelf.txt1_2.text = [NSString stringWithFormat:@"%d group",object.partiesOfSize12.intValue];
+             int partiesOfSize2 = 0;
+             int partiesOfSize4 = 0;
+             int partiesOfSize5OrMore = 0;
+             for (GTLStoreendpointStoreWaitListQueue *entry in object.items)
+             {
+                 if (entry.partySize.intValue < 3)
+                     partiesOfSize2++;
+                 else if (entry.partySize.intValue < 5)
+                     partiesOfSize4++;
+                 else
+                     partiesOfSize5OrMore++;
+             }
+             if (partiesOfSize2 == 0)
+                 self.txt1_2.text = @"None";
+             else if (partiesOfSize2 == 1)
+                 self.txt1_2.text = [NSString stringWithFormat:@"%d party",partiesOfSize2];
              else
-                 weakSelf.txt1_2.text = [NSString stringWithFormat:@"%d groups",object.partiesOfSize12.intValue];
-
-             if (object.partiesOfSize34.intValue == 0)
-                 weakSelf.txt3_4.text = @"None";
-             else if (object.partiesOfSize34.intValue == 1)
-                 weakSelf.txt3_4.text = [NSString stringWithFormat:@"%d group",object.partiesOfSize12.intValue];
-             else
-                 weakSelf.txt3_4.text = [NSString stringWithFormat:@"%d groups",object.partiesOfSize12.intValue];
+                 self.txt1_2.text = [NSString stringWithFormat:@"%d parties",partiesOfSize2];
              
-             if (object.partiesOfSize5OrMore.intValue == 0)
-                 weakSelf.txt5OrMore.text = @"None";
-             else if (object.partiesOfSize5OrMore.intValue == 1)
-                 weakSelf.txt5OrMore.text = [NSString stringWithFormat:@"%d group",object.partiesOfSize12.intValue];
+             if (partiesOfSize4 == 0)
+                 self.txt3_4.text = @"None";
+             else if (partiesOfSize4 == 1)
+                 self.txt3_4.text = [NSString stringWithFormat:@"%d party",partiesOfSize4];
              else
-                 weakSelf.txt5OrMore.text = [NSString stringWithFormat:@"%d groups",object.partiesOfSize12.intValue];
+                 self.txt3_4.text = [NSString stringWithFormat:@"%d parties",partiesOfSize4];
              
-             if (IsEmpty(object.waitTime12))
-                 weakSelf.txt1_2WaitTime.text = @"15 min";
+             if (partiesOfSize5OrMore == 0)
+                 self.txt5OrMore.text = @"None";
+             else if (partiesOfSize5OrMore == 1)
+                 self.txt5OrMore.text = [NSString stringWithFormat:@"%d party",partiesOfSize5OrMore];
              else
-                 weakSelf.txt1_2WaitTime.text = object.waitTime12;
-             if (IsEmpty(object.waitTime34))
-                 weakSelf.txt3_4WaitTime.text = @"15 min";
+                 self.txt5OrMore.text = [NSString stringWithFormat:@"%d parties",partiesOfSize5OrMore];
+             
+             int totalWaitingGroups = partiesOfSize2 + partiesOfSize4 + partiesOfSize5OrMore;
+//             if (totalWaitingGroups == 1)
+//                 self.totalQueue.text = @"Queue - 1 Party";
+//             else
+//                 self.totalQueue.text = [NSString stringWithFormat:@"Queue - %d Parties", totalWaitingGroups];
+             
+             if (totalWaitingGroups == 0)
+                 self.txt1_2WaitTime.text = @"15 min or less";
              else
-                 weakSelf.txt3_4WaitTime.text = object.waitTime34;
-             if (IsEmpty(object.waitTime12))
-                 weakSelf.txt5OrMoreWaitTime.text = @"15 min";
+                 self.txt1_2WaitTime.text = [NSString stringWithFormat:@"%d - %d min", totalWaitingGroups*2 + 15, totalWaitingGroups*2 + 30];
+             if (totalWaitingGroups == 0)
+                 self.txt3_4WaitTime.text = @"15 min";
              else
-                 weakSelf.txt5OrMoreWaitTime.text = object.waitTime5OrMore;
+                 self.txt3_4WaitTime.text = [NSString stringWithFormat:@"%d - %d min", totalWaitingGroups*2 + 15, totalWaitingGroups*2 + 45];
+             if (totalWaitingGroups == 0)
+                 self.txt5OrMoreWaitTime.text = @"15 min";
+             else
+                 self.txt5OrMoreWaitTime.text = [NSString stringWithFormat:@"%d - %d min", totalWaitingGroups*2 + 15, totalWaitingGroups*2 + 30];
+             [weakSelf.tableView reloadData];
          }
          else
-             NSLog(@"Asaan Server Call Failed: queryForGetStoreWaitlistSummaryWithStoreId - error:%@", error.userInfo);
+         {
+             NSLog(@"queryForGetStoreWaitListQueueWithStoreId error:%ld, %@", error.code, error.debugDescription);
+         }
      }];
-
 }
 
 - (void)didReceiveMemoryWarning {
@@ -164,6 +186,7 @@
     newEntry.estTimeMin = [NSNumber numberWithInt:(time + 15)];
     newEntry.estTimeMax = [NSNumber numberWithInt:(time + 30)];
     newEntry.partySize = [NSNumber numberWithInt:self.currPartySize];
+    newEntry.status = [NSNumber numberWithInt:1];
     
     __weak __typeof(self) weakSelf = self;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
@@ -179,7 +202,7 @@
          {
              appDelegate.globalObjectHolder.queueEntry = queueEntry;
              NSString *title = [NSString stringWithFormat:@"Your Waitlist Entry at %@", weakSelf.selectedStore.name];
-             NSString *msg = [NSString stringWithFormat:@"Thank you - your wait list request has been sent. %@ will acknowledge it shortly. If you need to make changes please call %@ immediately at %@.", weakSelf.selectedStore.name, weakSelf.selectedStore.name, weakSelf.selectedStore.phone];
+             NSString *msg = [NSString stringWithFormat:@"Thank you - your wait list request has been sent. If you need to make changes please call %@ immediately at %@.", weakSelf.selectedStore.name, weakSelf.selectedStore.phone];
              UIAlertView *alert=[[UIAlertView alloc]initWithTitle:title message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
              [alert show];
              [weakSelf performSegueWithIdentifier:@"segueUnwindWaitlistToStoreList" sender:weakSelf];

@@ -22,6 +22,7 @@
 @property (strong, nonatomic) GTLUserendpointUserAddress *defaultUserAddress;
 @property (strong, nonatomic) GTLUserendpointUser *currentUser;
 @property (strong, nonatomic) GTLStoreendpointStoreWaitListQueue *queueEntry;
+@property (strong, nonatomic) GTLStoreendpointStoreChatTeamCollection *usersStoreChatTeamMemberships;
 
 - (OnlineOrderDetails *)createOrderInProgress;
 - (void) removeOrderInProgress;

@@ -23,6 +23,7 @@
 #import "DeliveryOrCarryoutViewController.h"
 #import "ReserveOrWaitlistTableViewController.h"
 #import "ClaimStoreViewController.h"
+#import "StoreWaitListViewController.h"
 #import "UIAlertView+Blocks.h"
 
 #import "StoreViewController.h"
@@ -331,9 +332,26 @@
 {
     _selectedStore = self.dataProvider.dataObjects[sender.tag];
     if (_selectedStore.store.claimed.boolValue == true)
-        [self performSegueWithIdentifier:@"segueStoreListToReserve" sender:sender];
+    {
+        if ([self userBelongsToStoreChatTeam])
+            [self performSegueWithIdentifier:@"segueStoreListToStoreWaitList" sender:sender];
+        else
+            [self performSegueWithIdentifier:@"segueStoreListToReserve" sender:sender];
+    }
     else
         [self performSegueWithIdentifier:@"segueStoreListToClaimStore" sender:sender];
+}
+
+-(Boolean)userBelongsToStoreChatTeam
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    GTLStoreendpointStoreChatTeamCollection *teams = appDelegate.globalObjectHolder.usersStoreChatTeamMemberships;
+    if (teams == nil)
+        return false;
+    for (GTLStoreendpointStoreChatTeam *team in teams.items)
+        if (team.storeId.longLongValue == self.selectedStore.store.identifier.longLongValue)
+            return true;
+    return false;
 }
 
 #pragma mark - Navigation

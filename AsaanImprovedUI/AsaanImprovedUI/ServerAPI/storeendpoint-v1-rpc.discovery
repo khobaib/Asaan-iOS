@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/3ajxH-1Rvj8bAe4_bvlGTpnjYHI\"",
+ "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/AqbLpAh38BysWoqybpN7QxohdLI\"",
  "discoveryVersion": "v1",
  "id": "storeendpoint:v1",
  "name": "storeendpoint",
@@ -1415,6 +1415,10 @@
     "userName": {
      "type": "string"
     },
+    "userObjectId": {
+     "type": "string",
+     "format": "int64"
+    },
     "userPhone": {
      "type": "string"
     },
@@ -1728,6 +1732,15 @@
     "https://www.googleapis.com/auth/userinfo.email"
    ]
   },
+  "storeendpoint.getStoreChatTeamsForUser": {
+   "id": "storeendpoint.getStoreChatTeamsForUser",
+   "returns": {
+    "$ref": "StoreChatTeamCollection"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
   "storeendpoint.getStoreCount": {
    "id": "storeendpoint.getStoreCount",
    "returns": {
@@ -2010,25 +2023,6 @@
    "id": "storeendpoint.getStoreWaitListQueueEntryForCurrentUser",
    "returns": {
     "$ref": "StoreWaitListQueueAndPosition"
-   },
-   "scopes": [
-    "https://www.googleapis.com/auth/userinfo.email"
-   ]
-  },
-  "storeendpoint.getStoreWaitlistSummary": {
-   "id": "storeendpoint.getStoreWaitlistSummary",
-   "parameters": {
-    "storeId": {
-     "type": "string",
-     "required": true,
-     "format": "int64"
-    }
-   },
-   "parameterOrder": [
-    "storeId"
-   ],
-   "returns": {
-    "$ref": "StoreWaitlistSummary"
    },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"
@@ -2412,6 +2406,29 @@
    },
    "parameterOrder": [
     "resource"
+   ],
+   "returns": {
+    "$ref": "StoreWaitListQueue"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.saveStoreWaitlistQueueEntryByStoreEmployee": {
+   "id": "storeendpoint.saveStoreWaitlistQueueEntryByStoreEmployee",
+   "parameters": {
+    "queuePosition": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    },
+    "resource": {
+     "$ref": "StoreWaitListQueue"
+    }
+   },
+   "parameterOrder": [
+    "resource",
+    "queuePosition"
    ],
    "returns": {
     "$ref": "StoreWaitListQueue"

@@ -91,7 +91,7 @@
                  }
              }
              else
-                 NSLog(@"Asaan Server Call Failed: getUserAddresses - error:%@", error.userInfo);
+                 NSLog(@"Asaan Server Call Failed: getUserByPhone in PhoneSearchViewController - error:%@", error.userInfo);
          }];
     }
 }
