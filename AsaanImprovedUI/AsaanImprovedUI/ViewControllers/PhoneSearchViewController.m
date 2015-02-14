@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet SHSPhoneTextField *txtPhone;
 @property (weak, nonatomic) IBOutlet UIButton *btnAddEmployee;
 @property (strong, nonatomic) GTLUserendpointChatUser *chatUser;
+@property (weak, nonatomic) IBOutlet UIView *headerView;
 
 @end
 
@@ -27,6 +28,8 @@
     [super viewDidLoad];
     [self.txtPhone.formatter setDefaultOutputPattern:@"(###) ###-####"];
     self.txtPhone.formatter.prefix = @"+1 ";
+    
+    [UtilCalls setupHeaderView:self.headerView WithTitle:@"Select Employee by Phone" AndSubTitle:@"Make Sure Employee Has Joined Asaan First."];
 }
 
 - (void)viewWillAppear:(BOOL)animated

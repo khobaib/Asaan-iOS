@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtName;
 @property (weak, nonatomic) IBOutlet UITextField *txtPartySize;
 @property (strong, nonatomic) GTLUserendpointChatUser *chatUser;
+@property (weak, nonatomic) IBOutlet UIView *headerView;
 
 @end
 
@@ -30,6 +31,7 @@
     self.txtPartySize.text = @"1";
     [self.txtPhone.formatter setDefaultOutputPattern:@"(###) ###-####"];
     self.txtPhone.formatter.prefix = @"+1 ";
+    [UtilCalls setupHeaderView:self.headerView WithTitle:@"Add to Wait-list" AndSubTitle:@"Asaan users will be automatically found by phone. Others will receive confirmation via text messages."];
 
     // Do any additional setup after loading the view.
 }

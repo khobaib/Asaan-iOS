@@ -55,6 +55,9 @@
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+    
+    NSString *title = [NSString stringWithFormat:@"%@ Wait List", self.selectedStore.name];
+    self.navigationItem.title = title;
 
     self.allQueueEntries = [[NSMutableArray alloc]init];
     [self loadWaitlistQueue];
@@ -202,6 +205,10 @@
     txtName.text = entry.userName;
     txtPartySize.text = [NSString stringWithFormat:@"%d",entry.partySize.intValue];
     [tableIsReady addTarget:self action:@selector(tableIsReadyForRow:) forControlEvents:UIControlEventTouchUpInside];
+    if (entry.status.intValue == 3)
+        [tableIsReady setTitle:@"Seated" forState:UIControlStateNormal];
+    else
+        [tableIsReady setTitle:@"Table is Ready" forState:UIControlStateNormal];
     
     NSCalendar *c = [NSCalendar currentCalendar];
     NSDate *d1 = [NSDate date];
@@ -323,10 +330,16 @@
 #pragma mark - Private Methods
 - (IBAction) tableIsReadyForRow:(UIButton *)sender
 {
+    GTLStoreendpointStoreWaitListQueue *entry = [self.allQueueEntries objectAtIndex:sender.tag];
+    if (entry.dateNotifiedTableIsReady > 0)
+    {
+        [self seatQueueEntry:entry];
+        [sender setTitle:@"Seated" forState:UIControlStateNormal];
+        return;
+    }
     NSDate *date = [NSDate date];
     long timeInMillis = [date timeIntervalSince1970]*1000;
     
-    GTLStoreendpointStoreWaitListQueue *entry = [self.allQueueEntries objectAtIndex:sender.tag];
     entry.dateNotifiedTableIsReady = [NSNumber numberWithLong:timeInMillis];
     
     [self saveQueueEntry:entry];
@@ -361,13 +374,16 @@
      {
          if (!error && queueEntry != nil && queueEntry.identifier.longLongValue > 0)
          {
-             [weakSelf.allQueueEntries addObject:queueEntry];
-             if (queueEntry.partySize.intValue < 2)
-                 weakSelf.partiesOfSize2++;
-             else if (queueEntry.partySize.intValue < 4)
-                 weakSelf.partiesOfSize4++;
-             else
-                 weakSelf.partiesOfSize5OrMore++;
+             if (queueEntry.status.intValue < 3)
+             {
+                 [weakSelf.allQueueEntries addObject:queueEntry];
+                 if (queueEntry.partySize.intValue < 2)
+                     weakSelf.partiesOfSize2++;
+                 else if (queueEntry.partySize.intValue < 4)
+                     weakSelf.partiesOfSize4++;
+                 else
+                     weakSelf.partiesOfSize5OrMore++;
+             }
              [weakSelf.tableView reloadData];
          }
          else

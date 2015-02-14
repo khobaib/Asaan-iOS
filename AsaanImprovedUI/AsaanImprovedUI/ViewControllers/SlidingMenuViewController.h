@@ -12,6 +12,7 @@
 @interface SMTableViewCell1 : TDBadgedCell
 
 @property (nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *titleImage;
 
 @end
 

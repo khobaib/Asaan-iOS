@@ -138,7 +138,7 @@
     GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
     GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreMenuItemModifiersWithStoreId:_onlineOrderSelectedMenuItem.selectedStore.identifier.longLongValue menuItemPOSId:_onlineOrderSelectedMenuItem.selectedItem.menuItemPOSId.longLongValue];
     
-    NSLog(@"storeid=%ld, menuitemposid=%ld", _onlineOrderSelectedMenuItem.selectedStore.identifier.longLongValue, _onlineOrderSelectedMenuItem.selectedItem.menuItemPOSId.longLongValue);
+    NSLog(@"storeid=%lld, menuitemposid=%lld", _onlineOrderSelectedMenuItem.selectedStore.identifier.longLongValue, _onlineOrderSelectedMenuItem.selectedItem.menuItemPOSId.longLongValue);
     
     [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error)
      {

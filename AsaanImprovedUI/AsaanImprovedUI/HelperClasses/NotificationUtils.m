@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "GTLStoreendpointOrderAndReviews.h"
 #import "UtilCalls.h"
+#import "UIColor+AsaanGoldColor.h"
 
 @interface NotificationUtils()
 
@@ -115,7 +116,8 @@
                      pvc.selectedOrder = object.order;
                      pvc.reviewAndItems = object.orderAndItemsReview;
                      pvc.presentedFromNotification = true;
-                    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:pvc];
+                     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:pvc];
+//                     [UINavigationBar appearance].barTintColor = [UIColor asaanBackgroundColor];
                      [[UIViewController currentViewController] presentViewController:navigationController animated:YES completion:nil];
                  }
                  else

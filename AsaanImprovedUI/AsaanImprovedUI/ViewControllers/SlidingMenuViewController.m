@@ -30,6 +30,7 @@
 @interface SlidingMenuViewController () {
 
     NSArray *_menu;
+    NSArray *_menuImage;
     NSArray *_menuSegue;
 }
 
@@ -40,8 +41,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _menu = @[@"Stores", @"Profile", @"Chat History", @"Wait List Status", @"Friends", @"Pending Orders", @"Order History", @"Logout"];
-    _menuSegue = @[SEGUE_SMToStoreList, SEGUE_SMToUpdateProfile, SEGUE_SMToChatHistory, SEGUE_SMToWaitListStatus, SEGUE_SMToFriends, SEGUE_SMToCart, SEGUE_SMToOrderHistory, SEGUE_UnwindToStoreList];
+    _menu = @[@"Stores", @"Profile", @"Chat History", @"Wait List Status", @"Pending Orders", @"Order History", @"Logout"];
+    _menuImage = @[@"stores", @"profile", @"chat_history", @"no_image", @"cart", @"order_history", @"logout"];
+    _menuSegue = @[SEGUE_SMToStoreList, SEGUE_SMToUpdateProfile, SEGUE_SMToChatHistory, SEGUE_SMToWaitListStatus, SEGUE_SMToCart, SEGUE_SMToOrderHistory, SEGUE_UnwindToStoreList];
     
     NSAssert(_menu.count == _menuSegue.count, @"Menu and MenuSegue length should be equal.");
     
@@ -84,6 +86,7 @@
     
     SMTableViewCell1 *cell = [tableView dequeueReusableCellWithIdentifier: CellIdentifier forIndexPath: indexPath];
     
+    cell.titleImage.image = [UIImage imageNamed:_menuImage[indexPath.row]];
     cell.titleLabel.text = _menu[indexPath.row];
     cell.badgeRightOffset = 70;
     cell.badgeColor = [UIColor redColor];

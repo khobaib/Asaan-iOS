@@ -15,6 +15,7 @@
 #import <ParseCrashReporting/ParseCrashReporting.h>
 
 #import "UIColor+AsaanBackgroundColor.h"
+#import "UIColor+AsaanGoldColor.h"
 #import "SWRevealViewController.h"
 #import "BBBadgeBarButtonItem.h"
 #import "NotificationUtils.h"
@@ -98,6 +99,8 @@
     [UINavigationBar appearance].barTintColor = [UIColor asaanBackgroundColor];
     [UINavigationBar appearance].shadowImage = [UIImage new];
     [UINavigationBar appearance].titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+    
+    self.window.tintColor = [UIColor goldColor];
     
     UILocalNotification *localNotif =
     [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
