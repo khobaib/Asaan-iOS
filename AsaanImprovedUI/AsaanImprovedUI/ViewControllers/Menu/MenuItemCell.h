@@ -22,10 +22,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *todaysOrdersLabels;
 @property (weak, nonatomic) IBOutlet UILabel *likesLabel;
 @property (weak, nonatomic) IBOutlet UILabel *reviewsLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *likeImageView;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *mostOrderedLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *itemImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *likesImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *visitorsImageView;
 
 @property (weak, nonatomic) IBOutlet id<MenuItemCellDelegate> delegate;
 

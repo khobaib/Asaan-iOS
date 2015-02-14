@@ -11,6 +11,7 @@
 #import "WaitlistTableViewController.h"
 #import "AppDelegate.h"
 #import "UIAlertView+Blocks.h"
+#import "UtilCalls.h"
 
 @interface ReserveOrWaitlistTableViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *txtReserve;
@@ -88,17 +89,7 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 40)];
-    /* Create custom view to display section header... */
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, tableView.frame.size.width, 20)];
-    [label setFont:[UIFont boldSystemFontOfSize:14]];
-    [label setTextColor:[UIColor colorWithRed:255.0 green:255.0 blue:255.0 alpha:1.0]];
-    label.text = @"Welcome. Let's find a table for you.";
-    
-    /* Section header is in 0th index... */
-    [view addSubview:label];
-    [view setBackgroundColor:[UIColor colorWithRed:48/255.0 green:25/255.0 blue:25/255.0 alpha:1.0]]; //your background color...
-    return view;
+    return [UtilCalls setupStaticHeaderViewForTable:tableView WithTitle:self.selectedStore.name AndSubTitle:@"Welcome. Let's find a table for you."];
 }
 
 

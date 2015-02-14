@@ -354,8 +354,6 @@
 -(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UITableViewCell *headerCell = [tableView dequeueReusableCellWithIdentifier:@"HeaderCell"];
-    headerCell.textLabel.text = self.selectedOrder.storeName;
-    UILabel *txtSubtitle=(UILabel *)[headerCell viewWithTag:502];
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
@@ -363,7 +361,8 @@
     
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:self.selectedOrder.createdDate.longLongValue/1000];
     
-    txtSubtitle.text = [dateFormatter stringFromDate:date];
+    NSString *subTitle = [NSString stringWithFormat:@"Order Summary - %@", [dateFormatter stringFromDate:date]];
+    [UtilCalls setupHeaderView:headerCell WithTitle:self.selectedOrder.storeName AndSubTitle:subTitle];
     return headerCell;
 }
 

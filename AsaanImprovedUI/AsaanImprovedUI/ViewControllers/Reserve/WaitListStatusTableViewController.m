@@ -28,6 +28,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -35,33 +36,6 @@
     
     [UtilCalls getSlidingMenuBarButtonSetupWith:self];
     [self getStoreWaitStatus];
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    NSString *sectionTitle = [self tableView:tableView titleForHeaderInSection:section];
-    if (sectionTitle == nil)
-    {
-        return nil;
-    }
-    
-    // Create label with section title
-    UILabel *label = [[UILabel alloc] init];
-    label.frame = CGRectMake(20, 6, 300, 30);
-    label.backgroundColor = [UIColor clearColor];
-    label.textColor = [UIColor whiteColor];
-    //    label.shadowColor = [UIColor whiteColor];
-    //    label.shadowOffset = CGSizeMake(0.0, 1.0);
-    label.font = [UIFont boldSystemFontOfSize:16];
-    label.text = sectionTitle;
-    
-    // Create header view and add label as a subview
-    
-    // you could also just return the label (instead of making a new view and adding the label as subview. With the view you have more flexibility to make a background color or different paddings
-    //    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, SectionHeaderHeight)];
-    //    [view addSubview:label];
-    
-    return label;
 }
 
 - (void) getStoreWaitStatus
@@ -76,7 +50,7 @@
     [query setAdditionalHTTPHeaders:dic];
     [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreWaitListQueueAndPosition *object, NSError *error)
      {
-         weakSelf.navigationItem.title = object.queueEntry.storeName;
+         weakSelf.tableView.tableHeaderView = [UtilCalls setupStaticHeaderViewForTable:self.tableView WithTitle:object.queueEntry.storeName AndSubTitle:@"Your Wait-list Status"];
          if (!error)
          {
              if (object.queueEntry.dateNotifiedTableIsReady.longLongValue > 0)
@@ -134,9 +108,9 @@
              NSCalendar *c = [NSCalendar currentCalendar];
              NSDate *d1 = [NSDate date];
              NSDate *d2 = [NSDate dateWithTimeIntervalSince1970:object.queueEntry.createdDate.longLongValue*1000];//2012-06-22
-             NSDateComponents *components = [c components:NSHourCalendarUnit fromDate:d2 toDate:d1 options:0];
-             NSInteger diff = components.minute;
-             weakSelf.txtEstWaitTime.text = [NSString stringWithFormat:@"Estimated Wait Time: %ld - %ld min", (object.queueEntry.estTimeMin.longLongValue - diff), (object.queueEntry.estTimeMax.longLongValue - diff)];
+             NSDateComponents *components = [c components:NSHourCalendarUnit|NSMinuteCalendarUnit fromDate:d2 toDate:d1 options:0];
+             NSInteger diff = components.hour*60 + components.minute;
+             weakSelf.txtEstWaitTime.text = [NSString stringWithFormat:@"Elapsed Time: %ld min (%d - %d)", diff, (object.queueEntry.estTimeMin.intValue), (object.queueEntry.estTimeMax.intValue)];
          }
          else
              NSLog(@"Asaan Server Call Failed: queryForGetStoreWaitListQueueEntryForCurrentUser - error:%@", error.userInfo);

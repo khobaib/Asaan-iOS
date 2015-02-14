@@ -43,6 +43,7 @@
     self.imgLike = [UIImage imageNamed:@"ic_good_rating"];
     self.imgDislike = [UIImage imageNamed:@"ic_bad_rating"];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.tableView.tableHeaderView = [UtilCalls setupStaticHeaderViewForTable:self.tableView WithTitle:self.selectedStore.store.name AndSubTitle:nil];
     
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
     {

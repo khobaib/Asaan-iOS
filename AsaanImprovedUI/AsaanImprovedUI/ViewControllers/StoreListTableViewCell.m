@@ -25,6 +25,8 @@
     self.visitLabel.text = nil;
     self.likeLabel.text = nil;
     self.statsView.hidden = true;
+    self.visitorsImageView.hidden = true;
+    self.likesImageView.hidden = true;
 }
 
 @end

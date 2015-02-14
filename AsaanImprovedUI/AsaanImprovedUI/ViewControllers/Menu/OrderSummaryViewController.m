@@ -546,7 +546,7 @@
 {
     UITableViewCell *headerCell = [tableView dequeueReusableCellWithIdentifier:@"HeaderCell"];
     if (self.orderInProgress != nil && self.orderInProgress.selectedStore != nil)
-        headerCell.textLabel.text = self.orderInProgress.selectedStore.name;
+        [UtilCalls setupHeaderView:headerCell WithTitle:self.orderInProgress.selectedStore.name AndSubTitle:@"Order Summary"];
     return headerCell;
 }
 

@@ -161,6 +161,13 @@
     item.like = number.shortValue;
 }
 
+-(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UITableViewCell *headerCell = [tableView dequeueReusableCellWithIdentifier:@"HeaderCell"];
+    [UtilCalls setupHeaderView:headerCell WithTitle:self.selectedOrder.storeName AndSubTitle:@"Did any item stand out?"];
+    return headerCell;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell;

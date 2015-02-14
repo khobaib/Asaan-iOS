@@ -246,9 +246,10 @@
     if (storeAndStats.stats.visits.longLongValue > 0)
     {
         NSString *strVisitCount = [UtilCalls formattedNumber:storeAndStats.stats.visits];
-        NSString *str = [NSString stringWithFormat:@"%@ Guests per Wk", strVisitCount];
+        NSString *str = [NSString stringWithFormat:@"%@", strVisitCount];
         cell.visitLabel.text = str;
         cell.statsView.hidden = false;
+        cell.visitorsImageView.hidden = false;
     }
 
     NSString *strLike = [UtilCalls getOverallReviewStringFromStats:storeAndStats];
@@ -256,6 +257,7 @@
     {
         cell.likeLabel.text = strLike;
         cell.statsView.hidden = false;
+        cell.likesImageView.hidden = false;
     }
     //
     //        if (storeStats.recommendations.longLongValue > 0){

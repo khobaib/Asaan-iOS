@@ -75,29 +75,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    NSString *sectionTitle = [self tableView:tableView titleForHeaderInSection:section];
-    if (sectionTitle == nil)
-    {
-        return nil;
-    }
-    
-    // Create label with section title
-    UILabel *label = [[UILabel alloc] init];
-    label.frame = CGRectMake(20, 6, 300, 30);
-    label.backgroundColor = [UIColor clearColor];
-    label.textColor = [UIColor whiteColor];
-//    label.shadowColor = [UIColor whiteColor];
-//    label.shadowOffset = CGSizeMake(0.0, 1.0);
-    label.font = [UIFont boldSystemFontOfSize:16];
-    label.text = sectionTitle;
-    
-    // Create header view and add label as a subview
-    
-    // you could also just return the label (instead of making a new view and adding the label as subview. With the view you have more flexibility to make a background color or different paddings
-//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, SectionHeaderHeight)];
-//    [view addSubview:label];
-    
-    return label;
+    return [UtilCalls setupStaticHeaderViewForTable:tableView WithTitle:self.selectedStore.name AndSubTitle:@"Let's get your reservation started."];
 }
 
 - (IBAction)decPartySize:(id)sender

@@ -13,6 +13,7 @@
 #import "AppDelegate.h"
 #import "MBProgressHUD.h"
 #import "PTKCardType.h"
+#import "UtilCalls.h"
 #import <Parse/Parse.h>
 
 @interface SelectPaymentTableViewController ()
@@ -29,6 +30,8 @@
     [super viewDidLoad];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     self.userCards = appDelegate.globalObjectHolder.userCards;
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.tableView.tableHeaderView = [UtilCalls setupStaticHeaderViewForTable:self.tableView WithTitle:@"Select Payment Mode" AndSubTitle:nil];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

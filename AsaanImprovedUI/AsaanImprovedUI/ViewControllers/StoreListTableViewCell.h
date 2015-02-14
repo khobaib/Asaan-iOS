@@ -11,6 +11,8 @@
 @interface StoreListTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *visitorsImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *likesImageView;
 @property (weak, nonatomic) IBOutlet UIView *statsView;
 
 @property (weak, nonatomic) IBOutlet UILabel *restaurantLabel;

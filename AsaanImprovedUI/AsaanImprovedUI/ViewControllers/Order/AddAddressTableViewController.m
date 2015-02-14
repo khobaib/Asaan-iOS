@@ -43,6 +43,7 @@
     [super viewDidLoad];
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.tableView.tableHeaderView = [UtilCalls setupStaticHeaderViewForTable:self.tableView WithTitle:self.selectedStore.name AndSubTitle:@"Add Delivery Address"];
     [self setupDropdownView:self.state];
     
     // Uncomment the following line to preserve selection between presentations.

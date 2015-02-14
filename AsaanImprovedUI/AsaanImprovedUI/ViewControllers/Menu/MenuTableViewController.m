@@ -92,11 +92,11 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
 //    self.cellHeight = 150;
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
     {
-        self.tableView.estimatedRowHeight = 150;
+        self.tableView.estimatedRowHeight = 155;
         self.tableView.rowHeight = UITableViewAutomaticDimension;
     }
     else
-        self.cellHeight = 150;
+        self.cellHeight = 155;
 }
 
 - (void)dealloc
@@ -411,6 +411,8 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     cell.priceLabel.text = nil;
     cell.mostOrderedLabel.text = nil;
     cell.reviewsLabel.text = nil;
+    cell.likesImageView.image = nil;
+    cell.visitorsImageView.image = nil;
     
     id dataObject = menuSegmentHolder.provider.dataObjects[rowIndex];
     if ([dataObject isKindOfClass:[NSNull class]])
@@ -428,7 +430,10 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
         cell.mostOrderedLabel.text = @"Most Frequently Ordered";
     
     if (menuItemAndStats.stats.orders != nil && menuItemAndStats.stats.orders.longLongValue > 0)
-        cell.todaysOrdersLabels.text = [NSString stringWithFormat:@"Orders: %@", [UtilCalls formattedNumber:menuItemAndStats.stats.orders]];
+    {
+        cell.visitorsImageView.image = [UIImage imageNamed:@"number_visitors"];
+        cell.todaysOrdersLabels.text = [UtilCalls formattedNumber:menuItemAndStats.stats.orders];
+    }
     
     long reviewCount = menuItemAndStats.stats.dislikes.longLongValue + menuItemAndStats.stats.likes.longLongValue;
     if (reviewCount > 0)
@@ -440,6 +445,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
         NSString *strReviews = [UtilCalls formattedNumber:[NSNumber numberWithLong:reviewCount]];
         NSString *strLikePercent = [UtilCalls formattedNumber:likePercent];
         cell.reviewsLabel.text = [[[strLikePercent stringByAppendingString:@"%("] stringByAppendingString:strReviews] stringByAppendingString:@")"];
+        cell.likesImageView.image = [UIImage imageNamed:@"number_likes"];
     }
 
     cell.delegate = self;

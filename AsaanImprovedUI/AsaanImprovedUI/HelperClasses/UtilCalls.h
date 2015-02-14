@@ -26,6 +26,9 @@
 + (void) popFrom:(UIViewController *)childController ToViewController:(Class)parentControllerClass Animated:(BOOL)animated;
 + (void) popFrom:(UIViewController *)childController index:(int)index Animated:(BOOL)animated;
 
++ (void) setupHeaderView:(UIView *)headerView WithTitle:(NSString *)title AndSubTitle:(NSString *)subTitle;
++ (UIView *)setupStaticHeaderViewForTable:(UITableView*)tableView WithTitle:(NSString *)title AndSubTitle:(NSString *)subTitle;
+
 + (NSNumber *) stringToNumber:(NSString*)string;
 
 + (NSString *) getAuthTokenForCurrentUser;

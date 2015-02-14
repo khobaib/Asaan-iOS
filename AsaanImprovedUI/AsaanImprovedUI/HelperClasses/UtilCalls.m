@@ -181,6 +181,62 @@
         [childController.navigationController popToViewController:parentViewController animated:animated];
 }
 
++ (void) setupHeaderView:(UIView *)headerView WithTitle:(NSString *)title AndSubTitle:(NSString *)subTitle
+{
+    if (headerView)
+    {
+        UILabel *txtTitle = (UILabel *)[headerView viewWithTag:501];
+        UILabel *txtSubtitle = (UILabel *)[headerView viewWithTag:502];
+        
+        txtTitle.text = title;
+        txtSubtitle.text = subTitle;
+    }
+}
+
++ (UIView *)setupStaticHeaderViewForTable:(UITableView*)tableView WithTitle:(NSString *)title AndSubTitle:(NSString *)subTitle
+{
+//    NSString *sectionTitle = [self tableView:tableView titleForHeaderInSection:section];
+//    if (sectionTitle == nil)
+//    {
+//        return nil;
+//    }
+    
+    // Create label with section title
+    UILabel *labelTitle = [[UILabel alloc] init];
+    labelTitle.frame = CGRectMake(16, 16, 300, 30);
+    labelTitle.backgroundColor = [UIColor clearColor];
+    labelTitle.textColor = [UIColor whiteColor];
+    //    label.shadowColor = [UIColor whiteColor];
+    //    label.shadowOffset = CGSizeMake(0.0, 1.0);
+    labelTitle.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+    labelTitle.text = title;
+    
+    // Create header view and add label as a subview
+    
+    // you could also just return the label (instead of making a new view and adding the label as subview. With the view you have more flexibility to make a background color or different paddings
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.sectionHeaderHeight)];
+    [view addSubview:labelTitle];
+    
+    if (IsEmpty(subTitle) == false)
+    {
+        UILabel *labelSubTitle = [[UILabel alloc] init];
+        labelSubTitle.frame = CGRectMake(16, 16+30+8, 300, 30);
+        labelSubTitle.backgroundColor = [UIColor clearColor];
+        labelSubTitle.textColor = [UIColor whiteColor];
+        //    label.shadowColor = [UIColor whiteColor];
+        //    label.shadowOffset = CGSizeMake(0.0, 1.0);
+        labelSubTitle.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
+        labelSubTitle.text = subTitle;
+        [view addSubview:labelSubTitle];
+    }
+    UIView *view2 = [[UIView alloc] initWithFrame:CGRectMake(0, tableView.sectionHeaderHeight-1, tableView.bounds.size.width, 1)];
+    view2.backgroundColor = [UIColor whiteColor];
+    [view addSubview:view2];
+    
+    return view;
+
+}
+
 + (NSString *) getAuthTokenForCurrentUser
 {
     PFUser *user = [PFUser currentUser];
@@ -220,7 +276,7 @@
         NSNumber *likePercent = [NSNumber numberWithInt:iPercent];
         NSString *strReviewCount = [UtilCalls formattedNumber:[NSNumber numberWithLong:(foodCount + serviceCount)/2]];
         NSString *strLikePercent = [UtilCalls formattedNumber:likePercent];
-        return [NSString stringWithFormat:@"%@%% Love It (%@ Reviews)", strLikePercent, strReviewCount];
+        return [NSString stringWithFormat:@"%@%% (%@)", strLikePercent, strReviewCount];
     }
     else
         return nil;
@@ -237,7 +293,7 @@
         NSNumber *likePercent = [NSNumber numberWithInt:iPercent];
         NSString *strReviewCount = [UtilCalls formattedNumber:[NSNumber numberWithLong:(foodCount)/2]];
         NSString *strLikePercent = [UtilCalls formattedNumber:likePercent];
-        return [NSString stringWithFormat:@"%@%% Love It (%@ Reviews)", strLikePercent, strReviewCount];
+        return [NSString stringWithFormat:@"%@%% Like It (%@ Reviews)", strLikePercent, strReviewCount];
     }
     else
         return nil;
@@ -254,7 +310,7 @@
         NSNumber *likePercent = [NSNumber numberWithInt:iPercent];
         NSString *strReviewCount = [UtilCalls formattedNumber:[NSNumber numberWithLong:(serviceCount)/2]];
         NSString *strLikePercent = [UtilCalls formattedNumber:likePercent];
-        return [NSString stringWithFormat:@"%@%% Love It (%@ Reviews)", strLikePercent, strReviewCount];
+        return [NSString stringWithFormat:@"%@%% Like It (%@ Reviews)", strLikePercent, strReviewCount];
     }
     else
         return nil;

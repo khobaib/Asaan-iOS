@@ -95,6 +95,14 @@
     return cell;
 }
 
+-(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UITableViewCell *headerCell = [tableView dequeueReusableCellWithIdentifier:@"HeaderCell"];
+    if (self.selectedStore != nil)
+        [UtilCalls setupHeaderView:headerCell WithTitle:self.selectedStore.name AndSubTitle:@"Select Delivery Address"];
+    return headerCell;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     self.savedUserAddress = nil;

@@ -156,6 +156,18 @@
     return self.dataProvider.dataObjects.count;
 }
 
+-(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UITableViewCell *headerCell = [tableView dequeueReusableCellWithIdentifier:@"HeaderCell"];
+    
+    NSString *title = @"All Restaurants";
+    if (self.selectedStore != nil)
+        title = self.selectedStore.name;
+
+    [UtilCalls setupHeaderView:headerCell WithTitle:title AndSubTitle:@"Order History"];
+    return headerCell;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"OrderCell" forIndexPath:indexPath];
     cell.tag = indexPath.row;

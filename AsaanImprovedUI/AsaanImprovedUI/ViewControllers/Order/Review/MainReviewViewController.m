@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UISlider *serviceReviewSlider;
 @property (weak, nonatomic) IBOutlet SZTextView *txtReview;
 @property (weak, nonatomic) IBOutlet UIScrollView *reviewScrollView;
+@property (weak, nonatomic) IBOutlet UIView *headerView;
 
 @property (nonatomic) Boolean foodValueChanged;
 @property (nonatomic) Boolean serviceValueChanged;
@@ -36,6 +37,8 @@
     
     if (self.selectedOrder == nil)
         return;
+    NSString *strTitle = [NSString stringWithFormat:@"Tell us about your experience at %@", self.selectedOrder.storeName];
+    [UtilCalls setupHeaderView:self.headerView WithTitle:strTitle AndSubTitle:nil];
 
     [[self.txtReview layer] setBorderColor:[[UIColor grayColor] CGColor]];
     [[self.txtReview layer] setBorderWidth:2.3];
@@ -55,7 +58,7 @@
     else
         self.serviceReviewSlider.value = self.reviewAndItems.orderReview.serviceLike.floatValue/100;
     
-    self.navigationItem.title = [NSString stringWithFormat:@"How was %@?", self.selectedOrder.storeName];
+//    self.navigationItem.title = [NSString stringWithFormat:@"How was %@?", self.selectedOrder.storeName];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
