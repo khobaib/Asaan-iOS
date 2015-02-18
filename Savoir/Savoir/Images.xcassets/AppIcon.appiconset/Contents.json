@@ -3,25 +3,24 @@
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "asaan_appIcon29px.png",
+      "filename" : "asaan_appIcon58px.png",
       "scale" : "2x"
     },
     {
-      "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "asaan_appIcon58px.png",
+      "size" : "29x29",
       "scale" : "3x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "asaan_appIcon_40px.png",
+      "filename" : "asaan_appIcon_80px-1.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "asaan_appIcon_80px.png",
+      "filename" : "asaan_appIcon-4.png",
       "scale" : "3x"
     },
     {
@@ -39,7 +38,7 @@
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "asaan_appIcon29px-1.png",
+      "filename" : "asaan_appIcon29px.png",
       "scale" : "1x"
     },
     {
@@ -51,25 +50,25 @@
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "asaan_appIcon_40px-1.png",
+      "filename" : "asaan_appIcon_40px.png",
       "scale" : "1x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "asaan_appIcon_80px-1.png",
+      "filename" : "asaan_appIcon_80px.png",
       "scale" : "2x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "asaan_appIcon-2.png",
+      "filename" : "asaan_appIcon-3.png",
       "scale" : "1x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "asaan_appIcon-3.png",
+      "filename" : "asaan_appIcon-2.png",
       "scale" : "2x"
     }
   ],

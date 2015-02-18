@@ -19,6 +19,8 @@
     self.orderOnlineButton.tag = tag;
     self.reserveButton.tag = tag;
     
+    self.bgImageView.image = nil;
+    
     self.restaurantLabel.text = nil;
     self.trophyLabel.text = nil;
     self.cuisineLabel.text = nil;

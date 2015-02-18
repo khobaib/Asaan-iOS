@@ -8,15 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
-// All Stripe iOS errors will be under this domain.
+/**
+ *  All Stripe iOS errors will be under this domain.
+ */
 FOUNDATION_EXPORT NSString *const StripeDomain;
 
-typedef enum STPErrorCode {
+typedef NS_ENUM(NSInteger, STPErrorCode) {
     STPConnectionError = 40,     // Trouble connecting to Stripe.
     STPInvalidRequestError = 50, // Your request had invalid parameters.
     STPAPIError = 60,            // General-purpose API error (should be rare).
     STPCardError = 70,           // Something was wrong with the given card (most common).
-} STPErrorCode;
+    STPCheckoutError = 80,       // Stripe Checkout encountered an error.
+};
 
 #pragma mark userInfo keys
 
