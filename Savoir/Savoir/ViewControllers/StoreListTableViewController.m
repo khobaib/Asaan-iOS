@@ -242,7 +242,7 @@
     
     cell.restaurantLabel.text = storeAndStats.store.name;
     cell.trophyLabel.text = storeAndStats.store.trophies.firstObject;
-    cell.cuisineLabel.text = storeAndStats.store.subType;
+    cell.cuisineLabel.text = [NSString stringWithFormat:@"%@. %@", storeAndStats.store.city, storeAndStats.store.subType];
     if (storeAndStats.stats.visits.longLongValue > 0)
     {
         NSString *strVisitCount = [UtilCalls formattedNumber:storeAndStats.stats.visits];
