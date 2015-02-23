@@ -50,18 +50,18 @@
 - (void) removeOrderInProgress { _orderInProgress = nil; }
 - (void) removeWaitListQueueEntry
 {
-    self.queueEntry.status = [NSNumber numberWithInt:4]; // 4 = STATUS_CLOSED_CANCELLED_BY_CUSTOMER
-    __weak __typeof(self) weakSelf = self;
+    GTLStoreendpointStoreWaitListQueue *queueEntry = self.queueEntry;
+    self.queueEntry = nil;
+    queueEntry.status = [NSNumber numberWithInt:CLOSED_CANCELLED_BY_CUSTOMER];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-    GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForSaveStoreWaitlistQueueEntryWithObject:self.queueEntry];
+    GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForSaveStoreWaitlistQueueEntryWithObject:queueEntry];
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     dic[USER_AUTH_TOKEN_HEADER_NAME] = [UtilCalls getAuthTokenForCurrentUser];
     [query setAdditionalHTTPHeaders:dic];
     
-    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreWaitListQueue *queueEntry,NSError *error)
+    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreWaitListQueue *queueEntry1,NSError *error)
      {
-         weakSelf.queueEntry = nil;
          if (error)
          {
              NSLog(@"%@",[error userInfo]);

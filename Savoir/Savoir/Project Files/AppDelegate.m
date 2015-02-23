@@ -18,11 +18,9 @@
 #import "UIColor+SavoirGoldColor.h"
 #import "SWRevealViewController.h"
 #import "BBBadgeBarButtonItem.h"
-#import "NotificationUtils.h"
 
 @interface AppDelegate ()
 
-@property (strong, nonatomic) NotificationUtils *notificationUtils;
 @end
 
 @implementation AppDelegate
@@ -71,6 +69,7 @@
     }
     
     self.notificationUtils = [[NotificationUtils alloc]init];
+    self.notificationUtils.bReceivedChatNotification = false;
     
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
     if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
@@ -109,7 +108,7 @@
         NSLog(@"Inside didFinishLaunchingWithOptions %@", localNotif.userInfo);
 //        [viewController displayItem:itemName];  // custom method
         application.applicationIconBadgeNumber = localNotif.applicationIconBadgeNumber-1;
-        [self.notificationUtils application:application didReceiveLocalNotification:localNotif.userInfo];
+        [self.notificationUtils application:application didReceiveLocalNotification:localNotif.userInfo OnStartup:true];
     }
 //    [window addSubview:viewController.view];
 //    [window makeKeyAndVisible];
@@ -131,7 +130,7 @@
 #pragma mark - Handle Local Notification
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
-    [self.notificationUtils application:application didReceiveLocalNotification:notification.userInfo];
+    [self.notificationUtils application:application didReceiveLocalNotification:notification.userInfo OnStartup:false];
     application.applicationIconBadgeNumber = notification.applicationIconBadgeNumber - 1;
 
 //    NSString *itemName = [notification.userInfo objectForKey:@"REVIEW_ORDER"];
@@ -178,12 +177,11 @@
     NSLog(@"Inside 'application:didReceiveRemoteNotification:' - %@", userInfo);
     [PFPush handlePush:userInfo];
     
-    if (application.applicationState == UIApplicationStateInactive) {
+    if (application.applicationState == UIApplicationStateInactive)
         [PFAnalytics trackAppOpenedWithRemoteNotificationPayload:userInfo];
-    }
     
-#warning QUERY : Should we increase badge value of sliding-icon on receiving Local Notification?
     [[NSNotificationCenter defaultCenter] postNotificationName:BBBadgeIncreaseNotification object:self userInfo:@{BBUserInfoBadgeKey : [NSNumber numberWithInteger:application.applicationIconBadgeNumber]}];
+    self.notificationUtils.bReceivedChatNotification = true;
 }
 
 ///////////////////////////////////////////////////////////
@@ -195,14 +193,15 @@
      if (application.applicationState == UIApplicationStateInactive) {
          [PFAnalytics trackAppOpenedWithRemoteNotificationPayload:userInfo];
      }
+    self.notificationUtils.bReceivedChatNotification = true;
 }
 
 #pragma mark - 
 - (void)subscribeFinished:(NSNumber *)result error:(NSError *)error {
     if ([result boolValue]) {
-        NSLog(@"ParseStarterProject successfully subscribed to push notifications on the broadcast channel.");
+        NSLog(@"Savoir successfully subscribed to push notifications on the broadcast channel.");
     } else {
-        NSLog(@"ParseStarterProject failed to subscribe to push notifications on the broadcast channel.");
+        NSLog(@"Savoir failed to subscribe to push notifications on the broadcast channel.");
     }
 }
 

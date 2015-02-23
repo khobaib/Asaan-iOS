@@ -15,10 +15,10 @@
 #import "SHSPhoneTextField.h"
 
 @interface SignupProfileViewController ()
-@property (weak, nonatomic) IBOutlet UIButton *btnPhoto;
 @property (weak, nonatomic) IBOutlet UITextField *txtLastName;
 @property (weak, nonatomic) IBOutlet UITextField *txtFirstName;
 @property (weak, nonatomic) IBOutlet SHSPhoneTextField *txtPhone;
+@property (weak, nonatomic) IBOutlet UIImageView *imgPhoto;
 @property (weak, nonatomic) IBOutlet UIScrollView *signupProfileScrollView;
 
 @end
@@ -32,14 +32,18 @@
     self.navigationItem.hidesBackButton = YES;
     
     [super setBaseScrollView:_signupProfileScrollView];
-    
-    self.btnPhoto.layer.cornerRadius = self.btnPhoto.frame.size.width / 2;
-    self.btnPhoto.clipsToBounds = YES;
-    self.btnPhoto.layer.borderWidth = 3.0f;
-    self.btnPhoto.layer.borderColor = [UIColor whiteColor].CGColor;
-    
+
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected)];
+    singleTap.numberOfTapsRequired = 1;
+    [self.imgPhoto setUserInteractionEnabled:YES];
+    [self.imgPhoto addGestureRecognizer:singleTap];
     // NOTE: Rounded rect
     // self.profileImageView.layer.cornerRadius = 10.0f;
+//    
+    self.imgPhoto.layer.cornerRadius = self.imgPhoto.frame.size.width / 2;
+    self.imgPhoto.clipsToBounds = YES;
+    self.imgPhoto.layer.borderWidth = 3.0f;
+    self.imgPhoto.layer.borderColor = [UIColor whiteColor].CGColor;
     
     UIColor *color = [UIColor lightTextColor];
     _txtLastName.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Smith" attributes:@{NSForegroundColorAttributeName: color}];
@@ -66,7 +70,7 @@
     NSString *profilePhotoUrl=user[@"profilePhotoUrl"];
 
     if(!IsEmpty(profilePhotoUrl)){
-        [_btnPhoto.imageView sd_setImageWithURL:[NSURL URLWithString:profilePhotoUrl]];
+        [self.imgPhoto sd_setImageWithURL:[NSURL URLWithString:profilePhotoUrl]];
     } else {
         PFFile *file=user[@"picture"];
         if(file!=nil){
@@ -74,7 +78,7 @@
             [file getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
                 hud.hidden = NO;
                if (!error) {
-                    _btnPhoto.imageView.image = [UIImage imageWithData:imageData];
+                    self.imgPhoto.image = [UIImage imageWithData:imageData];
                 }
             }];
         }
@@ -97,15 +101,15 @@
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
 }
 
-- (IBAction)btnPhotoClick:(id)sender {
-    
+-(void)tapDetected
+{
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = YES;
     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    picker.cameraDevice = UIImagePickerControllerCameraDeviceFront;
     
     [self presentViewController:picker animated:YES completion:NULL];
-    
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
@@ -114,13 +118,19 @@
     [picker dismissViewControllerAnimated:YES completion:NULL];
     
     if (chosenImage != nil){
-        _btnPhoto.imageView.image = chosenImage;
+        self.imgPhoto.image = chosenImage;
         NSData *imageData = UIImagePNGRepresentation(chosenImage);
         PFUser *user = [PFUser currentUser];
         NSString *name=[NSString stringWithFormat:@"%@.png",user.username];
         PFFile *imageFile = [PFFile fileWithName:name data:imageData];
         user[@"picture"]=imageFile;
     }
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    
 }
 
 - (IBAction)btnSaveClick:(id)sender {

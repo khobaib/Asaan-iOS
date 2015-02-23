@@ -52,6 +52,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -91,11 +92,12 @@
     cell.badgeRightOffset = 70;
     cell.badgeColor = [UIColor redColor];
     cell.badgeTextColor = [UIColor whiteColor];
+
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
     
     if ([_menuSegue[indexPath.row] isEqualToString:SEGUE_SMToCart])
     {
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-        GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
         if (goh.orderInProgress == nil)
             cell.userInteractionEnabled = cell.titleLabel.enabled = NO;
         else
@@ -104,20 +106,16 @@
     
     if ([_menuSegue[indexPath.row] isEqualToString:SEGUE_SMToWaitListStatus])
     {
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-        GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
         if (goh.queueEntry == nil)
             cell.userInteractionEnabled = cell.titleLabel.enabled = NO;
         else
             cell.userInteractionEnabled = cell.titleLabel.enabled = YES;
     }
 
-    if ([_menuSegue[indexPath.row] isEqualToString:SEGUE_SMToChatHistory]) {
-        cell.badgeString = @"2";
-    }
-    else {
-        cell.badgeString = @"";
-    }
+    cell.badgeString = @"";
+    if ([_menuSegue[indexPath.row] isEqualToString:SEGUE_SMToChatHistory])
+        if (appDelegate.notificationUtils.bReceivedChatNotification == true)
+            cell.badgeString = @"N";
     
     return cell;
 }
@@ -125,16 +123,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 //    NSLog(@"Test %@", _menuSegue[indexPath.row]);
-    if ([_menuSegue[indexPath.row] isEqualToString:@""]) {
+    if ([_menuSegue[indexPath.row] isEqualToString:@""])
+    {
         return;
     }
-//    else if ([_menuSegue[indexPath.row] isEqualToString:SEGUE_SMToChatHistory]) {
-//        
-//        SWRevealViewController *revealViewController = self.revealViewController;
-//        GroupView *groupView = [[GroupView alloc] init];
-//        [(UINavigationController *)revealViewController.frontViewController pushViewController:groupView animated:YES];
-//    }
-    else if ([_menuSegue[indexPath.row] isEqualToString:SEGUE_UnwindToStoreList]) {
+    else if ([_menuSegue[indexPath.row] isEqualToString:SEGUE_UnwindToStoreList])
+    {
         PFUser *currentUser = [PFUser currentUser];
         if (currentUser)
         {
@@ -146,7 +140,8 @@
         
         [self performSegueWithIdentifier:SEGUE_SMToStoreList sender:self];
     }
-    else if ([_menuSegue[indexPath.row] isEqualToString:SEGUE_SMToCart]) {
+    else if ([_menuSegue[indexPath.row] isEqualToString:SEGUE_SMToCart])
+    {
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
         GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
         if (goh.orderInProgress != nil)
@@ -154,7 +149,8 @@
         else 
             [self.view makeToast:@"No pending order is available."];
     }
-    else if ([_menuSegue[indexPath.row] isEqualToString:SEGUE_SMToChatHistory]) {
+    else if ([_menuSegue[indexPath.row] isEqualToString:SEGUE_SMToChatHistory])
+    {
         
         SWRevealViewController *revealController = self.revealViewController;
         ChatTabBarController *frontController = [[ChatTabBarController alloc] init];
@@ -162,7 +158,8 @@
         
         [revealController pushFrontViewController:frontController animated:YES];
     }
-    else {
+    else
+    {
         [self performSegueWithIdentifier:_menuSegue[indexPath.row] sender:self];
     }
 }

@@ -67,6 +67,8 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
 	[super viewDidAppear:animated];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    appDelegate.notificationUtils.bReceivedChatNotification = false;
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 }
 

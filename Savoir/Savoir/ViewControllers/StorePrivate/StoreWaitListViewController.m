@@ -20,6 +20,7 @@
 #import "UIView+Toast.h"
 #import "pushnotification.h"
 #import "AddToWaitListViewController.h"
+#import "Constants.h"
 
 @interface StoreWaitListViewController ()<UITableViewDataSource, UITableViewDelegate, AddToWaitListReceiver>
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnEdit;
@@ -205,10 +206,10 @@
     txtName.text = entry.userName;
     txtPartySize.text = [NSString stringWithFormat:@"%d",entry.partySize.intValue];
     [tableIsReady addTarget:self action:@selector(tableIsReadyForRow:) forControlEvents:UIControlEventTouchUpInside];
-    if (entry.status.intValue == 3)
-        [tableIsReady setTitle:@"Seated" forState:UIControlStateNormal];
-    else
+    if (entry.status.intValue == TABLE_IS_READY)
         [tableIsReady setTitle:@"Table is Ready" forState:UIControlStateNormal];
+    else if (entry.status.intValue == CLOSED_SEATED)
+        [tableIsReady setTitle:@"Seated" forState:UIControlStateNormal];
     
     NSCalendar *c = [NSCalendar currentCalendar];
     NSDate *d1 = [NSDate date];
@@ -343,19 +344,19 @@
     entry.dateNotifiedTableIsReady = [NSNumber numberWithLong:timeInMillis];
     
     [self saveQueueEntry:entry];
-    NSString *msg = [NSString stringWithFormat:@"Your table at %@ will be ready in a few minutes. Please check in with the host to be seated.", entry.storeName];
-    SendPushNotification2(entry.userObjectId, msg);
+//    NSString *msg = [NSString stringWithFormat:@"Your table at %@ will be ready in a few minutes. Please check in with the host to be seated.", entry.storeName];
+//    SendPushNotification2(entry.userObjectId, msg);
 }
 
 - (void)cancelQueueEntry:(GTLStoreendpointStoreWaitListQueue *)entry
 {
-    entry.status = [NSNumber numberWithInt:5];
+    entry.status = [NSNumber numberWithInt:CLOSED_CANCELLED_BY_STORE];
     [self saveQueueEntry:entry];
 }
 
 - (void)seatQueueEntry:(GTLStoreendpointStoreWaitListQueue *)entry
 {
-    entry.status = [NSNumber numberWithInt:3];
+    entry.status = [NSNumber numberWithInt:CLOSED_SEATED];
     [self saveQueueEntry:entry];
 }
 
@@ -374,7 +375,7 @@
      {
          if (!error && queueEntry != nil && queueEntry.identifier.longLongValue > 0)
          {
-             if (queueEntry.status.intValue < 3)
+             if (queueEntry.status.intValue < CLOSED_SEATED)
              {
                  [weakSelf.allQueueEntries addObject:queueEntry];
                  if (queueEntry.partySize.intValue < 2)

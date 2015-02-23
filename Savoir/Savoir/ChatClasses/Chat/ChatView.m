@@ -122,6 +122,8 @@
     self.tabBarItem.title = @"Message";
 	self.collectionView.collectionViewLayout.springinessEnabled = YES;
 	timer = [NSTimer scheduledTimerWithTimeInterval:15.0 target:self selector:@selector(loadMessages) userInfo:nil repeats:YES];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    appDelegate.notificationUtils.bReceivedChatNotification = false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------

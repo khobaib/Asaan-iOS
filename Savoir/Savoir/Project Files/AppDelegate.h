@@ -11,6 +11,7 @@
 #import "GTLStoreendpoint.h"
 #import "GTLUserendpoint.h"
 #import "GlobalObjectHolder.h"
+#import "NotificationUtils.h"
 
 @class SWRevealViewControllerDelegate;
 @interface AppDelegate : UIResponder <UIApplicationDelegate, SWRevealViewControllerDelegate>
@@ -23,6 +24,7 @@
 @property (readonly, strong, nonatomic) GTLServiceStoreendpoint *gtlStoreService;
 @property (readonly, strong, nonatomic) GTLServiceUserendpoint *gtlUserService;
 @property (readonly, strong, nonatomic) GlobalObjectHolder *globalObjectHolder;
+@property (strong, nonatomic) NotificationUtils *notificationUtils;
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;

@@ -27,7 +27,7 @@
     if (self.selectedStore.providesReservation.boolValue == false)
     {
         NSDictionary* attributes = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
-        NSString *strMsg = [NSString stringWithFormat:@"Reserve: %@ does not support reservations through Savoir", self.selectedStore.name];
+        NSString *strMsg = [NSString stringWithFormat:@"Reserve"];
         NSAttributedString* attributedString = [[NSAttributedString alloc] initWithString:strMsg attributes:attributes];
         
         self.txtReserve.attributedText = attributedString;
@@ -35,7 +35,7 @@
     if (self.selectedStore.providesWaitlist.boolValue == false)
     {
         NSDictionary* attributes = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
-        NSString *strMsg = [NSString stringWithFormat:@"Wait list: %@ does not support wait listing through Savoir", self.selectedStore.name];
+        NSString *strMsg = [NSString stringWithFormat:@"Wait list"];
         NSAttributedString* attributedString = [[NSAttributedString alloc] initWithString:strMsg attributes:attributes];
         
         self.txtWaitlist.attributedText = attributedString;

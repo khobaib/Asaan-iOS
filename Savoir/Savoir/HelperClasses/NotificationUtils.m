@@ -65,7 +65,7 @@
     }
 }
 
-- (void)application:(UIApplication *)app didReceiveLocalNotification:(NSDictionary *)userInfo
+- (void)application:(UIApplication *)app didReceiveLocalNotification:(NSDictionary *)userInfo OnStartup:(Boolean)bStartup
 {
     NSNumber *orderId = [userInfo objectForKey:@"REVIEW_ORDER"];
     NSString *storeName = [userInfo objectForKey:@"REVIEW_STORE_NAME"];
@@ -80,7 +80,10 @@
                                                            delegate:self
                                                   cancelButtonTitle:@"Skip"
                                                   otherButtonTitles:@"Review", nil];
-        [alertView show];
+        if (bStartup == true)
+            [self alertView:alertView didDismissWithButtonIndex:1];
+        else
+            [alertView show];
     }
     //    [viewController displayItem:itemName];  // custom method
 //    app.applicationIconBadgeNumber = notification.applicationIconBadgeNumber - 1;
@@ -147,7 +150,7 @@
 - (void)application:(UIApplication *) application handleReviewActionWithNotification:(NSDictionary *) userInfo
 {
     NSLog(@"Inside handleReviewActionWithNotification %@", userInfo);
-    [self application:application didReceiveLocalNotification:userInfo];
+    [self application:application didReceiveLocalNotification:userInfo OnStartup:false];
 }
 
 - (void)application:(UIApplication *) application handleRemindActionWithNotification:(NSDictionary *) userInfo

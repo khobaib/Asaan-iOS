@@ -21,5 +21,10 @@ extern const NSUInteger FluentPagingTablePreloadMargin;
 extern const NSUInteger FluentPagingTablePageSize;
 extern const NSTimeInterval DataLoadingOperationDuration;
 
+extern const int WAITING;
+extern const int TABLE_IS_READY;
+extern const int CLOSED_SEATED;
+extern const int CLOSED_CANCELLED_BY_CUSTOMER;
+extern const int CLOSED_CANCELLED_BY_STORE;
 
 #endif

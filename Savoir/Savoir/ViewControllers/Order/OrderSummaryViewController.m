@@ -187,7 +187,10 @@
             [alert show];
             NotificationUtils *notificationUtils = [[NotificationUtils alloc]init];
             [notificationUtils scheduleNotificationWithOrder:object];
-            [weakSelf performSegueWithIdentifier:@"segueUnwindOrderSummaryToStoreList" sender:weakSelf];
+            if (self.revealViewController != nil)
+                [weakSelf performSegueWithIdentifier:@"SWOrderSummaryToStoreList" sender:weakSelf];
+            else
+                [weakSelf performSegueWithIdentifier:@"segueUnwindOrderSummaryToStoreList" sender:weakSelf];
         }
         else
         {
@@ -213,7 +216,10 @@
          else
          {
              [appDelegate.globalObjectHolder removeOrderInProgress];
-             [weakSelf performSegueWithIdentifier:@"segueUnwindOrderSummaryToStoreList" sender:weakSelf];
+             if (self.revealViewController != nil)
+                 [weakSelf performSegueWithIdentifier:@"SWOrderSummaryToStoreList" sender:weakSelf];
+             else
+                 [weakSelf performSegueWithIdentifier:@"segueUnwindOrderSummaryToStoreList" sender:weakSelf];
          }
      }];
 }

@@ -11,9 +11,11 @@
 
 @interface NotificationUtils : NSObject <UIAlertViewDelegate>
 
+@property (nonatomic) Boolean bReceivedChatNotification;
+
 - (void)scheduleNotificationWithOrder:(GTLStoreendpointStoreOrder *)order;
 - (void)cancelNotificationWithOrder:(NSNumber *)orderId;
-- (void)application:(UIApplication *)application didReceiveLocalNotification:(NSDictionary *)userInfo;
+- (void)application:(UIApplication *)app didReceiveLocalNotification:(NSDictionary *)userInfo OnStartup:(Boolean)bStartup;
 - (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(NSDictionary *)notification completionHandler:(void (^)()) completionHandler;
 - (void)application:(UIApplication *)application handleReviewActionWithNotification:(NSDictionary *) notification;
 - (void)application:(UIApplication *)application handleRemindActionWithNotification:(NSDictionary *) notification;

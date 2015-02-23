@@ -14,6 +14,7 @@
 #import "Constants.h"
 #import "GTLStoreendpoint.h"
 #import "InlineCalls.h"
+#import "Constants.h"
 
 @interface WaitlistTableViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *lbl1_2;
@@ -143,17 +144,17 @@
 //                 self.totalQueue.text = [NSString stringWithFormat:@"Queue - %d Parties", totalWaitingGroups];
              
              if (totalWaitingGroups == 0)
-                 self.txt1_2WaitTime.text = @"15 min or less";
+                 self.txt1_2WaitTime.text = @"15 min";
              else
-                 self.txt1_2WaitTime.text = [NSString stringWithFormat:@"%d - %d min", totalWaitingGroups*2 + 15, totalWaitingGroups*2 + 30];
+                 self.txt1_2WaitTime.text = [NSString stringWithFormat:@"%d-%d min", totalWaitingGroups*2 + 15, totalWaitingGroups*2 + 30];
              if (totalWaitingGroups == 0)
                  self.txt3_4WaitTime.text = @"15 min";
              else
-                 self.txt3_4WaitTime.text = [NSString stringWithFormat:@"%d - %d min", totalWaitingGroups*2 + 15, totalWaitingGroups*2 + 45];
+                 self.txt3_4WaitTime.text = [NSString stringWithFormat:@"%d-%d min", totalWaitingGroups*2 + 15, totalWaitingGroups*2 + 45];
              if (totalWaitingGroups == 0)
                  self.txt5OrMoreWaitTime.text = @"15 min";
              else
-                 self.txt5OrMoreWaitTime.text = [NSString stringWithFormat:@"%d - %d min", totalWaitingGroups*2 + 15, totalWaitingGroups*2 + 30];
+                 self.txt5OrMoreWaitTime.text = [NSString stringWithFormat:@"%d-%d min", totalWaitingGroups*2 + 15, totalWaitingGroups*2 + 30];
              [weakSelf.tableView reloadData];
          }
          else
@@ -186,7 +187,7 @@
     newEntry.estTimeMin = [NSNumber numberWithInt:(time + 15)];
     newEntry.estTimeMax = [NSNumber numberWithInt:(time + 30)];
     newEntry.partySize = [NSNumber numberWithInt:self.currPartySize];
-    newEntry.status = [NSNumber numberWithInt:1];
+    newEntry.status = [NSNumber numberWithInt:WAITING];
     
     __weak __typeof(self) weakSelf = self;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
