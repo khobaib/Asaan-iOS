@@ -116,26 +116,9 @@
                  else
                      partiesOfSize5OrMore++;
              }
-             if (partiesOfSize2 == 0)
-                 self.txt1_2.text = @"None";
-             else if (partiesOfSize2 == 1)
-                 self.txt1_2.text = [NSString stringWithFormat:@"%d party",partiesOfSize2];
-             else
-                 self.txt1_2.text = [NSString stringWithFormat:@"%d parties",partiesOfSize2];
-             
-             if (partiesOfSize4 == 0)
-                 self.txt3_4.text = @"None";
-             else if (partiesOfSize4 == 1)
-                 self.txt3_4.text = [NSString stringWithFormat:@"%d party",partiesOfSize4];
-             else
-                 self.txt3_4.text = [NSString stringWithFormat:@"%d parties",partiesOfSize4];
-             
-             if (partiesOfSize5OrMore == 0)
-                 self.txt5OrMore.text = @"None";
-             else if (partiesOfSize5OrMore == 1)
-                 self.txt5OrMore.text = [NSString stringWithFormat:@"%d party",partiesOfSize5OrMore];
-             else
-                 self.txt5OrMore.text = [NSString stringWithFormat:@"%d parties",partiesOfSize5OrMore];
+             self.txt1_2.text = [NSString stringWithFormat:@"%d",partiesOfSize2];
+             self.txt3_4.text = [NSString stringWithFormat:@"%d",partiesOfSize4];
+             self.txt5OrMore.text = [NSString stringWithFormat:@"%d",partiesOfSize5OrMore];
              
              int totalWaitingGroups = partiesOfSize2 + partiesOfSize4 + partiesOfSize5OrMore;
 //             if (totalWaitingGroups == 1)
@@ -144,17 +127,17 @@
 //                 self.totalQueue.text = [NSString stringWithFormat:@"Queue - %d Parties", totalWaitingGroups];
              
              if (totalWaitingGroups == 0)
-                 self.txt1_2WaitTime.text = @"15 min";
+                 self.txt1_2WaitTime.text = @"15";
              else
-                 self.txt1_2WaitTime.text = [NSString stringWithFormat:@"%d-%d min", totalWaitingGroups*2 + 15, totalWaitingGroups*2 + 30];
+                 self.txt1_2WaitTime.text = [NSString stringWithFormat:@"%d-%d", totalWaitingGroups*2 + 15, totalWaitingGroups*2 + 30];
              if (totalWaitingGroups == 0)
-                 self.txt3_4WaitTime.text = @"15 min";
+                 self.txt3_4WaitTime.text = @"15";
              else
-                 self.txt3_4WaitTime.text = [NSString stringWithFormat:@"%d-%d min", totalWaitingGroups*2 + 15, totalWaitingGroups*2 + 45];
+                 self.txt3_4WaitTime.text = [NSString stringWithFormat:@"%d-%d", totalWaitingGroups*2 + 15, totalWaitingGroups*2 + 45];
              if (totalWaitingGroups == 0)
-                 self.txt5OrMoreWaitTime.text = @"15 min";
+                 self.txt5OrMoreWaitTime.text = @"15";
              else
-                 self.txt5OrMoreWaitTime.text = [NSString stringWithFormat:@"%d-%d min", totalWaitingGroups*2 + 15, totalWaitingGroups*2 + 30];
+                 self.txt5OrMoreWaitTime.text = [NSString stringWithFormat:@"%d-%d", totalWaitingGroups*2 + 15, totalWaitingGroups*2 + 30];
              [weakSelf.tableView reloadData];
          }
          else

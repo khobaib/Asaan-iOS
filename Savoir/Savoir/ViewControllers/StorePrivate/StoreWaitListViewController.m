@@ -208,7 +208,10 @@
     }
     
     txtName.text = entry.userName;
-    txtPartySize.text = [NSString stringWithFormat:@"%d",entry.partySize.intValue];
+    if (entry.partySize.intValue == 1)
+        txtPartySize.text = [NSString stringWithFormat:@"%d person",entry.partySize.intValue];
+    else
+        txtPartySize.text = [NSString stringWithFormat:@"%d people",entry.partySize.intValue];
 
     if (entry.status.intValue == TABLE_IS_READY)
         btnTableIsReady.imageView.image = [UIImage imageNamed:@"waitlist_table_ready"];
@@ -290,26 +293,10 @@
     lbl5OrMore.layer.cornerRadius = 10.0f;
     lbl5OrMore.layer.borderWidth = 1.0f;
     lbl5OrMore.layer.borderColor = [UIColor grayColor].CGColor;
-    if (self.partiesOfSize2 == 0)
-        txt1_2.text = @"None";
-    else if (self.partiesOfSize2 == 1)
-        txt1_2.text = [NSString stringWithFormat:@"%d party",self.partiesOfSize2];
-    else
-        txt1_2.text = [NSString stringWithFormat:@"%d parties",self.partiesOfSize2];
     
-    if (self.partiesOfSize4 == 0)
-        txt3_4.text = @"None";
-    else if (self.partiesOfSize4 == 1)
-        txt3_4.text = [NSString stringWithFormat:@"%d party",self.partiesOfSize4];
-    else
-        txt3_4.text = [NSString stringWithFormat:@"%d parties",self.partiesOfSize4];
-    
-    if (self.partiesOfSize5OrMore == 0)
-        txt5OrMore.text = @"None";
-    else if (self.partiesOfSize5OrMore == 1)
-        txt5OrMore.text = [NSString stringWithFormat:@"%d party",self.partiesOfSize5OrMore];
-    else
-        txt5OrMore.text = [NSString stringWithFormat:@"%d parties",self.partiesOfSize5OrMore];
+    txt1_2.text = [NSString stringWithFormat:@"%d",self.partiesOfSize2];
+    txt3_4.text = [NSString stringWithFormat:@"%d",self.partiesOfSize4];
+    txt5OrMore.text = [NSString stringWithFormat:@"%d",self.partiesOfSize5OrMore];
 
     int totalWaitingGroups = self.partiesOfSize2 + self.partiesOfSize4 + self.partiesOfSize5OrMore;
     if (totalWaitingGroups == 1)
@@ -318,17 +305,17 @@
         totalQueue.text = [NSString stringWithFormat:@"Queue - %d Parties", totalWaitingGroups];
 
     if (totalWaitingGroups == 0)
-        txt1_2WaitTime.text = @"15 min or less";
+        txt1_2WaitTime.text = @"0-15min";
     else
-        txt1_2WaitTime.text = [NSString stringWithFormat:@"%d - %d min", totalWaitingGroups*2 + 15, totalWaitingGroups*2 + 30];
+        txt1_2WaitTime.text = [NSString stringWithFormat:@"%d-%d", totalWaitingGroups*2 + 15, totalWaitingGroups*2 + 30];
     if (totalWaitingGroups == 0)
-        txt3_4WaitTime.text = @"15 min";
+        txt3_4WaitTime.text = @"15";
     else
-        txt3_4WaitTime.text = [NSString stringWithFormat:@"%d - %d min", totalWaitingGroups*2 + 15, totalWaitingGroups*2 + 45];
+        txt3_4WaitTime.text = [NSString stringWithFormat:@"%d-%d", totalWaitingGroups*2 + 15, totalWaitingGroups*2 + 45];
     if (totalWaitingGroups == 0)
-        txt5OrMoreWaitTime.text = @"15 min";
+        txt5OrMoreWaitTime.text = @"15";
     else
-        txt5OrMoreWaitTime.text = [NSString stringWithFormat:@"%d - %d min", totalWaitingGroups*2 + 15, totalWaitingGroups*2 + 30];
+        txt5OrMoreWaitTime.text = [NSString stringWithFormat:@"%d-%d", totalWaitingGroups*2 + 15, totalWaitingGroups*2 + 30];
 
     return headerCell;
 }

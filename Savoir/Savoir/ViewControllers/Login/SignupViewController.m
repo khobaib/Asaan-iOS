@@ -75,7 +75,7 @@
         return false;
     }
     
-    if (_txtPassword.text.length >= 6)
+    if (_txtPassword.text.length < 6)
     {
         UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please Enter a valid. Passwords must be at least 6 characters." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         
