@@ -21,17 +21,19 @@
 #import "pushnotification.h"
 #import "AddToWaitListViewController.h"
 #import "Constants.h"
+#import "UIView+Superview.h"
+
 
 @interface StoreWaitListViewController ()<UITableViewDataSource, UITableViewDelegate, AddToWaitListReceiver>
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnEdit;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnAdd;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 @property (strong, nonatomic) NSTimer *timer;
 @property (nonatomic) BOOL isLoading;
 @property (nonatomic) int partiesOfSize2;
 @property (nonatomic) int partiesOfSize4;
 @property (nonatomic) int partiesOfSize5OrMore;
-
 @property (strong, nonatomic) NSMutableArray *allQueueEntries;
 
 @end
@@ -63,13 +65,12 @@
     self.allQueueEntries = [[NSMutableArray alloc]init];
     [self loadWaitlistQueue];
 }
-
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidAppear:(BOOL)animated
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
     [super viewDidAppear:animated];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:90.0 target:self selector:@selector(loadWaitlistQueue) userInfo:nil repeats:YES];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(loadWaitlistQueue) userInfo:nil repeats:YES];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -175,9 +176,12 @@
     UILabel *txtName = (UILabel *)[cell viewWithTag:502];
     UILabel *txtPartySize = (UILabel *)[cell viewWithTag:503];
     UILabel *txtTime = (UILabel *)[cell viewWithTag:504];
-    UIButton *tableIsReady = (UIButton *)[cell viewWithTag:505];
+    UIButton *btnTableIsReady = (UIButton *)[cell viewWithTag:506];
+    UIButton *btnJoinedFromInternet = (UIButton *)[cell viewWithTag:505];
     
-    tableIsReady.tag = indexPath.row;
+    btnTableIsReady.imageView.image = nil;
+    
+    cell.tag = indexPath.row;
     
     // NOTE: Rounded rect
     imgProfilePhoto.layer.cornerRadius = 10.0f;
@@ -205,11 +209,22 @@
     
     txtName.text = entry.userName;
     txtPartySize.text = [NSString stringWithFormat:@"%d",entry.partySize.intValue];
-    [tableIsReady addTarget:self action:@selector(tableIsReadyForRow:) forControlEvents:UIControlEventTouchUpInside];
+
     if (entry.status.intValue == TABLE_IS_READY)
-        [tableIsReady setTitle:@"Table is Ready" forState:UIControlStateNormal];
+        btnTableIsReady.imageView.image = [UIImage imageNamed:@"waitlist_table_ready"];
     else if (entry.status.intValue == CLOSED_SEATED)
-        [tableIsReady setTitle:@"Seated" forState:UIControlStateNormal];
+        btnTableIsReady.imageView.image = [UIImage imageNamed:@"waitlist_table_seated"];
+    else if (entry.status.intValue == WAITING)
+        btnTableIsReady.imageView.image = [UIImage imageNamed:@"waitlist_table_countdown"];
+
+    [btnTableIsReady addTarget:self action:@selector(tableIsReadyButtonPressed:) forControlEvents:UIControlEventTouchDown];
+    
+    [btnJoinedFromInternet addTarget:self action:@selector(tableIsReadyButtonPressed:) forControlEvents:UIControlEventTouchDown];
+    
+    if (entry.entryFromInternet.boolValue == true)
+        btnJoinedFromInternet.imageView.image = [UIImage imageNamed:@"waitlist_joined_by_internet"];
+    else
+        btnJoinedFromInternet.imageView.image = nil;
     
     NSCalendar *c = [NSCalendar currentCalendar];
     NSDate *d1 = [NSDate date];
@@ -227,6 +242,7 @@
     
     return cell;
 }
+
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.allQueueEntries.count > indexPath.row)
@@ -324,28 +340,34 @@
     int time = (self.partiesOfSize2 + self.partiesOfSize4 + self.partiesOfSize5OrMore)*2;
     waitListQueueEntry.estTimeMin = [NSNumber numberWithInt:(time + 15)];
     waitListQueueEntry.estTimeMax = [NSNumber numberWithInt:(time + 30)];
+    waitListQueueEntry.entryFromInternet = [NSNumber numberWithBool:NO];
     [self saveQueueEntry:waitListQueueEntry];
     [self.tableView reloadData];
 }
 
 #pragma mark - Private Methods
-- (IBAction) tableIsReadyForRow:(UIButton *)sender
+
+-(void)tableIsReadyButtonPressed:(UIButton *)btnTableIsReady
 {
-    GTLStoreendpointStoreWaitListQueue *entry = [self.allQueueEntries objectAtIndex:sender.tag];
-    if (entry.dateNotifiedTableIsReady > 0)
+    UIView *cell = [btnTableIsReady findSuperViewWithClass:[UITableViewCell class]];
+    GTLStoreendpointStoreWaitListQueue *entry = [self.allQueueEntries objectAtIndex:cell.tag];
+    
+    if (entry.status.intValue == TABLE_IS_READY)
     {
+        btnTableIsReady.imageView.image = [UIImage imageNamed:@"waitlist_table_seated"];
         [self seatQueueEntry:entry];
-        [sender setTitle:@"Seated" forState:UIControlStateNormal];
-        return;
     }
-    NSDate *date = [NSDate date];
-    long timeInMillis = [date timeIntervalSince1970]*1000;
-    
-    entry.dateNotifiedTableIsReady = [NSNumber numberWithLong:timeInMillis];
-    
-    [self saveQueueEntry:entry];
-//    NSString *msg = [NSString stringWithFormat:@"Your table at %@ will be ready in a few minutes. Please check in with the host to be seated.", entry.storeName];
-//    SendPushNotification2(entry.userObjectId, msg);
+    else
+    {
+        btnTableIsReady.imageView.image = [UIImage imageNamed:@"waitlist_table_ready"];
+        NSDate *date = [NSDate date];
+        long timeInMillis = [date timeIntervalSince1970]*1000;
+        
+        entry.dateNotifiedTableIsReady = [NSNumber numberWithLong:timeInMillis];
+        
+        entry.status = [NSNumber numberWithInt:TABLE_IS_READY];
+        [self saveQueueEntry:entry];
+    }
 }
 
 - (void)cancelQueueEntry:(GTLStoreendpointStoreWaitListQueue *)entry
@@ -375,7 +397,7 @@
      {
          if (!error && queueEntry != nil && queueEntry.identifier.longLongValue > 0)
          {
-             if (queueEntry.status.intValue < CLOSED_SEATED)
+             if (queueEntry.status.intValue == WAITING)
              {
                  [weakSelf.allQueueEntries addObject:queueEntry];
                  if (queueEntry.partySize.intValue < 2)

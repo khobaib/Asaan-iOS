@@ -423,7 +423,7 @@ const CGFloat kSDSegmentedControlScrollOffset = 20;
 - (NSInteger)firstEnabledSegmentIndexNearIndex:(NSUInteger)index
 {
     // Select the first enabled segment
-    for (int i = index; i < self._items.count; i++)
+    for (NSUInteger i = index; i < self._items.count; i++)
     {
         if (((SDSegmentView *)self._items[i]).enabled)
         {
@@ -431,7 +431,7 @@ const CGFloat kSDSegmentedControlScrollOffset = 20;
         }
     }
 
-    for (int i = index; i >= 0; i--)
+    for (NSUInteger i = index; i > 0; i--)
     {
         if (((SDSegmentView *)self._items[i]).enabled)
         {

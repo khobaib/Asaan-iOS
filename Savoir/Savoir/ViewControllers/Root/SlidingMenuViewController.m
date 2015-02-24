@@ -103,14 +103,6 @@
         else
             cell.userInteractionEnabled = cell.titleLabel.enabled = YES;
     }
-    
-    if ([_menuSegue[indexPath.row] isEqualToString:SEGUE_SMToWaitListStatus])
-    {
-        if (goh.queueEntry == nil)
-            cell.userInteractionEnabled = cell.titleLabel.enabled = NO;
-        else
-            cell.userInteractionEnabled = cell.titleLabel.enabled = YES;
-    }
 
     cell.badgeString = @"";
     if ([_menuSegue[indexPath.row] isEqualToString:SEGUE_SMToChatHistory])

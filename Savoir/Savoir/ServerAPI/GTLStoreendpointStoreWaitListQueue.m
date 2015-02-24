@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStoreWaitListQueue (0 custom class methods, 17 custom properties)
+//   GTLStoreendpointStoreWaitListQueue (0 custom class methods, 18 custom properties)
 
 #import "GTLStoreendpointStoreWaitListQueue.h"
 
@@ -24,9 +24,9 @@
 
 @implementation GTLStoreendpointStoreWaitListQueue
 @dynamic createdDate, dateNotifiedAcknowledged, dateNotifiedTableIsReady,
-         estimateChangedByStore, estTimeMax, estTimeMin, identifier,
-         modifiedDate, partySize, status, storeId, storeName, userId, userName,
-         userObjectId, userPhone, userProfilePhotoUrl;
+         entryFromInternet, estimateChangedByStore, estTimeMax, estTimeMin,
+         identifier, modifiedDate, partySize, status, storeId, storeName,
+         userId, userName, userObjectId, userPhone, userProfilePhotoUrl;
 
 + (NSDictionary *)propertyToJSONKeyMap {
   NSDictionary *map =

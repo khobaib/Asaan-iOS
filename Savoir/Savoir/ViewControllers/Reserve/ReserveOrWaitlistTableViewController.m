@@ -66,23 +66,38 @@
         if (self.selectedStore.providesWaitlist.boolValue == false)
             return;
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-        if (appDelegate.globalObjectHolder.queueEntry != nil)
-        {
-            NSString *errMsg = [NSString stringWithFormat:@"You are joining the wait list at a new restaurant. Do you want to remove yourself from %@'s wait list?", appDelegate.globalObjectHolder.queueEntry.storeName];
-            [UIAlertView showWithTitle:@"Leave your current wait-list?" message:errMsg cancelButtonTitle:@"No" otherButtonTitles:@[@"Yes"]
-                              tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex)
+        __weak __typeof(self) weakSelf = self;
+        GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
+        GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetStoreWaitListQueueEntryForCurrentUser];
+        
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        dic[USER_AUTH_TOKEN_HEADER_NAME] = [UtilCalls getAuthTokenForCurrentUser];
+        [query setAdditionalHTTPHeaders:dic];
+        [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreWaitListQueueAndPosition *object, NSError *error)
+         {
+             if (!error)
              {
-                 if (buttonIndex == [alertView cancelButtonIndex])
-                     return;
-                 else
+                 if (object.queueEntry != nil)
                  {
-                     [appDelegate.globalObjectHolder removeWaitListQueueEntry];
-                     [self performSegueWithIdentifier:@"segueReserveAndWaitlistToWaitlist" sender:self];
+                     NSString *errMsg = [NSString stringWithFormat:@"You are joining the wait list at a new restaurant. Do you want to remove yourself from %@'s wait list?", object.queueEntry.storeName];
+                     [UIAlertView showWithTitle:@"Leave your current wait-list?" message:errMsg cancelButtonTitle:@"No" otherButtonTitles:@[@"Yes"]
+                                       tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex)
+                      {
+                          if (buttonIndex == [alertView cancelButtonIndex])
+                              return;
+                          else
+                          {
+                              [UtilCalls removeWaitListQueueEntry:object.queueEntry];
+                              [weakSelf performSegueWithIdentifier:@"segueReserveAndWaitlistToWaitlist" sender:weakSelf];
+                          }
+                      }];
                  }
-             }];
-        }
-        else
-            [self performSegueWithIdentifier:@"segueReserveAndWaitlistToWaitlist" sender:self];
+                 else
+                     [weakSelf performSegueWithIdentifier:@"segueReserveAndWaitlistToWaitlist" sender:weakSelf];
+             }
+             else
+                 NSLog(@"Savoir Server Call Failed: loadUserQueueEntry - error:%@", error.userInfo);
+         }];
     }
     
 }

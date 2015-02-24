@@ -30,7 +30,6 @@
     self.defaultUserCard = nil;
     self.defaultUserAddress = nil;
     self.currentUser = nil;
-    self.queueEntry = nil;
 }
 
 - (void) loadAllUserObjects
@@ -38,7 +37,6 @@
     if (self.currentUser == nil)
     {
         [self loadCurrentUserFromServer];
-        [self loadUserQueueEntry];
         [self loadUserStoreChatTeams];
     }
     if (self.userCards == nil)
@@ -48,45 +46,6 @@
 }
 
 - (void) removeOrderInProgress { _orderInProgress = nil; }
-- (void) removeWaitListQueueEntry
-{
-    GTLStoreendpointStoreWaitListQueue *queueEntry = self.queueEntry;
-    self.queueEntry = nil;
-    queueEntry.status = [NSNumber numberWithInt:CLOSED_CANCELLED_BY_CUSTOMER];
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-    GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForSaveStoreWaitlistQueueEntryWithObject:queueEntry];
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    dic[USER_AUTH_TOKEN_HEADER_NAME] = [UtilCalls getAuthTokenForCurrentUser];
-    [query setAdditionalHTTPHeaders:dic];
-    
-    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreWaitListQueue *queueEntry1,NSError *error)
-     {
-         if (error)
-         {
-             NSLog(@"%@",[error userInfo]);
-         }
-     }];
-}
-
-- (void) loadUserQueueEntry
-{
-    __weak __typeof(self) weakSelf = self;
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-    GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetStoreWaitListQueueEntryForCurrentUser];
-    
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    dic[USER_AUTH_TOKEN_HEADER_NAME] = [UtilCalls getAuthTokenForCurrentUser];
-    [query setAdditionalHTTPHeaders:dic];
-    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreWaitListQueueAndPosition *object, NSError *error)
-     {
-         if (!error)
-             weakSelf.queueEntry = object.queueEntry;
-         else
-             NSLog(@"Savoir Server Call Failed: loadUserQueueEntry - error:%@", error.userInfo);
-     }];
-}
 
 - (void) loadUserStoreChatTeams
 {

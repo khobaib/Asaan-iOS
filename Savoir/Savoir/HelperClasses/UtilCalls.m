@@ -299,6 +299,26 @@
         return nil;
 }
 
++ (void) removeWaitListQueueEntry:(GTLStoreendpointStoreWaitListQueue *)queueEntry
+{
+    queueEntry.status = [NSNumber numberWithInt:CLOSED_CANCELLED_BY_CUSTOMER];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
+    GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForSaveStoreWaitlistQueueEntryWithObject:queueEntry];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    dic[USER_AUTH_TOKEN_HEADER_NAME] = [UtilCalls getAuthTokenForCurrentUser];
+    [query setAdditionalHTTPHeaders:dic];
+    
+    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreWaitListQueue *queueEntry, NSError *error)
+     {
+         if (error)
+         {
+             NSLog(@"%@",[error userInfo]);
+         }
+     }];
+}
+
+
 + (NSString *) getServiceReviewStringFromStats:(GTLStoreendpointStoreAndStats *)storeAndStats
 {
     long serviceCount = storeAndStats.stats.serviceDislikes.longLongValue + storeAndStats.stats.serviceLikes.longLongValue;

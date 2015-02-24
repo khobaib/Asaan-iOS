@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStoreWaitListQueue (0 custom class methods, 17 custom properties)
+//   GTLStoreendpointStoreWaitListQueue (0 custom class methods, 18 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLObject.h"
@@ -30,6 +30,7 @@
 @property (retain) NSNumber *createdDate;  // longLongValue
 @property (retain) NSNumber *dateNotifiedAcknowledged;  // longLongValue
 @property (retain) NSNumber *dateNotifiedTableIsReady;  // longLongValue
+@property (retain) NSNumber *entryFromInternet;  // boolValue
 @property (retain) NSNumber *estimateChangedByStore;  // boolValue
 @property (retain) NSNumber *estTimeMax;  // intValue
 @property (retain) NSNumber *estTimeMin;  // intValue

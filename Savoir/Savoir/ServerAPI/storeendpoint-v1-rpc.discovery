@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/5gXU4d7gIbTTuOk_wu26SMp4uoI\"",
+ "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/OLI_4ERdOa2Ad_ERtCeLL99dJVY\"",
  "discoveryVersion": "v1",
  "id": "storeendpoint:v1",
  "name": "storeendpoint",
@@ -1373,6 +1373,9 @@
     "dateNotifiedTableIsReady": {
      "type": "string",
      "format": "int64"
+    },
+    "entryFromInternet": {
+     "type": "boolean"
     },
     "estTimeMax": {
      "type": "integer",

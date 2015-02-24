@@ -188,7 +188,8 @@
     newEntry.estTimeMax = [NSNumber numberWithInt:(time + 30)];
     newEntry.partySize = [NSNumber numberWithInt:self.currPartySize];
     newEntry.status = [NSNumber numberWithInt:WAITING];
-    
+    newEntry.entryFromInternet = [NSNumber numberWithBool:YES];
+
     __weak __typeof(self) weakSelf = self;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
@@ -201,7 +202,6 @@
      {
          if (!error && queueEntry != nil && queueEntry.identifier > 0)
          {
-             appDelegate.globalObjectHolder.queueEntry = queueEntry;
              NSString *title = [NSString stringWithFormat:@"Your Waitlist Entry at %@", weakSelf.selectedStore.name];
              NSString *msg = [NSString stringWithFormat:@"Thank you - your wait list request has been sent. If you need to make changes please call %@ immediately at %@.", weakSelf.selectedStore.name, weakSelf.selectedStore.phone];
              UIAlertView *alert=[[UIAlertView alloc]initWithTitle:title message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];

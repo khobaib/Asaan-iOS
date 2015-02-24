@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GTLStoreendpointOrderReviewAndItemReviews.h"
 #import "GTLStoreendpointStoreAndStats.h"
+#import "GTLStoreendpointStoreWaitListQueue.h"
 
 @interface UtilCalls : NSObject
 
@@ -36,5 +37,6 @@
 + (NSString *) getOverallReviewStringFromStats:(GTLStoreendpointStoreAndStats *)storeAndStats;
 + (NSString *) getFoodReviewStringFromStats:(GTLStoreendpointStoreAndStats *)storeAndStats;
 + (NSString *) getServiceReviewStringFromStats:(GTLStoreendpointStoreAndStats *)storeAndStats;
++ (void) removeWaitListQueueEntry:(GTLStoreendpointStoreWaitListQueue *)queueEntry;
 
 @end

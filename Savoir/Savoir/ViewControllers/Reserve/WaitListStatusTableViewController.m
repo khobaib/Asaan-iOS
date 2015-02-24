@@ -21,6 +21,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *txtStatus;
 @property (weak, nonatomic) IBOutlet UILabel *txtPartiesBefore;
 @property (weak, nonatomic) IBOutlet UILabel *txtEstWaitTime;
+@property (weak, nonatomic) IBOutlet UILabel *txtMsg;
+@property (weak, nonatomic) IBOutlet UIButton *btnLeaveLine;
+@property (strong, nonatomic) NSTimer *timer;
+@property (strong, nonatomic) GTLStoreendpointStoreWaitListQueueAndPosition *queueEntry;
 
 @end
 
@@ -30,13 +34,28 @@
 {
     [super viewDidLoad];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    [self getStoreWaitStatus];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     [UtilCalls getSlidingMenuBarButtonSetupWith:self];
-    [self getStoreWaitStatus];
+}
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+- (void)viewDidAppear:(BOOL)animated
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+{
+    [super viewDidAppear:animated];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(getStoreWaitStatus) userInfo:nil repeats:YES];
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+- (void)viewWillDisappear:(BOOL)animated
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+{
+    [super viewWillDisappear:animated];
+    [self.timer invalidate];
 }
 
 - (void) getStoreWaitStatus
@@ -51,7 +70,18 @@
     [query setAdditionalHTTPHeaders:dic];
     [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreWaitListQueueAndPosition *object, NSError *error)
      {
+         weakSelf.queueEntry = object;
          weakSelf.tableView.tableHeaderView = [UtilCalls setupStaticHeaderViewForTable:self.tableView WithTitle:object.queueEntry.storeName AndSubTitle:@"Your Wait-list Status"];
+         if (object.queueEntry == nil)
+         {
+             weakSelf.txtStatus.text = @"You have not joined any wait-lists.";
+             weakSelf.txtPartiesBefore.text = nil;
+             weakSelf.txtEstWaitTime.text = nil;
+             weakSelf.txtMsg.text = nil;
+             weakSelf.btnLeaveLine.hidden = true;
+             
+             return;
+         }
          if (!error)
          {
              if (object.queueEntry.status.intValue == TABLE_IS_READY)
@@ -109,10 +139,9 @@
 
 - (IBAction)btnLeaveTheLine:(id)sender
 {
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    if (appDelegate.globalObjectHolder.queueEntry != nil)
+    if (self.queueEntry != nil)
     {
-        NSString *errMsg = [NSString stringWithFormat:@"Remove yourself from %@'s wait list?", appDelegate.globalObjectHolder.queueEntry.storeName];
+        NSString *errMsg = [NSString stringWithFormat:@"Remove yourself from %@'s wait list?", self.queueEntry.queueEntry.storeName];
         [UIAlertView showWithTitle:@"Leave your current wait-list?" message:errMsg cancelButtonTitle:@"No" otherButtonTitles:@[@"Yes"]
                           tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex)
          {
@@ -120,7 +149,7 @@
                  return;
              else
              {
-                 [appDelegate.globalObjectHolder removeWaitListQueueEntry];
+                 [UtilCalls removeWaitListQueueEntry:self.queueEntry.queueEntry];
                  [self performSegueWithIdentifier:@"SWWaitListStatusToStoreList" sender:self];
              }
          }];
