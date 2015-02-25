@@ -23,6 +23,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+//    
+//    self.navigationItem.leftBarButtonItem = nil;
+//    self.navigationItem.hidesBackButton = YES;
+//    
+//    self.navigationController.navigationItem.leftBarButtonItem = nil;
+//    self.navigationController.navigationItem.hidesBackButton = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -31,13 +37,12 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [self.navigationController setNavigationBarHidden:NO];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
-                                                  forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
-    self.navigationController.navigationBar.translucent = YES;
-    [self.navigationItem setHidesBackButton:YES];
-    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+    [self.navigationController setNavigationBarHidden:YES];
+//    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+//                                                  forBarMetrics:UIBarMetricsDefault];
+//    self.navigationController.navigationBar.shadowImage = [UIImage new];
+//    self.navigationController.navigationBar.translucent = YES;
+//    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -57,8 +62,6 @@
         if (!user) {
             UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
-//        } else if (user.isNew) {
-//            NSLog(@"User signed up and logged in through Facebook!");
         } else {
             [self _loadData];
         }

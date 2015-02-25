@@ -107,7 +107,7 @@
              }
          }
          else
-             NSLog(@"queryForGetChatRoomsAndMembershipsForUser error:%ld, %@", error.code, error.debugDescription);
+             NSLog(@"queryForGetChatRoomsAndMembershipsForUser error:%ld, %@", (long)error.code, error.debugDescription);
      }];
 }
 
@@ -175,7 +175,7 @@
              return;
          }
          else
-             NSLog(@"queryForSaveChatRoomWithObject error:%ld, %@", error.code, error.debugDescription);
+             NSLog(@"queryForSaveChatRoomWithObject error:%ld, %@", (long)error.code, error.debugDescription);
      }];
     
 }
