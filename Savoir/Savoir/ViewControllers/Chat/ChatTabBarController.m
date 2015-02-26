@@ -53,7 +53,7 @@
     navController2.parentNavigationController = self.parentNavigationController;
     
     if (self.parentNavigationController) {
-        [self.parentNavigationController setNavigationBarHidden:NO animated:NO];
+        [self.navigationController setNavigationBarHidden:NO animated:NO];
         [navController1 setNavigationBarHidden:YES animated:NO];
         [navController2 setNavigationBarHidden:YES animated:NO];
     }
