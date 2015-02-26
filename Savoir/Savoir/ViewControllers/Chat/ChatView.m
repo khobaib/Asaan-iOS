@@ -22,6 +22,8 @@
 #import "SDWebImageManager.h"
 #import "Constants.h"
 #import "UtilCalls.h"
+#import "UIColor+SavoirBackgroundColor.h"
+#import "UIColor+SavoirGoldColor.h"
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 @interface ChatView()
@@ -40,6 +42,13 @@
 	JSQMessagesAvatarImage *avatarImageBlank;
     GTLStoreendpointChatMessagesAndUsers *messagesAndUsers;
 }
+
+
+@property (nonatomic) long roomOrStoreId;
+@property (nonatomic) Boolean isStore;
+
+- (void) showIndividualRoomMessagesForStore:(long)roomOrStoreId isStore:(Boolean)isStore;
+
 @end
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -51,20 +60,16 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self)
-    {
-        [self.tabBarItem setImage:[UIImage imageNamed:@"tab_messages"]];
-//        self.tabBarItem.title = @"Group";
-    }
     return self;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-- (id)initWith:(long)Id_ title:(NSString *)title_
+- (id)initWith:(long)roomOrStoreId isStore:(Boolean)isStore
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
 	self = [super init];
-    self.roomOrMembershipId = Id_;
+    self.roomOrStoreId = roomOrStoreId;
+    self.isStore = isStore;
 //    self.title = title_;//@"Chat";
 	return self;
 }
@@ -79,38 +84,48 @@
 	PFUser *user = [PFUser currentUser];
 	self.senderId = user.objectId;
     self.senderDisplayName = [NSString stringWithFormat:@"%@ %@",user[PF_USER_FIRSTNAME], user[PF_USER_LASTNAME]];
+    
+    self.view.backgroundColor = [UIColor asaanBackgroundColor];
+    self.collectionView.backgroundColor = [UIColor asaanBackgroundColor];
+    self.inputToolbar.tintColor = [UIColor goldColor];
+//    self.inputToolbar.backgroundColor = [UIColor asaanBackgroundColor];
+    self.inputToolbar.barTintColor = [UIColor asaanBackgroundColor];
 
 	JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc] init];
 	bubbleImageOutgoing = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
-	bubbleImageIncoming = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
+	bubbleImageIncoming = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleBlueColor]];
 
 	avatarImageBlank = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"chat_blank"] diameter:30.0];
+    
+    [self loadInitialMessages];
 }
 
-- (void)setRoomOrStoreChatMembershipId:(long)roomOrStoreChatMemberId isStore:(Boolean)isStore
+- (void)loadInitialMessages
 {
-    NSLog(@"hh");
-    if (roomOrStoreChatMemberId != self.roomOrMembershipId)
+    users = [[NSMutableArray alloc] init];
+    messages = [[NSMutableArray alloc] init];
+    serverMessages = [[NSMutableArray alloc] init];
+    avatars = [[NSMutableDictionary alloc] init];
+    
+    [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+    [self.collectionView reloadData];
+    
+    isLoading = NO;
+    [self loadMessages];
+    
+    if (self.isStore == true)
+        self.inputToolbar.hidden = true;
+    else
+        self.inputToolbar.hidden = false;
+}
+
+- (void) showIndividualRoomMessagesForStore:(long)roomOrStoreId isStore:(Boolean)isStore
+{
+    if (roomOrStoreId != self.roomOrStoreId || isStore != self.isStore)
     {
-        self.roomOrMembershipId = roomOrStoreChatMemberId;
-        self.isStore = isStore;
-        NSLog(@"hhg");
-        
-        users = [[NSMutableArray alloc] init];
-        messages = [[NSMutableArray alloc] init];
-        serverMessages = [[NSMutableArray alloc] init];
-        avatars = [[NSMutableDictionary alloc] init];
-        
-        [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
-        [self.collectionView reloadData];
-        
-        isLoading = NO;
-        [self loadMessages];
-        
-        if (isStore == true)
-            self.inputToolbar.hidden = true;
-        else
-            self.inputToolbar.hidden = false;
+        ChatView *chatView = [[ChatView alloc] initWith:roomOrStoreId isStore:isStore];
+        chatView.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:chatView animated:YES];
     }
 }
 
@@ -119,7 +134,6 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
 	[super viewDidAppear:animated];
-    self.tabBarItem.title = @"Message";
 	self.collectionView.collectionViewLayout.springinessEnabled = YES;
 	timer = [NSTimer scheduledTimerWithTimeInterval:15.0 target:self selector:@selector(loadMessages) userInfo:nil repeats:YES];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
@@ -143,12 +157,12 @@
     if (isLoading == NO)
     {
         isLoading = YES;
-		JSQMessage *message_last = [messages lastObject];
+		GTLStoreendpointChatMessage *message_last = [serverMessages lastObject];
         
         __weak __typeof(self) weakSelf = self;
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
         GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-        GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetChatMessagesForStoreOrRoomWithRoomOrStoreId:weakSelf.roomOrMembershipId modifiedDate:message_last.date.timeIntervalSince1970 isStore:weakSelf.isStore firstPosition:0 maxResult:50];
+        GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetChatMessagesForStoreOrRoomWithRoomOrStoreId:weakSelf.roomOrStoreId modifiedDate:message_last.createdDate.longLongValue isStore:weakSelf.isStore firstPosition:0 maxResult:50];
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         dic[USER_AUTH_TOKEN_HEADER_NAME] = [UtilCalls getAuthTokenForCurrentUser];
         [query setAdditionalHTTPHeaders:dic];
@@ -196,7 +210,7 @@
 	if (object.fileMessage == nil)
 	{
 		JSQMessage *message = [[JSQMessage alloc] initWithSenderId:chatUser.objectId senderDisplayName:chatUser.name
-																	  date:[NSDate dateWithTimeIntervalSince1970:object.createdDate.longLongValue] text:object.txtMessage];
+																	  date:[NSDate dateWithTimeIntervalSince1970:object.createdDate.longLongValue/1000] text:object.txtMessage];
 		[messages addObject:message];
 	}
 	//---------------------------------------------------------------------------------------------------------------------------------------------
@@ -205,7 +219,7 @@
 		JSQPhotoMediaItem *mediaItem = [[JSQPhotoMediaItem alloc] initWithImage:nil];
 		mediaItem.appliesMediaViewMaskAsOutgoing = [chatUser.objectId isEqualToString:self.senderId];
 		JSQMessage *message =
-			[[JSQMessage alloc] initWithSenderId:chatUser.objectId senderDisplayName:chatUser.name date:[NSDate dateWithTimeIntervalSince1970:object.createdDate.longLongValue] media:mediaItem];
+			[[JSQMessage alloc] initWithSenderId:chatUser.objectId senderDisplayName:chatUser.name date:[NSDate dateWithTimeIntervalSince1970:object.createdDate.longLongValue/1000] media:mediaItem];
 		[messages addObject:message];
 		//-----------------------------------------------------------------------------------------------------------------------------------------
         SDWebImageManager *manager = [SDWebImageManager sharedManager];
@@ -241,7 +255,7 @@
     GTLStoreendpointChatMessage *newMessage = [[GTLStoreendpointChatMessage alloc]init];
     
     if (self.isStore == false)
-        newMessage.roomId = [NSNumber numberWithLong:self.roomOrMembershipId];
+        newMessage.roomId = [NSNumber numberWithLong:self.roomOrStoreId];
     
     newMessage.txtMessage = text;
     newMessage.fileMessage = filePicture.url;
@@ -269,7 +283,7 @@
      }];
 
     //---------------------------------------------------------------------------------------------------------------------------------------------
-	SendPushNotification(self.roomOrMembershipId, text);
+	SendPushNotification(self.roomOrStoreId, text);
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	[self finishSendingMessage];
 }
@@ -466,7 +480,7 @@
 {
 	NSLog(@"didTapAvatarImageView");
     GTLStoreendpointChatMessage *message = [serverMessages objectAtIndex:indexPath.row];
-    [self setRoomOrStoreChatMembershipId:message.roomId.longLongValue isStore:false];
+    [self showIndividualRoomMessagesForStore:message.roomId.longLongValue isStore:false];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -475,7 +489,7 @@
 {
 	NSLog(@"didTapMessageBubbleAtIndexPath");
     GTLStoreendpointChatMessage *message = [serverMessages objectAtIndex:indexPath.row];
-    [self setRoomOrStoreChatMembershipId:message.roomId.longLongValue isStore:false];
+    [self showIndividualRoomMessagesForStore:message.roomId.longLongValue isStore:false];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -484,7 +498,7 @@
 {
 	NSLog(@"didTapCellAtIndexPath %@", NSStringFromCGPoint(touchLocation));
     GTLStoreendpointChatMessage *message = [serverMessages objectAtIndex:indexPath.row];
-    [self setRoomOrStoreChatMembershipId:message.roomId.longLongValue isStore:false];
+    [self showIndividualRoomMessagesForStore:message.roomId.longLongValue isStore:false];
 }
 
 #pragma mark - UIActionSheetDelegate

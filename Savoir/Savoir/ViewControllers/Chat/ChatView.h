@@ -9,26 +9,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "ChatConstants.h"
-
-#import "NavigationController.h"
-#import "UIColor+SavoirBackgroundColor.h"
-
-@implementation NavigationController
+#import "JSQMessages.h"
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-- (void)viewDidLoad
+@interface ChatView : JSQMessagesViewController <UIActionSheetDelegate, UIImagePickerControllerDelegate>
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-{
-	[super viewDidLoad];
 
-    [self.navigationBar setBackgroundImage:[UIImage new]
-                             forBarMetrics:UIBarMetricsDefault];
-	self.navigationBar.barTintColor = [UIColor asaanBackgroundColor];
-    self.navigationBar.shadowImage = [UIImage new];
-	self.navigationBar.tintColor = [UIColor whiteColor];
-	self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
-	self.navigationBar.translucent = NO;
-}
+- (id)initWith:(long)roomOrStoreId isStore:(Boolean)isStore;
 
 @end

@@ -13,7 +13,7 @@
 #import <Parse/Parse.h>
 #import "AppDelegate.h"
 #import "UIView+Toast.h"
-#import "ChatTabBarController.h"
+#import "GroupView.h"
 
 @implementation SMTableViewCell1
 @end
@@ -145,10 +145,11 @@
     {
         
         SWRevealViewController *revealController = self.revealViewController;
-        ChatTabBarController *frontController = [[ChatTabBarController alloc] init];
-        frontController.selectedIndex = 0;
+        GroupView *groupView = [[GroupView alloc] init];
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:groupView];
+//        ChatTabBarController *frontController = [[ChatTabBarController alloc] init];
         
-        [revealController pushFrontViewController:frontController animated:YES];
+        [revealController pushFrontViewController:navController animated:YES];
     }
     else
     {

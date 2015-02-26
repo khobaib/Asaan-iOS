@@ -37,7 +37,7 @@
     if (self.currentUser == nil)
     {
         [self loadCurrentUserFromServer];
-        [self loadUserStoreChatTeams];
+        [self loadUserRoomsAndStoreChatTeams];
     }
     if (self.userCards == nil)
         [self loadUserCardsFromServer];
@@ -47,22 +47,24 @@
 
 - (void) removeOrderInProgress { _orderInProgress = nil; }
 
-- (void) loadUserStoreChatTeams
+- (void) loadUserRoomsAndStoreChatTeams
 {
     __weak __typeof(self) weakSelf = self;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-    GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetStoreChatTeamsForUser];
-    
+    GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetChatRoomsAndMembershipsForUser];
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     dic[USER_AUTH_TOKEN_HEADER_NAME] = [UtilCalls getAuthTokenForCurrentUser];
     [query setAdditionalHTTPHeaders:dic];
-    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreChatTeamCollection *object, NSError *error)
+    
+    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointChatRoomsAndStoreChatMemberships *object,NSError *error)
      {
          if (!error)
-             weakSelf.usersStoreChatTeamMemberships = object;
+         {
+             weakSelf.usersRoomsAndStores = object;
+         }
          else
-             NSLog(@"Savoir Server Call Failed: loadUserStoreChatTeams - error:%@", error.userInfo);
+             NSLog(@"queryForGetChatRoomsAndMembershipsForUser error:%ld, %@", (long)error.code, error.debugDescription);
      }];
 }
 

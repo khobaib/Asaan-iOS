@@ -20,9 +20,9 @@
 #import "GroupView.h"
 #import "ChatView.h"
 
-#import "ChatTabBarController.h"
 #import "Constants.h"
 #import "UtilCalls.h"
+#import "UIColor+SavoirBackgroundColor.h"
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 @interface GroupView()
@@ -37,11 +37,6 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-	if (self)
-	{
-		[self.tabBarItem setImage:[UIImage imageNamed:@"tab_group"]];
-		self.tabBarItem.title = @"Groups";
-	}
 	return self;
 }
 
@@ -51,9 +46,11 @@
 {
     [super viewDidLoad];
     self.title = @"Groups";
-    self.tabBarItem.title = @"Groups";
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	self.tableView.tableFooterView = [[UIView alloc] init];
+    self.view.backgroundColor = [UIColor asaanBackgroundColor];
+    self.tableView.backgroundColor = [UIColor asaanBackgroundColor];
+    self.tableView.allowsSelectionDuringEditing = NO;
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	self.chatRoomsAndMemberships = [[NSMutableArray alloc] init];
     if ([PFUser currentUser] != nil)
@@ -62,53 +59,27 @@
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------
-- (void)viewDidAppear:(BOOL)animated
-//-------------------------------------------------------------------------------------------------------------------------------------------------
-{
-	[super viewDidAppear:animated];
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    appDelegate.notificationUtils.bReceivedChatNotification = false;
-	//---------------------------------------------------------------------------------------------------------------------------------------------
-}
-
-#pragma mark - Backend actions
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 - (void)loadChatRooms
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
-    __weak __typeof(self) weakSelf = self;
+    [self.chatRoomsAndMemberships removeAllObjects];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-    GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetChatRoomsAndMembershipsForUser];
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    dic[USER_AUTH_TOKEN_HEADER_NAME] = [UtilCalls getAuthTokenForCurrentUser];
-    [query setAdditionalHTTPHeaders:dic];
+    GTLStoreendpointChatRoomsAndStoreChatMemberships *usersRoomsAndStores = appDelegate.globalObjectHolder.usersRoomsAndStores;
+    for (GTLStoreendpointStoreChatTeam *member in usersRoomsAndStores.storeChatMemberships)
+        [self.chatRoomsAndMemberships addObject:member];
+
+    for (GTLStoreendpointChatRoom *room in usersRoomsAndStores.chatRooms)
+        [self.chatRoomsAndMemberships addObject:room];
+
+    [self.tableView reloadData];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
-    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointChatRoomsAndStoreChatMemberships *object,NSError *error)
-     {
-         if (!error)
-         {
-             [weakSelf.chatRoomsAndMemberships removeAllObjects];
-             for (GTLStoreendpointStoreChatTeam *member in object.storeChatMemberships)
-                 [weakSelf.chatRoomsAndMemberships addObject:member];
-             
-             for (GTLStoreendpointChatRoom *room in object.chatRooms)
-                 [weakSelf.chatRoomsAndMemberships addObject:room];
-             
-             [weakSelf.tableView reloadData];
-             
-             if (self.navigationController.parentViewController && [self.navigationController.parentViewController isKindOfClass:ChatTabBarController.class])
-             {
-                 ChatTabBarController *tabbarController = (ChatTabBarController *)self.navigationController.parentViewController;
-                 if (tabbarController.selectedStore != nil)
-                     [self showChatRoomForStore:tabbarController.selectedStore.identifier.longLongValue WithName:tabbarController.selectedStore.name];
-             }
-         }
-         else
-             NSLog(@"queryForGetChatRoomsAndMembershipsForUser error:%ld, %@", (long)error.code, error.debugDescription);
-     }];
+    [UtilCalls getSlidingMenuBarButtonSetupWith:self];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -160,7 +131,7 @@
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     dic[USER_AUTH_TOKEN_HEADER_NAME] = [UtilCalls getAuthTokenForCurrentUser];
     [query setAdditionalHTTPHeaders:dic];
-
+    
     [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointChatRoom *object,NSError *error)
      {
          if (!error)
@@ -179,6 +150,17 @@
      }];
     
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+- (void)viewDidAppear:(BOOL)animated
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+{
+	[super viewDidAppear:animated];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    appDelegate.notificationUtils.bReceivedChatNotification = false;
+}
+
+#pragma mark - Backend actions
 
 #pragma mark - User actions
 
@@ -246,6 +228,9 @@
 {
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GroupChatCell"];
 	if (cell == nil) cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"GroupChatCell"];
+    cell.backgroundColor = [UIColor asaanBackgroundColor];
+    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     id object = self.chatRoomsAndMemberships[indexPath.row];
     if ([object isKindOfClass:[GTLStoreendpointChatRoom class]])
@@ -258,26 +243,6 @@
         GTLStoreendpointStoreChatTeam *storeChatMember = object;
         cell.textLabel.text = storeChatMember.storeName;
     }
-
-//	PFObject *chatroom = self.chatrooms[indexPath.row];
-//	cell.textLabel.text = [[chatroom[PF_CHATROOMS_NAME] componentsSeparatedByString:@"$$"] objectAtIndex:0];
-//	if (cell.detailTextLabel.text == nil) cell.detailTextLabel.text = @" ";
-//	cell.detailTextLabel.textColor = [UIColor lightGrayColor];
-//
-//	PFQuery *query = [PFQuery queryWithClassName:PF_CHAT_CLASS_NAME];
-//	[query whereKey:PF_CHAT_ROOMID equalTo:chatroom.objectId];
-//	[query orderByDescending:PF_CHAT_CREATEDAT];
-//	[query setLimit:1000];
-//	[query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
-//	{
-//		if ([objects count] != 0)
-//		{
-//			PFObject *chat = [objects firstObject];
-//			NSTimeInterval seconds = [[NSDate date] timeIntervalSinceDate:chat.createdAt];
-//			cell.detailTextLabel.text = [NSString stringWithFormat:@"%d messages (%@)", (int) [objects count], TimeElapsed(seconds)];
-//		}
-//		else cell.detailTextLabel.text = @"No message";
-//	}];
 
 	return cell;
 }
@@ -307,18 +272,11 @@
         title = storeChatMember.storeName;
         isStore = true;
     }
-
-    if (self.navigationController.parentViewController && [self.navigationController.parentViewController isKindOfClass:ChatTabBarController.class])
-    {
-        ChatTabBarController *tabbarController = (ChatTabBarController *)self.navigationController.parentViewController;
-        
-        tabbarController.title = title;
-        tabbarController.chatView.title = title;
-        [tabbarController.chatView setRoomOrStoreChatMembershipId:roomOrMembershipId isStore:isStore];
-        
-        tabbarController.selectedIndex = 1;
-    }
     
+    ChatView *chatView = [[ChatView alloc] initWith:roomOrMembershipId isStore:isStore];
+    chatView.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:chatView animated:YES];
+
 //	ChatView *chatView = [[ChatView alloc] initWith:roomId title:[[chatroom[PF_CHATROOMS_NAME] componentsSeparatedByString:@"$$"] objectAtIndex:0]];
 //	chatView.hidesBottomBarWhenPushed = YES;
 //	[self.navigationController pushViewController:chatView animated:YES];

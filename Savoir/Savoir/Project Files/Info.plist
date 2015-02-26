@@ -39,8 +39,6 @@
 	<true/>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string>bluetooth-central</string>
-		<string>external-accessory</string>
 		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>

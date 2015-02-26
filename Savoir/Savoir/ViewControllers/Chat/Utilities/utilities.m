@@ -14,16 +14,6 @@
 //#import "NavigationController.h"
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-void LoginUser(id target)
-//-------------------------------------------------------------------------------------------------------------------------------------------------
-{
-#warning TODO 
-    [[[NSException alloc] initWithName:@"Uncomment" reason:@"Uncomment the following lines." userInfo:nil] raise];
-//	NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:[[WelcomeView alloc] init]];
-//	[target presentViewController:navigationController animated:YES completion:nil];
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------
 UIImage* ResizeImage(UIImage *image, CGFloat width, CGFloat height)
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {

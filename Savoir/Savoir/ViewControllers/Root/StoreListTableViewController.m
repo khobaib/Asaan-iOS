@@ -32,7 +32,6 @@
 
 #import "ChatView.h"
 #import "ChatConstants.h"
-#import "ChatTabBarController.H"
 
 #import "MBProgressHUD.h"
 #import "ProgressHUD.h"
@@ -46,9 +45,7 @@
 @property (nonatomic) int maxResult;
 @property (weak, nonatomic) GTLStoreendpointStoreAndStats *selectedStore;
 
-// Chat Test
-@property (strong, nonatomic) UITabBarController *tabBarController;
-
+- (void)showChatRoomForStore:(long)storeId WithName:(NSString *)storeName;
 @end
 
 @implementation StoreListTableViewController
@@ -294,15 +291,68 @@
 - (IBAction)chatWithStore:(UIButton *)sender
 {
     _selectedStore = self.dataProvider.dataObjects[sender.tag];
+    [self showChatRoomForStore:_selectedStore.store.identifier.longLongValue WithName:_selectedStore.store.name];
+}
 
-    ChatTabBarController *frontController = [[ChatTabBarController alloc] init];
-    frontController.parentNavigationController = self.navigationController;
-    frontController.selectedStore = self.selectedStore.store;
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+- (void)showChatRoomForStore:(long)storeId WithName:(NSString *)storeName
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+{
+    if (storeId == 0)
+        return;
     
-    frontController.selectedIndex = 0;
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    GTLStoreendpointChatRoomsAndStoreChatMemberships *usersRoomsAndStores = appDelegate.globalObjectHolder.usersRoomsAndStores;
     
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-    [self.navigationController pushViewController:frontController animated:YES];
+    for (GTLStoreendpointChatRoom *room in usersRoomsAndStores.chatRooms)
+    {
+        if (room.storeId.longLongValue == storeId)
+        {
+            ChatView *chatView = [[ChatView alloc] initWith:room.identifier.longLongValue isStore:false];
+            chatView.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:chatView animated:YES];
+            return;
+        }
+    }
+    
+    for (GTLStoreendpointStoreChatTeam *team in usersRoomsAndStores.storeChatMemberships)
+    {
+        if (team.storeId.longLongValue == storeId)
+        {
+            ChatView *chatView = [[ChatView alloc] initWith:team.storeId.longLongValue isStore:true];
+            chatView.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:chatView animated:YES];
+            return;
+        }
+    }
+    // Create a new Chat room for this user and store
+    GTLStoreendpointChatRoom *newRoom = [[GTLStoreendpointChatRoom alloc]init];
+    newRoom.name = storeName;
+    newRoom.storeId = [NSNumber numberWithLong:storeId];
+    __weak __typeof(self) weakSelf = self;
+    GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
+    GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForSaveChatRoomWithObject:newRoom];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    dic[USER_AUTH_TOKEN_HEADER_NAME] = [UtilCalls getAuthTokenForCurrentUser];
+    [query setAdditionalHTTPHeaders:dic];
+    
+    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointChatRoom *object,NSError *error)
+     {
+         if (!error)
+         {
+             NSMutableArray *newRoomArray = [[NSMutableArray alloc]initWithArray:usersRoomsAndStores.chatRooms];
+             [newRoomArray addObject:object];
+             usersRoomsAndStores.chatRooms = newRoomArray;
+             ChatView *chatView = [[ChatView alloc] initWith:object.storeId.longLongValue isStore:false];
+             chatView.hidesBottomBarWhenPushed = YES;
+             [weakSelf.navigationController pushViewController:chatView animated:YES];
+             return;
+         }
+         else
+             NSLog(@"queryForSaveChatRoomWithObject error:%ld, %@", (long)error.code, error.debugDescription);
+     }];
+    
 }
 
 - (IBAction) showMenu:(UIButton *)sender
@@ -348,10 +398,10 @@
 -(Boolean)userBelongsToStoreChatTeam
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    GTLStoreendpointStoreChatTeamCollection *teams = appDelegate.globalObjectHolder.usersStoreChatTeamMemberships;
+    NSArray *teams = appDelegate.globalObjectHolder.usersRoomsAndStores.storeChatMemberships;
     if (teams == nil)
         return false;
-    for (GTLStoreendpointStoreChatTeam *team in teams.items)
+    for (GTLStoreendpointStoreChatTeam *team in teams)
         if (team.storeId.longLongValue == self.selectedStore.store.identifier.longLongValue)
             return true;
     return false;

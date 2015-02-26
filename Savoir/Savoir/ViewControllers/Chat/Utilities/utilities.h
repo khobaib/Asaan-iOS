@@ -12,7 +12,6 @@
 #import <UIKit/UIKit.h>
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-void			LoginUser					(id target);
 
 UIImage*		ResizeImage					(UIImage *image, CGFloat width, CGFloat height);
 
