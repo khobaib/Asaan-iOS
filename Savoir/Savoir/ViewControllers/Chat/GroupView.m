@@ -256,6 +256,7 @@
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
     long roomOrMembershipId = 0;
     NSString *title;
+    long storeId;
 	//---------------------------------------------------------------------------------------------------------------------------------------------
     id object = self.chatRoomsAndMemberships[indexPath.row];
     Boolean isStore = false;
@@ -264,6 +265,7 @@
         GTLStoreendpointChatRoom *room = object;
         roomOrMembershipId = room.identifier.longLongValue;
         title = room.name;
+        storeId = room.storeId.longLongValue;
     }
     else if ([object isKindOfClass:[GTLStoreendpointStoreChatTeam class]])
     {
@@ -271,9 +273,10 @@
         roomOrMembershipId = storeChatMember.storeId.longLongValue;
         title = storeChatMember.storeName;
         isStore = true;
+        storeId = storeChatMember.storeId.longLongValue;
     }
     
-    ChatView *chatView = [[ChatView alloc] initWith:roomOrMembershipId isStore:isStore];
+    ChatView *chatView = [[ChatView alloc] initWith:roomOrMembershipId isStore:isStore currentStoreId:storeId];
     chatView.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:chatView animated:YES];
 

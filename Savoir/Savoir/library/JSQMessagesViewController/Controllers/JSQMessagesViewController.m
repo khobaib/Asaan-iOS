@@ -467,8 +467,16 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     if (!isMediaMessage) {
         cell.textView.text = [messageItem text];
+
+        if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
+            //  workaround for iOS 7 textView data detectors bug
+            cell.textView.text = nil;
+            cell.textView.attributedText = [[NSAttributedString alloc] initWithString:[messageItem text]
+                                                                           attributes:@{ NSFontAttributeName : collectionView.collectionViewLayout.messageBubbleFont }];
+        }
+
         NSParameterAssert(cell.textView.text != nil);
-        
+
         id<JSQMessageBubbleImageDataSource> bubbleImageDataSource = [collectionView.dataSource collectionView:collectionView messageBubbleImageDataForItemAtIndexPath:indexPath];
         if (bubbleImageDataSource != nil) {
             cell.messageBubbleImageView.image = [bubbleImageDataSource messageBubbleImage];
@@ -669,9 +677,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (NSString *)jsq_currentlyComposedMessageText
 {
-    //  add a space to accept any auto-correct suggestions
-    NSString *text = self.inputToolbar.contentView.textView.text;
-    self.inputToolbar.contentView.textView.text = [text stringByAppendingString:@" "];
+    //  auto-accept any auto-correct suggestions
+    [self.inputToolbar.contentView.textView.inputDelegate selectionWillChange:self.inputToolbar.contentView.textView];
+    [self.inputToolbar.contentView.textView.inputDelegate selectionDidChange:self.inputToolbar.contentView.textView];
+    
     return [self.inputToolbar.contentView.textView.text jsq_stringByTrimingWhitespace];
 }
 

@@ -48,7 +48,7 @@ void ParsePushUserResign(void)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-void SendPushNotification(long roomId, NSString *text)
+void SendPushNotification(long roomId, long storeId, NSString *text)
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
 //    __weak __typeof(self) weakSelf = self;
@@ -75,9 +75,12 @@ void SendPushNotification(long roomId, NSString *text)
              PFQuery *queryInstallation = [PFInstallation query];
              [queryInstallation whereKey:PF_INSTALLATION_USER matchesQuery:query];
              
+             NSDictionary *pushContent = @{@"alert": text, @"roomId":[NSString stringWithFormat:@"%ld", roomId], @"storeId":[NSString stringWithFormat:@"%ld", storeId]};
+             
              PFPush *push = [[PFPush alloc] init];
              [push setQuery:queryInstallation];
-             [push setMessage:text];
+//             [push setMessage:text];
+             [push setData:pushContent];
              [push sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
               {
                   if (error != nil)
@@ -91,26 +94,4 @@ void SendPushNotification(long roomId, NSString *text)
              NSLog(@"queryForGetChatUsersForRoomWithRoomId error:%ld, %@.", error.code, error.debugDescription);
          }
      }];
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------
-void SendPushNotification2(NSString *objectId, NSString *text)
-//-------------------------------------------------------------------------------------------------------------------------------------------------
-{
-     PFQuery *query = [PFQuery queryWithClassName:PF_USER_CLASS_NAME];
-     [query whereKey:PF_USER_OBJECTID equalTo:objectId];
-     
-     PFQuery *queryInstallation = [PFInstallation query];
-     [queryInstallation whereKey:PF_INSTALLATION_USER matchesQuery:query];
-     
-     PFPush *push = [[PFPush alloc] init];
-     [push setQuery:queryInstallation];
-     [push setMessage:text];
-     [push sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
-      {
-          if (error != nil)
-          {
-              NSLog(@"SendPushNotification send error:%ld, %@.", error.code, error.debugDescription);
-          }
-      }];
 }

@@ -23,4 +23,7 @@
 - (UIMutableUserNotificationAction *)defineOrderReviewAction;
 - (UIMutableUserNotificationAction *)defineOrderRemindLaterAction;
 - (UIMutableUserNotificationAction *)defineDeclineAction;
+
+- (void)application:(UIApplication *)app didReceiveRemoteNotification:(NSDictionary *)userInfo UpdateUI:(Boolean)bUpdateUI;
+
 @end

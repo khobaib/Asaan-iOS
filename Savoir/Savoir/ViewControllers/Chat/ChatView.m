@@ -24,6 +24,7 @@
 #import "UtilCalls.h"
 #import "UIColor+SavoirBackgroundColor.h"
 #import "UIColor+SavoirGoldColor.h"
+#import "InlineCalls.h"
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 @interface ChatView()
@@ -45,9 +46,10 @@
 
 
 @property (nonatomic) long roomOrStoreId;
+@property (nonatomic) long storeId;
 @property (nonatomic) Boolean isStore;
 
-- (void) showIndividualRoomMessagesForStore:(long)roomOrStoreId isStore:(Boolean)isStore;
+- (void) showIndividualRoomMessagesForStore:(long)roomOrStoreId isStore:(Boolean)isStore currentStoreId:(long)storeid;
 
 @end
 //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -64,12 +66,13 @@
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-- (id)initWith:(long)roomOrStoreId isStore:(Boolean)isStore
+- (id)initWith:(long)roomOrStoreId isStore:(Boolean)isStore currentStoreId:(long)storeid
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
 	self = [super init];
     self.roomOrStoreId = roomOrStoreId;
     self.isStore = isStore;
+    self.storeId = storeid;
 //    self.title = title_;//@"Chat";
 	return self;
 }
@@ -90,40 +93,30 @@
     self.inputToolbar.tintColor = [UIColor goldColor];
 //    self.inputToolbar.backgroundColor = [UIColor asaanBackgroundColor];
     self.inputToolbar.barTintColor = [UIColor asaanBackgroundColor];
+    
+    if (self.isStore == true)
+        self.inputToolbar.hidden = true;
+    else
+        self.inputToolbar.hidden = false;
 
 	JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc] init];
 	bubbleImageOutgoing = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
 	bubbleImageIncoming = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleBlueColor]];
 
 	avatarImageBlank = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"chat_blank"] diameter:30.0];
-    
-    [self loadInitialMessages];
-}
 
-- (void)loadInitialMessages
-{
     users = [[NSMutableArray alloc] init];
     messages = [[NSMutableArray alloc] init];
     serverMessages = [[NSMutableArray alloc] init];
     avatars = [[NSMutableDictionary alloc] init];
-    
-    [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
-    [self.collectionView reloadData];
-    
-    isLoading = NO;
-    [self loadMessages];
-    
-    if (self.isStore == true)
-        self.inputToolbar.hidden = true;
-    else
-        self.inputToolbar.hidden = false;
+    [self loadMessagesForSend:false];
 }
 
-- (void) showIndividualRoomMessagesForStore:(long)roomOrStoreId isStore:(Boolean)isStore
+- (void) showIndividualRoomMessagesForStore:(long)roomOrStoreId isStore:(Boolean)isStore currentStoreId:(long)storeid
 {
     if (roomOrStoreId != self.roomOrStoreId || isStore != self.isStore)
     {
-        ChatView *chatView = [[ChatView alloc] initWith:roomOrStoreId isStore:isStore];
+        ChatView *chatView = [[ChatView alloc] initWith:roomOrStoreId isStore:isStore currentStoreId:self.storeId];
         chatView.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:chatView animated:YES];
     }
@@ -135,7 +128,7 @@
 {
 	[super viewDidAppear:animated];
 	self.collectionView.collectionViewLayout.springinessEnabled = YES;
-	timer = [NSTimer scheduledTimerWithTimeInterval:15.0 target:self selector:@selector(loadMessages) userInfo:nil repeats:YES];
+//	timer = [NSTimer scheduledTimerWithTimeInterval:15.0 target:self selector:@selector(loadMessagesForSend:false) userInfo:nil repeats:YES];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     appDelegate.notificationUtils.bReceivedChatNotification = false;
 }
@@ -145,13 +138,13 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
 	[super viewWillDisappear:animated];
-	[timer invalidate];
+//	[timer invalidate];
 }
 
 #pragma mark - Backend methods
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-- (void)loadMessages
+- (void)loadMessagesForSend:(Boolean)forSend
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
     if (isLoading == NO)
@@ -174,14 +167,17 @@
                 self.automaticallyScrollsToMostRecentMessage = NO;
                  
                 messagesAndUsers = object;
+                 NSInteger position = 0;
                 for (GTLStoreendpointChatMessage *message in [object.chatMessages reverseObjectEnumerator])
-                    [self addMessage:message];
+                {
+                    [self addMessage:message forSend:forSend];
+                    position++;
+                }
                 if ([object.chatMessages count] != 0)
                 {
+                    self.automaticallyScrollsToMostRecentMessage = YES;
                     [self finishReceivingMessage];
-                    [self scrollToBottomAnimated:NO];
                 }
-                self.automaticallyScrollsToMostRecentMessage = YES;
              }
              else
              {
@@ -194,7 +190,7 @@
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-- (void)addMessage:(GTLStoreendpointChatMessage *)object
+- (void)addMessage:(GTLStoreendpointChatMessage *)object forSend:(Boolean)forSend
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
 	//---------------------------------------------------------------------------------------------------------------------------------------------
@@ -231,34 +227,24 @@
             if (error == nil)
             {
                 mediaItem.image = image;
-                [self.collectionView reloadData];
+                if(forSend == true)
+                    [self.collectionView reloadData];
             }
         }];
 	}
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-- (void)sendMessage:(NSString *)text Picture:(UIImage *)picture
+- (void)sendMessage:(NSString *)text Picture:(PFFile *)pictureFile
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
-	PFFile *filePicture = nil;
-	//---------------------------------------------------------------------------------------------------------------------------------------------
-	if (picture != nil)
-	{
-		filePicture = [PFFile fileWithName:@"picture.jpg" data:UIImageJPEGRepresentation(picture, 0.6)];
-		[filePicture saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
-		{
-			if (error != nil) [ProgressHUD showError:@"Picture save error."];
-		}];
-	}
-	//---------------------------------------------------------------------------------------------------------------------------------------------
     GTLStoreendpointChatMessage *newMessage = [[GTLStoreendpointChatMessage alloc]init];
     
     if (self.isStore == false)
         newMessage.roomId = [NSNumber numberWithLong:self.roomOrStoreId];
     
     newMessage.txtMessage = text;
-    newMessage.fileMessage = filePicture.url;
+    newMessage.fileMessage = pictureFile.url;
 
     __weak __typeof(self) weakSelf = self;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
@@ -273,7 +259,14 @@
          if (error == nil)
          {
              [JSQSystemSoundPlayer jsq_playMessageSentSound];
-             [weakSelf loadMessages];
+             [weakSelf loadMessagesForSend:true];
+             
+             if (IsEmpty(text) == true)
+                 SendPushNotification(self.roomOrStoreId, self.storeId, @"You have a message.");
+             else
+                 SendPushNotification(self.roomOrStoreId, self.storeId, text);
+             
+             [self finishSendingMessage];
          }
          else
          {
@@ -281,11 +274,6 @@
              [ProgressHUD showError:@"Network error."];
          }
      }];
-
-    //---------------------------------------------------------------------------------------------------------------------------------------------
-	SendPushNotification(self.roomOrStoreId, text);
-	//---------------------------------------------------------------------------------------------------------------------------------------------
-	[self finishSendingMessage];
 }
 
 #pragma mark - JSQMessagesViewController method overrides
@@ -344,7 +332,6 @@
              if (error == nil)
              {
                  avatars[user.objectId] = [JSQMessagesAvatarImageFactory avatarImageWithImage:image diameter:30.0];
-                 [self.collectionView reloadData];
              }
          }];
 		return avatarImageBlank;
@@ -398,6 +385,8 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
+//    NSLog(@"numberOfItemsInSection %u", (unsigned int)[messages count]);
+//    NSLog(@"%@",[NSThread callStackSymbols]);
 	return [messages count];
 }
 
@@ -405,6 +394,10 @@
 - (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
+//    NSLog(@"cellForItemAtIndexPath %u", (unsigned int)indexPath.item);
+//    if (indexPath.item == 0)
+//        NSLog(@"%@",[NSThread callStackSymbols]);
+
 	JSQMessagesCollectionViewCell *cell = (JSQMessagesCollectionViewCell *)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
 	
 	JSQMessage *message = messages[indexPath.item];
@@ -480,7 +473,7 @@
 {
 	NSLog(@"didTapAvatarImageView");
     GTLStoreendpointChatMessage *message = [serverMessages objectAtIndex:indexPath.row];
-    [self showIndividualRoomMessagesForStore:message.roomId.longLongValue isStore:false];
+    [self showIndividualRoomMessagesForStore:message.roomId.longLongValue isStore:false currentStoreId:self.storeId];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -489,7 +482,7 @@
 {
 	NSLog(@"didTapMessageBubbleAtIndexPath");
     GTLStoreendpointChatMessage *message = [serverMessages objectAtIndex:indexPath.row];
-    [self showIndividualRoomMessagesForStore:message.roomId.longLongValue isStore:false];
+    [self showIndividualRoomMessagesForStore:message.roomId.longLongValue isStore:false currentStoreId:self.storeId];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -498,7 +491,7 @@
 {
 	NSLog(@"didTapCellAtIndexPath %@", NSStringFromCGPoint(touchLocation));
     GTLStoreendpointChatMessage *message = [serverMessages objectAtIndex:indexPath.row];
-    [self showIndividualRoomMessagesForStore:message.roomId.longLongValue isStore:false];
+    [self showIndividualRoomMessagesForStore:message.roomId.longLongValue isStore:false currentStoreId:self.storeId];
 }
 
 #pragma mark - UIActionSheetDelegate
@@ -521,7 +514,21 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
 	UIImage *picture = info[UIImagePickerControllerEditedImage];
-	[self sendMessage:@"[Picture message]" Picture:picture];
+    PFFile *filePicture = nil;
+    //---------------------------------------------------------------------------------------------------------------------------------------------
+    if (picture != nil)
+    {
+        filePicture = [PFFile fileWithName:@"picture.jpg" data:UIImageJPEGRepresentation(picture, 0.6)];
+        [filePicture saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+         {
+             if (error != nil)
+                 [ProgressHUD showError:@"Picture save error."];
+             else
+                 [self sendMessage:@"[Picture message]" Picture:filePicture];
+
+         }];
+    }
+    //---------------------------------------------------------------------------------------------------------------------------------------------
 	[picker dismissViewControllerAnimated:YES completion:nil];
 }
 

@@ -101,6 +101,15 @@
         // Load GAE Objects on startup
         GlobalObjectHolder *objectHolder = appDelegate.globalObjectHolder;
         [objectHolder loadAllUserObjects];
+        
+        PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+        PFUser *user = [currentInstallation objectForKey:@"user"];
+        
+        if (user == nil || [user.objectId isEqualToString:currentUser.objectId] == false)
+        {
+            [[PFInstallation currentInstallation] setObject:[PFUser currentUser] forKey:@"user"];
+            [[PFInstallation currentInstallation] saveEventually];
+        }
     }
     
     GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
@@ -309,7 +318,7 @@
     {
         if (room.storeId.longLongValue == storeId)
         {
-            ChatView *chatView = [[ChatView alloc] initWith:room.identifier.longLongValue isStore:false];
+            ChatView *chatView = [[ChatView alloc] initWith:room.identifier.longLongValue isStore:false currentStoreId:self.selectedStore.store.identifier.longLongValue];
             chatView.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:chatView animated:YES];
             return;
@@ -320,7 +329,7 @@
     {
         if (team.storeId.longLongValue == storeId)
         {
-            ChatView *chatView = [[ChatView alloc] initWith:team.storeId.longLongValue isStore:true];
+            ChatView *chatView = [[ChatView alloc] initWith:team.storeId.longLongValue isStore:true currentStoreId:self.selectedStore.store.identifier.longLongValue];
             chatView.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:chatView animated:YES];
             return;
@@ -344,7 +353,7 @@
              NSMutableArray *newRoomArray = [[NSMutableArray alloc]initWithArray:usersRoomsAndStores.chatRooms];
              [newRoomArray addObject:object];
              usersRoomsAndStores.chatRooms = newRoomArray;
-             ChatView *chatView = [[ChatView alloc] initWith:object.storeId.longLongValue isStore:false];
+             ChatView *chatView = [[ChatView alloc] initWith:object.identifier.longLongValue isStore:false currentStoreId:self.selectedStore.store.identifier.longLongValue];
              chatView.hidesBottomBarWhenPushed = YES;
              [weakSelf.navigationController pushViewController:chatView animated:YES];
              return;

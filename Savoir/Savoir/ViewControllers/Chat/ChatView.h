@@ -15,6 +15,6 @@
 @interface ChatView : JSQMessagesViewController <UIActionSheetDelegate, UIImagePickerControllerDelegate>
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 
-- (id)initWith:(long)roomOrStoreId isStore:(Boolean)isStore;
+- (id)initWith:(long)roomOrStoreId isStore:(Boolean)isStore currentStoreId:(long)storeid;
 
 @end

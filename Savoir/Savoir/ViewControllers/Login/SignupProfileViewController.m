@@ -145,8 +145,8 @@
         user[@"phone"]=_txtPhone.text;
         user[@"firstName"]=_txtFirstName.text;
         user[@"lastName"]=_txtLastName.text;
-        
         [user saveInBackground];
+        
         [self performSegueWithIdentifier:@"segueSignupProfileToStoreList" sender:self];
     }
 }

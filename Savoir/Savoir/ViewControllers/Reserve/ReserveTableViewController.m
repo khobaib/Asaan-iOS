@@ -244,7 +244,7 @@
              NSString *msg = [NSString stringWithFormat:@"Thank you - your reservation request has been sent. If you need to make changes please call %@ immediately at %@.", weakSelf.selectedStore.name, weakSelf.selectedStore.phone];
              
              //---------------------------------------------------------------------------------------------------------------------------------------------
-             SendPushNotification(roomId.longLongValue, textMessage);
+             SendPushNotification(roomId.longLongValue, weakSelf.selectedStore.identifier.longLongValue, textMessage);
              //---------------------------------------------------------------------------------------------------------------------------------------------
 
              UIAlertView *alert=[[UIAlertView alloc]initWithTitle:title message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];

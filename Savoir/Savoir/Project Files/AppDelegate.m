@@ -101,6 +101,16 @@
     
     self.window.tintColor = [UIColor goldColor];
     
+    if (launchOptions != nil)
+    {
+        NSDictionary *dictionary = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+        if (dictionary != nil)
+        {
+            NSLog(@"Launched from push notification: %@", dictionary);
+            [self.notificationUtils application:application didReceiveRemoteNotification:dictionary UpdateUI:NO];
+        }
+    }
+    
     UILocalNotification *localNotif =
     [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (localNotif)
@@ -181,7 +191,7 @@
         [PFAnalytics trackAppOpenedWithRemoteNotificationPayload:userInfo];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:BBBadgeIncreaseNotification object:self userInfo:@{BBUserInfoBadgeKey : [NSNumber numberWithInteger:application.applicationIconBadgeNumber]}];
-    self.notificationUtils.bReceivedChatNotification = true;
+    [self.notificationUtils application:application didReceiveRemoteNotification:userInfo UpdateUI:YES];
 }
 
 ///////////////////////////////////////////////////////////
