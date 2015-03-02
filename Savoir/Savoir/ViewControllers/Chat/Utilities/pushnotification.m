@@ -75,7 +75,7 @@ void SendPushNotification(long roomId, long storeId, NSString *text)
              PFQuery *queryInstallation = [PFInstallation query];
              [queryInstallation whereKey:PF_INSTALLATION_USER matchesQuery:query];
              
-             NSDictionary *pushContent = @{@"alert": text, @"roomId":[NSString stringWithFormat:@"%ld", roomId], @"storeId":[NSString stringWithFormat:@"%ld", storeId]};
+             NSDictionary *pushContent = @{@"alert": text, @"TYPE":@"CHAT", @"CHAT_ROOMID":[NSString stringWithFormat:@"%ld", roomId], @"CHAT_STOREID":[NSString stringWithFormat:@"%ld", storeId]};
              
              PFPush *push = [[PFPush alloc] init];
              [push setQuery:queryInstallation];

@@ -207,14 +207,14 @@
 //         see issue #484
 //         https://github.com/jessesquires/JSQMessagesViewController/issues/484
 //
-- (void)setBounds:(CGRect)bounds
-{
-    [super setBounds:bounds];
-    
-    if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
-        self.contentView.frame = bounds;
-    }
-}
+//- (void)setBounds:(CGRect)bounds
+//{
+//    [super setBounds:bounds];
+//    
+//    if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
+//        self.contentView.frame = bounds;
+//    }
+//}
 
 #pragma mark - Setters
 

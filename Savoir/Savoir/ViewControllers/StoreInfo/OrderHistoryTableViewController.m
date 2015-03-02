@@ -51,7 +51,10 @@
     [super viewWillAppear:animated];
     
     if (self.selectedStore == nil)
-        [UtilCalls getSlidingMenuBarButtonSetupWith:self];
+    {
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+        [appDelegate.notificationUtils getSlidingMenuBarButtonSetupWith:self];
+    }
 }
 
 - (void)setupOrderHistoryData {

@@ -49,11 +49,12 @@
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
-    if (self.navigationController.viewControllers[0] != self) {
+    if (self.navigationController.viewControllers[0] != self)
         self.navigationItem.leftBarButtonItem = nil;
-    }
-    else {
-        [UtilCalls getSlidingMenuBarButtonSetupWith:self];
+    else
+    {
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+        [appDelegate.notificationUtils getSlidingMenuBarButtonSetupWith:self];
     }
 }
 

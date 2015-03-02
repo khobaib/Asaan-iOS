@@ -106,8 +106,7 @@
 
     cell.badgeString = @"";
     if ([_menuSegue[indexPath.row] isEqualToString:SEGUE_SMToChatHistory])
-        if (appDelegate.notificationUtils.bReceivedChatNotification == true)
-            cell.badgeString = @"N";
+        cell.badgeString = [NSString stringWithFormat:@"%ld", (long)[UIApplication sharedApplication].applicationIconBadgeNumber];
     
     return cell;
 }
@@ -121,14 +120,9 @@
     }
     else if ([_menuSegue[indexPath.row] isEqualToString:SEGUE_UnwindToStoreList])
     {
-        PFUser *currentUser = [PFUser currentUser];
-        if (currentUser)
-        {
-            [PFUser logOut];
-            AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-            GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
-            [goh clearAllObjects];
-        }
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+        GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
+        [goh clearAllObjects];
         
         [self performSegueWithIdentifier:SEGUE_SMToStoreList sender:self];
     }

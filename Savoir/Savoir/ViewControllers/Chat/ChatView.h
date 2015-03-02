@@ -15,6 +15,14 @@
 @interface ChatView : JSQMessagesViewController <UIActionSheetDelegate, UIImagePickerControllerDelegate>
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 
+@property (nonatomic) Boolean presentedFromNotification;
+
+@property (nonatomic) long roomOrStoreId;
+@property (nonatomic) long storeId;
+@property (nonatomic) Boolean isStore;
+
 - (id)initWith:(long)roomOrStoreId isStore:(Boolean)isStore currentStoreId:(long)storeid;
+
+- (void) refreshMessageView;
 
 @end

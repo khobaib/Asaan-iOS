@@ -69,7 +69,7 @@
     }
     
     self.notificationUtils = [[NotificationUtils alloc]init];
-    self.notificationUtils.bReceivedChatNotification = false;
+    [_globalObjectHolder loadAllUserObjects];
     
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
     if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
@@ -103,11 +103,11 @@
     
     if (launchOptions != nil)
     {
-        NSDictionary *dictionary = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-        if (dictionary != nil)
+        NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+        if (userInfo != nil)
         {
-            NSLog(@"Launched from push notification: %@", dictionary);
-            [self.notificationUtils application:application didReceiveRemoteNotification:dictionary UpdateUI:NO];
+            NSLog(@"Inside 'didFinishLaunchingWithOptions renote notification:' - %@", userInfo);
+            [self.notificationUtils application:application didReceiveRemoteNotification:userInfo OnStartup:true AndStatus:application.applicationState];
         }
     }
     
@@ -115,9 +115,8 @@
     [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (localNotif)
     {
-        NSLog(@"Inside didFinishLaunchingWithOptions %@", localNotif.userInfo);
+        NSLog(@"Inside didFinishLaunchingWithOptions local notification: %@", localNotif.userInfo);
 //        [viewController displayItem:itemName];  // custom method
-        application.applicationIconBadgeNumber = localNotif.applicationIconBadgeNumber-1;
         [self.notificationUtils application:application didReceiveLocalNotification:localNotif.userInfo OnStartup:true];
     }
 //    [window addSubview:viewController.view];
@@ -141,30 +140,16 @@
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
     [self.notificationUtils application:application didReceiveLocalNotification:notification.userInfo OnStartup:false];
-    application.applicationIconBadgeNumber = notification.applicationIconBadgeNumber - 1;
-
-//    NSString *itemName = [notification.userInfo objectForKey:@"REVIEW_ORDER"];
-//    NSLog(@"Inside didReceiveLocalNotification :%@", notification.userInfo);
-////    [viewController displayItem:itemName];  // custom method
-//
-//#warning QUERY : Should we increase badge value of sliding-icon on receiving Local Notification?
-//    [[NSNotificationCenter defaultCenter] postNotificationName:BBBadgeIncreaseNotification object:self userInfo:@{BBUserInfoBadgeKey : [NSNumber numberWithInteger:app.applicationIconBadgeNumber]}];
 }
 
 - (void)application:(UIApplication *) application handleActionWithIdentifier:(NSString *) identifier forLocalNotification:(NSDictionary *) notification completionHandler:(void (^)()) completionHandler
 {
     [self.notificationUtils application:application handleActionWithIdentifier:identifier forLocalNotification:notification completionHandler:completionHandler];
-//    if ([identifier isEqualToString: @"REVIEW_IDENTIFIER"])
-//        [self handleReviewActionWithNotification:notification];
-//    else if ([identifier isEqualToString: @"REMIND_LATER_IDENTIFIER"])
-//        [self handleRemindActionWithNotification:notification];
-//
-//    // Must be called when finished
-//    completionHandler();
 }
 
 #pragma mark - Push Notification
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken {
+    NSLog(@"Inside didRegisterForRemoteNotificationsWithDeviceToken:");
     
     [PFPush storeDeviceToken:newDeviceToken];
     [PFPush subscribeToChannelInBackground:@"" target:self selector:@selector(subscribeFinished:error:)];
@@ -189,9 +174,7 @@
     
     if (application.applicationState == UIApplicationStateInactive)
         [PFAnalytics trackAppOpenedWithRemoteNotificationPayload:userInfo];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:BBBadgeIncreaseNotification object:self userInfo:@{BBUserInfoBadgeKey : [NSNumber numberWithInteger:application.applicationIconBadgeNumber]}];
-    [self.notificationUtils application:application didReceiveRemoteNotification:userInfo UpdateUI:YES];
+    [self.notificationUtils application:application didReceiveRemoteNotification:userInfo OnStartup:false AndStatus:application.applicationState];
 }
 
 ///////////////////////////////////////////////////////////
@@ -203,7 +186,7 @@
      if (application.applicationState == UIApplicationStateInactive) {
          [PFAnalytics trackAppOpenedWithRemoteNotificationPayload:userInfo];
      }
-    self.notificationUtils.bReceivedChatNotification = true;
+    [self.notificationUtils application:application didReceiveRemoteNotification:userInfo OnStartup:false AndStatus:application.applicationState];
 }
 
 #pragma mark - 

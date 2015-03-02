@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "UtilCalls.h"
-#import "BBBadgeBarButtonItem.h"
 #import <Parse/Parse.h>
 #import "AppDelegate.h"
 #import "InlineCalls.h"
@@ -105,42 +104,6 @@
         return NO;
     else
         return YES;
-}
-
-+ (UIBarButtonItem *)getSlidingMenuBarButtonSetupWith:(UIViewController *)viewController
-{
-    
-    SWRevealViewController *revealViewController = viewController.revealViewController;
-    revealViewController.delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    revealViewController.shouldUseFrontViewOverlay = YES;
-    revealViewController.shouldUseDoubleAnimationOnVCChange = NO;
-    
-    if ( revealViewController && viewController )
-    {
-        // If you want your BarButtonItem to handle touch event and click, use a UIButton as customView
-        UIButton *customButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-        // Add your action to your button
-        [customButton addTarget:viewController.revealViewController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
-        // Customize your button as you want, with an image if you have a pictogram to display for example
-        [customButton setImage:[UIImage imageNamed:@"reveal-icon"] forState:UIControlStateNormal];
-        
-        // Then create and add our custom BBBadgeBarButtonItem
-        BBBadgeBarButtonItem *barButton = [[BBBadgeBarButtonItem alloc] initWithCustomUIButton:customButton];
-        barButton.shouldHideBadgeAtZero = YES;
-        barButton.badgeOriginX = 13;
-        barButton.badgeOriginY = -9;
-//        barButton.badgeValue = [NSString stringWithFormat:@"%d", [UIApplication sharedApplication].applicationIconBadgeNumber];
-        
-        viewController.navigationItem.leftBarButtonItem = barButton;
-        
-        [viewController.navigationController.navigationBar addGestureRecognizer: viewController.revealViewController.panGestureRecognizer];
-        
-        return barButton;
-    }
-    else {
-        
-        return nil;
-    }
 }
 
 + (void)slidingMenuSetupWith:(UIViewController *)viewController withItem:(UIBarButtonItem *)revealButtonItem

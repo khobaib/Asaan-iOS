@@ -29,7 +29,6 @@
 - (void) loadUserAddressesFromServer;
 - (void) loadUserCardsFromServer;
 - (void) loadCurrentUserFromServer;
-- (void) loadUserQueueEntry;
 
 - (void) addCardToUserCards:(GTLUserendpointUserCard *)card;
 - (void) addAddressToUserAddresses:(GTLUserendpointUserAddress *)address;

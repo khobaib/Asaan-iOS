@@ -11,6 +11,7 @@
 #import <Parse/Parse.h>
 #import "UtilCalls.h"
 #import "Constants.h"
+#import "ChatConstants.h"
 
 @implementation GlobalObjectHolder
 @synthesize orderInProgress = _orderInProgress;
@@ -30,19 +31,40 @@
     self.defaultUserCard = nil;
     self.defaultUserAddress = nil;
     self.currentUser = nil;
+    // Unsubscribe from push notifications by removing the user association from the current installation.
+    PFUser *currentUser = [PFUser currentUser];
+    if (currentUser)
+    {
+        [[PFInstallation currentInstallation] removeObjectForKey:PF_INSTALLATION_USER];
+        [[PFInstallation currentInstallation] save];
+        [PFUser logOut];
+    }
 }
 
 - (void) loadAllUserObjects
 {
-    if (self.currentUser == nil)
+    PFUser *parseUser = [PFUser currentUser];
+    if (parseUser)
     {
-        [self loadCurrentUserFromServer];
-        [self loadUserRoomsAndStoreChatTeams];
+        // Load GAE Objects on startup
+        PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+        PFUser *user = [currentInstallation objectForKey:@"user"];
+        
+        if (user == nil || [user.objectId isEqualToString:parseUser.objectId] == false)
+        {
+            [[PFInstallation currentInstallation] setObject:[PFUser currentUser] forKey:@"user"];
+            [[PFInstallation currentInstallation] saveEventually];
+        }
+        if (self.currentUser == nil)
+        {
+            [self loadCurrentUserFromServer];
+            [self loadUserRoomsAndStoreChatTeams];
+        }
+        if (self.userCards == nil)
+            [self loadUserCardsFromServer];
+        if (self.userAddresses == nil)
+            [self loadUserAddressesFromServer];
     }
-    if (self.userCards == nil)
-        [self loadUserCardsFromServer];
-    if (self.userAddresses == nil)
-        [self loadUserAddressesFromServer];
 }
 
 - (void) removeOrderInProgress { _orderInProgress = nil; }

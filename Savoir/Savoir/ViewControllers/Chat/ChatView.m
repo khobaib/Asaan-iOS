@@ -44,12 +44,8 @@
     GTLStoreendpointChatMessagesAndUsers *messagesAndUsers;
 }
 
-
-@property (nonatomic) long roomOrStoreId;
-@property (nonatomic) long storeId;
-@property (nonatomic) Boolean isStore;
-
 - (void) showIndividualRoomMessagesForStore:(long)roomOrStoreId isStore:(Boolean)isStore currentStoreId:(long)storeid;
+- (void)backButtonPressed;
 
 @end
 //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -128,9 +124,35 @@
 {
 	[super viewDidAppear:animated];
 	self.collectionView.collectionViewLayout.springinessEnabled = YES;
-//	timer = [NSTimer scheduledTimerWithTimeInterval:15.0 target:self selector:@selector(loadMessagesForSend:false) userInfo:nil repeats:YES];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    appDelegate.notificationUtils.bReceivedChatNotification = false;
+    appDelegate.notificationUtils.chatView = self;
+//	timer = [NSTimer scheduledTimerWithTimeInterval:15.0 target:self selector:@selector(loadMessagesForSend:false) userInfo:nil repeats:YES];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    self.navigationController.navigationBar.translucent = NO;
+    
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    
+    if (self.presentedFromNotification == true)
+    {
+        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed)];
+        self.navigationItem.leftBarButtonItem = backButton;
+    }
+
+}
+
+- (void) refreshMessageView
+{
+    [self loadMessagesForSend:false];
+}
+
+- (void)backButtonPressed
+{
+    if (self.presentedFromNotification == true)
+        [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -138,6 +160,8 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
 	[super viewWillDisappear:animated];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    appDelegate.notificationUtils.chatView = nil;
 //	[timer invalidate];
 }
 

@@ -86,7 +86,6 @@
     [self.view endEditing:YES];
     NotificationUtils *notificationUtils = [[NotificationUtils alloc]init];
     [notificationUtils cancelNotificationWithOrder:self.selectedOrder.identifier];
-//    [UtilCalls getSlidingMenuBarButtonSetupWith:self];
 }
 
 - (void)backButtonPressed

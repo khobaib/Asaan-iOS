@@ -7,7 +7,7 @@
 //
 
 #import "UpdateInfoViewController.h"
-#import "UtilCalls.h"
+#import "AppDelegate.h"
 
 @interface UpdateInfoViewController ()
 
@@ -17,7 +17,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [UtilCalls getSlidingMenuBarButtonSetupWith:self];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    [appDelegate.notificationUtils getSlidingMenuBarButtonSetupWith:self];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

@@ -79,7 +79,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [UtilCalls getSlidingMenuBarButtonSetupWith:self];
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    [appDelegate.notificationUtils getSlidingMenuBarButtonSetupWith:self];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -157,7 +160,7 @@
 {
 	[super viewDidAppear:animated];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    appDelegate.notificationUtils.bReceivedChatNotification = false;
+//    appDelegate.notificationUtils.bReceivedChatNotification = false;
 }
 
 #pragma mark - Backend actions

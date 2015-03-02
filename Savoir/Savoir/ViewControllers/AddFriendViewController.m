@@ -7,6 +7,7 @@
 //
 
 #import "AddFriendViewController.h"
+#import "AppDelegate.h"
 #import "UtilCalls.h"
 
 @interface AddFriendViewController ()
@@ -20,7 +21,8 @@
     
     if (_showSlidingMenuButton) {
         
-        [UtilCalls getSlidingMenuBarButtonSetupWith:self];
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+        [appDelegate.notificationUtils getSlidingMenuBarButtonSetupWith:self];
     }
     else {
         self.navigationItem.rightBarButtonItem = nil;

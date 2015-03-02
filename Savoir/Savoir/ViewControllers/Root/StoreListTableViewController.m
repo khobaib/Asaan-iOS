@@ -59,8 +59,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [UtilCalls getSlidingMenuBarButtonSetupWith:self];
-    
     __weak __typeof(self) weakSelf = self;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
@@ -91,28 +89,17 @@
     [self.hud hide:YES];
     
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    [appDelegate.notificationUtils getSlidingMenuBarButtonSetupWith:self];
+    
     PFUser *currentUser = [PFUser currentUser];
-    if (!currentUser) {
+    if (!currentUser)
+    {
         [self performSegueWithIdentifier:@"segueStartup" sender:self];
         return;
     }
-    else{
-        
-        // Load GAE Objects on startup
-        GlobalObjectHolder *objectHolder = appDelegate.globalObjectHolder;
-        [objectHolder loadAllUserObjects];
-        
-        PFInstallation *currentInstallation = [PFInstallation currentInstallation];
-        PFUser *user = [currentInstallation objectForKey:@"user"];
-        
-        if (user == nil || [user.objectId isEqualToString:currentUser.objectId] == false)
-        {
-            [[PFInstallation currentInstallation] setObject:[PFUser currentUser] forKey:@"user"];
-            [[PFInstallation currentInstallation] saveEventually];
-        }
-    }
     
     GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
+    [goh loadAllUserObjects];
     if (goh.orderInProgress != nil)
     {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -354,7 +341,7 @@
              [newRoomArray addObject:object];
              usersRoomsAndStores.chatRooms = newRoomArray;
              ChatView *chatView = [[ChatView alloc] initWith:object.identifier.longLongValue isStore:false currentStoreId:self.selectedStore.store.identifier.longLongValue];
-             chatView.hidesBottomBarWhenPushed = YES;
+//             chatView.hidesBottomBarWhenPushed = YES;
              [weakSelf.navigationController pushViewController:chatView animated:YES];
              return;
          }

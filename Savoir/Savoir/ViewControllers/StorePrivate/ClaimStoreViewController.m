@@ -38,7 +38,10 @@
     if (self.navigationController.viewControllers[0] != self)
         self.navigationItem.leftBarButtonItem = nil;
     else
-        [UtilCalls getSlidingMenuBarButtonSetupWith:self];
+    {
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+        [appDelegate.notificationUtils getSlidingMenuBarButtonSetupWith:self];
+    }
     
     [self.navigationController setNavigationBarHidden:NO];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]

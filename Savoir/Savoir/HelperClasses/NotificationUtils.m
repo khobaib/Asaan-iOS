@@ -8,10 +8,13 @@
 
 #import "NotificationUtils.h"
 #import "MainReviewViewController.h"
+#import "ChatView.h"
 #import "AppDelegate.h"
 #import "GTLStoreendpointOrderAndReviews.h"
 #import "UtilCalls.h"
 #import "UIColor+SavoirGoldColor.h"
+#import "StoreListTableViewController.h"
+#import "BBBadgeBarButtonItem.h"
 
 @interface NotificationUtils()
 
@@ -34,7 +37,6 @@
     localNotif.alertAction = NSLocalizedString(@"Review", nil);
     
     localNotif.soundName = UILocalNotificationDefaultSoundName;
-    localNotif.applicationIconBadgeNumber = 1;
     
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
         localNotif.category = @"REVIEW_CATEGORY";
@@ -85,11 +87,6 @@
         else
             [alertView show];
     }
-    //    [viewController displayItem:itemName];  // custom method
-//    app.applicationIconBadgeNumber = notification.applicationIconBadgeNumber - 1;
-    
-//#warning QUERY : Should we increase badge value of sliding-icon on receiving Local Notification?
-//    [[NSNotificationCenter defaultCenter] postNotificationName:BBBadgeIncreaseNotification object:self userInfo:@{BBUserInfoBadgeKey : [NSNumber numberWithInteger:app.applicationIconBadgeNumber]}];
 }
 #pragma mark - UIAlertViewDelegate
 
@@ -120,7 +117,6 @@
                      pvc.reviewAndItems = object.orderAndItemsReview;
                      pvc.presentedFromNotification = true;
                      UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:pvc];
-//                     [UINavigationBar appearance].barTintColor = [UIColor asaanBackgroundColor];
                      [[UIViewController currentViewController] presentViewController:navigationController animated:YES completion:nil];
                  }
                  else
@@ -175,7 +171,6 @@
     localNotif.alertAction = NSLocalizedString(@"Review", nil);
     
     localNotif.soundName = UILocalNotificationDefaultSoundName;
-    localNotif.applicationIconBadgeNumber = 1;
     
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
         localNotif.category = @"REVIEW_CATEGORY";
@@ -268,10 +263,78 @@
     return declineAction;
 }
 
-- (void)application:(UIApplication *)app didReceiveRemoteNotification:(NSDictionary *)userInfo UpdateUI:(Boolean)bUpdateUI
+- (void)application:(UIApplication *)app didReceiveRemoteNotification:(NSDictionary *)userInfo OnStartup:(Boolean)bStartup AndStatus:(UIApplicationState)status
 {
+    NSString *type = [userInfo objectForKey:@"TYPE"];
+    if ([type isEqualToString:@"CHAT"] == false)
+        return;
     
+    long roomId = [[userInfo objectForKey:@"CHAT_ROOMID"] longLongValue];
+    long storeId = [[userInfo objectForKey:@"CHAT_STOREID"] longLongValue];
+    if (bStartup == true || status == UIApplicationStateInactive)
+        [self showChatViewControllerWithRoomId:roomId AndStoreId:storeId];
+    else
+    {
+        [UIApplication sharedApplication].applicationIconBadgeNumber++;
+        
+        if (self.chatView != nil)
+            [self.chatView refreshMessageView];
+        else
+        {
+            long badgeNumber = [UIApplication sharedApplication].applicationIconBadgeNumber;
+            self.barButton.badgeValue = [NSString stringWithFormat:@"%ld", (long)badgeNumber];
+        }
+    }
 }
 
+- (void) showChatViewControllerWithRoomId:(long)roomId AndStoreId:(long)storeId
+{
+    ChatView *chatView = [[ChatView alloc] initWith:roomId isStore:false currentStoreId:storeId];
+    chatView.presentedFromNotification = true;
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:chatView];
+    [navigationController setNavigationBarHidden:NO];
+    [navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                             forBarMetrics:UIBarMetricsDefault];
+    navigationController.navigationBar.shadowImage = [UIImage new];
+    navigationController.navigationBar.translucent = NO;
+    navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+    [[UIViewController currentViewController] presentViewController:navigationController animated:YES completion:nil];
+}
+
+
+- (UIBarButtonItem *)getSlidingMenuBarButtonSetupWith:(UIViewController *)viewController
+{
+    SWRevealViewController *revealViewController = viewController.revealViewController;
+    revealViewController.delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    revealViewController.shouldUseFrontViewOverlay = YES;
+    revealViewController.shouldUseDoubleAnimationOnVCChange = NO;
+    
+    if ( revealViewController && viewController )
+    {
+        // If you want your BarButtonItem to handle touch event and click, use a UIButton as customView
+        UIButton *customButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+        // Add your action to your button
+        [customButton addTarget:viewController.revealViewController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+        // Customize your button as you want, with an image if you have a pictogram to display for example
+        [customButton setImage:[UIImage imageNamed:@"reveal-icon"] forState:UIControlStateNormal];
+        
+        // Then create and add our custom BBBadgeBarButtonItem
+        self.barButton = [[BBBadgeBarButtonItem alloc] initWithCustomUIButton:customButton];
+        self.barButton.shouldHideBadgeAtZero = YES;
+        self.barButton.badgeOriginX = 13;
+        self.barButton.badgeOriginY = -9;
+        self.barButton.badgeValue = [NSString stringWithFormat:@"%ld", (long)[UIApplication sharedApplication].applicationIconBadgeNumber];
+        
+        viewController.navigationItem.leftBarButtonItem = self.barButton;
+        
+        [viewController.navigationController.navigationBar addGestureRecognizer: viewController.revealViewController.panGestureRecognizer];
+        
+        return self.barButton;
+    }
+    else {
+        
+        return nil;
+    }
+}
 
 @end

@@ -44,6 +44,8 @@
         else
             return vc;
         
+    } else if ([vc isKindOfClass:[SWRevealViewController class]]) {
+        return [(SWRevealViewController *)vc frontViewController];
     } else {
         
         // Unknown view controller type, return last child view controller

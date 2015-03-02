@@ -8,10 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "GTLStoreendpointStoreOrder.h"
+#import "BBBadgeBarButtonItem.h"
+#import "ChatView.h"
 
 @interface NotificationUtils : NSObject <UIAlertViewDelegate>
 
-@property (nonatomic) Boolean bReceivedChatNotification;
+@property (strong, nonatomic) BBBadgeBarButtonItem *barButton;
+@property (strong, nonatomic) ChatView *chatView;
 
 - (void)scheduleNotificationWithOrder:(GTLStoreendpointStoreOrder *)order;
 - (void)cancelNotificationWithOrder:(NSNumber *)orderId;
@@ -24,6 +27,7 @@
 - (UIMutableUserNotificationAction *)defineOrderRemindLaterAction;
 - (UIMutableUserNotificationAction *)defineDeclineAction;
 
-- (void)application:(UIApplication *)app didReceiveRemoteNotification:(NSDictionary *)userInfo UpdateUI:(Boolean)bUpdateUI;
+- (void)application:(UIApplication *)app didReceiveRemoteNotification:(NSDictionary *)userInfo OnStartup:(Boolean)bStartup AndStatus:(UIApplicationState)status;
+- (UIBarButtonItem *)getSlidingMenuBarButtonSetupWith:(UIViewController *)viewController;
 
 @end
