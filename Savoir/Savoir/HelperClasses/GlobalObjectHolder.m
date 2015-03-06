@@ -36,7 +36,7 @@
     if (currentUser)
     {
         [[PFInstallation currentInstallation] removeObjectForKey:PF_INSTALLATION_USER];
-        [[PFInstallation currentInstallation] save];
+        [[PFInstallation currentInstallation] saveInBackground];
         [PFUser logOut];
     }
 }

@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BaseViewController : UIViewController<UITextFieldDelegate, UITextViewDelegate>{
+@interface BaseViewController : UIViewController<UITextFieldDelegate, UITextViewDelegate>
+{
     UITextField *activeField;
     UITextView *activeTextView;
 }

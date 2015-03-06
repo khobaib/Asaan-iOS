@@ -121,12 +121,18 @@
     // Your app might not need or want this behavior.
     CGRect aRect = _frameRect;
     aRect.size.height -= _keyboardHeight;
-    if (!CGRectContainsPoint(aRect, activeField.frame.origin) ) {
-        [_baseScrollView scrollRectToVisible:activeField.frame animated:YES];
+    
+    if (activeField != nil)
+    {
+        if (!CGRectContainsPoint(aRect, activeField.frame.origin) )
+            [_baseScrollView scrollRectToVisible:activeField.frame animated:YES];
     }
     
-    if (!CGRectContainsPoint(aRect, activeTextView.frame.origin) ) {
-        [_baseScrollView scrollRectToVisible:activeTextView.frame animated:YES];
+    if (activeTextView != nil)
+    {
+        CGPoint origin = activeTextView.frame.origin;
+        if (!CGRectContainsPoint(aRect, origin) )
+            [_baseScrollView scrollRectToVisible:activeTextView.frame animated:YES];
     }
 }
 

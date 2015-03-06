@@ -34,11 +34,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [super setBaseScrollView:self.reviewScrollView];
+//    activeTextView = self.txtReview;
     
     if (self.selectedOrder == nil)
         return;
-    NSString *strTitle = [NSString stringWithFormat:@"Tell us about your experience at %@", self.selectedOrder.storeName];
-    [UtilCalls setupHeaderView:self.headerView WithTitle:strTitle AndSubTitle:nil];
+    [UtilCalls setupHeaderView:self.headerView WithTitle:self.selectedOrder.storeName AndSubTitle:@"Tell us about your experience"];
 
     [[self.txtReview layer] setBorderColor:[[UIColor grayColor] CGColor]];
     [[self.txtReview layer] setBorderWidth:2.3];
@@ -70,11 +70,9 @@
     if ([UtilCalls orderHasAlreadyBeenReviewed:self.reviewAndItems] == true)
         [self backButtonPressed];
     
-    [self.navigationController setNavigationBarHidden:NO];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
                                                   forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
-    self.navigationController.navigationBar.translucent = YES;
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     
     if (self.presentedFromNotification == true)
