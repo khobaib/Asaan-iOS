@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStore (0 custom class methods, 40 custom properties)
+//   GTLStoreendpointStore (0 custom class methods, 44 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLObject.h"
@@ -34,6 +34,8 @@
 @property (copy) NSString *bssid;
 @property (copy) NSString *city;
 @property (retain) NSNumber *claimed;  // boolValue
+@property (retain) NSNumber *cosineLat;  // doubleValue
+@property (retain) NSNumber *cosineLng;  // doubleValue
 @property (retain) NSNumber *createdDate;  // longLongValue
 @property (retain) NSNumber *deliveryDistance;  // intValue
 @property (retain) NSNumber *deliveryFee;  // intValue
@@ -65,6 +67,8 @@
 @property (retain) NSNumber *providesWaitlist;  // boolValue
 @property (copy) NSString *rewardsDescription;
 @property (retain) NSNumber *rewardsRate;  // intValue
+@property (retain) NSNumber *sineLat;  // doubleValue
+@property (retain) NSNumber *sineLng;  // doubleValue
 @property (copy) NSString *ssid;
 @property (copy) NSString *state;
 @property (copy) NSString *subType;

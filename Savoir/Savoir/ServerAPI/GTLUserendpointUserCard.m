@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLUserendpointUserCard (0 custom class methods, 22 custom properties)
+//   GTLUserendpointUserCard (0 custom class methods, 23 custom properties)
 
 #import "GTLUserendpointUserCard.h"
 
@@ -26,7 +26,7 @@
 @dynamic accessToken, address, brand, cardId, city, country, createdDate,
          defaultProperty, expMonth, expYear, fingerprint, fundingType,
          identifier, last4, modifiedDate, name, provider, providerCustomerId,
-         refreshToken, state, userId, zip;
+         refreshToken, state, type, userId, zip;
 
 + (NSDictionary *)propertyToJSONKeyMap {
   NSDictionary *map =

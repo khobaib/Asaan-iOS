@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryStoreendpoint (47 custom class methods, 16 custom properties)
+//   GTLQueryStoreendpoint (47 custom class methods, 14 custom properties)
 
 #import "GTLQueryStoreendpoint.h"
 
@@ -32,6 +32,7 @@
 #import "GTLStoreendpointOrderReview.h"
 #import "GTLStoreendpointOrderReviewAndItemReviews.h"
 #import "GTLStoreendpointOrderReviewListAndCount.h"
+#import "GTLStoreendpointPlaceOrderArguments.h"
 #import "GTLStoreendpointStore.h"
 #import "GTLStoreendpointStoreAndStatsCollection.h"
 #import "GTLStoreendpointStoreChatMemberArray.h"
@@ -61,9 +62,9 @@
 
 @implementation GTLQueryStoreendpoint
 
-@dynamic fields, firstPosition, guestCount, isStore, maxResult, menuItemPOSId,
-         menuPOSId, menuType, modifiedDate, orderId, orderMode, queuePosition,
-         roomId, roomOrStoreId, storeId, storeName;
+@dynamic fields, firstPosition, isStore, maxResult, menuItemPOSId, menuPOSId,
+         menuType, modifiedDate, orderId, queuePosition, roomId, roomOrStoreId,
+         storeId, storeName;
 
 #pragma mark -
 #pragma mark Service level methods
@@ -317,11 +318,7 @@
   return query;
 }
 
-+ (id)queryForPlaceOrderWithObject:(GTLStoreendpointAsaanLongString *)object
-                           storeId:(long long)storeId
-                         orderMode:(NSInteger)orderMode
-                        guestCount:(NSInteger)guestCount
-                         storeName:(NSString *)storeName {
++ (id)queryForPlaceOrderWithObject:(GTLStoreendpointPlaceOrderArguments *)object {
   if (object == nil) {
     GTL_DEBUG_ASSERT(object != nil, @"%@ got a nil object", NSStringFromSelector(_cmd));
     return nil;
@@ -329,10 +326,6 @@
   NSString *methodName = @"storeendpoint.placeOrder";
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
   query.bodyObject = object;
-  query.storeId = storeId;
-  query.orderMode = orderMode;
-  query.guestCount = guestCount;
-  query.storeName = storeName;
   query.expectedObjectClass = [GTLStoreendpointStoreOrder class];
   return query;
 }

@@ -18,6 +18,7 @@
 #import "UIColor+SavoirGoldColor.h"
 #import "SWRevealViewController.h"
 #import "BBBadgeBarButtonItem.h"
+#import "StripePay.h"
 
 @interface AppDelegate ()
 
@@ -45,7 +46,7 @@
     [Parse setApplicationId:@"uX5Pxp1cPWJUbhl4qp5REJskOqDIp33tfMcSu1Ac"
                   clientKey:@"4cad0RAqv53bvlmgiTgnOScuJVk7IY28XeH4Mes5"];
     [PFFacebookUtils initializeFacebook];
-    [Stripe setDefaultPublishableKey:@"pk_test_hlpADPUOWaxn6uN0aATgLivW"];
+    [Stripe setDefaultPublishableKey:StripePublishableKey];
     
     //    [PFUser enableAutomaticUser];
     
@@ -92,6 +93,13 @@
         [[UINavigationBar appearance] setHidden:NO];
         [UINavigationBar appearance].translucent = NO;
     }
+    
+//    [self.navigationController setNavigationBarHidden:NO];
+//    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+//                                                  forBarMetrics:UIBarMetricsDefault];
+//    self.navigationController.navigationBar.shadowImage = [UIImage new];
+//    self.navigationController.navigationBar.translucent = YES;
+//    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     
     [[UINavigationBar appearance] setBackgroundImage:[UIImage new]
                                                   forBarMetrics:UIBarMetricsDefault];

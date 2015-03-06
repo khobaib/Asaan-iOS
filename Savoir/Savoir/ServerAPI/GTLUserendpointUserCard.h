@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLUserendpointUserCard (0 custom class methods, 22 custom properties)
+//   GTLUserendpointUserCard (0 custom class methods, 23 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLObject.h"
@@ -29,7 +29,7 @@
 @interface GTLUserendpointUserCard : GTLObject
 @property (copy) NSString *accessToken;
 @property (copy) NSString *address;
-@property (copy) NSString *brand;
+@property (retain) NSNumber *brand;  // intValue
 @property (copy) NSString *cardId;
 @property (copy) NSString *city;
 @property (copy) NSString *country;
@@ -53,6 +53,7 @@
 @property (copy) NSString *providerCustomerId;
 @property (copy) NSString *refreshToken;
 @property (copy) NSString *state;
+@property (copy) NSString *type;
 @property (retain) NSNumber *userId;  // longLongValue
 @property (copy) NSString *zip;
 @end

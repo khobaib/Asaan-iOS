@@ -44,17 +44,15 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    [self.navigationController setNavigationBarHidden:NO];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
-                                                  forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.barTintColor = [UIColor asaanBackgroundColor];
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
-    self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
-    
-    // Prevent keyboard from showing by default
-    [self.ptkView endEditing:YES];
+//    
+//    [self.navigationController setNavigationBarHidden:NO];
+//    self.navigationController.navigationBar.translucent = NO;
+//    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+//                                                  forBarMetrics:UIBarMetricsDefault];
+//    self.navigationController.navigationBar.barTintColor = [UIColor asaanBackgroundColor];
+//    self.navigationController.navigationBar.shadowImage = [UIImage new];
+//    self.navigationController.navigationBar.translucent = NO;
+//    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
 }
 
 - (void)didReceiveMemoryWarning {
@@ -127,14 +125,15 @@
     card.addressZip = self.ptkView.card.addressZip;
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [Stripe createTokenWithCard:card completion:^(STPToken *token, NSError *error)
+    [[STPAPIClient sharedClient] createTokenWithCard:card completion:^(STPToken *token, NSError *error)
     {
         if (!error)
         {
             GTLUserendpointUserCard *card = [[GTLUserendpointUserCard alloc] init];
             card.accessToken = token.tokenId;
             card.address = token.card.addressLine1;
-            card.brand = [weakSelf getCardTypeForCard:weakSelf.ptkView.cardNumber];
+            card.type = [weakSelf getCardTypeForCard:weakSelf.ptkView.cardNumber];
+            card.brand = [NSNumber numberWithInt:token.card.brand];
             card.city = token.card.addressCity;
             card.country = token.card.country;
             card.cardId = token.card.cardId;

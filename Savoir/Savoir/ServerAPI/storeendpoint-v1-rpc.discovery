@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/OLI_4ERdOa2Ad_ERtCeLL99dJVY\"",
+ "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/OfkwyIT5ndhoSS3RPqqKLV5apjc\"",
  "discoveryVersion": "v1",
  "id": "storeendpoint:v1",
  "name": "storeendpoint",
@@ -428,6 +428,43 @@
     }
    }
   },
+  "PlaceOrderArguments": {
+   "id": "PlaceOrderArguments",
+   "type": "object",
+   "properties": {
+    "cardid": {
+     "type": "string"
+    },
+    "customerId": {
+     "type": "string"
+    },
+    "guestCount": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "orderMode": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "storeId": {
+     "type": "string",
+     "format": "int64"
+    },
+    "storeName": {
+     "type": "string"
+    },
+    "strOrder": {
+     "type": "string"
+    },
+    "token": {
+     "type": "string"
+    },
+    "userId": {
+     "type": "string",
+     "format": "int64"
+    }
+   }
+  },
   "Store": {
    "id": "Store",
    "type": "object",
@@ -453,6 +490,14 @@
     },
     "claimed": {
      "type": "boolean"
+    },
+    "cosineLat": {
+     "type": "number",
+     "format": "double"
+    },
+    "cosineLng": {
+     "type": "number",
+     "format": "double"
     },
     "createdDate": {
      "type": "string",
@@ -538,6 +583,14 @@
     "rewardsRate": {
      "type": "integer",
      "format": "int32"
+    },
+    "sineLat": {
+     "type": "number",
+     "format": "double"
+    },
+    "sineLng": {
+     "type": "number",
+     "format": "double"
     },
     "ssid": {
      "type": "string"
@@ -1149,6 +1202,15 @@
     "orderTotal": {
      "type": "string",
      "format": "int64"
+    },
+    "paymentChargeId": {
+     "type": "string"
+    },
+    "paymentInvoice": {
+     "type": "string"
+    },
+    "paymentReceiptNumber": {
+     "type": "string"
     },
     "poscheckId": {
      "type": "integer",
@@ -2083,35 +2145,12 @@
   "storeendpoint.placeOrder": {
    "id": "storeendpoint.placeOrder",
    "parameters": {
-    "guestCount": {
-     "type": "integer",
-     "required": true,
-     "format": "int32"
-    },
-    "orderMode": {
-     "type": "integer",
-     "required": true,
-     "format": "int32"
-    },
     "resource": {
-     "$ref": "AsaanLongString"
-    },
-    "storeId": {
-     "type": "string",
-     "required": true,
-     "format": "int64"
-    },
-    "storeName": {
-     "type": "string",
-     "required": true
+     "$ref": "PlaceOrderArguments"
     }
    },
    "parameterOrder": [
-    "resource",
-    "storeId",
-    "orderMode",
-    "guestCount",
-    "storeName"
+    "resource"
    ],
    "returns": {
     "$ref": "StoreOrder"

@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/yWJlKPARFohmgCKK5NGzOQE6WUM\"",
+ "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/dYKLgmj5f6ZkjWhPq8tq1LPpa1U\"",
  "discoveryVersion": "v1",
  "id": "userendpoint:v1",
  "name": "userendpoint",
@@ -245,7 +245,8 @@
      "type": "string"
     },
     "brand": {
-     "type": "string"
+     "type": "integer",
+     "format": "int32"
     },
     "cardId": {
      "type": "string"
@@ -301,6 +302,9 @@
      "type": "string"
     },
     "state": {
+     "type": "string"
+    },
+    "type": {
      "type": "string"
     },
     "userId": {

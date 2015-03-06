@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StripePay.h"
 
-@interface OrderSummaryViewController : UIViewController
+@interface OrderSummaryViewController : UIViewController <StripeApplePayReceiver>
 
 @end

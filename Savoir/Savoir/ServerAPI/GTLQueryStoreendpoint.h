@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryStoreendpoint (47 custom class methods, 16 custom properties)
+//   GTLQueryStoreendpoint (47 custom class methods, 14 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLQuery.h"
@@ -26,6 +26,7 @@
 @class GTLStoreendpointChatRoom;
 @class GTLStoreendpointItemReviewsArray;
 @class GTLStoreendpointOrderReview;
+@class GTLStoreendpointPlaceOrderArguments;
 @class GTLStoreendpointStore;
 @class GTLStoreendpointStoreChatMemberArray;
 @class GTLStoreendpointStoreDiscount;
@@ -53,7 +54,6 @@
 // Method-specific parameters; see the comments below for more information.
 //
 @property (assign) NSInteger firstPosition;
-@property (assign) NSInteger guestCount;
 @property (assign) BOOL isStore;
 @property (assign) NSInteger maxResult;
 @property (assign) NSInteger menuItemPOSId;
@@ -61,7 +61,6 @@
 @property (assign) NSInteger menuType;
 @property (assign) long long modifiedDate;
 @property (assign) long long orderId;
-@property (assign) NSInteger orderMode;
 @property (assign) NSInteger queuePosition;
 @property (assign) long long roomId;
 @property (assign) long long roomOrStoreId;
@@ -254,11 +253,7 @@
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 // Fetches a GTLStoreendpointStoreOrder.
-+ (id)queryForPlaceOrderWithObject:(GTLStoreendpointAsaanLongString *)object
-                           storeId:(long long)storeId
-                         orderMode:(NSInteger)orderMode
-                        guestCount:(NSInteger)guestCount
-                         storeName:(NSString *)storeName;
++ (id)queryForPlaceOrderWithObject:(GTLStoreendpointPlaceOrderArguments *)object;
 
 // Method: storeendpoint.removeStoreOwner
 //  Authorization scope(s):

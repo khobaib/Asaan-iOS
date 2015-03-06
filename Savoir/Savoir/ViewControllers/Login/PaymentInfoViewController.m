@@ -52,13 +52,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self.navigationController setNavigationBarHidden:NO];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
-                                                  forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
-    self.navigationController.navigationBar.translucent = YES;
-    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
-    
     // Prevent keyboard from showing by default
     [self.view endEditing:YES];
 }
@@ -128,8 +121,8 @@
     
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [Stripe createTokenWithCard:card completion:^(STPToken *token, NSError *error) {
-        
+//    [Stripe createTokenWithCard:card completion:^(STPToken *token, NSError *error) {
+    [[STPAPIClient sharedClient] createTokenWithCard:card completion:^(STPToken *token, NSError *error) {
         if (error) {
             
             [[[UIAlertView alloc]initWithTitle:@"Error" message:[error.userInfo description] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
@@ -139,7 +132,8 @@
             GTLUserendpointUserCard *card = [[GTLUserendpointUserCard alloc] init];
             card.accessToken = token.tokenId;
             card.address = token.card.addressLine1;
-            card.brand = token.card.type;
+            card.brand = [NSNumber numberWithInteger:token.card.brand];
+            card.type = token.card.type;
             card.city = token.card.addressCity;
             card.country = token.card.addressCountry; // ??? or token.card.country
             card.expMonth = [NSNumber numberWithInteger:token.card.expMonth];

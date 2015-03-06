@@ -28,6 +28,7 @@
 #import "GTLStoreendpointAsaanLongString.h"
 #import "UtilCalls.h"
 #import "NotificationUtils.h"
+#import "Constants.h"
 
 @interface OrderSummaryViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -35,6 +36,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnAdd;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnEdit;
 @property (strong, nonatomic) MenuTableViewController *itemInputController;
+@property (strong, nonatomic) StripePay *stripePay;
 
 @property (nonatomic) Boolean bInPlaceOrderMode;
 
@@ -48,6 +50,8 @@
     [super viewDidLoad];
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    
+    self.stripePay = [[StripePay alloc]init];
     
     if (self.navigationController.viewControllers[0] != self)
         self.navigationItem.leftBarButtonItem = nil;
@@ -80,18 +84,37 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (Boolean) placeOrderWithToken:(STPToken *)token
+{
+    return false;
+}
+
 - (IBAction)placeOrder:(id)sender
 {
     self.bInPlaceOrderMode = YES;
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+
     if (self.orderInProgress == nil)
         return;
-
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     
-    if (appDelegate.globalObjectHolder.defaultUserCard == nil)
+    if (self.stripePay.applePayEnabled)
     {
-        [self performSegueWithIdentifier:@"segueOrderSummaryToSelectPaymentMode" sender:self];
-        return;
+        if (self.stripePay.token == nil)
+        {
+            NSNumber *amount = [[NSNumber alloc] initWithLong:[self finalAmount]];
+            NSString *amountStr = [UtilCalls percentAmountToString:amount];
+            NSDecimalNumber *finalAmount = [NSDecimalNumber decimalNumberWithString:amountStr];
+            [self.stripePay beginApplePay:self Title:self.orderInProgress.selectedStore.name Label:@"Order" AndAmount:finalAmount];
+            return;
+        }
+    }
+    else
+    {
+        if (appDelegate.globalObjectHolder.defaultUserCard == nil)
+        {
+            [self performSegueWithIdentifier:@"segueOrderSummaryToSelectPaymentMode" sender:self];
+            return;
+        }
     }
     
     if (![self AreDeliveryRequirementsValid])
@@ -122,9 +145,8 @@
     NSString *discountStr;
     if (self.orderInProgress.selectedDiscount != nil)
     {
-        NSUInteger discountId = self.orderInProgress.selectedDiscount.posDiscountId.longLongValue;
-        NSString *discountAmtOrPercent = [UtilCalls amountToStringNoCurrency:[NSNumber numberWithLong:self.orderInProgress.selectedDiscount.value.longLongValue]];
-        discountStr = [NSString stringWithFormat:@"<DISCOUNTS ID=\"%ld\" AMOUNT=\"%@\" REFERENCE=\"Discounts FROM ASAAN\" />", discountId, discountAmtOrPercent];
+        NSString *discountAmtOrPercent = [UtilCalls amountToStringNoCurrency:[NSNumber numberWithLongLong:self.orderInProgress.selectedDiscount.value.longLongValue]];
+        discountStr = [NSString stringWithFormat:@"<DISCOUNTS ID=\"%lld\" AMOUNT=\"%@\" REFERENCE=\"Discounts FROM ASAAN\" />", self.orderInProgress.selectedDiscount.posDiscountId.longLongValue, discountAmtOrPercent];
         strItems=[strItems stringByAppendingString:discountStr];
     }
     
@@ -160,10 +182,23 @@
     
     NSLog(@"%@",orderString);
     
-    GTLStoreendpointAsaanLongString *als = [[GTLStoreendpointAsaanLongString alloc]init];
-    [als setStrValue:orderString];
+    GTLStoreendpointPlaceOrderArguments *orderArguments = [[GTLStoreendpointPlaceOrderArguments alloc]init];
+    orderArguments.guestCount = [NSNumber numberWithInt:self.orderInProgress.partySize];  // intValue
+    orderArguments.orderMode = [NSNumber numberWithInt:self.orderInProgress.orderType];  // intValue
+    orderArguments.storeId = self.orderInProgress.selectedStore.identifier;  // longLongValue
+    orderArguments.storeName = self.orderInProgress.selectedStore.name;
+    orderArguments.strOrder = orderString;
     
-    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForPlaceOrderWithObject:als storeId:self.orderInProgress.selectedStore.identifier.longLongValue orderMode:self.orderInProgress.orderType guestCount:self.orderInProgress.partySize storeName:self.orderInProgress.selectedStore.name];
+    if (self.stripePay.applePayEnabled && self.stripePay.token != nil)
+        orderArguments.token = self.stripePay.token.tokenId;
+    else
+    {
+        orderArguments.userId = appDelegate.globalObjectHolder.defaultUserCard.userId;  // longLongValue
+        orderArguments.cardid = appDelegate.globalObjectHolder.defaultUserCard.cardId;
+        orderArguments.customerId = appDelegate.globalObjectHolder.defaultUserCard.providerCustomerId;
+    }
+    
+    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForPlaceOrderWithObject:orderArguments];
     
     //[query setCustomParameter:@"hmHAJvHvKYmilfOqgUnc22tf/RL5GLmPbcFBg02d6wm+ZB1o3f7RKYqmB31+DGoH9Ad3s3WP99n587qDZ5tm+w==" forKey:@"asaan-auth-token"];
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
@@ -531,7 +566,10 @@
         {
             cell = [tableView dequeueReusableCellWithIdentifier:@"OtherCell" forIndexPath:indexPath];
             NSString *card = appDelegate.globalObjectHolder.defaultUserCard.last4;
-            if (IsEmpty(card))
+            
+            if (self.stripePay.applePayEnabled)
+                cell.textLabel.text = @"Payment Mode Apple Pay";
+            else if (IsEmpty(card))
                 card = @"(Not specified)";
             cell.textLabel.text = [NSString stringWithFormat:@"Payment Mode %@", card];
             cell.tag = 702;

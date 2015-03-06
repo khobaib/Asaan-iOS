@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStoreOrder (0 custom class methods, 24 custom properties)
+//   GTLStoreendpointStoreOrder (0 custom class methods, 27 custom properties)
 
 #import "GTLStoreendpointStoreOrder.h"
 
@@ -25,7 +25,8 @@
 @implementation GTLStoreendpointStoreOrder
 @dynamic closeDate, createdDate, deliveryFee, discount, discountDescription,
          employeeName, employeePOSId, finalTotal, guestCount, identifier,
-         modifiedDate, note, orderDetails, orderMode, orderTotal, poscheckId,
+         modifiedDate, note, orderDetails, orderMode, orderTotal,
+         paymentChargeId, paymentInvoice, paymentReceiptNumber, poscheckId,
          posintCheckId, serviceCharge, status, storeId, storeName, subTotal,
          tableNumber, tax;
 
