@@ -34,6 +34,7 @@
     // Override point for customization after application launch.
     // Enable Crash Reporting
     [ParseCrashReporting enable];
+    [_globalObjectHolder findStoreCountFromServer];
     
     // ****************************************************************************
     // Uncomment and fill in with your Parse credentials:

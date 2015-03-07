@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryStoreendpoint (47 custom class methods, 14 custom properties)
+//   GTLQueryStoreendpoint (48 custom class methods, 16 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLQuery.h"
@@ -55,6 +55,8 @@
 //
 @property (assign) NSInteger firstPosition;
 @property (assign) BOOL isStore;
+@property (assign) double lat;
+@property (assign) double lng;
 @property (assign) NSInteger maxResult;
 @property (assign) NSInteger menuItemPOSId;
 @property (assign) NSInteger menuPOSId;
@@ -223,6 +225,15 @@
 // Fetches a GTLStoreendpointStoreCollection.
 + (id)queryForGetStoresWithFirstPosition:(NSInteger)firstPosition
                                maxResult:(NSInteger)maxResult;
+
+// Method: storeendpoint.getStoresOrderedByDistanceWithStats
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
+// Fetches a GTLStoreendpointStoreAndStatsCollection.
++ (id)queryForGetStoresOrderedByDistanceWithStatsWithLat:(double)lat
+                                                     lng:(double)lng
+                                           firstPosition:(NSInteger)firstPosition
+                                               maxResult:(NSInteger)maxResult;
 
 // Method: storeendpoint.getStoreStats
 //  Authorization scope(s):

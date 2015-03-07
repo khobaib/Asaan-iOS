@@ -160,6 +160,19 @@
      }];
 }
 
+- (void) findStoreCountFromServer
+{
+    __weak __typeof(self) weakSelf = self;
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
+    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreCount];
+    
+    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointAsaanLong *object,NSError *error)
+     {
+         weakSelf.storeCount = object.longValue.longLongValue;
+     }];
+}
+
 - (void) addCardToUserCards:(GTLUserendpointUserCard *)card
 {
     NSMutableArray *newCards = [[NSMutableArray alloc]init];//[NSMutableArray arrayWithArray:self.userCards.items];

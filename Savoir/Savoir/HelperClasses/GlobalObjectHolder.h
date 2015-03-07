@@ -13,6 +13,7 @@
 #import "GTLUserendpointUserAddressCollection.h"
 #import "GTLUserendpointUserCardCollection.h"
 #import "GTLUserendpointUser.h"
+#import <CoreLocation/CoreLocation.h>
 
 @interface GlobalObjectHolder : NSObject
 @property (strong, nonatomic) OnlineOrderDetails *orderInProgress;
@@ -22,6 +23,10 @@
 @property (strong, nonatomic) GTLUserendpointUserAddress *defaultUserAddress;
 @property (strong, nonatomic) GTLUserendpointUser *currentUser;
 @property (strong, nonatomic) GTLStoreendpointChatRoomsAndStoreChatMemberships *usersRoomsAndStores;
+@property (nonatomic) long storeCount;
+
+@property (strong, nonatomic) CLLocationManager *locationManager;
+@property (strong, nonatomic) CLLocation* location;
 
 - (OnlineOrderDetails *)createOrderInProgress;
 - (void) removeOrderInProgress;
@@ -29,6 +34,7 @@
 - (void) loadUserAddressesFromServer;
 - (void) loadUserCardsFromServer;
 - (void) loadCurrentUserFromServer;
+- (void) findStoreCountFromServer;
 
 - (void) addCardToUserCards:(GTLUserendpointUserCard *)card;
 - (void) addAddressToUserAddresses:(GTLUserendpointUserAddress *)address;

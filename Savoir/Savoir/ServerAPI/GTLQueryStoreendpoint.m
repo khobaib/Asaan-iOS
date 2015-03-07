@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryStoreendpoint (47 custom class methods, 14 custom properties)
+//   GTLQueryStoreendpoint (48 custom class methods, 16 custom properties)
 
 #import "GTLQueryStoreendpoint.h"
 
@@ -62,9 +62,9 @@
 
 @implementation GTLQueryStoreendpoint
 
-@dynamic fields, firstPosition, isStore, maxResult, menuItemPOSId, menuPOSId,
-         menuType, modifiedDate, orderId, queuePosition, roomId, roomOrStoreId,
-         storeId, storeName;
+@dynamic fields, firstPosition, isStore, lat, lng, maxResult, menuItemPOSId,
+         menuPOSId, menuType, modifiedDate, orderId, queuePosition, roomId,
+         roomOrStoreId, storeId, storeName;
 
 #pragma mark -
 #pragma mark Service level methods
@@ -282,6 +282,20 @@
   query.firstPosition = firstPosition;
   query.maxResult = maxResult;
   query.expectedObjectClass = [GTLStoreendpointStoreCollection class];
+  return query;
+}
+
++ (id)queryForGetStoresOrderedByDistanceWithStatsWithLat:(double)lat
+                                                     lng:(double)lng
+                                           firstPosition:(NSInteger)firstPosition
+                                               maxResult:(NSInteger)maxResult {
+  NSString *methodName = @"storeendpoint.getStoresOrderedByDistanceWithStats";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.lat = lat;
+  query.lng = lng;
+  query.firstPosition = firstPosition;
+  query.maxResult = maxResult;
+  query.expectedObjectClass = [GTLStoreendpointStoreAndStatsCollection class];
   return query;
 }
 

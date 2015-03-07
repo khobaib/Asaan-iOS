@@ -3380,7 +3380,7 @@
         <!--OrderSummaryHistoryTableViewController-->
         <scene sceneID="rwb-Ka-rez">
             <objects>
-                <tableViewController storyboardIdentifier="OrderSummaryHistoryTableViewController" id="ZfF-w1-b3Z" userLabel="OrderSummaryHistoryTableViewController" customClass="OrderHistorySummaryTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="OrderSummaryHistoryTableViewController" extendedLayoutIncludesOpaqueBars="YES" id="ZfF-w1-b3Z" userLabel="OrderSummaryHistoryTableViewController" customClass="OrderHistorySummaryTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="78" sectionHeaderHeight="100" sectionFooterHeight="150" id="iJb-FX-lCF">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3650,6 +3650,7 @@
                             <outlet property="delegate" destination="ZfF-w1-b3Z" id="nla-d4-DZq"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="STR-IQ-hL4">
                         <barButtonItem key="rightBarButtonItem" title="Review" id="tef-h2-4Hl">
                             <connections>

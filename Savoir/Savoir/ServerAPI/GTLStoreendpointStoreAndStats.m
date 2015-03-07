@@ -19,7 +19,6 @@
 
 #import "GTLStoreendpointStore.h"
 #import "GTLStoreendpointStoreStats.h"
-#import "GTLStoreendpointStoreWaitlistSummary.h"
 
 // ----------------------------------------------------------------------------
 //
@@ -27,5 +26,5 @@
 //
 
 @implementation GTLStoreendpointStoreAndStats
-@dynamic stats, store, storeWaitListSummary;
+@dynamic distance, stats, store;
 @end

@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/OfkwyIT5ndhoSS3RPqqKLV5apjc\"",
+ "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/fagqeCLNV_6vPIDWFor34BPdM_k\"",
  "discoveryVersion": "v1",
  "id": "storeendpoint:v1",
  "name": "storeendpoint",
@@ -625,14 +625,15 @@
    "id": "StoreAndStats",
    "type": "object",
    "properties": {
+    "distance": {
+     "type": "number",
+     "format": "float"
+    },
     "stats": {
      "$ref": "StoreStats"
     },
     "store": {
      "$ref": "Store"
-    },
-    "storeWaitListSummary": {
-     "$ref": "StoreWaitlistSummary"
     }
    }
   },
@@ -2112,6 +2113,43 @@
    ],
    "returns": {
     "$ref": "StoreCollection"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.getStoresOrderedByDistanceWithStats": {
+   "id": "storeendpoint.getStoresOrderedByDistanceWithStats",
+   "parameters": {
+    "firstPosition": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    },
+    "lat": {
+     "type": "number",
+     "required": true,
+     "format": "double"
+    },
+    "lng": {
+     "type": "number",
+     "required": true,
+     "format": "double"
+    },
+    "maxResult": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    }
+   },
+   "parameterOrder": [
+    "lat",
+    "lng",
+    "firstPosition",
+    "maxResult"
+   ],
+   "returns": {
+    "$ref": "StoreAndStatsCollection"
    },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"

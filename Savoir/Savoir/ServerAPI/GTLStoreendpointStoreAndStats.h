@@ -23,7 +23,6 @@
 
 @class GTLStoreendpointStore;
 @class GTLStoreendpointStoreStats;
-@class GTLStoreendpointStoreWaitlistSummary;
 
 // ----------------------------------------------------------------------------
 //
@@ -31,7 +30,7 @@
 //
 
 @interface GTLStoreendpointStoreAndStats : GTLObject
+@property (retain) NSNumber *distance;  // floatValue
 @property (retain) GTLStoreendpointStoreStats *stats;
 @property (retain) GTLStoreendpointStore *store;
-@property (retain) GTLStoreendpointStoreWaitlistSummary *storeWaitListSummary;
 @end
