@@ -92,6 +92,13 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    if (self.txtFirstName.isFirstResponder)
+        activeField = self.txtFirstName;
+    else if (self.txtLastName.isFirstResponder)
+        activeField = self.txtFirstName;
+    else
+        activeField = self.txtPhone;
 }
 
 -(void)tapDetected

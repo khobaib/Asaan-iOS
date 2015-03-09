@@ -4828,7 +4828,7 @@
                                         </constraints>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                        <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="alM-nC-eOl"/>
@@ -7651,10 +7651,10 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ZYN-FD-zL4"/>
-        <segue reference="g5V-KY-zil"/>
         <segue reference="Udc-FT-5Vd"/>
+        <segue reference="g5V-KY-zil"/>
         <segue reference="F9u-xN-ecY"/>
-        <segue reference="t2R-Le-XNf"/>
+        <segue reference="cQG-s7-LJm"/>
         <segue reference="hDB-zH-iEH"/>
         <segue reference="UrJ-ne-Kfy"/>
         <segue reference="BxH-0j-lGN"/>

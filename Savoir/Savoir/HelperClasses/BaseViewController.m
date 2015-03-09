@@ -124,15 +124,20 @@
     
     if (activeField != nil)
     {
-        if (!CGRectContainsPoint(aRect, activeField.frame.origin) )
-            [_baseScrollView scrollRectToVisible:activeField.frame animated:YES];
+        CGPoint origin = [activeField.superview convertPoint:activeField.frame.origin toView:[UIApplication sharedApplication].keyWindow.rootViewController.view];
+        CGRect activeFieldRect = activeField.frame;
+        activeFieldRect.origin = origin;
+        if (!CGRectContainsPoint(aRect, origin) )
+            [_baseScrollView scrollRectToVisible:activeFieldRect animated:YES];
     }
     
     if (activeTextView != nil)
     {
-        CGPoint origin = activeTextView.frame.origin;
+        CGPoint origin = [activeTextView.superview convertPoint:activeTextView.frame.origin toView:[UIApplication sharedApplication].keyWindow.rootViewController.view];
+        CGRect activeViewRect = activeTextView.frame;
+        activeViewRect.origin = origin;
         if (!CGRectContainsPoint(aRect, origin) )
-            [_baseScrollView scrollRectToVisible:activeTextView.frame animated:YES];
+            [_baseScrollView scrollRectToVisible:activeViewRect animated:YES];
     }
 }
 
@@ -156,6 +161,8 @@
     UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
     
     _keyboardHeight = kbSize.height;
+    _frameRect = self.view.frame;
+    _baseScrollView.contentSize = _frameRect.size;
     
     if (UIDeviceOrientationIsLandscape(orientation) == true && SYSTEM_VERSION_LESS_THAN(@"8.0"))
         _keyboardHeight = kbSize.width;
@@ -170,6 +177,8 @@
     UIEdgeInsets contentInsets = UIEdgeInsetsZero;
     _baseScrollView.contentInset = contentInsets;
     _baseScrollView.scrollIndicatorInsets = contentInsets;
+    _frameRect = self.view.frame;
+    _baseScrollView.contentSize = _frameRect.size;
     NSLog(@"keyboardWillBeHidden");
 }
 
