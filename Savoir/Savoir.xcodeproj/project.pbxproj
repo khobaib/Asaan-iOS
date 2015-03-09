@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D400F8AD1AAE06F9004D458C /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D400F8AC1AAE06F9004D458C /* Fabric.framework */; };
+		D400F8B01AAE095F004D458C /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D400F8AF1AAE095F004D458C /* Crashlytics.framework */; };
 		D4046FF81A97FD0A0070537B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4046FF41A97FD0A0070537B /* LaunchScreen.xib */; };
 		D4046FF91A97FD0A0070537B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4046FF61A97FD0A0070537B /* Main.storyboard */; };
 		D4046FFC1A9B89BC0070537B /* OrderSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4046FFA1A9B89BC0070537B /* OrderSummaryViewController.m */; };
@@ -386,6 +388,8 @@
 
 /* Begin PBXFileReference section */
 		375D0FCD1A69982A0016C293 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		D400F8AC1AAE06F9004D458C /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = Savoir/frameworks/Fabric.framework; sourceTree = "<group>"; };
+		D400F8AF1AAE095F004D458C /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		D4046FF51A97FD0A0070537B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		D4046FF71A97FD0A0070537B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
 		D4046FFA1A9B89BC0070537B /* OrderSummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderSummaryViewController.m; sourceTree = "<group>"; };
@@ -1090,6 +1094,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D400F8AD1AAE06F9004D458C /* Fabric.framework in Frameworks */,
 				D46DA7861A92B5A400020313 /* CoreAudio.framework in Frameworks */,
 				D41960041A92ADBF00663149 /* CFNetwork.framework in Frameworks */,
 				D41960021A92ADB300663149 /* CoreLocation.framework in Frameworks */,
@@ -1129,6 +1134,7 @@
 				D40DF3761A3A9FFC00C67088 /* libstdc++.6.0.9.dylib in Frameworks */,
 				D40DF3771A3A9FFC00C67088 /* libstdc++.6.dylib in Frameworks */,
 				D40DF36E1A3A976700C67088 /* libsqlite3.0.dylib in Frameworks */,
+				D400F8B01AAE095F004D458C /* Crashlytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2396,6 +2402,8 @@
 		EFEC7E676E0C2F9960DA289C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D400F8AF1AAE095F004D458C /* Crashlytics.framework */,
+				D400F8AC1AAE06F9004D458C /* Fabric.framework */,
 				D46DA7851A92B5A400020313 /* CoreAudio.framework */,
 				D41960031A92ADBF00663149 /* CFNetwork.framework */,
 				D41960011A92ADB300663149 /* CoreLocation.framework */,
@@ -2444,6 +2452,7 @@
 				D4F2759C1A0C021800CEC95A /* Frameworks */,
 				D4F2759D1A0C021800CEC95A /* Resources */,
 				D46154541A81DD61003AE84D /* ShellScript */,
+				D400F8AE1AAE08EE004D458C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -2576,6 +2585,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		D400F8AE1AAE08EE004D458C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "$SRCROOT/Savoir/frameworks/Fabric.framework/run 5dec5dcf9721ca3e2ae0805306b80549fbb7bc2d 2ce161fa8ccc231e6b3c39ffd39d8ebc75e1ffdeb4043534964d4fcc62ea6229";
+		};
 		D46154541A81DD61003AE84D /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2587,7 +2609,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=/usr/local/bin:$PATH\n\ncd $SRCROOT/Savoir/parse\n\nparse symbols \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"";
+			shellScript = "export PATH=/usr/local/bin:$PATH\n\ncd $SRCROOT/Savoir/parse\n\nparse symbols \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -3044,7 +3066,10 @@
 				CODE_SIGN_ENTITLEMENTS = savoir/Savoir.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Savoir/frameworks";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Savoir/frameworks",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Savoir/Savoir-Prefix.pch";
 				GTL_BUILT_AS_FRAMEWORK = 1;
@@ -3072,7 +3097,10 @@
 				CODE_SIGN_ENTITLEMENTS = savoir/Savoir.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Savoir/frameworks";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Savoir/frameworks",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Savoir/Savoir-Prefix.pch";
 				GTL_BUILT_AS_FRAMEWORK = 1;

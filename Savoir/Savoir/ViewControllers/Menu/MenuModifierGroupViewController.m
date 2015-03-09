@@ -149,7 +149,7 @@
          }
          else
          {
-             NSString *errMsg = [NSString stringWithFormat:@"%@", [error userInfo]];
+             NSString *errMsg = [NSString stringWithFormat:@"%@", [error userInfo][@"error"]];
              UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"Savoir Server Access Failure" message:errMsg delegate:weakSelf cancelButtonTitle:@"Ok" otherButtonTitles:nil];
              
              [alert show];

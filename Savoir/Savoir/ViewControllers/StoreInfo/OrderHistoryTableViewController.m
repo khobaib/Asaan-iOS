@@ -93,7 +93,7 @@
                     [_dataProvider setInitialObjects:object.orders ForPage:1];
                  }
              }else{
-                 NSLog(@"setupOrderHistoryData Error:%@",[error userInfo]);
+                 NSLog(@"setupOrderHistoryData Error:%@",[error userInfo][@"error"]);
              }
              [weakSelf.tableView reloadData];
              hud.hidden = YES;

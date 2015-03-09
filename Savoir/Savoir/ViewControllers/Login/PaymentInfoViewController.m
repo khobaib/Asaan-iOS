@@ -125,7 +125,7 @@
     [[STPAPIClient sharedClient] createTokenWithCard:card completion:^(STPToken *token, NSError *error) {
         if (error) {
             
-            [[[UIAlertView alloc]initWithTitle:@"Error" message:[error.userInfo description] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+            [[[UIAlertView alloc]initWithTitle:@"Error" message:[error userInfo][@"error"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
             
         } else {
             
@@ -157,8 +157,8 @@
                     
                     [MBProgressHUD hideHUDForView:self.view animated:true];
                     
-                    [[[UIAlertView alloc]initWithTitle:@"Error" message:[error.userInfo description] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
-                    NSLog(@"%@",[error userInfo]);
+                    [[[UIAlertView alloc]initWithTitle:@"Error" message:[error userInfo][@"error"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+                    NSLog(@"%@",[error userInfo][@"error"]);
                 } else {
                     
                     NSLog(@"done %@", object.name);

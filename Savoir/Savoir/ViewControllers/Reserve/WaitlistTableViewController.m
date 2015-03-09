@@ -193,7 +193,7 @@
          }
          else
          {
-             NSLog(@"%@",[error userInfo]);
+             NSLog(@"%@",[error userInfo][@"error"]);
              NSString *title = @"Something went wrong";
              NSString *msg = [NSString stringWithFormat:@"We were unable to reach %@ and place you on their wait list. We're really sorry. Please call %@ directly at %@.", weakSelf.selectedStore.name, weakSelf.selectedStore.name, weakSelf.selectedStore.phone];
              UIAlertView *alert=[[UIAlertView alloc]initWithTitle:title message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];

@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Always find great restaurants near you.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Always find great restaurants near you.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -35,6 +31,20 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>Fabric</key>
+	<dict>
+		<key>APIKey</key>
+		<string>5dec5dcf9721ca3e2ae0805306b80549fbb7bc2d</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitInfo</key>
+				<dict/>
+				<key>KitName</key>
+				<string>Crashlytics</string>
+			</dict>
+		</array>
+	</dict>
 	<key>FacebookAppID</key>
 	<string>718517514848212</string>
 	<key>FacebookDisplayName</key>
@@ -43,6 +53,10 @@
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Always find great restaurants near you.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Always find great restaurants near you.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

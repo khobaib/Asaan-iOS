@@ -45,7 +45,7 @@
                 if(!error)
                     [weakSelf setDataPage:[object.orders mutableCopy]];
                 else
-                    NSLog(@"OrderForStoreLoadingOperation Error:%@",[error userInfo]);
+                    NSLog(@"OrderForStoreLoadingOperation Error:%@",[error userInfo][@"error"]);
                 
                 weakSelf.bDataLoaded = true;
             }];

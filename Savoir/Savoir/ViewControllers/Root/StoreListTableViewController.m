@@ -440,9 +440,9 @@
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
-    NSString *msg = [NSString stringWithFormat:@"Location update failed - error: %@", [error.userInfo description]];
+    NSString *msg = [NSString stringWithFormat:@"Location update failed - error: %@", [error userInfo][@"error"]];
     [self.view makeToast:msg];
-    NSLog(@"Location update failed - error: %@", [error.userInfo description]);
+    NSLog(@"Location update failed - error: %@", [error userInfo][@"error"]);
     
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     if (appDelegate.globalObjectHolder.location == nil)

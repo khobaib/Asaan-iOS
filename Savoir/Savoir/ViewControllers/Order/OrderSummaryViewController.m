@@ -230,7 +230,7 @@
         }
         else
         {
-            NSLog(@"%@",[error userInfo]);
+            NSLog(@"%@",[error userInfo][@"error"]);
             NSString *title = @"Something went wrong";
             NSString *msg = [NSString stringWithFormat:@"We were unable to reach %@ and place your order. We're really sorry. Please call %@ directly at %@ to place your order.", weakSelf.orderInProgress.selectedStore.name, weakSelf.orderInProgress.selectedStore.name, weakSelf.orderInProgress.selectedStore.phone];
             UIAlertView *alert=[[UIAlertView alloc]initWithTitle:title message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];

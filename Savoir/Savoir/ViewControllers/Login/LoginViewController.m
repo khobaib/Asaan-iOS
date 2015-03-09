@@ -62,8 +62,8 @@
 //            [self performSegueWithIdentifier:@"profilePage" sender:self];
             [self performSegueWithIdentifier:@"segueUnwindToStoreList" sender:sender];
         }else{
-            NSLog(@"%@",[error userInfo]);
-            UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"Error" message:[error localizedDescription] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            NSLog(@"%@",[error userInfo][@"error"]);
+            UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"Error" message:[error userInfo][@"error"] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
             [alert show];
         }
     }];

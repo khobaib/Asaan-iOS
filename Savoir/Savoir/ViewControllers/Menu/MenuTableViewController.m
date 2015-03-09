@@ -211,7 +211,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
                  }
                  
              }else{
-                 NSLog(@"MenusAndMenuItems Error:%@",[error userInfo]);
+                 NSLog(@"MenusAndMenuItems Error:%@",[error userInfo][@"error"]);
              }
              
              if (_menuSegmentHolders.count == 1)

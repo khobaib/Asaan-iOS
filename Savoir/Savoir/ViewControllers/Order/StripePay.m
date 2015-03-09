@@ -125,7 +125,7 @@ NSString *const AppleMerchantId = @"merchant.com.savoirexp.savoir"; // TODO: rep
 #pragma mark - Internal
 - (void)presentError:(NSError *)error {
     UIAlertView *message = [[UIAlertView alloc] initWithTitle:nil
-                                                      message:[error localizedDescription]
+                                                      message:[error userInfo][@"error"]
                                                      delegate:nil
                                             cancelButtonTitle:NSLocalizedString(@"OK", @"OK")
                                             otherButtonTitles:nil];

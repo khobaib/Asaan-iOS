@@ -43,7 +43,7 @@
                 if(!error)
                     [weakSelf setDataPage:[object.items mutableCopy]];
                 else
-                    NSLog(@"MenuItemLoadingOperation Error:%@",[error userInfo]);
+                    NSLog(@"MenuItemLoadingOperation Error:%@",[error userInfo][@"error"]);
                 
                 weakSelf.bDataLoaded = true;
             }];

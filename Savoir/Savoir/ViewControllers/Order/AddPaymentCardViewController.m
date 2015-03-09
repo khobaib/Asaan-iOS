@@ -167,11 +167,11 @@
 //                    [self.navigationController popViewControllerAnimated:YES];
                     [UtilCalls popFrom:self index:2 Animated:YES];
                 } else
-                    [[[UIAlertView alloc]initWithTitle:@"Error" message:[error.userInfo description] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+                    [[[UIAlertView alloc]initWithTitle:@"Error" message:[error userInfo][@"error"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
             }];
         }
         else
-            [[[UIAlertView alloc]initWithTitle:@"Error" message:[error.userInfo description] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+            [[[UIAlertView alloc]initWithTitle:@"Error" message:[error userInfo][@"error"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
     }];
 }
 

@@ -56,7 +56,7 @@
         
         [hud hide:YES];
         if (!user) {
-            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Error" message:[error userInfo][@"error"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
         } else {
             [self _loadData];
@@ -99,14 +99,14 @@
                         [self performSegueWithIdentifier:@"segueStartupToStoreList" sender:self];
                     }
                 } else {
-                    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK"     otherButtonTitles:nil];
+                    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Error" message:[error userInfo][@"error"] delegate:nil cancelButtonTitle:@"OK"     otherButtonTitles:nil];
                     [alert show];
                 }
             }];
         }else{
             
             [hud hide:YES];
-            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Error" message:[error userInfo][@"error"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
         }
     }];

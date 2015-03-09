@@ -134,7 +134,7 @@
     [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointOrderReview *object, NSError *error)
      {
          if (error)
-             NSLog(@"saveOrderReview Error:%@",[error userInfo]);
+             NSLog(@"saveOrderReview Error:%@",[error userInfo][@"error"]);
          else
              self.reviewAndItems.orderReview = object;
      }];

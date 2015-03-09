@@ -44,9 +44,8 @@
         if (!error) {
             [self performSegueWithIdentifier:@"segueSignupToSignupProfile" sender:self];
        } else {
-            NSString *errorString = [error localizedDescription];
             // Show the errorString somewhere and let the user try again.
-            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Error" message:[error userInfo][@"error"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
         }
     }];

@@ -44,7 +44,7 @@
                 if(!error)
                     [weakSelf setDataPage:[object.items mutableCopy]];
                 else
-                    NSLog(@"StoreLoadingOperation Error:%@",[error userInfo]);
+                    NSLog(@"StoreLoadingOperation Error:%@",[error userInfo][@"error"]);
                 
                 weakSelf.bDataLoaded = true;
             }];

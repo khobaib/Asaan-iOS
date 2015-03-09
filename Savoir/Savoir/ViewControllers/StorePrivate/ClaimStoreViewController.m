@@ -65,7 +65,7 @@
 //     {
 //         weakSelf.allUsers = [[NSMutableArray alloc]init];
 //         if (error)
-//             NSLog(@"ClaimStoreViewController getChatTeamMembers Error:%@",[error userInfo]);
+//             NSLog(@"ClaimStoreViewController getChatTeamMembers Error:%@", [error userInfo][@"error"]);
 //         else
 //         {
 //             if (object.items == nil || object.items.count == 0)
@@ -128,7 +128,13 @@
     [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error)
      {
          if (error)
-             NSLog(@"saveItemReviews Error:%@",[error userInfo]);
+         {
+             NSLog(@"queryForReplaceStoreChatGroupWithObject Error:%@",[error userInfo][@"error"]);
+             NSString *str = [NSString stringWithFormat:@"Something went wrong - your employees could not be saved. We are really sorry. Please try again. If this failure persists please contact Savoir Customer Support. Server Error: %@", [error userInfo][@"error"]];
+             [UIAlertView showWithTitle:@"Sorry!" message:str cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex)
+              {
+              }];
+         }
          else
          {
              NSString *str = @"Your employees have been saved. If this is your first time, Welcome! An Savoir representative will contact you shortly to verify your request and assist you with onboarding.";
