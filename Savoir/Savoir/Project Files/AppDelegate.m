@@ -34,6 +34,7 @@
     // Override point for customization after application launch.
     // Enable Crash Reporting
     [ParseCrashReporting enable];
+    [self globalObjectHolder];
     [_globalObjectHolder findStoreCountFromServer];
     
     // ****************************************************************************

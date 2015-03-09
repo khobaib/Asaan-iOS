@@ -47,6 +47,7 @@
 @property (nonatomic) int maxResult;
 @property (weak, nonatomic) GTLStoreendpointStoreAndStats *selectedStore;
 @property (strong, nonatomic) CLLocation *lastLocation;
+@property (nonatomic) NSUInteger distanceFromLastLocation;
 
 - (void)startStandardUpdates;
 
@@ -63,8 +64,6 @@
 #pragma mark - View Life-cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self startStandardUpdates];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -105,8 +104,7 @@
     else
         self.navigationItem.rightBarButtonItem = nil;
     
-    if (self.lastLocation != nil && [self.lastLocation distanceFromLocation:appDelegate.globalObjectHolder.location] > 50)
-        [self setupDatastore:appDelegate];
+    [self startStandardUpdates];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -120,37 +118,16 @@
     [self performSegueWithIdentifier:@"segueStoreListToOrderSummary" sender:self];
 }
 
-- (void)setupDatastore:(AppDelegate *)appDelegate {
-    if (appDelegate.globalObjectHolder.location != nil)
-    {
-        __weak __typeof(self) weakSelf = self;
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-        GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-        GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreCount];
-        
-        if (appDelegate.globalObjectHolder.storeCount > 0)
-        {
-            NSInteger pageSize = FluentPagingTablePageSize < appDelegate.globalObjectHolder.storeCount ? FluentPagingTablePageSize : appDelegate.globalObjectHolder.storeCount;
-            _dataProvider = [[DataProvider alloc] initWithPageSize:pageSize itemCount:appDelegate.globalObjectHolder.storeCount];
-            _dataProvider.delegate = weakSelf;
-            _dataProvider.shouldLoadAutomatically = YES;
-            _dataProvider.automaticPreloadMargin = FluentPagingTablePreloadMargin;
-            [weakSelf.tableView reloadData];
-        }
-        else
-        {
-            [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointAsaanLong *object,NSError *error)
-             {
-                 NSInteger pageSize = FluentPagingTablePageSize < object.longValue.longLongValue ? FluentPagingTablePageSize : object.longValue.longLongValue;
-                 _dataProvider = [[DataProvider alloc] initWithPageSize:pageSize itemCount:object.longValue.longLongValue];
-                 _dataProvider.delegate = weakSelf;
-                 _dataProvider.shouldLoadAutomatically = YES;
-                 _dataProvider.automaticPreloadMargin = FluentPagingTablePreloadMargin;
-                 if ([weakSelf isViewLoaded])
-                     [weakSelf.tableView reloadData];
-             }];
-        }
-    }
+- (void)setupDatastore
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    
+    NSInteger pageSize = FluentPagingTablePageSize < appDelegate.globalObjectHolder.storeCount ? FluentPagingTablePageSize : appDelegate.globalObjectHolder.storeCount;
+    _dataProvider = [[DataProvider alloc] initWithPageSize:pageSize itemCount:appDelegate.globalObjectHolder.storeCount];
+    _dataProvider.delegate = self;
+    _dataProvider.shouldLoadAutomatically = YES;
+    _dataProvider.automaticPreloadMargin = FluentPagingTablePreloadMargin;
+    [self.tableView reloadData];
 }
 
 #pragma mark - Data controller delegate
@@ -162,9 +139,8 @@
         
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:idx inSection:0];
         
-        if ([self.tableView.indexPathsForVisibleRows containsObject:indexPath]) {
+        if ([self.tableView.indexPathsForVisibleRows containsObject:indexPath])
             [indexPathsToReload addObject:indexPath];
-        }
     }];
     
     if (indexPathsToReload.count > 0) {
@@ -203,6 +179,8 @@
         return cell;
     }
     GTLStoreendpointStoreAndStats *storeAndStats = dataObject;
+    if (indexPath.row == 0)
+        self.distanceFromLastLocation = storeAndStats.distance.intValue * 1609.34;
 
     [cell.callButton addTarget:self action:@selector(callStore:) forControlEvents:UIControlEventTouchUpInside];
     [cell.chatButton addTarget:self action:@selector(chatWithStore:) forControlEvents:UIControlEventTouchUpInside];
@@ -446,7 +424,7 @@
         [appDelegate.globalObjectHolder.locationManager requestWhenInUseAuthorization];
     
     appDelegate.globalObjectHolder.locationManager.delegate = self;
-    appDelegate.globalObjectHolder.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    appDelegate.globalObjectHolder.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
     
     // Set a movement threshold for new events.
     appDelegate.globalObjectHolder.locationManager.distanceFilter = 50; // meters
@@ -471,23 +449,27 @@
         self.lastLocation = appDelegate.globalObjectHolder.location = [[CLLocation alloc]initWithLatitude:RAD2DEG(41.772193) longitude:RAD2DEG(-88.15099)];
     else
         self.lastLocation = appDelegate.globalObjectHolder.location;
-    [self setupDatastore:appDelegate];
+    [self setupDatastore];
 }
 
 // Delegate method from the CLLocationManagerDelegate protocol.
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
+    [manager stopUpdatingLocation];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     appDelegate.globalObjectHolder.location = [locations lastObject];
     
-    if (self.lastLocation == nil || [self.lastLocation distanceFromLocation:appDelegate.globalObjectHolder.location] > 50)
+    if (self.distanceFromLastLocation < 50)
+        self.distanceFromLastLocation = 50;
+    
+    if (self.lastLocation == nil || [self.lastLocation distanceFromLocation:appDelegate.globalObjectHolder.location] > self.distanceFromLastLocation)
     {
         self.lastLocation = appDelegate.globalObjectHolder.location;
         CLLocationCoordinate2D coordinate = [appDelegate.globalObjectHolder.location coordinate];
         
         NSLog(@"Location update received - latitude:%f longitude:%f",coordinate.latitude,coordinate.longitude);
         
-        [self setupDatastore:appDelegate];
+        [self setupDatastore];
     }
 
     //    NSDate* eventDate = location.timestamp;
