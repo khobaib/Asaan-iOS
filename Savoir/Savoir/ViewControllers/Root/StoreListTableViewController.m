@@ -175,6 +175,12 @@
         cell.menuButton.enabled = false;
         cell.orderOnlineButton.enabled = false;
         cell.reserveButton.enabled = false;
+
+        [cell.callButton setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+        [cell.chatButton setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+        [cell.menuButton setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+        [cell.orderOnlineButton setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+        [cell.reserveButton setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
         
         return cell;
     }
@@ -189,11 +195,14 @@
     [cell.reserveButton addTarget:self action:@selector(reserveTable:) forControlEvents:UIControlEventTouchUpInside];
     
     cell.callButton.enabled = true;
+    [cell.callButton setTitleColor:[UIColor goldColor] forState:UIControlStateNormal];
     
     if (storeAndStats.store.claimed.boolValue == true)
     {
         cell.chatButton.enabled = true;
         cell.menuButton.enabled = true;
+        [cell.chatButton setTitleColor:[UIColor goldColor] forState:UIControlStateDisabled];
+        [cell.menuButton setTitleColor:[UIColor goldColor] forState:UIControlStateDisabled];
         
         cell.chatButton.hidden = false;
         cell.menuButton.hidden = false;
@@ -224,15 +233,13 @@
     }
     else
     {
-        cell.chatButton.enabled = false;
-        cell.menuButton.enabled = false;
-        cell.orderOnlineButton.enabled = false;
-
         cell.chatButton.hidden = true;
         cell.menuButton.hidden = true;
         cell.orderOnlineButton.hidden = true;
 
         [cell.reserveButton setTitle:@"Claim Store" forState:UIControlStateNormal];
+        cell.reserveButton.enabled = true;
+        [cell.reserveButton setTitleColor:[UIColor goldColor] forState:UIControlStateNormal];
     }
     
     if (IsEmpty(storeAndStats.store.backgroundImageUrl) == false)
@@ -286,8 +293,10 @@
 - (IBAction) callStore:(UIButton *)sender
 {
     _selectedStore = self.dataProvider.dataObjects[sender.tag];
-    NSString *number = [NSString stringWithFormat:@"telprompt://%@", self.selectedStore.store.phone];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:number]];
+    NSCharacterSet *doNotWant = [[NSCharacterSet characterSetWithCharactersInString:@"1234567890"] invertedSet];
+    NSString *s = [[self.selectedStore.store.phone componentsSeparatedByCharactersInSet: doNotWant] componentsJoinedByString: @""];
+    NSString *phone = [NSString stringWithFormat:@"telprompt://%@", s];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phone]];
 }
 
 - (IBAction)chatWithStore:(UIButton *)sender

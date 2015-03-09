@@ -207,7 +207,7 @@
 {
     UITableViewCell *headerCell = [tableView dequeueReusableCellWithIdentifier:@"HeaderCell"];
     if (self.selectedStore != nil)
-        [UtilCalls setupHeaderView:headerCell WithTitle:self.selectedStore.name AndSubTitle:@"Add Employees for Customer Messaging"];
+        [UtilCalls setupHeaderView:headerCell WithTitle:self.selectedStore.name AndSubTitle:@"Add Employees for Chat and Waitlist Management."];
     return headerCell;
 }
 
