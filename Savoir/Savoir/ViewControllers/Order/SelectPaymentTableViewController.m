@@ -86,7 +86,7 @@
     {
         GTLUserendpointUserCard *userCard = [self.userCards.items objectAtIndex:indexPath.row];
         
-        imgCardType.image = [UIImage imageNamed:userCard.brand];
+        imgCardType.image = [UIImage imageNamed:userCard.type];
         txtCardLastFour.text = userCard.last4;
     }
     

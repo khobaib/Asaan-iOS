@@ -75,8 +75,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.hud = [MBProgressHUD showHUDAddedTo:_tableView animated:YES];
-    [self.hud hide:YES];
+    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     [appDelegate.notificationUtils getSlidingMenuBarButtonSetupWith:self];
@@ -146,7 +145,7 @@
     if (indexPathsToReload.count > 0) {
         [self.tableView reloadRowsAtIndexPaths:indexPathsToReload withRowAnimation:UITableViewRowAnimationFade];
     }
-    [self.hud hide:YES];
+//    [self.hud hide:YES];
 }
 
 - (DataLoadingOperation *) getDataLoadingOperationForPage:(NSUInteger)page indexes:(NSIndexSet *)indexes {
@@ -154,7 +153,7 @@
 }
 
 - (void)dataProvider:(DataProvider *)dataProvider willLoadDataAtIndexes:(NSIndexSet *)indexes {
-    [self.hud hide:NO];
+//    [self.hud show:YES];
 }
 
 #pragma mark - UITableViewDataSource
@@ -242,8 +241,23 @@
         [cell.reserveButton setTitleColor:[UIColor goldColor] forState:UIControlStateNormal];
     }
     
+//    if (IsEmpty(storeAndStats.store.backgroundImageUrl) == false)
+//        [cell.bgImageView sd_setImageWithURL:[NSURL URLWithString:storeAndStats.store.backgroundImageUrl]];
+    
     if (IsEmpty(storeAndStats.store.backgroundImageUrl) == false)
-        [cell.bgImageView sd_setImageWithURL:[NSURL URLWithString:storeAndStats.store.backgroundImageUrl]];
+    {
+        [cell.bgImageView sd_setImageWithURL:[NSURL URLWithString:storeAndStats.store.backgroundImageUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
+        {
+            if (cacheType == SDImageCacheTypeNone)
+            {
+                cell.bgImageView.alpha = 0;
+                [UIView animateWithDuration:0.3 animations:^{
+                    cell.bgImageView.alpha = 1;
+                }];
+            } else
+                cell.bgImageView.alpha = 1;
+        }];
+    }
     
     cell.restaurantLabel.text = storeAndStats.store.name;
     cell.trophyLabel.text = storeAndStats.store.trophies.firstObject;
@@ -453,12 +467,16 @@
     [self.view makeToast:msg];
     NSLog(@"Location update failed - error: %@", [error userInfo][@"error"]);
     
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    if (appDelegate.globalObjectHolder.location == nil)
-        self.lastLocation = appDelegate.globalObjectHolder.location = [[CLLocation alloc]initWithLatitude:RAD2DEG(41.772193) longitude:RAD2DEG(-88.15099)];
-    else
-        self.lastLocation = appDelegate.globalObjectHolder.location;
-    [self setupDatastore];
+    if (self.lastLocation == nil)
+    {
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+        if (appDelegate.globalObjectHolder.location == nil)
+            self.lastLocation = appDelegate.globalObjectHolder.location = [[CLLocation alloc]initWithLatitude:RAD2DEG(41.772193) longitude:RAD2DEG(-88.15099)];
+        else
+            self.lastLocation = appDelegate.globalObjectHolder.location;
+        [self setupDatastore];
+    }
+    [self.hud hide:YES];
 }
 
 // Delegate method from the CLLocationManagerDelegate protocol.
@@ -480,6 +498,7 @@
         
         [self setupDatastore];
     }
+    [self.hud hide:YES];
 
     //    NSDate* eventDate = location.timestamp;
     //    NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];

@@ -40,10 +40,10 @@ NSString *const BackendChargeURLString = nil; // TODO: replace nil with your own
 NSString *const AppleMerchantId = @"merchant.com.savoirexp.savoir"; // TODO: replace nil with your own value
 
 - (BOOL)applePayEnabled {
-    if ([PKPaymentRequest class]) {
-        PKPaymentRequest *paymentRequest = [Stripe paymentRequestWithMerchantIdentifier:AppleMerchantId];
-        return [Stripe canSubmitPaymentRequest:paymentRequest];
-    }
+//    if ([PKPaymentRequest class]) {
+//        PKPaymentRequest *paymentRequest = [Stripe paymentRequestWithMerchantIdentifier:AppleMerchantId];
+//        return [Stripe canSubmitPaymentRequest:paymentRequest];
+//    }
     return NO;
 }
 

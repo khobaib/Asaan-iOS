@@ -162,7 +162,7 @@
 
 - (void) findStoreCountFromServer
 {
-    self.storeCount = 40;
+    self.storeCount = 76;
 //    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 //    
 //    // to load

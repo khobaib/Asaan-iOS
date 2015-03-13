@@ -114,7 +114,6 @@
 		D4195EBA1A92A69C00663149 /* tab_group@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4195C391A92A69B00663149 /* tab_group@2x.png */; };
 		D4195EBB1A92A69C00663149 /* tab_messages@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4195C3A1A92A69B00663149 /* tab_messages@2x.png */; };
 		D4195EBC1A92A69C00663149 /* F_icon.svg.png in Resources */ = {isa = PBXBuildFile; fileRef = D4195C3B1A92A69B00663149 /* F_icon.svg.png */; };
-		D4195EBD1A92A69C00663149 /* imageedit_1_8511941988.png in Resources */ = {isa = PBXBuildFile; fileRef = D4195C3C1A92A69B00663149 /* imageedit_1_8511941988.png */; };
 		D4195EBE1A92A69C00663149 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4195C3D1A92A69B00663149 /* Images.xcassets */; };
 		D4195EC01A92A69C00663149 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D4195C431A92A69B00663149 /* AFHTTPRequestOperation.m */; };
 		D4195EC11A92A69C00663149 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D4195C451A92A69B00663149 /* AFHTTPRequestOperationManager.m */; };
@@ -307,7 +306,6 @@
 		D4195FE81A92AD0F00663149 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4195FE71A92AD0F00663149 /* MediaPlayer.framework */; };
 		D4195FEB1A92AD2800663149 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4195FE91A92AD2800663149 /* AudioToolbox.framework */; };
 		D4195FEE1A92AD3A00663149 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4195FED1A92AD3A00663149 /* Social.framework */; };
-		D4195FF01A92AD4600663149 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4195FEF1A92AD4600663149 /* PassKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D4195FF21A92AD5600663149 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4195FF11A92AD5600663149 /* UIKit.framework */; };
 		D4195FF41A92AD6200663149 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4195FF31A92AD6200663149 /* SystemConfiguration.framework */; };
 		D4195FF61A92AD6D00663149 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4195FF51A92AD6D00663149 /* MobileCoreServices.framework */; };
@@ -561,7 +559,6 @@
 		D4195C391A92A69B00663149 /* tab_group@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_group@2x.png"; sourceTree = "<group>"; };
 		D4195C3A1A92A69B00663149 /* tab_messages@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_messages@2x.png"; sourceTree = "<group>"; };
 		D4195C3B1A92A69B00663149 /* F_icon.svg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = F_icon.svg.png; sourceTree = "<group>"; };
-		D4195C3C1A92A69B00663149 /* imageedit_1_8511941988.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imageedit_1_8511941988.png; sourceTree = "<group>"; };
 		D4195C3D1A92A69B00663149 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D4195C421A92A69B00663149 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		D4195C431A92A69B00663149 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
@@ -938,7 +935,6 @@
 		D4195FE91A92AD2800663149 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		D4195FEA1A92AD2800663149 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		D4195FED1A92AD3A00663149 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		D4195FEF1A92AD4600663149 /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
 		D4195FF11A92AD5600663149 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D4195FF31A92AD6200663149 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		D4195FF51A92AD6D00663149 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -1106,7 +1102,6 @@
 				D4195FF61A92AD6D00663149 /* MobileCoreServices.framework in Frameworks */,
 				D4195FF41A92AD6200663149 /* SystemConfiguration.framework in Frameworks */,
 				D4195FF21A92AD5600663149 /* UIKit.framework in Frameworks */,
-				D4195FF01A92AD4600663149 /* PassKit.framework in Frameworks */,
 				D4195FEE1A92AD3A00663149 /* Social.framework in Frameworks */,
 				D4195FEB1A92AD2800663149 /* AudioToolbox.framework in Frameworks */,
 				D4195FE81A92AD0F00663149 /* MediaPlayer.framework in Frameworks */,
@@ -1471,7 +1466,6 @@
 			children = (
 				D4195C351A92A69B00663149 /* Chat */,
 				D4195C3B1A92A69B00663149 /* F_icon.svg.png */,
-				D4195C3C1A92A69B00663149 /* imageedit_1_8511941988.png */,
 			);
 			path = images;
 			sourceTree = "<group>";
@@ -2415,7 +2409,6 @@
 				D4195FF51A92AD6D00663149 /* MobileCoreServices.framework */,
 				D4195FF31A92AD6200663149 /* SystemConfiguration.framework */,
 				D4195FF11A92AD5600663149 /* UIKit.framework */,
-				D4195FEF1A92AD4600663149 /* PassKit.framework */,
 				D4195FED1A92AD3A00663149 /* Social.framework */,
 				D4195FE91A92AD2800663149 /* AudioToolbox.framework */,
 				D4195FEA1A92AD2800663149 /* AudioUnit.framework */,
@@ -2480,7 +2473,10 @@
 								enabled = 0;
 							};
 							com.apple.OMC = {
-								enabled = 1;
+								enabled = 0;
+							};
+							com.apple.Passbook = {
+								enabled = 0;
 							};
 						};
 					};
@@ -2574,7 +2570,6 @@
 				D409D7D81AA60A94008FADDF /* cvc-amex@2x.png in Resources */,
 				D409D7D61AA60A94008FADDF /* amex@2x.png in Resources */,
 				D4195EBC1A92A69C00663149 /* F_icon.svg.png in Resources */,
-				D4195EBD1A92A69C00663149 /* imageedit_1_8511941988.png in Resources */,
 				D4195EB71A92A69C00663149 /* chat_blank@2x.png in Resources */,
 				D409D7C81AA60A94008FADDF /* STPTestPaymentSummaryViewController.xib in Resources */,
 				D409D7E91AA60A94008FADDF /* textfield@2x.png in Resources */,
@@ -3034,7 +3029,11 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = STRIPE_ENABLE_APPLEPAY;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					NS_BLOCK_ASSERTIONS,
+					STRIPE_ENABLE_APPLEPAY,
+				);
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = NS_BLOCK_ASSERTIONS;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -3063,7 +3062,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_ENTITLEMENTS = savoir/Savoir.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3094,7 +3092,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_ENTITLEMENTS = savoir/Savoir.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (

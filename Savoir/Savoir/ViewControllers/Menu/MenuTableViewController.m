@@ -92,11 +92,11 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
 //    self.cellHeight = 150;
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
     {
-        self.tableView.estimatedRowHeight = 155;
+        self.tableView.estimatedRowHeight = 200;
         self.tableView.rowHeight = UITableViewAutomaticDimension;
     }
     else
-        self.cellHeight = 155;
+        self.cellHeight = 200;
 }
 
 - (void)dealloc
@@ -294,8 +294,19 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
 
 - (void)dropdownViewActionForSelectedRow:(int)row sender:(id)sender
 {
-    [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:row]
+    MenuSegmentHolder *menuSegmentHolder;
+    if (_menuSegmentHolders.count > 1)
+        menuSegmentHolder = [_menuSegmentHolders objectAtIndex:_segmentedControl.selectedSegmentIndex];
+    else
+        menuSegmentHolder = [_menuSegmentHolders firstObject];
+    
+    GTLStoreendpointStoreMenuHierarchy *submenu = [menuSegmentHolder.subMenus objectAtIndex:row];
+    
+    if (submenu.menuItemCount.longLongValue > 0)
+    {
+        [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:row]
                       atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
 }
 
 - (void)setupDropdownView:(DropdownView *)dropdownView
@@ -358,7 +369,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
 
 - (void)dataProvider:(DataProvider *)dataProvider willLoadDataAtIndexes:(NSIndexSet *)indexes
 {
-    [self.hud hide:NO];
+    [self.hud show:YES];
 }
 
 #pragma mark -
@@ -601,7 +612,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
         photo = [MWPhoto photoWithURL:[NSURL URLWithString:menuItemAndStats.menuItem.imageUrl]];
     }
     else {
-        photo = [MWPhoto photoWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"no_image_big" ofType:@"png"]]];
+        photo = [MWPhoto photoWithImage:[UIImage imageNamed:@"no_image"]];
         //        photo = [MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm2.static.flickr.com/1224/1011283712_5750c5ba8e_b.jpg"]];
     }
     
