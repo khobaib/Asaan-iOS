@@ -107,6 +107,10 @@
     return [UtilCalls setupStaticHeaderViewForTable:tableView WithTitle:self.selectedStore.name AndSubTitle:@"Welcome. Let's find a table for you."];
 }
 
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [cell setBackgroundColor:[UIColor clearColor]];
+} //<--
 
 #pragma mark - Navigation
 

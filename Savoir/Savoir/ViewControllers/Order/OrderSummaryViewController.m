@@ -617,6 +617,11 @@
         [self performSegueWithIdentifier:@"segueOrderSummaryToAddDiscount" sender:self];
 }
 
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [cell setBackgroundColor:[UIColor clearColor]];
+} //<--
+
 - (Boolean) isDefaultUserAddressValidForStoreDelivery
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];

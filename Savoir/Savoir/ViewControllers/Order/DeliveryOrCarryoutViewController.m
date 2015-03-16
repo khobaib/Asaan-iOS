@@ -126,6 +126,11 @@
     
 }
 
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [cell setBackgroundColor:[UIColor clearColor]];
+} //<--
+
 #pragma mark - Action Buttons
 - (IBAction)decOrderTime:(id)sender
 {

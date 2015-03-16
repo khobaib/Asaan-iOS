@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9AC464E61AB6CDC300DA6544 /* Main_ipad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AC464E41AB6CDC300DA6544 /* Main_ipad.storyboard */; };
 		D400F8AD1AAE06F9004D458C /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D400F8AC1AAE06F9004D458C /* Fabric.framework */; };
 		D400F8B01AAE095F004D458C /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D400F8AF1AAE095F004D458C /* Crashlytics.framework */; };
 		D4046FF81A97FD0A0070537B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4046FF41A97FD0A0070537B /* LaunchScreen.xib */; };
@@ -386,6 +387,7 @@
 
 /* Begin PBXFileReference section */
 		375D0FCD1A69982A0016C293 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		9AC464E51AB6CDC300DA6544 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main_ipad.storyboard; sourceTree = "<group>"; };
 		D400F8AC1AAE06F9004D458C /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = Savoir/frameworks/Fabric.framework; sourceTree = "<group>"; };
 		D400F8AF1AAE095F004D458C /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		D4046FF51A97FD0A0070537B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = LaunchScreen.xib; sourceTree = "<group>"; };
@@ -1141,6 +1143,7 @@
 			children = (
 				D4046FF41A97FD0A0070537B /* LaunchScreen.xib */,
 				D4046FF61A97FD0A0070537B /* Main.storyboard */,
+				9AC464E41AB6CDC300DA6544 /* Main_ipad.storyboard */,
 			);
 			path = Base.lproj;
 			sourceTree = "<group>";
@@ -2087,8 +2090,8 @@
 		D4195E551A92A69B00663149 /* Order */ = {
 			isa = PBXGroup;
 			children = (
-				D4046FFA1A9B89BC0070537B /* OrderSummaryViewController.m */,
 				D4046FFB1A9B89BC0070537B /* OrderSummaryViewController.h */,
+				D4046FFA1A9B89BC0070537B /* OrderSummaryViewController.m */,
 				D4195E561A92A69B00663149 /* AddAddressTableViewController.h */,
 				D4195E571A92A69B00663149 /* AddAddressTableViewController.m */,
 				D4195E581A92A69B00663149 /* AddPaymentCardViewController.h */,
@@ -2378,10 +2381,10 @@
 		D4F275961A0C021800CEC95A = {
 			isa = PBXGroup;
 			children = (
-				D46DA7801A92B26B00020313 /* SavoirTests */,
 				D4195BDB1A92A69B00663149 /* Savoir */,
-				D4F275A01A0C021800CEC95A /* Products */,
 				EFEC7E676E0C2F9960DA289C /* Frameworks */,
+				D46DA7801A92B26B00020313 /* SavoirTests */,
+				D4F275A01A0C021800CEC95A /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2543,6 +2546,7 @@
 				D438AB9B1A9FA6AC0089E61A /* JSQMessagesCollectionViewCellOutgoing.xib in Resources */,
 				D438ABA51A9FA6AC0089E61A /* JSQMessagesTypingIndicatorFooterView.xib in Resources */,
 				D409D7E41AA60A94008FADDF /* placeholder@2x.png in Resources */,
+				9AC464E61AB6CDC300DA6544 /* Main_ipad.storyboard in Resources */,
 				D438AB7A1A9FA6AC0089E61A /* JSQMessagesAssets.bundle in Resources */,
 				D4195FA21A92A69C00663149 /* ServerApiGenerator.rtf in Resources */,
 				D409D7DA1AA60A94008FADDF /* cvc@2x.png in Resources */,
@@ -2582,27 +2586,27 @@
 /* Begin PBXShellScriptBuildPhase section */
 		D400F8AE1AAE08EE004D458C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "$SRCROOT/Savoir/frameworks/Fabric.framework/run 5dec5dcf9721ca3e2ae0805306b80549fbb7bc2d 2ce161fa8ccc231e6b3c39ffd39d8ebc75e1ffdeb4043534964d4fcc62ea6229";
 		};
 		D46154541A81DD61003AE84D /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "export PATH=/usr/local/bin:$PATH\n\ncd $SRCROOT/Savoir/parse\n\nparse symbols \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"\n";
 		};
@@ -2898,6 +2902,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		9AC464E41AB6CDC300DA6544 /* Main_ipad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9AC464E51AB6CDC300DA6544 /* Base */,
+			);
+			name = Main_ipad.storyboard;
+			sourceTree = "<group>";
+		};
 		D4046FF41A97FD0A0070537B /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -3082,7 +3094,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Savoir;
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Savoir/frameworks/GoogleOpenSource.framework/Headers";
 			};
 			name = Debug;
@@ -3112,7 +3124,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Savoir;
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Savoir/frameworks/GoogleOpenSource.framework/Headers";
 			};
 			name = Release;
