@@ -1,4 +1,4 @@
-//
+WW//
 //  OrderSummaryViewController.m
 //  Savoir
 //
@@ -26,9 +26,12 @@
 #import "SelectPaymentTableViewController.h"
 #import "InlineCalls.h"
 #import "GTLStoreendpointAsaanLongString.h"
+#import "GTLStoreendpointPlaceOrderArguments.h"
 #import "UtilCalls.h"
 #import "NotificationUtils.h"
 #import "Constants.h"
+#import "XMLPOSOrder.h"
+#import "HTMLFaxOrder.h"
 
 @interface OrderSummaryViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -101,8 +104,7 @@
     {
         if (self.stripePay.token == nil)
         {
-            NSNumber *amount = [[NSNumber alloc] initWithLong:[self finalAmount]];
-            NSString *amountStr = [UtilCalls percentAmountToString:amount];
+            NSString *amountStr = [UtilCalls doubleAmountToString:[NSNumber numberWithDouble:[self finalAmount]]];
             NSDecimalNumber *finalAmount = [NSDecimalNumber decimalNumberWithString:amountStr];
             [self.stripePay beginApplePay:self Title:self.orderInProgress.selectedStore.name Label:@"Order" AndAmount:finalAmount];
             return;
@@ -120,74 +122,27 @@
     if (![self AreDeliveryRequirementsValid])
         return;
     
-    NSString *strItems = @"<ITEMREQUESTS>";
-    for (OnlineOrderSelectedMenuItem *object in self.orderInProgress.selectedMenuItems)
+    
+    GTLStoreendpointStoreOrder *order = [[GTLStoreendpointStoreOrder alloc]init];
+    
+    order.guestCount = [NSNumber numberWithInt:self.orderInProgress.partySize];  // intValue
+    order.orderMode = [NSNumber numberWithInt:self.orderInProgress.orderType];  // intValue
+    order.storeId = self.orderInProgress.selectedStore.identifier;  // longLongValue
+    order.storeName = self.orderInProgress.selectedStore.name;
+    order.subTotal = [UtilCalls doubleAmountToLong:[self subTotal]];
+    order.deliveryFee = [UtilCalls doubleAmountToLong:[self deliveryFee]];
+    order.serviceCharge = [UtilCalls doubleAmountToLong:[self gratuity]];
+    order.tax = [UtilCalls doubleAmountToLong:[self taxAmount]];
+    long finalTotal = [UtilCalls doubleAmountToLong:[self finalAmount]].longLongValue;
+    order.finalTotal = [NSNumber numberWithLong:finalTotal];
+    
+    if ([self discountAmount] > 0)
     {
-        NSString *itemString=[NSString stringWithFormat:@"<ADDITEM QTY=\"%lu\" ITEMID=\"%@\" >",(unsigned long)object.qty,object.selectedItem.menuItemPOSId];
-        strItems=[strItems stringByAppendingString:itemString];
-        for (OnlineOrderSelectedModifierGroup *modGroup in object.selectedModifierGroups)
-        {
-            for (int i = 0; i < modGroup.selectedModifierIndexes.count; i++)
-            {
-                NSNumber *value = [modGroup.selectedModifierIndexes objectAtIndex:i];
-                if (value.boolValue)
-                {
-                    GTLStoreendpointStoreMenuItemModifier *modifier = [modGroup.modifiers objectAtIndex:i];
-                    NSString *modString=[NSString stringWithFormat:@"<MODITEM QTY=\"1\" ITEMID=\"%@\" />",modifier.modifierPOSId];
-                    strItems=[strItems stringByAppendingString:modString];
-                }
-            }
-        }
-        strItems=[strItems stringByAppendingString:@"</ADDITEM>"];
+        order.discount = [UtilCalls doubleAmountToLong:[self discountAmount]];
+        order.discountDescription = self.orderInProgress.selectedDiscount.title;
     }
-    strItems=[strItems stringByAppendingString:@"</ITEMREQUESTS>"];
-    
-    NSString *discountStr;
-    if (self.orderInProgress.selectedDiscount != nil)
-    {
-        NSString *discountAmtOrPercent = [UtilCalls amountToStringNoCurrency:[NSNumber numberWithLongLong:self.orderInProgress.selectedDiscount.value.longLongValue]];
-        discountStr = [NSString stringWithFormat:@"<DISCOUNTS ID=\"%lld\" AMOUNT=\"%@\" REFERENCE=\"Discounts FROM ASAAN\" />", self.orderInProgress.selectedDiscount.posDiscountId.longLongValue, discountAmtOrPercent];
-        strItems=[strItems stringByAppendingString:discountStr];
-    }
-    
-    NSString *gratuityStr;
-    if ([self gratuity] > 0)
-    {
-//        gratuityStr = [NSString stringWithFormat:@"<SERVICECHARGES ID=\"%d\" AMOUNT=\"%@\" REFERENCE=\"SVC CHRG FROM ASAAN\" />", 902, [UtilCalls percentAmountToStringNoCurrency:[NSNumber numberWithLong:[self gratuity]]]];
-        gratuityStr = [NSString stringWithFormat:@"<SERVICECHARGES ID=\"%d\" AMOUNT=\"%@\" REFERENCE=\"SVC CHRG FROM ASAAN\" />", 901, [UtilCalls percentAmountToStringNoCurrency:[NSNumber numberWithLong:[self gratuity]]]];
-        strItems=[strItems stringByAppendingString:gratuityStr];
-    }
-    
-    //NSString *contactString=[NSString stringWithFormat:@"<CONTACT FIRSTNAME=\"%@\" LASTNAME=\"%@\" PHONE1=\"%@\" PHONE2=\"8012345678\" COMPANY=\"TEST CO\" DEPT=\"DEPT 123\" />"];
-    
-    PFUser *user = [PFUser currentUser];
-    NSString *contactString=[NSString stringWithFormat:@"<CONTACT FIRSTNAME=\"%@\" LASTNAME=\"%@\" PHONE1=\"%@\" />", user[@"firstName"], user[@"lastName"], user[@"phone"]];
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"hh:mm a"];
-    NSString *orderTime = [dateFormatter stringFromDate: self.orderInProgress.orderTime];
-    
-    NSString *orderString;
-    if (self.orderInProgress.orderType == [DeliveryOrCarryoutViewController ORDERTYPE_DELIVERY])
-    {
-        
-        //    NSString *deliveryString=[NSString stringWithFormat:@"<DELIVERY DELIVERYACCT=\"%@\" DELIVERYNOTE=\"%@\" ADDRESS1=\"123 Main street\" ADDRESS2=\"APT 123\" ADDRESS3=\"Back Door\" CITY=\"DENVER\" STATE=\"CO\" POSTALCODE=\"12345\" CROSSSTREET=\"MAIN AND 1st\" />"];
-        GTLUserendpointUserAddress *address = appDelegate.globalObjectHolder.defaultUserAddress;
-        NSString *deliveryString=[NSString stringWithFormat:@"<DELIVERY DELIVERYACCT=\"%@\" DELIVERYNOTE=\"%@\" ADDRESS=\"%@\" />", address.title, address.notes, address.fullAddress];
-        
-        orderString=[NSString stringWithFormat:@"<CHECKREQUESTS><ADDCHECK EXTCHECKID=\"ASAAN\" READYTIME=\"%@\" GUESTCOUNT=\"%d\" NOTE=\"%@\" ORDERMODE=\"@ORDER_MODE\">%@%@%@</ADDCHECK></CHECKREQUESTS>",orderTime, self.orderInProgress.partySize, self.orderInProgress.specialInstructions, contactString, deliveryString, strItems];
-    }
-    else
-        orderString=[NSString stringWithFormat:@"<CHECKREQUESTS><ADDCHECK EXTCHECKID=\"ASAAN\" READYTIME=\"%@\" GUESTCOUNT=\"%d\" NOTE=\"%@\" ORDERMODE=\"@ORDER_MODE\">%@%@</ADDCHECK></CHECKREQUESTS>",orderTime, self.orderInProgress.partySize, self.orderInProgress.specialInstructions, contactString, strItems];
-    
-    NSLog(@"%@",orderString);
     
     GTLStoreendpointPlaceOrderArguments *orderArguments = [[GTLStoreendpointPlaceOrderArguments alloc]init];
-    orderArguments.guestCount = [NSNumber numberWithInt:self.orderInProgress.partySize];  // intValue
-    orderArguments.orderMode = [NSNumber numberWithInt:self.orderInProgress.orderType];  // intValue
-    orderArguments.storeId = self.orderInProgress.selectedStore.identifier;  // longLongValue
-    orderArguments.storeName = self.orderInProgress.selectedStore.name;
-    orderArguments.strOrder = orderString;
     
     if (self.stripePay.applePayEnabled && self.stripePay.token != nil)
         orderArguments.token = self.stripePay.token.tokenId;
@@ -197,6 +152,27 @@
         orderArguments.cardid = appDelegate.globalObjectHolder.defaultUserCard.cardId;
         orderArguments.customerId = appDelegate.globalObjectHolder.defaultUserCard.providerCustomerId;
     }
+    
+    NSString *strOrder = nil;
+    order.orderHTML = [HTMLFaxOrder buildHTMLOrder:self.orderInProgress gratuity:[self gratuity] discountTitle:self.orderInProgress.selectedDiscount.title discountAmount:[self discountAmount] subTotal:[self subTotal] deliveryFee:[self deliveryFee] taxAmount:[self taxAmount] finalAmount:[self finalAmount] orderEstTime:[self orderDateString]];
+    
+    if (self.orderInProgress.selectedStore.providesPosIntegration.boolValue == NO)
+    {
+        strOrder = order.orderHTML;
+        order.orderDetails = [XMLPOSOrder buildPOSResponseXML:self.orderInProgress gratuity:[self gratuity] discountTitle:self.orderInProgress.selectedDiscount.title discountAmount:[self discountAmount] subTotal:[self subTotal] deliveryFee:[self deliveryFee] taxAmount:[self taxAmount]
+                                                                finalAmount:[self finalAmount] guestCount:order.guestCount.intValue];
+    }
+    else
+        strOrder = [XMLPOSOrder buildPOSOrder:self.orderInProgress gratuity:[self gratuity]];
+    
+    orderArguments.strOrder = strOrder;
+    orderArguments.order = order;
+
+    NSLog(@"orderArguments.strOrder");
+    NSLog(@"%@", strOrder);
+    
+    NSLog(@"orderArguments.strOrderResponse");
+    NSLog(@"%@", order.orderDetails);
     
     GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForPlaceOrderWithObject:orderArguments];
     
@@ -295,9 +271,9 @@
         return 0;
     
     if (self.orderInProgress.orderType == DeliveryOrCarryoutViewController.ORDERTYPE_CARRYOUT)
-        return self.orderInProgress.selectedMenuItems.count + 9;
+        return self.orderInProgress.selectedMenuItems.count + 7;
     else
-        return self.orderInProgress.selectedMenuItems.count + 11;
+        return self.orderInProgress.selectedMenuItems.count + 9;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -348,58 +324,56 @@
         [tableView reloadData];
     }
 }
-- (NSUInteger)subTotalNoDiscount
+- (double)subTotalNoDiscount
 {
     NSUInteger subTotalNoDiscount = 0;
     for (OnlineOrderSelectedMenuItem *onlineOrderSelectedMenuItem in self.orderInProgress.selectedMenuItems)
         subTotalNoDiscount += onlineOrderSelectedMenuItem.amount;
-    return subTotalNoDiscount;
+    return subTotalNoDiscount/100.0;
 }
-- (NSUInteger)discountAmount // already * by 1000000
+- (double)discountAmount // already * by 1000000
 {
     GTLStoreendpointStoreDiscount *discount = self.orderInProgress.selectedDiscount;
     if (discount == nil)
-        return 0;
+        return 0.0;
     
     if (self.orderInProgress.selectedDiscount.percentOrAmount.boolValue == true)
-        return [self subTotalNoDiscount] * discount.value.longLongValue;
+        return discount.value.longLongValue * [self subTotalNoDiscount]/1000000.0;
     else
-        return discount.value.longLongValue*10000;
+        return discount.value.longLongValue/100.0;
 }
 
-- (NSUInteger)taxAmount // already * by 1000000
+- (double)taxAmount // already * by 1000000
 {
-    NSUInteger taxPercentAmount = 0;
-    for (OnlineOrderSelectedMenuItem *onlineOrderSelectedMenuItem in self.orderInProgress.selectedMenuItems)
-        taxPercentAmount += onlineOrderSelectedMenuItem.amount * onlineOrderSelectedMenuItem.selectedItem.tax.longLongValue;
-    return taxPercentAmount;
+//    NSUInteger taxPercentAmount = 0;
+//    for (OnlineOrderSelectedMenuItem *onlineOrderSelectedMenuItem in self.orderInProgress.selectedMenuItems)
+//        taxPercentAmount += onlineOrderSelectedMenuItem.amount * onlineOrderSelectedMenuItem.selectedItem.tax.longLongValue;
+//    return taxPercentAmount;
+    if (self.orderInProgress.orderType == DeliveryOrCarryoutViewController.ORDERTYPE_CARRYOUT)
+        return ([self subTotal] + [self gratuity])*self.orderInProgress.selectedStore.taxPercent.longLongValue/10000.0;
+    else
+        return ([self subTotal] + [self gratuity] + [self deliveryFee])*self.orderInProgress.selectedStore.taxPercent.longLongValue/10000.0;
 }
 
-- (NSUInteger)gratuity // 15% - fixed for now
+- (double)gratuity // 15% - fixed for now
 {
-    return [self subTotalNoDiscount]*100*15;
+    return [self subTotalNoDiscount]*0.18;
 }
 
-- (NSUInteger)subTotal  // already * by 1000000
+- (double)subTotal  // already * by 1000000
 {
     if (self.orderInProgress.selectedDiscount.percentOrAmount.boolValue == true)
-        return ([self subTotalNoDiscount]*10000) - [self discountAmount];
+        return [self subTotalNoDiscount] - [self discountAmount];
     else
-        return ([self subTotalNoDiscount]*10000 - [self discountAmount]);
+        return [self subTotalNoDiscount] - [self discountAmount];
 }
 
-- (NSUInteger)orderTotal
+- (double)deliveryFee // $5 - fixed for now
 {
-    return [self subTotal] + [self gratuity] + [self taxAmount];
+    return self.orderInProgress.selectedStore.deliveryFee.intValue/100.0;
 }
 
-- (NSUInteger)deliveryFee // $5 - fixed for now
-{
-//    return 5000000;
-    return self.orderInProgress.selectedStore.deliveryFee.intValue*10000;
-}
-
-- (NSUInteger)finalAmount
+- (double)finalAmount
 {
     if (self.orderInProgress.orderType == DeliveryOrCarryoutViewController.ORDERTYPE_CARRYOUT)
         return ([self subTotal] + [self gratuity] + [self taxAmount]);
@@ -422,9 +396,9 @@
 
 - (UITableViewCell *)cellForAdditionalRowAtIndex:(int)index forTable:(UITableView *)tableView forIndexPath:indexPath
 {
-    if (self.orderInProgress.orderType == DeliveryOrCarryoutViewController.ORDERTYPE_CARRYOUT && index > 4)
+    if (self.orderInProgress.orderType == DeliveryOrCarryoutViewController.ORDERTYPE_CARRYOUT && index > 2)
         index++;
-    if (self.orderInProgress.orderType == DeliveryOrCarryoutViewController.ORDERTYPE_CARRYOUT && index > 7)
+    if (self.orderInProgress.orderType == DeliveryOrCarryoutViewController.ORDERTYPE_CARRYOUT && index > 6)
         index++;
 
     UITableViewCell *cell;
@@ -449,8 +423,8 @@
             }
             else
             {
-                NSNumber *amount = [[NSNumber alloc] initWithLong:[self discountAmount]];
-                txtAmount.text = [NSString stringWithFormat:@"%@-", [UtilCalls percentAmountToString:amount]];
+                NSNumber *amount = [[NSNumber alloc] initWithDouble:[self discountAmount]];
+                txtAmount.text = [NSString stringWithFormat:@"%@-", [UtilCalls doubleAmountToString:amount]];
             }
             txtMenuItemName.text = [NSString stringWithFormat:@"Discount %@", discount];
             break;
@@ -465,8 +439,8 @@
             
             txtMenuItemName.text = @"Subtotal";
             txtQty.text = nil;
-            NSNumber *amount = [[NSNumber alloc] initWithLong:[self subTotal]];
-            txtAmount.text = [UtilCalls percentAmountToString:amount];
+            NSNumber *amount = [[NSNumber alloc] initWithDouble:[self subTotal]];
+            txtAmount.text = [UtilCalls doubleAmountToString:amount];
             cell.accessoryType = UITableViewCellAccessoryNone;
             break;
         }
@@ -478,44 +452,14 @@
             UILabel *txtAmount = (UILabel *)[cell viewWithTag:503];
             cell.accessoryType = UITableViewCellAccessoryNone;
             
-            txtMenuItemName.text = @"Gratuity (Default: 15%)";
+            txtMenuItemName.text = @"Gratuity";
             txtQty.text = nil;
-            NSNumber *percentAmount = [[NSNumber alloc] initWithLong:[self gratuity]];
-            txtAmount.text = [UtilCalls percentAmountToString:percentAmount];
+            NSNumber *percentAmount = [[NSNumber alloc] initWithDouble:[self gratuity]];
+            txtAmount.text = [UtilCalls doubleAmountToString:percentAmount];
             cell.accessoryType = UITableViewCellAccessoryNone;
             break;
         }
-        case 3: // Tax
-        {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"MenuItemCell" forIndexPath:indexPath];
-            UILabel *txtMenuItemName = (UILabel *)[cell viewWithTag:501];
-            UILabel *txtQty = (UILabel *)[cell viewWithTag:502];
-            UILabel *txtAmount = (UILabel *)[cell viewWithTag:503];
-            cell.accessoryType = UITableViewCellAccessoryNone;
-            
-            txtMenuItemName.text = @"Tax (est.)";
-            txtQty.text = nil;
-            NSNumber *amount = [[NSNumber alloc] initWithLong:[self taxAmount]];
-            txtAmount.text = [UtilCalls percentAmountToString:amount];
-            cell.accessoryType = UITableViewCellAccessoryNone;
-            break;
-        }
-        case 4: // Order Total
-        {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"MenuItemCell" forIndexPath:indexPath];
-            UILabel *txtMenuItemName = (UILabel *)[cell viewWithTag:501];
-            UILabel *txtQty = (UILabel *)[cell viewWithTag:502];
-            UILabel *txtAmount = (UILabel *)[cell viewWithTag:503];
-            cell.accessoryType = UITableViewCellAccessoryNone;
-            
-            txtMenuItemName.text = @"Order Total";
-            txtQty.text = nil;
-            NSNumber *amount = [[NSNumber alloc] initWithLong:[self orderTotal]];
-            txtAmount.text = [UtilCalls percentAmountToString:amount];
-            cell.accessoryType = UITableViewCellAccessoryNone;
-            break;
-        }
-        case 5: // Delivery Fee
+        case 3: // Delivery Fee
         {
             cell = [tableView dequeueReusableCellWithIdentifier:@"MenuItemCell" forIndexPath:indexPath];
             UILabel *txtMenuItemName = (UILabel *)[cell viewWithTag:501];
@@ -526,11 +470,11 @@
             txtMenuItemName.text = @"Delivery";
             txtQty.text = nil;
             NSNumber *amount = [[NSNumber alloc] initWithLong:[self deliveryFee]];
-            txtAmount.text = [UtilCalls percentAmountToString:amount];
+            txtAmount.text = [UtilCalls doubleAmountToString:amount];
             cell.accessoryType = UITableViewCellAccessoryNone;
             break;
         }
-        case 6: // Amount Due
+        case 4: // Tax
         {
             cell = [tableView dequeueReusableCellWithIdentifier:@"MenuItemCell" forIndexPath:indexPath];
             UILabel *txtMenuItemName = (UILabel *)[cell viewWithTag:501];
@@ -538,21 +482,35 @@
             UILabel *txtAmount = (UILabel *)[cell viewWithTag:503];
             cell.accessoryType = UITableViewCellAccessoryNone;
             
-            txtMenuItemName.text = @"Amount Due";
+            txtMenuItemName.text = @"Tax";
             txtQty.text = nil;
-            
-            NSNumber *amount = [[NSNumber alloc] initWithLong:[self finalAmount]];
-            txtAmount.text = [UtilCalls percentAmountToString:amount];
+            NSNumber *amount = [[NSNumber alloc] initWithDouble:[self taxAmount]];
+            txtAmount.text = [UtilCalls doubleAmountToString:amount];
             cell.accessoryType = UITableViewCellAccessoryNone;
             break;
         }
-        case 7: // Estimated Delivery Time
+        case 5: // Final Total
+        {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"MenuItemCell" forIndexPath:indexPath];
+            UILabel *txtMenuItemName = (UILabel *)[cell viewWithTag:501];
+            UILabel *txtQty = (UILabel *)[cell viewWithTag:502];
+            UILabel *txtAmount = (UILabel *)[cell viewWithTag:503];
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            
+            txtMenuItemName.text = @"Final Amount";
+            txtQty.text = nil;
+            NSNumber *amount = [[NSNumber alloc] initWithDouble:[self finalAmount]];
+            txtAmount.text = [UtilCalls doubleAmountToString:amount];
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            break;
+        }
+        case 6: // Estimated Delivery Time
         {
             cell = [tableView dequeueReusableCellWithIdentifier:@"OtherCell" forIndexPath:indexPath];
             cell.textLabel.text = [NSString stringWithFormat:@"Est. Delivery Time %@", [self orderDateString]];
             break;
         }
-        case 8: // Delivery Address
+        case 7: // Delivery Address
         {
             cell = [tableView dequeueReusableCellWithIdentifier:@"OtherCell" forIndexPath:indexPath];
             NSString *address = appDelegate.globalObjectHolder.defaultUserAddress.fullAddress;
@@ -562,7 +520,7 @@
             cell.tag = 701;
             break;
         }
-        case 9: // Payment Mode
+        case 8: // Payment Mode
         {
             cell = [tableView dequeueReusableCellWithIdentifier:@"OtherCell" forIndexPath:indexPath];
             NSString *card = appDelegate.globalObjectHolder.defaultUserCard.last4;
@@ -575,12 +533,12 @@
             cell.tag = 702;
             break;
         }
-        case 10: // Special Instructions
-        {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"OtherCell" forIndexPath:indexPath];
-            cell.textLabel.text = [NSString stringWithFormat:@"Special Instructions %@", self.orderInProgress.specialInstructions];
-            break;
-        }
+//        case 9: // Special Instructions
+//        {
+//            cell = [tableView dequeueReusableCellWithIdentifier:@"OtherCell" forIndexPath:indexPath];
+//            cell.textLabel.text = [NSString stringWithFormat:@"Special Instructions %@", self.orderInProgress.specialInstructions];
+//            break;
+//        }
         default:
             break;
     }
@@ -625,9 +583,8 @@
     
     GTLUserendpointUserAddress *userAddress = appDelegate.globalObjectHolder.defaultUserAddress;
     CLLocation* first = [[CLLocation alloc] initWithLatitude:userAddress.lat.doubleValue longitude:userAddress.lng.doubleValue];
-    CLLocation* second = [[CLLocation alloc] initWithLatitude:self.orderInProgress.selectedStore.lat.doubleValue longitude:self.orderInProgress.selectedStore.lng.doubleValue];
     
-    return [UtilCalls isDistanceBetweenPointA:first AndPointB:second withinRange:self.orderInProgress.selectedStore.deliveryDistance.intValue];
+    return [UtilCalls isDistanceBetweenPointA:first AndStore:self.orderInProgress.selectedStore withinRange:self.orderInProgress.selectedStore.deliveryDistance.intValue];
 }
 
 - (Boolean)AreDeliveryRequirementsValid
@@ -641,7 +598,7 @@
             {
                 __block Boolean bReturn = NO;
                 __weak __typeof(self) weakSelf = self;
-                NSString *errMsg = [NSString stringWithFormat:@"%@ does not deliver to your %@. what do you want to do?", self.orderInProgress.selectedStore.name, appDelegate.globalObjectHolder.defaultUserAddress.title];
+                NSString *errMsg = [NSString stringWithFormat:@"%@ does not deliver to your %@ address. what do you want to do?", self.orderInProgress.selectedStore.name, appDelegate.globalObjectHolder.defaultUserAddress.name];
                 [UIAlertView showWithTitle:@"Address outside delivery range" message:errMsg cancelButtonTitle:@"Switch to Carryout" otherButtonTitles:@[@"Change Address", @"Cancel"]
                                   tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex)
                  {

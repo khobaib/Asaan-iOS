@@ -378,6 +378,8 @@
 		D445D7311A96BC5C00ED4919 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D445D72E1A96BC5C00ED4919 /* main.m */; };
 		D46DA7831A92B26B00020313 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D46DA7811A92B26B00020313 /* Info.plist */; };
 		D46DA7861A92B5A400020313 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D46DA7851A92B5A400020313 /* CoreAudio.framework */; };
+		D47D3ABB1ABB36810099176A /* HTMLFaxOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = D47D3ABA1ABB36810099176A /* HTMLFaxOrder.m */; };
+		D47D3ABE1ABB41EC0099176A /* XMLPOSOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = D47D3ABD1ABB41EC0099176A /* XMLPOSOrder.m */; };
 		D4828CBB1A71ADD200C80E92 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D4828CBA1A71ADD200C80E92 /* libz.dylib */; };
 		D4828CBE1A71ADE500C80E92 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D4828CBC1A71ADE500C80E92 /* libxml2.2.dylib */; };
 		D4828CBF1A71ADE500C80E92 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D4828CBD1A71ADE500C80E92 /* libxml2.dylib */; };
@@ -1078,6 +1080,10 @@
 		D445D72E1A96BC5C00ED4919 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D46DA7811A92B26B00020313 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D46DA7851A92B5A400020313 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		D47D3AB91ABB36810099176A /* HTMLFaxOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLFaxOrder.h; sourceTree = "<group>"; };
+		D47D3ABA1ABB36810099176A /* HTMLFaxOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLFaxOrder.m; sourceTree = "<group>"; };
+		D47D3ABC1ABB41EC0099176A /* XMLPOSOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLPOSOrder.h; sourceTree = "<group>"; };
+		D47D3ABD1ABB41EC0099176A /* XMLPOSOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLPOSOrder.m; sourceTree = "<group>"; };
 		D4828CBA1A71ADD200C80E92 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		D4828CBC1A71ADE500C80E92 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
 		D4828CBD1A71ADE500C80E92 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
@@ -1457,6 +1463,10 @@
 				D4195C271A92A69B00663149 /* OnlineOrderSelectedModifierGroup.m */,
 				D4195C281A92A69B00663149 /* OrderItemSummaryFromPOS.h */,
 				D4195C291A92A69B00663149 /* OrderItemSummaryFromPOS.m */,
+				D47D3AB91ABB36810099176A /* HTMLFaxOrder.h */,
+				D47D3ABA1ABB36810099176A /* HTMLFaxOrder.m */,
+				D47D3ABC1ABB41EC0099176A /* XMLPOSOrder.h */,
+				D47D3ABD1ABB41EC0099176A /* XMLPOSOrder.m */,
 			);
 			path = OnlineOrder;
 			sourceTree = "<group>";
@@ -2829,6 +2839,7 @@
 				D4195F6B1A92A69C00663149 /* GTLStoreendpointChatMessage.m in Sources */,
 				D4195FBF1A92A69C00663149 /* ReserveTableViewController.m in Sources */,
 				D409D7F91AA60A94008FADDF /* STPToken.m in Sources */,
+				D47D3ABE1ABB41EC0099176A /* XMLPOSOrder.m in Sources */,
 				D4195F211A92A69C00663149 /* SDWebImageCompat.m in Sources */,
 				D4195FAA1A92A69C00663149 /* PaymentInfoViewController.m in Sources */,
 				D409D7C31AA60A94008FADDF /* STPTestAddressStore.m in Sources */,
@@ -2870,6 +2881,7 @@
 				D445D7191A96BA3800ED4919 /* StoreListTableViewController.m in Sources */,
 				D4195F201A92A69C00663149 /* SDImageCache.m in Sources */,
 				D4195FB71A92A69C00663149 /* DeliveryOrCarryoutViewController.m in Sources */,
+				D47D3ABB1ABB36810099176A /* HTMLFaxOrder.m in Sources */,
 				D4195F261A92A69C00663149 /* SDWebImagePrefetcher.m in Sources */,
 				D409D7EB1AA60A94008FADDF /* Stripe+ApplePay.m in Sources */,
 				D438AB8F1A9FA6AC0089E61A /* JSQMediaItem.m in Sources */,

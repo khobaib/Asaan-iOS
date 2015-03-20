@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/fagqeCLNV_6vPIDWFor34BPdM_k\"",
+ "etag": "\"u_zXkMELIlX4ktyNbM2XKD4vK8E/AqZAthInNMMKCDq2splhg6szgCQ\"",
  "discoveryVersion": "v1",
  "id": "storeendpoint:v1",
  "name": "storeendpoint",
@@ -438,20 +438,8 @@
     "customerId": {
      "type": "string"
     },
-    "guestCount": {
-     "type": "integer",
-     "format": "int32"
-    },
-    "orderMode": {
-     "type": "integer",
-     "format": "int32"
-    },
-    "storeId": {
-     "type": "string",
-     "format": "int64"
-    },
-    "storeName": {
-     "type": "string"
+    "order": {
+     "$ref": "StoreOrder"
     },
     "strOrder": {
      "type": "string"
@@ -568,6 +556,9 @@
     "providesDelivery": {
      "type": "boolean"
     },
+    "providesPosIntegration": {
+     "type": "boolean"
+    },
     "providesPreOrder": {
      "type": "boolean"
     },
@@ -600,6 +591,10 @@
     },
     "subType": {
      "type": "string"
+    },
+    "taxPercent": {
+     "type": "integer",
+     "format": "int32"
     },
     "trophies": {
      "type": "array",
@@ -991,6 +986,9 @@
      "type": "string",
      "format": "int64"
     },
+    "subMenuName": {
+     "type": "string"
+    },
     "subMenuPOSId": {
      "type": "integer",
      "format": "int32"
@@ -1174,6 +1172,10 @@
      "type": "integer",
      "format": "int32"
     },
+    "faxId": {
+     "type": "string",
+     "format": "int64"
+    },
     "finalTotal": {
      "type": "string",
      "format": "int64"
@@ -1196,7 +1198,14 @@
     "orderDetails": {
      "type": "string"
     },
+    "orderHTML": {
+     "type": "string"
+    },
     "orderMode": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "orderStatus": {
      "type": "integer",
      "format": "int32"
     },
@@ -1224,9 +1233,6 @@
     "serviceCharge": {
      "type": "string",
      "format": "int64"
-    },
-    "status": {
-     "type": "string"
     },
     "storeId": {
      "type": "string",
@@ -1323,6 +1329,10 @@
      "type": "integer",
      "format": "int32"
     },
+    "dineInModeId": {
+     "type": "integer",
+     "format": "int32"
+    },
     "fallbackEmail": {
      "type": "string"
     },
@@ -1338,6 +1348,10 @@
     "modifiedDate": {
      "type": "string",
      "format": "int64"
+    },
+    "preOrderModeId": {
+     "type": "integer",
+     "format": "int32"
     },
     "status": {
      "type": "string",
@@ -2143,9 +2157,46 @@
     }
    },
    "parameterOrder": [
+    "firstPosition",
     "lat",
     "lng",
+    "maxResult"
+   ],
+   "returns": {
+    "$ref": "StoreAndStatsCollection"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.getStoresOrderedByDistanceWithStatsByOwner": {
+   "id": "storeendpoint.getStoresOrderedByDistanceWithStatsByOwner",
+   "parameters": {
+    "firstPosition": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    },
+    "lat": {
+     "type": "number",
+     "required": true,
+     "format": "double"
+    },
+    "lng": {
+     "type": "number",
+     "required": true,
+     "format": "double"
+    },
+    "maxResult": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    }
+   },
+   "parameterOrder": [
     "firstPosition",
+    "lat",
+    "lng",
     "maxResult"
    ],
    "returns": {
@@ -2526,6 +2577,12 @@
    "parameterOrder": [
     "resource"
    ],
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.updateStoreCoordinates": {
+   "id": "storeendpoint.updateStoreCoordinates",
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"
    ]

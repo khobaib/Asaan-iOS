@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStoreMenuItem (0 custom class methods, 26 custom properties)
+//   GTLStoreendpointStoreMenuItem (0 custom class methods, 27 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLObject.h"
@@ -51,6 +51,7 @@
 @property (retain) NSNumber *price;  // intValue
 @property (copy) NSString *shortDescription;
 @property (retain) NSNumber *storeId;  // longLongValue
+@property (copy) NSString *subMenuName;
 @property (retain) NSNumber *subMenuPOSId;  // intValue
 @property (retain) NSNumber *tax;  // intValue
 @property (copy) NSString *thumbnailUrl;

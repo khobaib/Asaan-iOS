@@ -13,13 +13,15 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointPlaceOrderArguments (0 custom class methods, 9 custom properties)
+//   GTLStoreendpointPlaceOrderArguments (0 custom class methods, 6 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLObject.h"
 #else
   #import "GTLObject.h"
 #endif
+
+@class GTLStoreendpointStoreOrder;
 
 // ----------------------------------------------------------------------------
 //
@@ -29,10 +31,7 @@
 @interface GTLStoreendpointPlaceOrderArguments : GTLObject
 @property (copy) NSString *cardid;
 @property (copy) NSString *customerId;
-@property (retain) NSNumber *guestCount;  // intValue
-@property (retain) NSNumber *orderMode;  // intValue
-@property (retain) NSNumber *storeId;  // longLongValue
-@property (copy) NSString *storeName;
+@property (retain) GTLStoreendpointStoreOrder *order;
 @property (copy) NSString *strOrder;
 @property (copy) NSString *token;
 @property (retain) NSNumber *userId;  // longLongValue

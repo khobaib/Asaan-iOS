@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStoreOrder (0 custom class methods, 27 custom properties)
+//   GTLStoreendpointStoreOrder (0 custom class methods, 29 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLObject.h"
@@ -34,6 +34,7 @@
 @property (copy) NSString *discountDescription;
 @property (copy) NSString *employeeName;
 @property (retain) NSNumber *employeePOSId;  // intValue
+@property (retain) NSNumber *faxId;  // longLongValue
 @property (retain) NSNumber *finalTotal;  // longLongValue
 @property (retain) NSNumber *guestCount;  // intValue
 
@@ -43,7 +44,9 @@
 @property (retain) NSNumber *modifiedDate;  // longLongValue
 @property (copy) NSString *note;
 @property (copy) NSString *orderDetails;
+@property (copy) NSString *orderHTML;
 @property (retain) NSNumber *orderMode;  // intValue
+@property (retain) NSNumber *orderStatus;  // intValue
 @property (retain) NSNumber *orderTotal;  // longLongValue
 @property (copy) NSString *paymentChargeId;
 @property (copy) NSString *paymentInvoice;
@@ -51,7 +54,6 @@
 @property (retain) NSNumber *poscheckId;  // intValue
 @property (retain) NSNumber *posintCheckId;  // longLongValue
 @property (retain) NSNumber *serviceCharge;  // longLongValue
-@property (copy) NSString *status;
 @property (retain) NSNumber *storeId;  // longLongValue
 @property (copy) NSString *storeName;
 @property (retain) NSNumber *subTotal;  // longLongValue

@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStoreMenuItem (0 custom class methods, 26 custom properties)
+//   GTLStoreendpointStoreMenuItem (0 custom class methods, 27 custom properties)
 
 #import "GTLStoreendpointStoreMenuItem.h"
 
@@ -26,8 +26,8 @@
 @dynamic active, allergyInfo, calories, createdDate, glutenFree, halal,
          hasModifiers, heatIndex, identifier, imageUrl, kosher, level,
          longDescription, menuItemPOSId, menuItemPosition, menuName, menuPOSId,
-         modifiedDate, price, shortDescription, storeId, subMenuPOSId, tax,
-         thumbnailUrl, vegan, vegetarian;
+         modifiedDate, price, shortDescription, storeId, subMenuName,
+         subMenuPOSId, tax, thumbnailUrl, vegan, vegetarian;
 
 + (NSDictionary *)propertyToJSONKeyMap {
   NSDictionary *map =

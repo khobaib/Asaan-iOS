@@ -41,7 +41,7 @@
     NSNumberFormatter * numberFormatter = [[NSNumberFormatter new] init];
     [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
     [numberFormatter setMaximumFractionDigits:2];
-    [numberFormatter setRoundingMode:NSNumberFormatterRoundFloor];
+    [numberFormatter setRoundingMode:NSNumberFormatterRoundUp];
     float fVal = [number floatValue];
     return [numberFormatter stringFromNumber:[NSNumber numberWithFloat:fVal]];
 }
@@ -51,7 +51,7 @@
     NSNumberFormatter * numberFormatter = [[NSNumberFormatter new] init];
     [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
     [numberFormatter setMaximumFractionDigits:2];
-    [numberFormatter setRoundingMode:NSNumberFormatterRoundFloor];
+    [numberFormatter setRoundingMode:NSNumberFormatterRoundUp];
     float fVal = [number floatValue]/100;
     return [numberFormatter stringFromNumber:[NSNumber numberWithFloat:fVal]];
 }
@@ -61,7 +61,7 @@
     NSNumberFormatter * numberFormatter = [[NSNumberFormatter new] init];
     [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
     [numberFormatter setMaximumFractionDigits:2];
-    [numberFormatter setRoundingMode:NSNumberFormatterRoundFloor];
+    [numberFormatter setRoundingMode:NSNumberFormatterRoundUp];
     float fVal = [number floatValue]/100;
     return [numberFormatter stringFromNumber:[NSNumber numberWithFloat:fVal]];
 }
@@ -71,9 +71,29 @@
     NSNumberFormatter * numberFormatter = [[NSNumberFormatter new] init];
     [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
     [numberFormatter setMaximumFractionDigits:2];
-    [numberFormatter setRoundingMode:NSNumberFormatterRoundFloor];
+    [numberFormatter setRoundingMode:NSNumberFormatterRoundUp];
     float fVal = [number floatValue]/1000000;
     return [numberFormatter stringFromNumber:[NSNumber numberWithFloat:fVal]];
+}
+
++ (NSString *) doubleAmountToString:(NSNumber*)number
+{
+    NSNumberFormatter * numberFormatter = [[NSNumberFormatter new] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [numberFormatter setMaximumFractionDigits:2];
+    [numberFormatter setRoundingMode:NSNumberFormatterRoundUp];
+    return [numberFormatter stringFromNumber:number];
+}
+
++ (NSNumber *) doubleAmountToLong:(double)doubleNumber
+{
+    NSNumberFormatter * numberFormatter = [[NSNumberFormatter new] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterNoStyle];
+    [numberFormatter setMaximumFractionDigits:0];
+    [numberFormatter setRoundingMode:NSNumberFormatterRoundUp];
+    NSNumber *number = [NSNumber numberWithDouble:doubleNumber * 100];
+    NSString *numberStr = [numberFormatter stringFromNumber:number];
+    return [self stringToNumber:numberStr];
 }
 
 + (NSString *) percentAmountToStringNoCurrency:(NSNumber*)number
@@ -81,9 +101,18 @@
     NSNumberFormatter * numberFormatter = [[NSNumberFormatter new] init];
     [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
     [numberFormatter setMaximumFractionDigits:2];
-    [numberFormatter setRoundingMode:NSNumberFormatterRoundFloor];
+    [numberFormatter setRoundingMode:NSNumberFormatterRoundUp];
     float fVal = [number floatValue]/1000000;
     return [numberFormatter stringFromNumber:[NSNumber numberWithFloat:fVal]];
+}
+
++ (NSString *) doubleAmountToStringNoCurrency:(NSNumber*)number
+{
+    NSNumberFormatter * numberFormatter = [[NSNumberFormatter new] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    [numberFormatter setMaximumFractionDigits:2];
+    [numberFormatter setRoundingMode:NSNumberFormatterRoundUp];
+    return [numberFormatter stringFromNumber:number];
 }
 
 + (NSNumber *) stringToNumber:(NSString*)string
@@ -94,8 +123,12 @@
 }
 
 
-+ (Boolean)isDistanceBetweenPointA:(CLLocation*)first AndPointB:(CLLocation *)second withinRange:(NSUInteger)range
++ (Boolean)isDistanceBetweenPointA:(CLLocation*)first AndStore:(GTLStoreendpointStore *)store withinRange:(NSUInteger)range;
 {
+    double storeLat = RAD2DEG(store.lat.doubleValue);
+    double storeLng = RAD2DEG(store.lng.doubleValue);
+    CLLocation* second = [[CLLocation alloc] initWithLatitude:storeLat longitude:storeLng];
+    
     float meterToMile = 0.000621371;
     CGFloat distance = [first distanceFromLocation:second];
     NSInteger maxDistance = floorf(distance * meterToMile);

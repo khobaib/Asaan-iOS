@@ -114,9 +114,8 @@
 
     GTLUserendpointUserAddress *userAddress = [self.userAddresses.items objectAtIndex:indexPath.row];
     CLLocation* first = [[CLLocation alloc] initWithLatitude:userAddress.lat.doubleValue longitude:userAddress.lng.doubleValue];
-    CLLocation* second = [[CLLocation alloc] initWithLatitude:self.selectedStore.lat.doubleValue longitude:self.selectedStore.lng.doubleValue];
 
-    if (![UtilCalls isDistanceBetweenPointA:first AndPointB:second withinRange:self.selectedStore.deliveryDistance.intValue])
+    if (![UtilCalls isDistanceBetweenPointA:first AndStore:self.selectedStore withinRange:self.selectedStore.deliveryDistance.intValue])
     {
         NSString *errMsg = [NSString stringWithFormat:@"Address is out of %@'s delivery range", self.selectedStore.name];
         UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"Error" message:errMsg delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];

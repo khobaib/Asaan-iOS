@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryStoreendpoint (48 custom class methods, 16 custom properties)
+//   GTLQueryStoreendpoint (50 custom class methods, 16 custom properties)
 
 #import "GTLQueryStoreendpoint.h"
 
@@ -285,15 +285,29 @@
   return query;
 }
 
-+ (id)queryForGetStoresOrderedByDistanceWithStatsWithLat:(double)lat
-                                                     lng:(double)lng
-                                           firstPosition:(NSInteger)firstPosition
-                                               maxResult:(NSInteger)maxResult {
++ (id)queryForGetStoresOrderedByDistanceWithStatsWithFirstPosition:(NSInteger)firstPosition
+                                                               lat:(double)lat
+                                                               lng:(double)lng
+                                                         maxResult:(NSInteger)maxResult {
   NSString *methodName = @"storeendpoint.getStoresOrderedByDistanceWithStats";
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.firstPosition = firstPosition;
   query.lat = lat;
   query.lng = lng;
+  query.maxResult = maxResult;
+  query.expectedObjectClass = [GTLStoreendpointStoreAndStatsCollection class];
+  return query;
+}
+
++ (id)queryForGetStoresOrderedByDistanceWithStatsByOwnerWithFirstPosition:(NSInteger)firstPosition
+                                                                      lat:(double)lat
+                                                                      lng:(double)lng
+                                                                maxResult:(NSInteger)maxResult {
+  NSString *methodName = @"storeendpoint.getStoresOrderedByDistanceWithStatsByOwner";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
   query.firstPosition = firstPosition;
+  query.lat = lat;
+  query.lng = lng;
   query.maxResult = maxResult;
   query.expectedObjectClass = [GTLStoreendpointStoreAndStatsCollection class];
   return query;
@@ -579,6 +593,12 @@
   NSString *methodName = @"storeendpoint.saveStoreWaitlistSummary";
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
   query.bodyObject = object;
+  return query;
+}
+
++ (id)queryForUpdateStoreCoordinates {
+  NSString *methodName = @"storeendpoint.updateStoreCoordinates";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
   return query;
 }
 

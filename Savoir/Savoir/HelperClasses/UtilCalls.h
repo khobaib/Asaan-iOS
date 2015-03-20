@@ -19,7 +19,10 @@
 + (NSString *) amountToStringNoCurrency:(NSNumber*)number;
 + (NSString *) percentAmountToString:(NSNumber*)number;
 + (NSString *) percentAmountToStringNoCurrency:(NSNumber*)number;
-+ (Boolean)isDistanceBetweenPointA:(CLLocation*)first AndPointB:(CLLocation *)second withinRange:(NSUInteger)range;
++ (NSString *) doubleAmountToStringNoCurrency:(NSNumber*)number;
++ (NSString *) doubleAmountToString:(NSNumber*)number;
++ (NSNumber *) doubleAmountToLong:(double)doubleNumber;
++ (Boolean)isDistanceBetweenPointA:(CLLocation*)first AndStore:(GTLStoreendpointStore *)store withinRange:(NSUInteger)range;
 
 + (void)slidingMenuSetupWith:(UIViewController *)viewController withItem:(UIBarButtonItem *)revealButtonItem;
 

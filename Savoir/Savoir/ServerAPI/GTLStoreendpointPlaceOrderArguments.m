@@ -13,9 +13,11 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointPlaceOrderArguments (0 custom class methods, 9 custom properties)
+//   GTLStoreendpointPlaceOrderArguments (0 custom class methods, 6 custom properties)
 
 #import "GTLStoreendpointPlaceOrderArguments.h"
+
+#import "GTLStoreendpointStoreOrder.h"
 
 // ----------------------------------------------------------------------------
 //
@@ -23,6 +25,5 @@
 //
 
 @implementation GTLStoreendpointPlaceOrderArguments
-@dynamic cardid, customerId, guestCount, orderMode, storeId, storeName,
-         strOrder, token, userId;
+@dynamic cardid, customerId, order, strOrder, token, userId;
 @end

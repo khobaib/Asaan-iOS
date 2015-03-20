@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryStoreendpoint (48 custom class methods, 16 custom properties)
+//   GTLQueryStoreendpoint (50 custom class methods, 16 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLQuery.h"
@@ -230,10 +230,19 @@
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 // Fetches a GTLStoreendpointStoreAndStatsCollection.
-+ (id)queryForGetStoresOrderedByDistanceWithStatsWithLat:(double)lat
-                                                     lng:(double)lng
-                                           firstPosition:(NSInteger)firstPosition
-                                               maxResult:(NSInteger)maxResult;
++ (id)queryForGetStoresOrderedByDistanceWithStatsWithFirstPosition:(NSInteger)firstPosition
+                                                               lat:(double)lat
+                                                               lng:(double)lng
+                                                         maxResult:(NSInteger)maxResult;
+
+// Method: storeendpoint.getStoresOrderedByDistanceWithStatsByOwner
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
+// Fetches a GTLStoreendpointStoreAndStatsCollection.
++ (id)queryForGetStoresOrderedByDistanceWithStatsByOwnerWithFirstPosition:(NSInteger)firstPosition
+                                                                      lat:(double)lat
+                                                                      lng:(double)lng
+                                                                maxResult:(NSInteger)maxResult;
 
 // Method: storeendpoint.getStoreStats
 //  Authorization scope(s):
@@ -380,5 +389,10 @@
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 + (id)queryForSaveStoreWaitlistSummaryWithObject:(GTLStoreendpointStoreWaitlistSummary *)object;
+
+// Method: storeendpoint.updateStoreCoordinates
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
++ (id)queryForUpdateStoreCoordinates;
 
 @end
