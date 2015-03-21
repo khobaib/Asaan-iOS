@@ -75,7 +75,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     [appDelegate.notificationUtils getSlidingMenuBarButtonSetupWith:self];
@@ -153,12 +152,18 @@
 }
 
 - (void)dataProvider:(DataProvider *)dataProvider willLoadDataAtIndexes:(NSIndexSet *)indexes {
-//    [self.hud show:YES];
+    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
+}
+
+-(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if([indexPath row] == ((NSIndexPath*)[[tableView indexPathsForVisibleRows] lastObject]).row)
+        [self.hud hide:YES];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -471,12 +476,11 @@
     {
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
         if (appDelegate.globalObjectHolder.location == nil)
-            self.lastLocation = appDelegate.globalObjectHolder.location = [[CLLocation alloc]initWithLatitude:RAD2DEG(41.772193) longitude:RAD2DEG(-88.15099)];
+            self.lastLocation = appDelegate.globalObjectHolder.location = [[CLLocation alloc]initWithLatitude:41.772193 longitude:-88.15099];
         else
             self.lastLocation = appDelegate.globalObjectHolder.location;
         [self setupDatastore];
     }
-    [self.hud hide:YES];
 }
 
 // Delegate method from the CLLocationManagerDelegate protocol.
@@ -498,7 +502,6 @@
         
         [self setupDatastore];
     }
-    [self.hud hide:YES];
 
     //    NSDate* eventDate = location.timestamp;
     //    NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];

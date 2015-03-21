@@ -345,11 +345,13 @@
     if (entry.status.intValue == TABLE_IS_READY)
     {
         btnTableIsReady.imageView.image = [UIImage imageNamed:@"waitlist_table_seated"];
+        [btnTableIsReady.imageView setNeedsDisplay];
         [self seatQueueEntry:entry];
     }
     else
     {
         btnTableIsReady.imageView.image = [UIImage imageNamed:@"waitlist_table_ready"];
+        [btnTableIsReady.imageView setNeedsDisplay];
         NSDate *date = [NSDate date];
         long timeInMillis = [date timeIntervalSince1970]*1000;
         
@@ -405,7 +407,6 @@
          }
          self.isLoading = NO;
      }];
-
 }
 
 #pragma mark - Navigation

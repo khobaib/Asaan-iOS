@@ -46,8 +46,8 @@
     
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
     {
-        self.tableView.estimatedRowHeight = 78;
         self.tableView.rowHeight = UITableViewAutomaticDimension;
+        self.tableView.estimatedRowHeight = 78;
     }
     else
         self.cellHeight = 78;

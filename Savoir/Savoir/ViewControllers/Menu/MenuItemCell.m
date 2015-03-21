@@ -18,8 +18,15 @@
     
     _itemImageView.userInteractionEnabled = YES;
     [_itemImageView addGestureRecognizer:tapped];
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
     
-    
+    [self.contentView layoutIfNeeded];
+    self.titleLabel.preferredMaxLayoutWidth = CGRectGetWidth(self.titleLabel.frame);
+    self.descriptionLabel.preferredMaxLayoutWidth = CGRectGetWidth(self.descriptionLabel.frame);
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

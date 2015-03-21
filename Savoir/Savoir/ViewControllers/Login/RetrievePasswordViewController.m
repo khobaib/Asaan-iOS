@@ -11,6 +11,7 @@
 #import "MBProgressHUD.h"
 #import <Parse/Parse.h>
 #import "InlineCalls.h"
+#import "UIAlertView+Blocks.h"
 
 @interface RetrievePasswordViewController ()
     @property (weak, nonatomic) IBOutlet UILabel *lblMessage;
@@ -44,9 +45,10 @@
         hud.labelText = @"Sending password retrieval email ...";
         hud.hidden = NO;
         [PFUser requestPasswordResetForEmailInBackground:_txtEmail.text];
-        _lblMessage.text = @"Email sent. Please check your mailbox.";
         hud.hidden = YES;
-        [NSThread sleepForTimeInterval:1];
+        [UIAlertView showWithTitle:@"Password Reset" message:@"Password Reset Email has been sent. Please check your mailbox." cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex)
+         {
+         }];
         [self performSegueWithIdentifier:@"segueUnwindToLogin" sender:textField];
     }
     return YES;

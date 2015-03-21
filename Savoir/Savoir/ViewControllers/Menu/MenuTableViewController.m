@@ -92,11 +92,11 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
 //    self.cellHeight = 150;
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
     {
-        self.tableView.estimatedRowHeight = 200;
         self.tableView.rowHeight = UITableViewAutomaticDimension;
+        self.tableView.estimatedRowHeight = 140;
     }
     else
-        self.cellHeight = 200;
+        self.cellHeight = 140;
 }
 
 - (void)dealloc
@@ -139,6 +139,12 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
         UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:button];
         self.navigationItem.rightBarButtonItem = item;
     }
+}
+// As of iOS 8 Beta 5 you need to reload the table data on viewDidAppear.  YUK...
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.tableView reloadData];
 }
 
 - (void) showOrderSummaryPressed
