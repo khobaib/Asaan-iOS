@@ -11,6 +11,7 @@
 #import "GTLStoreendpoint.h"
 #import "StoreLocation.h"
 #import <MapKit/MapKit.h>
+#import "InlineCalls.h"
 
 #define METER_DISTANCE  800
 
@@ -39,8 +40,8 @@
         
         // Configure MapView
         CLLocationCoordinate2D zoomLocation;
-        zoomLocation.latitude = [self.selectedStore.lat doubleValue];
-        zoomLocation.longitude= [self.selectedStore.lng doubleValue];
+        zoomLocation.latitude = RAD2DEG(self.selectedStore.lat.doubleValue);
+        zoomLocation.longitude= RAD2DEG(self.selectedStore.lng.doubleValue);
         
         if (CLLocationCoordinate2DIsValid(zoomLocation)) {
             MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 5*METER_DISTANCE, 5*METER_DISTANCE);
@@ -75,8 +76,8 @@
         [self.storeMapView removeAnnotation:annotation];
     }
     
-    NSNumber *latitude = self.selectedStore.lat;
-    NSNumber *longitude = self.selectedStore.lng;
+    NSNumber *latitude = [NSNumber numberWithDouble:RAD2DEG(self.selectedStore.lat.doubleValue)];
+    NSNumber *longitude = [NSNumber numberWithDouble:RAD2DEG(self.selectedStore.lng.doubleValue)];
     NSString *storeDescription = self.selectedStore.name;
     NSString *address = self.selectedStore.address;
     
