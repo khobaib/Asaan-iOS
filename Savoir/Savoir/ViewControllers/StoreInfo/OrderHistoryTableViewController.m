@@ -86,7 +86,7 @@
              {
                  if (object.orders.count > 0)
                  {
-                     _dataProvider = [[DataProvider alloc] initWithPageSize:object.orders.count itemCount:object.count.longLongValue];
+                     _dataProvider = [[DataProvider alloc] initWithPageSize:object.orders.count itemCount:object.count.intValue];
                      _dataProvider.delegate = weakSelf;
                      _dataProvider.shouldLoadAutomatically = YES;
                      _dataProvider.automaticPreloadMargin = FluentPagingTablePreloadMargin;
@@ -162,7 +162,7 @@
 -(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UITableViewCell *headerCell = [tableView dequeueReusableCellWithIdentifier:@"HeaderCell"];
-    
+    headerCell.backgroundColor = [UIColor clearColor];
     NSString *title = @"All Restaurants";
     if (self.selectedStore != nil)
         title = self.selectedStore.name;
@@ -174,7 +174,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"OrderCell" forIndexPath:indexPath];
     cell.tag = indexPath.row;
-    
+    cell.backgroundColor = [UIColor clearColor];
     UILabel *txtTitle=(UILabel *)[cell viewWithTag:501];
     UILabel *txtSubtitle=(UILabel *)[cell viewWithTag:502];
     txtTitle.text = nil;

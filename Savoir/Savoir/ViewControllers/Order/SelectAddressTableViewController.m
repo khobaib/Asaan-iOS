@@ -77,6 +77,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AddressCell" forIndexPath:indexPath];
+    cell.backgroundColor = [UIColor clearColor];
     UILabel *txtTitle=(UILabel *)[cell viewWithTag:501];
     UILabel *txtAddress=(UILabel *)[cell viewWithTag:502];
     

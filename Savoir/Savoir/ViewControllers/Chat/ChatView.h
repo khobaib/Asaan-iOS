@@ -17,11 +17,11 @@
 
 @property (nonatomic) Boolean presentedFromNotification;
 
-@property (nonatomic) long roomOrStoreId;
-@property (nonatomic) long storeId;
+@property (nonatomic) long long roomOrStoreId;
+@property (nonatomic) long long storeId;
 @property (nonatomic) Boolean isStore;
 
-- (id)initWith:(long)roomOrStoreId isStore:(Boolean)isStore currentStoreId:(long)storeid;
+- (id)initWith:(long long)roomOrStoreId isStore:(Boolean)isStore currentStoreId:(long long)storeid;
 
 - (void) refreshMessageView;
 

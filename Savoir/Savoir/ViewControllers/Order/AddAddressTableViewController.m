@@ -30,6 +30,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *other;
 @property (weak, nonatomic) IBOutlet UITextField *aptNo;
 @property (weak, nonatomic) IBOutlet DropdownView *state;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong, nonatomic) CLGeocoder *geocoder;
 
@@ -71,6 +72,11 @@
     self.city.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Chicago" attributes:@{NSForegroundColorAttributeName: color}];
     self.zip.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"60601" attributes:@{NSForegroundColorAttributeName: color}];
     self.other.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"e.g. Cross street, entrance at back of building, etc." attributes:@{NSForegroundColorAttributeName: color}];
+}
+
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.backgroundColor = [UIColor clearColor];
 }
 
 - (void)didReceiveMemoryWarning {

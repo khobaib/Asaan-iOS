@@ -215,6 +215,7 @@
 {
     UITableViewCell *cell;
     cell = [tableView dequeueReusableCellWithIdentifier:@"ChatUserCell" forIndexPath:indexPath];
+    cell.backgroundColor = [UIColor clearColor];
     UIImageView *imgProfilePhoto = (UIImageView *)[cell viewWithTag:501];
     UILabel *txtName = (UILabel *)[cell viewWithTag:502];
     UILabel *txtPhone = (UILabel *)[cell viewWithTag:503];

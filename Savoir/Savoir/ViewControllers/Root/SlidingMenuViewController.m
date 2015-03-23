@@ -86,6 +86,7 @@
     static NSString *CellIdentifier = @"SlidingMenuCell";
     
     SMTableViewCell1 *cell = [tableView dequeueReusableCellWithIdentifier: CellIdentifier forIndexPath: indexPath];
+    cell.backgroundColor = [UIColor clearColor];
     
     cell.titleImage.image = [UIImage imageNamed:_menuImage[indexPath.row]];
     cell.titleLabel.text = _menu[indexPath.row];

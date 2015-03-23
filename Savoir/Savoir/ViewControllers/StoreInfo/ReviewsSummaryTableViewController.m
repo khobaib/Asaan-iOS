@@ -93,7 +93,7 @@
              {
                  if (object.reviews.count > 0)
                  {
-                     _dataProvider = [[DataProvider alloc] initWithPageSize:object.reviews.count itemCount:object.count.longLongValue];
+                     _dataProvider = [[DataProvider alloc] initWithPageSize:object.reviews.count itemCount:object.count.intValue];
                      _dataProvider.delegate = weakSelf;
                      _dataProvider.shouldLoadAutomatically = YES;
                      _dataProvider.automaticPreloadMargin = FluentPagingTablePreloadMargin;
@@ -183,6 +183,7 @@
 - (UITableViewCell *)setupSummaryCellAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"SummaryCell" forIndexPath:indexPath];
+    cell.backgroundColor = [UIColor clearColor];
     cell.tag = indexPath.row;
 
     UILabel *txtCustomers=(UILabel *)[cell viewWithTag:501];
@@ -202,6 +203,7 @@
 - (UITableViewCell *)setupReviewCellAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"ReviewDetailCell" forIndexPath:indexPath];
+    cell.backgroundColor = [UIColor clearColor];
     cell.tag = indexPath.row;
     
     UILabel *txtPersonNameAndDate=(UILabel *)[cell viewWithTag:501];

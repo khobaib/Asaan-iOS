@@ -61,6 +61,11 @@
     [self getStoreWaitTimes];
 }
 
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.backgroundColor = [UIColor clearColor];
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     NSString *sectionTitle = [self tableView:tableView titleForHeaderInSection:section];
@@ -142,7 +147,7 @@
          }
          else
          {
-             NSLog(@"queryForGetStoreWaitListQueueWithStoreId error:%ld, %@", error.code, error.debugDescription);
+             NSLog(@"queryForGetStoreWaitListQueueWithStoreId error:%ld, %@", (long)error.code, error.debugDescription);
          }
      }];
 }
@@ -164,7 +169,7 @@
 {
     // Create a new Wait list queue entry for this user and store
     GTLStoreendpointStoreWaitListQueue *newEntry = [[GTLStoreendpointStoreWaitListQueue alloc]init];
-    newEntry.storeId = [NSNumber numberWithLong:self.selectedStore.identifier.longLongValue];
+    newEntry.storeId = [NSNumber numberWithLongLong:self.selectedStore.identifier.longLongValue];
     newEntry.storeName = self.selectedStore.name;
     int time = (self.storeWaitListSummary.partiesOfSize12.intValue + self.storeWaitListSummary.partiesOfSize34.intValue + self.storeWaitListSummary.partiesOfSize5OrMore.intValue)*2;
     newEntry.estTimeMin = [NSNumber numberWithInt:(time + 15)];

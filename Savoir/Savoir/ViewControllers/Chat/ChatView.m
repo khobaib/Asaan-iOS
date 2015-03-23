@@ -44,7 +44,7 @@
     GTLStoreendpointChatMessagesAndUsers *messagesAndUsers;
 }
 
-- (void) showIndividualRoomMessagesForStore:(long)roomOrStoreId isStore:(Boolean)isStore currentStoreId:(long)storeid;
+- (void) showIndividualRoomMessagesForStore:(long long)roomOrStoreId isStore:(Boolean)isStore currentStoreId:(long long)storeid;
 - (void)backButtonPressed;
 
 @end
@@ -62,7 +62,7 @@
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-- (id)initWith:(long)roomOrStoreId isStore:(Boolean)isStore currentStoreId:(long)storeid
+- (id)initWith:(long long)roomOrStoreId isStore:(Boolean)isStore currentStoreId:(long long)storeid
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
 	self = [super init];
@@ -108,7 +108,7 @@
     [self loadMessagesForSend:false];
 }
 
-- (void) showIndividualRoomMessagesForStore:(long)roomOrStoreId isStore:(Boolean)isStore currentStoreId:(long)storeid
+- (void) showIndividualRoomMessagesForStore:(long long)roomOrStoreId isStore:(Boolean)isStore currentStoreId:(long long)storeid
 {
     if (roomOrStoreId != self.roomOrStoreId || isStore != self.isStore)
     {
@@ -205,7 +205,7 @@
              }
              else
              {
-                 NSLog(@"queryForGetChatRoomsAndMembershipsForUser error:%ld, %@", error.code, error.debugDescription);
+                 NSLog(@"queryForGetChatRoomsAndMembershipsForUser error:%ld, %@", (long)error.code, error.debugDescription);
                  [ProgressHUD showError:@"Network error."];
              }
              isLoading = NO;
@@ -265,7 +265,7 @@
     GTLStoreendpointChatMessage *newMessage = [[GTLStoreendpointChatMessage alloc]init];
     
     if (self.isStore == false)
-        newMessage.roomId = [NSNumber numberWithLong:self.roomOrStoreId];
+        newMessage.roomId = [NSNumber numberWithLongLong:self.roomOrStoreId];
     
     newMessage.txtMessage = text;
     newMessage.fileMessage = pictureFile.url;
@@ -294,7 +294,7 @@
          }
          else
          {
-             NSLog(@"queryForSaveChatMessageWithObject error:%ld, %@", error.code, error.debugDescription);
+             NSLog(@"queryForSaveChatMessageWithObject error:%ld, %@", (long)error.code, error.debugDescription);
              [ProgressHUD showError:@"Network error."];
          }
      }];

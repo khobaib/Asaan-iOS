@@ -32,6 +32,7 @@
 @property (nonatomic, strong) MBProgressHUD *hud;
 @property (weak, nonatomic) IBOutlet UILabel *orderTime;
 @property (weak, nonatomic) IBOutlet UILabel *partySize;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic) long minOrderTime;
 @property (nonatomic) long timeIncrementInterval;
@@ -97,6 +98,11 @@
 //
 //    if (!self.userAddresses || !self.userAddresses.items || self.userAddresses.items.count == 0)
 //        [self performSegueWithIdentifier:@"segueAddAddress" sender:self];
+}
+
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.backgroundColor = [UIColor clearColor];
 }
 
 - (void)didReceiveMemoryWarning {

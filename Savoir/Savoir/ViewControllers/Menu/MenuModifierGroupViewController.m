@@ -162,7 +162,7 @@
 {
     if (_onlineOrderSelectedMenuItem.selectedModifierGroups.count > 0)
     {
-        long finalPrice = _onlineOrderSelectedMenuItem.selectedItem.price.longLongValue;
+        long long finalPrice = _onlineOrderSelectedMenuItem.selectedItem.price.longLongValue;
         for (OnlineOrderSelectedModifierGroup *modifierGroup in _onlineOrderSelectedMenuItem.selectedModifierGroups)
         {
             for (int i = 0; i < modifierGroup.selectedModifierIndexes.count; i++)
@@ -250,6 +250,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ModifierGroupCell" forIndexPath:indexPath];
+    cell.backgroundColor = [UIColor clearColor];
     GTLStoreendpointStoreMenuItemModifierGroup *modGroup = [_gtlModifiersAndGroups.modifierGroups objectAtIndex:indexPath.row];
     cell.textLabel.text = modGroup.modifierGroupShortDescription;
     cell.detailTextLabel.text = [self updateDescriptionForModifierGroup:modGroup];

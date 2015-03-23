@@ -10,6 +10,6 @@
 
 @interface OrderForStoreLoadingOperation : DataLoadingOperation
 
-- (instancetype)initWithIndexes:(NSIndexSet *)indexes storeId:(long)storeId;
+- (instancetype)initWithIndexes:(NSIndexSet *)indexes storeId:(long long)storeId;
 
 @end

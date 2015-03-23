@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 
 @interface UpdateInfoViewController ()
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -25,6 +26,11 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.backgroundColor = [UIColor clearColor];
 }
 
 - (void)didReceiveMemoryWarning {

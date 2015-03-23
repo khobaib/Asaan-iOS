@@ -74,6 +74,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PaymentCell" forIndexPath:indexPath];
+    cell.backgroundColor = [UIColor clearColor];
     UIImageView *imgCardType=(UIImageView *)[cell viewWithTag:501];
     UILabel *txtCardLastFour=(UILabel *)[cell viewWithTag:502];
     

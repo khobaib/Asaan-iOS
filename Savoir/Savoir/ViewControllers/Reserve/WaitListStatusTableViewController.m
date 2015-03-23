@@ -59,6 +59,11 @@
     [self.timer invalidate];
 }
 
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.backgroundColor = [UIColor clearColor];
+}
+
 - (void) getStoreWaitStatus
 {
     __weak __typeof(self) weakSelf = self;
@@ -124,7 +129,7 @@
              NSDate *d2 = [NSDate dateWithTimeIntervalSince1970:object.queueEntry.createdDate.longLongValue/1000];//2012-06-22
              NSDateComponents *components = [c components:NSHourCalendarUnit|NSMinuteCalendarUnit fromDate:d2 toDate:d1 options:0];
              NSInteger diff = components.hour*60 + components.minute;
-             weakSelf.txtEstWaitTime.text = [NSString stringWithFormat:@"Elapsed Time: %ld min (%d - %d)", diff, (object.queueEntry.estTimeMin.intValue), (object.queueEntry.estTimeMax.intValue)];
+             weakSelf.txtEstWaitTime.text = [NSString stringWithFormat:@"Elapsed Time: %ld min (%d - %d)", (long)diff, (object.queueEntry.estTimeMin.intValue), (object.queueEntry.estTimeMax.intValue)];
          }
          else
              NSLog(@"Savoir Server Call Failed: queryForGetStoreWaitListQueueEntryForCurrentUser - error:%@", error.userInfo);

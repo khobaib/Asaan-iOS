@@ -269,8 +269,8 @@
     if ([type isEqualToString:@"CHAT"] == false)
         return;
     
-    long roomId = [[userInfo objectForKey:@"CHAT_ROOMID"] longLongValue];
-    long storeId = [[userInfo objectForKey:@"CHAT_STOREID"] longLongValue];
+    long long roomId = [[userInfo objectForKey:@"CHAT_ROOMID"] longLongValue];
+    long long storeId = [[userInfo objectForKey:@"CHAT_STOREID"] longLongValue];
     if (bStartup == true || status == UIApplicationStateInactive)
         [self showChatViewControllerWithRoomId:roomId AndStoreId:storeId];
     else
@@ -287,7 +287,7 @@
     }
 }
 
-- (void) showChatViewControllerWithRoomId:(long)roomId AndStoreId:(long)storeId
+- (void) showChatViewControllerWithRoomId:(long long)roomId AndStoreId:(long long)storeId
 {
     ChatView *chatView = [[ChatView alloc] initWith:roomId isStore:false currentStoreId:storeId];
     chatView.presentedFromNotification = true;

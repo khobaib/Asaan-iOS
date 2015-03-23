@@ -40,6 +40,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *webLabel;
 @property (weak, nonatomic) IBOutlet UILabel *facebookLabel;
 @property (weak, nonatomic) IBOutlet UILabel *twitterLabel;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 
 @end
@@ -99,6 +100,11 @@
         self.facebookLabel.text = _selectedStore.fbUrl ? _selectedStore.fbUrl : @"";
         self.twitterLabel.text = _selectedStore.twitterUrl ? _selectedStore.twitterUrl : @"";
     }
+}
+
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.backgroundColor = [UIColor clearColor];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -67,7 +67,7 @@
 
     for (GTLStoreendpointStoreDiscount *discount in self.discounts)
     {
-        if ([discount.code isEqualToString:self.txtDiscountCode.text]) {
+        if (discount.code != nil && [discount.code caseInsensitiveCompare:self.txtDiscountCode.text] == NSOrderedSame) {
             NSString *foundResponse = [NSString stringWithFormat:@"%@ - %@", self.txtDiscountCode.text, discount.title];
             AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
             appDelegate.globalObjectHolder.orderInProgress.selectedDiscount = discount;

@@ -293,6 +293,7 @@
         }
     }
     
+    cell.backgroundColor = [UIColor clearColor];
     return cell;
 }
 

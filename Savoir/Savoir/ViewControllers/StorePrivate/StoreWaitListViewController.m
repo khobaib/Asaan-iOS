@@ -130,7 +130,7 @@
              }
              else
              {
-                 NSLog(@"queryForGetStoreWaitListQueueWithStoreId error:%ld, %@", error.code, error.debugDescription);
+                 NSLog(@"queryForGetStoreWaitListQueueWithStoreId error:%ld, %@", (long)error.code, error.debugDescription);
              }
              self.isLoading = NO;
          }];
@@ -175,6 +175,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserCell" forIndexPath:indexPath];
+    cell.backgroundColor = [UIColor clearColor];
     UIImageView *imgProfilePhoto = (UIImageView *)[cell viewWithTag:501];
     UILabel *txtName = (UILabel *)[cell viewWithTag:502];
     UILabel *txtPartySize = (UILabel *)[cell viewWithTag:503];

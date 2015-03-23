@@ -133,8 +133,8 @@
     order.deliveryFee = [UtilCalls doubleAmountToLong:[self deliveryFee]];
     order.serviceCharge = [UtilCalls doubleAmountToLong:[self gratuity]];
     order.tax = [UtilCalls doubleAmountToLong:[self taxAmount]];
-    long finalTotal = [UtilCalls doubleAmountToLong:[self finalAmount]].longLongValue;
-    order.finalTotal = [NSNumber numberWithLong:finalTotal];
+    long long finalTotal = [UtilCalls doubleAmountToLong:[self finalAmount]].longLongValue;
+    order.finalTotal = [NSNumber numberWithLongLong:finalTotal];
     
     if ([self discountAmount] > 0)
     {
@@ -302,6 +302,7 @@
         }
     }
     
+    cell.backgroundColor = [UIColor clearColor];
     return cell;
 }
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath

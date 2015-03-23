@@ -68,6 +68,11 @@
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.backgroundColor = [UIColor clearColor];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -172,7 +177,7 @@
          if (!error)
              [self sendMessage:object];
          else
-             NSLog(@"queryForGetChatRoomsAndMembershipsForUser error:%ld, %@", error.code, error.debugDescription);
+             NSLog(@"queryForGetChatRoomsAndMembershipsForUser error:%ld, %@", (long)error.code, error.debugDescription);
      }];
 }
 
@@ -199,7 +204,7 @@
     // Create a new Chat room for this user and store
     GTLStoreendpointChatRoom *newRoom = [[GTLStoreendpointChatRoom alloc]init];
     newRoom.name = self.selectedStore.name;
-    newRoom.storeId = [NSNumber numberWithLong:self.selectedStore.identifier.longLongValue];
+    newRoom.storeId = [NSNumber numberWithLongLong:self.selectedStore.identifier.longLongValue];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
     GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForSaveChatRoomWithObject:newRoom];
@@ -215,7 +220,7 @@
              return;
          }
          else
-             NSLog(@"queryForSaveChatRoomWithObject error:%ld, %@", error.code, error.debugDescription);
+             NSLog(@"queryForSaveChatRoomWithObject error:%ld, %@", (long)error.code, error.debugDescription);
      }];
 }
 
@@ -252,7 +257,7 @@
              [weakSelf performSegueWithIdentifier:@"segueUnwindReserveToStoreList" sender:weakSelf];
          }
          else
-             NSLog(@"createMessageAndSend queryForSaveChatMessageWithObject error:%ld, %@", error.code, error.debugDescription);
+             NSLog(@"createMessageAndSend queryForSaveChatMessageWithObject error:%ld, %@", (long)error.code, error.debugDescription);
      }];
 }
 

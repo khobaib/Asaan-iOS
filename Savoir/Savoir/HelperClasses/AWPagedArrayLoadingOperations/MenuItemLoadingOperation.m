@@ -21,7 +21,7 @@
 @implementation MenuItemLoadingOperation
 @synthesize bDataLoaded = _bDataLoaded;
 
-- (instancetype)initWithIndexes:(NSIndexSet *)indexes storeId:(long)storeId menuPOSId:(long)menuPOSId{
+- (instancetype)initWithIndexes:(NSIndexSet *)indexes storeId:(long long)storeId menuPOSId:(int)menuPOSId{
     
     self = [super initWithIndexes:indexes];
     

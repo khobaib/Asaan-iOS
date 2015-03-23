@@ -10,6 +10,6 @@
 
 @interface MenuItemLoadingOperation : DataLoadingOperation
 
-- (instancetype)initWithIndexes:(NSIndexSet *)indexes storeId:(long)storeId menuPOSId:(long)menuPOSId;
+- (instancetype)initWithIndexes:(NSIndexSet *)indexes storeId:(long long)storeId menuPOSId:(int)menuPOSId;
 
 @end

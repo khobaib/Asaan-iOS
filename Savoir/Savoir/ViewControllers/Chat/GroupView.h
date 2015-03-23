@@ -15,7 +15,7 @@
 
 //@property (strong, nonatomic) NSMutableArray *chatrooms;
 
-- (void)showChatRoomForStore:(long)storeId WithName:(NSString *)storeName;
+- (void)showChatRoomForStore:(long long)storeId WithName:(NSString *)storeName;
 
 
 @end

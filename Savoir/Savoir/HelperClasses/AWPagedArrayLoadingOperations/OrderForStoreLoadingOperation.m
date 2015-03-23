@@ -20,7 +20,7 @@
 @implementation OrderForStoreLoadingOperation
 @synthesize bDataLoaded = _bDataLoaded;
 
-- (instancetype)initWithIndexes:(NSIndexSet *)indexes storeId:(long)storeId{
+- (instancetype)initWithIndexes:(NSIndexSet *)indexes storeId:(long long)storeId{
     
     self = [super initWithIndexes:indexes];
     

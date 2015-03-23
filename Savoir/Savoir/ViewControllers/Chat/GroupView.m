@@ -86,7 +86,7 @@
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-- (void)showChatRoomForStore:(long)storeId WithName:(NSString *)storeName
+- (void)showChatRoomForStore:(long long)storeId WithName:(NSString *)storeName
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
     if (storeId == 0)
@@ -126,7 +126,7 @@
     // Create a new Chat room for this user and store
     GTLStoreendpointChatRoom *newRoom = [[GTLStoreendpointChatRoom alloc]init];
     newRoom.name = storeName;
-    newRoom.storeId = [NSNumber numberWithLong:storeId];
+    newRoom.storeId = [NSNumber numberWithLongLong:storeId];
     __weak __typeof(self) weakSelf = self;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
@@ -159,8 +159,6 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
 	[super viewDidAppear:animated];
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-//    appDelegate.notificationUtils.bReceivedChatNotification = false;
 }
 
 #pragma mark - Backend actions
@@ -257,9 +255,9 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
-    long roomOrMembershipId = 0;
+    long long roomOrMembershipId = 0;
     NSString *title;
-    long storeId;
+    long long storeId;
 	//---------------------------------------------------------------------------------------------------------------------------------------------
     id object = self.chatRoomsAndMemberships[indexPath.row];
     Boolean isStore = false;

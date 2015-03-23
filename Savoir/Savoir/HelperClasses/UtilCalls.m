@@ -262,15 +262,15 @@
 
 + (NSString *) getOverallReviewStringFromStats:(GTLStoreendpointStoreAndStats *)storeAndStats
 {
-    long foodCount = storeAndStats.stats.foodDislikes.longLongValue + storeAndStats.stats.foodLikes.longLongValue;
-    long serviceCount = storeAndStats.stats.serviceDislikes.longLongValue + storeAndStats.stats.serviceLikes.longLongValue;
+    long long foodCount = storeAndStats.stats.foodDislikes.longLongValue + storeAndStats.stats.foodLikes.longLongValue;
+    long long serviceCount = storeAndStats.stats.serviceDislikes.longLongValue + storeAndStats.stats.serviceLikes.longLongValue;
     if (foodCount + serviceCount > 0)
     {
         NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
         [numberFormatter setNumberStyle:NSNumberFormatterPercentStyle];
         int iPercent = (int)((storeAndStats.stats.foodLikes.longLongValue + storeAndStats.stats.serviceLikes.longLongValue)*100/(foodCount + serviceCount));
         NSNumber *likePercent = [NSNumber numberWithInt:iPercent];
-        NSString *strReviewCount = [UtilCalls formattedNumber:[NSNumber numberWithLong:(foodCount + serviceCount)/2]];
+        NSString *strReviewCount = [UtilCalls formattedNumber:[NSNumber numberWithLongLong:(foodCount + serviceCount)/2]];
         NSString *strLikePercent = [UtilCalls formattedNumber:likePercent];
         return [NSString stringWithFormat:@"%@%% (%@)", strLikePercent, strReviewCount];
     }
@@ -280,14 +280,14 @@
 
 + (NSString *) getFoodReviewStringFromStats:(GTLStoreendpointStoreAndStats *)storeAndStats
 {
-    long foodCount = storeAndStats.stats.foodDislikes.longLongValue + storeAndStats.stats.foodLikes.longLongValue;
+    long long foodCount = storeAndStats.stats.foodDislikes.longLongValue + storeAndStats.stats.foodLikes.longLongValue;
     if (foodCount > 0)
     {
         NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
         [numberFormatter setNumberStyle:NSNumberFormatterPercentStyle];
         int iPercent = (int)((storeAndStats.stats.foodLikes.longLongValue)*100/(foodCount));
         NSNumber *likePercent = [NSNumber numberWithInt:iPercent];
-        NSString *strReviewCount = [UtilCalls formattedNumber:[NSNumber numberWithLong:(foodCount)/2]];
+        NSString *strReviewCount = [UtilCalls formattedNumber:[NSNumber numberWithLongLong:(foodCount)/2]];
         NSString *strLikePercent = [UtilCalls formattedNumber:likePercent];
         return [NSString stringWithFormat:@"%@%% Like It (%@ Reviews)", strLikePercent, strReviewCount];
     }
@@ -317,14 +317,14 @@
 
 + (NSString *) getServiceReviewStringFromStats:(GTLStoreendpointStoreAndStats *)storeAndStats
 {
-    long serviceCount = storeAndStats.stats.serviceDislikes.longLongValue + storeAndStats.stats.serviceLikes.longLongValue;
+    long long serviceCount = storeAndStats.stats.serviceDislikes.longLongValue + storeAndStats.stats.serviceLikes.longLongValue;
     if (serviceCount > 0)
     {
         NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
         [numberFormatter setNumberStyle:NSNumberFormatterPercentStyle];
         int iPercent = (int)((storeAndStats.stats.serviceLikes.longLongValue)*100/(serviceCount));
         NSNumber *likePercent = [NSNumber numberWithInt:iPercent];
-        NSString *strReviewCount = [UtilCalls formattedNumber:[NSNumber numberWithLong:(serviceCount)/2]];
+        NSString *strReviewCount = [UtilCalls formattedNumber:[NSNumber numberWithLongLong:(serviceCount)/2]];
         NSString *strLikePercent = [UtilCalls formattedNumber:likePercent];
         return [NSString stringWithFormat:@"%@%% Like It (%@ Reviews)", strLikePercent, strReviewCount];
     }

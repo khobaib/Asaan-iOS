@@ -16,4 +16,4 @@ void		ParsePushUserAssign		(void);
 void		ParsePushUserResign		(void);
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-void		SendPushNotification	(long roomId, long storeId, NSString *text);
+void		SendPushNotification	(long long roomId, long long storeId, NSString *text);

@@ -51,7 +51,7 @@
 
 - (void)startStandardUpdates;
 
-- (void)showChatRoomForStore:(long)storeId WithName:(NSString *)storeName;
+- (void)showChatRoomForStore:(long long)storeId WithName:(NSString *)storeName;
 @end
 
 @implementation StoreListTableViewController
@@ -170,6 +170,7 @@
     
     StoreListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StoreListCell" forIndexPath:indexPath];
     cell.tag = indexPath.row;
+    cell.backgroundColor = [UIColor clearColor];
     
     id dataObject = self.dataProvider.dataObjects[indexPath.row];
     if ([dataObject isKindOfClass:[NSNull class]]) {
@@ -326,7 +327,7 @@
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-- (void)showChatRoomForStore:(long)storeId WithName:(NSString *)storeName
+- (void)showChatRoomForStore:(long long)storeId WithName:(NSString *)storeName
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
     if (storeId == 0)
@@ -359,7 +360,7 @@
     // Create a new Chat room for this user and store
     GTLStoreendpointChatRoom *newRoom = [[GTLStoreendpointChatRoom alloc]init];
     newRoom.name = storeName;
-    newRoom.storeId = [NSNumber numberWithLong:storeId];
+    newRoom.storeId = [NSNumber numberWithLongLong:storeId];
     __weak __typeof(self) weakSelf = self;
     GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
     GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForSaveChatRoomWithObject:newRoom];

@@ -367,8 +367,8 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
         menuSegmentHolder = [_menuSegmentHolders objectAtIndex:_segmentedControl.selectedSegmentIndex];
     else
         menuSegmentHolder = [_menuSegmentHolders firstObject];
-    long storeId = menuSegmentHolder.menu.storeId.longLongValue;
-    long menuPOSId = menuSegmentHolder.menu.menuPOSId.longLongValue;
+    long long storeId = menuSegmentHolder.menu.storeId.longLongValue;
+    long long menuPOSId = menuSegmentHolder.menu.menuPOSId.longLongValue;
     MenuItemLoadingOperation *milo = [[MenuItemLoadingOperation alloc] initWithIndexes:indexes storeId:storeId menuPOSId:menuPOSId];
     return milo;
 }
@@ -420,6 +420,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     NSInteger rowIndex = submenu.menuItemPosition.intValue + indexPath.row + 1;
     
     MenuItemCell *cell = [tableView dequeueReusableCellWithIdentifier:MenuItemCellIdentifier forIndexPath:indexPath];
+    cell.backgroundColor = [UIColor clearColor];
     
     cell.titleLabel.text = nil;
     cell.descriptionLabel.text = nil;
@@ -452,14 +453,14 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
         cell.todaysOrdersLabels.text = [UtilCalls formattedNumber:menuItemAndStats.stats.orders];
     }
     
-    long reviewCount = menuItemAndStats.stats.dislikes.longLongValue + menuItemAndStats.stats.likes.longLongValue;
+    long long reviewCount = menuItemAndStats.stats.dislikes.longLongValue + menuItemAndStats.stats.likes.longLongValue;
     if (reviewCount > 0)
     {
         NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
         [numberFormatter setNumberStyle:NSNumberFormatterPercentStyle];
         int iPercent = (int)(menuItemAndStats.stats.likes.longLongValue*100/reviewCount);
         NSNumber *likePercent = [NSNumber numberWithInt:iPercent];
-        NSString *strReviews = [UtilCalls formattedNumber:[NSNumber numberWithLong:reviewCount]];
+        NSString *strReviews = [UtilCalls formattedNumber:[NSNumber numberWithLongLong:reviewCount]];
         NSString *strLikePercent = [UtilCalls formattedNumber:likePercent];
         cell.reviewsLabel.text = [[[strLikePercent stringByAppendingString:@"%("] stringByAppendingString:strReviews] stringByAppendingString:@")"];
         cell.likesImageView.image = [UIImage imageNamed:@"number_likes"];
@@ -701,14 +702,14 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
             captionView.textMostOrdered = @"Most Frequently Ordered";
     }
     
-    long reviewCount = menuItemAndStats.stats.dislikes.longLongValue + menuItemAndStats.stats.likes.longLongValue;
+    long long reviewCount = menuItemAndStats.stats.dislikes.longLongValue + menuItemAndStats.stats.likes.longLongValue;
     if (reviewCount > 0)
     {
         NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
         [numberFormatter setNumberStyle:NSNumberFormatterPercentStyle];
         int iPercent = (int)(menuItemAndStats.stats.likes.longLongValue*100/reviewCount);
         NSNumber *likePercent = [NSNumber numberWithInt:iPercent];
-        NSString *strReviews = [UtilCalls formattedNumber:[NSNumber numberWithLong:reviewCount]];
+        NSString *strReviews = [UtilCalls formattedNumber:[NSNumber numberWithLongLong:reviewCount]];
         NSString *strLikePercent = [UtilCalls formattedNumber:likePercent];
         captionView.textLikes = [[[strLikePercent stringByAppendingString:@"%("] stringByAppendingString:strReviews] stringByAppendingString:@")"];
         captionView.imageLike = [UIImage imageNamed:@"Like"];
