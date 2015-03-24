@@ -12,6 +12,17 @@
 @interface UpdateInfoViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
+@property (strong, nonatomic) IBOutlet UITextField * txtFldFirstName;
+@property (strong, nonatomic) IBOutlet UITextField * txtFldLastName;
+@property (strong, nonatomic) IBOutlet UITextField * txtFldEmail;
+@property (strong, nonatomic) IBOutlet UITextField * txtFldPhone;
+@property (strong, nonatomic) IBOutlet UITextField * txtFldPaymentInfo;
+@property (strong, nonatomic) IBOutlet UITextField * txtFldFacebookProfile;
+
+@property (strong, nonatomic) IBOutlet UISlider * sldrTip;
+
+@property (strong, nonatomic) IBOutlet UILabel * lblSldrValue;
+
 @end
 
 @implementation UpdateInfoViewController
@@ -20,6 +31,37 @@
     [super viewDidLoad];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     [appDelegate.notificationUtils getSlidingMenuBarButtonSetupWith:self];
+    
+    //
+    [_txtFldFirstName setDelegate:self];
+    [_txtFldLastName setDelegate:self];
+    [_txtFldEmail setDelegate:self];
+    [_txtFldPhone setDelegate:self];
+    [_txtFldPaymentInfo setDelegate:self];
+    [_txtFldFacebookProfile setDelegate:self];
+    
+    //
+    [_txtFldFirstName setTextColor:[UIColor whiteColor]];
+    [_txtFldLastName setTextColor:[UIColor whiteColor]];
+    [_txtFldEmail setTextColor:[UIColor whiteColor]];
+    [_txtFldPhone setTextColor:[UIColor whiteColor]];
+    [_txtFldPaymentInfo setTextColor:[UIColor whiteColor]];
+    [_txtFldFacebookProfile setTextColor:[UIColor whiteColor]];
+    
+    //
+    [_txtFldFirstName setKeyboardType:UIKeyboardTypeDefault];
+    [_txtFldLastName setKeyboardType:UIKeyboardTypeDefault];
+    [_txtFldEmail setKeyboardType:UIKeyboardTypeEmailAddress];
+    [_txtFldPhone setKeyboardType:UIKeyboardTypeNumbersAndPunctuation];
+    [_txtFldPaymentInfo setKeyboardType:UIKeyboardTypeDefault];
+    [_txtFldFacebookProfile setKeyboardType:UIKeyboardTypeDefault];
+    
+    _sldrTip.minimumValue = 18;
+    _sldrTip.maximumValue = 50;
+    _sldrTip.continuous = YES;
+    _sldrTip.value = round(_sldrTip.value);
+    
+    _lblSldrValue.text = [NSString stringWithFormat:@"%d%%", (int) _sldrTip.value];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -47,5 +89,42 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark
+
+- (IBAction) sliderChanged:(id) sender
+{
+    UISlider * slider = (UISlider *) sender;
+    slider.value = round(slider.value);
+    
+    _lblSldrValue.text = [NSString stringWithFormat:@"%d%%", (int) _sldrTip.value];
+}
+
+#pragma mark
+
+- (void) tableView:(UITableView *) tableView didSelectRowAtIndexPath:(NSIndexPath *) indexPath
+{
+    UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+}
+
+#pragma mark
+
+- (void) textFieldDidBeginEditing:(UITextField *) textField
+{
+    
+}
+
+- (void) textFieldDidEndEditing:(UITextField *) textField
+{
+    
+}
+
+- (BOOL) textFieldShouldReturn:(UITextField *) textField
+{
+    [textField resignFirstResponder];
+    
+    return NO;
+}
 
 @end

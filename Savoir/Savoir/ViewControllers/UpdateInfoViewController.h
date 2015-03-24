@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UpdateInfoViewController : UITableViewController
+
+@interface UpdateInfoViewController : UITableViewController <UITextFieldDelegate>
 
 @end

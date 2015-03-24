@@ -2590,27 +2590,27 @@
 /* Begin PBXShellScriptBuildPhase section */
 		D400F8AE1AAE08EE004D458C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "$SRCROOT/Savoir/frameworks/Fabric.framework/run 5dec5dcf9721ca3e2ae0805306b80549fbb7bc2d 2ce161fa8ccc231e6b3c39ffd39d8ebc75e1ffdeb4043534964d4fcc62ea6229";
 		};
 		D46154541A81DD61003AE84D /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "export PATH=/usr/local/bin:$PATH\n\ncd $SRCROOT/Savoir/parse\n\nparse symbols \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"\n";
 		};
