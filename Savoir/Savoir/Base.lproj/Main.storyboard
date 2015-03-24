@@ -2589,14 +2589,8 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OVc-1B-6hm" id="Vp0-wU-reH">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="John" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zoO-o0-9Y2">
-                                                    <rect key="frame" x="122" y="12" width="53" height="30"/>
-                                                    <color key="backgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payment Info" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fkG-wV-v63">
-                                                    <rect key="frame" x="32" y="14" width="74" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Payment Info" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fkG-wV-v63">
+                                                    <rect key="frame" x="32" y="15" width="74" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="74" id="E9p-3s-P2v"/>
                                                         <constraint firstAttribute="height" constant="21" id="Gx8-VP-RWN"/>
@@ -2605,14 +2599,21 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j4E-fn-q1Z" customClass="PTKView">
+                                                    <rect key="frame" x="114" y="13" width="250" height="25"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="250" id="cwL-KA-flx"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <color key="backgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
+                                                <constraint firstItem="j4E-fn-q1Z" firstAttribute="leading" secondItem="fkG-wV-v63" secondAttribute="trailing" constant="16" id="A89-TR-chP"/>
+                                                <constraint firstItem="fkG-wV-v63" firstAttribute="centerY" secondItem="j4E-fn-q1Z" secondAttribute="centerY" id="JF9-7x-aJh"/>
                                                 <constraint firstItem="fkG-wV-v63" firstAttribute="leading" secondItem="Vp0-wU-reH" secondAttribute="leadingMargin" constant="24" id="RbU-9a-6Ek"/>
                                                 <constraint firstAttribute="centerX" secondItem="fkG-wV-v63" secondAttribute="centerX" id="XSA-wT-6B1"/>
-                                                <constraint firstItem="fkG-wV-v63" firstAttribute="baseline" secondItem="zoO-o0-9Y2" secondAttribute="baseline" id="gl5-VT-GXK"/>
                                                 <constraint firstAttribute="centerY" secondItem="fkG-wV-v63" secondAttribute="centerY" id="gzP-PV-ft8"/>
-                                                <constraint firstItem="zoO-o0-9Y2" firstAttribute="leading" secondItem="fkG-wV-v63" secondAttribute="trailing" constant="16" id="mkD-RD-G1K"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
@@ -2682,14 +2683,13 @@
                         <outlet property="txtFldFacebookProfile" destination="6ED-et-uuy" id="EpO-wr-60k"/>
                         <outlet property="txtFldFirstName" destination="dda-GU-08x" id="RE0-dY-l6E"/>
                         <outlet property="txtFldLastName" destination="Pc2-fA-DJH" id="cDU-jl-cZZ"/>
-                        <outlet property="txtFldPaymentInfo" destination="zoO-o0-9Y2" id="qzQ-Cs-5rr"/>
                         <outlet property="txtFldPhone" destination="EVn-1c-RPy" id="oNs-aN-Kwe"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eB1-Et-AML" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <barButtonItem image="back" id="8zT-a1-6BH"/>
             </objects>
-            <point key="canvasLocation" x="859" y="4219"/>
+            <point key="canvasLocation" x="859" y="4217"/>
         </scene>
         <!--Sliding Menu View Controller-->
         <scene sceneID="Xa8-71-HWp">
