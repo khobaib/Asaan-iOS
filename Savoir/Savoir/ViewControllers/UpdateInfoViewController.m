@@ -13,8 +13,6 @@
 
 @interface UpdateInfoViewController () <UITextFieldDelegate, PTKViewDelegate>
 
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
-
 @property (strong, nonatomic) IBOutlet UITextField * txtFldFirstName;
 @property (strong, nonatomic) IBOutlet UITextField * txtFldLastName;
 @property (strong, nonatomic) IBOutlet UITextField * txtFldEmail;
@@ -107,16 +105,6 @@
 }
 
 #pragma mark
-
-- (void) textFieldDidBeginEditing:(UITextField *) textField
-{
-    
-}
-
-- (void) textFieldDidEndEditing:(UITextField *) textField
-{
-    
-}
 
 - (BOOL) textFieldShouldReturn:(UITextField *) textField
 {
