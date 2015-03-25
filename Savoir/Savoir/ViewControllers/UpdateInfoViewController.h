@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+//#import "BaseViewController.h"
 
 
-@interface UpdateInfoViewController : UITableViewController <UITextFieldDelegate>
+@interface UpdateInfoViewController : UITableViewController
 
 @end

@@ -2670,13 +2670,14 @@
                             </tableViewSection>
                         </sections>
                         <connections>
-                            <outlet property="dataSource" destination="tng-5w-RmX" id="Cff-Hk-ZGj"/>
-                            <outlet property="delegate" destination="tng-5w-RmX" id="7UP-IY-Ycw"/>
+                            <outlet property="dataSource" destination="tng-5w-RmX" id="pZl-I5-rEe"/>
+                            <outlet property="delegate" destination="tng-5w-RmX" id="sou-7p-a5T"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Update your info" id="4Mi-ec-MDg"/>
                     <connections>
                         <outlet property="lblSldrValue" destination="gLN-au-glM" id="LUs-v7-MCp"/>
+                        <outlet property="ptkViewPayInfo" destination="j4E-fn-q1Z" id="JWD-et-wdh"/>
                         <outlet property="sldrTip" destination="OId-t1-MHn" id="yBb-Ik-Mln"/>
                         <outlet property="tableView" destination="J4d-zm-cOO" id="RDe-6n-ohG"/>
                         <outlet property="txtFldEmail" destination="60Z-7r-hr8" id="ela-bD-xSH"/>
