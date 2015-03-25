@@ -162,25 +162,25 @@
 
 - (void) findStoreCountFromServer
 {
-    self.storeCount = 67;
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    
-//    // to load
-//    NSNumber *aNumber = [defaults objectForKey:@"STORE_COUNT"];
-//    self.storeCount = aNumber.longLongValue;
-//    if (self.storeCount == 0)
-//        self.storeCount = 40;
-//    __weak __typeof(self) weakSelf = self;
-//    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-//    GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-//    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreCount];
-//    
-//    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointAsaanLong *object,NSError *error)
-//     {
-//         weakSelf.storeCount = object.longValue.longLongValue;
-//         [defaults setObject:[NSNumber numberWithLongLong:weakSelf.storeCount] forKey:@"STORE_COUNT"];
-//         [defaults synchronize];
-//     }];
+//    self.storeCount = 67;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+////
+////    // to load
+    NSNumber *aNumber = [defaults objectForKey:@"STORE_COUNT"];
+    self.storeCount = aNumber.longLongValue;
+    if (self.storeCount == 0)
+        self.storeCount = 40;
+    __weak __typeof(self) weakSelf = self;
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
+    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreCount];
+    
+    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointAsaanLong *object,NSError *error)
+     {
+         weakSelf.storeCount = object.longValue.longLongValue;
+         [defaults setObject:[NSNumber numberWithLongLong:weakSelf.storeCount] forKey:@"STORE_COUNT"];
+         [defaults synchronize];
+     }];
 }
 
 - (void) addCardToUserCards:(GTLUserendpointUserCard *)card

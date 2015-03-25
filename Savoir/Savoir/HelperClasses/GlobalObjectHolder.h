@@ -23,7 +23,7 @@
 @property (strong, nonatomic) GTLUserendpointUserAddress *defaultUserAddress;
 @property (strong, nonatomic) GTLUserendpointUser *currentUser;
 @property (strong, nonatomic) GTLStoreendpointChatRoomsAndStoreChatMemberships *usersRoomsAndStores;
-@property (nonatomic) int storeCount;
+@property (nonatomic) long long storeCount;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLLocation* location;
