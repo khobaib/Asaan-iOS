@@ -92,10 +92,9 @@
 
 #pragma mark
 
-- (IBAction) sliderChanged:(id) sender
+- (IBAction) sldrTipChanged:(id) sender
 {
-    UISlider * slider = (UISlider *) sender;
-    slider.value = round(slider.value);
+    _sldrTip.value = round(_sldrTip.value);
     
     _lblSldrValue.text = [NSString stringWithFormat:@"%d%%", (int) _sldrTip.value];
 }

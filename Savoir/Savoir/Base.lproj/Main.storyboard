@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="eRi-F6-0Pv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="eRi-F6-0Pv">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -2561,7 +2561,7 @@
                                                         <constraint firstAttribute="width" constant="150" id="x3K-WG-6jf"/>
                                                     </constraints>
                                                     <connections>
-                                                        <action selector="sliderChanged:" destination="tng-5w-RmX" eventType="valueChanged" id="jmQ-Vr-lZa"/>
+                                                        <action selector="sldrTipChanged:" destination="tng-5w-RmX" eventType="valueChanged" id="7qz-HV-dFL"/>
                                                     </connections>
                                                 </slider>
                                             </subviews>
