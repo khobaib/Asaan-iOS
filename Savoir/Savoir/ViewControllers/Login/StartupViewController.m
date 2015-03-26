@@ -23,10 +23,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    
-//    self.navigationItem.leftBarButtonItem = nil;
-//    self.navigationItem.hidesBackButton = YES;
-//    
+    
+    self.navigationController.navigationBarHidden = YES;
+    self.navigationItem.leftBarButtonItem = nil;
+    self.navigationItem.hidesBackButton = YES;
+//
 //    self.navigationController.navigationItem.leftBarButtonItem = nil;
 //    self.navigationController.navigationItem.hidesBackButton = YES;
 }
@@ -38,6 +39,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+//    self.navigationItem.leftBarButtonItem = nil;
+//    self.navigationItem.hidesBackButton = YES;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -96,10 +99,10 @@
                         [self performSegueWithIdentifier:@"segueStartupToPhoneFB" sender:self];
                     }
                     else {
-                        [self performSegueWithIdentifier:@"segueStartupToStoreList" sender:self];
+                        [self performSegueWithIdentifier:@"segueUnwindStartupToStoreList" sender:self];
                     }
                 } else {
-                    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Error" message:[error userInfo][@"error"] delegate:nil cancelButtonTitle:@"OK"     otherButtonTitles:nil];
+                    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Error" message:[error userInfo][@"error"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
                     [alert show];
                 }
             }];

@@ -4702,7 +4702,7 @@
                     </view>
                     <connections>
                         <segue destination="iob-Jr-Zqf" kind="show" identifier="segueStartupToPhoneFB" id="t2R-Le-XNf"/>
-                        <segue destination="4jT-di-mDu" kind="unwind" identifier="segueStartupToStoreList" unwindAction="unwindToStoreList:" id="u7p-zV-uZu"/>
+                        <segue destination="4jT-di-mDu" kind="unwind" identifier="segueUnwindStartupToStoreList" unwindAction="unwindToStoreList:" id="u7p-zV-uZu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Skk-2e-Ynb" sceneMemberID="firstResponder"/>
@@ -7708,12 +7708,12 @@
         <image name="waitlist_table_countdown" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="g5V-KY-zil"/>
         <segue reference="SWu-Ow-ZNJ"/>
-        <segue reference="F9u-xN-ecY"/>
+        <segue reference="g5V-KY-zil"/>
         <segue reference="Udc-FT-5Vd"/>
+        <segue reference="F9u-xN-ecY"/>
+        <segue reference="t2R-Le-XNf"/>
         <segue reference="UrJ-ne-Kfy"/>
-        <segue reference="cQG-s7-LJm"/>
         <segue reference="33i-hP-PSJ"/>
         <segue reference="BxH-0j-lGN"/>
     </inferredMetricsTieBreakers>
