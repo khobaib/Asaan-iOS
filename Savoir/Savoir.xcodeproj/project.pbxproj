@@ -2096,8 +2096,8 @@
 		D4195E551A92A69B00663149 /* Order */ = {
 			isa = PBXGroup;
 			children = (
-				D4046FFA1A9B89BC0070537B /* OrderSummaryViewController.m */,
 				D4046FFB1A9B89BC0070537B /* OrderSummaryViewController.h */,
+				D4046FFA1A9B89BC0070537B /* OrderSummaryViewController.m */,
 				D4195E561A92A69B00663149 /* AddAddressTableViewController.h */,
 				D4195E571A92A69B00663149 /* AddAddressTableViewController.m */,
 				D4195E581A92A69B00663149 /* AddPaymentCardViewController.h */,
@@ -2476,7 +2476,7 @@
 				TargetAttributes = {
 					D4F2759E1A0C021800CEC95A = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = 7742T5X57N;
+						DevelopmentTeam = V39QP9S6S6;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
 								enabled = 0;
