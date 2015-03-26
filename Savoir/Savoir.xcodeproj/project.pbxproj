@@ -77,14 +77,9 @@
 		D40DF36E1A3A976700C67088 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D40DF36D1A3A976700C67088 /* libsqlite3.0.dylib */; };
 		D40DF3761A3A9FFC00C67088 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D40DF3741A3A9FFC00C67088 /* libstdc++.6.0.9.dylib */; };
 		D40DF3771A3A9FFC00C67088 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D40DF3751A3A9FFC00C67088 /* libstdc++.6.dylib */; };
-		D4195E961A92A69C00663149 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4195BF61A92A69B00663149 /* FacebookSDK.framework */; };
 		D4195E971A92A69C00663149 /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4195BF71A92A69B00663149 /* GoogleOpenSource.framework */; };
 		D4195E981A92A69C00663149 /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D4195BF81A92A69B00663149 /* GooglePlus.bundle */; };
 		D4195E991A92A69C00663149 /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4195BF91A92A69B00663149 /* GooglePlus.framework */; };
-		D4195E9A1A92A69C00663149 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4195BFA1A92A69B00663149 /* Parse.framework */; };
-		D4195E9B1A92A69C00663149 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4195BFB1A92A69B00663149 /* ParseCrashReporting.framework */; };
-		D4195E9C1A92A69C00663149 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4195BFC1A92A69B00663149 /* ParseFacebookUtils.framework */; };
-		D4195E9D1A92A69C00663149 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4195BFD1A92A69B00663149 /* ParseUI.framework */; };
 		D4195E9E1A92A69C00663149 /* MenuItemLoadingOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D4195C011A92A69B00663149 /* MenuItemLoadingOperation.m */; };
 		D4195E9F1A92A69C00663149 /* OrderForStoreLoadingOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D4195C031A92A69B00663149 /* OrderForStoreLoadingOperation.m */; };
 		D4195EA01A92A69C00663149 /* OrderLoadingOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D4195C051A92A69B00663149 /* OrderLoadingOperation.m */; };
@@ -383,6 +378,12 @@
 		D4828CBE1A71ADE500C80E92 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D4828CBC1A71ADE500C80E92 /* libxml2.2.dylib */; };
 		D4828CBF1A71ADE500C80E92 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D4828CBD1A71ADE500C80E92 /* libxml2.dylib */; };
 		D4828D241A7AA4D000C80E92 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4828D231A7AA4D000C80E92 /* Accounts.framework */; };
+		D4A18FC31AC4455F0073D711 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A18FC11AC4455F0073D711 /* FBSDKCoreKit.framework */; };
+		D4A18FC41AC4455F0073D711 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A18FC21AC4455F0073D711 /* FBSDKLoginKit.framework */; };
+		D4A18FC91AC4457F0073D711 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A18FC51AC4457F0073D711 /* Parse.framework */; };
+		D4A18FCA1AC4457F0073D711 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A18FC61AC4457F0073D711 /* ParseCrashReporting.framework */; };
+		D4A18FCB1AC4457F0073D711 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A18FC71AC4457F0073D711 /* ParseFacebookUtils.framework */; };
+		D4A18FCC1AC4457F0073D711 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A18FC81AC4457F0073D711 /* ParseUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1087,6 +1088,12 @@
 		D4828CBC1A71ADE500C80E92 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
 		D4828CBD1A71ADE500C80E92 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		D4828D231A7AA4D000C80E92 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		D4A18FC11AC4455F0073D711 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../Documents/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		D4A18FC21AC4455F0073D711 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		D4A18FC51AC4457F0073D711 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "../../../Downloads/parse-library-1/Parse.framework"; sourceTree = "<group>"; };
+		D4A18FC61AC4457F0073D711 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseCrashReporting.framework; path = "../../../Downloads/parse-library-1/ParseCrashReporting.framework"; sourceTree = "<group>"; };
+		D4A18FC71AC4457F0073D711 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = "../../../Downloads/parse-library-1/ParseFacebookUtils.framework"; sourceTree = "<group>"; };
+		D4A18FC81AC4457F0073D711 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = "../../../Downloads/parse-library-1/ParseUI.framework"; sourceTree = "<group>"; };
 		D4F2759F1A0C021800CEC95A /* Savoir.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Savoir.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -1105,6 +1112,7 @@
 				D4195FFA1A92AD8C00663149 /* libz.1.1.3.dylib in Frameworks */,
 				D4195FF81A92AD7A00663149 /* Security.framework in Frameworks */,
 				D4195FF61A92AD6D00663149 /* MobileCoreServices.framework in Frameworks */,
+				D4A18FC41AC4455F0073D711 /* FBSDKLoginKit.framework in Frameworks */,
 				D4195FF41A92AD6200663149 /* SystemConfiguration.framework in Frameworks */,
 				D4195FF21A92AD5600663149 /* UIKit.framework in Frameworks */,
 				D4195FEE1A92AD3A00663149 /* Social.framework in Frameworks */,
@@ -1119,21 +1127,21 @@
 				D4195FDC1A92ACC200663149 /* AddressBookUI.framework in Frameworks */,
 				D4195FD81A92ACB300663149 /* Foundation.framework in Frameworks */,
 				D4195FD61A92ACA600663149 /* ImageIO.framework in Frameworks */,
+				D4A18FCA1AC4457F0073D711 /* ParseCrashReporting.framework in Frameworks */,
+				D4A18FCC1AC4457F0073D711 /* ParseUI.framework in Frameworks */,
 				D4195E971A92A69C00663149 /* GoogleOpenSource.framework in Frameworks */,
+				D4A18FC31AC4455F0073D711 /* FBSDKCoreKit.framework in Frameworks */,
 				D4195E991A92A69C00663149 /* GooglePlus.framework in Frameworks */,
 				D4195FD41A92AB9300663149 /* GooglePlus.bundle in Frameworks */,
 				D4828D241A7AA4D000C80E92 /* Accounts.framework in Frameworks */,
-				D4195E961A92A69C00663149 /* FacebookSDK.framework in Frameworks */,
-				D4195E9A1A92A69C00663149 /* Parse.framework in Frameworks */,
-				D4195E9D1A92A69C00663149 /* ParseUI.framework in Frameworks */,
-				D4195E9C1A92A69C00663149 /* ParseFacebookUtils.framework in Frameworks */,
-				D4195E9B1A92A69C00663149 /* ParseCrashReporting.framework in Frameworks */,
 				D4828CBF1A71ADE500C80E92 /* libxml2.dylib in Frameworks */,
 				D4828CBB1A71ADD200C80E92 /* libz.dylib in Frameworks */,
+				D4A18FC91AC4457F0073D711 /* Parse.framework in Frameworks */,
 				D4828CBE1A71ADE500C80E92 /* libxml2.2.dylib in Frameworks */,
 				D40DF3761A3A9FFC00C67088 /* libstdc++.6.0.9.dylib in Frameworks */,
 				D40DF3771A3A9FFC00C67088 /* libstdc++.6.dylib in Frameworks */,
 				D40DF36E1A3A976700C67088 /* libsqlite3.0.dylib in Frameworks */,
+				D4A18FCB1AC4457F0073D711 /* ParseFacebookUtils.framework in Frameworks */,
 				D400F8B01AAE095F004D458C /* Crashlytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2405,6 +2413,12 @@
 		EFEC7E676E0C2F9960DA289C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D4A18FC51AC4457F0073D711 /* Parse.framework */,
+				D4A18FC61AC4457F0073D711 /* ParseCrashReporting.framework */,
+				D4A18FC71AC4457F0073D711 /* ParseFacebookUtils.framework */,
+				D4A18FC81AC4457F0073D711 /* ParseUI.framework */,
+				D4A18FC11AC4455F0073D711 /* FBSDKCoreKit.framework */,
+				D4A18FC21AC4455F0073D711 /* FBSDKLoginKit.framework */,
 				D400F8AF1AAE095F004D458C /* Crashlytics.framework */,
 				D400F8AC1AAE06F9004D458C /* Fabric.framework */,
 				D46DA7851A92B5A400020313 /* CoreAudio.framework */,
@@ -3077,6 +3091,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/Savoir/frameworks",
 					"$(PROJECT_DIR)",
+					/Users/niravsaraiya/Documents/FacebookSDK,
+					"/Users/niravsaraiya/Downloads/parse-library-1",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Savoir/Savoir-Prefix.pch";
@@ -3107,6 +3123,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/Savoir/frameworks",
 					"$(PROJECT_DIR)",
+					/Users/niravsaraiya/Documents/FacebookSDK,
+					"/Users/niravsaraiya/Downloads/parse-library-1",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Savoir/Savoir-Prefix.pch";
