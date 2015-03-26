@@ -23,6 +23,8 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 
+NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsException";
+
 @interface AppDelegate ()
 
 @end
@@ -37,7 +39,6 @@
     // Override point for customization after application launch.
     // Enable Crash Reporting
     [Fabric with:@[CrashlyticsKit]];
-    [ParseCrashReporting enable];
     [self globalObjectHolder];
     [_globalObjectHolder findStoreCountFromServer];
     
@@ -49,6 +50,7 @@
     // described here: https://developers.facebook.com/docs/getting-started/facebook-sdk-for-ios/
     // [PFFacebookUtils initializeFacebook];
     // ****************************************************************************
+    [ParseCrashReporting enable];
     [Parse setApplicationId:@"uX5Pxp1cPWJUbhl4qp5REJskOqDIp33tfMcSu1Ac"
                   clientKey:@"4cad0RAqv53bvlmgiTgnOScuJVk7IY28XeH4Mes5"];
     [PFFacebookUtils initializeFacebook];

@@ -75,6 +75,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = NO;
     
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     [appDelegate.notificationUtils getSlidingMenuBarButtonSetupWith:self];
@@ -441,16 +442,33 @@
 #pragma mark - Location
 - (void)startStandardUpdates
 {
+    if ([CLLocationManager locationServicesEnabled] == NO || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusRestricted || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied)
+    {
+        NSString *msg = [NSString stringWithFormat:@"Location information is not available."];
+        [self.view makeToast:msg];
+        NSLog(@"%@", msg);
+        
+        if (self.lastLocation == nil)
+        {
+            // 41.772193,-88.15099
+            AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+            if (appDelegate.globalObjectHolder.location == nil)
+                self.lastLocation = appDelegate.globalObjectHolder.location = [[CLLocation alloc]initWithLatitude:41.772193 longitude:-88.15099];
+            else
+                self.lastLocation = appDelegate.globalObjectHolder.location;
+            [self setupDatastore];
+        }
+        return;
+    }
+    
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     // Create the location manager if this object does not
     // already have one.
     if (nil == appDelegate.globalObjectHolder.locationManager)
         appDelegate.globalObjectHolder.locationManager = [[CLLocationManager alloc] init];
-    
-    // 41.772193,-88.15099
  
-    if ([appDelegate.globalObjectHolder.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
-        [appDelegate.globalObjectHolder.locationManager requestWhenInUseAuthorization];
+    if ([appDelegate.globalObjectHolder.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)])
+        [appDelegate.globalObjectHolder.locationManager requestAlwaysAuthorization];
     
     appDelegate.globalObjectHolder.locationManager.delegate = self;
     appDelegate.globalObjectHolder.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
@@ -469,6 +487,7 @@
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
+    [manager stopUpdatingLocation];
     NSString *msg = [NSString stringWithFormat:@"Location update failed - error: %@", [error userInfo][@"error"]];
     [self.view makeToast:msg];
     NSLog(@"Location update failed - error: %@", [error userInfo][@"error"]);
