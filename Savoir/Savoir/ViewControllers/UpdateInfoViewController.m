@@ -14,6 +14,9 @@
 #import "InlineCalls.h"
 #import "UIImageView+WebCache.h"
 #import "MBProgressHUD.h"
+#import "STPCard.h"
+#import "Stripe.h"
+#import "UtilCalls.h"
 
 
 @interface UpdateInfoViewController () <UINavigationControllerDelegate,
@@ -213,7 +216,22 @@
     
     if (![emailTest evaluateWithObject:_txtFldEmail.text])
     {
-        UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please enter a valid email address." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please enter a valid email address." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        
+        return NO;
+    }
+    
+    /*
+    if (_isCardValid)
+    {
+        [self saveCardAtGAE];
+    }
+    */
+    
+    if (!_isCardValid)
+    {
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"The card number you have entered is not valid." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
         
         return NO;
@@ -275,14 +293,131 @@
     if (![self isValidForm])
         return;
 
+    MBProgressHUD * hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.labelText = @"Please Wait";
+    
+    [self saveCardAtGAE];
+    
     PFUser * user = [PFUser currentUser];
     user[@"firstName"] = _txtFldFirstName.text;
     user[@"lastName"] = _txtFldLastName.text;
     user[@"email"] = _txtFldEmail.text;
     user[@"phone"] = _txtFldPhone.text;
-    [user saveInBackground];
     
-    //[self performSegueWithIdentifier:@"segueSignupProfileToStoreList" sender:self];
+    [user saveInBackgroundWithBlock:^(BOOL complete, NSError * error)
+    {
+        hud.hidden = YES;
+        
+        if (!error)
+        {
+            UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Success" message:@"Profile successfully saved" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+        }
+        else
+        {
+            UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Error" message:[error userInfo][@"error"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+        }
+    }];
+}
+
+#pragma mark
+
+- (NSString *) getCardTypeForCard:(PTKCardNumber *) cardNumber
+{
+    PTKCardType cardType = [cardNumber cardType];
+    NSString * cardTypeName = @"placeholder";
+    
+    switch (cardType)
+    {
+        case PTKCardTypeAmex:
+            cardTypeName = @"amex";
+            break;
+        case PTKCardTypeDinersClub:
+            cardTypeName = @"diners";
+            break;
+        case PTKCardTypeDiscover:
+            cardTypeName = @"discover";
+            break;
+        case PTKCardTypeJCB:
+            cardTypeName = @"jcb";
+            break;
+        case PTKCardTypeMasterCard:
+            cardTypeName = @"mastercard";
+            break;
+        case PTKCardTypeVisa:
+            cardTypeName = @"visa";
+            break;
+        default:
+            break;
+    }
+    
+    return cardTypeName;
+}
+
+- (void) saveCardAtGAE
+{
+    __weak __typeof(self) weakSelf = self;
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    GTLServiceUserendpoint *gtlUserService= [appDelegate gtlUserService];
+    
+    STPCard *card = [[STPCard alloc] init];
+    card.number = _ptkViewPayInfo.card.number;
+    card.expMonth = _ptkViewPayInfo.card.expMonth;
+    card.expYear = _ptkViewPayInfo.card.expYear;
+    card.cvc = _ptkViewPayInfo.card.cvc;
+    card.addressZip = _ptkViewPayInfo.card.addressZip;
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [[STPAPIClient sharedClient] createTokenWithCard:card completion:^(STPToken *token, NSError *error)
+     {
+         if (!error)
+         {
+             GTLUserendpointUserCard *card = [[GTLUserendpointUserCard alloc] init];
+             card.accessToken = token.tokenId;
+             card.address = token.card.addressLine1;
+             card.type = [weakSelf getCardTypeForCard:weakSelf.ptkViewPayInfo.cardNumber];
+             card.brand = [NSNumber numberWithInt:token.card.brand];
+             card.city = token.card.addressCity;
+             card.country = token.card.country;
+             card.cardId = token.card.cardId;
+             card.fingerprint = token.card.fingerprint;
+             card.expMonth = [NSNumber numberWithInteger:token.card.expMonth];
+             card.expYear = [NSNumber numberWithInteger:token.card.expYear];
+             //            card.fundingType = @"";   // ???
+             card.last4 = token.card.last4;
+             //            card.modifiedDate = [NSNumber numberWithBool:false];   // ???
+             card.name = token.card.name;
+             //            card.provider = @"";   // ???
+             //            card.providerCustomerId = @"";   // ???
+             //            card.refreshToken = @"";   // ???
+             card.state = token.card.addressState;
+             //            card.userId = [NSNumber numberWithBool:false];   // ???
+             card.zip = token.card.addressZip;
+             
+             GTLQueryUserendpoint *query = [GTLQueryUserendpoint queryForSaveUserCardWithObject:card];
+             
+             NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+             dic[USER_AUTH_TOKEN_HEADER_NAME] = [UtilCalls getAuthTokenForCurrentUser];
+             [query setAdditionalHTTPHeaders:dic];
+             
+             [gtlUserService executeQuery:query completionHandler:^(GTLServiceTicket * ticket,GTLUserendpointUserCard *object, NSError *error )
+              {
+                  [MBProgressHUD hideHUDForView:self.view animated:true];
+                  if (!error)
+                  {
+                      AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+                      [appDelegate.globalObjectHolder addCardToUserCards:object];
+                      //                    [self.navigationController popViewControllerAnimated:YES];
+                      [UtilCalls popFrom:self index:2 Animated:YES];
+                  } else
+                      [[[UIAlertView alloc]initWithTitle:@"Error" message:[error userInfo][@"error"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+              }];
+         }
+         else
+             [[[UIAlertView alloc]initWithTitle:@"Error" message:[error userInfo][@"error"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+     }];
 }
 
 @end
