@@ -58,7 +58,6 @@
     [PFUser logInWithUsernameInBackground:email password:password block:^(PFUser *user,NSError *error){
         hud.hidden = YES;
         if(user){
-            NSLog(@"%@",[user description]);
 //            [self performSegueWithIdentifier:@"profilePage" sender:self];
             [self performSegueWithIdentifier:@"segueUnwindToStoreList" sender:sender];
         }else{

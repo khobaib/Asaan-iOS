@@ -190,7 +190,6 @@
                 {
                     NSString *desc;
                     double finalPrice = parentItem.price;
-                    NSLog(@"ParentItem.price: %f, Item.price: %f", parentItem.price, item.price);
                     if (item.price > 0)
                     {
                         desc = [NSString stringWithFormat:@"%@ (%@)", item.name, [UtilCalls rawAmountToString:[NSNumber numberWithDouble:item.price]]];
@@ -202,7 +201,6 @@
                     if (IsEmpty(parentItem.desc) == false)
                         desc = [NSString stringWithFormat:@"%@, %@", parentItem.desc, desc];
                     
-                    NSLog(@"ParentItem: %@, Item: %@, finalDesc: %@, finalPrice: %f", parentItem.name, item.name, desc, finalPrice);
                     parentItem.desc = desc;
                     parentItem.price = finalPrice;
                     

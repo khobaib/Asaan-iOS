@@ -34,14 +34,12 @@
     [super viewWillTransitionToSize: size withTransitionCoordinator:coordinator];
     _frameRect.size = size;
     _baseScrollView.contentSize = _frameRect.size;
-    NSLog(@"viewWillTransitionToSize");
 }
 - (void) didRotateFromInterfaceOrientation: (UIInterfaceOrientation) fromInterfaceOrientation
 {
     [super didRotateFromInterfaceOrientation: fromInterfaceOrientation];
     _frameRect = self.view.frame;
     _baseScrollView.contentSize = _frameRect.size;
-    NSLog(@"didRotateFromInterfaceOrientation");
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -156,7 +154,6 @@
     _isKeyboardShowing = true;
     NSDictionary* info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    NSLog(@"keyboardWasShown kbSize.height = %f, width = %f", kbSize.height, kbSize.width);
     
     UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
     
@@ -179,7 +176,6 @@
     _baseScrollView.scrollIndicatorInsets = contentInsets;
     _frameRect = self.view.frame;
     _baseScrollView.contentSize = _frameRect.size;
-    NSLog(@"keyboardWillBeHidden");
 }
 
 /*

@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStoreMenuHierarchy (0 custom class methods, 13 custom properties)
+//   GTLStoreendpointStoreMenuHierarchy (0 custom class methods, 14 custom properties)
 
 #import "GTLStoreendpointStoreMenuHierarchy.h"
 
@@ -23,14 +23,16 @@
 //
 
 @implementation GTLStoreendpointStoreMenuHierarchy
-@dynamic active, createdDate, hours, identifier, level, menuItemCount,
-         menuItemPosition, menuPOSId, menuType, modifiedDate, name, storeId,
-         subMenuPOSId;
+@dynamic active, createdDate, descriptionProperty, hours, identifier, level,
+         menuItemCount, menuItemPosition, menuPOSId, menuType, modifiedDate,
+         name, storeId, subMenuPOSId;
 
 + (NSDictionary *)propertyToJSONKeyMap {
   NSDictionary *map =
-    [NSDictionary dictionaryWithObject:@"id"
-                                forKey:@"identifier"];
+    [NSDictionary dictionaryWithObjectsAndKeys:
+      @"description", @"descriptionProperty",
+      @"id", @"identifier",
+      nil];
   return map;
 }
 

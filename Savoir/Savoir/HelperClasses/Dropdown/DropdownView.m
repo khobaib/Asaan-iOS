@@ -13,11 +13,14 @@
 #define DDImageViewFrame        {.origin = {self.frame.size.width - 30, 5}, .size = {20, self.frame.size.height - 10}}
 #define DDTitleLabelFreame      {.origin = {0, 0}, .size = {self.frame.size.width - 25, self.frame.size.height}}
 
-#define MAX_ROWS_SHOWED     6
+#define MAX_ROWS_SHOWED     20
 #define ROW_HEIGHT          35
 
-#define DDListTableViewOrigin   {-5, self.frame.size.height}
-#define DDListTableViewSize(x)  {self.frame.size.width + 10, x}
+// Modified to provide different widths for the button and the table
+//#define DDListTableViewOrigin   {-5, self.frame.size.height}
+//#define DDListTableViewSize(x)  {self.frame.size.width + 10, x}
+#define DDListTableViewOrigin   {-105, self.frame.size.height}
+#define DDListTableViewSize(x)  {100 + 10, x}
 
 @interface DropdownView () <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
 {

@@ -89,14 +89,13 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
                                              selector:@selector(didChangePreferredContentSize:)
                                                  name:UIContentSizeCategoryDidChangeNotification object:nil];
     
-//    self.cellHeight = 150;
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
-    {
-        self.tableView.rowHeight = UITableViewAutomaticDimension;
-        self.tableView.estimatedRowHeight = 140;
-    }
-    else
-        self.cellHeight = 140;
+//    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
+//    {
+//        self.tableView.rowHeight = UITableViewAutomaticDimension;
+//        self.tableView.estimatedRowHeight = 160;
+//    }
+//    else
+        self.cellHeight = 160;
 }
 
 - (void)dealloc
@@ -194,7 +193,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
                          
                          for (GTLStoreendpointStoreMenuHierarchy *submenu in object.menusAndSubmenus)
                          {
-                             if (submenu.level.intValue == 1 && submenu.menuPOSId.longLongValue == menu.menuPOSId.longLongValue)
+                             if (submenu.level.intValue == 1 && submenu.menuPOSId.longLongValue == menu.menuPOSId.longLongValue && submenu.menuItemCount.intValue > 0)
                              {
                                  [menuSegmentHolder.subMenus addObject:submenu];
                              }
@@ -342,22 +341,50 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
 
 - (void)dataProvider:(DataProvider *)dataProvider didLoadDataAtIndexes:(NSIndexSet *)indexes
 {
-    
-    NSMutableArray *indexPathsToReload = [NSMutableArray array];
-    
-    [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
-        
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:idx inSection:0];
-        
-        if ([self.tableView.indexPathsForVisibleRows containsObject:indexPath]) {
-            [indexPathsToReload addObject:indexPath];
-        }
-    }];
-    
-    if (indexPathsToReload.count > 0) {
-        [self.tableView reloadRowsAtIndexPaths:indexPathsToReload withRowAnimation:UITableViewRowAnimationFade];
-    }
+//    NSMutableArray *indexPathsToReload = [NSMutableArray array];
+//    
+//    NSUInteger index = [indexes firstIndex];
+//    
+//    while(index != NSNotFound)
+//    {
+//        NSIndexPath *indexPath = [self calculateIndexPathForIndex:index];
+//                                  
+//        if ([self.tableView.indexPathsForVisibleRows containsObject:indexPath])
+//        {
+//            NSLog(@"indexPathsForVisibleRows section = %ld row = %ld", (long)indexPath.section, (long)indexPath.row);
+//            [indexPathsToReload addObject:indexPath];
+//        }
+//        
+//        index=[indexes indexGreaterThanIndex: index];
+//    }
+//    
+//    if (indexPathsToReload.count > 0)
+//        [self.tableView reloadRowsAtIndexPaths:indexPathsToReload withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationFade];
     [self.hud hide:YES];
+}
+
+- (NSIndexPath *)calculateIndexPathForIndex:(NSUInteger) index
+{
+    MenuSegmentHolder *menuSegmentHolder;
+    if (_menuSegmentHolders.count > 1)
+        menuSegmentHolder = [_menuSegmentHolders objectAtIndex:_segmentedControl.selectedSegmentIndex];
+    else
+        menuSegmentHolder = [_menuSegmentHolders firstObject];
+
+    NSUInteger section = 0;
+    for (GTLStoreendpointStoreMenuHierarchy *submenu in menuSegmentHolder.subMenus)
+    {
+        NSUInteger startIndex = submenu.menuItemPosition.intValue;
+        NSUInteger count = submenu.menuItemCount.intValue;
+        if (index > startIndex && index < startIndex + count)
+        {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(index - startIndex) inSection:section];
+            return indexPath;
+        }
+        section++;
+    }
+    return nil;
 }
 
 - (DataLoadingOperation *) getDataLoadingOperationForPage:(NSUInteger)page indexes:(NSIndexSet *)indexes
@@ -368,7 +395,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     else
         menuSegmentHolder = [_menuSegmentHolders firstObject];
     long long storeId = menuSegmentHolder.menu.storeId.longLongValue;
-    long long menuPOSId = menuSegmentHolder.menu.menuPOSId.longLongValue;
+    int menuPOSId = menuSegmentHolder.menu.menuPOSId.intValue;
     MenuItemLoadingOperation *milo = [[MenuItemLoadingOperation alloc] initWithIndexes:indexes storeId:storeId menuPOSId:menuPOSId];
     return milo;
 }
@@ -513,10 +540,24 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
         [NSException raise:@"headerView == nil.." format:@"No cells with matching SubMenuCellIdentifier loaded from your storyboard"];
     }
     UILabel *txtName=(UILabel *)[headerView viewWithTag:401];
-    txtName.text = submenu.name;
+    txtName.numberOfLines = 0;
+    if (IsEmpty(submenu.descriptionProperty) == true)
+        txtName.text = submenu.name;
+    else
+        txtName.attributedText = [self getAttributedHeaderTextForSubMenu:submenu];
     DropdownView *dropdownView = (DropdownView*)[headerView  viewWithTag:402];
     [self setupDropdownView:dropdownView];
-    return headerView;
+    return headerView.contentView;
+}
+
+-(NSAttributedString *) getAttributedHeaderTextForSubMenu:(GTLStoreendpointStoreMenuHierarchy *)submenu
+{
+    NSString *str = [NSString stringWithFormat:@"\n\n%@", submenu.descriptionProperty];
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:submenu.name];
+    NSAttributedString *atrStr = [[NSAttributedString alloc]initWithString:str attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:[UIFont smallSystemFontSize]]}];
+    [attributedString appendAttributedString:atrStr];
+    
+    return attributedString;
 }
 
 #pragma mark -
@@ -547,11 +588,25 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
         [self.view makeToast:@"Please start an order from the \"Order Online\" button on the Store List."];
 }
 
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    MenuSegmentHolder *menuSegmentHolder;
+    if (_menuSegmentHolders.count > 1)
+        menuSegmentHolder = [_menuSegmentHolders objectAtIndex:_segmentedControl.selectedSegmentIndex];
+    else
+        menuSegmentHolder = [_menuSegmentHolders firstObject];
+    GTLStoreendpointStoreMenuHierarchy *submenu = [menuSegmentHolder.subMenus objectAtIndex:section];
+    if (IsEmpty(submenu.descriptionProperty))
+        return tableView.sectionHeaderHeight;
+    else
+        return 130;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
-        return UITableViewAutomaticDimension;
-    else
+//    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
+//        return UITableViewAutomaticDimension;
+//    else
         return self.cellHeight;
 }
 
@@ -819,7 +874,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
 #warning Use this to go to ordercontroller and here 'index' starts from 0;
 - (void)menuMWCaptionView:(MenuMWCaptionView *)menuMWCaptionView didClickedOrderButtonAtIndex:(NSUInteger)index {
     
-    NSLog(@"Tapped order button at index : %lu", (unsigned long)index);
+//    NSLog(@"Tapped order button at index : %lu", (unsigned long)index);
 //    [self addToOrder:self];
     
     [self performSegueWithIdentifier:@"segueMenuToModifierGroup" sender:self];

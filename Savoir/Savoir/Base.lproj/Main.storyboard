@@ -110,7 +110,7 @@
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="ESm-Q1-Rd9"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="36"/>
-                                            <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                             <variation key="default">
                                                 <mask key="constraints">
@@ -133,7 +133,7 @@
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="14" id="rIo-O2-FxB"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                            <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view alpha="0.80000000000000004" tag="702" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SYE-Cm-mzM" userLabel="StatsView">
@@ -1651,18 +1651,18 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZkS-er-Nns" id="1aA-Sl-ctT">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="401" contentMode="left" horizontalHuggingPriority="253" verticalHuggingPriority="252" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" misplaced="YES" text="Appetizers" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="035-Ls-zlP">
-                                            <rect key="frame" x="16" y="67" width="568" height="20"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="401" contentMode="left" horizontalHuggingPriority="253" verticalHuggingPriority="252" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="Appetizers" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="035-Ls-zlP">
+                                            <rect key="frame" x="8" y="70" width="546" height="20"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <view tag="402" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O0j-Pz-gGY" userLabel="DropdownView" customClass="DropdownView">
-                                            <rect key="frame" x="476" y="62" width="100" height="30"/>
+                                        <view tag="402" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O0j-Pz-gGY" userLabel="DropdownView" customClass="DropdownView">
+                                            <rect key="frame" x="562" y="65" width="30" height="30"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="2ww-2C-I5J"/>
-                                                <constraint firstAttribute="width" constant="100" id="x2t-C1-SzX"/>
+                                                <constraint firstAttribute="width" constant="30" id="x2t-C1-SzX"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -1671,10 +1671,11 @@
                                         <constraint firstAttribute="centerX" secondItem="035-Ls-zlP" secondAttribute="centerX" id="5f0-vO-0X6"/>
                                         <constraint firstItem="035-Ls-zlP" firstAttribute="top" secondItem="1aA-Sl-ctT" secondAttribute="topMargin" constant="4" id="Apj-zB-nbh"/>
                                         <constraint firstAttribute="centerX" secondItem="035-Ls-zlP" secondAttribute="centerX" id="Gbt-2e-IDF"/>
-                                        <constraint firstItem="035-Ls-zlP" firstAttribute="leading" secondItem="1aA-Sl-ctT" secondAttribute="leadingMargin" priority="900" constant="8" id="Mmq-Xp-peX"/>
+                                        <constraint firstItem="035-Ls-zlP" firstAttribute="leading" secondItem="1aA-Sl-ctT" secondAttribute="leadingMargin" priority="900" id="Mmq-Xp-peX"/>
                                         <constraint firstAttribute="centerY" secondItem="035-Ls-zlP" secondAttribute="centerY" id="NC1-sZ-dNh"/>
                                         <constraint firstAttribute="centerY" secondItem="035-Ls-zlP" secondAttribute="centerY" id="OLL-ud-9KS"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="O0j-Pz-gGY" secondAttribute="trailing" constant="16" id="f9k-Lk-aUm"/>
+                                        <constraint firstItem="O0j-Pz-gGY" firstAttribute="leading" secondItem="035-Ls-zlP" secondAttribute="trailing" constant="8" id="UGa-5q-K5m"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="O0j-Pz-gGY" secondAttribute="trailing" id="f9k-Lk-aUm"/>
                                         <constraint firstItem="O0j-Pz-gGY" firstAttribute="leading" secondItem="035-Ls-zlP" secondAttribute="trailing" priority="980" constant="50" id="fhU-8u-drT"/>
                                         <constraint firstItem="035-Ls-zlP" firstAttribute="top" secondItem="1aA-Sl-ctT" secondAttribute="topMargin" priority="900" constant="2" id="gDr-iv-g9c"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="035-Ls-zlP" secondAttribute="bottom" priority="901" constant="2" id="gQk-wb-LWn"/>
@@ -1691,6 +1692,7 @@
                                             <exclude reference="gDr-iv-g9c"/>
                                             <exclude reference="gQk-wb-LWn"/>
                                             <exclude reference="i30-Md-KbS"/>
+                                            <exclude reference="svD-oi-AjJ"/>
                                             <exclude reference="fhU-8u-drT"/>
                                         </mask>
                                     </variation>
@@ -7677,13 +7679,13 @@
         <image name="waitlist_table_countdown" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="SWu-Ow-ZNJ"/>
-        <segue reference="g5V-KY-zil"/>
-        <segue reference="Udc-FT-5Vd"/>
-        <segue reference="F9u-xN-ecY"/>
-        <segue reference="t2R-Le-XNf"/>
         <segue reference="UrJ-ne-Kfy"/>
-        <segue reference="33i-hP-PSJ"/>
+        <segue reference="SWu-Ow-ZNJ"/>
+        <segue reference="uGl-gS-kfz"/>
+        <segue reference="F9u-xN-ecY"/>
+        <segue reference="hDB-zH-iEH"/>
+        <segue reference="Udc-FT-5Vd"/>
+        <segue reference="t2R-Le-XNf"/>
         <segue reference="BxH-0j-lGN"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.79607843140000001" green="0.59607843140000005" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

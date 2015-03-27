@@ -167,12 +167,6 @@
     
     orderArguments.strOrder = strOrder;
     orderArguments.order = order;
-
-    NSLog(@"orderArguments.strOrder");
-    NSLog(@"%@", strOrder);
-    
-    NSLog(@"orderArguments.strOrderResponse");
-    NSLog(@"%@", order.orderDetails);
     
     GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForPlaceOrderWithObject:orderArguments];
     
@@ -189,7 +183,6 @@
     {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         
-        NSLog(@"%@",object);
         if(error == nil && object.identifier != nil && object.identifier.longLongValue != 0)
         {
             NSString *title = [NSString stringWithFormat:@"Your Order - %@", self.orderInProgress.selectedStore.name];

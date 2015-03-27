@@ -138,8 +138,6 @@
     GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
     GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreMenuItemModifiersWithStoreId:_onlineOrderSelectedMenuItem.selectedStore.identifier.longLongValue menuItemPOSId:_onlineOrderSelectedMenuItem.selectedItem.menuItemPOSId.longLongValue];
     
-    NSLog(@"storeid=%lld, menuitemposid=%lld", _onlineOrderSelectedMenuItem.selectedStore.identifier.longLongValue, _onlineOrderSelectedMenuItem.selectedItem.menuItemPOSId.longLongValue);
-    
     [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error)
      {
          if (!error)
@@ -369,7 +367,6 @@
 
 - (IBAction)unwindModifierToModifierGroup:(UIStoryboardSegue *)unwindSegue
 {
-    NSLog(@"Back to SelectPaymentTableViewController");
     UIViewController *cc = [unwindSegue sourceViewController];
 
     if ([cc isKindOfClass:[MenuModifierTableViewController class]])
