@@ -124,7 +124,6 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
         NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
         if (userInfo != nil)
         {
-            NSLog(@"Inside 'didFinishLaunchingWithOptions renote notification:' - %@", userInfo);
             [self.notificationUtils application:application didReceiveRemoteNotification:userInfo OnStartup:true AndStatus:application.applicationState];
         }
     }
@@ -133,7 +132,6 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
     [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (localNotif)
     {
-        NSLog(@"Inside didFinishLaunchingWithOptions local notification: %@", localNotif.userInfo);
 //        [viewController displayItem:itemName];  // custom method
         [self.notificationUtils application:application didReceiveLocalNotification:localNotif.userInfo OnStartup:true];
     }
@@ -167,8 +165,6 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 
 #pragma mark - Push Notification
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken {
-    NSLog(@"Inside didRegisterForRemoteNotificationsWithDeviceToken:");
-    
     [PFPush storeDeviceToken:newDeviceToken];
     [PFPush subscribeToChannelInBackground:@"" target:self selector:@selector(subscribeFinished:error:)];
     
@@ -187,7 +183,6 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 }
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     
-    NSLog(@"Inside 'application:didReceiveRemoteNotification:' - %@", userInfo);
     [PFPush handlePush:userInfo];
     
     if (application.applicationState == UIApplicationStateInactive)
@@ -200,7 +195,6 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 ///////////////////////////////////////////////////////////
  - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandle
 {
-    NSLog(@"Inside 'application:didReceiveRemoteNotification:fetchCompletionHandler:' - %@", userInfo);
      if (application.applicationState == UIApplicationStateInactive) {
          [PFAnalytics trackAppOpenedWithRemoteNotificationPayload:userInfo];
      }

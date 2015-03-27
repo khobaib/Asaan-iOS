@@ -71,7 +71,6 @@
 {
     NSNumber *orderId = [userInfo objectForKey:@"REVIEW_ORDER"];
     NSString *storeName = [userInfo objectForKey:@"REVIEW_STORE_NAME"];
-    NSLog(@"Inside didReceiveLocalNotification :%@", userInfo);
     if (orderId != nil && orderId.longLongValue > 0)
     {
         self.notificationInfo = userInfo;
@@ -145,13 +144,11 @@
 
 - (void)application:(UIApplication *) application handleReviewActionWithNotification:(NSDictionary *) userInfo
 {
-    NSLog(@"Inside handleReviewActionWithNotification %@", userInfo);
     [self application:application didReceiveLocalNotification:userInfo OnStartup:false];
 }
 
 - (void)application:(UIApplication *) application handleRemindActionWithNotification:(NSDictionary *) userInfo
 {
-    NSLog(@"Inside handleRemindActionWithNotification %@", userInfo);
     UILocalNotification *localNotif = [[UILocalNotification alloc] init];
     if (localNotif == nil)
         return;

@@ -67,7 +67,6 @@
     
     if (!_pagedArray.pages[@(page)] && !_dataLoadingOperations[@(page)]) {
         // Don't load data if there already is a loading operation in progress
-        NSLog(@"_loadDataForPage page download %ld", (long)page);
         [self _loadDataForPage:page];
     }
 }
@@ -126,7 +125,6 @@
 #pragma mark - Paged array delegate
 - (void)pagedArray:(AWPagedArray *)pagedArray willAccessIndex:(NSUInteger)index returnObject:(__autoreleasing id *)returnObject {
 
-    NSLog(@"pagedArray object accessed %ld", (long)index);
     if ([*returnObject isKindOfClass:[NSNull class]] && self.shouldLoadAutomatically) {
         [self _setShouldLoadDataForPage:[pagedArray pageForIndex:index]];
     } else {

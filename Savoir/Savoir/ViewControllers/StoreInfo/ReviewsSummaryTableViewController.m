@@ -113,22 +113,22 @@
 #pragma mark -
 
 - (void)dataProvider:(DataProvider *)dataProvider didLoadDataAtIndexes:(NSIndexSet *)indexes
-{
-    
-    NSMutableArray *indexPathsToReload = [NSMutableArray array];
-    
-    [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
-        
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:idx inSection:0];
-        
-        if ([self.tableView.indexPathsForVisibleRows containsObject:indexPath]) {
-            [indexPathsToReload addObject:indexPath];
-        }
-    }];
-    
-    if (indexPathsToReload.count > 0) {
-        [self.tableView reloadRowsAtIndexPaths:indexPathsToReload withRowAnimation:UITableViewRowAnimationFade];
-    }
+{    
+//    NSMutableArray *indexPathsToReload = [NSMutableArray array];
+//    
+//    [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+//        
+//        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:idx inSection:0];
+//        
+//        if ([self.tableView.indexPathsForVisibleRows containsObject:indexPath]) {
+//            [indexPathsToReload addObject:indexPath];
+//        }
+//    }];
+//    
+//    if (indexPathsToReload.count > 0) {
+//        [self.tableView reloadRowsAtIndexPaths:indexPathsToReload withRowAnimation:UITableViewRowAnimationFade];
+//    }
+    [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationFade];
     [self.hud hide:YES];
 }
 

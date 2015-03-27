@@ -219,12 +219,9 @@ NSString *endStr = @"</table> </td> </tr> </table> </body> </html>";
     }
     
     orderHTMLStr = [NSString stringWithFormat:@"%@ %@ %@", orderHTMLStr, allTableRows, endStr];
-    NSLog(@"%@",orderHTMLStr);
     
     orderHTMLStr = [orderHTMLStr stringByReplacingOccurrencesOfString:@"(null)" withString:@""];
-    NSLog(@"%@",orderHTMLStr);
     orderHTMLStr = [orderHTMLStr stringByReplacingOccurrencesOfString:@"\\n" withString:@""];
-    NSLog(@"%@",orderHTMLStr);
 
     return orderHTMLStr;
 }

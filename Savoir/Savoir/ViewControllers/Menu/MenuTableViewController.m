@@ -309,7 +309,6 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     
     if (submenu.menuItemCount.longLongValue > 0)
     {
-        NSLog(@"scrollToRowAtIndexPath row = 0 section = %ld", (long)row);
         [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:row]
                       atScrollPosition:UITableViewScrollPositionTop animated:YES];
     }
@@ -460,8 +459,6 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     cell.likesImageView.image = nil;
     cell.visitorsImageView.image = nil;
     
-    NSLog(@"cellForRowAtIndexPath section = %ld row = %ld", (long)indexPath.section, (long)indexPath.row);
-    
     id dataObject = menuSegmentHolder.provider.dataObjects[rowIndex];
     if ([dataObject isKindOfClass:[NSNull class]])
         return cell;
@@ -543,10 +540,24 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
         [NSException raise:@"headerView == nil.." format:@"No cells with matching SubMenuCellIdentifier loaded from your storyboard"];
     }
     UILabel *txtName=(UILabel *)[headerView viewWithTag:401];
-    txtName.text = submenu.name;
+    txtName.numberOfLines = 0;
+    if (IsEmpty(submenu.descriptionProperty) == true)
+        txtName.text = submenu.name;
+    else
+        txtName.attributedText = [self getAttributedHeaderTextForSubMenu:submenu];
     DropdownView *dropdownView = (DropdownView*)[headerView  viewWithTag:402];
     [self setupDropdownView:dropdownView];
     return headerView.contentView;
+}
+
+-(NSAttributedString *) getAttributedHeaderTextForSubMenu:(GTLStoreendpointStoreMenuHierarchy *)submenu
+{
+    NSString *str = [NSString stringWithFormat:@"\n\n%@", submenu.descriptionProperty];
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:submenu.name];
+    NSAttributedString *atrStr = [[NSAttributedString alloc]initWithString:str attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:[UIFont smallSystemFontSize]]}];
+    [attributedString appendAttributedString:atrStr];
+    
+    return attributedString;
 }
 
 #pragma mark -
@@ -575,6 +586,20 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     }
     else
         [self.view makeToast:@"Please start an order from the \"Order Online\" button on the Store List."];
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    MenuSegmentHolder *menuSegmentHolder;
+    if (_menuSegmentHolders.count > 1)
+        menuSegmentHolder = [_menuSegmentHolders objectAtIndex:_segmentedControl.selectedSegmentIndex];
+    else
+        menuSegmentHolder = [_menuSegmentHolders firstObject];
+    GTLStoreendpointStoreMenuHierarchy *submenu = [menuSegmentHolder.subMenus objectAtIndex:section];
+    if (IsEmpty(submenu.descriptionProperty))
+        return tableView.sectionHeaderHeight;
+    else
+        return 130;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
