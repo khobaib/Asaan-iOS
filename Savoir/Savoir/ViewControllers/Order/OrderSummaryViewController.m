@@ -358,7 +358,11 @@
 
 - (double)gratuity // 15% - fixed for now
 {
-    return [self subTotalNoDiscount]*0.18;
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    if (appDelegate.globalObjectHolder.currentUser.defaultTip.longValue == 0)
+        return [self subTotalNoDiscount] * 0.18;
+    else
+        return [self subTotalNoDiscount] * appDelegate.globalObjectHolder.currentUser.defaultTip.longValue/100;
 }
 
 - (double)subTotal  // already * by 1000000
