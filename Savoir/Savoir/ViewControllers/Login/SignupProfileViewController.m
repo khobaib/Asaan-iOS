@@ -96,7 +96,7 @@
     if (self.txtFirstName.isFirstResponder)
         activeField = self.txtFirstName;
     else if (self.txtLastName.isFirstResponder)
-        activeField = self.txtFirstName;
+        activeField = self.txtLastName;
     else
         activeField = self.txtPhone;
 }

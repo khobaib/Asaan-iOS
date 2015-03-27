@@ -23,14 +23,11 @@
 @interface UpdateInfoViewController () <UINavigationControllerDelegate,
         UIImagePickerControllerDelegate, UITextFieldDelegate, PTKViewDelegate, PTKTextFieldDelegate>
 
-@property (strong, nonatomic) IBOutlet UIScrollView * scrViewBase;
-
 @property (strong, nonatomic) IBOutlet UIImageView * imgPhoto;
 @property (strong, nonatomic) IBOutlet UITextField * txtFldFirstName;
 @property (strong, nonatomic) IBOutlet UITextField * txtFldLastName;
 @property (strong, nonatomic) IBOutlet UITextField * txtFldEmail;
 @property (strong, nonatomic) IBOutlet SHSPhoneTextField * txtFldPhone;
-@property (strong, nonatomic) IBOutlet UITextField * txtFldFacebookProfile;
 
 @property (strong, nonatomic) IBOutlet UISlider * sldrTip;
 
@@ -52,8 +49,6 @@
     [super viewDidLoad];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     [appDelegate.notificationUtils getSlidingMenuBarButtonSetupWith:self];
-    
-    [super setBaseScrollView:_scrViewBase];
 
     UITapGestureRecognizer * singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected)];
     singleTap.numberOfTapsRequired = 1;
@@ -64,20 +59,6 @@
     _imgPhoto.clipsToBounds = YES;
     _imgPhoto.layer.borderWidth = 3.0f;
     _imgPhoto.layer.borderColor = [UIColor whiteColor].CGColor;
-    
-    //
-    [_txtFldFirstName setDelegate:self];
-    [_txtFldLastName setDelegate:self];
-    [_txtFldEmail setDelegate:self];
-    [_txtFldPhone setDelegate:self];
-    [_txtFldFacebookProfile setDelegate:self];
-    
-    //
-    [_txtFldFirstName setKeyboardType:UIKeyboardTypeDefault];
-    [_txtFldLastName setKeyboardType:UIKeyboardTypeDefault];
-    [_txtFldEmail setKeyboardType:UIKeyboardTypeEmailAddress];
-    [_txtFldPhone setKeyboardType:UIKeyboardTypeNumbersAndPunctuation];
-    [_txtFldFacebookProfile setKeyboardType:UIKeyboardTypeDefault];
     
     [_txtFldPhone.formatter setDefaultOutputPattern:@"(###) ###-####"];
     _txtFldPhone.formatter.prefix = @"+1 ";
@@ -150,6 +131,13 @@
     // Prevent keyboard from showing by default
     [self.view endEditing:YES];
     [_ptkViewPayInfo endEditing:YES];
+//    
+//    if (self.txtFldFirstName.isFirstResponder)
+//        activeField = self.txtFldFirstName;
+//    else if (self.txtFldLastName.isFirstResponder)
+//        activeField = self.txtFldLastName;
+//    else
+//        activeField = self.txtFldPhone;
 }
 
 - (void) didReceiveMemoryWarning
@@ -272,7 +260,7 @@
     card.cvc = _ptkViewPayInfo.card.cvc;
     card.addressZip = _ptkViewPayInfo.card.addressZip;
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[STPAPIClient sharedClient] createTokenWithCard:card completion:^(STPToken *token, NSError *error)
      {
          if (!error)
@@ -315,11 +303,11 @@
                       //                    [self.navigationController popViewControllerAnimated:YES];
                       [UtilCalls popFrom:self index:2 Animated:YES];
                   } else
-                      [[[UIAlertView alloc]initWithTitle:@"Error" message:[error userInfo][@"error"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+                      [[[UIAlertView alloc]initWithTitle:@"Error" message:[error userInfo][@"NSLocalizedDescription"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
               }];
          }
          else
-             [[[UIAlertView alloc]initWithTitle:@"Error" message:[error userInfo][@"error"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+             [[[UIAlertView alloc]initWithTitle:@"Error" message:[error userInfo][@"NSLocalizedDescription"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
      }];
 }
 
@@ -337,9 +325,7 @@
     if (![self isValidForm])
         return;
 
-    MBProgressHUD * hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeIndeterminate;
-    hud.labelText = @"Please Wait";
+    __block MBProgressHUD * hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     [self saveCardAtGAE];
     
@@ -351,8 +337,7 @@
     
     [user saveInBackgroundWithBlock:^(BOOL complete, NSError * error)
     {
-        hud.hidden = YES;
-        
+        [hud hide:YES];
         if (!error)
         {
             UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Success" message:@"Profile successfully saved" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];

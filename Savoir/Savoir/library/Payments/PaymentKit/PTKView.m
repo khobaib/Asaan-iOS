@@ -92,8 +92,8 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
     _isValidState = NO;
 
 //    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, 290, 36);
-//    self.backgroundColor = [UIColor clearColor];
-    self.backgroundColor = [UIColor asaanBackgroundColor];
+    self.backgroundColor = [UIColor clearColor];
+//    self.backgroundColor = [UIColor asaanBackgroundColor];
     
 //    UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:self.bounds];
 //    backgroundImageView.image = [[UIImage imageNamed:@"textfield"]
@@ -120,7 +120,8 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
 //    self.opaqueOverGradientView.backgroundColor = [UIColor colorWithRed:0.9686 green:0.9686
 //                                                                   blue:0.9686 alpha:1.0000];
     
-    self.opaqueOverGradientView.backgroundColor = [UIColor asaanBackgroundColor];
+//    self.opaqueOverGradientView.backgroundColor = [UIColor asaanBackgroundColor];
+    self.opaqueOverGradientView.backgroundColor = [UIColor clearColor];
     self.opaqueOverGradientView.alpha = 0.0;
     [self.innerView addSubview:self.opaqueOverGradientView];
 

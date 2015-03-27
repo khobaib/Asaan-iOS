@@ -368,7 +368,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     else
         menuSegmentHolder = [_menuSegmentHolders firstObject];
     long long storeId = menuSegmentHolder.menu.storeId.longLongValue;
-    long long menuPOSId = menuSegmentHolder.menu.menuPOSId.longLongValue;
+    int menuPOSId = menuSegmentHolder.menu.menuPOSId.intValue;
     MenuItemLoadingOperation *milo = [[MenuItemLoadingOperation alloc] initWithIndexes:indexes storeId:storeId menuPOSId:menuPOSId];
     return milo;
 }
