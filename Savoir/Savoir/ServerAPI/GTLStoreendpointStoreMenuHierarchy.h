@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStoreMenuHierarchy (0 custom class methods, 13 custom properties)
+//   GTLStoreendpointStoreMenuHierarchy (0 custom class methods, 14 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLObject.h"
@@ -29,6 +29,10 @@
 @interface GTLStoreendpointStoreMenuHierarchy : GTLObject
 @property (retain) NSNumber *active;  // boolValue
 @property (retain) NSNumber *createdDate;  // longLongValue
+
+// Remapped to 'descriptionProperty' to avoid NSObject's 'description'.
+@property (copy) NSString *descriptionProperty;
+
 @property (copy) NSString *hours;
 
 // identifier property maps to 'id' in JSON (to avoid Objective C's 'id').

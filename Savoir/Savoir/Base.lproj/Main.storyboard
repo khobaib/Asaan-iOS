@@ -7708,13 +7708,13 @@
         <image name="waitlist_table_countdown" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="SWu-Ow-ZNJ"/>
-        <segue reference="g5V-KY-zil"/>
-        <segue reference="Udc-FT-5Vd"/>
-        <segue reference="F9u-xN-ecY"/>
-        <segue reference="t2R-Le-XNf"/>
         <segue reference="UrJ-ne-Kfy"/>
-        <segue reference="33i-hP-PSJ"/>
+        <segue reference="SWu-Ow-ZNJ"/>
+        <segue reference="uGl-gS-kfz"/>
+        <segue reference="F9u-xN-ecY"/>
+        <segue reference="hDB-zH-iEH"/>
+        <segue reference="Udc-FT-5Vd"/>
+        <segue reference="t2R-Le-XNf"/>
         <segue reference="BxH-0j-lGN"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.79607843140000001" green="0.59607843140000005" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
