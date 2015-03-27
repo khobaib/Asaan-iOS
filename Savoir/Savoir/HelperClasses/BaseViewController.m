@@ -8,8 +8,11 @@
 
 #import "BaseViewController.h"
 #import "UITextField+Extender.h"
+#import "PTKView.h"
+#import "PTKTextField.h"
 
-@interface BaseViewController ()
+
+@interface BaseViewController () <PTKViewDelegate>
     @property(nonatomic) CGRect frameRect;
     @property(nonatomic) Boolean isKeyboardShowing;
     @property(nonatomic) CGFloat keyboardHeight;
@@ -84,22 +87,24 @@
     [_baseScrollView layoutSubviews];
 }
 
-- (void)textViewDidBeginEditing:(UITextView *)textView {
-    
+#pragma mark
+
+- (void) textViewDidBeginEditing:(UITextView *) textView
+{
     activeTextView = textView;
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField
+- (void) textFieldDidBeginEditing:(UITextField *) textField
 {
     activeField = textField;
 }
 
-- (void)textViewDidEndEditing:(UITextView *)textView {
-    
+- (void) textViewDidEndEditing:(UITextView *) textView
+{
     activeTextView = nil;
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField
+- (void) textFieldDidEndEditing:(UITextField *) textField
 {
     activeField = nil;
 }
@@ -115,6 +120,20 @@
     
     return YES;
 }
+
+- (void) pkTextFieldDidBeginEditing:(UITextField *)textField
+{
+    activePTKField = textField;
+    NSLog(@"<-----------PTK------------>");
+}
+
+- (void) pkTextFieldDidEndEditing:(UITextField *)textField
+{
+    activePTKField = nil;
+    NSLog(@"<-----------PTK------------>");
+}
+
+#pragma mark
 
 - (void)resizeScrollbarToFitKeyboard
 {
@@ -145,6 +164,15 @@
         activeViewRect.origin = origin;
         if (!CGRectContainsPoint(aRect, origin) )
             [_baseScrollView scrollRectToVisible:activeViewRect animated:YES];
+    }
+    
+    if (activePTKField != nil)
+    {
+        CGPoint origin = [activePTKField.superview convertPoint:activePTKField.frame.origin toView:[UIApplication sharedApplication].keyWindow.rootViewController.view];
+        CGRect activeFieldRect = activePTKField.frame;
+        activeFieldRect.origin = origin;
+        if (!CGRectContainsPoint(aRect, origin) )
+            [_baseScrollView scrollRectToVisible:activeFieldRect animated:YES];
     }
 }
 

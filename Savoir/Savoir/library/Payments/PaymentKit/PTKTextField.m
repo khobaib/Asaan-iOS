@@ -63,4 +63,22 @@
     }
 }
 
+/*
+#pragma mark
+
+- (void) textFieldDidBeginEditing:(UITextField *) textField
+{
+    if ([self.delegate respondsToSelector:@selector(pkTextFieldDidBeginEditing:)])
+        [self.delegate performSelector:@selector(pkTextFieldDidBeginEditing:)
+                            withObject:self];
+}
+
+- (void) textFieldDidEndEditing:(UITextField *) textField
+{
+    if ([self.delegate respondsToSelector:@selector(pkTextFieldDidEndEditing:)])
+        [self.delegate performSelector:@selector(pkTextFieldDidEndEditing:)
+                            withObject:self];
+}
+*/ //<--
+
 @end

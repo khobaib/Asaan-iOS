@@ -448,7 +448,7 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
 
 #pragma mark - Delegates
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField
+- (void) textFieldDidBeginEditing:(UITextField *) textField
 {
     if ([textField isEqual:self.cardCVCField]) {
         [self setPlaceholderToCVC];
@@ -459,6 +459,15 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
     if ([textField isEqual:self.cardNumberField] && !_isInitialState) {
         [self stateCardNumber];
     }
+    
+    if ([self.delegate respondsToSelector:@selector(pkTextFieldDidBeginEditing:)])
+        [self.delegate performSelector:@selector(pkTextFieldDidBeginEditing:) withObject:textField];
+}
+
+- (void) textFieldDidEndEditing:(UITextField *) textField
+{
+    if ([self.delegate respondsToSelector:@selector(pkTextFieldDidEndEditing:)])
+        [self.delegate performSelector:@selector(pkTextFieldDidEndEditing:) withObject:textField];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)replacementString

@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "SHSPhoneTextField.h"
 #import "PTKView.h"
+#import "PTKTextField.h"
 #import <Parse/Parse.h>
 #import "InlineCalls.h"
 #import "UIImageView+WebCache.h"
@@ -20,7 +21,7 @@
 
 
 @interface UpdateInfoViewController () <UINavigationControllerDelegate,
-        UIImagePickerControllerDelegate, UITextFieldDelegate, PTKViewDelegate>
+        UIImagePickerControllerDelegate, UITextFieldDelegate, PTKViewDelegate, PTKTextFieldDelegate>
 
 @property (strong, nonatomic) IBOutlet UIScrollView * scrViewBase;
 
@@ -88,6 +89,7 @@
     
     _lblSldrValue.text = [NSString stringWithFormat:@"%d%%", (int) _sldrTip.value];
     
+    //
     [_ptkViewPayInfo setDelegate:self];
     
     //

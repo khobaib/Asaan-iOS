@@ -14,11 +14,13 @@
 
 @optional
 
-- (void)pkTextFieldDidBackSpaceWhileTextIsEmpty:(PTKTextField *)textField;
+- (void) pkTextFieldDidBackSpaceWhileTextIsEmpty:(PTKTextField *) textField;
+//- (void) pkTextFieldDidBeginEditing:(PTKTextField *) textField; //<--
+//- (void) pkTextFieldDidEndEditing:(PTKTextField *) textField; //<--
 
 @end
 
-@interface PTKTextField : UITextField
+@interface PTKTextField : UITextField //<UITextFieldDelegate> //<--
 
 + (NSString*)textByRemovingUselessSpacesFromString:(NSString*)string;
 
