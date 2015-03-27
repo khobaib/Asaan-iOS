@@ -20,7 +20,7 @@
 
 
 @interface UpdateInfoViewController () <UINavigationControllerDelegate,
-        UIImagePickerControllerDelegate, PTKViewDelegate>
+        UIImagePickerControllerDelegate, UITextFieldDelegate, PTKViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UIScrollView * scrViewBase;
 
@@ -147,6 +147,7 @@
     
     // Prevent keyboard from showing by default
     [self.view endEditing:YES];
+    [_ptkViewPayInfo endEditing:YES];
 }
 
 - (void) didReceiveMemoryWarning
@@ -164,15 +165,6 @@
     // Pass the selected object to the new view controller.
 }
 */
-
-#pragma mark
-
-- (IBAction) sldrTipChanged:(id) sender
-{
-    _sldrTip.value = round(_sldrTip.value);
-    
-    _lblSldrValue.text = [NSString stringWithFormat:@"%d%%", (int) _sldrTip.value];
-}
 
 #pragma mark
 
@@ -222,13 +214,6 @@
         return NO;
     }
     
-    /*
-    if (_isCardValid)
-    {
-        [self saveCardAtGAE];
-    }
-    */
-    
     if (!_isCardValid)
     {
         UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"The card number you have entered is not valid." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -239,90 +224,6 @@
     
     return YES;
 }
-
--(void) tapDetected
-{
-    UIImagePickerController * picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.allowsEditing = YES;
-    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    picker.cameraDevice = UIImagePickerControllerCameraDeviceFront;
-    
-    [self presentViewController:picker animated:YES completion:NULL];
-}
-
-#pragma mark
-
-- (void) imagePickerController:(UIImagePickerController *) picker didFinishPickingMediaWithInfo:(NSDictionary *) info
-{
-    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
-    [picker dismissViewControllerAnimated:YES completion:NULL];
-    
-    if (chosenImage != nil)
-    {
-        self.imgPhoto.image = chosenImage;
-        NSData * imageData = UIImagePNGRepresentation(chosenImage);
-        PFUser * user = [PFUser currentUser];
-        NSString * name = [NSString stringWithFormat:@"%@.png",user.username];
-        PFFile * imageFile = [PFFile fileWithName:name data:imageData];
-        user[@"picture"] = imageFile;
-    }
-}
-
-- (void) imagePickerControllerDidCancel:(UIImagePickerController *) picker
-{
-    [picker dismissViewControllerAnimated:YES completion:NULL];
-}
-
-#pragma mark
-
-- (void) paymentView:(PTKView *) paymentView withCard:(PTKCard *) card isValid:(BOOL) valid
-{
-    _isCardValid = valid;
-    
-    if (valid)
-    {
-        [paymentView endEditing:YES];
-    }
-}
-
-#pragma mark
-
-- (IBAction) onPressSave:(id) sender
-{
-    if (![self isValidForm])
-        return;
-
-    MBProgressHUD * hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeIndeterminate;
-    hud.labelText = @"Please Wait";
-    
-    [self saveCardAtGAE];
-    
-    PFUser * user = [PFUser currentUser];
-    user[@"firstName"] = _txtFldFirstName.text;
-    user[@"lastName"] = _txtFldLastName.text;
-    user[@"email"] = _txtFldEmail.text;
-    user[@"phone"] = _txtFldPhone.text;
-    
-    [user saveInBackgroundWithBlock:^(BOOL complete, NSError * error)
-    {
-        hud.hidden = YES;
-        
-        if (!error)
-        {
-            UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Success" message:@"Profile successfully saved" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alert show];
-        }
-        else
-        {
-            UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Error" message:[error userInfo][@"error"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alert show];
-        }
-    }];
-}
-
-#pragma mark
 
 - (NSString *) getCardTypeForCard:(PTKCardNumber *) cardNumber
 {
@@ -418,6 +319,95 @@
          else
              [[[UIAlertView alloc]initWithTitle:@"Error" message:[error userInfo][@"error"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
      }];
+}
+
+#pragma mark
+
+- (IBAction) sldrTipChanged:(id) sender
+{
+    _sldrTip.value = round(_sldrTip.value);
+    
+    _lblSldrValue.text = [NSString stringWithFormat:@"%d%%", (int) _sldrTip.value];
+}
+
+- (IBAction) onPressSave:(id) sender
+{
+    if (![self isValidForm])
+        return;
+
+    MBProgressHUD * hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.labelText = @"Please Wait";
+    
+    [self saveCardAtGAE];
+    
+    PFUser * user = [PFUser currentUser];
+    user[@"firstName"] = _txtFldFirstName.text;
+    user[@"lastName"] = _txtFldLastName.text;
+    user[@"email"] = _txtFldEmail.text;
+    user[@"phone"] = _txtFldPhone.text;
+    
+    [user saveInBackgroundWithBlock:^(BOOL complete, NSError * error)
+    {
+        hud.hidden = YES;
+        
+        if (!error)
+        {
+            UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Success" message:@"Profile successfully saved" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+        }
+        else
+        {
+            UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Error" message:[error userInfo][@"error"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+        }
+    }];
+}
+
+- (void) tapDetected
+{
+    UIImagePickerController * picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    picker.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+    
+    [self presentViewController:picker animated:YES completion:NULL];
+}
+
+#pragma mark
+
+- (void) imagePickerController:(UIImagePickerController *) picker didFinishPickingMediaWithInfo:(NSDictionary *) info
+{
+    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    
+    if (chosenImage != nil)
+    {
+        self.imgPhoto.image = chosenImage;
+        NSData * imageData = UIImagePNGRepresentation(chosenImage);
+        PFUser * user = [PFUser currentUser];
+        NSString * name = [NSString stringWithFormat:@"%@.png",user.username];
+        PFFile * imageFile = [PFFile fileWithName:name data:imageData];
+        user[@"picture"] = imageFile;
+    }
+}
+
+- (void) imagePickerControllerDidCancel:(UIImagePickerController *) picker
+{
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+#pragma mark
+
+- (void) paymentView:(PTKView *) paymentView withCard:(PTKCard *) card isValid:(BOOL) valid
+{
+    _isCardValid = valid;
+    
+    if (valid)
+    {
+        [paymentView endEditing:YES];
+    }
 }
 
 @end

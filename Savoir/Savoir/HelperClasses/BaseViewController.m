@@ -35,6 +35,8 @@
     _frameRect.size = size;
     _baseScrollView.contentSize = _frameRect.size;
     NSLog(@"viewWillTransitionToSize");
+    NSLog(@"<_baseScrollView.contentSize: w = %f, h = %f>", _baseScrollView.contentSize.width,
+          _baseScrollView.contentSize.height);
 }
 - (void) didRotateFromInterfaceOrientation: (UIInterfaceOrientation) fromInterfaceOrientation
 {
@@ -42,6 +44,8 @@
     _frameRect = self.view.frame;
     _baseScrollView.contentSize = _frameRect.size;
     NSLog(@"didRotateFromInterfaceOrientation");
+    NSLog(@"<_baseScrollView.contentSize: w = %f, h = %f>", _baseScrollView.contentSize.width,
+          _baseScrollView.contentSize.height);
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -55,6 +59,9 @@
                                                  name:UIKeyboardWillHideNotification object:nil];
     _frameRect = self.view.frame;
     _baseScrollView.contentSize = _frameRect.size;
+    NSLog(@"viewWillAppear");
+    NSLog(@"<_baseScrollView.contentSize: w = %f, h = %f>", _baseScrollView.contentSize.width,
+          _baseScrollView.contentSize.height);
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
