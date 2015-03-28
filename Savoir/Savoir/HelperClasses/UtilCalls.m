@@ -17,6 +17,8 @@
 
 @implementation UtilCalls
 
++ (int) ORDER_PREP_TIME { return 3600; }
+
 + (NSString *) formattedNumber:(NSNumber*) number
 {
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
@@ -314,7 +316,6 @@
      }];
 }
 
-
 + (NSString *) getServiceReviewStringFromStats:(GTLStoreendpointStoreAndStats *)storeAndStats
 {
     long long serviceCount = storeAndStats.stats.serviceDislikes.longLongValue + storeAndStats.stats.serviceLikes.longLongValue;
@@ -330,5 +331,101 @@
     }
     else
         return nil;
+}
+
++ (Boolean) canStore:(GTLStoreendpointStore *)store fulfillOrderAt:(NSDate *)date
+{
+    return [UtilCalls isDate:date InAllowedGivenDates:store.hours];
+}
+
++ (Boolean) canPlaceOrderFromMenu:(GTLStoreendpointStoreMenuHierarchy *)menu atDate:(NSDate *)date
+{
+    NSDate *minOrderDate = [date dateByAddingTimeInterval:[UtilCalls ORDER_PREP_TIME]];
+    return [UtilCalls isDate:minOrderDate InAllowedGivenDates:menu.hours];
+}
+
+//
+// date format
+// MONDAY CLOSED,TUESDAY 1130 1430;1700 2130,WEDNESDAY 1130 2130,THURSDAY 1130 2130,FRIDAY 1130 2230,SATURDAY 1200 2230,SUNDAY 1600 2100
+//
+
++ (Boolean) isDate:(NSDate *)date InAllowedGivenDates:(NSString *)strDates
+{
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *weekdayComponents = [gregorian components:(NSDayCalendarUnit | NSTimeZoneCalendarUnit | NSWeekdayCalendarUnit) fromDate:date];
+    
+    NSString *weekDay = [UtilCalls getStringDayOfWeekFromInt:weekdayComponents.weekday];
+    
+    if (IsEmpty(weekDay) == true)
+        return NO;
+    
+    NSString *requiredDayAndTimeStr = [UtilCalls findRequiredDay:weekDay FromGivenDatesString:strDates];
+    
+    if (IsEmpty(requiredDayAndTimeStr) == true)
+        return NO;
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"HHmm";
+    NSString *time24Str = [dateFormatter stringFromDate:date];
+    int time24 = [time24Str intValue];
+    
+    NSArray* allTimes = [requiredDayAndTimeStr componentsSeparatedByString: @";"];
+    for (NSString *timeString in allTimes)
+    {
+        NSArray* allComponents = [timeString componentsSeparatedByString: @" "];
+        NSString *startTimeStr = [allComponents objectAtIndex:0];
+        NSString *endTimeStr = [allComponents objectAtIndex:1];
+        int startTime = [startTimeStr intValue];
+        int endTime = [endTimeStr intValue];
+        
+        if (startTime <= time24 && time24 < endTime)
+            return YES;
+    }
+    
+    return NO;
+}
+
++ (NSString *)findRequiredDay:(NSString *)requiredDay FromGivenDatesString:(NSString *)strDates
+{
+    NSArray* allDays = [strDates componentsSeparatedByString: @","];
+    for (NSString *dayString in allDays)
+    {
+        NSArray* allComponents = [dayString componentsSeparatedByString: @" "];
+        NSString *day = [allComponents objectAtIndex:0];
+        if ([day compare:requiredDay] == NSOrderedSame)
+        {
+            // remove day part and return everything else
+            NSRange start = [dayString rangeOfString:@" "];
+            NSString *timeString = [dayString substringWithRange:NSMakeRange(start.location+1, dayString.length - (start.location+1))];
+            if ([timeString containsString:@"CLOSED"])
+                return nil;
+            return timeString;
+        }
+    }
+    return nil;
+}
+
++ (NSString *)getStringDayOfWeekFromInt:(NSUInteger)index
+{
+    switch (index)
+    {
+        case 1:
+            return @"SUNDAY";
+        case 2:
+            return @"MONDAY";
+        case 3:
+            return @"TUESDAY";
+        case 4:
+            return @"WEDNESDAY";
+        case 5:
+            return @"THURSDAY";
+        case 6:
+            return @"FRIDAY";
+        case 7:
+            return @"SATURDAY";
+        default:
+            return nil;
+    }
 }
 @end

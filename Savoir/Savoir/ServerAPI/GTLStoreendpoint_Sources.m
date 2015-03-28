@@ -26,6 +26,7 @@
 #import "GTLStoreendpointChatRoomsAndStoreChatMemberships.m"
 #import "GTLStoreendpointChatUser.m"
 #import "GTLStoreendpointChatUserArray.m"
+#import "GTLStoreendpointClientVersionMatch.m"
 #import "GTLStoreendpointItemReview.m"
 #import "GTLStoreendpointItemReviewsArray.m"
 #import "GTLStoreendpointMenuItemAndStats.m"

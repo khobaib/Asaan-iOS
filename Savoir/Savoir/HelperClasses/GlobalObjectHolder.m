@@ -167,7 +167,7 @@
 ////
 ////    // to load
     NSNumber *aNumber = [defaults objectForKey:@"STORE_COUNT"];
-    self.storeCount = aNumber.longLongValue;
+    self.storeCount = aNumber.intValue;
     if (self.storeCount == 0)
         self.storeCount = 40;
     __weak __typeof(self) weakSelf = self;
@@ -177,9 +177,22 @@
     
     [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointAsaanLong *object,NSError *error)
      {
-         weakSelf.storeCount = object.longValue.longLongValue;
+         weakSelf.storeCount = object.longValue.intValue;
          [defaults setObject:[NSNumber numberWithLongLong:weakSelf.storeCount] forKey:@"STORE_COUNT"];
          [defaults synchronize];
+     }];
+}
+
+- (void) loadSupportedClientVersionFromServer
+{
+    __weak __typeof(self) weakSelf = self;
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
+    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetClientVersion];
+    
+    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointClientVersionMatch *object,NSError *error)
+     {
+         weakSelf.versionFromServer = object.approvedIOSClientVersion;
      }];
 }
 

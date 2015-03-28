@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryStoreendpoint (50 custom class methods, 16 custom properties)
+//   GTLQueryStoreendpoint (51 custom class methods, 16 custom properties)
 
 #import "GTLQueryStoreendpoint.h"
 
@@ -24,6 +24,7 @@
 #import "GTLStoreendpointChatRoom.h"
 #import "GTLStoreendpointChatRoomsAndStoreChatMemberships.h"
 #import "GTLStoreendpointChatUserArray.h"
+#import "GTLStoreendpointClientVersionMatch.h"
 #import "GTLStoreendpointItemReviewsArray.h"
 #import "GTLStoreendpointMenuItemAndStatsCollection.h"
 #import "GTLStoreendpointMenuItemModifiersAndGroups.h"
@@ -98,6 +99,13 @@
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
   query.roomId = roomId;
   query.expectedObjectClass = [GTLStoreendpointChatUserArray class];
+  return query;
+}
+
++ (id)queryForGetClientVersion {
+  NSString *methodName = @"storeendpoint.getClientVersion";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.expectedObjectClass = [GTLStoreendpointClientVersionMatch class];
   return query;
 }
 

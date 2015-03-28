@@ -33,6 +33,7 @@
                       [GTLStoreendpointChatRoomsAndStoreChatMemberships class],
                       [GTLStoreendpointChatUser class],
                       [GTLStoreendpointChatUserArray class],
+                      [GTLStoreendpointClientVersionMatch class],
                       [GTLStoreendpointItemReview class],
                       [GTLStoreendpointItemReviewsArray class],
                       [GTLStoreendpointMenuItemAndStats class],

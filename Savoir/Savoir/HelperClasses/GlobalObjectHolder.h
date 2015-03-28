@@ -23,10 +23,12 @@
 @property (strong, nonatomic) GTLUserendpointUserAddress *defaultUserAddress;
 @property (strong, nonatomic) GTLUserendpointUser *currentUser;
 @property (strong, nonatomic) GTLStoreendpointChatRoomsAndStoreChatMemberships *usersRoomsAndStores;
-@property (nonatomic) long long storeCount;
+@property (nonatomic) int storeCount;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLLocation* location;
+
+@property (strong, nonatomic) NSString *versionFromServer;
 
 - (OnlineOrderDetails *)createOrderInProgress;
 - (void) removeOrderInProgress;
@@ -41,5 +43,7 @@
 
 - (void) loadAllUserObjects;
 - (void) clearAllObjects;
+
+- (void) loadSupportedClientVersionFromServer;
 
 @end

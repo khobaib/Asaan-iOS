@@ -50,13 +50,12 @@
 + (int) ORDERTYPE_CARRYOUT { return 1;}
 + (int) ORDERTYPE_DELIVERY { return 2;}
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.minPartySize = self.currPartySize = 1;
     self.partySize.text = [NSString stringWithFormat:@"%d", self.currPartySize];
-    self.minOrderTime = 3600;
+    self.minOrderTime = [UtilCalls ORDER_PREP_TIME];
     self.timeIncrementInterval = 900; // 15 min
     self.timeDecrementInterval = -900; // 15 min
     

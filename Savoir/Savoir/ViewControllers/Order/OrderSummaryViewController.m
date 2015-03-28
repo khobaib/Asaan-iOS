@@ -170,42 +170,52 @@
     
     GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForPlaceOrderWithObject:orderArguments];
     
-    //[query setCustomParameter:@"hmHAJvHvKYmilfOqgUnc22tf/RL5GLmPbcFBg02d6wm+ZB1o3f7RKYqmB31+DGoH9Ad3s3WP99n587qDZ5tm+w==" forKey:@"asaan-auth-token"];
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
     dic[USER_AUTH_TOKEN_HEADER_NAME]=[UtilCalls getAuthTokenForCurrentUser];
     
     [query setAdditionalHTTPHeaders:dic];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    __weak __typeof(self) weakSelf = self;
-    GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreOrder *object,NSError *error)
+    if ([UtilCalls canStore:self.orderInProgress.selectedStore fulfillOrderAt:self.orderInProgress.orderTime] == NO)
     {
-        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-        
-        if(error == nil && object.identifier != nil && object.identifier.longLongValue != 0)
+        NSString *msg = [NSString stringWithFormat:@"%@ cannot accept any online orders at this time.", self.orderInProgress.selectedStore.name];
+        [UIAlertView showWithTitle:@"Online Order Failure" message:msg cancelButtonTitle:@"Ok" otherButtonTitles:nil
+                          tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex)
+         {
+         }];
+    }
+    else
+    {
+        __weak __typeof(self) weakSelf = self;
+        GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
+        [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreOrder *object,NSError *error)
         {
-            NSString *title = [NSString stringWithFormat:@"Your Order - %@", self.orderInProgress.selectedStore.name];
-            NSString *msg = [NSString stringWithFormat:@"Thank you - your order has been placed. If you need to make changes please call %@ immediately at %@.", weakSelf.orderInProgress.selectedStore.name, weakSelf.orderInProgress.selectedStore.phone];
-            [appDelegate.globalObjectHolder removeOrderInProgress];
-            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:title message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-            [alert show];
-            NotificationUtils *notificationUtils = [[NotificationUtils alloc]init];
-            [notificationUtils scheduleNotificationWithOrder:object];
-            if (self.revealViewController != nil)
-                [weakSelf performSegueWithIdentifier:@"SWOrderSummaryToStoreList" sender:weakSelf];
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            
+            if(error == nil && object.identifier != nil && object.identifier.longLongValue != 0)
+            {
+                NSString *title = [NSString stringWithFormat:@"Your Order - %@", self.orderInProgress.selectedStore.name];
+                NSString *msg = [NSString stringWithFormat:@"Thank you - your order has been placed. If you need to make changes please call %@ immediately at %@.", weakSelf.orderInProgress.selectedStore.name, weakSelf.orderInProgress.selectedStore.phone];
+                [appDelegate.globalObjectHolder removeOrderInProgress];
+                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:title message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+                [alert show];
+                NotificationUtils *notificationUtils = [[NotificationUtils alloc]init];
+                [notificationUtils scheduleNotificationWithOrder:object];
+                if (self.revealViewController != nil)
+                    [weakSelf performSegueWithIdentifier:@"SWOrderSummaryToStoreList" sender:weakSelf];
+                else
+                    [weakSelf performSegueWithIdentifier:@"segueUnwindOrderSummaryToStoreList" sender:weakSelf];
+            }
             else
-                [weakSelf performSegueWithIdentifier:@"segueUnwindOrderSummaryToStoreList" sender:weakSelf];
-        }
-        else
-        {
-            NSLog(@"%@",[error userInfo][@"error"]);
-            NSString *title = @"Something went wrong";
-            NSString *msg = [NSString stringWithFormat:@"We were unable to reach %@ and place your order. We're really sorry. Please call %@ directly at %@ to place your order.", weakSelf.orderInProgress.selectedStore.name, weakSelf.orderInProgress.selectedStore.name, weakSelf.orderInProgress.selectedStore.phone];
-            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:title message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-            [alert show];
-        }
-    }];
+            {
+                NSLog(@"%@",[error userInfo][@"error"]);
+                NSString *title = @"Something went wrong";
+                NSString *msg = [NSString stringWithFormat:@"We were unable to reach %@ and place your order. We're really sorry. Please call %@ directly at %@ to place your order.", weakSelf.orderInProgress.selectedStore.name, weakSelf.orderInProgress.selectedStore.name, weakSelf.orderInProgress.selectedStore.phone];
+                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:title message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+                [alert show];
+            }
+        }];
+    }
 }
 
 - (IBAction)cancelOrder:(id)sender

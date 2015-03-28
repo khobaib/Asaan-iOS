@@ -80,6 +80,21 @@
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     [appDelegate.notificationUtils getSlidingMenuBarButtonSetupWith:self];
     
+    if ([self isVersionSupported] == false)
+    {
+        [UIAlertView showWithTitle:@"Savoir update required" message:@"In order to continue please update the Savoir app. It should only take a few moments." cancelButtonTitle:nil otherButtonTitles:@[@"Update"]
+                          tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex)
+         {
+//             if (buttonIndex != [alertView cancelButtonIndex])
+//             {
+                 NSString *iTunesLink = @"https://itunes.apple.com/us/app/savoir/id967526744?mt=8";
+                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
+//             }
+          }];
+        
+        return;
+    }
+    
     PFUser *currentUser = [PFUser currentUser];
     if (!currentUser)
     {
@@ -104,6 +119,21 @@
         self.navigationItem.rightBarButtonItem = nil;
     
     [self startStandardUpdates];
+}
+
+- (Boolean) isVersionSupported
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    NSString *actualVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    NSString *requiredVersion = appDelegate.globalObjectHolder.versionFromServer;
+    
+    NSLog(@"actualVersion = %@, requiredVersion = %@", actualVersion, requiredVersion);
+    
+    // This is the simplest way to compare versions, keeping in mind that "1" < "1.0" < "1.0.0"
+    if (IsEmpty(requiredVersion) == false && [requiredVersion compare:actualVersion options:NSNumericSearch] == NSOrderedDescending)
+        return false;
+    else
+        return true;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -411,7 +441,18 @@
                  [appDelegate.globalObjectHolder removeOrderInProgress];
          }];
     }
-    [self performSegueWithIdentifier:@"seguePlaceOnlineOrder" sender:sender];
+    NSDate *currentDate = [NSDate date];
+    
+    if ([UtilCalls canStore:_selectedStore.store fulfillOrderAt:currentDate] == NO)
+    {
+        NSString *msg = [NSString stringWithFormat:@"%@ is closed and cannot accept any online orders at this time.", _selectedStore.store.name];
+        [UIAlertView showWithTitle:@"Online Order Failure" message:msg cancelButtonTitle:@"Ok" otherButtonTitles:nil
+                          tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex)
+         {
+         }];
+    }
+    else
+        [self performSegueWithIdentifier:@"seguePlaceOnlineOrder" sender:sender];
 }
 
 - (IBAction) reserveTable:(UIButton *)sender

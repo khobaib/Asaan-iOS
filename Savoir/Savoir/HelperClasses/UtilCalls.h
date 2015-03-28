@@ -10,8 +10,11 @@
 #import "GTLStoreendpointOrderReviewAndItemReviews.h"
 #import "GTLStoreendpointStoreAndStats.h"
 #import "GTLStoreendpointStoreWaitListQueue.h"
+#import "GTLStoreendpointStoreMenuHierarchy.h"
 
 @interface UtilCalls : NSObject
+
++ (int) ORDER_PREP_TIME;
 
 + (NSString *) formattedNumber:(NSNumber*) number;
 + (NSString *) rawAmountToString:(NSNumber*)number;
@@ -40,5 +43,9 @@
 + (NSString *) getFoodReviewStringFromStats:(GTLStoreendpointStoreAndStats *)storeAndStats;
 + (NSString *) getServiceReviewStringFromStats:(GTLStoreendpointStoreAndStats *)storeAndStats;
 + (void) removeWaitListQueueEntry:(GTLStoreendpointStoreWaitListQueue *)queueEntry;
+
++ (Boolean) canStore:(GTLStoreendpointStore *)store fulfillOrderAt:(NSDate *)date;
+
++ (Boolean) canPlaceOrderFromMenu:(GTLStoreendpointStoreMenuHierarchy *)menu atDate:(NSDate *)date;
 
 @end

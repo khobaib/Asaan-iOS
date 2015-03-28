@@ -23,6 +23,7 @@
 #import "GTLStoreendpointChatRoomsAndStoreChatMemberships.h"
 #import "GTLStoreendpointChatUser.h"
 #import "GTLStoreendpointChatUserArray.h"
+#import "GTLStoreendpointClientVersionMatch.h"
 #import "GTLStoreendpointItemReview.h"
 #import "GTLStoreendpointItemReviewsArray.h"
 #import "GTLStoreendpointMenuItemAndStats.h"

@@ -385,6 +385,7 @@
 		D4828CBE1A71ADE500C80E92 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D4828CBC1A71ADE500C80E92 /* libxml2.2.dylib */; };
 		D4828CBF1A71ADE500C80E92 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D4828CBD1A71ADE500C80E92 /* libxml2.dylib */; };
 		D4828D241A7AA4D000C80E92 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4828D231A7AA4D000C80E92 /* Accounts.framework */; };
+		D49FBA981AC613D600F55360 /* GTLStoreendpointClientVersionMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = D49FBA971AC613D600F55360 /* GTLStoreendpointClientVersionMatch.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1098,6 +1099,8 @@
 		D4828CBC1A71ADE500C80E92 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
 		D4828CBD1A71ADE500C80E92 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		D4828D231A7AA4D000C80E92 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		D49FBA961AC613D600F55360 /* GTLStoreendpointClientVersionMatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointClientVersionMatch.h; sourceTree = "<group>"; };
+		D49FBA971AC613D600F55360 /* GTLStoreendpointClientVersionMatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointClientVersionMatch.m; sourceTree = "<group>"; };
 		D4F2759F1A0C021800CEC95A /* Savoir.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Savoir.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -1907,6 +1910,8 @@
 		D4195DAF1A92A69B00663149 /* ServerAPI */ = {
 			isa = PBXGroup;
 			children = (
+				D49FBA961AC613D600F55360 /* GTLStoreendpointClientVersionMatch.h */,
+				D49FBA971AC613D600F55360 /* GTLStoreendpointClientVersionMatch.m */,
 				D409D8021AA6D3D2008FADDF /* GTLStoreendpointPlaceOrderArguments.h */,
 				D409D8031AA6D3D2008FADDF /* GTLStoreendpointPlaceOrderArguments.m */,
 				D4195DB01A92A69B00663149 /* GTLQueryStoreendpoint.h */,
@@ -2875,6 +2880,7 @@
 				D4195F981A92A69C00663149 /* GTLStoreendpointStoreWaitListQueueCollection.m in Sources */,
 				D4195ED21A92A69C00663149 /* DataLoadingOperation.m in Sources */,
 				D438AB961A9FA6AC0089E61A /* JSQMessagesCollectionView.m in Sources */,
+				D49FBA981AC613D600F55360 /* GTLStoreendpointClientVersionMatch.m in Sources */,
 				D4195F9C1A92A69C00663149 /* GTLUserendpointConstants.m in Sources */,
 				D445D71A1A96BA3800ED4919 /* ClaimStoreViewController.m in Sources */,
 				D4195EAB1A92A69C00663149 /* GlobalObjectHolder.m in Sources */,
