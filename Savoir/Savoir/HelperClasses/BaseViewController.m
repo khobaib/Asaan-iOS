@@ -8,8 +8,10 @@
 
 #import "BaseViewController.h"
 #import "UITextField+Extender.h"
+#import "PTKView.h"
 
-@interface BaseViewController ()
+
+@interface BaseViewController () <PTKViewDelegate>
     @property(nonatomic) CGRect frameRect;
     @property(nonatomic) Boolean isKeyboardShowing;
     @property(nonatomic) CGFloat keyboardHeight;
@@ -95,6 +97,18 @@
     activeField = nil;
 }
 
+- (void) pkTextFieldDidBeginEditing:(UITextField *)textField
+{
+    activePTKField = textField;
+    NSLog(@"<-----------PTK------------>");
+}
+
+- (void) pkTextFieldDidEndEditing:(UITextField *)textField
+{
+    activePTKField = nil;
+    NSLog(@"<-----------PTK------------>");
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
     
     UITextField *next = theTextField.nextTextField;
@@ -136,6 +150,15 @@
         activeViewRect.origin = origin;
         if (!CGRectContainsPoint(aRect, origin) )
             [_baseScrollView scrollRectToVisible:activeViewRect animated:YES];
+    }
+    
+    if (activePTKField != nil)
+    {
+        CGPoint origin = [activePTKField.superview convertPoint:activePTKField.frame.origin toView:[UIApplication sharedApplication].keyWindow.rootViewController.view];
+        CGRect activeFieldRect = activePTKField.frame;
+        activeFieldRect.origin = origin;
+        if (!CGRectContainsPoint(aRect, origin) )
+            [_baseScrollView scrollRectToVisible:activeFieldRect animated:YES];
     }
 }
 

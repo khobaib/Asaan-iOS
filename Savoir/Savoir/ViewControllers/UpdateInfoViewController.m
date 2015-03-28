@@ -22,6 +22,8 @@
 @interface UpdateInfoViewController () <UINavigationControllerDelegate,
         UIImagePickerControllerDelegate, UITextFieldDelegate, PTKViewDelegate>
 
+@property (strong, nonatomic) IBOutlet UIScrollView * scrViewBase;
+
 @property (strong, nonatomic) IBOutlet UIImageView * imgPhoto;
 @property (strong, nonatomic) IBOutlet UITextField * txtFldFirstName;
 @property (strong, nonatomic) IBOutlet UITextField * txtFldLastName;
@@ -48,6 +50,8 @@
     [super viewDidLoad];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     [appDelegate.notificationUtils getSlidingMenuBarButtonSetupWith:self];
+    
+    [super setBaseScrollView:_scrViewBase];
 
     UITapGestureRecognizer * singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected)];
     singleTap.numberOfTapsRequired = 1;

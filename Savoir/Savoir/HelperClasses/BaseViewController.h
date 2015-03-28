@@ -12,6 +12,7 @@
 {
     UITextField *activeField;
     UITextView *activeTextView;
+    UITextField * activePTKField;
 }
     @property(weak, nonatomic) UIScrollView* baseScrollView;
 
