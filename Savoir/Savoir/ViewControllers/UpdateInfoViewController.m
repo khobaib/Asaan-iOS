@@ -138,15 +138,22 @@
     [super viewWillAppear:animated];
     
     // Prevent keyboard from showing by default
-    [self.view endEditing:YES];
-    [_ptkViewPayInfo endEditing:YES];
-//    
+//    [self.view endEditing:YES];
+//    [_ptkViewPayInfo endEditing:YES];
+//
 //    if (self.txtFldFirstName.isFirstResponder)
 //        activeField = self.txtFldFirstName;
 //    else if (self.txtFldLastName.isFirstResponder)
 //        activeField = self.txtFldLastName;
 //    else
 //        activeField = self.txtFldPhone;
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    // Prevent keyboard from showing by default
+    [self.view endEditing:YES];
 }
 
 - (void) didReceiveMemoryWarning

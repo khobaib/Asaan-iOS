@@ -51,10 +51,13 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
     // [PFFacebookUtils initializeFacebook];
     // ****************************************************************************
     [ParseCrashReporting enable];
-    [Parse setApplicationId:@"GXtJ9wg7fm1oMLt36zD5GvbsXyXJW6atbQjQKnin"
-                  clientKey:@"1MXmqCsvaOKWs2ilTGOL2wvugGrasbZMwukIvn1Q"];
-//    [Parse setApplicationId:@"uX5Pxp1cPWJUbhl4qp5REJskOqDIp33tfMcSu1Ac"
-//                  clientKey:@"4cad0RAqv53bvlmgiTgnOScuJVk7IY28XeH4Mes5"];
+    // Test
+//    [Parse setApplicationId:@"GXtJ9wg7fm1oMLt36zD5GvbsXyXJW6atbQjQKnin"
+//                  clientKey:@"1MXmqCsvaOKWs2ilTGOL2wvugGrasbZMwukIvn1Q"];
+    
+    // Production
+    [Parse setApplicationId:@"uX5Pxp1cPWJUbhl4qp5REJskOqDIp33tfMcSu1Ac"
+                  clientKey:@"4cad0RAqv53bvlmgiTgnOScuJVk7IY28XeH4Mes5"];
     [PFFacebookUtils initializeFacebook];
     [Stripe setDefaultPublishableKey:StripePublishableKey];
     

@@ -49,6 +49,9 @@ const NSUInteger MenuFluentPagingTablePageSize = 50;
 @property (strong, nonatomic) GTLStoreendpointMenuItemAndStats *selectedMenuItem;
 @property (strong, nonatomic) NSMutableDictionary *allMenuStats;
 
+@property (nonatomic) Boolean bScrollTableToRow;
+@property (strong, nonatomic) NSIndexPath *indexPathForTopRow;
+
 @property (nonatomic) CGFloat cellHeight;
 
 - (void) showOrderSummaryPressed;
@@ -76,6 +79,8 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    self.bScrollTableToRow = false;
     
     [self setupMenuSegmentController];
     
@@ -181,7 +186,6 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
          {
              if(!error && object.menuItems.count > 0 && object.menusAndSubmenus.count > 0)
              {
-                 [self setTableHeightBasedOnLargestMenuItemIn:object.menuItems];
                  GTLStoreendpointMenuItemAndStats *menuItemAndStats = [object.menuItems firstObject];
                  for (GTLStoreendpointStoreMenuHierarchy *menu in object.menusAndSubmenus)
                  {
@@ -252,22 +256,6 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     }
 }
 
-- (void) setTableHeightBasedOnLargestMenuItemIn:(NSArray *)menuItems // of GTLStoreendpointMenuItemAndStats
-{
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
-        return;
-    
-    long size = 0;
-    for (GTLStoreendpointMenuItemAndStats *object in menuItems)
-        if ((object.menuItem.shortDescription.length*2 + object.menuItem.longDescription.length) > size)
-            size = object.menuItem.shortDescription.length*2 + object.menuItem.longDescription.length;
-    
-    if (size > 80)
-        self.cellHeight = 200;
-    else
-        self.cellHeight = 150;
-}
-
 #pragma mark -
 #pragma mark === Actions ===
 #pragma mark -
@@ -286,11 +274,15 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     _segmentedControlSelectedIndex = _segmentedControl.selectedSegmentIndex;
     MenuSegmentHolder *newMenuSegmentHolder = [_menuSegmentHolders objectAtIndex:_segmentedControlSelectedIndex];
     firstVisibleIndexPath = newMenuSegmentHolder.topRowIndex;
+//    
+//    self.bScrollTableToRow = true;
+//    self.indexPathForTopRow = firstVisibleIndexPath;
+
+    [_tableView reloadData];
     
     [_tableView scrollToRowAtIndexPath:firstVisibleIndexPath
                       atScrollPosition:UITableViewScrollPositionTop
                               animated:NO];
-    [_tableView reloadData];
 }
 
 #pragma mark -
@@ -596,10 +588,30 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     else
         menuSegmentHolder = [_menuSegmentHolders firstObject];
     GTLStoreendpointStoreMenuHierarchy *submenu = [menuSegmentHolder.subMenus objectAtIndex:section];
-    if (IsEmpty(submenu.descriptionProperty))
-        return tableView.sectionHeaderHeight;
-    else
-        return 130;
+    
+    NSUInteger rowSize = 40;
+    
+    NSUInteger nameLength = submenu.name.length/25;
+    
+    rowSize = rowSize + nameLength*20;
+
+    NSUInteger descLength = (submenu.descriptionProperty.length>0 && submenu.descriptionProperty.length<45)?1:submenu.descriptionProperty.length/45;
+    
+    rowSize = rowSize + descLength*20;
+    return rowSize;
+//    
+//    if (size > 80)
+//    self.cellHeight = 200;
+//    else
+//    self.cellHeight = 150;
+//
+//    if (IsEmpty(submenu.descriptionProperty))
+//        return tableView.sectionHeaderHeight;
+//    else
+//    {
+//        
+//    }
+////        return 130;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

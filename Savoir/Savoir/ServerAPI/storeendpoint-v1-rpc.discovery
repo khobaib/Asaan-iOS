@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"u_zXkMELIlX4ktyNbM2XKD4vK8E/oTUINoELc_q5_lmiBmr-xZVRDYw\"",
+ "etag": "\"u_zXkMELIlX4ktyNbM2XKD4vK8E/WY1Zf3QHUVa7j2TLyjKJrtcZl9k\"",
  "discoveryVersion": "v1",
  "id": "storeendpoint:v1",
  "name": "storeendpoint",
@@ -14,8 +14,8 @@
   "x32": "http://www.google.com/images/icons/product/search-32.gif"
  },
  "protocol": "rpc",
- "rootUrl": "https://blissful-mantis-89513.appspot.com/_ah/api/",
- "rpcUrl": "https://blissful-mantis-89513.appspot.com/_ah/api/rpc",
+ "rootUrl": "https://asaan-server.appspot.com/_ah/api/",
+ "rpcUrl": "https://asaan-server.appspot.com/_ah/api/rpc",
  "rpcPath": "/_ah/api/rpc",
  "parameters": {
   "alt": {

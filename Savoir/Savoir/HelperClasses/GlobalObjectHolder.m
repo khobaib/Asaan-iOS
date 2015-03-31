@@ -162,13 +162,11 @@
 
 - (void) findStoreCountFromServer
 {
-//    self.storeCount = 67;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-////
-////    // to load
+
     NSNumber *aNumber = [defaults objectForKey:@"STORE_COUNT"];
     self.storeCount = aNumber.intValue;
-    if (self.storeCount == 0)
+    if (self.storeCount == 0 || self.storeCount > 50)
         self.storeCount = 40;
     __weak __typeof(self) weakSelf = self;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
