@@ -26,6 +26,7 @@
   NSArray *classes = [NSArray arrayWithObjects:
                       [GTLQueryStoreendpoint class],
                       [GTLStoreendpointAsaanLong class],
+                      [GTLStoreendpointAsaanLongCollection class],
                       [GTLStoreendpointAsaanLongString class],
                       [GTLStoreendpointChatMessage class],
                       [GTLStoreendpointChatMessagesAndUsers class],

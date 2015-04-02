@@ -32,6 +32,7 @@
 #import "Extension.h"
 #import "GlobalObjectHolder.h"
 #import "UIView+Toast.h"
+#import <DBChooser/DBChooser.h>
 
 
 const NSUInteger MenuFluentPagingTablePreloadMargin = 5;
@@ -804,7 +805,28 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
 
 - (void)menuItemCell:(MenuItemCell *)menuItemCell didClickedItemImage:(UIImageView *)sender
 {
+    // Selected Item
+    MenuSegmentHolder *menuSegmentHolder;
+    if (_menuSegmentHolders.count > 1)
+        menuSegmentHolder = [_menuSegmentHolders objectAtIndex:_segmentedControl.selectedSegmentIndex];
+    else
+        menuSegmentHolder = [_menuSegmentHolders firstObject];
     
+    GTLStoreendpointStoreMenuHierarchy *submenu = [menuSegmentHolder.subMenus objectAtIndex:menuItemCell.indexPath.section];
+    NSInteger rowIndex = submenu.menuItemPosition.intValue + menuItemCell.indexPath.row + 1;
+    
+    id dataObject = menuSegmentHolder.provider.dataObjects[rowIndex];
+    if (![dataObject isKindOfClass:[NSNull class]])
+    {
+        self.selectedMenuItem = dataObject;
+    }
+
+    if ([UtilCalls userIsOwnerOfStore:self.selectedStore])
+    {
+        [self showDropboxImageChooserForCell:menuItemCell];
+        return;
+    }
+
     // Create browser (must be done each time photo browser is
     // displayed. Photo browser objects cannot be re-used)
     MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
@@ -825,22 +847,81 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     [browser showNextPhotoAnimated:YES];
     [browser showPreviousPhotoAnimated:YES];
     [browser setCurrentPhotoIndex:sender.tag];
+}
+
+- (void) showDropboxImageChooserForCell:(MenuItemCell *)menuItemCell
+{
+    __weak __typeof(self) weakSelf = self;
+    [[DBChooser defaultChooser] openChooserForLinkType:DBChooserLinkTypeDirect
+                                    fromViewController:self completion:^(NSArray *results)
+     {
+         if ([results count])
+         {
+             GTLStoreendpointStoreMenuItem *currentItem = weakSelf.selectedMenuItem.menuItem;
+             DBChooserResult *_result = results[0]; // result received from last Chooser call
+             [menuItemCell.itemImageView setImageWithURL:[_result thumbnails][@"64x64"]
+                                placeholderImage:[UIImage imageWithColor:RGBA(0.0, 0.0, 0.0, 0.5)]
+                                       completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
+             {
+                if (!error)
+                {
+                    NSData *imageData = UIImagePNGRepresentation(image);
+                    NSString *imageFileName = [NSString stringWithFormat:@"%lld-thumbnail.png", currentItem.identifier.longLongValue];
+                    PFFile *imageFile = [PFFile fileWithName:imageFileName data:imageData];
+                    [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+                    {
+                        if (!error && succeeded)
+                        {
+                            currentItem.thumbnailUrl = imageFile.url;
+                            [weakSelf saveStoreMenuItem:currentItem];
+                        } else
+                            NSLog(@"Parse Image upload Error: %@", error);
+                    }];
+                }
+                 else
+                     NSLog(@"Dropbox Image Download Error: %@", error);
+             }
+                             usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+             SDWebImageManager *manager = [SDWebImageManager sharedManager];
+             [manager downloadImageWithURL:[_result thumbnails][@"640x480"]
+                                   options:0
+                                  progress:^(NSInteger receivedSize, NSInteger expectedSize) {/* progression tracking code */ }
+                                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL)
+             {
+                 if (image)
+                 {
+                     NSData *imageData = UIImagePNGRepresentation(image);
+                     NSString *imageFileName = [NSString stringWithFormat:@"%lld-thumbnail.png", currentItem.identifier.longLongValue];
+                     PFFile *imageFile = [PFFile fileWithName:imageFileName data:imageData];
+                     [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+                      {
+                          if (!error && succeeded)
+                          {
+                              currentItem.imageUrl = imageFile.url;
+                              [weakSelf saveStoreMenuItem:currentItem];
+                          } else
+                              NSLog(@"Parse Image upload Error: %@", error);
+                      }];
+                 }
+             }];
+         } else {/* User canceled the action */}
+     }];
+}
+
+- (void) saveStoreMenuItem:(GTLStoreendpointStoreMenuItem *)currentItem
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
+    GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForSaveStoreMenuItemWithObject:currentItem];
     
-    // Selected Item
-    MenuSegmentHolder *menuSegmentHolder;
-    if (_menuSegmentHolders.count > 1)
-        menuSegmentHolder = [_menuSegmentHolders objectAtIndex:_segmentedControl.selectedSegmentIndex];
-    else
-        menuSegmentHolder = [_menuSegmentHolders firstObject];
-    
-    GTLStoreendpointStoreMenuHierarchy *submenu = [menuSegmentHolder.subMenus objectAtIndex:menuItemCell.indexPath.section];
-    NSInteger rowIndex = submenu.menuItemPosition.intValue + menuItemCell.indexPath.row + 1;
-    
-    id dataObject = menuSegmentHolder.provider.dataObjects[rowIndex];
-    if (![dataObject isKindOfClass:[NSNull class]])
-    {
-        self.selectedMenuItem = dataObject;
-    }
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    dic[USER_AUTH_TOKEN_HEADER_NAME] = [UtilCalls getAuthTokenForCurrentUser];
+    [query setAdditionalHTTPHeaders:dic];
+    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error)
+     {
+         if (error)
+             NSLog(@"Savoir Server Call Failed: saveStoreMenuItem - error:%@", error.userInfo);
+     }];
 }
 
 #pragma mark -

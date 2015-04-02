@@ -13,11 +13,12 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryStoreendpoint (51 custom class methods, 16 custom properties)
+//   GTLQueryStoreendpoint (52 custom class methods, 16 custom properties)
 
 #import "GTLQueryStoreendpoint.h"
 
 #import "GTLStoreendpointAsaanLong.h"
+#import "GTLStoreendpointAsaanLongCollection.h"
 #import "GTLStoreendpointAsaanLongString.h"
 #import "GTLStoreendpointChatMessage.h"
 #import "GTLStoreendpointChatMessagesAndUsers.h"
@@ -318,6 +319,13 @@
   query.lng = lng;
   query.maxResult = maxResult;
   query.expectedObjectClass = [GTLStoreendpointStoreAndStatsCollection class];
+  return query;
+}
+
++ (id)queryForGetStoresOwnedByUser {
+  NSString *methodName = @"storeendpoint.getStoresOwnedByUser";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.expectedObjectClass = [GTLStoreendpointAsaanLongCollection class];
   return query;
 }
 

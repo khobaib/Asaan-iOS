@@ -428,4 +428,29 @@
             return nil;
     }
 }
+
++ (Boolean)userBelongsToStoreChatTeamForStore:(GTLStoreendpointStore *)store
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    NSArray *teams = appDelegate.globalObjectHolder.usersRoomsAndStores.storeChatMemberships;
+    if (teams == nil)
+        return false;
+    for (GTLStoreendpointStoreChatTeam *team in teams)
+        if (team.storeId.longLongValue == store.identifier.longLongValue)
+            return true;
+    return false;
+}
+
++ (Boolean)userIsOwnerOfStore:(GTLStoreendpointStore *)store
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    GTLStoreendpointAsaanLongCollection *stores = appDelegate.globalObjectHolder.storesOwnedByUser;
+    if (stores == nil)
+        return false;
+    for (GTLStoreendpointAsaanLong *storeId in stores)
+        if (storeId.longValue.longLongValue == store.identifier.longLongValue)
+            return true;
+    return false;
+}
+
 @end

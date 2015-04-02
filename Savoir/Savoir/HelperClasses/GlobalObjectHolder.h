@@ -23,6 +23,8 @@
 @property (strong, nonatomic) GTLUserendpointUserAddress *defaultUserAddress;
 @property (strong, nonatomic) GTLUserendpointUser *currentUser;
 @property (strong, nonatomic) GTLStoreendpointChatRoomsAndStoreChatMemberships *usersRoomsAndStores;
+@property (strong, nonatomic) GTLStoreendpointAsaanLongCollection *storesOwnedByUser;
+
 @property (nonatomic) int storeCount;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
@@ -37,6 +39,7 @@
 - (void) loadUserCardsFromServer;
 - (void) loadCurrentUserFromServer;
 - (void) findStoreCountFromServer;
+- (void) getStoresOwnedByUser;
 
 - (void) addCardToUserCards:(GTLUserendpointUserCard *)card;
 - (void) addAddressToUserAddresses:(GTLUserendpointUserAddress *)address;

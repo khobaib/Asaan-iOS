@@ -19,6 +19,7 @@
 #import "GTLStoreendpointConstants.m"
 
 #import "GTLStoreendpointAsaanLong.m"
+#import "GTLStoreendpointAsaanLongCollection.m"
 #import "GTLStoreendpointAsaanLongString.m"
 #import "GTLStoreendpointChatMessage.m"
 #import "GTLStoreendpointChatMessagesAndUsers.m"

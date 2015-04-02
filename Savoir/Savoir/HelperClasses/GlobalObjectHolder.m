@@ -31,6 +31,8 @@
     self.defaultUserCard = nil;
     self.defaultUserAddress = nil;
     self.currentUser = nil;
+    self.usersRoomsAndStores = nil;
+    self.storesOwnedByUser = nil;
     // Unsubscribe from push notifications by removing the user association from the current installation.
     PFUser *currentUser = [PFUser currentUser];
     if (currentUser)
@@ -59,6 +61,7 @@
         {
             [self loadCurrentUserFromServer];
             [self loadUserRoomsAndStoreChatTeams];
+            [self getStoresOwnedByUser];
         }
         if (self.userCards == nil)
             [self loadUserCardsFromServer];
@@ -191,6 +194,25 @@
     [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointClientVersionMatch *object,NSError *error)
      {
          weakSelf.versionFromServer = object.approvedIOSClientVersion;
+     }];
+}
+
+- (void) getStoresOwnedByUser
+{
+    __weak __typeof(self) weakSelf = self;
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
+    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoresOwnedByUser];
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    dic[USER_AUTH_TOKEN_HEADER_NAME] = [UtilCalls getAuthTokenForCurrentUser];
+    [query setAdditionalHTTPHeaders:dic];
+    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointAsaanLongCollection *object, NSError *error)
+     {
+         if (!error)
+             weakSelf.storesOwnedByUser = object;
+         else
+             NSLog(@"Savoir Server Call Failed: getStoresOwnedByUser - error:%@", error.userInfo);
      }];
 }
 

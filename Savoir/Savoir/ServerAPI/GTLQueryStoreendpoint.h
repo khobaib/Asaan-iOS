@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryStoreendpoint (51 custom class methods, 16 custom properties)
+//   GTLQueryStoreendpoint (52 custom class methods, 16 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLQuery.h"
@@ -249,6 +249,12 @@
                                                                       lat:(double)lat
                                                                       lng:(double)lng
                                                                 maxResult:(NSInteger)maxResult;
+
+// Method: storeendpoint.getStoresOwnedByUser
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
+// Fetches a GTLStoreendpointAsaanLongCollection.
++ (id)queryForGetStoresOwnedByUser;
 
 // Method: storeendpoint.getStoreStats
 //  Authorization scope(s):

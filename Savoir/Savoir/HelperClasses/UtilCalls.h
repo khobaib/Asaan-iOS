@@ -43,9 +43,9 @@
 + (NSString *) getFoodReviewStringFromStats:(GTLStoreendpointStoreAndStats *)storeAndStats;
 + (NSString *) getServiceReviewStringFromStats:(GTLStoreendpointStoreAndStats *)storeAndStats;
 + (void) removeWaitListQueueEntry:(GTLStoreendpointStoreWaitListQueue *)queueEntry;
-
 + (Boolean) canStore:(GTLStoreendpointStore *)store fulfillOrderAt:(NSDate *)date;
-
 + (Boolean) canPlaceOrderFromMenu:(GTLStoreendpointStoreMenuHierarchy *)menu atDate:(NSDate *)date;
++ (Boolean)userBelongsToStoreChatTeamForStore:(GTLStoreendpointStore *)store;
++ (Boolean)userIsOwnerOfStore:(GTLStoreendpointStore *)store;
 
 @end

@@ -460,25 +460,13 @@
     _selectedStore = self.dataProvider.dataObjects[sender.tag];
     if (_selectedStore.store.claimed.boolValue == true)
     {
-        if ([self userBelongsToStoreChatTeam])
+        if ([UtilCalls userBelongsToStoreChatTeamForStore:_selectedStore.store])
             [self performSegueWithIdentifier:@"segueStoreListToStoreWaitList" sender:sender];
         else
             [self performSegueWithIdentifier:@"segueStoreListToReserve" sender:sender];
     }
     else
         [self performSegueWithIdentifier:@"segueStoreListToClaimStore" sender:sender];
-}
-
--(Boolean)userBelongsToStoreChatTeam
-{
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    NSArray *teams = appDelegate.globalObjectHolder.usersRoomsAndStores.storeChatMemberships;
-    if (teams == nil)
-        return false;
-    for (GTLStoreendpointStoreChatTeam *team in teams)
-        if (team.storeId.longLongValue == self.selectedStore.store.identifier.longLongValue)
-            return true;
-    return false;
 }
 
 #pragma mark - Location

@@ -379,6 +379,9 @@
 		D445D7311A96BC5C00ED4919 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D445D72E1A96BC5C00ED4919 /* main.m */; };
 		D46DA7831A92B26B00020313 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D46DA7811A92B26B00020313 /* Info.plist */; };
 		D46DA7861A92B5A400020313 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D46DA7851A92B5A400020313 /* CoreAudio.framework */; };
+		D46E25841ACA333600AEF681 /* DBChooser.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D46E25821ACA333600AEF681 /* DBChooser.bundle */; };
+		D46E25851ACA333600AEF681 /* DBChooser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D46E25831ACA333600AEF681 /* DBChooser.framework */; };
+		D46E25881ACC3D9D00AEF681 /* GTLStoreendpointAsaanLongCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = D46E25871ACC3D9D00AEF681 /* GTLStoreendpointAsaanLongCollection.m */; };
 		D47D3ABB1ABB36810099176A /* HTMLFaxOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = D47D3ABA1ABB36810099176A /* HTMLFaxOrder.m */; };
 		D47D3ABE1ABB41EC0099176A /* XMLPOSOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = D47D3ABD1ABB41EC0099176A /* XMLPOSOrder.m */; };
 		D4828CBB1A71ADD200C80E92 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D4828CBA1A71ADD200C80E92 /* libz.dylib */; };
@@ -1091,6 +1094,10 @@
 		D445D72E1A96BC5C00ED4919 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D46DA7811A92B26B00020313 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D46DA7851A92B5A400020313 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		D46E25821ACA333600AEF681 /* DBChooser.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DBChooser.bundle; sourceTree = "<group>"; };
+		D46E25831ACA333600AEF681 /* DBChooser.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DBChooser.framework; sourceTree = "<group>"; };
+		D46E25861ACC3D9D00AEF681 /* GTLStoreendpointAsaanLongCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointAsaanLongCollection.h; sourceTree = "<group>"; };
+		D46E25871ACC3D9D00AEF681 /* GTLStoreendpointAsaanLongCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointAsaanLongCollection.m; sourceTree = "<group>"; };
 		D47D3AB91ABB36810099176A /* HTMLFaxOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLFaxOrder.h; sourceTree = "<group>"; };
 		D47D3ABA1ABB36810099176A /* HTMLFaxOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLFaxOrder.m; sourceTree = "<group>"; };
 		D47D3ABC1ABB41EC0099176A /* XMLPOSOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLPOSOrder.h; sourceTree = "<group>"; };
@@ -1118,6 +1125,7 @@
 				D4195FFC1A92AD9600663149 /* QuartzCore.framework in Frameworks */,
 				D4195FF81A92AD7A00663149 /* Security.framework in Frameworks */,
 				D4195FF61A92AD6D00663149 /* MobileCoreServices.framework in Frameworks */,
+				D46E25851ACA333600AEF681 /* DBChooser.framework in Frameworks */,
 				D4195FF41A92AD6200663149 /* SystemConfiguration.framework in Frameworks */,
 				D4195FF21A92AD5600663149 /* UIKit.framework in Frameworks */,
 				D4195FEE1A92AD3A00663149 /* Social.framework in Frameworks */,
@@ -1379,6 +1387,8 @@
 		D4195BF41A92A69B00663149 /* frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D46E25821ACA333600AEF681 /* DBChooser.bundle */,
+				D46E25831ACA333600AEF681 /* DBChooser.framework */,
 				D4195BF51A92A69B00663149 /* Bolts.framework */,
 				D4195BF61A92A69B00663149 /* FacebookSDK.framework */,
 				D4195BF71A92A69B00663149 /* GoogleOpenSource.framework */,
@@ -1910,6 +1920,8 @@
 		D4195DAF1A92A69B00663149 /* ServerAPI */ = {
 			isa = PBXGroup;
 			children = (
+				D46E25861ACC3D9D00AEF681 /* GTLStoreendpointAsaanLongCollection.h */,
+				D46E25871ACC3D9D00AEF681 /* GTLStoreendpointAsaanLongCollection.m */,
 				D49FBA961AC613D600F55360 /* GTLStoreendpointClientVersionMatch.h */,
 				D49FBA971AC613D600F55360 /* GTLStoreendpointClientVersionMatch.m */,
 				D409D8021AA6D3D2008FADDF /* GTLStoreendpointPlaceOrderArguments.h */,
@@ -2603,6 +2615,7 @@
 				D409D7F31AA60A94008FADDF /* Info.plist in Resources */,
 				D4195F601A92A69C00663149 /* global.json in Resources */,
 				D409D7D81AA60A94008FADDF /* cvc-amex@2x.png in Resources */,
+				D46E25841ACA333600AEF681 /* DBChooser.bundle in Resources */,
 				D409D7D61AA60A94008FADDF /* amex@2x.png in Resources */,
 				D4195EBC1A92A69C00663149 /* F_icon.svg.png in Resources */,
 				D4195EB71A92A69C00663149 /* chat_blank@2x.png in Resources */,
@@ -2747,6 +2760,7 @@
 				D445D7171A96BA3800ED4919 /* SlidingMenuViewController.m in Sources */,
 				D4195EC21A92A69C00663149 /* AFHTTPSessionManager.m in Sources */,
 				D4195EA31A92A69C00663149 /* BaseViewController.m in Sources */,
+				D46E25881ACC3D9D00AEF681 /* GTLStoreendpointAsaanLongCollection.m in Sources */,
 				D409D7D21AA60A94008FADDF /* PTKTextField.m in Sources */,
 				D4195F651A92A69C00663149 /* GTLQueryUserendpoint.m in Sources */,
 				D4195F0A1A92A69C00663149 /* MWTapDetectingImageView.m in Sources */,

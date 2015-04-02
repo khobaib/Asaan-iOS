@@ -16,6 +16,7 @@
 #import "GTLStoreendpointConstants.h"
 
 #import "GTLStoreendpointAsaanLong.h"
+#import "GTLStoreendpointAsaanLongCollection.h"
 #import "GTLStoreendpointAsaanLongString.h"
 #import "GTLStoreendpointChatMessage.h"
 #import "GTLStoreendpointChatMessagesAndUsers.h"

@@ -23,6 +23,8 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 
+#import <DBChooser/DBChooser.h>
+
 NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsException";
 
 @interface AppDelegate ()
@@ -150,6 +152,12 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
+    
+    if ([[DBChooser defaultChooser] handleOpenURL:url]) {
+        // This was a Chooser response and handleOpenURL automatically ran the
+        // completion block
+        return YES;
+    }
     
     return [FBAppCall handleOpenURL:url
                   sourceApplication:sourceApplication
