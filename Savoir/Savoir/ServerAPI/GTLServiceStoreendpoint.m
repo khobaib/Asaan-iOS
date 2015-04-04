@@ -90,7 +90,7 @@
     // From discovery.  Where to send JSON-RPC.
     // Turn off prettyPrint for this service to save bandwidth (especially on
     // mobile). The fetcher logging will pretty print.
-    self.rpcURL = [NSURL URLWithString:@"https://asaan-server.appspot.com/_ah/api/rpc?prettyPrint=false"];
+    self.rpcURL = [NSURL URLWithString:@"https://blissful-mantis-89513.appspot.com/_ah/api/rpc?prettyPrint=false"];
   }
   return self;
 }
