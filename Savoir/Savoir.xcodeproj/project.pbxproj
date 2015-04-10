@@ -14,6 +14,28 @@
 		D4046FFC1A9B89BC0070537B /* OrderSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4046FFA1A9B89BC0070537B /* OrderSummaryViewController.m */; };
 		D4046FFF1A9C07A40070537B /* UIView+Superview.m in Sources */ = {isa = PBXBuildFile; fileRef = D4046FFE1A9C07A40070537B /* UIView+Superview.m */; };
 		D40470031A9CE83B0070537B /* AddToWaitListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D40470021A9CE83B0070537B /* AddToWaitListViewController.m */; };
+		D406D7ED1AD056220076D0B6 /* InStorePay.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D406D7EB1AD056220076D0B6 /* InStorePay.storyboard */; };
+		D406D7F31AD23ACB0076D0B6 /* UpdateInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D7EF1AD23ACB0076D0B6 /* UpdateInfoViewController.m */; };
+		D406D7F41AD23ACB0076D0B6 /* AddFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D7F11AD23ACB0076D0B6 /* AddFriendViewController.m */; };
+		D406D7F71AD23B510076D0B6 /* ExistingGroupsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D7F61AD23B510076D0B6 /* ExistingGroupsTableViewController.m */; };
+		D406D7FA1AD23B850076D0B6 /* JoinGroupTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D7F91AD23B850076D0B6 /* JoinGroupTableViewController.m */; };
+		D406D7FD1AD23BF00076D0B6 /* InStoreOrderSummaryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D7FC1AD23BF00076D0B6 /* InStoreOrderSummaryTableViewController.m */; };
+		D406D8001AD23C250076D0B6 /* InstorePaymentOptionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D7FF1AD23C250076D0B6 /* InstorePaymentOptionTableViewController.m */; };
+		D406D8031AD23C5C0076D0B6 /* SplitItemsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D8021AD23C5C0076D0B6 /* SplitItemsTableViewController.m */; };
+		D406D8061AD23C880076D0B6 /* SplitEvenTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D8051AD23C880076D0B6 /* SplitEvenTableViewController.m */; };
+		D406D8091AD23CBC0076D0B6 /* FinalPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D8081AD23CBC0076D0B6 /* FinalPaymentViewController.m */; };
+		D406D80D1AD2E3E80076D0B6 /* InStoreOrderDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D80C1AD2E3E80076D0B6 /* InStoreOrderDetails.m */; };
+		D406D8161AD2F2C10076D0B6 /* GTLStoreendpointStoreTableGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D80F1AD2F2C10076D0B6 /* GTLStoreendpointStoreTableGroup.m */; };
+		D406D8171AD2F2C10076D0B6 /* GTLStoreendpointStoreTableGroupCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D8111AD2F2C10076D0B6 /* GTLStoreendpointStoreTableGroupCollection.m */; };
+		D406D8181AD2F2C10076D0B6 /* GTLStoreendpointStoreTableGroupMember.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D8131AD2F2C10076D0B6 /* GTLStoreendpointStoreTableGroupMember.m */; };
+		D406D8191AD2F2C10076D0B6 /* GTLStoreendpointStoreTableGroupMemberCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D8151AD2F2C10076D0B6 /* GTLStoreendpointStoreTableGroupMemberCollection.m */; };
+		D406D81C1AD382FC0076D0B6 /* GTLStoreendpointStoreTableGroupMemberArray.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D81B1AD382FC0076D0B6 /* GTLStoreendpointStoreTableGroupMemberArray.m */; };
+		D406D81F1AD463180076D0B6 /* GTLStoreendpointSplitOrderArguments.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D81E1AD463180076D0B6 /* GTLStoreendpointSplitOrderArguments.m */; };
+		D406D8221AD485560076D0B6 /* InStoreServer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D406D8201AD485560076D0B6 /* InStoreServer.storyboard */; };
+		D406D8261AD57C0A0076D0B6 /* TablesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D8251AD57C0A0076D0B6 /* TablesViewController.m */; };
+		D406D8291AD57C450076D0B6 /* ServerOrderSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D8281AD57C450076D0B6 /* ServerOrderSummaryViewController.m */; };
+		D406D82C1AD57C980076D0B6 /* ServerSelectGroupTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D82B1AD57C980076D0B6 /* ServerSelectGroupTableViewController.m */; };
+		D406D8321AD5A10E0076D0B6 /* GTLStoreendpointTableGroupsAndOrders.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D8311AD5A10E0076D0B6 /* GTLStoreendpointTableGroupsAndOrders.m */; };
 		D409D7C11AA60A94008FADDF /* ApplePayStubs.podspec in Resources */ = {isa = PBXBuildFile; fileRef = D409D7581AA60A93008FADDF /* ApplePayStubs.podspec */; };
 		D409D7C21AA60A94008FADDF /* PKPayment+STPTestKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = D409D75B1AA60A93008FADDF /* PKPayment+STPTestKeys.m */; };
 		D409D7C31AA60A94008FADDF /* STPTestAddressStore.m in Sources */ = {isa = PBXBuildFile; fileRef = D409D75D1AA60A93008FADDF /* STPTestAddressStore.m */; };
@@ -254,7 +276,6 @@
 		D4195FA21A92A69C00663149 /* ServerApiGenerator.rtf in Resources */ = {isa = PBXBuildFile; fileRef = D4195E2C1A92A69B00663149 /* ServerApiGenerator.rtf */; };
 		D4195FA31A92A69C00663149 /* storeendpoint-v1-rpc.discovery in Resources */ = {isa = PBXBuildFile; fileRef = D4195E2D1A92A69B00663149 /* storeendpoint-v1-rpc.discovery */; };
 		D4195FA41A92A69C00663149 /* userendpoint-v1-rpc.discovery in Resources */ = {isa = PBXBuildFile; fileRef = D4195E2E1A92A69B00663149 /* userendpoint-v1-rpc.discovery */; };
-		D4195FA51A92A69C00663149 /* AddFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4195E311A92A69B00663149 /* AddFriendViewController.m */; };
 		D4195FA91A92A69C00663149 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4195E3D1A92A69B00663149 /* LoginViewController.m */; };
 		D4195FAA1A92A69C00663149 /* PaymentInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4195E3F1A92A69B00663149 /* PaymentInfoViewController.m */; };
 		D4195FAB1A92A69C00663149 /* RetrievePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4195E411A92A69B00663149 /* RetrievePasswordViewController.m */; };
@@ -285,7 +306,6 @@
 		D4195FC71A92A69C00663149 /* StoreLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = D4195E7F1A92A69C00663149 /* StoreLocation.m */; };
 		D4195FC81A92A69C00663149 /* StoreMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4195E811A92A69C00663149 /* StoreMapViewController.m */; };
 		D4195FC91A92A69C00663149 /* StoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4195E831A92A69C00663149 /* StoreViewController.m */; };
-		D4195FCD1A92A69C00663149 /* UpdateInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4195E8B1A92A69C00663149 /* UpdateInfoViewController.m */; };
 		D4195FD21A92A90E00663149 /* UIColor+SavoirGoldColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D4195FD01A92A90E00663149 /* UIColor+SavoirGoldColor.m */; };
 		D4195FD31A92A90E00663149 /* UIColor+SavoirBackgroundColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D4195FD11A92A90E00663149 /* UIColor+SavoirBackgroundColor.m */; };
 		D4195FD41A92AB9300663149 /* GooglePlus.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = D4195BF81A92A69B00663149 /* GooglePlus.bundle */; };
@@ -404,6 +424,49 @@
 		D40470001A9CE83B0070537B /* AddToWaitListReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddToWaitListReceiver.h; sourceTree = "<group>"; };
 		D40470011A9CE83B0070537B /* AddToWaitListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddToWaitListViewController.h; sourceTree = "<group>"; };
 		D40470021A9CE83B0070537B /* AddToWaitListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddToWaitListViewController.m; sourceTree = "<group>"; };
+		D406D7EC1AD056220076D0B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = InStorePay.storyboard; sourceTree = "<group>"; };
+		D406D7EF1AD23ACB0076D0B6 /* UpdateInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateInfoViewController.m; sourceTree = "<group>"; };
+		D406D7F01AD23ACB0076D0B6 /* UpdateInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateInfoViewController.h; sourceTree = "<group>"; };
+		D406D7F11AD23ACB0076D0B6 /* AddFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendViewController.m; sourceTree = "<group>"; };
+		D406D7F21AD23ACB0076D0B6 /* AddFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendViewController.h; sourceTree = "<group>"; };
+		D406D7F51AD23B510076D0B6 /* ExistingGroupsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExistingGroupsTableViewController.h; sourceTree = "<group>"; };
+		D406D7F61AD23B510076D0B6 /* ExistingGroupsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExistingGroupsTableViewController.m; sourceTree = "<group>"; };
+		D406D7F81AD23B850076D0B6 /* JoinGroupTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JoinGroupTableViewController.h; sourceTree = "<group>"; };
+		D406D7F91AD23B850076D0B6 /* JoinGroupTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JoinGroupTableViewController.m; sourceTree = "<group>"; };
+		D406D7FB1AD23BF00076D0B6 /* InStoreOrderSummaryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InStoreOrderSummaryTableViewController.h; sourceTree = "<group>"; };
+		D406D7FC1AD23BF00076D0B6 /* InStoreOrderSummaryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InStoreOrderSummaryTableViewController.m; sourceTree = "<group>"; };
+		D406D7FE1AD23C250076D0B6 /* InstorePaymentOptionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstorePaymentOptionTableViewController.h; sourceTree = "<group>"; };
+		D406D7FF1AD23C250076D0B6 /* InstorePaymentOptionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstorePaymentOptionTableViewController.m; sourceTree = "<group>"; };
+		D406D8011AD23C5C0076D0B6 /* SplitItemsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplitItemsTableViewController.h; sourceTree = "<group>"; };
+		D406D8021AD23C5C0076D0B6 /* SplitItemsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplitItemsTableViewController.m; sourceTree = "<group>"; };
+		D406D8041AD23C880076D0B6 /* SplitEvenTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplitEvenTableViewController.h; sourceTree = "<group>"; };
+		D406D8051AD23C880076D0B6 /* SplitEvenTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplitEvenTableViewController.m; sourceTree = "<group>"; };
+		D406D8071AD23CBC0076D0B6 /* FinalPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinalPaymentViewController.h; sourceTree = "<group>"; };
+		D406D8081AD23CBC0076D0B6 /* FinalPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinalPaymentViewController.m; sourceTree = "<group>"; };
+		D406D80B1AD2E3E80076D0B6 /* InStoreOrderDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InStoreOrderDetails.h; sourceTree = "<group>"; };
+		D406D80C1AD2E3E80076D0B6 /* InStoreOrderDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InStoreOrderDetails.m; sourceTree = "<group>"; };
+		D406D80E1AD2F2C10076D0B6 /* GTLStoreendpointStoreTableGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreTableGroup.h; sourceTree = "<group>"; };
+		D406D80F1AD2F2C10076D0B6 /* GTLStoreendpointStoreTableGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreTableGroup.m; sourceTree = "<group>"; };
+		D406D8101AD2F2C10076D0B6 /* GTLStoreendpointStoreTableGroupCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreTableGroupCollection.h; sourceTree = "<group>"; };
+		D406D8111AD2F2C10076D0B6 /* GTLStoreendpointStoreTableGroupCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreTableGroupCollection.m; sourceTree = "<group>"; };
+		D406D8121AD2F2C10076D0B6 /* GTLStoreendpointStoreTableGroupMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreTableGroupMember.h; sourceTree = "<group>"; };
+		D406D8131AD2F2C10076D0B6 /* GTLStoreendpointStoreTableGroupMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreTableGroupMember.m; sourceTree = "<group>"; };
+		D406D8141AD2F2C10076D0B6 /* GTLStoreendpointStoreTableGroupMemberCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreTableGroupMemberCollection.h; sourceTree = "<group>"; };
+		D406D8151AD2F2C10076D0B6 /* GTLStoreendpointStoreTableGroupMemberCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreTableGroupMemberCollection.m; sourceTree = "<group>"; };
+		D406D81A1AD382FC0076D0B6 /* GTLStoreendpointStoreTableGroupMemberArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreTableGroupMemberArray.h; sourceTree = "<group>"; };
+		D406D81B1AD382FC0076D0B6 /* GTLStoreendpointStoreTableGroupMemberArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreTableGroupMemberArray.m; sourceTree = "<group>"; };
+		D406D81D1AD463180076D0B6 /* GTLStoreendpointSplitOrderArguments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointSplitOrderArguments.h; sourceTree = "<group>"; };
+		D406D81E1AD463180076D0B6 /* GTLStoreendpointSplitOrderArguments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointSplitOrderArguments.m; sourceTree = "<group>"; };
+		D406D8211AD485560076D0B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = InStoreServer.storyboard; sourceTree = "<group>"; };
+		D406D8241AD57C0A0076D0B6 /* TablesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TablesViewController.h; sourceTree = "<group>"; };
+		D406D8251AD57C0A0076D0B6 /* TablesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TablesViewController.m; sourceTree = "<group>"; };
+		D406D8271AD57C450076D0B6 /* ServerOrderSummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerOrderSummaryViewController.h; sourceTree = "<group>"; };
+		D406D8281AD57C450076D0B6 /* ServerOrderSummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerOrderSummaryViewController.m; sourceTree = "<group>"; };
+		D406D82A1AD57C980076D0B6 /* ServerSelectGroupTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerSelectGroupTableViewController.h; sourceTree = "<group>"; };
+		D406D82B1AD57C980076D0B6 /* ServerSelectGroupTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerSelectGroupTableViewController.m; sourceTree = "<group>"; };
+		D406D8301AD5A10E0076D0B6 /* GTLStoreendpointTableGroupsAndOrders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointTableGroupsAndOrders.h; sourceTree = "<group>"; };
+		D406D8311AD5A10E0076D0B6 /* GTLStoreendpointTableGroupsAndOrders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointTableGroupsAndOrders.m; sourceTree = "<group>"; };
+		D406D8331AD830670076D0B6 /* TableOrderReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableOrderReceiver.h; sourceTree = "<group>"; };
 		D409D7581AA60A93008FADDF /* ApplePayStubs.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ApplePayStubs.podspec; sourceTree = "<group>"; };
 		D409D75A1AA60A93008FADDF /* PKPayment+STPTestKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PKPayment+STPTestKeys.h"; sourceTree = "<group>"; };
 		D409D75B1AA60A93008FADDF /* PKPayment+STPTestKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PKPayment+STPTestKeys.m"; sourceTree = "<group>"; };
@@ -860,8 +923,6 @@
 		D4195E2C1A92A69B00663149 /* ServerApiGenerator.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = ServerApiGenerator.rtf; sourceTree = "<group>"; };
 		D4195E2D1A92A69B00663149 /* storeendpoint-v1-rpc.discovery */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "storeendpoint-v1-rpc.discovery"; sourceTree = "<group>"; };
 		D4195E2E1A92A69B00663149 /* userendpoint-v1-rpc.discovery */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "userendpoint-v1-rpc.discovery"; sourceTree = "<group>"; };
-		D4195E301A92A69B00663149 /* AddFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendViewController.h; sourceTree = "<group>"; };
-		D4195E311A92A69B00663149 /* AddFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendViewController.m; sourceTree = "<group>"; };
 		D4195E361A92A69B00663149 /* ChatConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatConstants.h; sourceTree = "<group>"; };
 		D4195E3C1A92A69B00663149 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		D4195E3D1A92A69B00663149 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
@@ -923,8 +984,6 @@
 		D4195E811A92A69C00663149 /* StoreMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreMapViewController.m; sourceTree = "<group>"; };
 		D4195E821A92A69C00663149 /* StoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreViewController.h; sourceTree = "<group>"; };
 		D4195E831A92A69C00663149 /* StoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreViewController.m; sourceTree = "<group>"; };
-		D4195E8A1A92A69C00663149 /* UpdateInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateInfoViewController.h; sourceTree = "<group>"; };
-		D4195E8B1A92A69C00663149 /* UpdateInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateInfoViewController.m; sourceTree = "<group>"; };
 		D4195FCE1A92A90E00663149 /* UIColor+SavoirGoldColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+SavoirGoldColor.h"; sourceTree = "<group>"; };
 		D4195FCF1A92A90E00663149 /* UIColor+SavoirBackgroundColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+SavoirBackgroundColor.h"; sourceTree = "<group>"; };
 		D4195FD01A92A90E00663149 /* UIColor+SavoirGoldColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+SavoirGoldColor.m"; sourceTree = "<group>"; };
@@ -1170,8 +1229,54 @@
 			children = (
 				D4046FF41A97FD0A0070537B /* LaunchScreen.xib */,
 				D4046FF61A97FD0A0070537B /* Main.storyboard */,
+				D406D7EB1AD056220076D0B6 /* InStorePay.storyboard */,
+				D406D8201AD485560076D0B6 /* InStoreServer.storyboard */,
 			);
 			path = Base.lproj;
+			sourceTree = "<group>";
+		};
+		D406D7EE1AD23AB80076D0B6 /* InStoreBillPay */ = {
+			isa = PBXGroup;
+			children = (
+				D406D7F51AD23B510076D0B6 /* ExistingGroupsTableViewController.h */,
+				D406D7F61AD23B510076D0B6 /* ExistingGroupsTableViewController.m */,
+				D406D7F81AD23B850076D0B6 /* JoinGroupTableViewController.h */,
+				D406D7F91AD23B850076D0B6 /* JoinGroupTableViewController.m */,
+				D406D7FB1AD23BF00076D0B6 /* InStoreOrderSummaryTableViewController.h */,
+				D406D7FC1AD23BF00076D0B6 /* InStoreOrderSummaryTableViewController.m */,
+				D406D7FE1AD23C250076D0B6 /* InstorePaymentOptionTableViewController.h */,
+				D406D7FF1AD23C250076D0B6 /* InstorePaymentOptionTableViewController.m */,
+				D406D8011AD23C5C0076D0B6 /* SplitItemsTableViewController.h */,
+				D406D8021AD23C5C0076D0B6 /* SplitItemsTableViewController.m */,
+				D406D8041AD23C880076D0B6 /* SplitEvenTableViewController.h */,
+				D406D8051AD23C880076D0B6 /* SplitEvenTableViewController.m */,
+				D406D8071AD23CBC0076D0B6 /* FinalPaymentViewController.h */,
+				D406D8081AD23CBC0076D0B6 /* FinalPaymentViewController.m */,
+			);
+			path = InStoreBillPay;
+			sourceTree = "<group>";
+		};
+		D406D80A1AD2E3AB0076D0B6 /* InStoreOrder */ = {
+			isa = PBXGroup;
+			children = (
+				D406D80B1AD2E3E80076D0B6 /* InStoreOrderDetails.h */,
+				D406D80C1AD2E3E80076D0B6 /* InStoreOrderDetails.m */,
+			);
+			path = InStoreOrder;
+			sourceTree = "<group>";
+		};
+		D406D8231AD57BE20076D0B6 /* InStoreServer */ = {
+			isa = PBXGroup;
+			children = (
+				D406D8331AD830670076D0B6 /* TableOrderReceiver.h */,
+				D406D8241AD57C0A0076D0B6 /* TablesViewController.h */,
+				D406D8251AD57C0A0076D0B6 /* TablesViewController.m */,
+				D406D8271AD57C450076D0B6 /* ServerOrderSummaryViewController.h */,
+				D406D8281AD57C450076D0B6 /* ServerOrderSummaryViewController.m */,
+				D406D82A1AD57C980076D0B6 /* ServerSelectGroupTableViewController.h */,
+				D406D82B1AD57C980076D0B6 /* ServerSelectGroupTableViewController.m */,
+			);
+			path = InStoreServer;
 			sourceTree = "<group>";
 		};
 		D409D7561AA60A93008FADDF /* Payments */ = {
@@ -1405,6 +1510,7 @@
 		D4195BFE1A92A69B00663149 /* HelperClasses */ = {
 			isa = PBXGroup;
 			children = (
+				D406D80A1AD2E3AB0076D0B6 /* InStoreOrder */,
 				D4195BFF1A92A69B00663149 /* AWPagedArrayLoadingOperations */,
 				D4195C0E1A92A69B00663149 /* ContainerViewContoller */,
 				D4195C131A92A69B00663149 /* Dropdown */,
@@ -1920,6 +2026,20 @@
 		D4195DAF1A92A69B00663149 /* ServerAPI */ = {
 			isa = PBXGroup;
 			children = (
+				D406D8301AD5A10E0076D0B6 /* GTLStoreendpointTableGroupsAndOrders.h */,
+				D406D8311AD5A10E0076D0B6 /* GTLStoreendpointTableGroupsAndOrders.m */,
+				D406D81D1AD463180076D0B6 /* GTLStoreendpointSplitOrderArguments.h */,
+				D406D81E1AD463180076D0B6 /* GTLStoreendpointSplitOrderArguments.m */,
+				D406D81A1AD382FC0076D0B6 /* GTLStoreendpointStoreTableGroupMemberArray.h */,
+				D406D81B1AD382FC0076D0B6 /* GTLStoreendpointStoreTableGroupMemberArray.m */,
+				D406D80E1AD2F2C10076D0B6 /* GTLStoreendpointStoreTableGroup.h */,
+				D406D80F1AD2F2C10076D0B6 /* GTLStoreendpointStoreTableGroup.m */,
+				D406D8101AD2F2C10076D0B6 /* GTLStoreendpointStoreTableGroupCollection.h */,
+				D406D8111AD2F2C10076D0B6 /* GTLStoreendpointStoreTableGroupCollection.m */,
+				D406D8121AD2F2C10076D0B6 /* GTLStoreendpointStoreTableGroupMember.h */,
+				D406D8131AD2F2C10076D0B6 /* GTLStoreendpointStoreTableGroupMember.m */,
+				D406D8141AD2F2C10076D0B6 /* GTLStoreendpointStoreTableGroupMemberCollection.h */,
+				D406D8151AD2F2C10076D0B6 /* GTLStoreendpointStoreTableGroupMemberCollection.m */,
 				D46E25861ACC3D9D00AEF681 /* GTLStoreendpointAsaanLongCollection.h */,
 				D46E25871ACC3D9D00AEF681 /* GTLStoreendpointAsaanLongCollection.m */,
 				D49FBA961AC613D600F55360 /* GTLStoreendpointClientVersionMatch.h */,
@@ -2058,18 +2178,16 @@
 		D4195E2F1A92A69B00663149 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				D406D8231AD57BE20076D0B6 /* InStoreServer */,
+				D406D7EE1AD23AB80076D0B6 /* InStoreBillPay */,
 				D445D7081A96BA3800ED4919 /* Root */,
 				D445D70F1A96BA3800ED4919 /* StorePrivate */,
-				D4195E301A92A69B00663149 /* AddFriendViewController.h */,
-				D4195E311A92A69B00663149 /* AddFriendViewController.m */,
 				D4195E351A92A69B00663149 /* Chat */,
 				D4195E3B1A92A69B00663149 /* Login */,
 				D4195E481A92A69B00663149 /* Menu */,
 				D4195E551A92A69B00663149 /* Order */,
 				D4195E6A1A92A69B00663149 /* Reserve */,
 				D4195E751A92A69C00663149 /* StoreInfo */,
-				D4195E8A1A92A69C00663149 /* UpdateInfoViewController.h */,
-				D4195E8B1A92A69C00663149 /* UpdateInfoViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -2179,6 +2297,10 @@
 		D4195E751A92A69C00663149 /* StoreInfo */ = {
 			isa = PBXGroup;
 			children = (
+				D406D7EF1AD23ACB0076D0B6 /* UpdateInfoViewController.m */,
+				D406D7F01AD23ACB0076D0B6 /* UpdateInfoViewController.h */,
+				D406D7F11AD23ACB0076D0B6 /* AddFriendViewController.m */,
+				D406D7F21AD23ACB0076D0B6 /* AddFriendViewController.h */,
 				D4195E761A92A69C00663149 /* InfoViewController.h */,
 				D4195E771A92A69C00663149 /* InfoViewController.m */,
 				D4195E781A92A69C00663149 /* OrderHistorySummaryTableViewController.h */,
@@ -2579,6 +2701,7 @@
 				D4195EBB1A92A69C00663149 /* tab_messages@2x.png in Resources */,
 				D438AB841A9FA6AC0089E61A /* JSQMessagesViewController.xib in Resources */,
 				D409D7E21AA60A94008FADDF /* mastercard@2x.png in Resources */,
+				D406D7ED1AD056220076D0B6 /* InStorePay.storyboard in Resources */,
 				D409D7E71AA60A94008FADDF /* gradient@2x.png in Resources */,
 				D409D7E81AA60A94008FADDF /* textfield.png in Resources */,
 				D409D7E61AA60A94008FADDF /* visa@2x.png in Resources */,
@@ -2603,6 +2726,7 @@
 				D46DA7831A92B26B00020313 /* Info.plist in Resources */,
 				D445D7291A96BB9B00ED4919 /* Savoir.entitlements in Resources */,
 				D4046FF91A97FD0A0070537B /* Main.storyboard in Resources */,
+				D406D8221AD485560076D0B6 /* InStoreServer.storyboard in Resources */,
 				D409D7E31AA60A94008FADDF /* placeholder.png in Resources */,
 				D409D7E01AA60A94008FADDF /* jcb@2x.png in Resources */,
 				D409D7DD1AA60A94008FADDF /* discover.png in Resources */,
@@ -2685,6 +2809,7 @@
 				D4195FBB1A92A69C00663149 /* SelectAddressTableViewController.m in Sources */,
 				D4195FB61A92A69C00663149 /* AddPaymentCardViewController.m in Sources */,
 				D4195E9F1A92A69C00663149 /* OrderForStoreLoadingOperation.m in Sources */,
+				D406D80D1AD2E3E80076D0B6 /* InStoreOrderDetails.m in Sources */,
 				D438AB911A9FA6AC0089E61A /* JSQMessagesAvatarImage.m in Sources */,
 				D409D7CD1AA60A94008FADDF /* PTKCard.m in Sources */,
 				D409D7FA1AA60A94008FADDF /* StripeError.m in Sources */,
@@ -2699,6 +2824,7 @@
 				D40470031A9CE83B0070537B /* AddToWaitListViewController.m in Sources */,
 				D4195FC31A92A69C00663149 /* InfoViewController.m in Sources */,
 				D4195F271A92A69C00663149 /* UIButton+WebCache.m in Sources */,
+				D406D8181AD2F2C10076D0B6 /* GTLStoreendpointStoreTableGroupMember.m in Sources */,
 				D4195F6F1A92A69C00663149 /* GTLStoreendpointChatUser.m in Sources */,
 				D409D7CE1AA60A94008FADDF /* PTKCardCVC.m in Sources */,
 				D4195FB11A92A69C00663149 /* MenuModifierTableViewController.m in Sources */,
@@ -2706,6 +2832,7 @@
 				D4195F771A92A69C00663149 /* GTLStoreendpointMenusAndMenuItems.m in Sources */,
 				D4195FD31A92A90E00663149 /* UIColor+SavoirBackgroundColor.m in Sources */,
 				D4195FB51A92A69C00663149 /* AddAddressTableViewController.m in Sources */,
+				D406D8171AD2F2C10076D0B6 /* GTLStoreendpointStoreTableGroupCollection.m in Sources */,
 				D4195EC11A92A69C00663149 /* AFHTTPRequestOperationManager.m in Sources */,
 				D4195F761A92A69C00663149 /* GTLStoreendpointMenuItemModifiersAndGroups.m in Sources */,
 				D4195ED11A92A69C00663149 /* AWPagedArray.m in Sources */,
@@ -2729,6 +2856,7 @@
 				D4195F141A92A69C00663149 /* PSTCollectionViewData.m in Sources */,
 				D4195FAF1A92A69C00663149 /* MenuItemCell.m in Sources */,
 				D4195EB61A92A69C00663149 /* UtilCalls.m in Sources */,
+				D406D7F71AD23B510076D0B6 /* ExistingGroupsTableViewController.m in Sources */,
 				D4195F6C1A92A69C00663149 /* GTLStoreendpointChatMessagesAndUsers.m in Sources */,
 				D4195FD21A92A90E00663149 /* UIColor+SavoirGoldColor.m in Sources */,
 				D409D7F71AA60A94008FADDF /* STPCard.m in Sources */,
@@ -2736,9 +2864,11 @@
 				D4195F7F1A92A69C00663149 /* GTLStoreendpointStoreChatMemberArray.m in Sources */,
 				D4195F711A92A69C00663149 /* GTLStoreendpointConstants.m in Sources */,
 				D4195F9F1A92A69C00663149 /* GTLUserendpointUserAddressCollection.m in Sources */,
+				D406D8091AD23CBC0076D0B6 /* FinalPaymentViewController.m in Sources */,
 				D4195F5C1A92A69C00663149 /* UIImageView+UIActivityIndicatorForSDWebImage.m in Sources */,
 				D4195F7C1A92A69C00663149 /* GTLStoreendpointStore.m in Sources */,
 				D409D7C51AA60A94008FADDF /* STPTestDataTableViewController.m in Sources */,
+				D406D8031AD23C5C0076D0B6 /* SplitItemsTableViewController.m in Sources */,
 				D4195F7E1A92A69C00663149 /* GTLStoreendpointStoreAndStatsCollection.m in Sources */,
 				D4195F911A92A69C00663149 /* GTLStoreendpointStoreOwner.m in Sources */,
 				D409D7C61AA60A94008FADDF /* STPTestPaymentAuthorizationViewController.m in Sources */,
@@ -2780,13 +2910,14 @@
 				D4195F731A92A69C00663149 /* GTLStoreendpointItemReviewsArray.m in Sources */,
 				D438AB031A9F8BF60089E61A /* camera.m in Sources */,
 				D4195F8E1A92A69C00663149 /* GTLStoreendpointStoreMenuStats.m in Sources */,
-				D4195FCD1A92A69C00663149 /* UpdateInfoViewController.m in Sources */,
 				D4195F641A92A69C00663149 /* GTLQueryStoreendpoint.m in Sources */,
 				D4195F291A92A69C00663149 /* UIImage+MultiFormat.m in Sources */,
 				D4195F0C1A92A69C00663149 /* MWZoomingScrollView.m in Sources */,
 				D4195ECF1A92A69C00663149 /* UIRefreshControl+AFNetworking.m in Sources */,
+				D406D8291AD57C450076D0B6 /* ServerOrderSummaryViewController.m in Sources */,
 				D438AB7D1A9FA6AC0089E61A /* NSString+JSQMessages.m in Sources */,
 				D4195F8A1A92A69C00663149 /* GTLStoreendpointStoreMenuItem.m in Sources */,
+				D406D7FA1AD23B850076D0B6 /* JoinGroupTableViewController.m in Sources */,
 				D4195F591A92A69C00663149 /* SWRevealViewController.m in Sources */,
 				D4195F971A92A69C00663149 /* GTLStoreendpointStoreWaitListQueueAndPosition.m in Sources */,
 				D4195F041A92A69C00663149 /* MWCaptionView.m in Sources */,
@@ -2802,11 +2933,13 @@
 				D438AB971A9FA6AC0089E61A /* JSQMessagesCollectionViewCell.m in Sources */,
 				D4195F311A92A69C00663149 /* SHSPhoneTextField.m in Sources */,
 				D409D7F21AA60A94008FADDF /* STPStrictURLProtocol.m in Sources */,
+				D406D8191AD2F2C10076D0B6 /* GTLStoreendpointStoreTableGroupMemberCollection.m in Sources */,
 				D438AB931A9FA6AC0089E61A /* JSQPhotoMediaItem.m in Sources */,
 				D438AB7E1A9FA6AC0089E61A /* UIColor+JSQMessages.m in Sources */,
 				D4195EC51A92A69C00663149 /* AFURLConnectionOperation.m in Sources */,
 				D4195F921A92A69C00663149 /* GTLStoreendpointStoreOwnerCollection.m in Sources */,
 				D4195F241A92A69C00663149 /* SDWebImageDownloaderOperation.m in Sources */,
+				D406D8261AD57C0A0076D0B6 /* TablesViewController.m in Sources */,
 				D438AB821A9FA6AC0089E61A /* JSQMessagesKeyboardController.m in Sources */,
 				D4195F0D1A92A69C00663149 /* OrderedDictionary.m in Sources */,
 				D4195F1A1A92A69C00663149 /* PSTGridLayoutItem.m in Sources */,
@@ -2821,7 +2954,6 @@
 				D438AB851A9FA6AC0089E61A /* JSQMessagesAvatarImageFactory.m in Sources */,
 				D4195F031A92A69C00663149 /* MBProgressHUD.m in Sources */,
 				D4195F701A92A69C00663149 /* GTLStoreendpointChatUserArray.m in Sources */,
-				D4195FA51A92A69C00663149 /* AddFriendViewController.m in Sources */,
 				D438AB881A9FA6AC0089E61A /* JSQMessagesTimestampFormatter.m in Sources */,
 				D409D7CF1AA60A94008FADDF /* PTKCardExpiry.m in Sources */,
 				D4195F151A92A69C00663149 /* PSTCollectionViewFlowLayout.m in Sources */,
@@ -2842,6 +2974,7 @@
 				D4195EC01A92A69C00663149 /* AFHTTPRequestOperation.m in Sources */,
 				D4195F2E1A92A69C00663149 /* SHSPhoneLogic.m in Sources */,
 				D438AB7F1A9FA6AC0089E61A /* UIDevice+JSQMessages.m in Sources */,
+				D406D81F1AD463180076D0B6 /* GTLStoreendpointSplitOrderArguments.m in Sources */,
 				D4195EC81A92A69C00663149 /* AFURLSessionManager.m in Sources */,
 				D438AB831A9FA6AC0089E61A /* JSQMessagesViewController.m in Sources */,
 				D4195F071A92A69C00663149 /* MWPhoto.m in Sources */,
@@ -2859,13 +2992,16 @@
 				D4195F231A92A69C00663149 /* SDWebImageDownloader.m in Sources */,
 				D4195F881A92A69C00663149 /* GTLStoreendpointStoreMenuHierarchy.m in Sources */,
 				D4195F061A92A69C00663149 /* MWGridViewController.m in Sources */,
+				D406D8161AD2F2C10076D0B6 /* GTLStoreendpointStoreTableGroup.m in Sources */,
 				D409D7CC1AA60A94008FADDF /* PTKAddressZip.m in Sources */,
 				D438ABA11A9FA6AC0089E61A /* JSQMessagesMediaPlaceholderView.m in Sources */,
 				D438AB021A9F8BF60089E61A /* GroupView.m in Sources */,
 				D438AB8E1A9FA6AC0089E61A /* JSQLocationMediaItem.m in Sources */,
 				D4195E9E1A92A69C00663149 /* MenuItemLoadingOperation.m in Sources */,
+				D406D7F41AD23ACB0076D0B6 /* AddFriendViewController.m in Sources */,
 				D4195F111A92A69C00663149 /* PSTCollectionView.m in Sources */,
 				D4195FAD1A92A69C00663149 /* SignupViewController.m in Sources */,
+				D406D81C1AD382FC0076D0B6 /* GTLStoreendpointStoreTableGroupMemberArray.m in Sources */,
 				D4195F841A92A69C00663149 /* GTLStoreendpointStoreDiscountArray.m in Sources */,
 				D445D7311A96BC5C00ED4919 /* main.m in Sources */,
 				D409D7EF1AA60A94008FADDF /* STPColorUtils.m in Sources */,
@@ -2878,6 +3014,7 @@
 				D4195F6B1A92A69C00663149 /* GTLStoreendpointChatMessage.m in Sources */,
 				D4195FBF1A92A69C00663149 /* ReserveTableViewController.m in Sources */,
 				D409D7F91AA60A94008FADDF /* STPToken.m in Sources */,
+				D406D7F31AD23ACB0076D0B6 /* UpdateInfoViewController.m in Sources */,
 				D47D3ABE1ABB41EC0099176A /* XMLPOSOrder.m in Sources */,
 				D4195F211A92A69C00663149 /* SDWebImageCompat.m in Sources */,
 				D4195FAA1A92A69C00663149 /* PaymentInfoViewController.m in Sources */,
@@ -2896,6 +3033,7 @@
 				D438AB961A9FA6AC0089E61A /* JSQMessagesCollectionView.m in Sources */,
 				D49FBA981AC613D600F55360 /* GTLStoreendpointClientVersionMatch.m in Sources */,
 				D4195F9C1A92A69C00663149 /* GTLUserendpointConstants.m in Sources */,
+				D406D8321AD5A10E0076D0B6 /* GTLStoreendpointTableGroupsAndOrders.m in Sources */,
 				D445D71A1A96BA3800ED4919 /* ClaimStoreViewController.m in Sources */,
 				D4195EAB1A92A69C00663149 /* GlobalObjectHolder.m in Sources */,
 				D4195ECC1A92A69C00663149 /* UIButton+AFNetworking.m in Sources */,
@@ -2909,16 +3047,19 @@
 				D4195FB81A92A69C00663149 /* OrderDiscountViewController.m in Sources */,
 				D438AB9A1A9FA6AC0089E61A /* JSQMessagesCollectionViewCellOutgoing.m in Sources */,
 				D438AB041A9F8BF60089E61A /* pushnotification.m in Sources */,
+				D406D7FD1AD23BF00076D0B6 /* InStoreOrderSummaryTableViewController.m in Sources */,
 				D4195ED51A92A69C00663149 /* TDBadgedCell.m in Sources */,
 				D438ABA41A9FA6AC0089E61A /* JSQMessagesTypingIndicatorFooterView.m in Sources */,
 				D4195FC01A92A69C00663149 /* WaitListStatusTableViewController.m in Sources */,
 				D4195F5D1A92A69C00663149 /* UIAlertView+Blocks.m in Sources */,
 				D409D7C41AA60A94008FADDF /* STPTestCardStore.m in Sources */,
 				D4195EAC1A92A69C00663149 /* MenuSegmentHolder.m in Sources */,
+				D406D82C1AD57C980076D0B6 /* ServerSelectGroupTableViewController.m in Sources */,
 				D438ABA21A9FA6AC0089E61A /* JSQMessagesToolbarContentView.m in Sources */,
 				D409D8011AA62E04008FADDF /* StripePay.m in Sources */,
 				D4195F6A1A92A69C00663149 /* GTLStoreendpointAsaanLongString.m in Sources */,
 				D445D7191A96BA3800ED4919 /* StoreListTableViewController.m in Sources */,
+				D406D8001AD23C250076D0B6 /* InstorePaymentOptionTableViewController.m in Sources */,
 				D4195F201A92A69C00663149 /* SDImageCache.m in Sources */,
 				D4195FB71A92A69C00663149 /* DeliveryOrCarryoutViewController.m in Sources */,
 				D47D3ABB1ABB36810099176A /* HTMLFaxOrder.m in Sources */,
@@ -2932,6 +3073,7 @@
 				D4195F7D1A92A69C00663149 /* GTLStoreendpointStoreAndStats.m in Sources */,
 				D4195EA61A92A69C00663149 /* EmptySegue.m in Sources */,
 				D4195F8D1A92A69C00663149 /* GTLStoreendpointStoreMenuItemModifierGroup.m in Sources */,
+				D406D8061AD23C880076D0B6 /* SplitEvenTableViewController.m in Sources */,
 				D4195EAF1A92A69C00663149 /* OnlineOrderSelectedMenuItem.m in Sources */,
 				D4195FC61A92A69C00663149 /* ReviewsSummaryTableViewController.m in Sources */,
 				D438AB9F1A9FA6AC0089E61A /* JSQMessagesLoadEarlierHeaderView.m in Sources */,
@@ -2964,6 +3106,22 @@
 				D4046FF71A97FD0A0070537B /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D406D7EB1AD056220076D0B6 /* InStorePay.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D406D7EC1AD056220076D0B6 /* Base */,
+			);
+			name = InStorePay.storyboard;
+			sourceTree = "<group>";
+		};
+		D406D8201AD485560076D0B6 /* InStoreServer.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D406D8211AD485560076D0B6 /* Base */,
+			);
+			name = InStoreServer.storyboard;
 			sourceTree = "<group>";
 		};
 		D438AB0D1A9FA6AB0089E61A /* JSQMessages.strings */ = {

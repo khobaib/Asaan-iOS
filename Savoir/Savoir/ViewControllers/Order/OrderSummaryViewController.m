@@ -160,7 +160,7 @@
     {
         strOrder = order.orderHTML;
         order.orderDetails = [XMLPOSOrder buildPOSResponseXML:self.orderInProgress gratuity:[self gratuity] discountTitle:self.orderInProgress.selectedDiscount.title discountAmount:[self discountAmount] subTotal:[self subTotal] deliveryFee:[self deliveryFee] taxAmount:[self taxAmount]
-                                                                finalAmount:[self finalAmount] guestCount:order.guestCount.intValue];
+                                                                finalAmount:[self finalAmount] guestCount:order.guestCount.intValue tableNumber:0];
     }
     else
         strOrder = [XMLPOSOrder buildPOSOrder:self.orderInProgress gratuity:[self gratuity]];
@@ -347,7 +347,7 @@
         return discount.value.longLongValue/100.0;
 }
 
-- (double)taxAmount // already * by 1000000
+- (double)taxAmount
 {
 //    NSUInteger taxPercentAmount = 0;
 //    for (OnlineOrderSelectedMenuItem *onlineOrderSelectedMenuItem in self.orderInProgress.selectedMenuItems)
@@ -359,7 +359,7 @@
         return ([self subTotal] + [self gratuity] + [self deliveryFee])*self.orderInProgress.selectedStore.taxPercent.longLongValue/10000.0;
 }
 
-- (double)gratuity // 15% - fixed for now
+- (double)gratuity
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     if (appDelegate.globalObjectHolder.currentUser.defaultTip.longValue == 0)

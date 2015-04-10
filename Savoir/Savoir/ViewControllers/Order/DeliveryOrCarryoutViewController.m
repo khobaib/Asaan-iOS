@@ -49,6 +49,8 @@
 
 + (int) ORDERTYPE_CARRYOUT { return 1;}
 + (int) ORDERTYPE_DELIVERY { return 2;}
++ (int) ORDERTYPE_PREVISIT { return 3;};
++ (int) ORDERTYPE_DININGIN { return 4;};
 
 - (void)viewDidLoad {
     [super viewDidLoad];

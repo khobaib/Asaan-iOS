@@ -39,6 +39,8 @@
 #import "Constants.h"
 #import <CoreLocation/CoreLocation.h>
 
+#import "TablesViewController.h"
+
 @interface StoreListTableViewController ()<DataProviderDelegate, CLLocationManagerDelegate>
 
 @property (nonatomic, strong) MBProgressHUD *hud;
@@ -102,6 +104,12 @@
         return;
     }
     
+    if (appDelegate.globalObjectHolder.selectedStore != nil && [UtilCalls userBelongsToStoreChatTeamForStore:appDelegate.globalObjectHolder.selectedStore])
+    {
+        [self startServerMode];
+        return;
+    }
+    
     GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
     [goh loadAllUserObjects];
     if (goh.orderInProgress != nil)
@@ -134,6 +142,23 @@
         return false;
     else
         return true;
+}
+
+- (void) startServerMode
+{
+    UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"InStoreServer" bundle:nil];
+    MenuTableViewController *destination = [mainStoryBoard instantiateViewControllerWithIdentifier:@"ServerTablesViewController"];
+    
+    UIStoryboardSegue *segue = [UIStoryboardSegue segueWithIdentifier:@"segueStoreListToServerTableView" source:self destination:destination performHandler:^(void) {
+        //view transition/animation
+        [self.navigationController pushViewController:destination animated:YES];
+    }];
+    
+    [self shouldPerformSegueWithIdentifier:segue.identifier sender:self];//optional
+    [self prepareForSegue:segue sender:self];
+    
+    [segue perform];
+
 }
 
 - (void)didReceiveMemoryWarning {

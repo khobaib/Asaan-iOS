@@ -181,7 +181,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
         __weak __typeof(self) weakSelf = self;
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
         GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-        GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreMenuHierarchyAndItemsWithStoreId:self.selectedStore.identifier.longLongValue menuType:0 maxResult:MenuFluentPagingTablePageSize];
+        GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreMenuHierarchyAndItemsWithMaxResult:MenuFluentPagingTablePageSize menuType:0 storeId:self.selectedStore.identifier.longLongValue];
         
         [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointMenusAndMenuItems *object,NSError *error)
          {

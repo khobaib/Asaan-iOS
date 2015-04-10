@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryStoreendpoint (52 custom class methods, 16 custom properties)
+//   GTLQueryStoreendpoint (66 custom class methods, 18 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLQuery.h"
@@ -27,6 +27,7 @@
 @class GTLStoreendpointItemReviewsArray;
 @class GTLStoreendpointOrderReview;
 @class GTLStoreendpointPlaceOrderArguments;
+@class GTLStoreendpointSplitOrderArguments;
 @class GTLStoreendpointStore;
 @class GTLStoreendpointStoreChatMemberArray;
 @class GTLStoreendpointStoreDiscount;
@@ -36,8 +37,10 @@
 @class GTLStoreendpointStoreMenuItem;
 @class GTLStoreendpointStoreMenuItemModifier;
 @class GTLStoreendpointStoreMenuItemModifierGroup;
+@class GTLStoreendpointStoreOrder;
 @class GTLStoreendpointStoreOwner;
 @class GTLStoreendpointStorePOSConnection;
+@class GTLStoreendpointStoreTableGroupMemberArray;
 @class GTLStoreendpointStoreWaitListQueue;
 @class GTLStoreendpointStoreWaitlistSummary;
 
@@ -53,6 +56,7 @@
 //
 // Method-specific parameters; see the comments below for more information.
 //
+@property (assign) long long beaconId;
 @property (assign) NSInteger firstPosition;
 @property (assign) BOOL isStore;
 @property (assign) double lat;
@@ -68,20 +72,37 @@
 @property (assign) long long roomOrStoreId;
 @property (assign) long long storeId;
 @property (copy) NSString *storeName;
+@property (assign) long long storeTableGroupId;
 
 #pragma mark -
 #pragma mark Service level methods
 // These create a GTLQueryStoreendpoint object.
 
+// Method: storeendpoint.addMemberToStoreTableGroup
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
++ (id)queryForAddMemberToStoreTableGroupWithOrderId:(long long)orderId
+                                  storeTableGroupId:(long long)storeTableGroupId;
+
+// Method: storeendpoint.closeOrder
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
++ (id)queryForCloseOrderWithObject:(GTLStoreendpointStoreOrder *)object;
+
+// Method: storeendpoint.createStoreTableGroup
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
++ (id)queryForCreateStoreTableGroupWithStoreId:(long long)storeId;
+
 // Method: storeendpoint.getChatMessagesForStoreOrRoom
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 // Fetches a GTLStoreendpointChatMessagesAndUsers.
-+ (id)queryForGetChatMessagesForStoreOrRoomWithRoomOrStoreId:(long long)roomOrStoreId
-                                                modifiedDate:(long long)modifiedDate
++ (id)queryForGetChatMessagesForStoreOrRoomWithFirstPosition:(NSInteger)firstPosition
                                                      isStore:(BOOL)isStore
-                                               firstPosition:(NSInteger)firstPosition
-                                                   maxResult:(NSInteger)maxResult;
+                                                   maxResult:(NSInteger)maxResult
+                                                modifiedDate:(long long)modifiedDate
+                                               roomOrStoreId:(long long)roomOrStoreId;
 
 // Method: storeendpoint.getChatRoomsAndMembershipsForUser
 //  Authorization scope(s):
@@ -101,14 +122,26 @@
 // Fetches a GTLStoreendpointClientVersionMatch.
 + (id)queryForGetClientVersion;
 
+// Method: storeendpoint.getMembersForStoreTableGroup
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
+// Fetches a GTLStoreendpointStoreTableGroupMemberCollection.
++ (id)queryForGetMembersForStoreTableGroupWithStoreTableGroupId:(long long)storeTableGroupId;
+
 // Method: storeendpoint.getMenuItemAndStatsForMenu
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 // Fetches a GTLStoreendpointMenuItemAndStatsCollection.
-+ (id)queryForGetMenuItemAndStatsForMenuWithStoreId:(long long)storeId
-                                          menuPOSId:(NSInteger)menuPOSId
-                                      firstPosition:(NSInteger)firstPosition
-                                          maxResult:(NSInteger)maxResult;
++ (id)queryForGetMenuItemAndStatsForMenuWithFirstPosition:(NSInteger)firstPosition
+                                                maxResult:(NSInteger)maxResult
+                                                menuPOSId:(NSInteger)menuPOSId
+                                                  storeId:(long long)storeId;
+
+// Method: storeendpoint.getOpenAndUnassignedGroupsForStore
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
+// Fetches a GTLStoreendpointStoreTableGroupCollection.
++ (id)queryForGetOpenAndUnassignedGroupsForStoreWithStoreId:(long long)storeId;
 
 // Method: storeendpoint.getOrderAndReviewsById
 //  Authorization scope(s):
@@ -120,9 +153,9 @@
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 // Fetches a GTLStoreendpointOrderReviewListAndCount.
-+ (id)queryForGetOrderReviewsForStoreWithStoreId:(long long)storeId
-                                   firstPosition:(NSInteger)firstPosition
-                                       maxResult:(NSInteger)maxResult;
++ (id)queryForGetOrderReviewsForStoreWithFirstPosition:(NSInteger)firstPosition
+                                             maxResult:(NSInteger)maxResult
+                                               storeId:(long long)storeId;
 
 // Method: storeendpoint.getReviewForCurrentUserAndOrder
 //  Authorization scope(s):
@@ -142,6 +175,12 @@
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 // Fetches a GTLStoreendpointStore.
 + (id)queryForGetStoreWithStoreId:(long long)storeId;
+
+// Method: storeendpoint.getStoreByBeaconId
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
+// Fetches a GTLStoreendpointStore.
++ (id)queryForGetStoreByBeaconIdWithBeaconId:(long long)beaconId;
 
 // Method: storeendpoint.getStoreChatMembers
 //  Authorization scope(s):
@@ -171,32 +210,44 @@
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 // Fetches a GTLStoreendpointMenusAndMenuItems.
-+ (id)queryForGetStoreMenuHierarchyAndItemsWithStoreId:(long long)storeId
-                                              menuType:(NSInteger)menuType
-                                             maxResult:(NSInteger)maxResult;
++ (id)queryForGetStoreMenuHierarchyAndItemsWithMaxResult:(NSInteger)maxResult
+                                                menuType:(NSInteger)menuType
+                                                 storeId:(long long)storeId;
 
 // Method: storeendpoint.getStoreMenuItemModifiers
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 // Fetches a GTLStoreendpointMenuItemModifiersAndGroups.
-+ (id)queryForGetStoreMenuItemModifiersWithStoreId:(long long)storeId
-                                     menuItemPOSId:(NSInteger)menuItemPOSId;
++ (id)queryForGetStoreMenuItemModifiersWithMenuItemPOSId:(NSInteger)menuItemPOSId
+                                                 storeId:(long long)storeId;
 
 // Method: storeendpoint.getStoreMenuItems
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 // Fetches a GTLStoreendpointStoreMenuItemCollection.
-+ (id)queryForGetStoreMenuItemsWithStoreId:(long long)storeId
-                             firstPosition:(NSInteger)firstPosition
-                                 maxResult:(NSInteger)maxResult;
++ (id)queryForGetStoreMenuItemsWithFirstPosition:(NSInteger)firstPosition
+                                       maxResult:(NSInteger)maxResult
+                                         storeId:(long long)storeId;
 
 // Method: storeendpoint.getStoreMenus
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 // Fetches a GTLStoreendpointStoreMenuHierarchyCollection.
-+ (id)queryForGetStoreMenusWithStoreId:(long long)storeId
-                         firstPosition:(NSInteger)firstPosition
-                             maxResult:(NSInteger)maxResult;
++ (id)queryForGetStoreMenusWithFirstPosition:(NSInteger)firstPosition
+                                   maxResult:(NSInteger)maxResult
+                                     storeId:(long long)storeId;
+
+// Method: storeendpoint.getStoreOrderById
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
+// Fetches a GTLStoreendpointStoreOrder.
++ (id)queryForGetStoreOrderByIdWithOrderId:(long long)orderId;
+
+// Method: storeendpoint.getStoreOrdersAndGroupsForEmployee
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
+// Fetches a GTLStoreendpointTableGroupsAndOrders.
++ (id)queryForGetStoreOrdersAndGroupsForEmployeeWithStoreId:(long long)storeId;
 
 // Method: storeendpoint.getStoreOrdersForCurrentUser
 //  Authorization scope(s):
@@ -209,9 +260,9 @@
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 // Fetches a GTLStoreendpointStoreOrderListAndCount.
-+ (id)queryForGetStoreOrdersForCurrentUserAndStoreWithStoreId:(long long)storeId
-                                                firstPosition:(NSInteger)firstPosition
-                                                    maxResult:(NSInteger)maxResult;
++ (id)queryForGetStoreOrdersForCurrentUserAndStoreWithFirstPosition:(NSInteger)firstPosition
+                                                          maxResult:(NSInteger)maxResult
+                                                            storeId:(long long)storeId;
 
 // Method: storeendpoint.getStoreOwners
 //  Authorization scope(s):
@@ -269,6 +320,12 @@
 + (id)queryForGetStoresWithStatsWithFirstPosition:(NSInteger)firstPosition
                                         maxResult:(NSInteger)maxResult;
 
+// Method: storeendpoint.getStoreTableGroupsForStore
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
+// Fetches a GTLStoreendpointStoreTableGroupCollection.
++ (id)queryForGetStoreTableGroupsForStoreWithStoreId:(long long)storeId;
+
 // Method: storeendpoint.getStoreWaitListQueue
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
@@ -280,6 +337,11 @@
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 // Fetches a GTLStoreendpointStoreWaitListQueueAndPosition.
 + (id)queryForGetStoreWaitListQueueEntryForCurrentUser;
+
+// Method: storeendpoint.payForMember
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
++ (id)queryForPayForMemberWithObject:(GTLStoreendpointSplitOrderArguments *)object;
 
 // Method: storeendpoint.placeOrder
 //  Authorization scope(s):
@@ -402,9 +464,31 @@
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 + (id)queryForSaveStoreWaitlistSummaryWithObject:(GTLStoreendpointStoreWaitlistSummary *)object;
 
+// Method: storeendpoint.startOrder
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
+// Fetches a GTLStoreendpointStoreOrder.
++ (id)queryForStartOrderWithObject:(GTLStoreendpointPlaceOrderArguments *)object;
+
+// Method: storeendpoint.updateOrderFromServer
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
++ (id)queryForUpdateOrderFromServerWithObject:(GTLStoreendpointStoreOrder *)object;
+
 // Method: storeendpoint.updateStoreCoordinates
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 + (id)queryForUpdateStoreCoordinates;
+
+// Method: storeendpoint.updateStoreTableGroup
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
++ (id)queryForUpdateStoreTableGroupWithOrderId:(long long)orderId
+                             storeTableGroupId:(long long)storeTableGroupId;
+
+// Method: storeendpoint.updateStoreTableGroupMember
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
++ (id)queryForUpdateStoreTableGroupMemberWithObject:(GTLStoreendpointStoreTableGroupMemberArray *)object;
 
 @end

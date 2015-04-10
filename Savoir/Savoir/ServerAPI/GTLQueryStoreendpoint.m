@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryStoreendpoint (52 custom class methods, 16 custom properties)
+//   GTLQueryStoreendpoint (66 custom class methods, 18 custom properties)
 
 #import "GTLQueryStoreendpoint.h"
 
@@ -35,6 +35,7 @@
 #import "GTLStoreendpointOrderReviewAndItemReviews.h"
 #import "GTLStoreendpointOrderReviewListAndCount.h"
 #import "GTLStoreendpointPlaceOrderArguments.h"
+#import "GTLStoreendpointSplitOrderArguments.h"
 #import "GTLStoreendpointStore.h"
 #import "GTLStoreendpointStoreAndStatsCollection.h"
 #import "GTLStoreendpointStoreChatMemberArray.h"
@@ -57,33 +58,65 @@
 #import "GTLStoreendpointStorePOSConnection.h"
 #import "GTLStoreendpointStoreStats.h"
 #import "GTLStoreendpointStoreStatsCollection.h"
+#import "GTLStoreendpointStoreTableGroupCollection.h"
+#import "GTLStoreendpointStoreTableGroupMemberArray.h"
+#import "GTLStoreendpointStoreTableGroupMemberCollection.h"
 #import "GTLStoreendpointStoreWaitListQueue.h"
 #import "GTLStoreendpointStoreWaitListQueueAndPosition.h"
 #import "GTLStoreendpointStoreWaitListQueueCollection.h"
 #import "GTLStoreendpointStoreWaitlistSummary.h"
+#import "GTLStoreendpointTableGroupsAndOrders.h"
 
 @implementation GTLQueryStoreendpoint
 
-@dynamic fields, firstPosition, isStore, lat, lng, maxResult, menuItemPOSId,
-         menuPOSId, menuType, modifiedDate, orderId, queuePosition, roomId,
-         roomOrStoreId, storeId, storeName;
+@dynamic beaconId, fields, firstPosition, isStore, lat, lng, maxResult,
+         menuItemPOSId, menuPOSId, menuType, modifiedDate, orderId,
+         queuePosition, roomId, roomOrStoreId, storeId, storeName,
+         storeTableGroupId;
 
 #pragma mark -
 #pragma mark Service level methods
 // These create a GTLQueryStoreendpoint object.
 
-+ (id)queryForGetChatMessagesForStoreOrRoomWithRoomOrStoreId:(long long)roomOrStoreId
-                                                modifiedDate:(long long)modifiedDate
++ (id)queryForAddMemberToStoreTableGroupWithOrderId:(long long)orderId
+                                  storeTableGroupId:(long long)storeTableGroupId {
+  NSString *methodName = @"storeendpoint.addMemberToStoreTableGroup";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.orderId = orderId;
+  query.storeTableGroupId = storeTableGroupId;
+  return query;
+}
+
++ (id)queryForCloseOrderWithObject:(GTLStoreendpointStoreOrder *)object {
+  if (object == nil) {
+    GTL_DEBUG_ASSERT(object != nil, @"%@ got a nil object", NSStringFromSelector(_cmd));
+    return nil;
+  }
+  NSString *methodName = @"storeendpoint.closeOrder";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.bodyObject = object;
+  return query;
+}
+
++ (id)queryForCreateStoreTableGroupWithStoreId:(long long)storeId {
+  NSString *methodName = @"storeendpoint.createStoreTableGroup";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.storeId = storeId;
+  return query;
+}
+
++ (id)queryForGetChatMessagesForStoreOrRoomWithFirstPosition:(NSInteger)firstPosition
                                                      isStore:(BOOL)isStore
-                                               firstPosition:(NSInteger)firstPosition
-                                                   maxResult:(NSInteger)maxResult {
+                                                   maxResult:(NSInteger)maxResult
+                                                modifiedDate:(long long)modifiedDate
+                                               roomOrStoreId:(long long)roomOrStoreId {
   NSString *methodName = @"storeendpoint.getChatMessagesForStoreOrRoom";
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
-  query.roomOrStoreId = roomOrStoreId;
-  query.modifiedDate = modifiedDate;
-  query.isStore = isStore;
   query.firstPosition = firstPosition;
+  query.isStore = isStore;
   query.maxResult = maxResult;
+  query.modifiedDate = modifiedDate;
+  query.roomOrStoreId = roomOrStoreId;
   query.expectedObjectClass = [GTLStoreendpointChatMessagesAndUsers class];
   return query;
 }
@@ -110,17 +143,33 @@
   return query;
 }
 
-+ (id)queryForGetMenuItemAndStatsForMenuWithStoreId:(long long)storeId
-                                          menuPOSId:(NSInteger)menuPOSId
-                                      firstPosition:(NSInteger)firstPosition
-                                          maxResult:(NSInteger)maxResult {
++ (id)queryForGetMembersForStoreTableGroupWithStoreTableGroupId:(long long)storeTableGroupId {
+  NSString *methodName = @"storeendpoint.getMembersForStoreTableGroup";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.storeTableGroupId = storeTableGroupId;
+  query.expectedObjectClass = [GTLStoreendpointStoreTableGroupMemberCollection class];
+  return query;
+}
+
++ (id)queryForGetMenuItemAndStatsForMenuWithFirstPosition:(NSInteger)firstPosition
+                                                maxResult:(NSInteger)maxResult
+                                                menuPOSId:(NSInteger)menuPOSId
+                                                  storeId:(long long)storeId {
   NSString *methodName = @"storeendpoint.getMenuItemAndStatsForMenu";
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
-  query.storeId = storeId;
-  query.menuPOSId = menuPOSId;
   query.firstPosition = firstPosition;
   query.maxResult = maxResult;
+  query.menuPOSId = menuPOSId;
+  query.storeId = storeId;
   query.expectedObjectClass = [GTLStoreendpointMenuItemAndStatsCollection class];
+  return query;
+}
+
++ (id)queryForGetOpenAndUnassignedGroupsForStoreWithStoreId:(long long)storeId {
+  NSString *methodName = @"storeendpoint.getOpenAndUnassignedGroupsForStore";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.storeId = storeId;
+  query.expectedObjectClass = [GTLStoreendpointStoreTableGroupCollection class];
   return query;
 }
 
@@ -132,14 +181,14 @@
   return query;
 }
 
-+ (id)queryForGetOrderReviewsForStoreWithStoreId:(long long)storeId
-                                   firstPosition:(NSInteger)firstPosition
-                                       maxResult:(NSInteger)maxResult {
++ (id)queryForGetOrderReviewsForStoreWithFirstPosition:(NSInteger)firstPosition
+                                             maxResult:(NSInteger)maxResult
+                                               storeId:(long long)storeId {
   NSString *methodName = @"storeendpoint.getOrderReviewsForStore";
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
-  query.storeId = storeId;
   query.firstPosition = firstPosition;
   query.maxResult = maxResult;
+  query.storeId = storeId;
   query.expectedObjectClass = [GTLStoreendpointOrderReviewListAndCount class];
   return query;
 }
@@ -166,6 +215,14 @@
   NSString *methodName = @"storeendpoint.getStore";
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
   query.storeId = storeId;
+  query.expectedObjectClass = [GTLStoreendpointStore class];
+  return query;
+}
+
++ (id)queryForGetStoreByBeaconIdWithBeaconId:(long long)beaconId {
+  NSString *methodName = @"storeendpoint.getStoreByBeaconId";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.beaconId = beaconId;
   query.expectedObjectClass = [GTLStoreendpointStore class];
   return query;
 }
@@ -200,49 +257,65 @@
   return query;
 }
 
-+ (id)queryForGetStoreMenuHierarchyAndItemsWithStoreId:(long long)storeId
-                                              menuType:(NSInteger)menuType
-                                             maxResult:(NSInteger)maxResult {
++ (id)queryForGetStoreMenuHierarchyAndItemsWithMaxResult:(NSInteger)maxResult
+                                                menuType:(NSInteger)menuType
+                                                 storeId:(long long)storeId {
   NSString *methodName = @"storeendpoint.getStoreMenuHierarchyAndItems";
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
-  query.storeId = storeId;
-  query.menuType = menuType;
   query.maxResult = maxResult;
+  query.menuType = menuType;
+  query.storeId = storeId;
   query.expectedObjectClass = [GTLStoreendpointMenusAndMenuItems class];
   return query;
 }
 
-+ (id)queryForGetStoreMenuItemModifiersWithStoreId:(long long)storeId
-                                     menuItemPOSId:(NSInteger)menuItemPOSId {
++ (id)queryForGetStoreMenuItemModifiersWithMenuItemPOSId:(NSInteger)menuItemPOSId
+                                                 storeId:(long long)storeId {
   NSString *methodName = @"storeendpoint.getStoreMenuItemModifiers";
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
-  query.storeId = storeId;
   query.menuItemPOSId = menuItemPOSId;
+  query.storeId = storeId;
   query.expectedObjectClass = [GTLStoreendpointMenuItemModifiersAndGroups class];
   return query;
 }
 
-+ (id)queryForGetStoreMenuItemsWithStoreId:(long long)storeId
-                             firstPosition:(NSInteger)firstPosition
-                                 maxResult:(NSInteger)maxResult {
++ (id)queryForGetStoreMenuItemsWithFirstPosition:(NSInteger)firstPosition
+                                       maxResult:(NSInteger)maxResult
+                                         storeId:(long long)storeId {
   NSString *methodName = @"storeendpoint.getStoreMenuItems";
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
-  query.storeId = storeId;
   query.firstPosition = firstPosition;
   query.maxResult = maxResult;
+  query.storeId = storeId;
   query.expectedObjectClass = [GTLStoreendpointStoreMenuItemCollection class];
   return query;
 }
 
-+ (id)queryForGetStoreMenusWithStoreId:(long long)storeId
-                         firstPosition:(NSInteger)firstPosition
-                             maxResult:(NSInteger)maxResult {
++ (id)queryForGetStoreMenusWithFirstPosition:(NSInteger)firstPosition
+                                   maxResult:(NSInteger)maxResult
+                                     storeId:(long long)storeId {
   NSString *methodName = @"storeendpoint.getStoreMenus";
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
-  query.storeId = storeId;
   query.firstPosition = firstPosition;
   query.maxResult = maxResult;
+  query.storeId = storeId;
   query.expectedObjectClass = [GTLStoreendpointStoreMenuHierarchyCollection class];
+  return query;
+}
+
++ (id)queryForGetStoreOrderByIdWithOrderId:(long long)orderId {
+  NSString *methodName = @"storeendpoint.getStoreOrderById";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.orderId = orderId;
+  query.expectedObjectClass = [GTLStoreendpointStoreOrder class];
+  return query;
+}
+
++ (id)queryForGetStoreOrdersAndGroupsForEmployeeWithStoreId:(long long)storeId {
+  NSString *methodName = @"storeendpoint.getStoreOrdersAndGroupsForEmployee";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.storeId = storeId;
+  query.expectedObjectClass = [GTLStoreendpointTableGroupsAndOrders class];
   return query;
 }
 
@@ -256,14 +329,14 @@
   return query;
 }
 
-+ (id)queryForGetStoreOrdersForCurrentUserAndStoreWithStoreId:(long long)storeId
-                                                firstPosition:(NSInteger)firstPosition
-                                                    maxResult:(NSInteger)maxResult {
++ (id)queryForGetStoreOrdersForCurrentUserAndStoreWithFirstPosition:(NSInteger)firstPosition
+                                                          maxResult:(NSInteger)maxResult
+                                                            storeId:(long long)storeId {
   NSString *methodName = @"storeendpoint.getStoreOrdersForCurrentUserAndStore";
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
-  query.storeId = storeId;
   query.firstPosition = firstPosition;
   query.maxResult = maxResult;
+  query.storeId = storeId;
   query.expectedObjectClass = [GTLStoreendpointStoreOrderListAndCount class];
   return query;
 }
@@ -347,6 +420,14 @@
   return query;
 }
 
++ (id)queryForGetStoreTableGroupsForStoreWithStoreId:(long long)storeId {
+  NSString *methodName = @"storeendpoint.getStoreTableGroupsForStore";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.storeId = storeId;
+  query.expectedObjectClass = [GTLStoreendpointStoreTableGroupCollection class];
+  return query;
+}
+
 + (id)queryForGetStoreWaitListQueueWithStoreId:(long long)storeId {
   NSString *methodName = @"storeendpoint.getStoreWaitListQueue";
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
@@ -359,6 +440,17 @@
   NSString *methodName = @"storeendpoint.getStoreWaitListQueueEntryForCurrentUser";
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
   query.expectedObjectClass = [GTLStoreendpointStoreWaitListQueueAndPosition class];
+  return query;
+}
+
++ (id)queryForPayForMemberWithObject:(GTLStoreendpointSplitOrderArguments *)object {
+  if (object == nil) {
+    GTL_DEBUG_ASSERT(object != nil, @"%@ got a nil object", NSStringFromSelector(_cmd));
+    return nil;
+  }
+  NSString *methodName = @"storeendpoint.payForMember";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.bodyObject = object;
   return query;
 }
 
@@ -612,9 +704,52 @@
   return query;
 }
 
++ (id)queryForStartOrderWithObject:(GTLStoreendpointPlaceOrderArguments *)object {
+  if (object == nil) {
+    GTL_DEBUG_ASSERT(object != nil, @"%@ got a nil object", NSStringFromSelector(_cmd));
+    return nil;
+  }
+  NSString *methodName = @"storeendpoint.startOrder";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.bodyObject = object;
+  query.expectedObjectClass = [GTLStoreendpointStoreOrder class];
+  return query;
+}
+
++ (id)queryForUpdateOrderFromServerWithObject:(GTLStoreendpointStoreOrder *)object {
+  if (object == nil) {
+    GTL_DEBUG_ASSERT(object != nil, @"%@ got a nil object", NSStringFromSelector(_cmd));
+    return nil;
+  }
+  NSString *methodName = @"storeendpoint.updateOrderFromServer";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.bodyObject = object;
+  return query;
+}
+
 + (id)queryForUpdateStoreCoordinates {
   NSString *methodName = @"storeendpoint.updateStoreCoordinates";
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  return query;
+}
+
++ (id)queryForUpdateStoreTableGroupWithOrderId:(long long)orderId
+                             storeTableGroupId:(long long)storeTableGroupId {
+  NSString *methodName = @"storeendpoint.updateStoreTableGroup";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.orderId = orderId;
+  query.storeTableGroupId = storeTableGroupId;
+  return query;
+}
+
++ (id)queryForUpdateStoreTableGroupMemberWithObject:(GTLStoreendpointStoreTableGroupMemberArray *)object {
+  if (object == nil) {
+    GTL_DEBUG_ASSERT(object != nil, @"%@ got a nil object", NSStringFromSelector(_cmd));
+    return nil;
+  }
+  NSString *methodName = @"storeendpoint.updateStoreTableGroupMember";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.bodyObject = object;
   return query;
 }
 

@@ -13,13 +13,14 @@
 #import <Parse/Parse.h>
 #import "DeliveryOrCarryoutViewController.h"
 #import "AppDelegate.h"
+#import "OrderItemSummaryFromPOS.h"
+#import "InlineCalls.h"
 
 
 @implementation XMLPOSOrder
 
 + (NSString *)buildPOSOrder:(OnlineOrderDetails *)orderInProgress gratuity:(double)gratuity
-{
-    
+{    
     NSString *strItems = @"<ITEMREQUESTS>";
     for (OnlineOrderSelectedMenuItem *object in orderInProgress.selectedMenuItems)
     {
@@ -110,13 +111,13 @@
  </POSRESPONSE>
  */
 
-NSString *beginXMLResponseStr = @"<POSRESPONSE> <GETCHECKDETAILS> <CHECK GUESTCOUNT=\"%ld\" TABLENUMBER=\"0\" SUBTOTAL=\"%@\" TAX=\"%@\" SERVICECHARGES=\"%@\" COMPLETETOTAL=\"%@\" DELIVERY=\"%@\"> <ENTRIES>";
+NSString *beginXMLResponseStr = @"<POSRESPONSE> <GETCHECKDETAILS> <CHECK ENTRYCOUNT=\"%ld\" GUESTCOUNT=\"%ld\" TABLENUMBER=\"%ld\" SUBTOTAL=\"%@\" TAX=\"%@\" SERVICECHARGES=\"%@\" COMPLETETOTAL=\"%@\" DELIVERY=\"%@\"> <ENTRIES>";
 
-NSString *tableRowXML = @"<ENTRY ID=\"%d\" QUANTITY=\"%@\" PRICE=\"%@\" DISP_NAME=\"%@\" ITEMID=\"%ld\" OPTION=\"%@\" />";
+NSString *tableRowXML = @"<ENTRY ID=\"%d\" QUANTITY=\"%@\" PRICE=\"%@\" DISP_NAME=\"%@\" OPTION=\"%@\" ITEMID=\"%ld\" />";
 
 NSString *discountStrFormat = @"<DISCOUNTS DESC=\"%@\" AMOUNT=\"%@\"/>";
 
-+ (NSString *)buildPOSResponseXML:(OnlineOrderDetails *)orderInProgress gratuity:(double)gratuity discountTitle:(NSString *)discountTitle discountAmount:(double)discountAmount subTotal:(double)subTotal deliveryFee:(double)deliveryFee taxAmount:(double)taxAmount finalAmount:(double)finalAmount guestCount:(NSUInteger)guestCount
++ (NSString *)buildPOSResponseXML:(OnlineOrderDetails *)orderInProgress gratuity:(double)gratuity discountTitle:(NSString *)discountTitle discountAmount:(double)discountAmount subTotal:(double)subTotal deliveryFee:(double)deliveryFee taxAmount:(double)taxAmount finalAmount:(double)finalAmount guestCount:(NSUInteger)guestCount tableNumber:(NSUInteger)tableNumber
 {
     NSString *discountStr = nil;
     if (discountAmount > 0)
@@ -154,7 +155,10 @@ NSString *discountStrFormat = @"<DISCOUNTS DESC=\"%@\" AMOUNT=\"%@\"/>";
                 if (value.boolValue)
                 {
                     GTLStoreendpointStoreMenuItemModifier *modifier = [modGroup.modifiers objectAtIndex:i];
-                    option = [NSString stringWithFormat:@"%@, %@", option, modifier.shortDescription];
+                    if (option == nil)
+                        option = modifier.shortDescription;
+                    else
+                        option = [NSString stringWithFormat:@"%@, %@", option, modifier.shortDescription];
                 }
             }
         }
@@ -162,16 +166,126 @@ NSString *discountStrFormat = @"<DISCOUNTS DESC=\"%@\" AMOUNT=\"%@\"/>";
         NSNumber *amount = [[NSNumber alloc] initWithLong:object.amount];
         NSString *amountStr = [UtilCalls amountToStringNoCurrency:amount];
         
-        NSString *menuItemRow = [NSString stringWithFormat:tableRowXML, entryId, quantity, amountStr, menuItemName, object.selectedItem.identifier.longLongValue, option];
+        NSString *menuItemRow = [NSString stringWithFormat:tableRowXML, entryId, quantity, amountStr, menuItemName, option, object.selectedItem.identifier.longLongValue];
         allTableRows = [NSString stringWithFormat:@"%@ %@", allTableRows, menuItemRow];
         entryId++;
     }
-    NSString *orderHTMLStr = [NSString stringWithFormat:beginXMLResponseStr, (long)guestCount, subTotalStr, taxStr, gratuityStr, orderTotalStr, deliveryFeeStr];
+    NSString *orderHTMLStr = [NSString stringWithFormat:beginXMLResponseStr, (long)entryId, (long)guestCount, (long)tableNumber, subTotalStr, taxStr, gratuityStr, orderTotalStr, deliveryFeeStr];
     
     NSString *finalStr = [NSString stringWithFormat:@"%@ %@ </ENTRIES> %@ %@</CHECK></GETCHECKDETAILS></POSRESPONSE>", orderHTMLStr, allTableRows, discountStr, paymentStr];
     finalStr = [finalStr stringByReplacingOccurrencesOfString:@"(null)" withString:@""];
    
     return finalStr;
 }
+
++ (NSUInteger)findEntryCountInOrderString:(NSString *)XMLOrderStr
+{
+    if (IsEmpty(XMLOrderStr) == true)
+        return 0;
+    
+    NSString *searchStr = @"ENTRYCOUNT=\"";
+    NSRange startRange = [XMLOrderStr rangeOfString:searchStr];
+    if (startRange.location == NSNotFound)
+        return 0;
+    
+    NSString *tempStr = [XMLOrderStr substringFromIndex:NSMaxRange(startRange)];
+    searchStr = @"\"";
+    NSRange endRange = [tempStr rangeOfString:searchStr];
+    NSString *countStr = [tempStr substringToIndex:NSMaxRange(endRange)-1];
+    
+    NSLog(@"findEntryCountInOrderString countStr = %@", countStr);
+    
+    return [countStr intValue];
+}
+
++ (NSString *)replaceEntryCountFrom:(NSUInteger)oldCount To:(NSUInteger)newCount In:(NSString *)XMLOrderStr
+{
+    NSString *searchStr = [NSString stringWithFormat:@"ENTRYCOUNT=\"%ld\"",(long)oldCount];
+    NSString *replaceStr = [NSString stringWithFormat:@"ENTRYCOUNT=\"%ld\"",(long)newCount];
+    return [XMLOrderStr stringByReplacingOccurrencesOfString:searchStr withString:replaceStr];
+}
+
++ (NSString *)buildPOSResponseXMLByAddingNewItems:(OnlineOrderDetails *)orderInProgress ToOrderString:(NSString *)XMLOrderStr
+{
+    NSString *allTableRows = nil;
+    NSUInteger entryId = [XMLPOSOrder findEntryCountInOrderString:XMLOrderStr];
+    NSUInteger oldEntryCount = entryId;
+    for (OnlineOrderSelectedMenuItem *object in orderInProgress.selectedMenuItems)
+    {
+        NSString *menuItemName = object.selectedItem.shortDescription;
+        NSString *option = nil;
+        for (OnlineOrderSelectedModifierGroup *modGroup in object.selectedModifierGroups)
+        {
+            for (int i = 0; i < modGroup.selectedModifierIndexes.count; i++)
+            {
+                NSNumber *value = [modGroup.selectedModifierIndexes objectAtIndex:i];
+                if (value.boolValue)
+                {
+                    GTLStoreendpointStoreMenuItemModifier *modifier = [modGroup.modifiers objectAtIndex:i];
+                    if (option == nil)
+                        option = modifier.shortDescription;
+                    else
+                        option = [NSString stringWithFormat:@"%@ %@", option, modifier.shortDescription];
+                }
+            }
+        }
+        if (option == nil)
+        {
+            if (object.specialInstructions != nil)
+                option = [NSString stringWithFormat:@"NOTE: %@ \n", object.specialInstructions];
+        }
+        else
+        {
+            if (object.specialInstructions != nil)
+                option = [NSString stringWithFormat:@"OPTIONS: %@ NOTE: %@ \n", option, object.specialInstructions];
+        }
+
+        
+        NSString *quantity = [NSString stringWithFormat:@"%lu", (unsigned long)object.qty];
+        NSNumber *amount = [[NSNumber alloc] initWithLong:object.amount];
+        NSString *amountStr = [UtilCalls amountToStringNoCurrency:amount];
+        
+        NSString *menuItemRow = [NSString stringWithFormat:tableRowXML, entryId, quantity, amountStr, menuItemName, option, object.selectedItem.identifier.longLongValue];
+        
+        if (allTableRows == nil)
+            allTableRows = menuItemRow;
+        else
+            allTableRows = [NSString stringWithFormat:@"%@ %@", allTableRows, menuItemRow];
+        entryId++;
+    }
+    
+    NSString *newItemsStr = [NSString stringWithFormat:@"%@ </ENTRIES>", allTableRows];
+    
+    NSString *finalStr = [XMLOrderStr stringByReplacingOccurrencesOfString:@"</ENTRIES>" withString:newItemsStr];
+    finalStr = [finalStr stringByReplacingOccurrencesOfString:@"(null)" withString:@""];
+    
+    finalStr = [XMLPOSOrder replaceEntryCountFrom:oldEntryCount To:entryId In:finalStr];
+    
+    NSLog(@"AddingNewItems finalStr = %@", finalStr);
+    return finalStr;
+}
+
++ (NSString *)buildPOSResponseXMLByRemovingItem:(int)entryId FromOrderString:(NSString *)XMLOrderStr
+{
+    if (IsEmpty(XMLOrderStr) == true || entryId == 0)
+        return XMLOrderStr;
+    
+    NSString *searchStr = [NSString stringWithFormat:@"<ENTRY ID=\"%d\"", entryId];
+    NSRange startRange = [XMLOrderStr rangeOfString:searchStr];
+    if (startRange.location == NSNotFound)
+        return XMLOrderStr;
+    
+    NSString *startStr = [XMLOrderStr substringToIndex:startRange.location-1];
+    NSString *tempStr = [XMLOrderStr substringFromIndex:startRange.location];
+    searchStr = @"/>";
+    NSRange endRange = [tempStr rangeOfString:searchStr];
+    NSString *endStr = [tempStr substringFromIndex:NSMaxRange(endRange)];
+    
+    NSString *finalStr = [NSString stringWithFormat:@"%@%@", startStr, endStr];
+    
+    NSLog(@"RemovingItem finalStr = %@", finalStr);
+    return finalStr;
+}
+
 
 @end

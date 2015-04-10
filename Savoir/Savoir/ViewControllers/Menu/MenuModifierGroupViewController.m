@@ -47,7 +47,7 @@
         _onlineOrderSelectedMenuItem.selectedStore = self.selectedStore;
         _onlineOrderSelectedMenuItem.selectedModifierGroups = [[NSMutableArray alloc]init];
         _onlineOrderSelectedMenuItem.qty = 1;
-        _onlineOrderSelectedMenuItem.price = self.selectedMenuItem.price.longLongValue;
+        _onlineOrderSelectedMenuItem.price = self.selectedMenuItem.price.intValue;
         _onlineOrderSelectedMenuItem.amount = _onlineOrderSelectedMenuItem.price*_onlineOrderSelectedMenuItem.qty;
     }
     else
@@ -69,7 +69,7 @@
     }
     self.txtMenuItemName.text = _onlineOrderSelectedMenuItem.selectedItem.shortDescription;
     NSNumber *amount = [[NSNumber alloc] initWithLong:_onlineOrderSelectedMenuItem.amount];
-    _onlineOrderSelectedMenuItem.amount = amount.longLongValue;
+    _onlineOrderSelectedMenuItem.amount = amount.intValue;
     self.txtQty.text = [NSString stringWithFormat:@"%lu", (unsigned long)_onlineOrderSelectedMenuItem.qty];
     self.txtSpecialInstructions.text = _onlineOrderSelectedMenuItem.specialInstructions;
     self.txtAmount.text = [UtilCalls amountToString:amount];
@@ -136,7 +136,7 @@
     __weak __typeof(self) weakSelf = self;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreMenuItemModifiersWithStoreId:_onlineOrderSelectedMenuItem.selectedStore.identifier.longLongValue menuItemPOSId:_onlineOrderSelectedMenuItem.selectedItem.menuItemPOSId.longLongValue];
+    GTLQueryStoreendpoint *query= [GTLQueryStoreendpoint queryForGetStoreMenuItemModifiersWithMenuItemPOSId:_onlineOrderSelectedMenuItem.selectedItem.menuItemPOSId.intValue storeId:_onlineOrderSelectedMenuItem.selectedStore.identifier.longLongValue];
     
     [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error)
      {
@@ -160,7 +160,7 @@
 {
     if (_onlineOrderSelectedMenuItem.selectedModifierGroups.count > 0)
     {
-        long long finalPrice = _onlineOrderSelectedMenuItem.selectedItem.price.longLongValue;
+        NSUInteger finalPrice = _onlineOrderSelectedMenuItem.selectedItem.price.intValue;
         for (OnlineOrderSelectedModifierGroup *modifierGroup in _onlineOrderSelectedMenuItem.selectedModifierGroups)
         {
             for (int i = 0; i < modifierGroup.selectedModifierIndexes.count; i++)
@@ -310,7 +310,7 @@
     
     if (self.bInEditMode == YES)
     {
-        orderInProgress.specialInstructions = self.txtSpecialInstructions.text;
+        self.onlineOrderSelectedMenuItem.specialInstructions = self.txtSpecialInstructions.text;
         [orderInProgress.selectedMenuItems replaceObjectAtIndex:self.selectedIndex withObject:self.onlineOrderSelectedMenuItem];
         [self performSegueWithIdentifier:@"unwindModifierGroupToOrderSummary" sender:self];
         return;
@@ -323,13 +323,13 @@
         orderInProgress.orderType = self.orderType;
         orderInProgress.orderTime = self.orderTime;
         orderInProgress.partySize = self.partySize;
-        orderInProgress.specialInstructions = self.txtSpecialInstructions.text;
+        self.onlineOrderSelectedMenuItem.specialInstructions = self.txtSpecialInstructions.text;
         [orderInProgress.selectedMenuItems addObject:self.onlineOrderSelectedMenuItem];
         [self performSegueWithIdentifier:@"segueunwindModifierGroupToMenu" sender:self];
     }
     else
     {
-        orderInProgress.specialInstructions = self.txtSpecialInstructions.text;
+        self.onlineOrderSelectedMenuItem.specialInstructions = self.txtSpecialInstructions.text;
         [orderInProgress.selectedMenuItems addObject:self.onlineOrderSelectedMenuItem];
         [self performSegueWithIdentifier:@"segueunwindModifierGroupToMenu" sender:self];
     }

@@ -87,6 +87,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
     self.notificationUtils = [[NotificationUtils alloc]init];
     [_globalObjectHolder loadSupportedClientVersionFromServer];
     [_globalObjectHolder loadAllUserObjects];
+    [_globalObjectHolder getStoreForBeaconId:125ll];
     
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
     if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
