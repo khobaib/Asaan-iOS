@@ -28,6 +28,7 @@
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
+- (BOOL)isNetworkReachable; //<--
 
 @end
 

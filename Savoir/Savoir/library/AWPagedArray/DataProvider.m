@@ -112,14 +112,19 @@
         [self _setShouldLoadDataForPage:preloadPage];
     }
 }
-- (void)_dataOperation:(DataLoadingOperation *)operation finishedLoadingForPage:(NSUInteger)page {
-    
+- (void)_dataOperation:(DataLoadingOperation *)operation finishedLoadingForPage:(NSUInteger)page
+{
     [_dataLoadingOperations removeObjectForKey:@(page)];
-    [_pagedArray setObjects:operation.dataPage forPage:page];
     
-    if ([self.delegate respondsToSelector:@selector(dataProvider:didLoadDataAtIndexes:)]) {
-        [self.delegate dataProvider:self didLoadDataAtIndexes:operation.indexes];
-    }
+    if (operation.dataPage.count > 0)
+    {
+        [_pagedArray setObjects:operation.dataPage forPage:page];
+        
+        if ([self.delegate respondsToSelector:@selector(dataProvider:didLoadDataAtIndexes:)])
+        {
+            [self.delegate dataProvider:self didLoadDataAtIndexes:operation.indexes];
+        }
+    } //<--
 }
 
 #pragma mark - Paged array delegate

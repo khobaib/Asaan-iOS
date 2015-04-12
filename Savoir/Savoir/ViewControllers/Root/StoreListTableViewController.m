@@ -71,6 +71,19 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    /*
+    AppDelegate *appDel = (AppDelegate *)[UIApplication sharedApplication].delegate; //<--
+    
+    if (![appDel isNetworkReachable])
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Connection Error"
+                                                            message:
+                                  @"Internet connection appears to be offline"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    }*/ //<--
 }
 
 - (void)viewWillAppear:(BOOL)animated {

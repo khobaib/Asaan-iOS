@@ -24,6 +24,8 @@
 #import <Crashlytics/Crashlytics.h>
 
 #import <DBChooser/DBChooser.h>
+#import "AFNetworkReachabilityManager.h" //<--
+
 
 NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsException";
 
@@ -145,6 +147,33 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 //    [window makeKeyAndVisible];
 
 //    [self performSelector:@selector(crash) withObject:nil afterDelay:10.0];
+    
+    /*
+    [[NSNotificationCenter defaultCenter] addObserver:self
+            selector:@selector(handleReachabilityChange:)
+                        name:AFNetworkingReachabilityDidChangeNotification object:nil];
+    */ //<--
+    
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:
+    ^(AFNetworkReachabilityStatus status)
+    {
+        NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
+        
+        if (status == AFNetworkReachabilityStatusNotReachable ||
+            status == AFNetworkReachabilityStatusUnknown)
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Connection Error"
+                                                                message:
+                                      @"Internet connection appears to be offline"
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+            [alertView show];
+        }
+    }]; //<--
+    
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring]; //<--
+    
     return YES;
 }
 
@@ -361,5 +390,17 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 
     [[NSNotificationCenter defaultCenter] postNotificationName:BBBadgeResetItemNotification object:self];
 }
+
+#pragma mark
+
+- (void)handleReachabilityChange:(NSNotification *)notification
+{
+    
+} //<--
+
+- (BOOL)isNetworkReachable
+{
+    return [AFNetworkReachabilityManager sharedManager].isReachable;
+} //<--
 
 @end
