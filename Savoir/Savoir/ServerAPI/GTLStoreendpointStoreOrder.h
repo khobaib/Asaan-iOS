@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStoreOrder (0 custom class methods, 30 custom properties)
+//   GTLStoreendpointStoreOrder (0 custom class methods, 29 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLObject.h"
@@ -32,7 +32,6 @@
 @property (retain) NSNumber *deliveryFee;  // longLongValue
 @property (retain) NSNumber *discount;  // longLongValue
 @property (copy) NSString *discountDescription;
-@property (retain) NSNumber *employeeId;  // longLongValue
 @property (copy) NSString *employeeName;
 @property (retain) NSNumber *employeePOSId;  // intValue
 @property (retain) NSNumber *faxId;  // longLongValue

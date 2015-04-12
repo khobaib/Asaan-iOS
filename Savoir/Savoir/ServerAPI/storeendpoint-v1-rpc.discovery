@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"u_zXkMELIlX4ktyNbM2XKD4vK8E/wb3OVRX6K_5zXIN5ieDYbBfqORc\"",
+ "etag": "\"u_zXkMELIlX4ktyNbM2XKD4vK8E/7sPuBRl4_67aF4LIp_EJ2v7jDRc\"",
  "discoveryVersion": "v1",
  "id": "storeendpoint:v1",
  "name": "storeendpoint",
@@ -481,24 +481,6 @@
     "userId": {
      "type": "string",
      "format": "int64"
-    }
-   }
-  },
-  "SplitOrderArguments": {
-   "id": "SplitOrderArguments",
-   "type": "object",
-   "properties": {
-    "cardid": {
-     "type": "string"
-    },
-    "customerId": {
-     "type": "string"
-    },
-    "stgm": {
-     "$ref": "StoreTableGroupMember"
-    },
-    "token": {
-     "type": "string"
     }
    }
   },
@@ -1217,10 +1199,6 @@
     "discountDescription": {
      "type": "string"
     },
-    "employeeId": {
-     "type": "string",
-     "format": "int64"
-    },
     "employeeName": {
      "type": "string"
     },
@@ -1491,164 +1469,6 @@
     }
    }
   },
-  "StoreTableGroup": {
-   "id": "StoreTableGroup",
-   "type": "object",
-   "properties": {
-    "createdDate": {
-     "type": "string",
-     "format": "int64"
-    },
-    "firstName": {
-     "type": "string"
-    },
-    "id": {
-     "type": "string",
-     "format": "int64"
-    },
-    "lastName": {
-     "type": "string"
-    },
-    "modifiedDate": {
-     "type": "string",
-     "format": "int64"
-    },
-    "orderId": {
-     "type": "string",
-     "format": "int64"
-    },
-    "profilePhotoUrl": {
-     "type": "string"
-    },
-    "status": {
-     "type": "integer",
-     "format": "int32"
-    },
-    "storeId": {
-     "type": "string",
-     "format": "int64"
-    },
-    "userId": {
-     "type": "string",
-     "format": "int64"
-    }
-   }
-  },
-  "StoreTableGroupCollection": {
-   "id": "StoreTableGroupCollection",
-   "type": "object",
-   "properties": {
-    "items": {
-     "type": "array",
-     "items": {
-      "$ref": "StoreTableGroup"
-     }
-    }
-   }
-  },
-  "StoreTableGroupMember": {
-   "id": "StoreTableGroupMember",
-   "type": "object",
-   "properties": {
-    "createdDate": {
-     "type": "string",
-     "format": "int64"
-    },
-    "finalTotal": {
-     "type": "string",
-     "format": "int64"
-    },
-    "firstName": {
-     "type": "string"
-    },
-    "id": {
-     "type": "string",
-     "format": "int64"
-    },
-    "lastName": {
-     "type": "string"
-    },
-    "modifiedDate": {
-     "type": "string",
-     "format": "int64"
-    },
-    "orderId": {
-     "type": "string",
-     "format": "int64"
-    },
-    "paidItems": {
-     "type": "string"
-    },
-    "payingFor": {
-     "type": "integer",
-     "format": "int32"
-    },
-    "payingUserId": {
-     "type": "string",
-     "format": "int64"
-    },
-    "paymentChargeId": {
-     "type": "string"
-    },
-    "paymentInvoice": {
-     "type": "string"
-    },
-    "paymentReceiptNumber": {
-     "type": "string"
-    },
-    "paymentType": {
-     "type": "integer",
-     "format": "int32"
-    },
-    "profilePhotoUrl": {
-     "type": "string"
-    },
-    "storeTableGroupId": {
-     "type": "string",
-     "format": "int64"
-    },
-    "subtotal": {
-     "type": "string",
-     "format": "int64"
-    },
-    "tax": {
-     "type": "string",
-     "format": "int64"
-    },
-    "tip": {
-     "type": "string",
-     "format": "int64"
-    },
-    "userId": {
-     "type": "string",
-     "format": "int64"
-    }
-   }
-  },
-  "StoreTableGroupMemberArray": {
-   "id": "StoreTableGroupMemberArray",
-   "type": "object",
-   "properties": {
-    "members": {
-     "type": "array",
-     "items": {
-      "$ref": "StoreTableGroupMember"
-     }
-    }
-   }
-  },
-  "StoreTableGroupMemberCollection": {
-   "id": "StoreTableGroupMemberCollection",
-   "type": "object",
-   "properties": {
-    "items": {
-     "type": "array",
-     "items": {
-      "$ref": "StoreTableGroupMember"
-     }
-    }
-   }
-  },
   "StoreWaitListQueue": {
    "id": "StoreWaitListQueue",
    "type": "object",
@@ -1783,79 +1603,9 @@
      "type": "string"
     }
    }
-  },
-  "TableGroupsAndOrders": {
-   "id": "TableGroupsAndOrders",
-   "type": "object",
-   "properties": {
-    "groups": {
-     "type": "array",
-     "items": {
-      "$ref": "StoreTableGroup"
-     }
-    },
-    "orders": {
-     "type": "array",
-     "items": {
-      "$ref": "StoreOrder"
-     }
-    }
-   }
   }
  },
  "methods": {
-  "storeendpoint.addMemberToStoreTableGroup": {
-   "id": "storeendpoint.addMemberToStoreTableGroup",
-   "parameters": {
-    "orderId": {
-     "type": "string",
-     "required": true,
-     "format": "int64"
-    },
-    "storeTableGroupId": {
-     "type": "string",
-     "required": true,
-     "format": "int64"
-    }
-   },
-   "parameterOrder": [
-    "orderId",
-    "storeTableGroupId"
-   ],
-   "scopes": [
-    "https://www.googleapis.com/auth/userinfo.email"
-   ]
-  },
-  "storeendpoint.closeOrder": {
-   "id": "storeendpoint.closeOrder",
-   "parameters": {
-    "resource": {
-     "$ref": "StoreOrder"
-    }
-   },
-   "parameterOrder": [
-    "resource"
-   ],
-   "scopes": [
-    "https://www.googleapis.com/auth/userinfo.email"
-   ]
-  },
-  "storeendpoint.createStoreTableGroup": {
-   "id": "storeendpoint.createStoreTableGroup",
-   "parameters": {
-    "storeId": {
-     "type": "string",
-     "required": true,
-     "format": "int64"
-    }
-   },
-   "parameterOrder": [
-    "storeId"
-   ],
-   "scopes": [
-    "https://www.googleapis.com/auth/userinfo.email"
-   ]
-  },
   "storeendpoint.getChatMessagesForStoreOrRoom": {
    "id": "storeendpoint.getChatMessagesForStoreOrRoom",
    "parameters": {
@@ -1885,11 +1635,11 @@
     }
    },
    "parameterOrder": [
-    "firstPosition",
-    "isStore",
-    "maxResult",
+    "roomOrStoreId",
     "modifiedDate",
-    "roomOrStoreId"
+    "isStore",
+    "firstPosition",
+    "maxResult"
    ],
    "returns": {
     "$ref": "ChatMessagesAndUsers"
@@ -1935,25 +1685,6 @@
     "https://www.googleapis.com/auth/userinfo.email"
    ]
   },
-  "storeendpoint.getMembersForStoreTableGroup": {
-   "id": "storeendpoint.getMembersForStoreTableGroup",
-   "parameters": {
-    "storeTableGroupId": {
-     "type": "string",
-     "required": true,
-     "format": "int64"
-    }
-   },
-   "parameterOrder": [
-    "storeTableGroupId"
-   ],
-   "returns": {
-    "$ref": "StoreTableGroupMemberCollection"
-   },
-   "scopes": [
-    "https://www.googleapis.com/auth/userinfo.email"
-   ]
-  },
   "storeendpoint.getMenuItemAndStatsForMenu": {
    "id": "storeendpoint.getMenuItemAndStatsForMenu",
    "parameters": {
@@ -1979,32 +1710,13 @@
     }
    },
    "parameterOrder": [
-    "firstPosition",
-    "maxResult",
+    "storeId",
     "menuPOSId",
-    "storeId"
+    "firstPosition",
+    "maxResult"
    ],
    "returns": {
     "$ref": "MenuItemAndStatsCollection"
-   },
-   "scopes": [
-    "https://www.googleapis.com/auth/userinfo.email"
-   ]
-  },
-  "storeendpoint.getOpenAndUnassignedGroupsForStore": {
-   "id": "storeendpoint.getOpenAndUnassignedGroupsForStore",
-   "parameters": {
-    "storeId": {
-     "type": "string",
-     "required": true,
-     "format": "int64"
-    }
-   },
-   "parameterOrder": [
-    "storeId"
-   ],
-   "returns": {
-    "$ref": "StoreTableGroupCollection"
    },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"
@@ -2049,9 +1761,9 @@
     }
    },
    "parameterOrder": [
+    "storeId",
     "firstPosition",
-    "maxResult",
-    "storeId"
+    "maxResult"
    ],
    "returns": {
     "$ref": "OrderReviewListAndCount"
@@ -2115,25 +1827,6 @@
    },
    "parameterOrder": [
     "storeId"
-   ],
-   "returns": {
-    "$ref": "Store"
-   },
-   "scopes": [
-    "https://www.googleapis.com/auth/userinfo.email"
-   ]
-  },
-  "storeendpoint.getStoreByBeaconId": {
-   "id": "storeendpoint.getStoreByBeaconId",
-   "parameters": {
-    "beaconId": {
-     "type": "string",
-     "required": true,
-     "format": "int64"
-    }
-   },
-   "parameterOrder": [
-    "beaconId"
    ],
    "returns": {
     "$ref": "Store"
@@ -2218,9 +1911,9 @@
     }
    },
    "parameterOrder": [
-    "maxResult",
+    "storeId",
     "menuType",
-    "storeId"
+    "maxResult"
    ],
    "returns": {
     "$ref": "MenusAndMenuItems"
@@ -2244,8 +1937,8 @@
     }
    },
    "parameterOrder": [
-    "menuItemPOSId",
-    "storeId"
+    "storeId",
+    "menuItemPOSId"
    ],
    "returns": {
     "$ref": "MenuItemModifiersAndGroups"
@@ -2274,9 +1967,9 @@
     }
    },
    "parameterOrder": [
+    "storeId",
     "firstPosition",
-    "maxResult",
-    "storeId"
+    "maxResult"
    ],
    "returns": {
     "$ref": "StoreMenuItemCollection"
@@ -2305,50 +1998,12 @@
     }
    },
    "parameterOrder": [
+    "storeId",
     "firstPosition",
-    "maxResult",
-    "storeId"
+    "maxResult"
    ],
    "returns": {
     "$ref": "StoreMenuHierarchyCollection"
-   },
-   "scopes": [
-    "https://www.googleapis.com/auth/userinfo.email"
-   ]
-  },
-  "storeendpoint.getStoreOrderById": {
-   "id": "storeendpoint.getStoreOrderById",
-   "parameters": {
-    "orderId": {
-     "type": "string",
-     "required": true,
-     "format": "int64"
-    }
-   },
-   "parameterOrder": [
-    "orderId"
-   ],
-   "returns": {
-    "$ref": "StoreOrder"
-   },
-   "scopes": [
-    "https://www.googleapis.com/auth/userinfo.email"
-   ]
-  },
-  "storeendpoint.getStoreOrdersAndGroupsForEmployee": {
-   "id": "storeendpoint.getStoreOrdersAndGroupsForEmployee",
-   "parameters": {
-    "storeId": {
-     "type": "string",
-     "required": true,
-     "format": "int64"
-    }
-   },
-   "parameterOrder": [
-    "storeId"
-   ],
-   "returns": {
-    "$ref": "TableGroupsAndOrders"
    },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"
@@ -2399,9 +2054,9 @@
     }
    },
    "parameterOrder": [
+    "storeId",
     "firstPosition",
-    "maxResult",
-    "storeId"
+    "maxResult"
    ],
    "returns": {
     "$ref": "StoreOrderListAndCount"
@@ -2462,25 +2117,6 @@
    ],
    "returns": {
     "$ref": "StoreStats"
-   },
-   "scopes": [
-    "https://www.googleapis.com/auth/userinfo.email"
-   ]
-  },
-  "storeendpoint.getStoreTableGroupsForStore": {
-   "id": "storeendpoint.getStoreTableGroupsForStore",
-   "parameters": {
-    "storeId": {
-     "type": "string",
-     "required": true,
-     "format": "int64"
-    }
-   },
-   "parameterOrder": [
-    "storeId"
-   ],
-   "returns": {
-    "$ref": "StoreTableGroupCollection"
    },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"
@@ -2643,20 +2279,6 @@
    "returns": {
     "$ref": "StoreAndStatsCollection"
    },
-   "scopes": [
-    "https://www.googleapis.com/auth/userinfo.email"
-   ]
-  },
-  "storeendpoint.payForMember": {
-   "id": "storeendpoint.payForMember",
-   "parameters": {
-    "resource": {
-     "$ref": "SplitOrderArguments"
-    }
-   },
-   "parameterOrder": [
-    "resource"
-   ],
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"
    ]
@@ -3011,75 +2633,8 @@
     "https://www.googleapis.com/auth/userinfo.email"
    ]
   },
-  "storeendpoint.startOrder": {
-   "id": "storeendpoint.startOrder",
-   "parameters": {
-    "resource": {
-     "$ref": "PlaceOrderArguments"
-    }
-   },
-   "parameterOrder": [
-    "resource"
-   ],
-   "returns": {
-    "$ref": "StoreOrder"
-   },
-   "scopes": [
-    "https://www.googleapis.com/auth/userinfo.email"
-   ]
-  },
-  "storeendpoint.updateOrderFromServer": {
-   "id": "storeendpoint.updateOrderFromServer",
-   "parameters": {
-    "resource": {
-     "$ref": "StoreOrder"
-    }
-   },
-   "parameterOrder": [
-    "resource"
-   ],
-   "scopes": [
-    "https://www.googleapis.com/auth/userinfo.email"
-   ]
-  },
   "storeendpoint.updateStoreCoordinates": {
    "id": "storeendpoint.updateStoreCoordinates",
-   "scopes": [
-    "https://www.googleapis.com/auth/userinfo.email"
-   ]
-  },
-  "storeendpoint.updateStoreTableGroup": {
-   "id": "storeendpoint.updateStoreTableGroup",
-   "parameters": {
-    "orderId": {
-     "type": "string",
-     "required": true,
-     "format": "int64"
-    },
-    "storeTableGroupId": {
-     "type": "string",
-     "required": true,
-     "format": "int64"
-    }
-   },
-   "parameterOrder": [
-    "orderId",
-    "storeTableGroupId"
-   ],
-   "scopes": [
-    "https://www.googleapis.com/auth/userinfo.email"
-   ]
-  },
-  "storeendpoint.updateStoreTableGroupMember": {
-   "id": "storeendpoint.updateStoreTableGroupMember",
-   "parameters": {
-    "resource": {
-     "$ref": "StoreTableGroupMemberArray"
-    }
-   },
-   "parameterOrder": [
-    "resource"
-   ],
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"
    ]

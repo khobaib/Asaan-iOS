@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "OnlineOrderDetails.h"
-#import "InStoreOrderDetails.h"
 #import "GTLUserendpointUserAddress.h"
 #import "GTLUserendpointUserCard.h"
 #import "GTLUserendpointUserAddressCollection.h"
@@ -18,7 +17,6 @@
 
 @interface GlobalObjectHolder : NSObject
 @property (strong, nonatomic) OnlineOrderDetails *orderInProgress;
-@property (strong, nonatomic) InStoreOrderDetails *inStoreOrderDetails;
 @property (strong, nonatomic) GTLUserendpointUserAddressCollection *userAddresses;
 @property (strong, nonatomic) GTLUserendpointUserCardCollection *userCards;
 @property (strong, nonatomic) GTLUserendpointUserCard *defaultUserCard;
@@ -26,7 +24,6 @@
 @property (strong, nonatomic) GTLUserendpointUser *currentUser;
 @property (strong, nonatomic) GTLStoreendpointChatRoomsAndStoreChatMemberships *usersRoomsAndStores;
 @property (strong, nonatomic) GTLStoreendpointAsaanLongCollection *storesOwnedByUser;
-@property (strong, nonatomic) GTLStoreendpointStore *selectedStore;
 
 @property (nonatomic) int storeCount;
 
@@ -37,7 +34,6 @@
 
 - (OnlineOrderDetails *)createOrderInProgress;
 - (void) removeOrderInProgress;
-- (void) removeInStoreOrderInProgress;
 
 - (void) loadUserAddressesFromServer;
 - (void) loadUserCardsFromServer;
@@ -52,6 +48,5 @@
 - (void) clearAllObjects;
 
 - (void) loadSupportedClientVersionFromServer;
-- (void) getStoreForBeaconId:(long long)beaconId;
 
 @end

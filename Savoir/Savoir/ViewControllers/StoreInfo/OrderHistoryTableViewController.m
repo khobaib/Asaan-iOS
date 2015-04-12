@@ -72,7 +72,7 @@
         GTLQueryStoreendpoint *query;
         
         if (self.selectedStore != nil)
-            query = [GTLQueryStoreendpoint queryForGetStoreOrdersForCurrentUserAndStoreWithFirstPosition:0 maxResult:FluentPagingTablePageSize storeId:self.selectedStore.identifier.longLongValue];
+            query = [GTLQueryStoreendpoint queryForGetStoreOrdersForCurrentUserAndStoreWithStoreId:self.selectedStore.identifier.longLongValue firstPosition:0 maxResult:FluentPagingTablePageSize];
         else
             query = [GTLQueryStoreendpoint queryForGetStoreOrdersForCurrentUserWithFirstPosition:0 maxResult:FluentPagingTablePageSize];
         NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];

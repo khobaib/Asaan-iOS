@@ -39,7 +39,7 @@
         [self addExecutionBlock:^{
             AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
             GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-            GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetOrderReviewsForStoreWithFirstPosition:firstPosition maxResult:maxResult storeId:storeId];
+            GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetOrderReviewsForStoreWithStoreId:storeId firstPosition:firstPosition maxResult:maxResult];
             NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
             dic[USER_AUTH_TOKEN_HEADER_NAME] = [UtilCalls getAuthTokenForCurrentUser];
             [query setAdditionalHTTPHeaders:dic];

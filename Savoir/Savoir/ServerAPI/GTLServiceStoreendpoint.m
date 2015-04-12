@@ -46,7 +46,6 @@
                       [GTLStoreendpointOrderReviewAndItemReviews class],
                       [GTLStoreendpointOrderReviewListAndCount class],
                       [GTLStoreendpointPlaceOrderArguments class],
-                      [GTLStoreendpointSplitOrderArguments class],
                       [GTLStoreendpointStore class],
                       [GTLStoreendpointStoreAndStats class],
                       [GTLStoreendpointStoreAndStatsCollection class],
@@ -73,16 +72,10 @@
                       [GTLStoreendpointStorePOSConnection class],
                       [GTLStoreendpointStoreStats class],
                       [GTLStoreendpointStoreStatsCollection class],
-                      [GTLStoreendpointStoreTableGroup class],
-                      [GTLStoreendpointStoreTableGroupCollection class],
-                      [GTLStoreendpointStoreTableGroupMember class],
-                      [GTLStoreendpointStoreTableGroupMemberArray class],
-                      [GTLStoreendpointStoreTableGroupMemberCollection class],
                       [GTLStoreendpointStoreWaitListQueue class],
                       [GTLStoreendpointStoreWaitListQueueAndPosition class],
                       [GTLStoreendpointStoreWaitListQueueCollection class],
                       [GTLStoreendpointStoreWaitlistSummary class],
-                      [GTLStoreendpointTableGroupsAndOrders class],
                       nil];
   return classes;
 }

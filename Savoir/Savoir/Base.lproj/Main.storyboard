@@ -473,8 +473,8 @@
                         <color key="backgroundColor" red="0.18823529410000001" green="0.098039215690000001" blue="0.098039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="separatorColor" red="0.44084087170000003" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <color key="sectionIndexBackgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="sectionIndexTrackingBackgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="sectionIndexBackgroundColor" red="0.18823529410000001" green="0.098039215690000001" blue="0.098039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="sectionIndexTrackingBackgroundColor" red="0.18823529410000001" green="0.098039215690000001" blue="0.098039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <sections>
                             <tableViewSection id="T5M-Nf-fGl">
                                 <cells>
@@ -526,7 +526,6 @@
                                                     </connections>
                                                 </button>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="S2B-r9-g0X" secondAttribute="trailing" constant="8" id="0D8-hD-x7O"/>
                                                 <constraint firstItem="cdt-rp-Vjt" firstAttribute="firstBaseline" secondItem="S2B-r9-g0X" secondAttribute="firstBaseline" id="0IX-es-l2n"/>
@@ -561,7 +560,7 @@
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.18823529410000001" green="0.098039215690000001" blue="0.098039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TableViewCell" id="8bi-rl-mJB">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -631,7 +630,6 @@
                                                     </connections>
                                                 </button>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstItem="Rjf-sB-fqS" firstAttribute="firstBaseline" secondItem="hBv-fw-iWe" secondAttribute="firstBaseline" id="1ME-Db-8VH"/>
                                                 <constraint firstItem="ouX-HF-HTm" firstAttribute="leading" secondItem="7wI-ho-DuR" secondAttribute="leadingMargin" id="82I-Hb-nvT"/>
@@ -1428,7 +1426,7 @@
         <!--MenuTableViewController-->
         <scene sceneID="1g9-7q-4cr">
             <objects>
-                <tableViewController storyboardIdentifier="MenuTableViewController" title="Menu" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2nl-tz-z8l" userLabel="MenuTableViewController" customClass="MenuTableViewController" sceneMemberID="viewController">
+                <tableViewController title="Menu" extendedLayoutIncludesOpaqueBars="YES" id="2nl-tz-z8l" userLabel="MenuTableViewController" customClass="MenuTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="160" sectionHeaderHeight="40" sectionFooterHeight="40" id="6bZ-Qj-a9y">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2532,7 +2530,7 @@
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="18%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gLN-au-glM">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="0%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gLN-au-glM">
                                                         <rect key="frame" x="80" y="0.0" width="20" height="50"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -2929,7 +2927,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="80" sectionHeaderHeight="160" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="78Y-Fo-bH7">
                                 <rect key="frame" x="16" y="44" width="568" height="476"/>
                                 <color key="backgroundColor" red="0.18823529410000001" green="0.098039215690000001" blue="0.098039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="sectionIndexBackgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="sectionIndexBackgroundColor" red="0.18823529410000001" green="0.098039215690000001" blue="0.098039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexTrackingBackgroundColor" red="0.18823529410000001" green="0.098039215690000001" blue="0.098039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HeaderCell" rowHeight="160" id="bvA-5G-mVx">
@@ -3269,7 +3267,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.18823529410000001" green="0.098039215690000001" blue="0.098039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="zFl-Z1-ntb" firstAttribute="top" secondItem="iRg-jG-2go" secondAttribute="topMargin" id="3mq-oa-vJe"/>
                             <constraint firstItem="zFl-Z1-ntb" firstAttribute="leading" secondItem="iRg-jG-2go" secondAttribute="leadingMargin" id="GYE-bf-ic2"/>
@@ -7691,12 +7689,12 @@
         <image name="waitlist_table_countdown" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="UrJ-ne-Kfy"/>
         <segue reference="SWu-Ow-ZNJ"/>
         <segue reference="uGl-gS-kfz"/>
-        <segue reference="WgG-9g-jiE"/>
+        <segue reference="F9u-xN-ecY"/>
         <segue reference="hDB-zH-iEH"/>
         <segue reference="Udc-FT-5Vd"/>
-        <segue reference="UrJ-ne-Kfy"/>
         <segue reference="t2R-Le-XNf"/>
         <segue reference="BxH-0j-lGN"/>
     </inferredMetricsTieBreakers>

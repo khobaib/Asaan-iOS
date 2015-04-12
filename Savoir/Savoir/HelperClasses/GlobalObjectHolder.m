@@ -72,8 +72,6 @@
 
 - (void) removeOrderInProgress { _orderInProgress = nil; }
 
-- (void) removeInStoreOrderInProgress { _inStoreOrderDetails = nil; }
-
 - (void) loadUserRoomsAndStoreChatTeams
 {
     __weak __typeof(self) weakSelf = self;
@@ -241,25 +239,6 @@
     addresses.items = newAddresses;
     self.userAddresses = addresses;
     self.defaultUserAddress = address;
-}
-
-- (void) getStoreForBeaconId:(long long)beaconId
-{
-    __weak __typeof(self) weakSelf = self;
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreByBeaconIdWithBeaconId:beaconId];
-    
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    dic[USER_AUTH_TOKEN_HEADER_NAME] = [UtilCalls getAuthTokenForCurrentUser];
-    [query setAdditionalHTTPHeaders:dic];
-    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStore *object, NSError *error)
-     {
-         if (!error)
-             weakSelf.selectedStore = object;
-         else
-             NSLog(@"Savoir Server Call Failed: queryForGetStoreByBeaconId - error:%@", error.userInfo);
-     }];
 }
 
 @end

@@ -179,7 +179,7 @@
         __weak __typeof(self) weakSelf = self;
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
         GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-        GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetChatMessagesForStoreOrRoomWithFirstPosition:0 isStore:weakSelf.isStore maxResult:50 modifiedDate:message_last.createdDate.longLongValue roomOrStoreId:weakSelf.roomOrStoreId];
+        GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetChatMessagesForStoreOrRoomWithRoomOrStoreId:weakSelf.roomOrStoreId modifiedDate:message_last.createdDate.longLongValue isStore:weakSelf.isStore firstPosition:0 maxResult:50];
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         dic[USER_AUTH_TOKEN_HEADER_NAME] = [UtilCalls getAuthTokenForCurrentUser];
         [query setAdditionalHTTPHeaders:dic];
