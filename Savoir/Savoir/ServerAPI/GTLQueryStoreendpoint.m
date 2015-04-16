@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryStoreendpoint (66 custom class methods, 18 custom properties)
+//   GTLQueryStoreendpoint (65 custom class methods, 18 custom properties)
 
 #import "GTLQueryStoreendpoint.h"
 
@@ -59,6 +59,7 @@
 #import "GTLStoreendpointStoreStats.h"
 #import "GTLStoreendpointStoreStatsCollection.h"
 #import "GTLStoreendpointStoreTableGroupCollection.h"
+#import "GTLStoreendpointStoreTableGroupMember.h"
 #import "GTLStoreendpointStoreTableGroupMemberArray.h"
 #import "GTLStoreendpointStoreTableGroupMemberCollection.h"
 #import "GTLStoreendpointStoreWaitListQueue.h"
@@ -84,17 +85,6 @@
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
   query.orderId = orderId;
   query.storeTableGroupId = storeTableGroupId;
-  return query;
-}
-
-+ (id)queryForCloseOrderWithObject:(GTLStoreendpointStoreOrder *)object {
-  if (object == nil) {
-    GTL_DEBUG_ASSERT(object != nil, @"%@ got a nil object", NSStringFromSelector(_cmd));
-    return nil;
-  }
-  NSString *methodName = @"storeendpoint.closeOrder";
-  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
-  query.bodyObject = object;
   return query;
 }
 
@@ -170,6 +160,13 @@
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
   query.storeId = storeId;
   query.expectedObjectClass = [GTLStoreendpointStoreTableGroupCollection class];
+  return query;
+}
+
++ (id)queryForGetOpenGroupForMember {
+  NSString *methodName = @"storeendpoint.getOpenGroupForMember";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.expectedObjectClass = [GTLStoreendpointStoreTableGroupMember class];
   return query;
 }
 
@@ -704,18 +701,6 @@
   return query;
 }
 
-+ (id)queryForStartOrderWithObject:(GTLStoreendpointPlaceOrderArguments *)object {
-  if (object == nil) {
-    GTL_DEBUG_ASSERT(object != nil, @"%@ got a nil object", NSStringFromSelector(_cmd));
-    return nil;
-  }
-  NSString *methodName = @"storeendpoint.startOrder";
-  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
-  query.bodyObject = object;
-  query.expectedObjectClass = [GTLStoreendpointStoreOrder class];
-  return query;
-}
-
 + (id)queryForUpdateOrderFromServerWithObject:(GTLStoreendpointStoreOrder *)object {
   if (object == nil) {
     GTL_DEBUG_ASSERT(object != nil, @"%@ got a nil object", NSStringFromSelector(_cmd));
@@ -724,6 +709,7 @@
   NSString *methodName = @"storeendpoint.updateOrderFromServer";
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
   query.bodyObject = object;
+  query.expectedObjectClass = [GTLStoreendpointStoreOrder class];
   return query;
 }
 

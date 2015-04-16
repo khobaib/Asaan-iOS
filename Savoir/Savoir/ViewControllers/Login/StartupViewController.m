@@ -7,7 +7,8 @@
 //
 
 #import "StartupViewController.h"
-#import <ParseFacebookUtils/PFFacebookUtils.h>
+#import <ParseFacebookUtilsV4/PFFacebookUtils.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "MBProgressHUD.h"
 #import "InlineCalls.h"
 #import "UIColor+SavoirGoldColor.h"
@@ -55,7 +56,7 @@
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.labelText = @"Please Wait";
     hud.hidden=NO;
-    [PFFacebookUtils logInWithPermissions:permissions block:^(PFUser *user, NSError *error) {
+    [PFFacebookUtils logInInBackgroundWithReadPermissions:permissions block:^(PFUser *user, NSError *error) {
         
         [hud hide:YES];
         if (!user) {
@@ -74,9 +75,9 @@
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.labelText = @"Gathering information from Facebook.Please wait ...";
     
-    FBRequest *request = [FBRequest requestForMe];
+    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil];
     
-    [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
         if (!error) {
             NSDictionary *userData = (NSDictionary *)result;
             NSDateFormatter* dateFormatter = [[NSDateFormatter alloc]init] ;
@@ -87,7 +88,8 @@
             user[@"firstName"]=userData[@"first_name"];
             
             user[@"lastName"]=userData[@"last_name"];
-            user[@"profilePhotoUrl"]=[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large", userData[@"id"]];
+            user[@"profilePhotoUrl"] = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", userData[@"id"]];
+
             user.username = user.email = userData[@"email"];
             
             [user saveInBackgroundWithBlock:^(BOOL complete,NSError *error){

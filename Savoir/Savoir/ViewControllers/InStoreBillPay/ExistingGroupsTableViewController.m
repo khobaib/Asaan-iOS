@@ -33,6 +33,7 @@
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
         [appDelegate.notificationUtils getSlidingMenuBarButtonSetupWith:self];
     }
+    [self setupExistingGroupsData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -52,7 +53,7 @@
         __weak __typeof(self) weakSelf = self;
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
         GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-        long long storeId = appDelegate.globalObjectHolder.selectedStore.identifier.longLongValue;
+        long long storeId = appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore.identifier.longLongValue;
         GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetStoreTableGroupsForStoreWithStoreId:storeId];
 
         NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
@@ -75,36 +76,9 @@
 }
 - (IBAction)createGroup:(id)sender
 {
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeIndeterminate;
-    hud.labelText = @"Please Wait";
-    hud.hidden = NO;
-    
-    if (self)
-    {
-        __weak __typeof(self) weakSelf = self;
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-        GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-        long long storeId = appDelegate.globalObjectHolder.selectedStore.identifier.longLongValue;
-        GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForCreateStoreTableGroupWithStoreId:storeId];
-        
-        NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
-        dic[USER_AUTH_TOKEN_HEADER_NAME]=[UtilCalls getAuthTokenForCurrentUser];
-        
-        [query setAdditionalHTTPHeaders:dic];
-        
-        [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreTableGroup *object,NSError *error)
-         {
-             if(!error)
-             {
-                 appDelegate.globalObjectHolder.inStoreOrderDetails.selectedTableGroup = object;
-                 [self performSegueWithIdentifier:@"segueCreateOrJoinGroupAndShowOrder" sender:weakSelf];
-             }else{
-                 NSLog(@"setupExistingGroupsData Error:%@",[error userInfo][@"error"]);
-             }
-             hud.hidden = YES;
-         }];
-    }
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    [appDelegate.globalObjectHolder.inStoreOrderDetails createGroup];
+    [self performSegueWithIdentifier:@"segueCreateOrJoinGroupAndShowOrder" sender:self];
 }
 
 #pragma mark - Table view data source
@@ -113,7 +87,7 @@
 {
     UITableViewCell *headerCell = [tableView dequeueReusableCellWithIdentifier:@"HeaderCell"];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    NSString *title = [NSString stringWithFormat:@"Welcome to %@", appDelegate.globalObjectHolder.selectedStore.name];
+    NSString *title = [NSString stringWithFormat:@"Welcome to %@", appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore.name];
     [UtilCalls setupHeaderView:headerCell WithTitle:title AndSubTitle:@"Find your group or create a new one."];
     return headerCell;
 }
@@ -179,35 +153,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeIndeterminate;
-    hud.labelText = @"Please Wait";
-    hud.hidden = NO;
-
-    appDelegate.globalObjectHolder.inStoreOrderDetails.selectedTableGroup = [self.tableGroups.items objectAtIndex:indexPath.row];
-    
-    if (self)
-    {
-        __weak __typeof(self) weakSelf = self;
-        GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-        GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForAddMemberToStoreTableGroupWithOrderId:appDelegate.globalObjectHolder.inStoreOrderDetails.selectedTableGroup.orderId.longLongValue storeTableGroupId:appDelegate.globalObjectHolder.inStoreOrderDetails.selectedTableGroup.identifier.longLongValue];
-        
-        NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
-        dic[USER_AUTH_TOKEN_HEADER_NAME]=[UtilCalls getAuthTokenForCurrentUser];
-        
-        [query setAdditionalHTTPHeaders:dic];
-        
-        [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, id object,NSError *error)
-         {
-             if(!error)
-             {
-                 [self performSegueWithIdentifier:@"segueCreateOrJoinGroupAndShowOrder" sender:weakSelf];
-             }else{
-                 NSLog(@"setupExistingGroupsData Error:%@",[error userInfo][@"error"]);
-             }
-             hud.hidden = YES;
-         }];
-    }
+    [appDelegate.globalObjectHolder.inStoreOrderDetails joinGroup:[self.tableGroups.items objectAtIndex:indexPath.row]];
+    [self performSegueWithIdentifier:@"segueCreateOrJoinGroupAndShowOrder" sender:self];
 }
 
 /*

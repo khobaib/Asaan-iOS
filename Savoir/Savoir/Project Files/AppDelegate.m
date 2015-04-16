@@ -7,7 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import <ParseFacebookUtils/PFFacebookUtils.h>
+#import <ParseFacebookUtilsV4/PFFacebookUtils.h>
+#import <FBSDKCoreKit/FBSDKApplicationDelegate.h>
 #import <Parse/Parse.h>
 #import "Stripe.h"
 #import <QuartzCore/QuartzCore.h>
@@ -25,7 +26,7 @@
 
 #import <DBChooser/DBChooser.h>
 
-NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsException";
+//NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsException";
 
 @interface AppDelegate ()
 
@@ -60,7 +61,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
     // Production
 //    [Parse setApplicationId:@"uX5Pxp1cPWJUbhl4qp5REJskOqDIp33tfMcSu1Ac"
 //                  clientKey:@"4cad0RAqv53bvlmgiTgnOScuJVk7IY28XeH4Mes5"];
-    [PFFacebookUtils initializeFacebook];
+    [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
     [Stripe setDefaultPublishableKey:StripePublishableKey];
     
     //    [PFUser enableAutomaticUser];
@@ -148,21 +149,35 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 //    [self performSelector:@selector(crash) withObject:nil afterDelay:10.0];
     return YES;
 }
-
+//
+//- (BOOL)application:(UIApplication *)application
+//            openURL:(NSURL *)url
+//  sourceApplication:(NSString *)sourceApplication
+//         annotation:(id)annotation {
+//    
+//    if ([[DBChooser defaultChooser] handleOpenURL:url]) {
+//        // This was a Chooser response and handleOpenURL automatically ran the
+//        // completion block
+//        return YES;
+//    }
+//    
+//    return [FBAppCall handleOpenURL:url
+//                  sourceApplication:sourceApplication
+//                        withSession:[PFFacebookUtils session]];
+//}
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
-    
     if ([[DBChooser defaultChooser] handleOpenURL:url]) {
         // This was a Chooser response and handleOpenURL automatically ran the
         // completion block
         return YES;
     }
-    
-    return [FBAppCall handleOpenURL:url
-                  sourceApplication:sourceApplication
-                        withSession:[PFFacebookUtils session]];
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                          openURL:url
+                                                sourceApplication:sourceApplication
+                                                       annotation:annotation];
 }
 
 #pragma mark - Handle Local Notification
@@ -240,7 +255,8 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     
-    [FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
+//    [FBSDKAppEvents activateApp];
+//    [FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

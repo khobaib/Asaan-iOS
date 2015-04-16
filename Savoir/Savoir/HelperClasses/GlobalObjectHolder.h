@@ -26,7 +26,6 @@
 @property (strong, nonatomic) GTLUserendpointUser *currentUser;
 @property (strong, nonatomic) GTLStoreendpointChatRoomsAndStoreChatMemberships *usersRoomsAndStores;
 @property (strong, nonatomic) GTLStoreendpointAsaanLongCollection *storesOwnedByUser;
-@property (strong, nonatomic) GTLStoreendpointStore *selectedStore;
 
 @property (nonatomic) int storeCount;
 

@@ -33,6 +33,8 @@
 @property (nonatomic) float discountAmt;
 @property (nonatomic) Boolean isNewOrder;
 
+@property (strong, nonatomic) GTLStoreendpointStoreTableGroup *selectedGroup;
+
 @end
 
 @implementation ServerOrderSummaryViewController
@@ -43,20 +45,22 @@
     self.isNewOrder = false;
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     
     if (self.navigationController.viewControllers[0] != self)
         self.navigationItem.leftBarButtonItem = nil;
     else
     {
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
         [appDelegate.notificationUtils getSlidingMenuBarButtonSetupWith:self];
     }
-    if (self.selectedOrder != nil)
+    if (appDelegate.globalObjectHolder.inStoreOrderDetails.order != nil)
     {
-        self.txtTable.text = [NSString stringWithFormat:@"%d", self.selectedOrder.tableNumber.intValue];
-        self.txtPartySize.text = [NSString stringWithFormat:@"%d", self.selectedOrder.guestCount.intValue];
-        self.txtCheckId.text = [NSString stringWithFormat:@"%d", self.selectedOrder.poscheckId.intValue];
+        self.txtTable.text = [NSString stringWithFormat:@"%d", appDelegate.globalObjectHolder.inStoreOrderDetails.order.tableNumber.intValue];
+        self.txtPartySize.text = [NSString stringWithFormat:@"%d", appDelegate.globalObjectHolder.inStoreOrderDetails.order.guestCount.intValue];
+        self.txtCheckId.text = [NSString stringWithFormat:@"%d", appDelegate.globalObjectHolder.inStoreOrderDetails.order.poscheckId.intValue];
     }
+    
+    self.selectedGroup = appDelegate.globalObjectHolder.inStoreOrderDetails.selectedTableGroup;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -64,17 +68,17 @@
     [super viewDidAppear:animated];
     
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    if (self.selectedOrder == nil)
+    if (appDelegate.globalObjectHolder.inStoreOrderDetails.order == nil)
     {
-        self.selectedOrder = [[GTLStoreendpointStoreOrder alloc]init];
-        self.selectedOrder.storeId = appDelegate.globalObjectHolder.selectedStore.identifier;
-        self.selectedOrder.storeName = appDelegate.globalObjectHolder.selectedStore.name;
-        self.selectedOrder.guestCount = 0;  // intValue
-        self.selectedOrder.orderMode = [NSNumber numberWithInt:[DeliveryOrCarryoutViewController ORDERTYPE_DININGIN]];  // intValue
+        appDelegate.globalObjectHolder.inStoreOrderDetails.order = [[GTLStoreendpointStoreOrder alloc]init];
+        appDelegate.globalObjectHolder.inStoreOrderDetails.order.storeId = appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore.identifier;
+        appDelegate.globalObjectHolder.inStoreOrderDetails.order.storeName = appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore.name;
+        appDelegate.globalObjectHolder.inStoreOrderDetails.order.guestCount = 0;  // intValue
+        appDelegate.globalObjectHolder.inStoreOrderDetails.order.orderMode = [NSNumber numberWithInt:[DeliveryOrCarryoutViewController ORDERTYPE_DININGIN]];  // intValue
         self.isNewOrder = true;
     }
     [self updateOrderStringFromOrderInProgress];
-    [self parsePOSCheckDetails];
+    self.finalItems = [appDelegate.globalObjectHolder.inStoreOrderDetails parseOrderDetails];
     [self.tableView reloadData];
 }
 
@@ -131,6 +135,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // If row is deleted, remove it from the list.
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
         OrderItemSummaryFromPOS *item = [self.finalItems objectAtIndex:indexPath.row];
@@ -139,12 +144,12 @@
         {
             if (anotherItem.entryId == deletedEntryId || anotherItem.parentEntryId == deletedEntryId)
             {
-                NSLog(@"%@", self.selectedOrder.orderDetails);
-                NSString *XMLOrderStr = [XMLPOSOrder buildPOSResponseXMLByRemovingItem:anotherItem.entryId FromOrderString:self.selectedOrder.orderDetails];
-                self.selectedOrder.orderDetails = XMLOrderStr;
+                NSLog(@"%@", appDelegate.globalObjectHolder.inStoreOrderDetails.order.orderDetails);
+                NSString *XMLOrderStr = [XMLPOSOrder buildPOSResponseXMLByRemovingItem:anotherItem.entryId FromOrderString:appDelegate.globalObjectHolder.inStoreOrderDetails.order.orderDetails];
+                appDelegate.globalObjectHolder.inStoreOrderDetails.order.orderDetails = XMLOrderStr;
             }
         }
-        [self parsePOSCheckDetails];
+        self.finalItems = [appDelegate.globalObjectHolder.inStoreOrderDetails parseOrderDetails];
         [self.tableView reloadData];
     }
 }
@@ -153,39 +158,61 @@
 {
     NSUInteger subTotalNoDiscount = 0;
     for (OrderItemSummaryFromPOS *item in self.finalItems)
-        subTotalNoDiscount += item.price*item.qty;
+        subTotalNoDiscount += item.price;
     return subTotalNoDiscount;
-}
-
-- (double)discount
-{
-    return self.discountAmt;
 }
 
 - (void)saveClicked
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-    self.selectedOrder.tableNumber = [NSNumber numberWithInt:[self.txtTable.text intValue]];
-    self.selectedOrder.guestCount = [NSNumber numberWithInt:[self.txtPartySize.text intValue]];
-    self.selectedOrder.poscheckId = [NSNumber numberWithInt:[self.txtCheckId.text intValue]];
+    appDelegate.globalObjectHolder.inStoreOrderDetails.order.tableNumber = [NSNumber numberWithInt:[self.txtTable.text intValue]];
+    appDelegate.globalObjectHolder.inStoreOrderDetails.order.guestCount = [NSNumber numberWithInt:[self.txtPartySize.text intValue]];
+    appDelegate.globalObjectHolder.inStoreOrderDetails.order.poscheckId = [NSNumber numberWithInt:[self.txtCheckId.text intValue]];
+    appDelegate.globalObjectHolder.inStoreOrderDetails.order.subTotal = [NSNumber numberWithInt:([self subTotalNoDiscountFull] - self.discountAmt)*100];
     
-    if (self.isNewOrder == true && IsEmpty(self.selectedOrder.orderDetails))
+    appDelegate.globalObjectHolder.inStoreOrderDetails.order.orderDetails = [XMLPOSOrder replaceValuesInOrderString:appDelegate.globalObjectHolder.inStoreOrderDetails.order.orderDetails gratuity:0.0 discountTitle:self.discountName discountAmount:self.discountAmt subTotal:([self subTotalNoDiscountFull] - self.discountAmt) deliveryFee:0.0 taxAmount:0.0 finalAmount:0.0 guestCount:appDelegate.globalObjectHolder.inStoreOrderDetails.order.guestCount.intValue tableNumber:appDelegate.globalObjectHolder.inStoreOrderDetails.order.tableNumber.intValue];
+    
+    if (self.isNewOrder == true && [self subTotalNoDiscountFull] < 0.5)
         return;
 
-    [self.receiver changedOrder:self.selectedOrder];
-    GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForUpdateOrderFromServerWithObject:self.selectedOrder];
+    GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForUpdateOrderFromServerWithObject:appDelegate.globalObjectHolder.inStoreOrderDetails.order];
     
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
     dic[USER_AUTH_TOKEN_HEADER_NAME]=[UtilCalls getAuthTokenForCurrentUser];
     
     [query setAdditionalHTTPHeaders:dic];
     
-    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, id object,NSError *error)
+    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreOrder *object, NSError *error)
      {
          if(error)
          {
              NSLog(@"ServerOrderSummary: queryForUpdateOrderFromServerWithObject Error:%@",[error userInfo][@"error"]);
+         }
+         else
+         {
+             appDelegate.globalObjectHolder.inStoreOrderDetails.order = object;
+             [self.receiver changedOrder:appDelegate.globalObjectHolder.inStoreOrderDetails.order];
+             
+             if (appDelegate.globalObjectHolder.inStoreOrderDetails.selectedTableGroup != nil && appDelegate.globalObjectHolder.inStoreOrderDetails.selectedTableGroup.identifier.longLongValue != self.selectedGroup.identifier.longLongValue)
+             {
+                 GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
+                 GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForUpdateStoreTableGroupWithOrderId:appDelegate.globalObjectHolder.inStoreOrderDetails.order.identifier.longLongValue storeTableGroupId:appDelegate.globalObjectHolder.inStoreOrderDetails.selectedTableGroup.identifier.longLongValue];
+                 
+                 NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
+                 dic[USER_AUTH_TOKEN_HEADER_NAME]=[UtilCalls getAuthTokenForCurrentUser];
+                 
+                 [query setAdditionalHTTPHeaders:dic];
+                 
+                 [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, id object,NSError *error)
+                  {
+                      if(!error)
+                      {
+                      }else{
+                          NSLog(@"Update Store Table Group With Order Error:%@",[error userInfo][@"error"]);
+                      }
+                  }];
+             }
          }
      }];
 }
@@ -230,84 +257,89 @@
 }
 - (IBAction)btnCloseClicked:(id)sender
 {
-    self.selectedOrder.orderStatus = [NSNumber numberWithInt:5]; // Status = closed
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    appDelegate.globalObjectHolder.inStoreOrderDetails.order.orderStatus = [NSNumber numberWithInt:5]; // Status = closed
     [self performSegueWithIdentifier:@"segueUnwindOrderToServerTable" sender:sender];
+}
+- (void) addedGroup:(GTLStoreendpointStoreTableGroup *)group ToOrder:(GTLStoreendpointStoreOrder *)order
+{
+    
 }
 
 - (void)updateOrderStringFromOrderInProgress
 {
-    self.selectedOrder.tableNumber = [NSNumber numberWithInt:[self.txtTable.text intValue]];
-    self.selectedOrder.guestCount = [NSNumber numberWithInt:[self.txtPartySize.text intValue]];
-    self.selectedOrder.poscheckId = [NSNumber numberWithInt:[self.txtCheckId.text intValue]];
-
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    appDelegate.globalObjectHolder.inStoreOrderDetails.order.tableNumber = [NSNumber numberWithInt:[self.txtTable.text intValue]];
+    appDelegate.globalObjectHolder.inStoreOrderDetails.order.guestCount = [NSNumber numberWithInt:[self.txtPartySize.text intValue]];
+    appDelegate.globalObjectHolder.inStoreOrderDetails.order.poscheckId = [NSNumber numberWithInt:[self.txtCheckId.text intValue]];
+
     if(appDelegate.globalObjectHolder.orderInProgress == nil)
         return;
     NSString *XMLOrderStr;
     
-    if (IsEmpty(self.selectedOrder.orderDetails) == true)
-        XMLOrderStr = [XMLPOSOrder buildPOSResponseXML:appDelegate.globalObjectHolder.orderInProgress gratuity:0.0 discountTitle:nil discountAmount:0 subTotal:0 deliveryFee:0 taxAmount:0 finalAmount:0 guestCount:self.selectedOrder.guestCount.intValue tableNumber:self.selectedOrder.tableNumber.intValue];
+    if (IsEmpty(appDelegate.globalObjectHolder.inStoreOrderDetails.order.orderDetails) == true)
+        XMLOrderStr = [XMLPOSOrder buildPOSResponseXML:appDelegate.globalObjectHolder.orderInProgress gratuity:0.0 discountTitle:nil discountAmount:0 subTotal:0 deliveryFee:0 taxAmount:0 finalAmount:0 guestCount:appDelegate.globalObjectHolder.inStoreOrderDetails.order.guestCount.intValue tableNumber:appDelegate.globalObjectHolder.inStoreOrderDetails.order.tableNumber.intValue];
     else
-        XMLOrderStr = [XMLPOSOrder buildPOSResponseXMLByAddingNewItems:appDelegate.globalObjectHolder.orderInProgress ToOrderString:self.selectedOrder.orderDetails];
-    self.selectedOrder.orderDetails = XMLOrderStr;
+        XMLOrderStr = [XMLPOSOrder buildPOSResponseXMLByAddingNewItems:appDelegate.globalObjectHolder.orderInProgress ToOrderString:appDelegate.globalObjectHolder.inStoreOrderDetails.order.orderDetails];
+    appDelegate.globalObjectHolder.inStoreOrderDetails.order.orderDetails = XMLOrderStr;
     appDelegate.globalObjectHolder.orderInProgress = nil;
 }
-
-- (MutableOrderedDictionary *)getCheckItemsFromXML:(NSString *)strPOSCheckDetails
-{
-    if (IsEmpty(strPOSCheckDetails))
-        return nil;
-    RXMLElement *rootXML = [RXMLElement elementFromXMLString:strPOSCheckDetails encoding:NSUTF8StringEncoding];
-    if (rootXML == nil)
-        return nil;
-    //    NSArray *rxmlEntries = [[[rootXML child:@"GETCHECKDETAILS"] child:@"CHECK"] children:@"ENTRIES"];
-    MutableOrderedDictionary *items = [[MutableOrderedDictionary alloc]init];
-    
-    int position = 0;
-    NSArray *allEntries = [[[[rootXML child:@"GETCHECKDETAILS"] child:@"CHECK"] child:@"ENTRIES"] children:@"ENTRY"];
-    
-    for (RXMLElement *entry in allEntries)
-    {
-        OrderItemSummaryFromPOS *orderItemSummaryFromPOS = [[OrderItemSummaryFromPOS alloc]init];
-        orderItemSummaryFromPOS.posMenuItemId = [UtilCalls stringToNumber:[entry attribute:@"ITEMID"]].intValue;
-        orderItemSummaryFromPOS.qty = [UtilCalls stringToNumber:[entry attribute:@"QUANTITY"]].intValue;
-        orderItemSummaryFromPOS.price = [UtilCalls stringToNumber:[entry attribute:@"PRICE"]].floatValue;
-        orderItemSummaryFromPOS.name = [entry attribute:@"DISP_NAME"];
-        orderItemSummaryFromPOS.desc = [entry attribute:@"OPTION"];
-        orderItemSummaryFromPOS.entryId = [UtilCalls stringToNumber:[entry attribute:@"ID"]].intValue;
-        orderItemSummaryFromPOS.position = position++;
-        
-        [items setObject:orderItemSummaryFromPOS forKey:[NSNumber numberWithLong:orderItemSummaryFromPOS.entryId]];
-    }
-    
-    return items;
-}
-
-- (void) parsePOSCheckDetails
-{
-    MutableOrderedDictionary *items = [self getCheckItemsFromXML:self.selectedOrder.orderDetails];
-    self.finalItems = [[NSMutableArray alloc]init];
-    for (int i = 0; i < items.count; i++)
-    {
-        OrderItemSummaryFromPOS *item = [items objectAtIndex:i];
-        [self.finalItems addObject:item];
-    }
-}
+//
+//- (MutableOrderedDictionary *)getCheckItemsFromXML:(NSString *)strPOSCheckDetails
+//{
+//    if (IsEmpty(strPOSCheckDetails))
+//        return nil;
+//    RXMLElement *rootXML = [RXMLElement elementFromXMLString:strPOSCheckDetails encoding:NSUTF8StringEncoding];
+//    if (rootXML == nil)
+//        return nil;
+//    //    NSArray *rxmlEntries = [[[rootXML child:@"GETCHECKDETAILS"] child:@"CHECK"] children:@"ENTRIES"];
+//    MutableOrderedDictionary *items = [[MutableOrderedDictionary alloc]init];
+//    
+//    int position = 0;
+//    NSArray *allEntries = [[[[rootXML child:@"GETCHECKDETAILS"] child:@"CHECK"] child:@"ENTRIES"] children:@"ENTRY"];
+//    
+//    for (RXMLElement *entry in allEntries)
+//    {
+//        OrderItemSummaryFromPOS *orderItemSummaryFromPOS = [[OrderItemSummaryFromPOS alloc]init];
+//        orderItemSummaryFromPOS.posMenuItemId = [UtilCalls stringToNumber:[entry attribute:@"ITEMID"]].intValue;
+//        orderItemSummaryFromPOS.qty = [UtilCalls stringToNumber:[entry attribute:@"QUANTITY"]].intValue;
+//        orderItemSummaryFromPOS.price = [UtilCalls stringToNumber:[entry attribute:@"PRICE"]].floatValue;
+//        orderItemSummaryFromPOS.name = [entry attribute:@"DISP_NAME"];
+//        orderItemSummaryFromPOS.desc = [entry attribute:@"OPTION"];
+//        orderItemSummaryFromPOS.entryId = [UtilCalls stringToNumber:[entry attribute:@"ID"]].intValue;
+//        orderItemSummaryFromPOS.position = position++;
+//        
+//        [items setObject:orderItemSummaryFromPOS forKey:[NSNumber numberWithLong:orderItemSummaryFromPOS.entryId]];
+//    }
+//    
+//    return items;
+//}
+//
+//- (void) parsePOSCheckDetails
+//{
+//    MutableOrderedDictionary *items = [self getCheckItemsFromXML:appDelegate.globalObjectHolder.inStoreOrderDetails.order.orderDetails];
+//    self.finalItems = [[NSMutableArray alloc]init];
+//    for (int i = 0; i < items.count; i++)
+//    {
+//        OrderItemSummaryFromPOS *item = [items objectAtIndex:i];
+//        [self.finalItems addObject:item];
+//    }
+//}
 
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     if ([[segue identifier] isEqualToString:@"segueShowServerOrderToSelectGroup"])
     {
         ServerSelectGroupTableViewController *controller = [segue destinationViewController];
-        [controller setSelectedOrder:self.selectedOrder];
+        [controller setSelectedOrder:appDelegate.globalObjectHolder.inStoreOrderDetails.order];
     }
     else if ([[segue identifier] isEqualToString:@"segueServerOrderSummaryToMenu"])
     {
         MenuTableViewController *controller = [segue destinationViewController];
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-        [controller setSelectedStore:appDelegate.globalObjectHolder.selectedStore];
+        [controller setSelectedStore:appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore];
         [controller setBMenuIsInOrderMode:YES];
     }
 }

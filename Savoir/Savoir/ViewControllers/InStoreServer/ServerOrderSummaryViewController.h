@@ -11,6 +11,5 @@
 #import "TableOrderReceiver.h"
 
 @interface ServerOrderSummaryViewController : UIViewController
-@property (strong, nonatomic) GTLStoreendpointStoreOrder *selectedOrder;
 @property (weak) id <TableOrderReceiver> receiver;
 @end

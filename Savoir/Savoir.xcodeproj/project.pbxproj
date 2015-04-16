@@ -18,7 +18,6 @@
 		D406D7F31AD23ACB0076D0B6 /* UpdateInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D7EF1AD23ACB0076D0B6 /* UpdateInfoViewController.m */; };
 		D406D7F41AD23ACB0076D0B6 /* AddFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D7F11AD23ACB0076D0B6 /* AddFriendViewController.m */; };
 		D406D7F71AD23B510076D0B6 /* ExistingGroupsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D7F61AD23B510076D0B6 /* ExistingGroupsTableViewController.m */; };
-		D406D7FA1AD23B850076D0B6 /* JoinGroupTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D7F91AD23B850076D0B6 /* JoinGroupTableViewController.m */; };
 		D406D7FD1AD23BF00076D0B6 /* InStoreOrderSummaryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D7FC1AD23BF00076D0B6 /* InStoreOrderSummaryTableViewController.m */; };
 		D406D8001AD23C250076D0B6 /* InstorePaymentOptionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D7FF1AD23C250076D0B6 /* InstorePaymentOptionTableViewController.m */; };
 		D406D8031AD23C5C0076D0B6 /* SplitItemsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D8021AD23C5C0076D0B6 /* SplitItemsTableViewController.m */; };
@@ -336,8 +335,6 @@
 		D41FF7611AC3659A00395DE0 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D41FF75B1AC3659A00395DE0 /* ParseCrashReporting.framework */; };
 		D41FF7641AC3659A00395DE0 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D41FF75E1AC3659A00395DE0 /* ParseUI.framework */; };
 		D41FF7661AC3662300395DE0 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D41FF7651AC3662300395DE0 /* FBSDKLoginKit.framework */; };
-		D41FF7681AC3667100395DE0 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D41FF7671AC3667100395DE0 /* FacebookSDK.framework */; };
-		D41FF76C1AC36AA500395DE0 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D41FF76B1AC36AA500395DE0 /* ParseFacebookUtils.framework */; };
 		D438AB011A9F8BF60089E61A /* ChatView.m in Sources */ = {isa = PBXBuildFile; fileRef = D438AAF61A9F8BF60089E61A /* ChatView.m */; };
 		D438AB021A9F8BF60089E61A /* GroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = D438AAF71A9F8BF60089E61A /* GroupView.m */; };
 		D438AB031A9F8BF60089E61A /* camera.m in Sources */ = {isa = PBXBuildFile; fileRef = D438AAFC1A9F8BF60089E61A /* camera.m */; };
@@ -409,6 +406,9 @@
 		D4828CBF1A71ADE500C80E92 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D4828CBD1A71ADE500C80E92 /* libxml2.dylib */; };
 		D4828D241A7AA4D000C80E92 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4828D231A7AA4D000C80E92 /* Accounts.framework */; };
 		D49FBA981AC613D600F55360 /* GTLStoreendpointClientVersionMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = D49FBA971AC613D600F55360 /* GTLStoreendpointClientVersionMatch.m */; };
+		D4BDBEF41AD8B6EE0014273B /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4BDBEF31AD8B6EE0014273B /* FBSDKShareKit.framework */; };
+		D4BDBEFA1AD8D0F90014273B /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D41FF75D1AC3659A00395DE0 /* ParseFacebookUtilsV4.framework */; };
+		D4BDBEFB1AD8D22E0014273B /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4BDBEF71AD8CE590014273B /* Bolts.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -431,8 +431,6 @@
 		D406D7F21AD23ACB0076D0B6 /* AddFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendViewController.h; sourceTree = "<group>"; };
 		D406D7F51AD23B510076D0B6 /* ExistingGroupsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExistingGroupsTableViewController.h; sourceTree = "<group>"; };
 		D406D7F61AD23B510076D0B6 /* ExistingGroupsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExistingGroupsTableViewController.m; sourceTree = "<group>"; };
-		D406D7F81AD23B850076D0B6 /* JoinGroupTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JoinGroupTableViewController.h; sourceTree = "<group>"; };
-		D406D7F91AD23B850076D0B6 /* JoinGroupTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JoinGroupTableViewController.m; sourceTree = "<group>"; };
 		D406D7FB1AD23BF00076D0B6 /* InStoreOrderSummaryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InStoreOrderSummaryTableViewController.h; sourceTree = "<group>"; };
 		D406D7FC1AD23BF00076D0B6 /* InStoreOrderSummaryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InStoreOrderSummaryTableViewController.m; sourceTree = "<group>"; };
 		D406D7FE1AD23C250076D0B6 /* InstorePaymentOptionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstorePaymentOptionTableViewController.h; sourceTree = "<group>"; };
@@ -1018,7 +1016,6 @@
 		D41FF75D1AC3659A00395DE0 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtilsV4.framework; path = Savoir/frameworks/ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		D41FF75E1AC3659A00395DE0 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = Savoir/frameworks/ParseUI.framework; sourceTree = "<group>"; };
 		D41FF7651AC3662300395DE0 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
-		D41FF7671AC3667100395DE0 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		D41FF76B1AC36AA500395DE0 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = Savoir/frameworks/ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		D438AAF61A9F8BF60089E61A /* ChatView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatView.m; sourceTree = "<group>"; };
 		D438AAF71A9F8BF60089E61A /* GroupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupView.m; sourceTree = "<group>"; };
@@ -1167,6 +1164,9 @@
 		D4828D231A7AA4D000C80E92 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		D49FBA961AC613D600F55360 /* GTLStoreendpointClientVersionMatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointClientVersionMatch.h; sourceTree = "<group>"; };
 		D49FBA971AC613D600F55360 /* GTLStoreendpointClientVersionMatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointClientVersionMatch.m; sourceTree = "<group>"; };
+		D4BDBEF31AD8B6EE0014273B /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../../Documents/FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
+		D4BDBEF71AD8CE590014273B /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ../../../Documents/FacebookSDK/Bolts.framework; sourceTree = "<group>"; };
+		D4BDBEFD1AE020C80014273B /* InStoreOrderReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InStoreOrderReceiver.h; sourceTree = "<group>"; };
 		D4F2759F1A0C021800CEC95A /* Savoir.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Savoir.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -1175,6 +1175,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4BDBEFB1AD8D22E0014273B /* Bolts.framework in Frameworks */,
 				D400F8AD1AAE06F9004D458C /* Fabric.framework in Frameworks */,
 				D46DA7861A92B5A400020313 /* CoreAudio.framework in Frameworks */,
 				D41960041A92ADBF00663149 /* CFNetwork.framework in Frameworks */,
@@ -1188,9 +1189,7 @@
 				D4195FF41A92AD6200663149 /* SystemConfiguration.framework in Frameworks */,
 				D4195FF21A92AD5600663149 /* UIKit.framework in Frameworks */,
 				D4195FEE1A92AD3A00663149 /* Social.framework in Frameworks */,
-				D41FF7561AC3644100395DE0 /* FBSDKCoreKit.framework in Frameworks */,
 				D4195FEB1A92AD2800663149 /* AudioToolbox.framework in Frameworks */,
-				D41FF76C1AC36AA500395DE0 /* ParseFacebookUtils.framework in Frameworks */,
 				D4195FE81A92AD0F00663149 /* MediaPlayer.framework in Frameworks */,
 				D4195FE61A92AD0600663149 /* MapKit.framework in Frameworks */,
 				D4195FE21A92ACF400663149 /* CoreData.framework in Frameworks */,
@@ -1200,23 +1199,25 @@
 				D4195FDB1A92ACC200663149 /* AddressBook.framework in Frameworks */,
 				D4195FDC1A92ACC200663149 /* AddressBookUI.framework in Frameworks */,
 				D4195FD81A92ACB300663149 /* Foundation.framework in Frameworks */,
+				D4BDBEF41AD8B6EE0014273B /* FBSDKShareKit.framework in Frameworks */,
+				D41FF7561AC3644100395DE0 /* FBSDKCoreKit.framework in Frameworks */,
 				D41FF7661AC3662300395DE0 /* FBSDKLoginKit.framework in Frameworks */,
 				D4195FD61A92ACA600663149 /* ImageIO.framework in Frameworks */,
-				D41FF7611AC3659A00395DE0 /* ParseCrashReporting.framework in Frameworks */,
 				D4195E971A92A69C00663149 /* GoogleOpenSource.framework in Frameworks */,
 				D4195E991A92A69C00663149 /* GooglePlus.framework in Frameworks */,
 				D4195FD41A92AB9300663149 /* GooglePlus.bundle in Frameworks */,
 				D41FF7641AC3659A00395DE0 /* ParseUI.framework in Frameworks */,
+				D41FF7601AC3659A00395DE0 /* Parse.framework in Frameworks */,
+				D4BDBEFA1AD8D0F90014273B /* ParseFacebookUtilsV4.framework in Frameworks */,
+				D41FF7611AC3659A00395DE0 /* ParseCrashReporting.framework in Frameworks */,
 				D4828D241A7AA4D000C80E92 /* Accounts.framework in Frameworks */,
 				D4195FFA1A92AD8C00663149 /* libz.1.1.3.dylib in Frameworks */,
 				D4828CBF1A71ADE500C80E92 /* libxml2.dylib in Frameworks */,
 				D4828CBB1A71ADD200C80E92 /* libz.dylib in Frameworks */,
-				D41FF7601AC3659A00395DE0 /* Parse.framework in Frameworks */,
 				D4828CBE1A71ADE500C80E92 /* libxml2.2.dylib in Frameworks */,
 				D40DF3761A3A9FFC00C67088 /* libstdc++.6.0.9.dylib in Frameworks */,
 				D40DF3771A3A9FFC00C67088 /* libstdc++.6.dylib in Frameworks */,
 				D40DF36E1A3A976700C67088 /* libsqlite3.0.dylib in Frameworks */,
-				D41FF7681AC3667100395DE0 /* FacebookSDK.framework in Frameworks */,
 				D400F8B01AAE095F004D458C /* Crashlytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1240,8 +1241,6 @@
 			children = (
 				D406D7F51AD23B510076D0B6 /* ExistingGroupsTableViewController.h */,
 				D406D7F61AD23B510076D0B6 /* ExistingGroupsTableViewController.m */,
-				D406D7F81AD23B850076D0B6 /* JoinGroupTableViewController.h */,
-				D406D7F91AD23B850076D0B6 /* JoinGroupTableViewController.m */,
 				D406D7FB1AD23BF00076D0B6 /* InStoreOrderSummaryTableViewController.h */,
 				D406D7FC1AD23BF00076D0B6 /* InStoreOrderSummaryTableViewController.m */,
 				D406D7FE1AD23C250076D0B6 /* InstorePaymentOptionTableViewController.h */,
@@ -1259,6 +1258,7 @@
 		D406D80A1AD2E3AB0076D0B6 /* InStoreOrder */ = {
 			isa = PBXGroup;
 			children = (
+				D4BDBEFD1AE020C80014273B /* InStoreOrderReceiver.h */,
 				D406D80B1AD2E3E80076D0B6 /* InStoreOrderDetails.h */,
 				D406D80C1AD2E3E80076D0B6 /* InStoreOrderDetails.m */,
 			);
@@ -2557,8 +2557,9 @@
 		EFEC7E676E0C2F9960DA289C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D4BDBEF71AD8CE590014273B /* Bolts.framework */,
+				D4BDBEF31AD8B6EE0014273B /* FBSDKShareKit.framework */,
 				D41FF76B1AC36AA500395DE0 /* ParseFacebookUtils.framework */,
-				D41FF7671AC3667100395DE0 /* FacebookSDK.framework */,
 				D41FF7651AC3662300395DE0 /* FBSDKLoginKit.framework */,
 				D41FF75A1AC3659A00395DE0 /* Parse.framework */,
 				D41FF75B1AC3659A00395DE0 /* ParseCrashReporting.framework */,
@@ -2917,7 +2918,6 @@
 				D406D8291AD57C450076D0B6 /* ServerOrderSummaryViewController.m in Sources */,
 				D438AB7D1A9FA6AC0089E61A /* NSString+JSQMessages.m in Sources */,
 				D4195F8A1A92A69C00663149 /* GTLStoreendpointStoreMenuItem.m in Sources */,
-				D406D7FA1AD23B850076D0B6 /* JoinGroupTableViewController.m in Sources */,
 				D4195F591A92A69C00663149 /* SWRevealViewController.m in Sources */,
 				D4195F971A92A69C00663149 /* GTLStoreendpointStoreWaitListQueueAndPosition.m in Sources */,
 				D4195F041A92A69C00663149 /* MWCaptionView.m in Sources */,
@@ -3272,12 +3272,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/Savoir/frameworks",
 					"$(PROJECT_DIR)",
 					"~/Documents/FacebookSDK",
+					/Users/niravsaraiya/Documents/FacebookSDK,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Savoir/Savoir-Prefix.pch";
@@ -3303,12 +3305,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/Savoir/frameworks",
 					"$(PROJECT_DIR)",
 					"~/Documents/FacebookSDK",
+					/Users/niravsaraiya/Documents/FacebookSDK,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Savoir/Savoir-Prefix.pch";

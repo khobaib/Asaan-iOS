@@ -14,8 +14,9 @@
 #import "InlineCalls.h"
 #import "Extension.h"
 #import "GTLStoreendpointStoreTableGroupCollection.h"
+#import "InStoreOrderReceiver.h"
 
-@interface ServerSelectGroupTableViewController ()
+@interface ServerSelectGroupTableViewController ()<InStoreOrderReceiver>
 @property (strong, nonatomic) GTLStoreendpointStoreTableGroupCollection *tableGroups;
 
 @end
@@ -25,15 +26,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     if (self.navigationController.viewControllers[0] != self)
         self.navigationItem.leftBarButtonItem = nil;
     else
-    {
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
         [appDelegate.notificationUtils getSlidingMenuBarButtonSetupWith:self];
-    }
+    [appDelegate.globalObjectHolder.inStoreOrderDetails getOpenGroups:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,38 +41,17 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)setupExistingGroupsData
+- (void) orderChanged
 {
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeIndeterminate;
-    hud.labelText = @"Please Wait";
-    hud.hidden = NO;
-    
-    if (self)
-    {
-        __weak __typeof(self) weakSelf = self;
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-        GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-        long long storeId = appDelegate.globalObjectHolder.selectedStore.identifier.longLongValue;
-        GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetOpenAndUnassignedGroupsForStoreWithStoreId:storeId];
-        
-        NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
-        dic[USER_AUTH_TOKEN_HEADER_NAME]=[UtilCalls getAuthTokenForCurrentUser];
-        
-        [query setAdditionalHTTPHeaders:dic];
-        
-        [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreTableGroupCollection *object,NSError *error)
-         {
-             if(!error)
-             {
-                 weakSelf.tableGroups = object;
-                 [weakSelf.tableView reloadData];
-             }else{
-                 NSLog(@"setupExistingGroupsData Error:%@",[error userInfo][@"error"]);
-             }
-             hud.hidden = YES;
-         }];
-    }
+    // Don't care
+}
+- (void) tableGroupMemberChanged
+{
+    // Don't care
+}
+- (void) openGroupsChanged
+{
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -81,7 +60,7 @@
 {
     UITableViewCell *headerCell = [tableView dequeueReusableCellWithIdentifier:@"HeaderCell"];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    NSString *title = [NSString stringWithFormat:@"Welcome to %@", appDelegate.globalObjectHolder.selectedStore.name];
+    NSString *title = [NSString stringWithFormat:@"Welcome to %@", appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore.name];
     [UtilCalls setupHeaderView:headerCell WithTitle:title AndSubTitle:@"Select a group for your table."];
     return headerCell;
 }
@@ -153,29 +132,35 @@
     hud.hidden = NO;
     
     appDelegate.globalObjectHolder.inStoreOrderDetails.selectedTableGroup = [self.tableGroups.items objectAtIndex:indexPath.row];
+    appDelegate.globalObjectHolder.inStoreOrderDetails.selectedTableGroup.orderId = self.selectedOrder.identifier;
     
+    [self updateStoreTableGroup:appDelegate.globalObjectHolder.inStoreOrderDetails.selectedTableGroup.identifier.longLongValue withOrderId:self.selectedOrder.identifier.longLongValue];
+    
+    [self performSegueWithIdentifier:@"segueUnwindSelectGroupToOrderSummary" sender:self];
+}
+
+- (void) updateStoreTableGroup:(long long)tableGroupId withOrderId:(long long)orderId
+{
     if (self)
     {
-        __weak __typeof(self) weakSelf = self;
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
         GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-        GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForUpdateStoreTableGroupWithOrderId:self.selectedOrder.identifier.longLongValue storeTableGroupId:appDelegate.globalObjectHolder.inStoreOrderDetails.selectedTableGroup.identifier.longLongValue];
+        GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForUpdateStoreTableGroupWithOrderId:orderId storeTableGroupId:tableGroupId];
         
         NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
         dic[USER_AUTH_TOKEN_HEADER_NAME]=[UtilCalls getAuthTokenForCurrentUser];
         
         [query setAdditionalHTTPHeaders:dic];
         
-        [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, id object,NSError *error)
+        [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreTableGroupCollection *object,NSError *error)
          {
-             if(!error)
+             if(error)
              {
-                 [self performSegueWithIdentifier:@"segueUnwindSelectGroupToOrderSummary" sender:weakSelf];
-             }else{
-                 NSLog(@"Update Store Table Group With Order Error:%@",[error userInfo][@"error"]);
+                 NSLog(@"setupExistingGroupsData Error:%@",[error userInfo][@"error"]);
              }
-             hud.hidden = YES;
          }];
     }
+
 }
 
 /*

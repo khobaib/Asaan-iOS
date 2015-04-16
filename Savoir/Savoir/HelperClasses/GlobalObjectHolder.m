@@ -245,7 +245,6 @@
 
 - (void) getStoreForBeaconId:(long long)beaconId
 {
-    __weak __typeof(self) weakSelf = self;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
     GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoreByBeaconIdWithBeaconId:beaconId];
@@ -256,7 +255,10 @@
     [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStore *object, NSError *error)
      {
          if (!error)
-             weakSelf.selectedStore = object;
+         {
+             appDelegate.globalObjectHolder.inStoreOrderDetails = [[InStoreOrderDetails alloc]init];
+             appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore = object;
+         }
          else
              NSLog(@"Savoir Server Call Failed: queryForGetStoreByBeaconId - error:%@", error.userInfo);
      }];

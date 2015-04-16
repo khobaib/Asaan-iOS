@@ -39,7 +39,11 @@
 #import "Constants.h"
 #import <CoreLocation/CoreLocation.h>
 
+#import <ParseFacebookUtils/PFFacebookUtils.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+
 #import "TablesViewController.h"
+#import "ExistingGroupsTableViewController.h"
 
 @interface StoreListTableViewController ()<DataProviderDelegate, CLLocationManagerDelegate>
 
@@ -66,6 +70,8 @@
 #pragma mark - View Life-cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -103,12 +109,46 @@
         [self performSegueWithIdentifier:@"segueStartup" sender:self];
         return;
     }
-    
-    if (appDelegate.globalObjectHolder.selectedStore != nil && [UtilCalls userBelongsToStoreChatTeamForStore:appDelegate.globalObjectHolder.selectedStore])
+    else
     {
-        [self startServerMode];
-        return;
+        BOOL isLinkedToFacebook = [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]];
+        if (isLinkedToFacebook == true)
+        {
+            FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil];
+            [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error)
+            {
+                if (!error)
+                {
+                    // handle successful response
+                } else if ([[error userInfo][@"error"][@"type"] isEqualToString: @"OAuthException"])
+                { // Since the request failed, we can check if it was due to an invalid session
+                    NSLog(@"The facebook session was invalidated");
+                    [PFFacebookUtils unlinkUserInBackground:[PFUser currentUser]];
+                    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+                    GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
+                    [goh clearAllObjects];
+                    [self performSegueWithIdentifier:@"segueStartup" sender:self];
+                } else
+                {
+                    NSLog(@"Some other error: %@", error);
+                }
+            }];
+        }
     }
+//    
+//    if (appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore != nil)
+//    {
+//        if ([UtilCalls userBelongsToStoreChatTeamForStore:appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore])
+//        {
+//            [self startServerMode];
+//            return;
+//        }
+//        else
+//        {
+//            [self startInStoreMode];
+//            return;
+//        }
+//    }
     
     GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
     [goh loadAllUserObjects];
@@ -159,6 +199,73 @@
     
     [segue perform];
 
+}
+
+- (void) startInStoreMode
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.labelText = @"Please Wait";
+    hud.hidden = NO;
+
+    if (self)
+    {
+        __weak __typeof(self) weakSelf = self;
+        GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
+        GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetOpenGroupForMember];
+        
+        NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
+        dic[USER_AUTH_TOKEN_HEADER_NAME]=[UtilCalls getAuthTokenForCurrentUser];
+        
+        [query setAdditionalHTTPHeaders:dic];
+        
+        [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreTableGroup *object,NSError *error)
+         {
+             if(!error)
+             {
+                 AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+                 if (object != nil && object.identifier.longLongValue > 0)
+                 {
+                     appDelegate.globalObjectHolder.inStoreOrderDetails.selectedTableGroup = object;
+                     NSLog(@"startInStoreMode tableGroupId = %lld orderId = %lld", object.identifier.longLongValue, object.orderId.longLongValue);
+
+                     UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"InStorePay" bundle:nil];
+                     ExistingGroupsTableViewController *destination = [mainStoryBoard instantiateViewControllerWithIdentifier:@"InstoreOrderSummaryViewController"];
+                     
+                     UIStoryboardSegue *segue = [UIStoryboardSegue segueWithIdentifier:@"segueStartupToInstoreOrderSummary" source:weakSelf destination:destination performHandler:^(void) {
+                         //view transition/animation
+                         [weakSelf.navigationController pushViewController:destination animated:YES];
+                     }];
+                     
+                     [weakSelf shouldPerformSegueWithIdentifier:segue.identifier sender:weakSelf];//optional
+                     [weakSelf prepareForSegue:segue sender:weakSelf];
+                     
+                     [segue perform];
+                 }
+                 else
+                 {
+                     appDelegate.globalObjectHolder.inStoreOrderDetails.selectedTableGroup = nil;
+                     
+                     UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"InStorePay" bundle:nil];
+                     ExistingGroupsTableViewController *destination = [mainStoryBoard instantiateViewControllerWithIdentifier:@"ExistingGroupsTableViewController"];
+                     
+                     UIStoryboardSegue *segue = [UIStoryboardSegue segueWithIdentifier:@"segueStoreListToInStoreExistingGroupView" source:weakSelf destination:destination performHandler:^(void) {
+                         //view transition/animation
+                         [weakSelf.navigationController pushViewController:destination animated:YES];
+                     }];
+                     
+                     [weakSelf shouldPerformSegueWithIdentifier:segue.identifier sender:weakSelf];//optional
+                     [weakSelf prepareForSegue:segue sender:weakSelf];
+                     
+                     [segue perform];
+                 }
+             }else{
+                 NSLog(@"queryForAddMemberToStoreTableGroup Error:%@",[error userInfo][@"error"]);
+             }
+             hud.hidden = YES;
+         }];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

@@ -22,7 +22,6 @@
 
 @property (strong, nonatomic) GTLStoreendpointTableGroupsAndOrders *ordersAndGroups;
 @property (strong, nonatomic) NSMutableArray *orders;
-@property (strong, nonatomic) GTLStoreendpointStoreOrder *selectedOrder;
 
 @end
 
@@ -82,7 +81,7 @@
         __weak __typeof(self) weakSelf = self;
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
         GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-        long long storeId = appDelegate.globalObjectHolder.selectedStore.identifier.longLongValue;
+        long long storeId = appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore.identifier.longLongValue;
         GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetStoreOrdersAndGroupsForEmployeeWithStoreId:storeId];
         
         NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
@@ -220,9 +219,9 @@
         {
             AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
             GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-            self.selectedOrder.orderStatus = [NSNumber numberWithInt:5]; // Status = closed
+            order.orderStatus = [NSNumber numberWithInt:5]; // Status = closed
             
-            GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForUpdateOrderFromServerWithObject:self.selectedOrder];
+            GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForUpdateOrderFromServerWithObject:order];
             
             NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
             dic[USER_AUTH_TOKEN_HEADER_NAME]=[UtilCalls getAuthTokenForCurrentUser];
@@ -236,14 +235,15 @@
                      NSLog(@"ServerOrderSummary: queryForUpdateOrderFromServerWithObject Error:%@",[error userInfo][@"error"]);
                  }
              }];
+            [self.orders removeObjectAtIndex:indexPath.row];
+            [tableView reloadData];
         }
-        [self.orders removeObjectAtIndex:indexPath.row];
-        [tableView reloadData];
     }
 }
 - (IBAction)btnAddClicked:(id)sender
 {
-    self.selectedOrder = nil;
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    appDelegate.globalObjectHolder.inStoreOrderDetails.order = nil;
     [self performSegueWithIdentifier:@"segueTablesToOrderSummary" sender:self];
 }
 
@@ -253,7 +253,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.selectedOrder = [self.orders objectAtIndex:indexPath.row];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    appDelegate.globalObjectHolder.inStoreOrderDetails.order = [self.orders objectAtIndex:indexPath.row];
     [self performSegueWithIdentifier:@"segueTablesToOrderSummary" sender:self];
 }
 
@@ -286,6 +287,8 @@
     }
     [self.orders addObject:order];
     [self.tableView reloadData];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    appDelegate.globalObjectHolder.inStoreOrderDetails = nil;
 }
 
 #pragma mark - Navigation
@@ -296,7 +299,6 @@
     if ([[segue identifier] isEqualToString:@"segueTablesToOrderSummary"])
     {
         ServerOrderSummaryViewController *controller = [segue destinationViewController];
-        [controller setSelectedOrder:self.selectedOrder];
         [controller setReceiver:self];
     }
 }

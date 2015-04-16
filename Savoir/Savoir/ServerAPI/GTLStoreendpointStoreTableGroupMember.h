@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStoreTableGroupMember (0 custom class methods, 20 custom properties)
+//   GTLStoreendpointStoreTableGroupMember (0 custom class methods, 21 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLObject.h"
@@ -45,6 +45,7 @@
 @property (copy) NSString *paymentReceiptNumber;
 @property (retain) NSNumber *paymentType;  // intValue
 @property (copy) NSString *profilePhotoUrl;
+@property (retain) NSNumber *status;  // intValue
 @property (retain) NSNumber *storeTableGroupId;  // longLongValue
 @property (retain) NSNumber *subtotal;  // longLongValue
 @property (retain) NSNumber *tax;  // longLongValue

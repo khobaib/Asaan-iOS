@@ -246,7 +246,7 @@
         NSLog(@"Auth token = %@ for user %@", authToken, email);
         return authToken;
     }
-    return nil;
+    return @"Unknown";
 }
 
 + (Boolean) orderHasAlreadyBeenReviewed:(GTLStoreendpointOrderReviewAndItemReviews *)reviewAndItems

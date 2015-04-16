@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryStoreendpoint (66 custom class methods, 18 custom properties)
+//   GTLQueryStoreendpoint (65 custom class methods, 18 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLQuery.h"
@@ -84,11 +84,6 @@
 + (id)queryForAddMemberToStoreTableGroupWithOrderId:(long long)orderId
                                   storeTableGroupId:(long long)storeTableGroupId;
 
-// Method: storeendpoint.closeOrder
-//  Authorization scope(s):
-//   kGTLAuthScopeStoreendpointUserinfoEmail
-+ (id)queryForCloseOrderWithObject:(GTLStoreendpointStoreOrder *)object;
-
 // Method: storeendpoint.createStoreTableGroup
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
@@ -142,6 +137,12 @@
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 // Fetches a GTLStoreendpointStoreTableGroupCollection.
 + (id)queryForGetOpenAndUnassignedGroupsForStoreWithStoreId:(long long)storeId;
+
+// Method: storeendpoint.getOpenGroupForMember
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
+// Fetches a GTLStoreendpointStoreTableGroupMember.
++ (id)queryForGetOpenGroupForMember;
 
 // Method: storeendpoint.getOrderAndReviewsById
 //  Authorization scope(s):
@@ -464,15 +465,10 @@
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 + (id)queryForSaveStoreWaitlistSummaryWithObject:(GTLStoreendpointStoreWaitlistSummary *)object;
 
-// Method: storeendpoint.startOrder
-//  Authorization scope(s):
-//   kGTLAuthScopeStoreendpointUserinfoEmail
-// Fetches a GTLStoreendpointStoreOrder.
-+ (id)queryForStartOrderWithObject:(GTLStoreendpointPlaceOrderArguments *)object;
-
 // Method: storeendpoint.updateOrderFromServer
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
+// Fetches a GTLStoreendpointStoreOrder.
 + (id)queryForUpdateOrderFromServerWithObject:(GTLStoreendpointStoreOrder *)object;
 
 // Method: storeendpoint.updateStoreCoordinates

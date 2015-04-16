@@ -14,8 +14,9 @@
 #import "InlineCalls.h"
 #import "UtilCalls.h"
 #import "MBProgressHUD.h"
+#import "InStoreOrderReceiver.h"
 
-@interface InStoreOrderSummaryTableViewController ()
+@interface InStoreOrderSummaryTableViewController () <InStoreOrderReceiver>
 @property (strong, nonatomic) GTLStoreendpointStoreOrder *selectedOrder;
 @property (nonatomic, strong) NSMutableArray *finalItems;
 @end
@@ -34,142 +35,45 @@
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
         [appDelegate.notificationUtils getSlidingMenuBarButtonSetupWith:self];
     }
+    
+    NSLog(@"InStoreOrderSummaryTableViewController viewDidLoad");
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     [self refreshOrderDetails];
+    NSLog(@"InStoreOrderSummaryTableViewController viewWillAppear");
+}
+
+- (void)orderChanged
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    self.finalItems = [appDelegate.globalObjectHolder.inStoreOrderDetails parseOrderDetails];
+    [self.tableView reloadData];
+    NSLog(@"InStoreOrderSummaryTableViewController orderChanged finalItems count = %lu", (unsigned long)self.finalItems.count);
+}
+
+- (void) tableGroupMemberChanged
+{
+    // Don't Care.
+}
+
+- (void) openGroupsChanged
+{
+    // Don't Care.
 }
 
 - (void)refreshOrderDetails
 {
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeIndeterminate;
-    hud.labelText = @"Please Wait";
-    hud.hidden = NO;
-    
-    if (self)
-    {
-        __weak __typeof(self) weakSelf = self;
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-        GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-        long long orderId = appDelegate.globalObjectHolder.inStoreOrderDetails.selectedTableGroup.orderId.longLongValue;
-        GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetStoreOrderByIdWithOrderId:orderId];
-        
-        NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
-        dic[USER_AUTH_TOKEN_HEADER_NAME]=[UtilCalls getAuthTokenForCurrentUser];
-        
-        [query setAdditionalHTTPHeaders:dic];
-        
-        [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreOrder *object,NSError *error)
-         {
-             if(!error)
-             {
-                 weakSelf.selectedOrder = object;
-                 [self parsePOSCheckDetails];
-                 [weakSelf.tableView reloadData];
-             }else{
-                 NSLog(@"setupExistingGroupsData Error:%@",[error userInfo][@"error"]);
-             }
-             hud.hidden = YES;
-         }];
-    }
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    [appDelegate.globalObjectHolder.inStoreOrderDetails getStoreOrderDetails:self];
+    NSLog(@"InStoreOrderSummaryTableViewController refreshOrderDetails");
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (MutableOrderedDictionary *)getCheckItemsFromXML:(NSString *)strPOSCheckDetails
-{
-    RXMLElement *rootXML = [RXMLElement elementFromXMLString:strPOSCheckDetails encoding:NSUTF8StringEncoding];
-    if (rootXML == nil)
-        return nil;
-    //    NSArray *rxmlEntries = [[[rootXML child:@"GETCHECKDETAILS"] child:@"CHECK"] children:@"ENTRIES"];
-    MutableOrderedDictionary *items = [[MutableOrderedDictionary alloc]init];
-    
-    int position = 0;
-    NSArray *allEntries = [[[[rootXML child:@"GETCHECKDETAILS"] child:@"CHECK"] child:@"ENTRIES"] children:@"ENTRY"];
-    
-    for (RXMLElement *entry in allEntries)
-    {
-        OrderItemSummaryFromPOS *orderItemSummaryFromPOS = [[OrderItemSummaryFromPOS alloc]init];
-        orderItemSummaryFromPOS.posMenuItemId = [UtilCalls stringToNumber:[entry attribute:@"ITEMID"]].intValue;
-        orderItemSummaryFromPOS.qty = [UtilCalls stringToNumber:[entry attribute:@"QUANTITY"]].intValue;
-        orderItemSummaryFromPOS.price = [UtilCalls stringToNumber:[entry attribute:@"PRICE"]].floatValue;
-        orderItemSummaryFromPOS.name = [entry attribute:@"DISP_NAME"];
-        orderItemSummaryFromPOS.parentEntryId = [UtilCalls stringToNumber:[entry attribute:@"PARENTENTRY"]].intValue;
-        orderItemSummaryFromPOS.entryId = [UtilCalls stringToNumber:[entry attribute:@"ID"]].intValue;
-        orderItemSummaryFromPOS.position = position++;
-        
-        [items setObject:orderItemSummaryFromPOS forKey:[NSNumber numberWithLong:orderItemSummaryFromPOS.entryId]];
-    }
-    
-    return items;
-}
-
-- (void) parsePOSCheckDetails
-{
-    MutableOrderedDictionary *items = [self getCheckItemsFromXML:self.selectedOrder.orderDetails];
-    self.finalItems = [[NSMutableArray alloc]init];
-    
-    if (items != nil)
-    {
-        for (int i = 0; i < items.count; i++)
-        {
-            OrderItemSummaryFromPOS *item = [items objectAtIndex:i];
-            if (item.parentEntryId > 0)
-            {
-                OrderItemSummaryFromPOS *parentItem = [items objectForKey:[NSNumber numberWithLong:item.parentEntryId]];
-                if (parentItem != nil)
-                {
-                    NSString *desc;
-                    double finalPrice = parentItem.price;
-                    if (item.price > 0)
-                    {
-                        desc = [NSString stringWithFormat:@"%@ (%@)", item.name, [UtilCalls rawAmountToString:[NSNumber numberWithDouble:item.price]]];
-                        finalPrice = parentItem.price + item.price;
-                    }
-                    else
-                        desc = item.name;
-                    
-                    if (IsEmpty(parentItem.desc) == false)
-                        desc = [NSString stringWithFormat:@"%@, %@", parentItem.desc, desc];
-                    
-                    parentItem.desc = desc;
-                    parentItem.price = finalPrice;
-                    
-                    [items setObject:parentItem forKey:[NSNumber numberWithLong:parentItem.entryId]];
-                    //                    [items removeObjectForKey:[NSNumber numberWithLong:item.entryId]];
-                }
-            }
-        }
-        for (long i = items.count-1; i >=0; i--)
-        {
-            OrderItemSummaryFromPOS *item = [items objectAtIndex:i];
-            if (item.parentEntryId > 0)
-                [items removeObjectForKey:[NSNumber numberWithLong:item.entryId]];
-        }
-        
-        MutableOrderedDictionary *combinedItems = [[MutableOrderedDictionary alloc]init];
-        for (int i = 0; i < items.count; i++)
-        {
-            OrderItemSummaryFromPOS *item = [items objectAtIndex:i];
-            NSString *key = [NSString stringWithFormat:@"%d_%@_%@", item.posMenuItemId, [UtilCalls rawAmountToString:[NSNumber numberWithDouble:item.price]], item.desc];
-            OrderItemSummaryFromPOS *duplicateItem = [combinedItems objectForKey:key];
-            if (duplicateItem != nil)
-                duplicateItem.qty++;
-            else
-                [combinedItems setObject:item forKey:key];
-        }
-        for (int i = 0; i < combinedItems.count; i++)
-        {
-            OrderItemSummaryFromPOS *item = [combinedItems objectAtIndex:i];
-            [self.finalItems addObject:item];
-        }
-    }
 }
 
 #pragma mark - Table view data source
@@ -205,46 +109,6 @@
 
     cell.backgroundColor = [UIColor clearColor];
     return cell;
-}
-
-- (IBAction)onPayClick:(id)sender
-{
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeIndeterminate;
-    hud.labelText = @"Please Wait";
-    hud.hidden = NO;
-    
-    if (self)
-    {
-        __weak __typeof(self) weakSelf = self;
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-        GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-        long long storeTableGroupId = appDelegate.globalObjectHolder.inStoreOrderDetails.selectedTableGroup.identifier.longLongValue;
-        GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetMembersForStoreTableGroupWithStoreTableGroupId:storeTableGroupId];
-        
-        NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
-        dic[USER_AUTH_TOKEN_HEADER_NAME]=[UtilCalls getAuthTokenForCurrentUser];
-        
-        [query setAdditionalHTTPHeaders:dic];
-        
-        [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreTableGroupMemberCollection *object,NSError *error)
-         {
-             if(!error)
-             {
-                 appDelegate.globalObjectHolder.inStoreOrderDetails.tableGroupMembers = object;
-                 if (object.items.count == 1)
-                 {
-                     appDelegate.globalObjectHolder.inStoreOrderDetails.paymentType = [InStoreOrderDetails PAYMENT_TYPE_PAYINFULL];
-                     [weakSelf performSegueWithIdentifier:@"seguePayEntireAmount" sender:weakSelf];
-                 }
-                 else
-                     [weakSelf performSegueWithIdentifier:@"seguePaymentOption" sender:weakSelf];
-             }else{
-                 NSLog(@"setupExistingGroupsData Error:%@",[error userInfo][@"error"]);
-             }
-             hud.hidden = YES;
-         }];
-    }
 }
 
 /*
