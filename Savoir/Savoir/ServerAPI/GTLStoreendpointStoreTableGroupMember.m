@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStoreTableGroupMember (0 custom class methods, 21 custom properties)
+//   GTLStoreendpointStoreTableGroupMember (0 custom class methods, 22 custom properties)
 
 #import "GTLStoreendpointStoreTableGroupMember.h"
 
@@ -24,9 +24,9 @@
 
 @implementation GTLStoreendpointStoreTableGroupMember
 @dynamic createdDate, finalTotal, firstName, identifier, lastName, modifiedDate,
-         orderId, paidItems, payingFor, payingUserId, paymentChargeId,
-         paymentInvoice, paymentReceiptNumber, paymentType, profilePhotoUrl,
-         status, storeTableGroupId, subtotal, tax, tip, userId;
+         orderId, paidItems, parseObjectId, payingFor, payingUserId,
+         paymentChargeId, paymentInvoice, paymentReceiptNumber, paymentType,
+         profilePhotoUrl, status, storeTableGroupId, subtotal, tax, tip, userId;
 
 + (NSDictionary *)propertyToJSONKeyMap {
   NSDictionary *map =

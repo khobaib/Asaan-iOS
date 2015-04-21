@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DiscountReceiver.h"
+#import "GTLStoreendpoint.h"
 
 @interface OrderDiscountViewController : UIViewController
+
+@property (weak) id<DiscountReceiver>receiver;
+@property (strong, nonatomic) GTLStoreendpointStore *selectedStore;
 
 @end

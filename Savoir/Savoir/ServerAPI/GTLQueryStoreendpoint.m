@@ -52,6 +52,7 @@
 #import "GTLStoreendpointStoreMenuItemModifier.h"
 #import "GTLStoreendpointStoreMenuItemModifierGroup.h"
 #import "GTLStoreendpointStoreOrder.h"
+#import "GTLStoreendpointStoreOrderAndTeamDetails.h"
 #import "GTLStoreendpointStoreOrderListAndCount.h"
 #import "GTLStoreendpointStoreOwner.h"
 #import "GTLStoreendpointStoreOwnerCollection.h"
@@ -417,6 +418,13 @@
   return query;
 }
 
++ (id)queryForGetStoreTableGroupDetailsForCurrentUser {
+  NSString *methodName = @"storeendpoint.getStoreTableGroupDetailsForCurrentUser";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
+  query.expectedObjectClass = [GTLStoreendpointStoreOrderAndTeamDetails class];
+  return query;
+}
+
 + (id)queryForGetStoreTableGroupsForStoreWithStoreId:(long long)storeId {
   NSString *methodName = @"storeendpoint.getStoreTableGroupsForStore";
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
@@ -719,21 +727,12 @@
   return query;
 }
 
-+ (id)queryForUpdateStoreTableGroupWithOrderId:(long long)orderId
-                             storeTableGroupId:(long long)storeTableGroupId {
-  NSString *methodName = @"storeendpoint.updateStoreTableGroup";
-  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
-  query.orderId = orderId;
-  query.storeTableGroupId = storeTableGroupId;
-  return query;
-}
-
-+ (id)queryForUpdateStoreTableGroupMemberWithObject:(GTLStoreendpointStoreTableGroupMemberArray *)object {
++ (id)queryForUpdateStoreTableGroupMembersWithObject:(GTLStoreendpointStoreTableGroupMemberArray *)object {
   if (object == nil) {
     GTL_DEBUG_ASSERT(object != nil, @"%@ got a nil object", NSStringFromSelector(_cmd));
     return nil;
   }
-  NSString *methodName = @"storeendpoint.updateStoreTableGroupMember";
+  NSString *methodName = @"storeendpoint.updateStoreTableGroupMembers";
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
   query.bodyObject = object;
   return query;

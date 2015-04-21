@@ -14,10 +14,10 @@
 #import "InlineCalls.h"
 #import "Extension.h"
 #import "GTLStoreendpointStoreTableGroupCollection.h"
+#import "GTLStoreendpointStoreTableGroup.h"
 #import "InStoreOrderReceiver.h"
 
 @interface ServerSelectGroupTableViewController ()<InStoreOrderReceiver>
-@property (strong, nonatomic) GTLStoreendpointStoreTableGroupCollection *tableGroups;
 
 @end
 
@@ -75,10 +75,11 @@
 {
     // Return the number of rows in the section.
     
-    if (self.tableGroups == nil)
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    if (appDelegate.globalObjectHolder.inStoreOrderDetails.openGroups == nil)
         return 0;
     else
-        return self.tableGroups.items.count;
+        return appDelegate.globalObjectHolder.inStoreOrderDetails.openGroups.items.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -90,7 +91,8 @@
     
     cell.tag = indexPath.row;
     
-    GTLStoreendpointStoreTableGroup *tableGroup = [self.tableGroups.items objectAtIndex:indexPath.row];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    GTLStoreendpointStoreTableGroup *tableGroup = [appDelegate.globalObjectHolder.inStoreOrderDetails.openGroups.items objectAtIndex:indexPath.row];
     
     // NOTE: Rounded rect
     imgProfilePhoto.layer.cornerRadius = 10.0f;
@@ -131,36 +133,12 @@
     hud.labelText = @"Please Wait";
     hud.hidden = NO;
     
-    appDelegate.globalObjectHolder.inStoreOrderDetails.selectedTableGroup = [self.tableGroups.items objectAtIndex:indexPath.row];
-    appDelegate.globalObjectHolder.inStoreOrderDetails.selectedTableGroup.orderId = self.selectedOrder.identifier;
+    GTLStoreendpointStoreTableGroup *group = [appDelegate.globalObjectHolder.inStoreOrderDetails.openGroups.items objectAtIndex:indexPath.row];
     
-    [self updateStoreTableGroup:appDelegate.globalObjectHolder.inStoreOrderDetails.selectedTableGroup.identifier.longLongValue withOrderId:self.selectedOrder.identifier.longLongValue];
+    self.selectedOrder.storeTableGroupId = group.identifier;
+    [self.receiver changedGroupSelection:group];
     
     [self performSegueWithIdentifier:@"segueUnwindSelectGroupToOrderSummary" sender:self];
-}
-
-- (void) updateStoreTableGroup:(long long)tableGroupId withOrderId:(long long)orderId
-{
-    if (self)
-    {
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-        GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-        GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForUpdateStoreTableGroupWithOrderId:orderId storeTableGroupId:tableGroupId];
-        
-        NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
-        dic[USER_AUTH_TOKEN_HEADER_NAME]=[UtilCalls getAuthTokenForCurrentUser];
-        
-        [query setAdditionalHTTPHeaders:dic];
-        
-        [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreTableGroupCollection *object,NSError *error)
-         {
-             if(error)
-             {
-                 NSLog(@"setupExistingGroupsData Error:%@",[error userInfo][@"error"]);
-             }
-         }];
-    }
-
 }
 
 /*

@@ -19,6 +19,7 @@
 @interface SplitEvenTableViewController ()<InStoreOrderReceiver>
 @property (strong, nonatomic) NSIndexPath *indexOfMemberMe;
 @property (strong, nonatomic) NSMutableDictionary *changedMembers;
+@property (nonatomic, strong) NSTimer *timer;
 @end
 
 @implementation SplitEvenTableViewController
@@ -39,9 +40,17 @@
     self.changedMembers = [[NSMutableDictionary alloc]init];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
-    [self setupGroupMembers];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:35.0 target:self selector:@selector(refreshOrderDetails) userInfo:nil repeats:YES];
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+- (void)viewWillDisappear:(BOOL)animated
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+{
+    [super viewWillDisappear:animated];
+    [self.timer invalidate];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -51,18 +60,18 @@
 
 - (void)orderChanged
 {
-    // Don't Care.
-}
-
-- (void) tableGroupMemberChanged
-{
     [self.tableView reloadData];
 }
 
-- (void)setupGroupMembers
+- (void)openGroupsChanged
+{
+    // Don't Care.
+}
+
+- (void)refreshOrderDetails
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    [appDelegate.globalObjectHolder.inStoreOrderDetails getGroupMembers:self];
+    [appDelegate.globalObjectHolder.inStoreOrderDetails getStoreOrderDetails:self];
 }
 
 #pragma mark - Table view data source
@@ -84,7 +93,8 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    return appDelegate.globalObjectHolder.inStoreOrderDetails.tableGroupMembers.items.count;
+    long count = appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.members.count;
+    return count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -97,7 +107,7 @@
     cell.tag = indexPath.row;
     
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    GTLStoreendpointStoreTableGroupMember *member = [appDelegate.globalObjectHolder.inStoreOrderDetails.tableGroupMembers.items objectAtIndex:indexPath.row];
+    GTLStoreendpointStoreTableGroupMember *member = [appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.members objectAtIndex:indexPath.row];
     
     // NOTE: Rounded rect
     imgProfilePhoto.layer.cornerRadius = 10.0f;
@@ -147,9 +157,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
+//    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    GTLStoreendpointStoreTableGroupMember *member = [appDelegate.globalObjectHolder.inStoreOrderDetails.tableGroupMembers.items objectAtIndex:indexPath.row];
+    GTLStoreendpointStoreTableGroupMember *member = [appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.members objectAtIndex:indexPath.row];
     if (self.indexOfMemberMe.row == indexPath.row)
     {
         [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
@@ -163,13 +173,13 @@
     else
     {
         UITableViewCell *cellMe = [self.tableView cellForRowAtIndexPath:self.indexOfMemberMe];
-        GTLStoreendpointStoreTableGroupMember *memberMe = appDelegate.globalObjectHolder.inStoreOrderDetails.memberMe;
+        GTLStoreendpointStoreTableGroupMember *memberMe = appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.memberMe;
         if (cellMe.accessoryType == UITableViewCellAccessoryNone)
         {
             [cellMe setAccessoryType:UITableViewCellAccessoryCheckmark];
             memberMe.payingUserId = memberMe.userId;
             memberMe.payingFor = [NSNumber numberWithInt:1];
-            [self.changedMembers setObject:member forKey:indexPath];
+            [self.changedMembers setObject:memberMe forKey:self.indexOfMemberMe];
         }
 
         if (cell.accessoryType == UITableViewCellAccessoryCheckmark)
@@ -201,18 +211,24 @@
 - (NSString *)payingForStringForRow:(NSUInteger)row
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    GTLStoreendpointStoreTableGroupMember *member = [appDelegate.globalObjectHolder.inStoreOrderDetails.tableGroupMembers.items objectAtIndex:row];
+    GTLStoreendpointStoreTableGroupMember *payingMember = [appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.members objectAtIndex:row];
+    long long payingUserId = payingMember.userId.longLongValue;
     
-    if (member.payingUserId.longLongValue != member.userId.longLongValue)
+    int payingForCount = 0;
+    for (GTLStoreendpointStoreTableGroupMember *member in appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.members)
     {
-        for (GTLStoreendpointStoreTableGroupMember *otherMember in appDelegate.globalObjectHolder.inStoreOrderDetails.tableGroupMembers.items)
-        {
-            if (otherMember.userId.longLongValue == member.payingUserId.longLongValue)
-                return [NSString stringWithFormat:@"Paid by %@ %@", otherMember.firstName, otherMember.lastName];
-        }
+        if (member.payingUserId.longLongValue == payingUserId)
+            payingForCount++;
     }
-    else
-        return [NSString stringWithFormat:@"Paying for %d of %lu", member.payingFor.intValue, (unsigned long)appDelegate.globalObjectHolder.inStoreOrderDetails.tableGroupMembers.items.count];
+    payingMember.payingFor = [NSNumber numberWithInt:payingForCount];
+    if (payingMember.payingFor.intValue > 0)
+        return [NSString stringWithFormat:@"Paying for %d of %lu", payingMember.payingFor.intValue, (unsigned long)appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.members.count];
+    
+    for (GTLStoreendpointStoreTableGroupMember *otherMember in appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.members)
+    {
+        if (otherMember.userId.longLongValue == payingMember.payingUserId.longLongValue)
+            return [NSString stringWithFormat:@"Paid by %@ %@", otherMember.firstName, otherMember.lastName];
+    }
     return nil;
 }
 

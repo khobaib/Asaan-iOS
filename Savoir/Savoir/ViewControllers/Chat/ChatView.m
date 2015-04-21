@@ -126,7 +126,7 @@
 	self.collectionView.collectionViewLayout.springinessEnabled = YES;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     appDelegate.notificationUtils.chatView = self;
-//	timer = [NSTimer scheduledTimerWithTimeInterval:15.0 target:self selector:@selector(loadMessagesForSend:false) userInfo:nil repeats:YES];
+	timer = [NSTimer scheduledTimerWithTimeInterval:35.0 target:self selector:@selector(refreshMessageView) userInfo:nil repeats:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -162,7 +162,7 @@
 	[super viewWillDisappear:animated];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     appDelegate.notificationUtils.chatView = nil;
-//	[timer invalidate];
+	[timer invalidate];
 }
 
 #pragma mark - Backend methods

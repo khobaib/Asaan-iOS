@@ -14,6 +14,7 @@
 #import "InlineCalls.h"
 #import "Extension.h"
 #import "ServerOrderSummaryViewController.h"
+#import "XMLPOSOrder.h"
 
 @interface TablesViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnEdit;
@@ -22,6 +23,7 @@
 
 @property (strong, nonatomic) GTLStoreendpointTableGroupsAndOrders *ordersAndGroups;
 @property (strong, nonatomic) NSMutableArray *orders;
+@property (nonatomic, strong) NSTimer *timer;
 
 @end
 
@@ -45,6 +47,15 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:35.0 target:self selector:@selector(setupExistingTablesFromOrders) userInfo:nil repeats:YES];
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+- (void)viewWillDisappear:(BOOL)animated
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+{
+    [super viewWillDisappear:animated];
+    [self.timer invalidate];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -145,7 +156,7 @@
     GTLStoreendpointStoreTableGroup *tableGroup;
     for (GTLStoreendpointStoreTableGroup *tg in self.ordersAndGroups.groups)
     {
-        if (tg.orderId.longLongValue == order.identifier.longLongValue)
+        if (tg.identifier.longLongValue == order.storeTableGroupId.longLongValue)
         {
             tableGroup = tg;
             break;
@@ -161,7 +172,7 @@
     else if (order.orderStatus.shortValue == 3)
         txtStatus.text = @"Status: Partially Paid";
     else if (order.orderStatus.shortValue == 4)
-        txtStatus.text = @"Status: Completely Paid";
+        txtStatus.text = @"Status: Paid";
     else if (order.orderStatus.shortValue == 5)
         txtStatus.text = @"Status: Closed";
     
@@ -243,7 +254,8 @@
 - (IBAction)btnAddClicked:(id)sender
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    appDelegate.globalObjectHolder.inStoreOrderDetails.order = nil;
+    appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails = [[GTLStoreendpointStoreOrderAndTeamDetails alloc]init];
+    appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order = nil;
     [self performSegueWithIdentifier:@"segueTablesToOrderSummary" sender:self];
 }
 
@@ -254,7 +266,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    appDelegate.globalObjectHolder.inStoreOrderDetails.order = [self.orders objectAtIndex:indexPath.row];
+    appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails = [[GTLStoreendpointStoreOrderAndTeamDetails alloc]init];
+    appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order = [self.orders objectAtIndex:indexPath.row];
+    appDelegate.globalObjectHolder.inStoreOrderDetails.selectedDiscount = [XMLPOSOrder getDiscountFromXML:appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.orderDetails];
     [self performSegueWithIdentifier:@"segueTablesToOrderSummary" sender:self];
 }
 
@@ -265,30 +279,26 @@
 - (void) changedOrder:(GTLStoreendpointStoreOrder *)order
 {
     long long changedOrderId = order.identifier.longLongValue;
-    int index = 0;
-    for (GTLStoreendpointStoreOrder *oldOrder in self.orders)
-    {
-        if(changedOrderId == oldOrder.identifier.longLongValue)
-        {
-            if (order.orderStatus.intValue == 5) // Closed
-            {
-                [self.orders removeObjectAtIndex:index];
-                [self.tableView reloadData];
-            }
-            else
-            {
-                [self.orders replaceObjectAtIndex:index withObject:order];
-                NSMutableArray *array = [[NSMutableArray alloc]initWithCapacity:1];
-                [array addObject:[NSIndexPath indexPathForRow:index inSection:0]];
-                [self.tableView reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationAutomatic];
-            }
-            return;
-        }
-    }
-    [self.orders addObject:order];
-    [self.tableView reloadData];
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    appDelegate.globalObjectHolder.inStoreOrderDetails = nil;
+    if (changedOrderId == 0)
+        return;
+    [self setupExistingTablesFromOrders];
+//    int index = 0;
+//    Boolean bFound = false;
+//    for (GTLStoreendpointStoreOrder *oldOrder in self.orders)
+//    {
+//        if(changedOrderId == oldOrder.identifier.longLongValue)
+//        {
+//            if (order.orderStatus.intValue == 5) // Closed
+//                [self.orders removeObjectAtIndex:index];
+//            else
+//                [self.orders replaceObjectAtIndex:index withObject:order];
+//            bFound = true;
+//            break;
+//        }
+//    }
+//    if (bFound == false)
+//        [self.orders addObject:order];
+//    [self.tableView reloadData];
 }
 
 #pragma mark - Navigation

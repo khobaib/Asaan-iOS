@@ -125,7 +125,7 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
-    if (goh.orderInProgress != nil)
+    if (goh.inStoreOrderDetails == nil && goh.orderInProgress != nil)
     {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setImage:[UIImage imageNamed:@"cart.png"] forState:UIControlStateNormal];

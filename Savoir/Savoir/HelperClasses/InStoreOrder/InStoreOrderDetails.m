@@ -13,6 +13,7 @@
 #import "RXMLElement.h"
 #import "OrderedDictionary.h"
 #import "InlineCalls.h"
+#import "XMLPOSOrder.h"
 
 @implementation InStoreOrderDetails
 
@@ -24,7 +25,6 @@
 {
     if (self)
     {
-        __weak __typeof(self) weakSelf = self;
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
         GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
         long long storeId = self.selectedStore.identifier.longLongValue;
@@ -37,9 +37,7 @@
         
         [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreTableGroup *object, NSError *error)
          {
-             if(!error)
-                 weakSelf.selectedTableGroup = object;
-             else
+             if(error)
                  NSLog(@"setupExistingGroupsData Error:%@",[error userInfo][@"error"]);
          }];
     }
@@ -47,20 +45,18 @@
 
 - (void) joinGroup:(GTLStoreendpointStoreTableGroup *)tableGroup
 {
-    self.selectedTableGroup = tableGroup;
-    
     if (self)
     {
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
         GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-        GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForAddMemberToStoreTableGroupWithOrderId:appDelegate.globalObjectHolder.inStoreOrderDetails.selectedTableGroup.orderId.longLongValue storeTableGroupId:appDelegate.globalObjectHolder.inStoreOrderDetails.selectedTableGroup.identifier.longLongValue];
+        GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForAddMemberToStoreTableGroupWithOrderId:tableGroup.orderId.longLongValue storeTableGroupId:tableGroup.identifier.longLongValue];
         
         NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
         dic[USER_AUTH_TOKEN_HEADER_NAME]=[UtilCalls getAuthTokenForCurrentUser];
         
         [query setAdditionalHTTPHeaders:dic];
         
-        [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, id object,NSError *error)
+        [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreTableGroupMember *object,NSError *error)
          {
              if(error)
                  NSLog(@"queryForAddMemberToStoreTableGroup Error:%@",[error userInfo][@"error"]);
@@ -103,58 +99,26 @@
         __weak __typeof(self) weakSelf = self;
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
         GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-        long long orderId = self.selectedTableGroup.orderId.longLongValue;
-        NSLog(@"getStoreOrderDetails orderId = %lld selectedTableGroupId = %lld", orderId, self.selectedTableGroup.identifier.longLongValue);
-        if (orderId == 0)
-            return;
-        GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetStoreOrderByIdWithOrderId:orderId];
+        
+        GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetStoreTableGroupDetailsForCurrentUser];
         
         NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
         dic[USER_AUTH_TOKEN_HEADER_NAME]=[UtilCalls getAuthTokenForCurrentUser];
         
         [query setAdditionalHTTPHeaders:dic];
         
-        [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreOrder *object,NSError *error)
+        [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreOrderAndTeamDetails *object,NSError *error)
          {
              if(!error)
              {
-                 weakSelf.order = object;
-                 NSLog(@"parseOrderDetails XML=%@", object.orderDetails);
+                 weakSelf.teamAndOrderDetails = object;
+                 weakSelf.selectedDiscount = [XMLPOSOrder getDiscountFromXML:appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.orderDetails];
                  [receiver orderChanged];
              }else{
                  NSLog(@"getStoreOrderDetails Error:%@",[error userInfo][@"error"]);
              }
          }];
     }
-}
-
-- (void)getGroupMembers:(id <InStoreOrderReceiver>)receiver
-{
-    if (self)
-    {
-        __weak __typeof(self) weakSelf = self;
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-        GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-        long long storeTableGroupId = appDelegate.globalObjectHolder.inStoreOrderDetails.selectedTableGroup.identifier.longLongValue;
-        GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetMembersForStoreTableGroupWithStoreTableGroupId:storeTableGroupId];
-        
-        NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
-        dic[USER_AUTH_TOKEN_HEADER_NAME]=[UtilCalls getAuthTokenForCurrentUser];
-        
-        [query setAdditionalHTTPHeaders:dic];
-        
-        [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreTableGroupMemberCollection *object,NSError *error)
-         {
-             if(!error)
-             {
-                 weakSelf.tableGroupMembers = object;
-                 [receiver tableGroupMemberChanged];
-             }else{
-                 NSLog(@"getGroupMembers Error:%@",[error userInfo][@"error"]);
-             }
-         }];
-    }
-
 }
 
 - (void) updateStoreTableGroupMembers:(NSMutableDictionary *)changedMembers
@@ -164,7 +128,7 @@
     
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-    GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForUpdateStoreTableGroupMemberWithObject:memberCollection];
+    GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForUpdateStoreTableGroupMembersWithObject:memberCollection];
     
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
     dic[USER_AUTH_TOKEN_HEADER_NAME]=[UtilCalls getAuthTokenForCurrentUser];
@@ -178,48 +142,12 @@
      }];
 }
 
-- (MutableOrderedDictionary *)getCheckItemsFromXML:(NSString *)strPOSCheckDetails
+- (void) clearCurrentOrder
 {
-    if (IsEmpty(strPOSCheckDetails))
-        return nil;
-    RXMLElement *rootXML = [RXMLElement elementFromXMLString:strPOSCheckDetails encoding:NSUTF8StringEncoding];
-    if (rootXML == nil)
-        return nil;
-    //    NSArray *rxmlEntries = [[[rootXML child:@"GETCHECKDETAILS"] child:@"CHECK"] children:@"ENTRIES"];
-    MutableOrderedDictionary *items = [[MutableOrderedDictionary alloc]init];
-    
-    int position = 0;
-    NSArray *allEntries = [[[[rootXML child:@"GETCHECKDETAILS"] child:@"CHECK"] child:@"ENTRIES"] children:@"ENTRY"];
-    
-    for (RXMLElement *entry in allEntries)
-    {
-        OrderItemSummaryFromPOS *orderItemSummaryFromPOS = [[OrderItemSummaryFromPOS alloc]init];
-        orderItemSummaryFromPOS.posMenuItemId = [UtilCalls stringToNumber:[entry attribute:@"ITEMID"]].intValue;
-        orderItemSummaryFromPOS.qty = [UtilCalls stringToNumber:[entry attribute:@"QUANTITY"]].intValue;
-        orderItemSummaryFromPOS.price = [UtilCalls stringToNumber:[entry attribute:@"PRICE"]].floatValue;
-        orderItemSummaryFromPOS.name = [entry attribute:@"DISP_NAME"];
-        orderItemSummaryFromPOS.desc = [entry attribute:@"OPTION"];
-        orderItemSummaryFromPOS.entryId = [UtilCalls stringToNumber:[entry attribute:@"ID"]].intValue;
-        orderItemSummaryFromPOS.position = position++;
-        
-        [items setObject:orderItemSummaryFromPOS forKey:[NSNumber numberWithLong:orderItemSummaryFromPOS.entryId]];
-    }
-    
-    return items;
+    self.teamAndOrderDetails = nil;
+    self.partySize = 0;
+    self.paymentType = [InStoreOrderDetails PAYMENT_TYPE_PAYINFULL];
+    self.selectedDiscount = nil;
 }
-
-- (NSMutableArray *) parseOrderDetails
-{
-    MutableOrderedDictionary *items = [self getCheckItemsFromXML:self.order.orderDetails];
-    NSMutableArray *finalItems = [[NSMutableArray alloc]init];
-    for (int i = 0; i < items.count; i++)
-    {
-        OrderItemSummaryFromPOS *item = [items objectAtIndex:i];
-        [finalItems addObject:item];
-    }
-    NSLog(@"parseOrderDetails count=%ld", (long)finalItems.count);
-    return finalItems;
-}
-
 
 @end

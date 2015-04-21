@@ -15,7 +15,7 @@
 #import "AppDelegate.h"
 #import "OrderItemSummaryFromPOS.h"
 #import "InlineCalls.h"
-
+#import "RXMLElement.h"
 
 @implementation XMLPOSOrder
 
@@ -111,25 +111,15 @@
  </POSRESPONSE>
  */
 
-NSString *beginXMLResponseStr = @"<POSRESPONSE> <GETCHECKDETAILS> <CHECK ENTRYCOUNT=\"%ld\" GUESTCOUNT=\"%ld\" TABLENUMBER=\"%ld\" SUBTOTAL=\"%@\" TAX=\"%@\" SERVICECHARGES=\"%@\" COMPLETETOTAL=\"%@\" DELIVERY=\"%@\"> <ENTRIES>";
+NSString *beginXMLResponseStr = @"<POSRESPONSE> <GETCHECKDETAILS> <CHECK ID=\"%ld\" ENTRYCOUNT=\"%ld\" GUESTCOUNT=\"%ld\" TABLENUMBER=\"%ld\" SUBTOTAL=\"%@\" TAX=\"%@\" SERVICECHARGES=\"%@\" COMPLETETOTAL=\"%@\" DELIVERY=\"%@\"> <ENTRIES>";
 
 NSString *tableRowXML = @"<ENTRY ID=\"%d\" QUANTITY=\"%@\" PRICE=\"%@\" DISP_NAME=\"%@\" OPTION=\"%@\" ITEMID=\"%ld\" />";
 
-NSString *discountStrFormat = @"<DISCOUNTS DESC=\"%@\" AMOUNT=\"%@\"/>";
+NSString *discountStrFormat = @"<DISCOUNTS DESC=\"%@\" AMOUNT=\"%@\" ID=\"%lld\" ISPERCENT=\"%d\" VALUE=\"%d\" />";
 NSString *discountStrEmptyFormat = @"<DISCOUNTS />";
 
-+ (NSString *)buildPOSResponseXML:(OnlineOrderDetails *)orderInProgress gratuity:(double)gratuity discountTitle:(NSString *)discountTitle discountAmount:(double)discountAmount subTotal:(double)subTotal deliveryFee:(double)deliveryFee taxAmount:(double)taxAmount finalAmount:(double)finalAmount guestCount:(NSUInteger)guestCount tableNumber:(NSUInteger)tableNumber
++ (NSString *)buildPOSResponseXML:(OnlineOrderDetails *)orderInProgress checkId:(long)checkId gratuity:(double)gratuity subTotal:(double)subTotal deliveryFee:(double)deliveryFee taxAmount:(double)taxAmount finalAmount:(double)finalAmount guestCount:(NSUInteger)guestCount tableNumber:(NSUInteger)tableNumber
 {
-    NSString *discountStr = nil;
-    if (discountAmount > 0)
-    {
-        NSNumber *amount = [[NSNumber alloc] initWithDouble:discountAmount];
-        NSString *amountStr = [UtilCalls doubleAmountToStringNoCurrency:amount];
-        discountStr = [NSString stringWithFormat:discountStrFormat, discountTitle, amountStr];
-    }
-    else
-        discountStr = discountStrEmptyFormat;
-    
     NSString *paymentStr = [NSString stringWithFormat:@"<PAYMENTS BRAND=\"--CARDTYPE--\" LASTFOUR=\"--CARDLASTFOUR--\" />"];
     
     NSNumber *amount = [[NSNumber alloc] initWithDouble:subTotal];
@@ -171,9 +161,9 @@ NSString *discountStrEmptyFormat = @"<DISCOUNTS />";
         allTableRows = [NSString stringWithFormat:@"%@ %@", allTableRows, menuItemRow];
         entryId++;
     }
-    NSString *orderHTMLStr = [NSString stringWithFormat:beginXMLResponseStr, (long)entryId, (long)guestCount, (long)tableNumber, subTotalStr, taxStr, gratuityStr, orderTotalStr, deliveryFeeStr];
+    NSString *orderHTMLStr = [NSString stringWithFormat:beginXMLResponseStr, checkId, (long)entryId, (long)guestCount, (long)tableNumber, subTotalStr, taxStr, gratuityStr, orderTotalStr, deliveryFeeStr];
     
-    NSString *finalStr = [NSString stringWithFormat:@"%@ %@ </ENTRIES> %@ %@</CHECK></GETCHECKDETAILS></POSRESPONSE>", orderHTMLStr, allTableRows, discountStr, paymentStr];
+    NSString *finalStr = [NSString stringWithFormat:@"%@ %@ </ENTRIES> %@ %@</CHECK></GETCHECKDETAILS></POSRESPONSE>", orderHTMLStr, allTableRows, discountStrEmptyFormat, paymentStr];
     finalStr = [finalStr stringByReplacingOccurrencesOfString:@"(null)" withString:@""];
    
     return finalStr;
@@ -205,12 +195,12 @@ NSString *discountStrEmptyFormat = @"<DISCOUNTS />";
         }
         if (option == nil)
         {
-            if (object.specialInstructions != nil)
+            if (IsEmpty(object.specialInstructions) != true)
                 option = [NSString stringWithFormat:@"NOTE: %@ \n", object.specialInstructions];
         }
         else
         {
-            if (object.specialInstructions != nil)
+            if (IsEmpty(object.specialInstructions) != true)
                 option = [NSString stringWithFormat:@"OPTIONS: %@ NOTE: %@ \n", option, object.specialInstructions];
         }
         
@@ -266,7 +256,7 @@ NSString *discountStrEmptyFormat = @"<DISCOUNTS />";
     return finalStr;
 }
 
-+ (NSString *) replaceValuesInOrderString:(NSString *)XMLOrderStr gratuity:(double)gratuity discountTitle:(NSString *)discountTitle discountAmount:(double)discountAmount subTotal:(double)subTotal deliveryFee:(double)deliveryFee taxAmount:(double)taxAmount finalAmount:(double)finalAmount guestCount:(NSUInteger)guestCount tableNumber:(NSUInteger)tableNumber
++ (NSString *) replaceValuesInOrderString:(NSString *)XMLOrderStr gratuity:(double)gratuity subTotal:(double)subTotal deliveryFee:(double)deliveryFee taxAmount:(double)taxAmount finalAmount:(double)finalAmount checkId:(long)checkId guestCount:(NSUInteger)guestCount tableNumber:(NSUInteger)tableNumber
 {
     XMLOrderStr = [XMLPOSOrder changeOldAmountTo:gratuity InOrderString:XMLOrderStr forAmountType:@"SERVICECHARGES"];
     XMLOrderStr = [XMLPOSOrder changeOldAmountTo:subTotal InOrderString:XMLOrderStr forAmountType:@"SUBTOTAL"];
@@ -274,11 +264,10 @@ NSString *discountStrEmptyFormat = @"<DISCOUNTS />";
     XMLOrderStr = [XMLPOSOrder changeOldAmountTo:finalAmount InOrderString:XMLOrderStr forAmountType:@"COMPLETETOTAL"];
     XMLOrderStr = [XMLPOSOrder changeOldAmountTo:guestCount InOrderString:XMLOrderStr forAmountType:@"GUESTCOUNT"];
     XMLOrderStr = [XMLPOSOrder changeOldAmountTo:tableNumber InOrderString:XMLOrderStr forAmountType:@"TABLENUMBER"];
-    XMLOrderStr = [XMLPOSOrder replaceDiscountStrWithDescription:discountTitle Amount:discountAmount InOrderString:XMLOrderStr];
+    XMLOrderStr = [XMLPOSOrder changeOldAmountTo:checkId InOrderString:XMLOrderStr forAmountType:@"CHECK ID"];
     
     XMLOrderStr = [XMLOrderStr stringByReplacingOccurrencesOfString:@"(null)" withString:@""];
     
-    NSLog(@"RemovingItem XMLOrderStr = %@", XMLOrderStr);
     return XMLOrderStr;
 }
 
@@ -333,17 +322,14 @@ NSString *discountStrEmptyFormat = @"<DISCOUNTS />";
     return [XMLOrderStr stringByReplacingOccurrencesOfString:searchStr withString:replaceStr];
 }
 
-//NSString *discountStrFormat = @"<DISCOUNTS DESC=\"%@\" AMOUNT=\"%@\"/>";
-//NSString *discountStrEmptyFormat = @"<DISCOUNTS />";
-
-+ (NSString *)replaceDiscountStrWithDescription:(NSString *)desc Amount:(double)newAmount InOrderString:(NSString *)XMLOrderStr
++ (NSString *)replaceDiscountIdWith:(long long)discountId Description:(NSString *)discountTitle IsPercent:(int) discountIsPercent Value:(int) discountValue Amount:(double)newAmount InOrderString:(NSString *)XMLOrderStr
 {
     NSString *newDiscountStr = nil;
-    if (newAmount > 0)
+    if (discountId > 0)
     {
         NSNumber *amount = [[NSNumber alloc] initWithDouble:newAmount];
         NSString *amountStr = [UtilCalls doubleAmountToStringNoCurrency:amount];
-        newDiscountStr = [NSString stringWithFormat:discountStrFormat, desc, amountStr];
+        newDiscountStr = [NSString stringWithFormat:discountStrFormat, discountTitle, amountStr, discountId, discountIsPercent, discountValue];
     }
     else
         newDiscountStr = discountStrEmptyFormat;
@@ -352,15 +338,146 @@ NSString *discountStrEmptyFormat = @"<DISCOUNTS />";
     if (startRange.location != NSNotFound)
         return [XMLOrderStr stringByReplacingOccurrencesOfString:discountStrEmptyFormat withString:newDiscountStr];
     
-    NSString *searchStr = @"<DISCOUNTS DESC=\"";
+    NSString *searchStr = @"<DISCOUNTS ";
     startRange = [XMLOrderStr rangeOfString:searchStr];
     searchStr = @"/>";
     NSString *tempStr = [XMLOrderStr substringFromIndex:NSMaxRange(startRange)];
     NSRange endRange = [tempStr rangeOfString:searchStr];
     NSString *detailStr = [tempStr substringToIndex:NSMaxRange(endRange)];
     
-    searchStr = [NSString stringWithFormat:@"<DISCOUNTS DESC=\"%@", detailStr];
+    searchStr = [NSString stringWithFormat:@"<DISCOUNTS %@", detailStr];
     return [XMLOrderStr stringByReplacingOccurrencesOfString:searchStr withString:newDiscountStr];
 }
 
+// NSString *discountStrFormat = @"<DISCOUNTS DESC=\"%@\" AMOUNT=\"%@\" ID=\"%lld\" ISPERCENT=\"%d\" VALUE=\"%d\" />";
+
++ (GTLStoreendpointStoreDiscount *)getDiscountFromXML:(NSString *)strPOSCheckDetails
+{
+    NSString *title;
+    long long discountId;
+    int isPercent;
+    int value;
+    
+    // NSString *discountStrFormat = @"<DISCOUNTS DESC=\"%@\" AMOUNT=\"%@\" ID=\"%lld\" ISPERCENT=\"%d\" VALUE=\"%d\" />";
+    NSString *searchStr = @"<DISCOUNTS ";
+    NSRange beginRange = [strPOSCheckDetails rangeOfString:searchStr];
+    if (beginRange.location == NSNotFound)
+        return nil;
+    
+    NSString *tempStr = [strPOSCheckDetails substringFromIndex:NSMaxRange(beginRange)];
+    searchStr = @"/>";
+    NSRange endRange = [tempStr rangeOfString:searchStr];
+    if (endRange.location == NSNotFound)
+        return nil;
+    NSString *discountStr = [tempStr substringToIndex:NSMaxRange(endRange)];
+    
+    // ------Get Title--------------
+    searchStr = @"DESC=\"";
+    NSRange startRange = [discountStr rangeOfString:searchStr];
+    if (startRange.location == NSNotFound)
+        return nil;
+    tempStr = [discountStr substringFromIndex:NSMaxRange(startRange)];
+
+    searchStr = @"\"";
+    endRange = [tempStr rangeOfString:searchStr];
+    if (endRange.location == NSNotFound)
+        return nil;
+    title = [tempStr substringToIndex:NSMaxRange(endRange)-1];
+    // ------Get Title--------------
+    
+    // ------Get ID--------------
+    searchStr = @"ID=\"";
+    startRange = [discountStr rangeOfString:searchStr];
+    if (startRange.location == NSNotFound)
+        return nil;
+    tempStr = [discountStr substringFromIndex:NSMaxRange(startRange)];
+    
+    searchStr = @"\"";
+    endRange = [tempStr rangeOfString:searchStr];
+    if (endRange.location == NSNotFound)
+        return nil;
+    NSString *tempNumStr = [tempStr substringToIndex:NSMaxRange(endRange)-1];
+    discountId = [tempNumStr longLongValue];
+    // ------Get ID--------------
+    
+    // ------Get IsPercent--------------
+    searchStr = @"ISPERCENT=\"";
+    startRange = [discountStr rangeOfString:searchStr];
+    if (startRange.location == NSNotFound)
+        return nil;
+    tempStr = [discountStr substringFromIndex:NSMaxRange(startRange)];
+    
+    searchStr = @"\"";
+    endRange = [tempStr rangeOfString:searchStr];
+    if (endRange.location == NSNotFound)
+        return nil;
+    tempNumStr = [tempStr substringToIndex:NSMaxRange(endRange)-1];
+    isPercent = [tempNumStr intValue];
+    // ------Get IsPercent--------------
+    
+    // ------Get Value--------------
+    searchStr = @"VALUE=\"";
+    startRange = [discountStr rangeOfString:searchStr];
+    if (startRange.location == NSNotFound)
+        return nil;
+    tempStr = [discountStr substringFromIndex:NSMaxRange(startRange)];
+    
+    searchStr = @"\"";
+    endRange = [tempStr rangeOfString:searchStr];
+    if (endRange.location == NSNotFound)
+        return nil;
+    tempNumStr = [tempStr substringToIndex:NSMaxRange(endRange)];
+    value = [tempNumStr intValue];
+    // ------Get Value--------------
+    
+    GTLStoreendpointStoreDiscount *storeDiscount = [[GTLStoreendpointStoreDiscount alloc]init];
+    storeDiscount.identifier = [NSNumber numberWithLongLong:discountId];
+    storeDiscount.title = title;
+    storeDiscount.percentOrAmount = [NSNumber numberWithInt:isPercent];
+    storeDiscount.value = [NSNumber numberWithInt:value];
+    return storeDiscount;
+}
+
++ (MutableOrderedDictionary *)getCheckItemsFromXML:(NSString *)strPOSCheckDetails
+{
+    if (IsEmpty(strPOSCheckDetails))
+        return nil;
+    RXMLElement *rootXML = [RXMLElement elementFromXMLString:strPOSCheckDetails encoding:NSUTF8StringEncoding];
+    if (rootXML == nil)
+        return nil;
+    //    NSArray *rxmlEntries = [[[rootXML child:@"GETCHECKDETAILS"] child:@"CHECK"] children:@"ENTRIES"];
+    MutableOrderedDictionary *items = [[MutableOrderedDictionary alloc]init];
+    
+    int position = 0;
+    NSArray *allEntries = [[[[rootXML child:@"GETCHECKDETAILS"] child:@"CHECK"] child:@"ENTRIES"] children:@"ENTRY"];
+    
+    for (RXMLElement *entry in allEntries)
+    {
+        OrderItemSummaryFromPOS *orderItemSummaryFromPOS = [[OrderItemSummaryFromPOS alloc]init];
+        orderItemSummaryFromPOS.posMenuItemId = [UtilCalls stringToNumber:[entry attribute:@"ITEMID"]].intValue;
+        orderItemSummaryFromPOS.qty = [UtilCalls stringToNumber:[entry attribute:@"QUANTITY"]].intValue;
+        orderItemSummaryFromPOS.price = [UtilCalls stringToNumber:[entry attribute:@"PRICE"]].floatValue;
+        orderItemSummaryFromPOS.name = [entry attribute:@"DISP_NAME"];
+        orderItemSummaryFromPOS.desc = [entry attribute:@"OPTION"];
+        orderItemSummaryFromPOS.entryId = [UtilCalls stringToNumber:[entry attribute:@"ID"]].intValue;
+        orderItemSummaryFromPOS.position = position++;
+        
+        [items setObject:orderItemSummaryFromPOS forKey:[NSNumber numberWithLong:orderItemSummaryFromPOS.entryId]];
+    }
+    
+    return items;
+}
+
++ (NSMutableArray *) parseOrderDetails:(NSString *)orderDetails
+{
+    MutableOrderedDictionary *items = [self getCheckItemsFromXML:orderDetails];
+    NSMutableArray *finalItems = [[NSMutableArray alloc]init];
+    for (int i = 0; i < items.count; i++)
+    {
+        OrderItemSummaryFromPOS *item = [items objectAtIndex:i];
+        [finalItems addObject:item];
+    }
+    NSLog(@"parseOrderDetails count=%ld", (long)finalItems.count);
+    return finalItems;
+}
 @end

@@ -321,6 +321,12 @@
 + (id)queryForGetStoresWithStatsWithFirstPosition:(NSInteger)firstPosition
                                         maxResult:(NSInteger)maxResult;
 
+// Method: storeendpoint.getStoreTableGroupDetailsForCurrentUser
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
+// Fetches a GTLStoreendpointStoreOrderAndTeamDetails.
++ (id)queryForGetStoreTableGroupDetailsForCurrentUser;
+
 // Method: storeendpoint.getStoreTableGroupsForStore
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
@@ -476,15 +482,9 @@
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 + (id)queryForUpdateStoreCoordinates;
 
-// Method: storeendpoint.updateStoreTableGroup
+// Method: storeendpoint.updateStoreTableGroupMembers
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
-+ (id)queryForUpdateStoreTableGroupWithOrderId:(long long)orderId
-                             storeTableGroupId:(long long)storeTableGroupId;
-
-// Method: storeendpoint.updateStoreTableGroupMember
-//  Authorization scope(s):
-//   kGTLAuthScopeStoreendpointUserinfoEmail
-+ (id)queryForUpdateStoreTableGroupMemberWithObject:(GTLStoreendpointStoreTableGroupMemberArray *)object;
++ (id)queryForUpdateStoreTableGroupMembersWithObject:(GTLStoreendpointStoreTableGroupMemberArray *)object;
 
 @end

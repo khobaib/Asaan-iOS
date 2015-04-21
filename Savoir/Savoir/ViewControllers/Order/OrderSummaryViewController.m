@@ -32,8 +32,10 @@
 #import "Constants.h"
 #import "XMLPOSOrder.h"
 #import "HTMLFaxOrder.h"
+#import "OrderDiscountViewController.h"
+#import "DiscountReceiver.h"
 
-@interface OrderSummaryViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface OrderSummaryViewController () <UITableViewDataSource, UITableViewDelegate, DiscountReceiver>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) OnlineOrderDetails *orderInProgress;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnAdd;
@@ -159,8 +161,7 @@
     if (self.orderInProgress.selectedStore.providesPosIntegration.boolValue == NO)
     {
         strOrder = order.orderHTML;
-        order.orderDetails = [XMLPOSOrder buildPOSResponseXML:self.orderInProgress gratuity:[self gratuity] discountTitle:self.orderInProgress.selectedDiscount.title discountAmount:[self discountAmount] subTotal:[self subTotal] deliveryFee:[self deliveryFee] taxAmount:[self taxAmount]
-                                                                finalAmount:[self finalAmount] guestCount:order.guestCount.intValue tableNumber:0];
+        order.orderDetails = [XMLPOSOrder buildPOSResponseXML:self.orderInProgress checkId:0 gratuity:[self gratuity] subTotal:[self subTotal] deliveryFee:[self deliveryFee] taxAmount:[self taxAmount] finalAmount:[self finalAmount] guestCount:order.guestCount.intValue tableNumber:0];
     }
     else
         strOrder = [XMLPOSOrder buildPOSOrder:self.orderInProgress gratuity:[self gratuity]];
@@ -261,6 +262,17 @@
     [super setEditing:editing animated:animated];
     [self.tableView setEditing:editing animated:YES];
 }
+
+#pragma mark -
+#pragma mark === DiscountReceiver ===
+#pragma mark -
+
+- (void)selectedDiscount:(GTLStoreendpointStoreDiscount *)discount
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    appDelegate.globalObjectHolder.orderInProgress.selectedDiscount = discount;
+}
+
 #pragma mark -
 #pragma mark  === UITableViewDataSource ===
 #pragma mark -
@@ -663,6 +675,12 @@
     {
         SelectAddressTableViewController *controller = [segue destinationViewController];
         [controller setSelectedStore:self.orderInProgress.selectedStore];
+    }
+    else if ([[segue identifier] isEqualToString:@"segueInstorePayToOrderDiscountViewController"])
+    {
+        OrderDiscountViewController *controller = [segue destinationViewController];
+        [controller setSelectedStore:self.orderInProgress.selectedStore];
+        [controller setReceiver:self];
     }
 }
 

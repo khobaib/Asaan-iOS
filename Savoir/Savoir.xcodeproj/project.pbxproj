@@ -409,6 +409,7 @@
 		D4BDBEF41AD8B6EE0014273B /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4BDBEF31AD8B6EE0014273B /* FBSDKShareKit.framework */; };
 		D4BDBEFA1AD8D0F90014273B /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D41FF75D1AC3659A00395DE0 /* ParseFacebookUtilsV4.framework */; };
 		D4BDBEFB1AD8D22E0014273B /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4BDBEF71AD8CE590014273B /* Bolts.framework */; };
+		D4BDBF011AE35C590014273B /* GTLStoreendpointStoreOrderAndTeamDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = D4BDBF001AE35C590014273B /* GTLStoreendpointStoreOrderAndTeamDetails.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1167,6 +1168,10 @@
 		D4BDBEF31AD8B6EE0014273B /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../../Documents/FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
 		D4BDBEF71AD8CE590014273B /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ../../../Documents/FacebookSDK/Bolts.framework; sourceTree = "<group>"; };
 		D4BDBEFD1AE020C80014273B /* InStoreOrderReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InStoreOrderReceiver.h; sourceTree = "<group>"; };
+		D4BDBEFE1AE15B150014273B /* DiscountReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscountReceiver.h; sourceTree = "<group>"; };
+		D4BDBEFF1AE35C590014273B /* GTLStoreendpointStoreOrderAndTeamDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreOrderAndTeamDetails.h; sourceTree = "<group>"; };
+		D4BDBF001AE35C590014273B /* GTLStoreendpointStoreOrderAndTeamDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreOrderAndTeamDetails.m; sourceTree = "<group>"; };
+		D4BDBF021AE5540F0014273B /* GroupSelectionReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupSelectionReceiver.h; sourceTree = "<group>"; };
 		D4F2759F1A0C021800CEC95A /* Savoir.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Savoir.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -1269,6 +1274,7 @@
 			isa = PBXGroup;
 			children = (
 				D406D8331AD830670076D0B6 /* TableOrderReceiver.h */,
+				D4BDBF021AE5540F0014273B /* GroupSelectionReceiver.h */,
 				D406D8241AD57C0A0076D0B6 /* TablesViewController.h */,
 				D406D8251AD57C0A0076D0B6 /* TablesViewController.m */,
 				D406D8271AD57C450076D0B6 /* ServerOrderSummaryViewController.h */,
@@ -2026,6 +2032,8 @@
 		D4195DAF1A92A69B00663149 /* ServerAPI */ = {
 			isa = PBXGroup;
 			children = (
+				D4BDBEFF1AE35C590014273B /* GTLStoreendpointStoreOrderAndTeamDetails.h */,
+				D4BDBF001AE35C590014273B /* GTLStoreendpointStoreOrderAndTeamDetails.m */,
 				D406D8301AD5A10E0076D0B6 /* GTLStoreendpointTableGroupsAndOrders.h */,
 				D406D8311AD5A10E0076D0B6 /* GTLStoreendpointTableGroupsAndOrders.m */,
 				D406D81D1AD463180076D0B6 /* GTLStoreendpointSplitOrderArguments.h */,
@@ -2261,6 +2269,7 @@
 				D4195E661A92A69B00663149 /* SelectPaymentTableViewController.m */,
 				D409D7FF1AA62E04008FADDF /* StripePay.h */,
 				D409D8001AA62E04008FADDF /* StripePay.m */,
+				D4BDBEFE1AE15B150014273B /* DiscountReceiver.h */,
 			);
 			path = Order;
 			sourceTree = "<group>";
@@ -3064,6 +3073,7 @@
 				D4195FB71A92A69C00663149 /* DeliveryOrCarryoutViewController.m in Sources */,
 				D47D3ABB1ABB36810099176A /* HTMLFaxOrder.m in Sources */,
 				D4195F261A92A69C00663149 /* SDWebImagePrefetcher.m in Sources */,
+				D4BDBF011AE35C590014273B /* GTLStoreendpointStoreOrderAndTeamDetails.m in Sources */,
 				D409D7EB1AA60A94008FADDF /* Stripe+ApplePay.m in Sources */,
 				D438AB8F1A9FA6AC0089E61A /* JSQMediaItem.m in Sources */,
 				D409D7F41AA60A94008FADDF /* STPAPIClient.m in Sources */,

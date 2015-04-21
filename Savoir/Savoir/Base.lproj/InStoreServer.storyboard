@@ -62,13 +62,13 @@
                                     </mask>
                                 </variation>
                             </toolbar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="DhE-sk-TYO">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="DhE-sk-TYO">
                                 <rect key="frame" x="16" y="44" width="568" height="476"/>
                                 <color key="backgroundColor" red="0.18823529410000001" green="0.098039215690000001" blue="0.098039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.18823529410000001" green="0.098039215690000001" blue="0.098039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexTrackingBackgroundColor" red="0.18823529410000001" green="0.098039215690000001" blue="0.098039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserCell" id="kCn-Pt-ExG">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="UserCell" id="kCn-Pt-ExG">
                                         <rect key="frame" x="0.0" y="250" width="600" height="100"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kCn-Pt-ExG" id="Kp2-Hf-ySM">
@@ -179,7 +179,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Hpr-wQ-lSN">
-                                <rect key="frame" x="16" y="130" width="568" height="390"/>
+                                <rect key="frame" x="16" y="130" width="568" height="342"/>
                                 <color key="backgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexTrackingBackgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -440,6 +440,16 @@
                                     </mask>
                                 </variation>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iha-5b-bl5">
+                                <rect key="frame" x="32" y="488" width="536" height="32"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <state key="normal" title="Close Order">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnCloseClicked:" destination="iE5-pL-uUt" eventType="touchUpInside" id="BAT-nw-zgG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -449,9 +459,13 @@
                             <constraint firstAttribute="trailingMargin" secondItem="oBQ-id-9My" secondAttribute="trailing" id="GZT-WU-CJ2"/>
                             <constraint firstItem="nCr-re-HIc" firstAttribute="top" secondItem="ruE-Tx-xdP" secondAttribute="topMargin" id="N39-lg-Yo6"/>
                             <constraint firstItem="I5u-9P-BA8" firstAttribute="top" secondItem="Hpr-wQ-lSN" secondAttribute="bottom" constant="16" id="Opd-o5-y4f"/>
+                            <constraint firstItem="iha-5b-bl5" firstAttribute="leading" secondItem="ruE-Tx-xdP" secondAttribute="leadingMargin" constant="16" id="ZuH-qy-UFQ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="iha-5b-bl5" secondAttribute="trailing" constant="16" id="aIT-58-AMR"/>
                             <constraint firstItem="nCr-re-HIc" firstAttribute="leading" secondItem="ruE-Tx-xdP" secondAttribute="leadingMargin" id="idh-UL-O7e"/>
                             <constraint firstItem="oBQ-id-9My" firstAttribute="top" secondItem="44X-ss-M7f" secondAttribute="bottom" constant="20" id="j7S-qH-8kV"/>
+                            <constraint firstItem="I5u-9P-BA8" firstAttribute="top" secondItem="iha-5b-bl5" secondAttribute="bottom" constant="16" id="kf9-F2-mT2"/>
                             <constraint firstItem="oBQ-id-9My" firstAttribute="leading" secondItem="ruE-Tx-xdP" secondAttribute="leadingMargin" id="lmD-a1-JBW"/>
+                            <constraint firstItem="iha-5b-bl5" firstAttribute="top" secondItem="Hpr-wQ-lSN" secondAttribute="bottom" constant="16" id="njr-mF-xJb"/>
                             <constraint firstItem="nCr-re-HIc" firstAttribute="top" secondItem="44X-ss-M7f" secondAttribute="bottom" id="nym-mK-1Qc"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Hpr-wQ-lSN" secondAttribute="trailing" id="ocl-fy-M4o"/>
                             <constraint firstItem="Hpr-wQ-lSN" firstAttribute="leading" secondItem="ruE-Tx-xdP" secondAttribute="leadingMargin" id="s9C-Tf-4tg"/>
@@ -462,15 +476,16 @@
                                 <exclude reference="N39-lg-Yo6"/>
                                 <exclude reference="nym-mK-1Qc"/>
                                 <exclude reference="EBY-fX-JuX"/>
+                                <exclude reference="Opd-o5-y4f"/>
                             </mask>
                         </variation>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Order Summary" id="EDP-yY-H75">
-                        <barButtonItem key="rightBarButtonItem" title="Close" id="Nff-YH-gPp">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Nff-YH-gPp">
                             <connections>
-                                <action selector="btnCloseClicked:" destination="iE5-pL-uUt" id="DyQ-SL-5pQ"/>
+                                <action selector="btnSaveClicked:" destination="iE5-pL-uUt" id="FRE-Tk-Zm7"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

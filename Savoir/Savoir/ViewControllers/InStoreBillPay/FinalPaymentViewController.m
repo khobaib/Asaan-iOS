@@ -20,6 +20,7 @@
 #import "GTLStoreendpointSplitOrderArguments.h"
 #import "SelectPaymentTableViewController.h"
 #import "InStoreOrderReceiver.h"
+#import "XMLPOSOrder.h"
 
 @interface FinalPaymentViewController ()<InStoreOrderReceiver>
 @property (weak, nonatomic) IBOutlet UISegmentedControl *tipSegmentController;
@@ -31,10 +32,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *txtTipLabel;
 
 @property (nonatomic, strong) NSMutableArray *finalItems;
-@property (strong, nonatomic) NSString *discountName;
-@property (nonatomic) float discountAmt;
 
 @property (strong, nonatomic) StripePay *stripePay;
+
+@property (nonatomic) Boolean bPayNowClicked;
 
 @end
 
@@ -46,10 +47,6 @@
     self.stripePay = [[StripePay alloc]init];
     
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    if (self.navigationController.viewControllers[0] != self)
-        self.navigationItem.leftBarButtonItem = nil;
-    else
-        [appDelegate.notificationUtils getSlidingMenuBarButtonSetupWith:self];
     
     int defaultTip = appDelegate.globalObjectHolder.currentUser.defaultTip.intValue;
     if (defaultTip <= 18)
@@ -72,29 +69,23 @@
         self.tipSegmentController.selectedSegmentIndex = 3;
         self.tipSlider.value = defaultTip;
     }
-    NSLog(@"FinalPaymentViewController viewDidLoad");
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    [appDelegate.globalObjectHolder.inStoreOrderDetails getGroupMembers:self];
-    [appDelegate.globalObjectHolder.inStoreOrderDetails getStoreOrderDetails:self];
-    NSLog(@"FinalPaymentViewController viewWillAppear finalItems count = %lu", (unsigned long)self.finalItems.count);
+    [self orderChanged];
+    self.bPayNowClicked = false;
 }
 
 - (void)orderChanged
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    self.finalItems = [appDelegate.globalObjectHolder.inStoreOrderDetails parseOrderDetails];
+    self.finalItems = [XMLPOSOrder parseOrderDetails:appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.orderDetails];
     [self updatePaymentValues];
-    NSLog(@"FinalPaymentViewController orderChanged finalItems count = %lu", (unsigned long)self.finalItems.count);
-}
-
-- (void) tableGroupMemberChanged
-{
-    [self updatePaymentValues];
-    NSLog(@"FinalPaymentViewController tableGroupMemberChanged finalItems count = %lu", (unsigned long)self.finalItems.count);
+    
+    NSLog(@"orderChanged 1");
+    if (self.bPayNowClicked == true)
+    {
+        
+        NSLog(@"orderChanged 2");
+        [self finishPayForMember];
+    }
 }
 
 - (void)openGroupsChanged
@@ -105,25 +96,33 @@
 - (NSUInteger) payingForCount
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    int payingForCount = 0;
-    for (GTLStoreendpointStoreTableGroupMember *member in appDelegate.globalObjectHolder.inStoreOrderDetails.tableGroupMembers.items)
+    if (appDelegate.globalObjectHolder.inStoreOrderDetails.paymentType == [InStoreOrderDetails PAYMENT_TYPE_PAYINFULL])
+        return 1;
+    else
     {
-        if (member.payingUserId.longLongValue == appDelegate.globalObjectHolder.currentUser.identifier.longLongValue)
-            payingForCount++;
+        int payingForCount = 0;
+        for (GTLStoreendpointStoreTableGroupMember *member in appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.members)
+        {
+            if (member.payingUserId.longLongValue == appDelegate.globalObjectHolder.currentUser.identifier.longLongValue)
+                payingForCount++;
+        }
+        return payingForCount;
     }
-    return payingForCount;
 }
 
 - (NSUInteger) groupCount
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    return appDelegate.globalObjectHolder.inStoreOrderDetails.tableGroupMembers.items.count;
+    if (appDelegate.globalObjectHolder.inStoreOrderDetails.paymentType == [InStoreOrderDetails PAYMENT_TYPE_PAYINFULL])
+        return 1;
+    else
+        return appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.members.count;
 }
 
 - (void) updatePaymentValues
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    if (appDelegate.globalObjectHolder.inStoreOrderDetails.order == nil || [self groupCount] == 0)
+    if (appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order == nil || [self groupCount] == 0)
         return;
     self.txtFinalAmount.text = [UtilCalls rawAmountToString:[NSNumber numberWithDouble:[self finalTotal]]];
     self.txtSubTotal.text = [UtilCalls rawAmountToString:[NSNumber numberWithDouble:([self subTotalNoDiscountMyShare] - [self discount])]];
@@ -131,11 +130,11 @@
     self.txtTax.text = [UtilCalls rawAmountToString:[NSNumber numberWithDouble:[self taxAmount]]];
     self.txtTipLabel.text = [NSString stringWithFormat:@"Tip (%d%%):", (int)(self.tipSlider.value)];
     
-    GTLStoreendpointStoreTableGroupMember *memberMe = appDelegate.globalObjectHolder.inStoreOrderDetails.memberMe;
-    memberMe.finalTotal = [NSNumber numberWithDouble:[self finalTotal]];
-    memberMe.subtotal = [NSNumber numberWithDouble:([self subTotalNoDiscountMyShare] - [self discount])];
-    memberMe.tip = [NSNumber numberWithDouble:[self gratuity]];
-    memberMe.tax = [NSNumber numberWithDouble:([self taxAmount])];
+    GTLStoreendpointStoreTableGroupMember *memberMe = appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.memberMe;
+    memberMe.finalTotal = [NSNumber numberWithInt:([self finalTotal]*100)];
+    memberMe.subtotal = [NSNumber numberWithInt:([self subTotalNoDiscountMyShare] - [self discount])*100];
+    memberMe.tip = [NSNumber numberWithInt:([self gratuity]*100)];
+    memberMe.tax = [NSNumber numberWithInt:([self taxAmount]*100)];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -162,11 +161,13 @@
     [self updatePaymentValues];
 }
 
-- (double)subTotalNoDiscountFull
+- (double)subTotalNoDiscount
 {
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     NSUInteger subTotalNoDiscount = 0;
     for (OrderItemSummaryFromPOS *item in self.finalItems)
         subTotalNoDiscount += item.price;
+    subTotalNoDiscount = subTotalNoDiscount - appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.alreadyPaidSubtotal.doubleValue/100;
     return subTotalNoDiscount;
 }
 
@@ -175,7 +176,7 @@
     if ([self groupCount] == 0)
         return 0;
     else
-        return [self subTotalNoDiscountFull]*[self payingForCount]/[self groupCount];
+        return [self subTotalNoDiscount]*[self payingForCount]/[self groupCount];
 }
 
 - (double)discount
@@ -183,7 +184,19 @@
     if ([self groupCount] == 0)
         return 0;
     else
-        return self.discountAmt*[self payingForCount]/[self groupCount];
+        return [self discountAmount]*[self payingForCount]/[self groupCount];
+}
+
+- (double)discountAmount
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    GTLStoreendpointStoreDiscount *discount = appDelegate.globalObjectHolder.inStoreOrderDetails.selectedDiscount;
+    if (discount == nil)
+        return 0;
+    if (discount.percentOrAmount.boolValue == true)
+        return ([self subTotalNoDiscount]*discount.value.intValue/100);
+    else
+        return discount.value.intValue/100;
 }
 
 - (double)gratuity
@@ -212,8 +225,12 @@
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     
+    NSLog(@"payNowClicked 1");
+    
     if ([self finalTotal] < 1)
         return;
+    
+    NSLog(@"payNowClicked 2");
     
     if (self.stripePay.applePayEnabled)
     {
@@ -245,7 +262,45 @@
         }
     }
     
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.labelText = @"Please Wait";
+    hud.hidden = NO;
+    
+    self.bPayNowClicked = true;
+    [appDelegate.globalObjectHolder.inStoreOrderDetails getStoreOrderDetails:self];
+    
+    NSLog(@"payNowClicked 3");
+}
+
+- (void)finishPayForMember
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    self.bPayNowClicked = false;
+    
+    NSLog(@"finishPayForMember 1");
+    
     GTLStoreendpointSplitOrderArguments *orderArguments = [[GTLStoreendpointSplitOrderArguments alloc]init];
+    NSMutableArray *members = [[NSMutableArray alloc]init];
+    for (GTLStoreendpointStoreTableGroupMember *member in appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.members)
+    {
+        if (member.payingUserId.longLongValue == appDelegate.globalObjectHolder.currentUser.identifier.longLongValue)
+        {
+            if (member.identifier.longLongValue == appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.memberMe.identifier.longLongValue)
+                [members addObject:appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.memberMe];
+            else
+                [members addObject:member];
+        }
+    }
+    
+    NSLog(@"finishPayForMember 3");
+    
+    if (members.count == 0)
+        return;
+    
+    NSLog(@"finishPayForMember 4");
+    
+    orderArguments.stgms = members;
     
     if (self.stripePay.applePayEnabled && self.stripePay.token != nil)
         orderArguments.token = self.stripePay.token.tokenId;
@@ -254,12 +309,6 @@
         orderArguments.cardid = appDelegate.globalObjectHolder.defaultUserCard.cardId;
         orderArguments.customerId = appDelegate.globalObjectHolder.defaultUserCard.providerCustomerId;
     }
-    orderArguments.stgm = appDelegate.globalObjectHolder.inStoreOrderDetails.memberMe;
-
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeIndeterminate;
-    hud.labelText = @"Please Wait";
-    hud.hidden = NO;
     
     if (self)
     {
@@ -275,6 +324,8 @@
         
         [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, id object,NSError *error)
          {
+             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+             hud.hidden = YES;
              if(!error)
              {
                  NSString *title = [NSString stringWithFormat:@"Your Payment - %@", appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore.name];
@@ -282,20 +333,18 @@
                  UIAlertView *alert=[[UIAlertView alloc]initWithTitle:title message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
                  [alert show];
                  NotificationUtils *notificationUtils = [[NotificationUtils alloc]init];
-                 [notificationUtils scheduleNotificationWithOrder:appDelegate.globalObjectHolder.inStoreOrderDetails.order];
-                 [appDelegate.globalObjectHolder removeInStoreOrderInProgress];
-//                 if (self.revealViewController != nil)
-//                     [weakSelf performSegueWithIdentifier:@"SWOrderSummaryToStoreList" sender:weakSelf];
-//                 else
-                     [weakSelf performSegueWithIdentifier:@"segueUnwindBillToStoreList" sender:weakSelf];
+                 [notificationUtils scheduleNotificationWithOrder:appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order];
+                 [appDelegate.globalObjectHolder.inStoreOrderDetails clearCurrentOrder];
+                 //                 if (self.revealViewController != nil)
+                 //                     [weakSelf performSegueWithIdentifier:@"SWOrderSummaryToStoreList" sender:weakSelf];
+                 //                 else
+                 [weakSelf performSegueWithIdentifier:@"segueUnwindMemberPayToExistingGroups" sender:weakSelf];
              }else{
                  NSLog(@"queryForPayForMemberWithObject Error:%@",[error userInfo][@"error"]);
              }
-             hud.hidden = YES;
          }];
     }
 }
-
 /*
 #pragma mark - Navigation
 

@@ -31,6 +31,6 @@
 @interface GTLStoreendpointSplitOrderArguments : GTLObject
 @property (copy) NSString *cardid;
 @property (copy) NSString *customerId;
-@property (retain) GTLStoreendpointStoreTableGroupMember *stgm;
+@property (retain) NSArray *stgms;  // of GTLStoreendpointStoreTableGroupMember
 @property (copy) NSString *token;
 @end

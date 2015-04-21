@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "GTLStoreendpointStoreOrder.h"
+#import "GroupSelectionReceiver.h"
 
 @interface ServerSelectGroupTableViewController : UITableViewController
 @property (strong, nonatomic) GTLStoreendpointStoreOrder *selectedOrder;
+@property (weak) id <GroupSelectionReceiver> receiver;
 
 @end

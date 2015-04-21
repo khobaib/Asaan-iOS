@@ -1219,7 +1219,7 @@
         <!--OrderDiscountViewController-->
         <scene sceneID="j0R-Ne-x21">
             <objects>
-                <viewController extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" id="dZ7-s2-3tX" userLabel="OrderDiscountViewController" customClass="OrderDiscountViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OrderDiscountViewController" extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dZ7-s2-3tX" userLabel="OrderDiscountViewController" customClass="OrderDiscountViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cwZ-OK-GZn"/>
                         <viewControllerLayoutGuide type="bottom" id="iGF-bd-ZvK"/>

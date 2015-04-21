@@ -15,10 +15,13 @@
 #import "UtilCalls.h"
 #import "MBProgressHUD.h"
 #import "InStoreOrderReceiver.h"
+#import "XMLPOSOrder.h"
 
 @interface InStoreOrderSummaryTableViewController () <InStoreOrderReceiver>
 @property (strong, nonatomic) GTLStoreendpointStoreOrder *selectedOrder;
 @property (nonatomic, strong) NSMutableArray *finalItems;
+@property (nonatomic, strong) NSTimer *timer;
+
 @end
 
 @implementation InStoreOrderSummaryTableViewController
@@ -35,28 +38,33 @@
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
         [appDelegate.notificationUtils getSlidingMenuBarButtonSetupWith:self];
     }
-    
-    NSLog(@"InStoreOrderSummaryTableViewController viewDidLoad");
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     [self refreshOrderDetails];
-    NSLog(@"InStoreOrderSummaryTableViewController viewWillAppear");
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:35.0 target:self selector:@selector(refreshOrderDetails) userInfo:nil repeats:YES];
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+- (void)viewWillDisappear:(BOOL)animated
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+{
+    [super viewWillDisappear:animated];
+    [self.timer invalidate];
 }
 
 - (void)orderChanged
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    self.finalItems = [appDelegate.globalObjectHolder.inStoreOrderDetails parseOrderDetails];
+    self.finalItems = [XMLPOSOrder parseOrderDetails:appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.orderDetails];
     [self.tableView reloadData];
-    NSLog(@"InStoreOrderSummaryTableViewController orderChanged finalItems count = %lu", (unsigned long)self.finalItems.count);
 }
 
 - (void) tableGroupMemberChanged
 {
-    // Don't Care.
+    [self refreshOrderDetails];
 }
 
 - (void) openGroupsChanged
@@ -83,32 +91,135 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.finalItems.count;
+    if (self.finalItems.count == 0)
+        return 0;
+    else
+        return self.finalItems.count + 2; // Two extra rows for discount and subtotal
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MenuItemCell" forIndexPath:indexPath];
-    UILabel *txtMenuItemName = (UILabel *)[cell viewWithTag:501];
-    UILabel *txtQty = (UILabel *)[cell viewWithTag:502];
-    UILabel *txtAmount = (UILabel *)[cell viewWithTag:503];
-    UILabel *txtDesc = (UILabel *)[cell viewWithTag:504];
-    txtDesc.text = nil;
-    txtMenuItemName.text = nil;
-    txtQty.text = nil;
-    txtAmount.text = nil;
-    
-    OrderItemSummaryFromPOS *item = [self.finalItems objectAtIndex:indexPath.row];
-    if (item != nil)
+    UITableViewCell *cell;
+    if (self.finalItems.count <= indexPath.row)
     {
-        txtMenuItemName.text = item.name;
-        txtQty.text = [NSString stringWithFormat:@"%d", item.qty];
-        txtAmount.text = [NSString stringWithFormat:@"%@", [UtilCalls rawAmountToString:[NSNumber numberWithDouble:item.price]]];
-        txtDesc.text = item.desc;
+        int realIndex = (int)(indexPath.row - self.finalItems.count);
+        cell = [self cellForAdditionalRowAtIndex:realIndex forTable:tableView forIndexPath:indexPath];
     }
-
+    else
+    {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"MenuItemCell" forIndexPath:indexPath];
+        UILabel *txtMenuItemName = (UILabel *)[cell viewWithTag:501];
+        UILabel *txtQty = (UILabel *)[cell viewWithTag:502];
+        UILabel *txtAmount = (UILabel *)[cell viewWithTag:503];
+        UILabel *txtDesc = (UILabel *)[cell viewWithTag:504];
+        txtDesc.text = nil;
+        txtMenuItemName.text = nil;
+        txtQty.text = nil;
+        txtAmount.text = nil;
+        
+        OrderItemSummaryFromPOS *item = [self.finalItems objectAtIndex:indexPath.row];
+        if (item != nil)
+        {
+            txtMenuItemName.text = item.name;
+            txtQty.text = [NSString stringWithFormat:@"%d", item.qty];
+            txtAmount.text = [NSString stringWithFormat:@"%@", [UtilCalls rawAmountToString:[NSNumber numberWithDouble:item.price]]];
+            txtDesc.text = item.desc;
+        }
+    }
+    
     cell.backgroundColor = [UIColor clearColor];
     return cell;
+}
+
+- (UITableViewCell *)cellForAdditionalRowAtIndex:(int)index forTable:(UITableView *)tableView forIndexPath:indexPath
+{
+    UITableViewCell *cell;
+    switch (index)
+    {
+        case 0: // Discount
+        {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"MenuItemCell" forIndexPath:indexPath];
+            cell.tag = 703;
+            
+            UILabel *txtMenuItemName = (UILabel *)[cell viewWithTag:501];
+            UILabel *txtQty = (UILabel *)[cell viewWithTag:502];
+            UILabel *txtAmount = (UILabel *)[cell viewWithTag:503];
+            UILabel *txtDesc = (UILabel *)[cell viewWithTag:504];
+            
+            txtDesc.text = nil;
+            txtMenuItemName.text = nil;
+            txtQty.text = nil;
+            txtAmount.text = nil;
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            
+            txtMenuItemName.text = @"Discount";
+            NSString *discount = [self discountTitle];
+            if (!IsEmpty(discount))
+            {
+                NSNumber *amount = [[NSNumber alloc] initWithDouble:[self discountAmount]];
+                txtAmount.text = [NSString stringWithFormat:@"%@-", [UtilCalls doubleAmountToString:amount]];
+                txtDesc.text = discount;
+            }
+            else
+                txtDesc.text = @"None";
+            break;
+        }
+        case 1: // Subtotal
+        {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"MenuItemCell" forIndexPath:indexPath];
+            cell.tag = 704;
+            
+            UILabel *txtMenuItemName = (UILabel *)[cell viewWithTag:501];
+            UILabel *txtQty = (UILabel *)[cell viewWithTag:502];
+            UILabel *txtAmount = (UILabel *)[cell viewWithTag:503];
+            UILabel *txtDesc = (UILabel *)[cell viewWithTag:504];
+            
+            txtDesc.text = nil;
+            txtMenuItemName.text = nil;
+            txtQty.text = nil;
+            txtAmount.text = nil;
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            
+            txtMenuItemName.text = @"Subtotal";
+            NSNumber *amount = [[NSNumber alloc] initWithDouble:[self subTotal]];
+            txtAmount.text = [UtilCalls doubleAmountToString:amount];
+            break;
+        }
+        default:
+            break;
+    }
+    return cell;
+}
+
+- (double)subTotalNoDiscount
+{
+    NSUInteger subTotalNoDiscount = 0;
+    for (OrderItemSummaryFromPOS *item in self.finalItems)
+        subTotalNoDiscount += item.price;
+    return subTotalNoDiscount;
+}
+
+- (double)discountAmount
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    GTLStoreendpointStoreDiscount *discount = appDelegate.globalObjectHolder.inStoreOrderDetails.selectedDiscount;
+    if (discount == nil)
+        return 0;
+    if (discount.percentOrAmount.boolValue == true)
+        return ([self subTotalNoDiscount]*discount.value.intValue/100);
+    else
+        return discount.value.intValue/100;
+}
+
+- (NSString *)discountTitle
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    return appDelegate.globalObjectHolder.inStoreOrderDetails.selectedDiscount.title;
+}
+
+- (double)subTotal  // already * by 1000000
+{
+    return [self subTotalNoDiscount] - [self discountAmount];
 }
 
 /*

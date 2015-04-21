@@ -57,6 +57,7 @@
 #import "GTLStoreendpointStoreMenuItemModifierGroup.h"
 #import "GTLStoreendpointStoreMenuStats.h"
 #import "GTLStoreendpointStoreOrder.h"
+#import "GTLStoreendpointStoreOrderAndTeamDetails.h"
 #import "GTLStoreendpointStoreOrderListAndCount.h"
 #import "GTLStoreendpointStoreOwner.h"
 #import "GTLStoreendpointStoreOwnerCollection.h"

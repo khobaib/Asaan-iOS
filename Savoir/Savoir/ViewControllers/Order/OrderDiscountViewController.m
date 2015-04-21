@@ -27,7 +27,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadStoreDiscountsFromServer];
-    // Do any additional setup after loading the view.
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -43,9 +42,8 @@
     
     // Prevent keyboard from showing by default
     [self.txtDiscountCode endEditing:YES];
-//    UIColor *color = [UIColor darkTextColor];
-//    self.txtDiscountCode.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Enter Discount Code" attributes:@{NSForegroundColorAttributeName: color}];
-
+    UIColor *color = [UIColor darkTextColor];
+    self.txtDiscountCode.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Enter Discount Code" attributes:@{NSForegroundColorAttributeName: color}];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -67,11 +65,11 @@
 
     for (GTLStoreendpointStoreDiscount *discount in self.discounts)
     {
-        if (discount.code != nil && [discount.code caseInsensitiveCompare:self.txtDiscountCode.text] == NSOrderedSame) {
+        if (discount.code != nil && [discount.code caseInsensitiveCompare:self.txtDiscountCode.text] == NSOrderedSame)
+        {
             NSString *foundResponse = [NSString stringWithFormat:@"%@ - %@", self.txtDiscountCode.text, discount.title];
-            AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-            appDelegate.globalObjectHolder.orderInProgress.selectedDiscount = discount;
             self.txtDiscountCode.text = foundResponse;
+            [self.receiver selectedDiscount:discount];
             return;
         }
     }
@@ -82,7 +80,7 @@
     __weak __typeof(self) weakSelf = self;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-    GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetStoreDiscountsWithStoreId:appDelegate.globalObjectHolder.orderInProgress.selectedStore.identifier.longLongValue];
+    GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetStoreDiscountsWithStoreId:self.selectedStore.identifier.longLongValue];
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     dic[USER_AUTH_TOKEN_HEADER_NAME] = [UtilCalls getAuthTokenForCurrentUser];

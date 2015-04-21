@@ -17,6 +17,7 @@
 
 @interface ExistingGroupsTableViewController ()
 @property (strong, nonatomic) GTLStoreendpointStoreTableGroupCollection *tableGroups;
+@property (nonatomic, strong) NSTimer *timer;
 @end
 
 @implementation ExistingGroupsTableViewController
@@ -34,6 +35,21 @@
         [appDelegate.notificationUtils getSlidingMenuBarButtonSetupWith:self];
     }
     [self setupExistingGroupsData];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self setupExistingGroupsData];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:35.0 target:self selector:@selector(setupExistingGroupsData) userInfo:nil repeats:YES];
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+- (void)viewWillDisappear:(BOOL)animated
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+{
+    [super viewWillDisappear:animated];
+    [self.timer invalidate];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -157,8 +173,8 @@
     [self performSegueWithIdentifier:@"segueCreateOrJoinGroupAndShowOrder" sender:self];
 }
 
-/*
 #pragma mark - Navigation
+/*
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -171,5 +187,9 @@
     }
 }
  */
+
+- (IBAction)unwindToExistingGroupsTableViewController:(UIStoryboardSegue *)unwindSegue
+{
+}
 
 @end

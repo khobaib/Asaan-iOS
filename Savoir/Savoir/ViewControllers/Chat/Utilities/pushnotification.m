@@ -16,6 +16,8 @@
 #import "GTLStoreendpoint.h"
 #import "UtilCalls.h"
 #import "Constants.h"
+#import "InStoreOrderDetails.h"
+#import "InlineCalls.h"
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 void ParsePushUserAssign(void)
@@ -66,7 +68,7 @@ void SendPushNotification(long long roomId, long long storeId, NSString *text)
              NSMutableArray *userObjectIds = [[NSMutableArray alloc]init];
              PFUser *user = [PFUser currentUser];
              for (GTLStoreendpointChatUser *chatUser in object.chatUsers)
-                 if ([chatUser.objectId compare:user.objectId] != 0)
+                 if ([chatUser.objectId isEqualToString:user.objectId] == false)
                      [userObjectIds addObject:chatUser.objectId];
              
              PFQuery *query = [PFQuery queryWithClassName:PF_USER_CLASS_NAME];

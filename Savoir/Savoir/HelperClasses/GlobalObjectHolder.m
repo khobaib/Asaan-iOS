@@ -171,8 +171,10 @@
 
     NSNumber *aNumber = [defaults objectForKey:@"STORE_COUNT"];
     self.storeCount = aNumber.intValue;
-    if (self.storeCount == 0 || self.storeCount > 50)
-        self.storeCount = 40;
+    if (self.storeCount == 0)
+        self.storeCount = 5;
+    else if (self.storeCount > 50)
+        self.storeCount = 50;
     __weak __typeof(self) weakSelf = self;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];

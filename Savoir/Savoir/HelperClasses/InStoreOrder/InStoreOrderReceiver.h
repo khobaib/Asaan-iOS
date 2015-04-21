@@ -11,6 +11,5 @@
 @protocol InStoreOrderReceiver <NSObject>
 
 - (void) orderChanged;
-- (void) tableGroupMemberChanged;
 - (void) openGroupsChanged;
 @end

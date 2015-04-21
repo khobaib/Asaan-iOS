@@ -92,15 +92,6 @@
     }
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-//    if (!self.userCards || !self.userCards.items || self.userCards.items.count == 0)
-//        [self performSegueWithIdentifier:@"segueAddPaymentMethod" sender:self];
-//
-//    if (!self.userAddresses || !self.userAddresses.items || self.userAddresses.items.count == 0)
-//        [self performSegueWithIdentifier:@"segueAddAddress" sender:self];
-}
-
 - (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     cell.backgroundColor = [UIColor clearColor];

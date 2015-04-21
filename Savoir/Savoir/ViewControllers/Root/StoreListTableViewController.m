@@ -71,8 +71,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -135,7 +133,7 @@
             }];
         }
     }
-//    
+    
 //    if (appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore != nil)
 //    {
 //        if ([UtilCalls userBelongsToStoreChatTeamForStore:appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore])
@@ -152,7 +150,7 @@
     
     GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
     [goh loadAllUserObjects];
-    if (goh.orderInProgress != nil)
+    if (goh.inStoreOrderDetails == nil && goh.orderInProgress != nil)
     {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setImage:[UIImage imageNamed:@"cart.png"] forState:UIControlStateNormal];
@@ -208,28 +206,29 @@
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.labelText = @"Please Wait";
     hud.hidden = NO;
+    
+    [appDelegate.globalObjectHolder.inStoreOrderDetails clearCurrentOrder];
 
     if (self)
     {
         __weak __typeof(self) weakSelf = self;
         GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-        GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetOpenGroupForMember];
+        GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetStoreTableGroupDetailsForCurrentUser];
         
         NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
         dic[USER_AUTH_TOKEN_HEADER_NAME]=[UtilCalls getAuthTokenForCurrentUser];
         
         [query setAdditionalHTTPHeaders:dic];
         
-        [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreTableGroup *object,NSError *error)
+        [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreOrderAndTeamDetails *object,NSError *error)
          {
              if(!error)
              {
                  AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-                 if (object != nil && object.identifier.longLongValue > 0)
+                 appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails = object;
+                 NSLog(@"startInStoreMode tableGroupMemberId = %lld orderId = %lld", object.memberMe.identifier.longLongValue, object.order.identifier.longLongValue);
+                 if (object != nil && object.memberMe.identifier.longLongValue > 0)
                  {
-                     appDelegate.globalObjectHolder.inStoreOrderDetails.selectedTableGroup = object;
-                     NSLog(@"startInStoreMode tableGroupId = %lld orderId = %lld", object.identifier.longLongValue, object.orderId.longLongValue);
-
                      UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"InStorePay" bundle:nil];
                      ExistingGroupsTableViewController *destination = [mainStoryBoard instantiateViewControllerWithIdentifier:@"InstoreOrderSummaryViewController"];
                      
@@ -245,8 +244,6 @@
                  }
                  else
                  {
-                     appDelegate.globalObjectHolder.inStoreOrderDetails.selectedTableGroup = nil;
-                     
                      UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"InStorePay" bundle:nil];
                      ExistingGroupsTableViewController *destination = [mainStoryBoard instantiateViewControllerWithIdentifier:@"ExistingGroupsTableViewController"];
                      
