@@ -13,15 +13,13 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointSplitOrderArguments (0 custom class methods, 4 custom properties)
+//   GTLStoreendpointSplitOrderArguments (0 custom class methods, 7 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLObject.h"
 #else
   #import "GTLObject.h"
 #endif
-
-@class GTLStoreendpointStoreTableGroupMember;
 
 // ----------------------------------------------------------------------------
 //
@@ -31,6 +29,9 @@
 @interface GTLStoreendpointSplitOrderArguments : GTLObject
 @property (copy) NSString *cardid;
 @property (copy) NSString *customerId;
-@property (retain) NSArray *stgms;  // of GTLStoreendpointStoreTableGroupMember
+@property (retain) NSNumber *gratuityPercent;  // longLongValue
+@property (retain) NSArray *paidMembers;  // of NSNumber (longLongValue)
+@property (retain) NSNumber *paymentType;  // intValue
+@property (retain) NSNumber *taxPercent;  // longLongValue
 @property (copy) NSString *token;
 @end

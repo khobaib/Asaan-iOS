@@ -47,5 +47,6 @@
 + (Boolean) canPlaceOrderFromMenu:(GTLStoreendpointStoreMenuHierarchy *)menu atDate:(NSDate *)date;
 + (Boolean)userBelongsToStoreChatTeamForStore:(GTLStoreendpointStore *)store;
 + (Boolean)userIsOwnerOfStore:(GTLStoreendpointStore *)store;
++ (void) handleClosedOrderFor:(id)sender SegueTo:(NSString *)segueIdentifier;
 
 @end

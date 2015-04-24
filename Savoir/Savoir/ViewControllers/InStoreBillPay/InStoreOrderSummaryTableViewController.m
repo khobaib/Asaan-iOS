@@ -21,6 +21,7 @@
 @property (strong, nonatomic) GTLStoreendpointStoreOrder *selectedOrder;
 @property (nonatomic, strong) NSMutableArray *finalItems;
 @property (nonatomic, strong) NSTimer *timer;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *btnPay;
 
 @end
 
@@ -55,10 +56,21 @@
     [self.timer invalidate];
 }
 
+#pragma mark - InStoreOrderReceiver Delegate
+
 - (void)orderChanged
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    if (appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.memberMe == nil
+        || appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.orderStatus.intValue == 4 // Fully Paid
+        || appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.orderStatus.intValue == 5) // Paid and Closed
+        [UtilCalls handleClosedOrderFor:self SegueTo:@"segueUnwindInStoreOrderSummaryToStoreList"];
     self.finalItems = [XMLPOSOrder parseOrderDetails:appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.orderDetails];
+    if ([self subTotal] > 0)
+        self.btnPay.enabled = true;
+    else
+        self.btnPay.enabled = false;
+
     [self.tableView reloadData];
 }
 

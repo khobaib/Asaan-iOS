@@ -80,12 +80,11 @@
 #pragma mark Service level methods
 // These create a GTLQueryStoreendpoint object.
 
-+ (id)queryForAddMemberToStoreTableGroupWithOrderId:(long long)orderId
-                                  storeTableGroupId:(long long)storeTableGroupId {
++ (id)queryForAddMemberToStoreTableGroupWithStoreTableGroupId:(long long)storeTableGroupId {
   NSString *methodName = @"storeendpoint.addMemberToStoreTableGroup";
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
-  query.orderId = orderId;
   query.storeTableGroupId = storeTableGroupId;
+  query.expectedObjectClass = [GTLStoreendpointStoreOrderAndTeamDetails class];
   return query;
 }
 
@@ -93,6 +92,7 @@
   NSString *methodName = @"storeendpoint.createStoreTableGroup";
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
   query.storeId = storeId;
+  query.expectedObjectClass = [GTLStoreendpointStoreOrderAndTeamDetails class];
   return query;
 }
 

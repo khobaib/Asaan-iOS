@@ -21,6 +21,7 @@
 #import "DeliveryOrCarryoutViewController.h"
 #import "OrderDiscountViewController.h"
 #import "DiscountReceiver.h"
+#import "UIAlertView+Blocks.h"
 
 @interface ServerOrderSummaryViewController ()<UITableViewDataSource, UITableViewDelegate, DiscountReceiver, GroupSelectionReceiver>
 @property (weak, nonatomic) IBOutlet UITextField *txtTable;
@@ -508,8 +509,22 @@
 }
 - (IBAction)btnCloseClicked:(id)sender
 {
-    self.bCloseClicked = true;
-    [self saveClicked];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    if (appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.storeTableGroupId.longLongValue > 0 &&
+        appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.orderStatus.intValue < 4)
+    {
+        NSString *title = [NSString stringWithFormat:@"Closing an unpaid Savoir order!"];
+        NSString *msg = [NSString stringWithFormat:@"This order has a Savoir Group attached to it and is not paid. Would you still like to close it?"];
+        [UIAlertView showWithTitle:title message:msg cancelButtonTitle:@"No" otherButtonTitles:@[@"Close Order"]
+                          tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex)
+         {
+             if (buttonIndex != [alertView cancelButtonIndex])
+             {
+                 self.bCloseClicked = true;
+                 [self saveClicked];
+             }
+         }];
+    }
 }
 - (IBAction)btnSaveClicked:(id)sender
 {

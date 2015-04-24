@@ -81,12 +81,13 @@
 // Method: storeendpoint.addMemberToStoreTableGroup
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
-+ (id)queryForAddMemberToStoreTableGroupWithOrderId:(long long)orderId
-                                  storeTableGroupId:(long long)storeTableGroupId;
+// Fetches a GTLStoreendpointStoreOrderAndTeamDetails.
++ (id)queryForAddMemberToStoreTableGroupWithStoreTableGroupId:(long long)storeTableGroupId;
 
 // Method: storeendpoint.createStoreTableGroup
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
+// Fetches a GTLStoreendpointStoreOrderAndTeamDetails.
 + (id)queryForCreateStoreTableGroupWithStoreId:(long long)storeId;
 
 // Method: storeendpoint.getChatMessagesForStoreOrRoom

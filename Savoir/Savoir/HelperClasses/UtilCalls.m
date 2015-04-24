@@ -453,4 +453,20 @@
     return false;
 }
 
++ (void) handleClosedOrderFor:(id)sender SegueTo:(NSString *)segueIdentifier
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    NSString *title = [NSString stringWithFormat:@"Your order at %@", appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore.name];
+    NSString *msg = [NSString stringWithFormat:@"This order is paid for and closed - Thank you!"];
+    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:title message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+    [alert show];
+//    NotificationUtils *notificationUtils = [[NotificationUtils alloc]init];
+//    [notificationUtils scheduleNotificationWithOrder:appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order];
+    [appDelegate.globalObjectHolder.inStoreOrderDetails clearCurrentOrder];
+    //                 if (self.revealViewController != nil)
+    //                     [weakSelf performSegueWithIdentifier:@"SWOrderSummaryToStoreList" sender:weakSelf];
+    //                 else
+    [sender performSegueWithIdentifier:segueIdentifier sender:sender];
+}
+
 @end

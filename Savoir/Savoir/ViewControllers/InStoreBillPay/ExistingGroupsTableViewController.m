@@ -14,8 +14,9 @@
 #import "InlineCalls.h"
 #import "Extension.h"
 #import "GTLStoreendpointStoreTableGroupCollection.h"
+#import "InStoreOrderReceiver.h"
 
-@interface ExistingGroupsTableViewController ()
+@interface ExistingGroupsTableViewController () <InStoreOrderReceiver>
 @property (strong, nonatomic) GTLStoreendpointStoreTableGroupCollection *tableGroups;
 @property (nonatomic, strong) NSTimer *timer;
 @end
@@ -57,6 +58,23 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - InStoreOrderReceiver Delegate
+
+- (void)orderChanged
+{
+    [self performSegueWithIdentifier:@"segueCreateOrJoinGroupAndShowOrder" sender:self];
+}
+
+- (void) tableGroupMemberChanged
+{
+    // Don't Care.
+}
+
+- (void) openGroupsChanged
+{
+    // Don't Care.
+}
+
 - (void)setupExistingGroupsData
 {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -93,8 +111,7 @@
 - (IBAction)createGroup:(id)sender
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    [appDelegate.globalObjectHolder.inStoreOrderDetails createGroup];
-    [self performSegueWithIdentifier:@"segueCreateOrJoinGroupAndShowOrder" sender:self];
+    [appDelegate.globalObjectHolder.inStoreOrderDetails createGroup:self];
 }
 
 #pragma mark - Table view data source
@@ -169,8 +186,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    [appDelegate.globalObjectHolder.inStoreOrderDetails joinGroup:[self.tableGroups.items objectAtIndex:indexPath.row]];
-    [self performSegueWithIdentifier:@"segueCreateOrJoinGroupAndShowOrder" sender:self];
+    [appDelegate.globalObjectHolder.inStoreOrderDetails joinGroup:[self.tableGroups.items objectAtIndex:indexPath.row] receiver:self];
 }
 
 #pragma mark - Navigation

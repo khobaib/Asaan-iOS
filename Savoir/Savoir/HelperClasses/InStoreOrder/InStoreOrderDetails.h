@@ -23,11 +23,11 @@
 + (int)PAYMENT_TYPE_SPLITEVENLY;
 + (int)PAYMENT_TYPE_SPLITBYITEM;
 
-- (void) createGroup;
-- (void) joinGroup:(GTLStoreendpointStoreTableGroup *)tableGroup;
+- (void) createGroup:(id <InStoreOrderReceiver>)receiver;
+- (void) joinGroup:(GTLStoreendpointStoreTableGroup *)tableGroup receiver:(id <InStoreOrderReceiver>)receiver;
 - (void) getStoreOrderDetails:(id <InStoreOrderReceiver>)receiver;
 - (void) getOpenGroups:(id <InStoreOrderReceiver>)receiver;
-- (void) updateStoreTableGroupMembers:(NSMutableDictionary *)changedMembers;
+- (void) updateStoreTableGroupMembers:(NSMutableDictionary *)changedMembers receiver:(id <InStoreOrderReceiver>)receiver;
 - (void) clearCurrentOrder;
 
 @end

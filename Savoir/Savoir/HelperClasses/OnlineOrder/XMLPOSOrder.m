@@ -82,8 +82,6 @@
     else
         orderString=[NSString stringWithFormat:@"<CHECKREQUESTS><ADDCHECK EXTCHECKID=\"ASAAN\" READYTIME=\"%@\" GUESTCOUNT=\"%d\" NOTE=\"%@\" ORDERMODE=\"@ORDER_MODE\">%@%@</ADDCHECK></CHECKREQUESTS>",orderTime, orderInProgress.partySize, orderInProgress.specialInstructions, contactString, strItems];
     
-    NSLog(@"%@",orderString);
-    
     orderString = [orderString stringByReplacingOccurrencesOfString:@"(null)" withString:@""];
     return orderString;
 }
@@ -225,7 +223,6 @@ NSString *discountStrEmptyFormat = @"<DISCOUNTS />";
     
     finalStr = [finalStr stringByReplacingOccurrencesOfString:@"(null)" withString:@""];
 
-    NSLog(@"AddingNewItems finalStr = %@", finalStr);
     return finalStr;
 }
 //                NSString *beginXMLResponseStr = @"<POSRESPONSE> <GETCHECKDETAILS> <CHECK ENTRYCOUNT=\"%ld\" GUESTCOUNT=\"%ld\" TABLENUMBER=\"%ld\" SUBTOTAL=\"%@\" TAX=\"%@\" SERVICECHARGES=\"%@\" COMPLETETOTAL=\"%@\" DELIVERY=\"%@\"> <ENTRIES>";
@@ -252,7 +249,6 @@ NSString *discountStrEmptyFormat = @"<DISCOUNTS />";
     
     finalStr = [finalStr stringByReplacingOccurrencesOfString:@"(null)" withString:@""];
     
-    NSLog(@"RemovingItem finalStr = %@", finalStr);
     return finalStr;
 }
 
@@ -286,8 +282,6 @@ NSString *discountStrEmptyFormat = @"<DISCOUNTS />";
     NSRange endRange = [tempStr rangeOfString:searchStr];
     NSString *countStr = [tempStr substringToIndex:NSMaxRange(endRange)-1];
     
-    NSLog(@"findEntryCountInOrderString countStr = %@", countStr);
-    
     return [countStr intValue];
 }
 
@@ -316,7 +310,6 @@ NSString *discountStrEmptyFormat = @"<DISCOUNTS />";
     NSNumber *amount = [[NSNumber alloc] initWithDouble:newAmount];
     NSString *newAmountStr = [UtilCalls doubleAmountToStringNoCurrency:amount];
     
-    NSLog(@"findEntryOldAmountInOrderString countStr = %@, amountType = %@", countStr, amountType);
     searchStr = [NSString stringWithFormat:@"%@=\"%@\"", amountType, countStr];
     NSString *replaceStr = [NSString stringWithFormat:@"%@=\"%@\"",amountType, newAmountStr];
     return [XMLOrderStr stringByReplacingOccurrencesOfString:searchStr withString:replaceStr];
@@ -477,7 +470,6 @@ NSString *discountStrEmptyFormat = @"<DISCOUNTS />";
         OrderItemSummaryFromPOS *item = [items objectAtIndex:i];
         [finalItems addObject:item];
     }
-    NSLog(@"parseOrderDetails count=%ld", (long)finalItems.count);
     return finalItems;
 }
 @end

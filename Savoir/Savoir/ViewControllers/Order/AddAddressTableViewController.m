@@ -30,7 +30,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *other;
 @property (weak, nonatomic) IBOutlet UITextField *aptNo;
 @property (weak, nonatomic) IBOutlet DropdownView *state;
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong, nonatomic) CLGeocoder *geocoder;
 

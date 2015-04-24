@@ -13,11 +13,9 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointSplitOrderArguments (0 custom class methods, 4 custom properties)
+//   GTLStoreendpointSplitOrderArguments (0 custom class methods, 7 custom properties)
 
 #import "GTLStoreendpointSplitOrderArguments.h"
-
-#import "GTLStoreendpointStoreTableGroupMember.h"
 
 // ----------------------------------------------------------------------------
 //
@@ -25,12 +23,13 @@
 //
 
 @implementation GTLStoreendpointSplitOrderArguments
-@dynamic cardid, customerId, stgms, token;
+@dynamic cardid, customerId, gratuityPercent, paidMembers, paymentType,
+         taxPercent, token;
 
 + (NSDictionary *)arrayPropertyToClassMap {
   NSDictionary *map =
-    [NSDictionary dictionaryWithObject:[GTLStoreendpointStoreTableGroupMember class]
-                                forKey:@"stgms"];
+    [NSDictionary dictionaryWithObject:[NSNumber class]
+                                forKey:@"paidMembers"];
   return map;
 }
 

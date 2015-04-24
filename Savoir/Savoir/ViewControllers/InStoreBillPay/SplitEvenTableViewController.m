@@ -60,18 +60,31 @@
 
 - (void)orderChanged
 {
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    if (appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.memberMe == nil
+        || appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.orderStatus.intValue == 4 // Fully Paid
+        || appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.orderStatus.intValue == 5) // Paid and Closed
+        [UtilCalls handleClosedOrderFor:self SegueTo:@"segueUnwindSplitEvenToStoreList"];
     [self.tableView reloadData];
 }
 
 - (void)openGroupsChanged
 {
-    // Don't Care.
+    [self performSegueWithIdentifier:@"segueSplitEvenlyToPay" sender:self];
 }
 
 - (void)refreshOrderDetails
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     [appDelegate.globalObjectHolder.inStoreOrderDetails getStoreOrderDetails:self];
+}
+- (IBAction)btnDoneClicked:(id)sender
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    if (self.changedMembers != nil && self.changedMembers.count > 0)
+        [appDelegate.globalObjectHolder.inStoreOrderDetails updateStoreTableGroupMembers:self.changedMembers receiver:self];
+    else
+        [self openGroupsChanged];
 }
 
 #pragma mark - Table view data source
@@ -232,23 +245,16 @@
     return nil;
 }
 
-- (void) updateStoreTableGroupMembers
-{
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    if (self.changedMembers != nil && self.changedMembers.count > 0)
-        [appDelegate.globalObjectHolder.inStoreOrderDetails updateStoreTableGroupMembers:self.changedMembers];
-}
-
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get reference to the destination view controller
-    if ([[segue identifier] isEqualToString:@"segueSplitEvenlyToPay"])
-    {
-        [self updateStoreTableGroupMembers];
-    }
+//    // Get reference to the destination view controller
+//    if ([[segue identifier] isEqualToString:@"segueSplitEvenlyToPay"])
+//    {
+//        [self updateStoreTableGroupMembers];
+//    }
 }
 
 @end

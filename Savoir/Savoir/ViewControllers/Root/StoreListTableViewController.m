@@ -134,19 +134,19 @@
         }
     }
     
-//    if (appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore != nil)
-//    {
-//        if ([UtilCalls userBelongsToStoreChatTeamForStore:appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore])
-//        {
-//            [self startServerMode];
-//            return;
-//        }
-//        else
-//        {
-//            [self startInStoreMode];
-//            return;
-//        }
-//    }
+    if (appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore != nil)
+    {
+        if ([UtilCalls userBelongsToStoreChatTeamForStore:appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore])
+        {
+            [self startServerMode];
+            return;
+        }
+        else
+        {
+            [self startInStoreMode];
+            return;
+        }
+    }
     
     GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
     [goh loadAllUserObjects];
@@ -227,6 +227,7 @@
                  AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
                  appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails = object;
                  NSLog(@"startInStoreMode tableGroupMemberId = %lld orderId = %lld", object.memberMe.identifier.longLongValue, object.order.identifier.longLongValue);
+                 NSLog(@"startInStoreMode member status = %d orderId = %d", object.memberMe.status.intValue, object.order.orderStatus.intValue);
                  if (object != nil && object.memberMe.identifier.longLongValue > 0)
                  {
                      UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"InStorePay" bundle:nil];

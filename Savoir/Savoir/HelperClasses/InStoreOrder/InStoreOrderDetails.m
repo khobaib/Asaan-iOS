@@ -17,11 +17,11 @@
 
 @implementation InStoreOrderDetails
 
-+ (int)PAYMENT_TYPE_PAYINFULL { return 1; }
-+ (int)PAYMENT_TYPE_SPLITEVENLY { return 2; }
-+ (int)PAYMENT_TYPE_SPLITBYITEM  { return 3; }
++ (int)PAYMENT_TYPE_PAYINFULL { return 0; }
++ (int)PAYMENT_TYPE_SPLITEVENLY { return 1; }
++ (int)PAYMENT_TYPE_SPLITBYITEM  { return 2; }
 
-- (void)createGroup
+- (void)createGroup:(id <InStoreOrderReceiver>)receiver
 {
     if (self)
     {
@@ -35,31 +35,40 @@
         
         [query setAdditionalHTTPHeaders:dic];
         
-        [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreTableGroup *object, NSError *error)
+        [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreOrderAndTeamDetails *object, NSError *error)
          {
              if(error)
                  NSLog(@"setupExistingGroupsData Error:%@",[error userInfo][@"error"]);
+             else
+             {
+                 self.teamAndOrderDetails = object;
+                 [receiver orderChanged];
+             }
          }];
     }
 }
 
-- (void) joinGroup:(GTLStoreendpointStoreTableGroup *)tableGroup
+- (void) joinGroup:(GTLStoreendpointStoreTableGroup *)tableGroup receiver:(id <InStoreOrderReceiver>)receiver
 {
     if (self)
     {
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
         GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-        GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForAddMemberToStoreTableGroupWithOrderId:tableGroup.orderId.longLongValue storeTableGroupId:tableGroup.identifier.longLongValue];
+        GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForAddMemberToStoreTableGroupWithStoreTableGroupId:tableGroup.identifier.longLongValue];
         
         NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
         dic[USER_AUTH_TOKEN_HEADER_NAME]=[UtilCalls getAuthTokenForCurrentUser];
         
         [query setAdditionalHTTPHeaders:dic];
         
-        [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreTableGroupMember *object,NSError *error)
+        [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreOrderAndTeamDetails *object,NSError *error)
          {
              if(error)
                  NSLog(@"queryForAddMemberToStoreTableGroup Error:%@",[error userInfo][@"error"]);
+             {
+                 self.teamAndOrderDetails = object;
+                 [receiver orderChanged];
+             }
          }];
     }
 }
@@ -121,7 +130,7 @@
     }
 }
 
-- (void) updateStoreTableGroupMembers:(NSMutableDictionary *)changedMembers
+- (void) updateStoreTableGroupMembers:(NSMutableDictionary *)changedMembers receiver:(id <InStoreOrderReceiver>)receiver
 {
     GTLStoreendpointStoreTableGroupMemberArray *memberCollection = [[GTLStoreendpointStoreTableGroupMemberArray alloc]init];
     memberCollection.members = changedMembers.allValues;
@@ -139,6 +148,8 @@
      {
          if(error)
              NSLog(@"queryForUpdateStoreTableGroupMemberWithObject Error:%@",[error userInfo][@"error"]);
+         else
+             [receiver openGroupsChanged];
      }];
 }
 
