@@ -352,8 +352,8 @@
 + (Boolean) isDate:(NSDate *)date InAllowedGivenDates:(NSString *)strDates
 {
     NSCalendar *gregorian = [[NSCalendar alloc]
-                             initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *weekdayComponents = [gregorian components:(NSDayCalendarUnit | NSTimeZoneCalendarUnit | NSWeekdayCalendarUnit) fromDate:date];
+                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *weekdayComponents = [gregorian components:(NSCalendarUnitDay | NSCalendarUnitTimeZone | NSCalendarUnitWeekday) fromDate:date];
     
     NSString *weekDay = [UtilCalls getStringDayOfWeekFromInt:weekdayComponents.weekday];
     

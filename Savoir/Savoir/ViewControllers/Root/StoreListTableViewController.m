@@ -39,11 +39,12 @@
 #import "Constants.h"
 #import <CoreLocation/CoreLocation.h>
 
-#import <ParseFacebookUtils/PFFacebookUtils.h>
+#import <ParseFacebookUtilsV4/PFFacebookUtils.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 #import "TablesViewController.h"
 #import "ExistingGroupsTableViewController.h"
+#import "MenuWebViewController.h"
 
 @interface StoreListTableViewController ()<DataProviderDelegate, CLLocationManagerDelegate>
 
@@ -76,7 +77,6 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -134,20 +134,6 @@
         }
     }
     
-    if (appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore != nil)
-    {
-        if ([UtilCalls userBelongsToStoreChatTeamForStore:appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore])
-        {
-            [self startServerMode];
-            return;
-        }
-        else
-        {
-            [self startInStoreMode];
-            return;
-        }
-    }
-    
     GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
     [goh loadAllUserObjects];
     if (goh.inStoreOrderDetails == nil && goh.orderInProgress != nil)
@@ -180,90 +166,6 @@
         return false;
     else
         return true;
-}
-
-- (void) startServerMode
-{
-    UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"InStoreServer" bundle:nil];
-    MenuTableViewController *destination = [mainStoryBoard instantiateViewControllerWithIdentifier:@"ServerTablesViewController"];
-    
-    UIStoryboardSegue *segue = [UIStoryboardSegue segueWithIdentifier:@"segueStoreListToServerTableView" source:self destination:destination performHandler:^(void) {
-        //view transition/animation
-        [self.navigationController pushViewController:destination animated:YES];
-    }];
-    
-    [self shouldPerformSegueWithIdentifier:segue.identifier sender:self];//optional
-    [self prepareForSegue:segue sender:self];
-    
-    [segue perform];
-
-}
-
-- (void) startInStoreMode
-{
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeIndeterminate;
-    hud.labelText = @"Please Wait";
-    hud.hidden = NO;
-    
-    [appDelegate.globalObjectHolder.inStoreOrderDetails clearCurrentOrder];
-
-    if (self)
-    {
-        __weak __typeof(self) weakSelf = self;
-        GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-        GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetStoreTableGroupDetailsForCurrentUser];
-        
-        NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
-        dic[USER_AUTH_TOKEN_HEADER_NAME]=[UtilCalls getAuthTokenForCurrentUser];
-        
-        [query setAdditionalHTTPHeaders:dic];
-        
-        [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreOrderAndTeamDetails *object,NSError *error)
-         {
-             if(!error)
-             {
-                 AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-                 appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails = object;
-                 NSLog(@"startInStoreMode tableGroupMemberId = %lld orderId = %lld", object.memberMe.identifier.longLongValue, object.order.identifier.longLongValue);
-                 NSLog(@"startInStoreMode member status = %d orderId = %d", object.memberMe.status.intValue, object.order.orderStatus.intValue);
-                 if (object != nil && object.memberMe.identifier.longLongValue > 0)
-                 {
-                     UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"InStorePay" bundle:nil];
-                     ExistingGroupsTableViewController *destination = [mainStoryBoard instantiateViewControllerWithIdentifier:@"InstoreOrderSummaryViewController"];
-                     
-                     UIStoryboardSegue *segue = [UIStoryboardSegue segueWithIdentifier:@"segueStartupToInstoreOrderSummary" source:weakSelf destination:destination performHandler:^(void) {
-                         //view transition/animation
-                         [weakSelf.navigationController pushViewController:destination animated:YES];
-                     }];
-                     
-                     [weakSelf shouldPerformSegueWithIdentifier:segue.identifier sender:weakSelf];//optional
-                     [weakSelf prepareForSegue:segue sender:weakSelf];
-                     
-                     [segue perform];
-                 }
-                 else
-                 {
-                     UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"InStorePay" bundle:nil];
-                     ExistingGroupsTableViewController *destination = [mainStoryBoard instantiateViewControllerWithIdentifier:@"ExistingGroupsTableViewController"];
-                     
-                     UIStoryboardSegue *segue = [UIStoryboardSegue segueWithIdentifier:@"segueStoreListToInStoreExistingGroupView" source:weakSelf destination:destination performHandler:^(void) {
-                         //view transition/animation
-                         [weakSelf.navigationController pushViewController:destination animated:YES];
-                     }];
-                     
-                     [weakSelf shouldPerformSegueWithIdentifier:segue.identifier sender:weakSelf];//optional
-                     [weakSelf prepareForSegue:segue sender:weakSelf];
-                     
-                     [segue perform];
-                 }
-             }else{
-                 NSLog(@"queryForAddMemberToStoreTableGroup Error:%@",[error userInfo][@"error"]);
-             }
-             hud.hidden = YES;
-         }];
-    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -333,6 +235,9 @@
     StoreListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StoreListCell" forIndexPath:indexPath];
     cell.tag = indexPath.row;
     cell.backgroundColor = [UIColor clearColor];
+
+    cell.chatButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    cell.orderOnlineButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     
     id dataObject = self.dataProvider.dataObjects[indexPath.row];
     if ([dataObject isKindOfClass:[NSNull class]]) {
@@ -342,6 +247,7 @@
         cell.menuButton.enabled = false;
         cell.orderOnlineButton.enabled = false;
         cell.reserveButton.enabled = false;
+        cell.statsView.hidden = true;
 
         [cell.callButton setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
         [cell.chatButton setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
@@ -362,6 +268,7 @@
     [cell.reserveButton addTarget:self action:@selector(reserveTable:) forControlEvents:UIControlEventTouchUpInside];
     
     cell.callButton.enabled = true;
+    cell.menuButton.enabled = true;
     [cell.callButton setTitleColor:[UIColor goldColor] forState:UIControlStateNormal];
     
     if (storeAndStats.store.claimed.boolValue == true)
@@ -401,10 +308,9 @@
     else
     {
         cell.chatButton.hidden = true;
-        cell.menuButton.hidden = true;
         cell.orderOnlineButton.hidden = true;
 
-        [cell.reserveButton setTitle:@"Claim Store" forState:UIControlStateNormal];
+        [cell.reserveButton setTitle:@"Claim" forState:UIControlStateNormal];
         cell.reserveButton.enabled = true;
         [cell.reserveButton setTitleColor:[UIColor goldColor] forState:UIControlStateNormal];
     }
@@ -429,8 +335,7 @@
     
     cell.restaurantLabel.text = storeAndStats.store.name;
     cell.trophyLabel.text = storeAndStats.store.trophies.firstObject;
-//    cell.cuisineLabel.text = [NSString stringWithFormat:@"%@. %@", storeAndStats.store.city, storeAndStats.store.subType];
-    cell.cuisineLabel.text = [NSString stringWithFormat:@"%@", storeAndStats.store.city];
+    cell.cuisineLabel.text = [[NSString stringWithFormat:@"%@ \u25C8 %@",storeAndStats.store.subType , storeAndStats.store.city] uppercaseString];
     if (storeAndStats.stats.visits.longLongValue > 0)
     {
         NSString *strVisitCount = [UtilCalls formattedNumber:storeAndStats.stats.visits];
@@ -452,6 +357,34 @@
     //            txtRecommends.text = [UtilCalls formattedNumber:storeStats.recommendations];
     //            imgRecommends.hidden = false;
     //        }
+//    
+//    if (cell.statsView.hidden == true)
+//    {
+//        CGRect newFrame = cell.statsView.frame;
+//        newFrame.size.height = 0;
+//        [cell.statsView setFrame:newFrame];
+//    }
+//    else
+//    {
+//        CGRect newFrame = cell.statsView.frame;
+//        newFrame.size.height = 20;
+//        [cell.statsView setFrame:newFrame];
+//    }
+//    
+//    if (IsEmpty(cell.trophyLabel.text))
+//    {
+//        cell.trophyLabel.hidden = true;
+//        CGRect newFrame = cell.statsView.frame;
+//        newFrame.size.height = 0;
+//        [cell.trophyLabel setFrame:newFrame];
+//    }
+//    else
+//    {
+//        cell.trophyLabel.hidden = false;
+//        CGRect newFrame = cell.statsView.frame;
+//        newFrame.size.height = 20;
+//        [cell.trophyLabel setFrame:newFrame];
+//    }
     
     return cell;
 }
@@ -551,7 +484,10 @@
 - (IBAction) showMenu:(UIButton *)sender
 {
     _selectedStore = self.dataProvider.dataObjects[sender.tag];
-    [self performSegueWithIdentifier:@"segueMenu" sender:sender];
+    if (_selectedStore.store.claimed.boolValue == false)
+        [self performSegueWithIdentifier:@"segueStorelistToWebMenu" sender:sender];
+    else
+        [self performSegueWithIdentifier:@"segueMenu" sender:sender];
 }
 
 - (IBAction) placeOrder:(UIButton *)sender
@@ -703,6 +639,15 @@
         MenuTableViewController *controller = [segue destinationViewController];
         // Pass any objects to the view controller here, like...
         [controller setSelectedStore:_selectedStore.store];
+    }
+    else if ([[segue identifier] isEqualToString:@"segueStorelistToWebMenu"])
+    {
+        // Get reference to the destination view controller
+        MenuWebViewController *controller = [segue destinationViewController];
+        // Pass any objects to the view controller here, like...
+//        [controller setMenuURL:@"http://www.topazcafe.com/dinner-menu/"];
+        [controller setStoreName:_selectedStore.store.name];
+        [controller setMenuURL:_selectedStore.store.twitterUrl];
     }
     else if ([[segue identifier] isEqualToString:@"seguePlaceOnlineOrder"])
     {

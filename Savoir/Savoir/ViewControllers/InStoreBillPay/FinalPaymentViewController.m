@@ -91,7 +91,6 @@
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     [appDelegate.globalObjectHolder.inStoreOrderDetails getStoreOrderDetails:self];
-    NSLog(@"FinalPaymentViewController refreshOrderDetails");
 }
 
 - (void)orderChanged
@@ -254,12 +253,8 @@
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     
-    NSLog(@"payNowClicked 1");
-    
     if ([self finalTotal] == 0)
         return;
-    
-    NSLog(@"payNowClicked 2");
     
     if (self.stripePay.applePayEnabled)
     {
@@ -297,15 +292,11 @@
     hud.hidden = NO;
     
     [self finishPayForMember];
-    
-    NSLog(@"payNowClicked 3");
 }
 
 - (void)finishPayForMember
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    
-    NSLog(@"finishPayForMember 1");
     
     GTLStoreendpointSplitOrderArguments *orderArguments = [[GTLStoreendpointSplitOrderArguments alloc]init];
     NSMutableArray *memberIds = [[NSMutableArray alloc]init];
@@ -317,8 +308,6 @@
                  [memberIds addObject:member.userId];
         }
     }
-    
-    NSLog(@"finishPayForMember 3");
     
     orderArguments.paidMembers = memberIds;
     orderArguments.paymentType = [NSNumber numberWithInt:appDelegate.globalObjectHolder.inStoreOrderDetails.paymentType];

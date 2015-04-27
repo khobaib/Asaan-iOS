@@ -12,6 +12,7 @@
 #import "GTLUserendpoint.h"
 #import "GlobalObjectHolder.h"
 #import "NotificationUtils.h"
+#import "BeaconManager.h"
 
 @class SWRevealViewControllerDelegate;
 @interface AppDelegate : UIResponder <UIApplicationDelegate, SWRevealViewControllerDelegate>
@@ -24,6 +25,7 @@
 @property (readonly, strong, nonatomic) GTLServiceStoreendpoint *gtlStoreService;
 @property (readonly, strong, nonatomic) GTLServiceUserendpoint *gtlUserService;
 @property (readonly, strong, nonatomic) GlobalObjectHolder *globalObjectHolder;
+@property (readonly, strong, nonatomic) BeaconManager *beaconManager;
 @property (strong, nonatomic) NotificationUtils *notificationUtils;
 
 - (void)saveContext;

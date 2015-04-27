@@ -16,6 +16,8 @@
 @property (strong, nonatomic) BBBadgeBarButtonItem *barButton;
 @property (strong, nonatomic) ChatView *chatView;
 
+- (void)scheduleLocalNotificationWithString:(NSString *)message;
+
 - (void)scheduleNotificationWithOrder:(GTLStoreendpointStoreOrder *)order;
 - (void)cancelNotificationWithOrder:(NSNumber *)orderId;
 - (void)application:(UIApplication *)app didReceiveLocalNotification:(NSDictionary *)userInfo OnStartup:(Boolean)bStartup;

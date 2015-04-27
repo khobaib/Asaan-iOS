@@ -51,6 +51,5 @@
 - (void) clearAllObjects;
 
 - (void) loadSupportedClientVersionFromServer;
-- (void) getStoreForBeaconId:(long long)beaconId;
 
 @end

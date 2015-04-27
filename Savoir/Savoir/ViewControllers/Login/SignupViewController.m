@@ -8,7 +8,7 @@
 
 #import "SignupViewController.h"
 #import "UIColor+SavoirGoldColor.h"
-#import <ParseFacebookUtils/PFFacebookUtils.h>
+#import <ParseFacebookUtilsV4/PFFacebookUtils.h>
 #import "InlineCalls.h"
 #import "MBProgressHUD.h"
 #import "Extension.h"

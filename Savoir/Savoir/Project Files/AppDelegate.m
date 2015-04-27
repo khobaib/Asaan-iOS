@@ -23,6 +23,7 @@
 
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
+#import <EstimoteSDK/EstimoteSDK.h>
 
 #import <DBChooser/DBChooser.h>
 
@@ -44,6 +45,22 @@
     [Fabric with:@[CrashlyticsKit]];
     [self globalObjectHolder];
     [_globalObjectHolder findStoreCountFromServer];
+    // App ID and App Token should be provided using method below
+    // to allow beacons connection and Estimote Cloud requests possible.
+    // Both values can be found in Estimote Cloud ( http://cloud.estimote.com )
+    // in Account Settings tab.
+    
+//    NSLog(@"ESTAppDelegate: APP ID and APP TOKEN are required to connect to your beacons and make Estimote API calls.");
+    [ESTCloudManager setupAppID:@"savoir" andAppToken:@"505f814a1606b62084e2057166b38d12"];
+    
+    // Estimote Analytics allows you to log activity related to monitoring mechanism.
+    // At the current stage it is possible to log all enter/exit events when monitoring
+    // Particular beacons (Proximity UUID, Major, Minor values needs to be provided).
+    
+//    NSLog(@"ESTAppDelegate: Analytics are turned OFF by defaults. You can enable them changing flag");
+    [ESTCloudManager enableMonitoringAnalytics:NO];
+    [ESTCloudManager enableGPSPositioningForAnalytics:NO];
+    [self beaconManager];
     
     // ****************************************************************************
     // Uncomment and fill in with your Parse credentials:
@@ -88,7 +105,6 @@
     self.notificationUtils = [[NotificationUtils alloc]init];
     [_globalObjectHolder loadSupportedClientVersionFromServer];
     [_globalObjectHolder loadAllUserObjects];
-    [_globalObjectHolder getStoreForBeaconId:125ll];
     
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
     if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
@@ -273,6 +289,7 @@
 @synthesize gtlStoreService = _gtlStoreService;
 @synthesize gtlUserService = _gtlUserService;
 @synthesize globalObjectHolder = _globalObjectHolder;
+@synthesize beaconManager = _beaconManager;
 
 - (NSURL *)applicationDocumentsDirectory {
     // The directory the application uses to store the Core Data store file. This code uses a directory named "com.asaan.Savoir" in the application's documents directory.
@@ -331,6 +348,13 @@
     if(_globalObjectHolder == nil)
         _globalObjectHolder = [[GlobalObjectHolder alloc]init];
     return _globalObjectHolder;
+}
+
+- (BeaconManager *)beaconManager {
+    
+    if(_beaconManager == nil)
+        _beaconManager = [[BeaconManager alloc]init];
+    return _beaconManager;
 }
 
 - (GTLServiceUserendpoint *)gtlUserService {

@@ -50,6 +50,26 @@
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
 }
 
+- (void)scheduleLocalNotificationWithString:(NSString *)message
+{
+    UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+    if (localNotif == nil)
+        return;
+    NSDate *date = [NSDate date];
+    localNotif.fireDate = [date dateByAddingTimeInterval:30]; // Fire initial review time after one hour.
+    localNotif.timeZone = [NSTimeZone defaultTimeZone];
+    
+    localNotif.alertBody = message;
+    localNotif.alertAction = NSLocalizedString(@"Ok", nil);
+    
+    localNotif.soundName = UILocalNotificationDefaultSoundName;
+    
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
+        localNotif.category = @"REVIEW_CATEGORY";
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
+}
+
 - (void)cancelNotificationWithOrder:(NSNumber *)orderId
 {
     NSArray *arrayOfLocalNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications] ;

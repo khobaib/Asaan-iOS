@@ -69,6 +69,8 @@
 	<string>Savoir uses your location to notify you about great restaurants around you.</string>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>bluetooth-central</string>
+		<string>location</string>
 		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
