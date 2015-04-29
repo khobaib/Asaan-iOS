@@ -299,17 +299,20 @@
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     
     GTLStoreendpointSplitOrderArguments *orderArguments = [[GTLStoreendpointSplitOrderArguments alloc]init];
-    NSMutableArray *memberIds = [[NSMutableArray alloc]init];
+    NSMutableArray *members = [[NSMutableArray alloc]init];
     for (GTLStoreendpointStoreTableGroupMember *member in appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.members)
     {
         if (member.payingUserId.longLongValue == appDelegate.globalObjectHolder.currentUser.identifier.longLongValue)
         {
             if (member.identifier.longLongValue != appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.memberMe.identifier.longLongValue)
-                 [memberIds addObject:member.userId];
+                 [members addObject:member];
         }
     }
     
-    orderArguments.paidMembers = memberIds;
+    orderArguments.memberMe = appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.memberMe;
+    orderArguments.storeTableGroup = appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.storeTableGroup;
+    orderArguments.order = appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order;
+    orderArguments.paidMembers = members;
     orderArguments.paymentType = [NSNumber numberWithInt:appDelegate.globalObjectHolder.inStoreOrderDetails.paymentType];
     orderArguments.gratuityPercent = [NSNumber numberWithInt:self.tipSlider.value];
     orderArguments.taxPercent = [NSNumber numberWithInt:appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore.taxPercent.intValue];

@@ -24,6 +24,7 @@
 + (int)PAYMENT_TYPE_SPLITBYITEM;
 
 - (void) createGroup:(id <InStoreOrderReceiver>)receiver;
+- (void) leaveGroup:(id <InStoreOrderReceiver>)receiver;
 - (void) joinGroup:(GTLStoreendpointStoreTableGroup *)tableGroup receiver:(id <InStoreOrderReceiver>)receiver;
 - (void) getStoreOrderDetails:(id <InStoreOrderReceiver>)receiver;
 - (void) getOpenGroups:(id <InStoreOrderReceiver>)receiver;

@@ -48,6 +48,35 @@
     }
 }
 
+- (void)leaveGroup:(id <InStoreOrderReceiver>)receiver
+{
+    if (self)
+    {
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+        GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
+        GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForRemoveMemberFromStoreTableGroup];
+        
+        NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
+        dic[USER_AUTH_TOKEN_HEADER_NAME]=[UtilCalls getAuthTokenForCurrentUser];
+        
+        [query setAdditionalHTTPHeaders:dic];
+        
+        [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error)
+         {
+             if(error)
+             {
+                 [[[UIAlertView alloc]initWithTitle:@"Leave Group/Table Error" message:[error userInfo][@"error"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+                 NSLog(@"queryForRemoveMemberFromStoreTableGroup Error:%@",[error userInfo][@"error"]);
+             }
+             else
+             {
+                 [self clearCurrentOrder];
+                 [receiver orderChanged];
+             }
+         }];
+    }
+}
+
 - (void) joinGroup:(GTLStoreendpointStoreTableGroup *)tableGroup receiver:(id <InStoreOrderReceiver>)receiver
 {
     if (self)
@@ -159,6 +188,7 @@
     self.partySize = 0;
     self.paymentType = [InStoreOrderDetails PAYMENT_TYPE_PAYINFULL];
     self.selectedDiscount = nil;
+    self.selectedStore = nil;
 }
 
 @end
