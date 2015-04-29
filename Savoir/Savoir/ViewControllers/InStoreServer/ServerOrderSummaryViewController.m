@@ -18,7 +18,7 @@
 #import "XMLPOSOrder.h"
 #import "ServerSelectGroupTableViewController.h"
 #import "MenuTableViewController.h"
-#import "DeliveryOrCarryoutViewController.h"
+#import "OrderTypeTableViewController.h"
 #import "OrderDiscountViewController.h"
 #import "DiscountReceiver.h"
 #import "UIAlertView+Blocks.h"
@@ -368,7 +368,7 @@
         appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order = [[GTLStoreendpointStoreOrder alloc]init];
         appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.storeId = appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore.identifier;
         appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.storeName = appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore.name;
-        appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.orderMode = [NSNumber numberWithInt:[DeliveryOrCarryoutViewController ORDERTYPE_DININGIN]];
+        appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.orderMode = [NSNumber numberWithInt:[OrderTypeTableViewController ORDERTYPE_DININGIN]];
     }
     
     appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.orderDetails = self.XMLOrderStr;
@@ -397,6 +397,7 @@
      {
          if(error)
          {
+             [[[UIAlertView alloc]initWithTitle:@"Order Change Error" message:[error userInfo][@"error"] delegate:weakSelf cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
              NSLog(@"ServerOrderSummary: queryForUpdateOrderFromServerWithObject Error:%@",[error userInfo][@"error"]);
          }
          else
@@ -510,6 +511,11 @@
 - (IBAction)btnCloseClicked:(id)sender
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    if (appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order == nil)
+    {
+        [[[UIAlertView alloc]initWithTitle:@"Close Order" message:@"Cannot close an unsaved order. Please save order first." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+        return;
+    }
     if (appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.storeTableGroupId.longLongValue > 0 &&
         appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.orderStatus.intValue < 4)
     {

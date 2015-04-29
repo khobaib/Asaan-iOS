@@ -20,7 +20,7 @@
 #import "StoreLoadingOperation.h"
 #import "UIImageView+WebCache.h"
 #import "MenuTableViewController.h"
-#import "DeliveryOrCarryoutViewController.h"
+#import "OrderTypeTableViewController.h"
 #import "ReserveOrWaitlistTableViewController.h"
 #import "ClaimStoreViewController.h"
 #import "StoreWaitListViewController.h"
@@ -657,7 +657,7 @@
     else if ([[segue identifier] isEqualToString:@"seguePlaceOnlineOrder"])
     {
         // Get reference to the destination view controller
-        DeliveryOrCarryoutViewController *controller = [segue destinationViewController];
+        OrderTypeTableViewController *controller = [segue destinationViewController];
         // Pass any objects to the view controller here, like...
         [controller setSelectedStore:_selectedStore.store];
     }

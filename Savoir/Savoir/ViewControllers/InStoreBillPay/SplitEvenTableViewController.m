@@ -42,6 +42,11 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [self startTimer];
+}
+
+- (void)startTimer
+{
     self.timer = [NSTimer scheduledTimerWithTimeInterval:35.0 target:self selector:@selector(refreshOrderDetails) userInfo:nil repeats:YES];
 }
 
@@ -64,12 +69,16 @@
     if (appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.memberMe == nil
         || appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.orderStatus.intValue == 4 // Fully Paid
         || appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.orderStatus.intValue == 5) // Paid and Closed
+    {
+        [self.timer invalidate];
         [UtilCalls handleClosedOrderFor:self SegueTo:@"segueUnwindSplitEvenToStoreList"];
+    }
     [self.tableView reloadData];
 }
 
 - (void)openGroupsChanged
 {
+    [self.timer invalidate];
     [self performSegueWithIdentifier:@"segueSplitEvenlyToPay" sender:self];
 }
 

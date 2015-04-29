@@ -46,13 +46,6 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    [self refreshOrderDetails];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:35.0 target:self selector:@selector(refreshOrderDetails) userInfo:nil repeats:YES];
-}
 - (IBAction)btnLeaveGroup:(id)sender
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
@@ -68,12 +61,24 @@
     [appDelegate.globalObjectHolder.inStoreOrderDetails leaveGroup:self];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self refreshOrderDetails];
+    [self startTimer];
+}
+
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillDisappear:(BOOL)animated
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
     [super viewWillDisappear:animated];
     [self.timer invalidate];
+}
+
+- (void)startTimer
+{
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:35.0 target:self selector:@selector(refreshOrderDetails) userInfo:nil repeats:YES];
 }
 
 #pragma mark - InStoreOrderReceiver Delegate
@@ -84,7 +89,10 @@
     if (appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.memberMe == nil
         || appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.orderStatus.intValue == 4 // Fully Paid
         || appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.orderStatus.intValue == 5) // Paid and Closed
+    {
+        [self.timer invalidate];
         [UtilCalls handleClosedOrderFor:self SegueTo:@"segueUnwindInStoreOrderSummaryToStoreList"];
+    }
     self.finalItems = [XMLPOSOrder parseOrderDetails:appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.orderDetails];
     if ([self subTotal] > 0)
         self.btnPay.enabled = true;

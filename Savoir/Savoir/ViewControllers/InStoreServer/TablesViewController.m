@@ -42,7 +42,6 @@
         self.navigationItem.leftBarButtonItem = backButton;
 
     }
-    [self setupExistingTablesFromOrders];
 }
 
 - (void)backButtonPressed

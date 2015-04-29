@@ -11,7 +11,7 @@
 #import "OnlineOrderSelectedModifierGroup.h"
 #import "UtilCalls.h"
 #import <Parse/Parse.h>
-#import "DeliveryOrCarryoutViewController.h"
+#import "OrderTypeTableViewController.h"
 #import "AppDelegate.h"
 #import "OrderItemSummaryFromPOS.h"
 #import "InlineCalls.h"
@@ -69,7 +69,7 @@
     NSString *orderTime = [dateFormatter stringFromDate: orderInProgress.orderTime];
     
     NSString *orderString;
-    if (orderInProgress.orderType == [DeliveryOrCarryoutViewController ORDERTYPE_DELIVERY])
+    if (orderInProgress.orderType == [OrderTypeTableViewController ORDERTYPE_DELIVERY])
     {
         
         //    NSString *deliveryString=[NSString stringWithFormat:@"<DELIVERY DELIVERYACCT=\"%@\" DELIVERYNOTE=\"%@\" ADDRESS1=\"123 Main street\" ADDRESS2=\"APT 123\" ADDRESS3=\"Back Door\" CITY=\"DENVER\" STATE=\"CO\" POSTALCODE=\"12345\" CROSSSTREET=\"MAIN AND 1st\" />"];

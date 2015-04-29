@@ -21,7 +21,7 @@
 #import <MBProgressHUD.h>
 #import "AppDelegate.h"
 #import "UIAlertView+Blocks.h"
-#import "DeliveryOrCarryoutViewController.h"
+#import "OrderTypeTableViewController.h"
 #import "SelectAddressTableViewController.h"
 #import "SelectPaymentTableViewController.h"
 #import "InlineCalls.h"
@@ -285,7 +285,7 @@
     if (self.orderInProgress == nil || self.orderInProgress.selectedMenuItems == nil || self.orderInProgress.selectedMenuItems.count == 0)
         return 0;
     
-    if (self.orderInProgress.orderType == DeliveryOrCarryoutViewController.ORDERTYPE_CARRYOUT)
+    if (self.orderInProgress.orderType == OrderTypeTableViewController.ORDERTYPE_CARRYOUT)
         return self.orderInProgress.selectedMenuItems.count + 7;
     else
         return self.orderInProgress.selectedMenuItems.count + 9;
@@ -365,7 +365,7 @@
 //    for (OnlineOrderSelectedMenuItem *onlineOrderSelectedMenuItem in self.orderInProgress.selectedMenuItems)
 //        taxPercentAmount += onlineOrderSelectedMenuItem.amount * onlineOrderSelectedMenuItem.selectedItem.tax.longLongValue;
 //    return taxPercentAmount;
-    if (self.orderInProgress.orderType == DeliveryOrCarryoutViewController.ORDERTYPE_CARRYOUT)
+    if (self.orderInProgress.orderType == OrderTypeTableViewController.ORDERTYPE_CARRYOUT)
         return ([self subTotal] + [self gratuity])*self.orderInProgress.selectedStore.taxPercent.longLongValue/10000.0;
     else
         return ([self subTotal] + [self gratuity] + [self deliveryFee])*self.orderInProgress.selectedStore.taxPercent.longLongValue/10000.0;
@@ -395,7 +395,7 @@
 
 - (double)finalAmount
 {
-    if (self.orderInProgress.orderType == DeliveryOrCarryoutViewController.ORDERTYPE_CARRYOUT)
+    if (self.orderInProgress.orderType == OrderTypeTableViewController.ORDERTYPE_CARRYOUT)
         return ([self subTotal] + [self gratuity] + [self taxAmount]);
     else
         return ([self subTotal] + [self gratuity] + [self taxAmount] + [self deliveryFee]);
@@ -416,9 +416,9 @@
 
 - (UITableViewCell *)cellForAdditionalRowAtIndex:(int)index forTable:(UITableView *)tableView forIndexPath:indexPath
 {
-    if (self.orderInProgress.orderType == DeliveryOrCarryoutViewController.ORDERTYPE_CARRYOUT && index > 2)
+    if (self.orderInProgress.orderType == OrderTypeTableViewController.ORDERTYPE_CARRYOUT && index > 2)
         index++;
-    if (self.orderInProgress.orderType == DeliveryOrCarryoutViewController.ORDERTYPE_CARRYOUT && index > 6)
+    if (self.orderInProgress.orderType == OrderTypeTableViewController.ORDERTYPE_CARRYOUT && index > 6)
         index++;
 
     UITableViewCell *cell;
@@ -609,7 +609,7 @@
 
 - (Boolean)AreDeliveryRequirementsValid
 {
-    if (self.orderInProgress.orderType == [DeliveryOrCarryoutViewController ORDERTYPE_DELIVERY])
+    if (self.orderInProgress.orderType == [OrderTypeTableViewController ORDERTYPE_DELIVERY])
     {
         if (![self isDefaultUserAddressValidForStoreDelivery])
         {
@@ -624,7 +624,7 @@
                  {
                      if (buttonIndex == [alertView cancelButtonIndex])
                      {
-                         weakSelf.orderInProgress.orderType = [DeliveryOrCarryoutViewController ORDERTYPE_CARRYOUT];
+                         weakSelf.orderInProgress.orderType = [OrderTypeTableViewController ORDERTYPE_CARRYOUT];
                          [weakSelf.tableView reloadData];
                          bReturn = YES;
                      }

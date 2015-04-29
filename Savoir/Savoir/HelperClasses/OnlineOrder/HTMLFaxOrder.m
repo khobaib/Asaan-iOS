@@ -95,7 +95,7 @@ src="http://static1.squarespace.com/static/54ce8734e4b08a9c05c30098/t/54e545d5e4
 #import "OnlineOrderSelectedModifierGroup.h"
 #import "UtilCalls.h"
 #import <Parse/Parse.h>
-#import "DeliveryOrCarryoutViewController.h"
+#import "OrderTypeTableViewController.h"
 #import "AppDelegate.h"
 
 @implementation HTMLFaxOrder : NSObject 
@@ -133,7 +133,7 @@ NSString *endStr = @"</table> </td> </tr> </table> </body> </html>";
     NSString *addressStr =[NSString stringWithFormat:@"%@ %@ %@", address.title, address.fullAddress, address.notes];
     
     NSString *orderType = @"Carryout";
-    if (orderInProgress.orderType == [DeliveryOrCarryoutViewController ORDERTYPE_DELIVERY])
+    if (orderInProgress.orderType == [OrderTypeTableViewController ORDERTYPE_DELIVERY])
         orderType = @"Delivery";
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];

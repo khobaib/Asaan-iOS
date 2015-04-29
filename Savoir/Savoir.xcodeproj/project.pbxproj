@@ -285,7 +285,6 @@
 		D4195FB31A92A69C00663149 /* MenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4195E521A92A69B00663149 /* MenuTableViewController.m */; };
 		D4195FB51A92A69C00663149 /* AddAddressTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4195E571A92A69B00663149 /* AddAddressTableViewController.m */; };
 		D4195FB61A92A69C00663149 /* AddPaymentCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4195E591A92A69B00663149 /* AddPaymentCardViewController.m */; };
-		D4195FB71A92A69C00663149 /* DeliveryOrCarryoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4195E5B1A92A69B00663149 /* DeliveryOrCarryoutViewController.m */; };
 		D4195FB81A92A69C00663149 /* OrderDiscountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4195E5D1A92A69B00663149 /* OrderDiscountViewController.m */; };
 		D4195FB91A92A69C00663149 /* MainReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4195E601A92A69B00663149 /* MainReviewViewController.m */; };
 		D4195FBA1A92A69C00663149 /* ReviewItemsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4195E621A92A69B00663149 /* ReviewItemsTableViewController.m */; };
@@ -955,8 +954,6 @@
 		D4195E571A92A69B00663149 /* AddAddressTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddAddressTableViewController.m; sourceTree = "<group>"; };
 		D4195E581A92A69B00663149 /* AddPaymentCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPaymentCardViewController.h; sourceTree = "<group>"; };
 		D4195E591A92A69B00663149 /* AddPaymentCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPaymentCardViewController.m; sourceTree = "<group>"; };
-		D4195E5A1A92A69B00663149 /* DeliveryOrCarryoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliveryOrCarryoutViewController.h; sourceTree = "<group>"; };
-		D4195E5B1A92A69B00663149 /* DeliveryOrCarryoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeliveryOrCarryoutViewController.m; sourceTree = "<group>"; };
 		D4195E5C1A92A69B00663149 /* OrderDiscountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDiscountViewController.h; sourceTree = "<group>"; };
 		D4195E5D1A92A69B00663149 /* OrderDiscountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDiscountViewController.m; sourceTree = "<group>"; };
 		D4195E5F1A92A69B00663149 /* MainReviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainReviewViewController.h; sourceTree = "<group>"; };
@@ -2314,8 +2311,6 @@
 				D4195E571A92A69B00663149 /* AddAddressTableViewController.m */,
 				D4195E581A92A69B00663149 /* AddPaymentCardViewController.h */,
 				D4195E591A92A69B00663149 /* AddPaymentCardViewController.m */,
-				D4195E5A1A92A69B00663149 /* DeliveryOrCarryoutViewController.h */,
-				D4195E5B1A92A69B00663149 /* DeliveryOrCarryoutViewController.m */,
 				D4195E5C1A92A69B00663149 /* OrderDiscountViewController.h */,
 				D4195E5D1A92A69B00663149 /* OrderDiscountViewController.m */,
 				D4195E5E1A92A69B00663149 /* Review */,
@@ -3156,7 +3151,6 @@
 				D445D7191A96BA3800ED4919 /* StoreListTableViewController.m in Sources */,
 				D406D8001AD23C250076D0B6 /* InstorePaymentOptionTableViewController.m in Sources */,
 				D4195F201A92A69C00663149 /* SDImageCache.m in Sources */,
-				D4195FB71A92A69C00663149 /* DeliveryOrCarryoutViewController.m in Sources */,
 				D47D3ABB1ABB36810099176A /* HTMLFaxOrder.m in Sources */,
 				D4195F261A92A69C00663149 /* SDWebImagePrefetcher.m in Sources */,
 				D4BDBF011AE35C590014273B /* GTLStoreendpointStoreOrderAndTeamDetails.m in Sources */,

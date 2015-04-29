@@ -76,6 +76,11 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self startTimer];
+}
+
+- (void)startTimer
+{
     self.timer = [NSTimer scheduledTimerWithTimeInterval:35.0 target:self selector:@selector(refreshOrderDetails) userInfo:nil repeats:YES];
 }
 
@@ -99,8 +104,11 @@
     if (appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.memberMe == nil
         || appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.orderStatus.intValue == 4 // Fully Paid
         || appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.orderStatus.intValue == 5) // Paid and Closed
+    {
+        [self.timer invalidate];
         [UtilCalls handleClosedOrderFor:self SegueTo:@"segueUnwindMemberPayToStoreList"];
-        
+    }
+    
     self.finalItems = [XMLPOSOrder parseOrderDetails:appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.orderDetails];
     [self updatePaymentValues];
     
@@ -296,6 +304,7 @@
 
 - (void)finishPayForMember
 {
+    [self.timer invalidate];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     
     GTLStoreendpointSplitOrderArguments *orderArguments = [[GTLStoreendpointSplitOrderArguments alloc]init];
@@ -346,6 +355,7 @@
                  [UtilCalls handleClosedOrderFor:weakSelf SegueTo:@"segueUnwindMemberPayToStoreList"];
              }else{
                  NSLog(@"queryForPayForMemberWithObject Error:%@",[error userInfo][@"error"]);
+                 [self startTimer];
              }
          }];
     }
