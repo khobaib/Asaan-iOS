@@ -525,6 +525,11 @@
              }
          }];
     }
+    else
+    {
+        self.bCloseClicked = true;
+        [self saveClicked];
+    }
 }
 - (IBAction)btnSaveClicked:(id)sender
 {

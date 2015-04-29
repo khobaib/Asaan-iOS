@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GTLStoreendpointStore.h"
 
 @interface InStoreUtils : NSObject
 
 + (void) getStoreForBeaconId:(long)beaconId;
-+ (void) startInStoreMode;
-+ (void) startServerMode;
++ (void) startInStoreMode:(UIViewController *)source ForStore:(GTLStoreendpointStore *)store;
 
 @end

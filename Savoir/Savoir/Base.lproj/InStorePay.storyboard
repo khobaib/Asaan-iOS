@@ -230,10 +230,10 @@
                                             <variation key="default">
                                                 <mask key="constraints">
                                                     <exclude reference="Jh2-FC-Cto"/>
-                                                    <exclude reference="mJu-cU-Epb"/>
+                                                    <exclude reference="FKC-Y9-sGy"/>
                                                     <exclude reference="Gnt-a8-mr8"/>
                                                     <exclude reference="VWv-61-4Rm"/>
-                                                    <exclude reference="FKC-Y9-sGy"/>
+                                                    <exclude reference="mJu-cU-Epb"/>
                                                     <exclude reference="77c-a5-ilv"/>
                                                     <exclude reference="AMT-QV-Mnj"/>
                                                 </mask>
@@ -253,7 +253,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="btnLeaveGroupClicked:" destination="ywv-Hr-Y0N" eventType="touchUpInside" id="I9f-rO-mub"/>
+                                    <action selector="btnLeaveGroup:" destination="ywv-Hr-Y0N" eventType="touchUpInside" id="cng-Dt-I4T"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -270,12 +270,15 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="Order Summary" id="7Kh-e0-fda">
-                        <barButtonItem key="rightBarButtonItem" title="Pay" id="h4L-I2-6tm"/>
+                        <barButtonItem key="rightBarButtonItem" title="Pay" id="h4L-I2-6tm">
+                            <connections>
+                                <segue destination="qWH-ol-yFm" kind="show" identifier="seguePaymentOption" id="kdh-TC-IB0"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="btnPay" destination="h4L-I2-6tm" id="qc8-Oj-1Ak"/>
                         <outlet property="tableView" destination="7gu-lw-rDQ" id="UXJ-fJ-Osp"/>
-                        <segue destination="qWH-ol-yFm" kind="show" identifier="seguePaymentOption" id="gg5-4m-mo8"/>
                         <segue destination="9t0-nh-nVb" kind="unwind" identifier="segueUnwindInStoreOrderSummaryToStoreList" unwindAction="unwindToStoreList:" id="pSe-KT-yjx"/>
                     </connections>
                 </viewController>

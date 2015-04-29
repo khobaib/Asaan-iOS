@@ -140,7 +140,8 @@
     [UINavigationBar appearance].barTintColor = [UIColor asaanBackgroundColor];
     [UINavigationBar appearance].shadowImage = [UIImage new];
     [UINavigationBar appearance].titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
-    
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60)
+                                                         forBarMetrics:UIBarMetricsDefault];
     self.window.tintColor = [UIColor goldColor];
     
     if (launchOptions != nil)

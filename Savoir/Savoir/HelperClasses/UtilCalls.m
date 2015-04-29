@@ -336,12 +336,13 @@
 
 + (Boolean) canStore:(GTLStoreendpointStore *)store fulfillOrderAt:(NSDate *)date
 {
-    double storeLat = RAD2DEG(store.lat.doubleValue);
-    double storeLng = RAD2DEG(store.lng.doubleValue);
-    CLLocation* storeLocation = [[CLLocation alloc] initWithLatitude:storeLat longitude:storeLng];
-    NSTimeZone *storeTimeZone = storeLocation.timeZone;
-
-    return [UtilCalls isDate:date InAllowedGivenDates:store.hours ForTimeZine:storeTimeZone];
+    return true;
+//    double storeLat = RAD2DEG(store.lat.doubleValue);
+//    double storeLng = RAD2DEG(store.lng.doubleValue);
+//    CLLocation* storeLocation = [[CLLocation alloc] initWithLatitude:storeLat longitude:storeLng];
+//    NSTimeZone *storeTimeZone = storeLocation.timeZone;
+//
+//    return [UtilCalls isDate:date InAllowedGivenDates:store.hours ForTimeZine:storeTimeZone];
 }
 
 + (Boolean) canPlaceOrderFromMenu:(GTLStoreendpointStoreMenuHierarchy *)menu atDate:(NSDate *)date ForStore:(GTLStoreendpointStore *)store
@@ -469,7 +470,7 @@
 + (void) handleClosedOrderFor:(id)sender SegueTo:(NSString *)segueIdentifier
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    NSString *title = [NSString stringWithFormat:@"Your order at %@", appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore.name];
+    NSString *title = [NSString stringWithFormat:@"Your order"];
     NSString *msg = [NSString stringWithFormat:@"This order is paid for and closed - Thank you!"];
     UIAlertView *alert=[[UIAlertView alloc]initWithTitle:title message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
     [alert show];

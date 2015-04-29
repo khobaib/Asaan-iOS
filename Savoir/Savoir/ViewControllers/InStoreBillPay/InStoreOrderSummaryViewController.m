@@ -33,13 +33,18 @@
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
-    if (self.navigationController.viewControllers[0] != self)
-        self.navigationItem.leftBarButtonItem = nil;
-    else
+    if (self.navigationController.viewControllers[0] == self)
     {
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-        [appDelegate.notificationUtils getSlidingMenuBarButtonSetupWith:self];
+        //        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+        //        [appDelegate.notificationUtils getSlidingMenuBarButtonSetupWith:self];
+        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"UINavigationBarBackIndicatorGold"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed)];
+        self.navigationItem.leftBarButtonItem = backButton;
     }
+}
+
+- (void)backButtonPressed
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -47,6 +52,20 @@
     
     [self refreshOrderDetails];
     self.timer = [NSTimer scheduledTimerWithTimeInterval:35.0 target:self selector:@selector(refreshOrderDetails) userInfo:nil repeats:YES];
+}
+- (IBAction)btnLeaveGroup:(id)sender
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    if ([self subTotal] > 0)
+    {
+        if (appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.members.count == 1)
+        {
+            [[[UIAlertView alloc]initWithTitle:@"Leave Group/Table Error" message:@"This table has an active order. Please ask your server to close the table before leaving." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+            return;
+        }
+    }
+    
+    [appDelegate.globalObjectHolder.inStoreOrderDetails leaveGroup:self];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -233,20 +252,6 @@
 - (double)subTotal  // already * by 1000000
 {
     return [self subTotalNoDiscount] - [self discountAmount];
-}
-- (IBAction)btnLeaveGroupClicked:(id)sender
-{
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    if ([self subTotal] > 0)
-    {
-        if (appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.members.count == 1)
-        {
-            [[[UIAlertView alloc]initWithTitle:@"Leave Group/Table Error" message:@"This table has an active order. Please ask your server to close the table before leaving." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
-            return;
-        }
-    }
-    
-    [appDelegate.globalObjectHolder.inStoreOrderDetails leaveGroup:self];
 }
 
 /*

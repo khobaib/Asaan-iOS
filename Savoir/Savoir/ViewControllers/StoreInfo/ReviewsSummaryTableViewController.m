@@ -19,7 +19,6 @@
 @interface ReviewsSummaryTableViewController ()<DataProviderDelegate>
 
 @property (nonatomic, strong) MBProgressHUD *hud;
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) int startPosition;
 @property (nonatomic) int maxResult;
 @property (strong, nonatomic) UIImage *imgLike;

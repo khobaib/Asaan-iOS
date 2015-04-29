@@ -660,7 +660,6 @@
         DeliveryOrCarryoutViewController *controller = [segue destinationViewController];
         // Pass any objects to the view controller here, like...
         [controller setSelectedStore:_selectedStore.store];
-        [controller setBCalledFromStoreList:YES];
     }
     else if ([[segue identifier] isEqualToString:@"StoreListToStoreSegue"]) {
         

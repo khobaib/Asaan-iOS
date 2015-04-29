@@ -11,7 +11,8 @@
 #import "UtilCalls.h"
 #import "TablesViewController.h"
 #import "ExistingGroupsTableViewController.h"
-#import "InStoreOrderSummaryTableViewController.h"
+#import "InStoreOrderSummaryViewController.h"
+#import "UIView+Toast.h"
 
 @implementation InStoreUtils
 
@@ -28,41 +29,45 @@
      {
          if (!error)
          {
-             if ([UtilCalls canStore:object fulfillOrderAt:[NSDate date]] == true)
-             {
-                 appDelegate.globalObjectHolder.inStoreOrderDetails = [[InStoreOrderDetails alloc]init];
-                 appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore = object;
-                 if ([UtilCalls userBelongsToStoreChatTeamForStore:appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore])
-                 {
-                     [InStoreUtils startServerMode];
-                     return;
-                 }
-                 else
-                 {
-                     [InStoreUtils startInStoreMode];
-                     return;
-                 }
-             }
+             [InStoreUtils startInStoreMode:nil ForStore:object];
          }
          else
              NSLog(@"Savoir Server Call Failed: queryForGetStoreByBeaconId - error:%@", error.userInfo);
      }];
 }
 
-+ (void) startServerMode
++ (void) startInStoreMode:(UIViewController *)source ForStore:(GTLStoreendpointStore *)store
+{
+    source = nil;
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if ([UtilCalls canStore:store fulfillOrderAt:[NSDate date]] == true)
+    {
+        appDelegate.globalObjectHolder.inStoreOrderDetails = [[InStoreOrderDetails alloc]init];
+        appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore = store;
+        if ([UtilCalls userBelongsToStoreChatTeamForStore:appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore])
+        {
+            [InStoreUtils startServerMode:source];
+            return;
+        }
+        else
+        {
+            [InStoreUtils startInStoreMode:source];
+            return;
+        }
+    }
+}
+
++ (void) startServerMode:(UIViewController *)source
 {
     UIStoryboard *mainstoryboard = [UIStoryboard storyboardWithName:@"InStoreServer" bundle:nil];
     TablesViewController* pvc = [mainstoryboard instantiateViewControllerWithIdentifier:@"ServerTablesViewController"];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:pvc];
-    [[UIViewController currentViewController] presentViewController:navigationController animated:YES completion:nil];
+    [InStoreUtils displaySource:source Destination:pvc];
 }
 
-+ (void) startInStoreMode
++ (void) startInStoreMode:(UIViewController *)source
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    
-    [appDelegate.globalObjectHolder.inStoreOrderDetails clearCurrentOrder];
-    
+
     if (self)
     {
         GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
@@ -77,28 +82,56 @@
          {
              if(!error)
              {
-                 AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
                  appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails = object;
-                 NSLog(@"startInStoreMode tableGroupMemberId = %lld orderId = %lld", object.memberMe.identifier.longLongValue, object.order.identifier.longLongValue);
-                 NSLog(@"startInStoreMode member status = %d orderId = %d", object.memberMe.status.intValue, object.order.orderStatus.intValue);
-                 if (object.memberMe.identifier.longLongValue > 0 && object.order.identifier.longLongValue > 0)
+                 
+                 UIStoryboard *mainstoryboard = [UIStoryboard storyboardWithName:@"InStorePay" bundle:nil];
+                 if (object.memberMe.identifier.longLongValue > 0)
                  {
-                     UIStoryboard *mainstoryboard = [UIStoryboard storyboardWithName:@"InStorePay" bundle:nil];
-                     InStoreOrderSummaryTableViewController* pvc = [mainstoryboard instantiateViewControllerWithIdentifier:@"InstoreOrderSummaryViewController"];
-                     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:pvc];
-                     [[UIViewController currentViewController] presentViewController:navigationController animated:YES completion:nil];
+                     InStoreOrderSummaryViewController* pvc = [mainstoryboard instantiateViewControllerWithIdentifier:@"InstoreOrderSummaryViewController"];
+                     if (appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore != nil &&
+                         appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore.identifier.longLongValue != object.store.identifier.longLongValue)
+                     {
+                         appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore = object.store;
+                         [InStoreUtils displaySource:source Destination:pvc];
+                         NSString *msg = [NSString stringWithFormat:@"You have an open order at %@. Please close this order before opening a new one.", object.store.name];
+                         [pvc.view makeToast:msg];
+                     }
+                     else
+                     {
+                         appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore = object.store;
+                         [InStoreUtils displaySource:source Destination:pvc];
+                     }
                  }
                  else
                  {
-                     UIStoryboard *mainstoryboard = [UIStoryboard storyboardWithName:@"InStorePay" bundle:nil];
                      ExistingGroupsTableViewController* pvc = [mainstoryboard instantiateViewControllerWithIdentifier:@"ExistingGroupsTableViewController"];
-                     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:pvc];
-                     [[UIViewController currentViewController] presentViewController:navigationController animated:YES completion:nil];
+                     [InStoreUtils displaySource:source Destination:pvc];
                  }
              }else{
                  NSLog(@"queryForAddMemberToStoreTableGroup Error:%@",[error userInfo][@"error"]);
              }
          }];
+    }
+}
+
++ (void) displaySource:(UIViewController *)source Destination:(UIViewController *)destination
+{
+    if (source == nil)
+    {
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:destination];
+        [[UIViewController currentViewController] presentViewController:navigationController animated:YES completion:nil];
+    }
+    else
+    {
+        UIStoryboardSegue *segue = [UIStoryboardSegue segueWithIdentifier:@"segueStoreListToConsumerOrderView" source:source destination:destination performHandler:^(void) {
+            //view transition/animation
+            [source.navigationController pushViewController:destination animated:YES];
+        }];
+        
+        [source shouldPerformSegueWithIdentifier:segue.identifier sender:source];//optional
+        [source prepareForSegue:segue sender:source];
+        
+        [segue perform];
     }
 }
 

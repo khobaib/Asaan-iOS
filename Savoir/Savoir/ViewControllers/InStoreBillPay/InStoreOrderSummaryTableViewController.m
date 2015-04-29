@@ -32,13 +32,18 @@
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
-    if (self.navigationController.viewControllers[0] != self)
-        self.navigationItem.leftBarButtonItem = nil;
-    else
+    if (self.navigationController.viewControllers[0] == self)
     {
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-        [appDelegate.notificationUtils getSlidingMenuBarButtonSetupWith:self];
+        //        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+        //        [appDelegate.notificationUtils getSlidingMenuBarButtonSetupWith:self];
+        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"UINavigationBarBackIndicatorGold"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed)];
+        self.navigationItem.leftBarButtonItem = backButton;
     }
+}
+
+- (void)backButtonPressed
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
