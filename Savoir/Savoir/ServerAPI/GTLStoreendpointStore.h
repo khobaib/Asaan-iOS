@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStore (0 custom class methods, 46 custom properties)
+//   GTLStoreendpointStore (0 custom class methods, 47 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLObject.h"
@@ -62,6 +62,7 @@
 @property (retain) NSNumber *providesCarryout;  // boolValue
 @property (retain) NSNumber *providesChat;  // boolValue
 @property (retain) NSNumber *providesDelivery;  // boolValue
+@property (retain) NSNumber *providesDineInAndPay;  // boolValue
 @property (retain) NSNumber *providesPosIntegration;  // boolValue
 @property (retain) NSNumber *providesPreOrder;  // boolValue
 @property (retain) NSNumber *providesReservation;  // boolValue

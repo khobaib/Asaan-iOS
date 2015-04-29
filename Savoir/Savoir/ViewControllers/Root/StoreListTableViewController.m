@@ -283,7 +283,12 @@
         cell.orderOnlineButton.hidden = false;
         [cell.reserveButton setTitle:@"Reserve" forState:UIControlStateNormal];
 
-        if (storeAndStats.store.providesCarryout.boolValue == true || storeAndStats.store.providesDelivery.boolValue == true || storeAndStats.store.providesPreOrder.boolValue == true)
+        if ((storeAndStats.store.providesCarryout.boolValue == true ||
+            storeAndStats.store.providesDelivery.boolValue == true ||
+            storeAndStats.store.providesPreOrder.boolValue == true ||
+            storeAndStats.store.providesDineInAndPay.boolValue == true) &&
+            ([UtilCalls canStore:storeAndStats.store fulfillOrderAt:[NSDate date]] == true))
+
         {
             cell.orderOnlineButton.enabled = true;
             [cell.orderOnlineButton setTitleColor:[UIColor goldColor] forState:UIControlStateNormal];

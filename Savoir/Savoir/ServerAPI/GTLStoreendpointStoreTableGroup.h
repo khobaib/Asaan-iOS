@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStoreTableGroup (0 custom class methods, 10 custom properties)
+//   GTLStoreendpointStoreTableGroup (0 custom class methods, 11 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLObject.h"
@@ -40,4 +40,5 @@
 @property (retain) NSNumber *status;  // intValue
 @property (retain) NSNumber *storeId;  // longLongValue
 @property (retain) NSNumber *userId;  // longLongValue
+@property (retain) NSNumber *version;  // longLongValue
 @end

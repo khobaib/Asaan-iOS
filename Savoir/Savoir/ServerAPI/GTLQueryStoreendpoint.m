@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryStoreendpoint (65 custom class methods, 18 custom properties)
+//   GTLQueryStoreendpoint (66 custom class methods, 18 custom properties)
 
 #import "GTLQueryStoreendpoint.h"
 
@@ -468,6 +468,12 @@
   GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
   query.bodyObject = object;
   query.expectedObjectClass = [GTLStoreendpointStoreOrder class];
+  return query;
+}
+
++ (id)queryForRemoveMemberFromStoreTableGroup {
+  NSString *methodName = @"storeendpoint.removeMemberFromStoreTableGroup";
+  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
   return query;
 }
 

@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStoreTableGroup (0 custom class methods, 10 custom properties)
+//   GTLStoreendpointStoreTableGroup (0 custom class methods, 11 custom properties)
 
 #import "GTLStoreendpointStoreTableGroup.h"
 
@@ -24,7 +24,7 @@
 
 @implementation GTLStoreendpointStoreTableGroup
 @dynamic createdDate, firstName, identifier, lastName, modifiedDate, orderId,
-         profilePhotoUrl, status, storeId, userId;
+         profilePhotoUrl, status, storeId, userId, version;
 
 + (NSDictionary *)propertyToJSONKeyMap {
   NSDictionary *map =

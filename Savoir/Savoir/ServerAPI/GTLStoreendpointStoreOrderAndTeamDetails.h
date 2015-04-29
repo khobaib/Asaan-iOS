@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStoreOrderAndTeamDetails (0 custom class methods, 4 custom properties)
+//   GTLStoreendpointStoreOrderAndTeamDetails (0 custom class methods, 5 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLObject.h"
@@ -21,6 +21,7 @@
   #import "GTLObject.h"
 #endif
 
+@class GTLStoreendpointStore;
 @class GTLStoreendpointStoreOrder;
 @class GTLStoreendpointStoreTableGroup;
 @class GTLStoreendpointStoreTableGroupMember;
@@ -34,5 +35,6 @@
 @property (retain) GTLStoreendpointStoreTableGroupMember *memberMe;
 @property (retain) NSArray *members;  // of GTLStoreendpointStoreTableGroupMember
 @property (retain) GTLStoreendpointStoreOrder *order;
+@property (retain) GTLStoreendpointStore *store;
 @property (retain) GTLStoreendpointStoreTableGroup *storeTableGroup;
 @end

@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"u_zXkMELIlX4ktyNbM2XKD4vK8E/NPd6y01yRMNHYlOFtIGX-mE_GYI\"",
+ "etag": "\"u_zXkMELIlX4ktyNbM2XKD4vK8E/95NWsQHcOlK3AAF_Qjc1ZdYalW4\"",
  "discoveryVersion": "v1",
  "id": "storeendpoint:v1",
  "name": "storeendpoint",
@@ -498,16 +498,24 @@
      "type": "string",
      "format": "int64"
     },
+    "memberMe": {
+     "$ref": "StoreTableGroupMember"
+    },
+    "order": {
+     "$ref": "StoreOrder"
+    },
     "paidMembers": {
      "type": "array",
      "items": {
-      "type": "string",
-      "format": "int64"
+      "$ref": "StoreTableGroupMember"
      }
     },
     "paymentType": {
      "type": "integer",
      "format": "int32"
+    },
+    "storeTableGroup": {
+     "$ref": "StoreTableGroup"
     },
     "taxPercent": {
      "type": "string",
@@ -619,6 +627,9 @@
      "type": "boolean"
     },
     "providesDelivery": {
+     "type": "boolean"
+    },
+    "providesDineInAndPay": {
      "type": "boolean"
     },
     "providesPosIntegration": {
@@ -1335,6 +1346,10 @@
     "tax": {
      "type": "string",
      "format": "int64"
+    },
+    "version": {
+     "type": "string",
+     "format": "int64"
     }
    }
   },
@@ -1353,6 +1368,9 @@
     },
     "order": {
      "$ref": "StoreOrder"
+    },
+    "store": {
+     "$ref": "Store"
     },
     "storeTableGroup": {
      "$ref": "StoreTableGroup"
@@ -1579,6 +1597,10 @@
     "userId": {
      "type": "string",
      "format": "int64"
+    },
+    "version": {
+     "type": "string",
+     "format": "int64"
     }
    }
   },
@@ -1675,6 +1697,10 @@
      "format": "int64"
     },
     "userId": {
+     "type": "string",
+     "format": "int64"
+    },
+    "version": {
      "type": "string",
      "format": "int64"
     }
@@ -2733,6 +2759,12 @@
    "returns": {
     "$ref": "StoreOrder"
    },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "storeendpoint.removeMemberFromStoreTableGroup": {
+   "id": "storeendpoint.removeMemberFromStoreTableGroup",
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"
    ]

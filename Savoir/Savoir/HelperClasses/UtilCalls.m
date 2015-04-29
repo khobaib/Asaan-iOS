@@ -11,6 +11,7 @@
 #import <Parse/Parse.h>
 #import "AppDelegate.h"
 #import "InlineCalls.h"
+#import "CLLocation+APTimeZones.h"
 
 @interface UtilCalls()
 @end
@@ -335,13 +336,23 @@
 
 + (Boolean) canStore:(GTLStoreendpointStore *)store fulfillOrderAt:(NSDate *)date
 {
-    return [UtilCalls isDate:date InAllowedGivenDates:store.hours];
+    double storeLat = RAD2DEG(store.lat.doubleValue);
+    double storeLng = RAD2DEG(store.lng.doubleValue);
+    CLLocation* storeLocation = [[CLLocation alloc] initWithLatitude:storeLat longitude:storeLng];
+    NSTimeZone *storeTimeZone = storeLocation.timeZone;
+
+    return [UtilCalls isDate:date InAllowedGivenDates:store.hours ForTimeZine:storeTimeZone];
 }
 
-+ (Boolean) canPlaceOrderFromMenu:(GTLStoreendpointStoreMenuHierarchy *)menu atDate:(NSDate *)date
++ (Boolean) canPlaceOrderFromMenu:(GTLStoreendpointStoreMenuHierarchy *)menu atDate:(NSDate *)date ForStore:(GTLStoreendpointStore *)store
 {
+    double storeLat = RAD2DEG(store.lat.doubleValue);
+    double storeLng = RAD2DEG(store.lng.doubleValue);
+    CLLocation* storeLocation = [[CLLocation alloc] initWithLatitude:storeLat longitude:storeLng];
+    NSTimeZone *storeTimeZone = storeLocation.timeZone;
+
     NSDate *minOrderDate = [date dateByAddingTimeInterval:[UtilCalls ORDER_PREP_TIME]];
-    return [UtilCalls isDate:minOrderDate InAllowedGivenDates:menu.hours];
+    return [UtilCalls isDate:minOrderDate InAllowedGivenDates:menu.hours ForTimeZine:storeTimeZone];
 }
 
 //
@@ -349,10 +360,12 @@
 // MONDAY CLOSED,TUESDAY 1130 1430;1700 2130,WEDNESDAY 1130 2130,THURSDAY 1130 2130,FRIDAY 1130 2230,SATURDAY 1200 2230,SUNDAY 1600 2100
 //
 
-+ (Boolean) isDate:(NSDate *)date InAllowedGivenDates:(NSString *)strDates
++ (Boolean) isDate:(NSDate *)date InAllowedGivenDates:(NSString *)strDates ForTimeZine:(NSTimeZone *)storeTimeZone
 {
     NSCalendar *gregorian = [[NSCalendar alloc]
                              initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    [gregorian setTimeZone:storeTimeZone];
+    
     NSDateComponents *weekdayComponents = [gregorian components:(NSCalendarUnitDay | NSCalendarUnitTimeZone | NSCalendarUnitWeekday) fromDate:date];
     
     NSString *weekDay = [UtilCalls getStringDayOfWeekFromInt:weekdayComponents.weekday];

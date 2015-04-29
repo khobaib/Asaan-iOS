@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryStoreendpoint (65 custom class methods, 18 custom properties)
+//   GTLQueryStoreendpoint (66 custom class methods, 18 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLQuery.h"
@@ -356,6 +356,11 @@
 //   kGTLAuthScopeStoreendpointUserinfoEmail
 // Fetches a GTLStoreendpointStoreOrder.
 + (id)queryForPlaceOrderWithObject:(GTLStoreendpointPlaceOrderArguments *)object;
+
+// Method: storeendpoint.removeMemberFromStoreTableGroup
+//  Authorization scope(s):
+//   kGTLAuthScopeStoreendpointUserinfoEmail
++ (id)queryForRemoveMemberFromStoreTableGroup;
 
 // Method: storeendpoint.removeStoreOwner
 //  Authorization scope(s):

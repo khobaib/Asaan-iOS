@@ -13,10 +13,11 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLStoreendpointStoreOrderAndTeamDetails (0 custom class methods, 4 custom properties)
+//   GTLStoreendpointStoreOrderAndTeamDetails (0 custom class methods, 5 custom properties)
 
 #import "GTLStoreendpointStoreOrderAndTeamDetails.h"
 
+#import "GTLStoreendpointStore.h"
 #import "GTLStoreendpointStoreOrder.h"
 #import "GTLStoreendpointStoreTableGroup.h"
 #import "GTLStoreendpointStoreTableGroupMember.h"
@@ -27,7 +28,7 @@
 //
 
 @implementation GTLStoreendpointStoreOrderAndTeamDetails
-@dynamic memberMe, members, order, storeTableGroup;
+@dynamic memberMe, members, order, store, storeTableGroup;
 
 + (NSDictionary *)arrayPropertyToClassMap {
   NSDictionary *map =

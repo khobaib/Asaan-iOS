@@ -407,6 +407,10 @@
 		D4828CBE1A71ADE500C80E92 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D4828CBC1A71ADE500C80E92 /* libxml2.2.dylib */; };
 		D4828CBF1A71ADE500C80E92 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D4828CBD1A71ADE500C80E92 /* libxml2.dylib */; };
 		D4828D241A7AA4D000C80E92 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4828D231A7AA4D000C80E92 /* Accounts.framework */; };
+		D49E95B51AF069110016EE2C /* APTimeZones.m in Sources */ = {isa = PBXBuildFile; fileRef = D49E95AE1AF069110016EE2C /* APTimeZones.m */; };
+		D49E95B61AF069110016EE2C /* CLLocation+APTimeZones.m in Sources */ = {isa = PBXBuildFile; fileRef = D49E95B11AF069110016EE2C /* CLLocation+APTimeZones.m */; };
+		D49E95B71AF069110016EE2C /* CLPlacemark+APTimeZones.m in Sources */ = {isa = PBXBuildFile; fileRef = D49E95B31AF069110016EE2C /* CLPlacemark+APTimeZones.m */; };
+		D49E95B81AF069110016EE2C /* timezonesDB.json in Resources */ = {isa = PBXBuildFile; fileRef = D49E95B41AF069110016EE2C /* timezonesDB.json */; };
 		D49FBA981AC613D600F55360 /* GTLStoreendpointClientVersionMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = D49FBA971AC613D600F55360 /* GTLStoreendpointClientVersionMatch.m */; };
 		D4B602EA1AEAE6590007BA41 /* InStoreUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B602E91AEAE6590007BA41 /* InStoreUtils.m */; };
 		D4B602EB1AEAEA7B0007BA41 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D400F8AC1AAE06F9004D458C /* Fabric.framework */; };
@@ -1178,6 +1182,13 @@
 		D4828CBC1A71ADE500C80E92 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
 		D4828CBD1A71ADE500C80E92 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		D4828D231A7AA4D000C80E92 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		D49E95AD1AF069110016EE2C /* APTimeZones.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APTimeZones.h; sourceTree = "<group>"; };
+		D49E95AE1AF069110016EE2C /* APTimeZones.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APTimeZones.m; sourceTree = "<group>"; };
+		D49E95B01AF069110016EE2C /* CLLocation+APTimeZones.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLLocation+APTimeZones.h"; sourceTree = "<group>"; };
+		D49E95B11AF069110016EE2C /* CLLocation+APTimeZones.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLLocation+APTimeZones.m"; sourceTree = "<group>"; };
+		D49E95B21AF069110016EE2C /* CLPlacemark+APTimeZones.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLPlacemark+APTimeZones.h"; sourceTree = "<group>"; };
+		D49E95B31AF069110016EE2C /* CLPlacemark+APTimeZones.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLPlacemark+APTimeZones.m"; sourceTree = "<group>"; };
+		D49E95B41AF069110016EE2C /* timezonesDB.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = timezonesDB.json; sourceTree = "<group>"; };
 		D49FBA961AC613D600F55360 /* GTLStoreendpointClientVersionMatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointClientVersionMatch.h; sourceTree = "<group>"; };
 		D49FBA971AC613D600F55360 /* GTLStoreendpointClientVersionMatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointClientVersionMatch.m; sourceTree = "<group>"; };
 		D4B602E81AEAE6590007BA41 /* InStoreUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InStoreUtils.h; sourceTree = "<group>"; };
@@ -1664,6 +1675,7 @@
 		D4195C3F1A92A69B00663149 /* library */ = {
 			isa = PBXGroup;
 			children = (
+				D49E95AC1AF069110016EE2C /* APTimeZones */,
 				D409D7561AA60A93008FADDF /* Payments */,
 				D438AB091A9FA6AB0089E61A /* JSQMessagesViewController */,
 				D4195C401A92A69B00663149 /* AFNetworking */,
@@ -2579,6 +2591,28 @@
 			path = SavoirTests;
 			sourceTree = "<group>";
 		};
+		D49E95AC1AF069110016EE2C /* APTimeZones */ = {
+			isa = PBXGroup;
+			children = (
+				D49E95AD1AF069110016EE2C /* APTimeZones.h */,
+				D49E95AE1AF069110016EE2C /* APTimeZones.m */,
+				D49E95AF1AF069110016EE2C /* Categories */,
+				D49E95B41AF069110016EE2C /* timezonesDB.json */,
+			);
+			path = APTimeZones;
+			sourceTree = "<group>";
+		};
+		D49E95AF1AF069110016EE2C /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				D49E95B01AF069110016EE2C /* CLLocation+APTimeZones.h */,
+				D49E95B11AF069110016EE2C /* CLLocation+APTimeZones.m */,
+				D49E95B21AF069110016EE2C /* CLPlacemark+APTimeZones.h */,
+				D49E95B31AF069110016EE2C /* CLPlacemark+APTimeZones.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
 		D4F275961A0C021800CEC95A = {
 			isa = PBXGroup;
 			children = (
@@ -2772,6 +2806,7 @@
 				D406D8221AD485560076D0B6 /* InStoreServer.storyboard in Resources */,
 				D409D7E31AA60A94008FADDF /* placeholder.png in Resources */,
 				D409D7E01AA60A94008FADDF /* jcb@2x.png in Resources */,
+				D49E95B81AF069110016EE2C /* timezonesDB.json in Resources */,
 				D409D7DD1AA60A94008FADDF /* discover.png in Resources */,
 				D4195F081A92A69C00663149 /* MWPhotoBrowser.bundle in Resources */,
 				D4195E981A92A69C00663149 /* GooglePlus.bundle in Resources */,
@@ -2853,6 +2888,7 @@
 				D4195FB61A92A69C00663149 /* AddPaymentCardViewController.m in Sources */,
 				D4195E9F1A92A69C00663149 /* OrderForStoreLoadingOperation.m in Sources */,
 				D406D80D1AD2E3E80076D0B6 /* InStoreOrderDetails.m in Sources */,
+				D49E95B71AF069110016EE2C /* CLPlacemark+APTimeZones.m in Sources */,
 				D438AB911A9FA6AC0089E61A /* JSQMessagesAvatarImage.m in Sources */,
 				D409D7CD1AA60A94008FADDF /* PTKCard.m in Sources */,
 				D409D7FA1AA60A94008FADDF /* StripeError.m in Sources */,
@@ -2867,6 +2903,7 @@
 				D40470031A9CE83B0070537B /* AddToWaitListViewController.m in Sources */,
 				D4195FC31A92A69C00663149 /* InfoViewController.m in Sources */,
 				D4195F271A92A69C00663149 /* UIButton+WebCache.m in Sources */,
+				D49E95B61AF069110016EE2C /* CLLocation+APTimeZones.m in Sources */,
 				D406D8181AD2F2C10076D0B6 /* GTLStoreendpointStoreTableGroupMember.m in Sources */,
 				D4195F6F1A92A69C00663149 /* GTLStoreendpointChatUser.m in Sources */,
 				D409D7CE1AA60A94008FADDF /* PTKCardCVC.m in Sources */,
@@ -3005,6 +3042,7 @@
 				D409D7C21AA60A94008FADDF /* PKPayment+STPTestKeys.m in Sources */,
 				D409D7F01AA60A94008FADDF /* STPIOSCheckoutWebViewAdapter.m in Sources */,
 				D4195ECE1A92A69C00663149 /* UIProgressView+AFNetworking.m in Sources */,
+				D49E95B51AF069110016EE2C /* APTimeZones.m in Sources */,
 				D409D7CB1AA60A94008FADDF /* README.md in Sources */,
 				D4195F931A92A69C00663149 /* GTLStoreendpointStorePOSConnection.m in Sources */,
 				D4195F171A92A69C00663149 /* PSTCollectionViewLayout.m in Sources */,
