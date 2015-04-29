@@ -41,6 +41,26 @@
 //    
 //    self.restaurantTitle.textColor = self.cuisineTitle.textColor = self.chefTitle.textColor = self.trophiesTitle.textColor = [UIColor goldColor];
 //    self.addressTitle.textColor = self.phoneTitle.textColor = self.webTitle.textColor = self.facebookTitle.textColor = self.twitterTitle.textColor = [UIColor goldColor];
+    
+    //
+    self.address.textContainerInset = UIEdgeInsetsMake(4, 0, 4, 0);
+    self.address.scrollEnabled = NO;
+    self.address.editable = NO;
+    self.address.selectable = YES;
+    self.address.dataDetectorTypes = UIDataDetectorTypeAll;
+    
+    self.phone.textContainerInset = UIEdgeInsetsMake(4, 0, 4, 0);
+    self.phone.scrollEnabled = NO;
+    self.phone.editable = NO;
+    self.phone.selectable = YES;
+    self.phone.dataDetectorTypes = UIDataDetectorTypeAll;
+
+    self.web.textContainerInset = UIEdgeInsetsMake(4, 0, 4, 0);
+    self.web.scrollEnabled = NO;
+    self.web.editable = NO;
+    self.web.selectable = YES;
+    self.web.dataDetectorTypes = UIDataDetectorTypeAll;
+    //<--
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -82,12 +102,13 @@
         self.address.text = _selectedStore.address ? _selectedStore.address : @"";
         self.phone.text = _selectedStore.phone ? _selectedStore.phone : @"";
         self.web.text = _selectedStore.webSiteUrl ? _selectedStore.webSiteUrl : @"";
+
 //        self.address.editable = NO;
-        self.address.dataDetectorTypes = UIDataDetectorTypeAll;
+//        self.address.dataDetectorTypes = UIDataDetectorTypeAll;
 //        self.phone.editable = NO;
-        self.phone.dataDetectorTypes = UIDataDetectorTypeAll;
+//        self.phone.dataDetectorTypes = UIDataDetectorTypeAll;
 //        self.web.editable = NO;
-        self.web.dataDetectorTypes = UIDataDetectorTypeAll;
+//        self.web.dataDetectorTypes = UIDataDetectorTypeAll;
 //        self.facebookLabel.text = _selectedStore.fbUrl ? _selectedStore.fbUrl : @"";
 //        self.twitterLabel.text = _selectedStore.twitterUrl ? _selectedStore.twitterUrl : @"";
     }
