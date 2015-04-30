@@ -49,6 +49,7 @@
                       [GTLStoreendpointSplitOrderArguments class],
                       [GTLStoreendpointStore class],
                       [GTLStoreendpointStoreAndStats class],
+                      [GTLStoreendpointStoreAndStatsAndCount class],
                       [GTLStoreendpointStoreAndStatsCollection class],
                       [GTLStoreendpointStoreChatMemberArray class],
                       [GTLStoreendpointStoreChatTeam class],

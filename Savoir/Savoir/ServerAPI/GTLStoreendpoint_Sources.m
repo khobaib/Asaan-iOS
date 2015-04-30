@@ -42,6 +42,7 @@
 #import "GTLStoreendpointSplitOrderArguments.m"
 #import "GTLStoreendpointStore.m"
 #import "GTLStoreendpointStoreAndStats.m"
+#import "GTLStoreendpointStoreAndStatsAndCount.m"
 #import "GTLStoreendpointStoreAndStatsCollection.m"
 #import "GTLStoreendpointStoreChatMemberArray.m"
 #import "GTLStoreendpointStoreChatTeam.m"

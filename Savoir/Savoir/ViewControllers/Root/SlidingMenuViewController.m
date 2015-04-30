@@ -41,7 +41,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _menu = @[@"Stores", @"Profile", @"Chat History", @"Wait List Status", @"Pending Orders", @"Order History", @"Logout"];
+    _menu = @[@"Stores", @"Profile", @"Chat History", @"Wait List Status", @"Pending Online Order", @"Order History", @"Logout"];
     _menuImage = @[@"stores", @"profile", @"chat_history", @"no_image", @"cart", @"order_history", @"logout"];
     _menuSegue = @[SEGUE_SMToStoreList, SEGUE_SMToUpdateProfile, SEGUE_SMToChatHistory, SEGUE_SMToWaitListStatus, SEGUE_SMToCart, SEGUE_SMToOrderHistory, SEGUE_UnwindToStoreList];
     

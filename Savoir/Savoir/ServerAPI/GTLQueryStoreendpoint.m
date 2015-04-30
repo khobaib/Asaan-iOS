@@ -37,6 +37,7 @@
 #import "GTLStoreendpointPlaceOrderArguments.h"
 #import "GTLStoreendpointSplitOrderArguments.h"
 #import "GTLStoreendpointStore.h"
+#import "GTLStoreendpointStoreAndStatsAndCount.h"
 #import "GTLStoreendpointStoreAndStatsCollection.h"
 #import "GTLStoreendpointStoreChatMemberArray.h"
 #import "GTLStoreendpointStoreChatTeamCollection.h"
@@ -375,7 +376,7 @@
   query.lat = lat;
   query.lng = lng;
   query.maxResult = maxResult;
-  query.expectedObjectClass = [GTLStoreendpointStoreAndStatsCollection class];
+  query.expectedObjectClass = [GTLStoreendpointStoreAndStatsAndCount class];
   return query;
 }
 

@@ -126,6 +126,15 @@
 
 #pragma mark - Table view data source
 
+-(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UITableViewCell *headerCell = [tableView dequeueReusableCellWithIdentifier:@"HeaderCell"];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    NSString *title = [NSString stringWithFormat:@"%@", appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore.name];
+    [UtilCalls setupHeaderView:headerCell WithTitle:title AndSubTitle:@"Order Summary"];
+    return headerCell;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }

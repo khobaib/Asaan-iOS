@@ -412,6 +412,10 @@
 		D49E95BB1AF06E660016EE2C /* InStoreOrderSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D49E95BA1AF06E660016EE2C /* InStoreOrderSummaryViewController.m */; };
 		D49E95BE1AF086DE0016EE2C /* OrderTypeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D49E95BD1AF086DE0016EE2C /* OrderTypeTableViewController.m */; };
 		D49E95C11AF086F70016EE2C /* OrderTimeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D49E95C01AF086F70016EE2C /* OrderTimeTableViewController.m */; };
+		D49E95C51AF1D9190016EE2C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = D49E95C41AF1D9190016EE2C /* Reachability.m */; };
+		D49E95C81AF1E5050016EE2C /* GTLStoreendpointStoreAndStatsAndCount.m in Sources */ = {isa = PBXBuildFile; fileRef = D49E95C71AF1E5050016EE2C /* GTLStoreendpointStoreAndStatsAndCount.m */; };
+		D49E95CC1AF1ECA80016EE2C /* NoNetworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D49E95CA1AF1ECA80016EE2C /* NoNetworkViewController.m */; };
+		D49E95CD1AF1ECA80016EE2C /* NoNetworkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D49E95CB1AF1ECA80016EE2C /* NoNetworkViewController.xib */; };
 		D49FBA981AC613D600F55360 /* GTLStoreendpointClientVersionMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = D49FBA971AC613D600F55360 /* GTLStoreendpointClientVersionMatch.m */; };
 		D4B602EA1AEAE6590007BA41 /* InStoreUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B602E91AEAE6590007BA41 /* InStoreUtils.m */; };
 		D4B602EB1AEAEA7B0007BA41 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D400F8AC1AAE06F9004D458C /* Fabric.framework */; };
@@ -1192,6 +1196,13 @@
 		D49E95BD1AF086DE0016EE2C /* OrderTypeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderTypeTableViewController.m; sourceTree = "<group>"; };
 		D49E95BF1AF086F70016EE2C /* OrderTimeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderTimeTableViewController.h; sourceTree = "<group>"; };
 		D49E95C01AF086F70016EE2C /* OrderTimeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderTimeTableViewController.m; sourceTree = "<group>"; };
+		D49E95C31AF1D9190016EE2C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		D49E95C41AF1D9190016EE2C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		D49E95C61AF1E5050016EE2C /* GTLStoreendpointStoreAndStatsAndCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreAndStatsAndCount.h; sourceTree = "<group>"; };
+		D49E95C71AF1E5050016EE2C /* GTLStoreendpointStoreAndStatsAndCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreAndStatsAndCount.m; sourceTree = "<group>"; };
+		D49E95C91AF1ECA80016EE2C /* NoNetworkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoNetworkViewController.h; sourceTree = "<group>"; };
+		D49E95CA1AF1ECA80016EE2C /* NoNetworkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoNetworkViewController.m; sourceTree = "<group>"; };
+		D49E95CB1AF1ECA80016EE2C /* NoNetworkViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoNetworkViewController.xib; sourceTree = "<group>"; };
 		D49FBA961AC613D600F55360 /* GTLStoreendpointClientVersionMatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointClientVersionMatch.h; sourceTree = "<group>"; };
 		D49FBA971AC613D600F55360 /* GTLStoreendpointClientVersionMatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointClientVersionMatch.m; sourceTree = "<group>"; };
 		D4B602E81AEAE6590007BA41 /* InStoreUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InStoreUtils.h; sourceTree = "<group>"; };
@@ -1678,6 +1689,7 @@
 		D4195C3F1A92A69B00663149 /* library */ = {
 			isa = PBXGroup;
 			children = (
+				D49E95C21AF1D9190016EE2C /* Reachability */,
 				D49E95AC1AF069110016EE2C /* APTimeZones */,
 				D409D7561AA60A93008FADDF /* Payments */,
 				D438AB091A9FA6AB0089E61A /* JSQMessagesViewController */,
@@ -2079,6 +2091,8 @@
 		D4195DAF1A92A69B00663149 /* ServerAPI */ = {
 			isa = PBXGroup;
 			children = (
+				D49E95C61AF1E5050016EE2C /* GTLStoreendpointStoreAndStatsAndCount.h */,
+				D49E95C71AF1E5050016EE2C /* GTLStoreendpointStoreAndStatsAndCount.m */,
 				D4BDBEFF1AE35C590014273B /* GTLStoreendpointStoreOrderAndTeamDetails.h */,
 				D4BDBF001AE35C590014273B /* GTLStoreendpointStoreOrderAndTeamDetails.m */,
 				D406D8301AD5A10E0076D0B6 /* GTLStoreendpointTableGroupsAndOrders.h */,
@@ -2559,6 +2573,9 @@
 				D445D70C1A96BA3800ED4919 /* StoreListTableViewCell.m */,
 				D445D70D1A96BA3800ED4919 /* StoreListTableViewController.h */,
 				D445D70E1A96BA3800ED4919 /* StoreListTableViewController.m */,
+				D49E95C91AF1ECA80016EE2C /* NoNetworkViewController.h */,
+				D49E95CA1AF1ECA80016EE2C /* NoNetworkViewController.m */,
+				D49E95CB1AF1ECA80016EE2C /* NoNetworkViewController.xib */,
 			);
 			path = Root;
 			sourceTree = "<group>";
@@ -2616,6 +2633,15 @@
 				D49E95B31AF069110016EE2C /* CLPlacemark+APTimeZones.m */,
 			);
 			path = Categories;
+			sourceTree = "<group>";
+		};
+		D49E95C21AF1D9190016EE2C /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				D49E95C31AF1D9190016EE2C /* Reachability.h */,
+				D49E95C41AF1D9190016EE2C /* Reachability.m */,
+			);
+			path = Reachability;
 			sourceTree = "<group>";
 		};
 		D4F275961A0C021800CEC95A = {
@@ -2812,6 +2838,7 @@
 				D409D7E31AA60A94008FADDF /* placeholder.png in Resources */,
 				D409D7E01AA60A94008FADDF /* jcb@2x.png in Resources */,
 				D49E95B81AF069110016EE2C /* timezonesDB.json in Resources */,
+				D49E95CD1AF1ECA80016EE2C /* NoNetworkViewController.xib in Resources */,
 				D409D7DD1AA60A94008FADDF /* discover.png in Resources */,
 				D4195F081A92A69C00663149 /* MWPhotoBrowser.bundle in Resources */,
 				D4195E981A92A69C00663149 /* GooglePlus.bundle in Resources */,
@@ -3051,6 +3078,7 @@
 				D4195ECE1A92A69C00663149 /* UIProgressView+AFNetworking.m in Sources */,
 				D49E95B51AF069110016EE2C /* APTimeZones.m in Sources */,
 				D409D7CB1AA60A94008FADDF /* README.md in Sources */,
+				D49E95CC1AF1ECA80016EE2C /* NoNetworkViewController.m in Sources */,
 				D4195F931A92A69C00663149 /* GTLStoreendpointStorePOSConnection.m in Sources */,
 				D4195F171A92A69C00663149 /* PSTCollectionViewLayout.m in Sources */,
 				D409D7C91AA60A94008FADDF /* STPTestShippingMethodStore.m in Sources */,
@@ -3122,6 +3150,7 @@
 				D4195ED21A92A69C00663149 /* DataLoadingOperation.m in Sources */,
 				D438AB961A9FA6AC0089E61A /* JSQMessagesCollectionView.m in Sources */,
 				D49FBA981AC613D600F55360 /* GTLStoreendpointClientVersionMatch.m in Sources */,
+				D49E95C81AF1E5050016EE2C /* GTLStoreendpointStoreAndStatsAndCount.m in Sources */,
 				D4195F9C1A92A69C00663149 /* GTLUserendpointConstants.m in Sources */,
 				D406D8321AD5A10E0076D0B6 /* GTLStoreendpointTableGroupsAndOrders.m in Sources */,
 				D445D71A1A96BA3800ED4919 /* ClaimStoreViewController.m in Sources */,
@@ -3130,6 +3159,7 @@
 				D4195F0F1A92A69C00663149 /* ProgressHUD.m in Sources */,
 				D4195F1C1A92A69C00663149 /* PSTGridLayoutSection.m in Sources */,
 				D438AB9D1A9FA6AC0089E61A /* JSQMessagesInputToolbar.m in Sources */,
+				D49E95C51AF1D9190016EE2C /* Reachability.m in Sources */,
 				D4195FC71A92A69C00663149 /* StoreLocation.m in Sources */,
 				D4195F741A92A69C00663149 /* GTLStoreendpointMenuItemAndStats.m in Sources */,
 				D438AB9E1A9FA6AC0089E61A /* JSQMessagesLabel.m in Sources */,

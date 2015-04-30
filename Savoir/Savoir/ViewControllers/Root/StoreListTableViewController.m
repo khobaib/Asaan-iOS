@@ -86,6 +86,11 @@
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     [appDelegate.notificationUtils getSlidingMenuBarButtonSetupWith:self];
     
+    appDelegate.storeListTableViewController = self;
+    if (appDelegate.currentNetworkStatus == NotReachable)
+        return;
+    appDelegate.storeListTableViewController = nil;
+    
     if ([self isVersionSupported] == false)
     {
         [UIAlertView showWithTitle:@"Savoir update required" message:@"In order to continue please update the Savoir app. It should only take a few moments." cancelButtonTitle:nil otherButtonTitles:@[@"Update"]
@@ -135,7 +140,7 @@
     }
     
     GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
-    [goh loadAllUserObjects];
+    [goh loadSupportedClientVersionFromServer];
     if (goh.inStoreOrderDetails == nil && goh.orderInProgress != nil)
     {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -181,33 +186,40 @@
 
 - (void)setupDatastore
 {
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    
-    NSInteger pageSize = FluentPagingTablePageSize < appDelegate.globalObjectHolder.storeCount ? FluentPagingTablePageSize : appDelegate.globalObjectHolder.storeCount;
-    _dataProvider = [[DataProvider alloc] initWithPageSize:pageSize itemCount:appDelegate.globalObjectHolder.storeCount];
-    _dataProvider.delegate = self;
-    _dataProvider.shouldLoadAutomatically = YES;
-    _dataProvider.automaticPreloadMargin = FluentPagingTablePreloadMargin;
-    [self.tableView reloadData];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.labelText = @"Please Wait";
+    hud.hidden = NO;
+    if (self)
+    {
+        __weak __typeof(self) weakSelf = self;
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+        GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
+        double latInRads = DEG2RAD(appDelegate.globalObjectHolder.location.coordinate.latitude);
+        double lngInRads = DEG2RAD(appDelegate.globalObjectHolder.location.coordinate.longitude);
+        GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoresOrderedByDistanceWithStatsWithFirstPosition:0 lat:latInRads lng:lngInRads maxResult:FluentPagingTablePageSize];
+        
+        [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreAndStatsAndCount *object,NSError *error)
+         {
+             if(!error && object.storeAndStatsList.count > 0)
+             {
+                 
+                 NSInteger pageSize = FluentPagingTablePageSize < object.storeAndStatsList.count ? FluentPagingTablePageSize : object.storeAndStatsList.count;
+                 _dataProvider = [[DataProvider alloc] initWithPageSize:pageSize itemCount:object.storeCount.longValue];
+                 _dataProvider.delegate = weakSelf;
+                 _dataProvider.shouldLoadAutomatically = YES;
+                 _dataProvider.automaticPreloadMargin = FluentPagingTablePreloadMargin;
+                 [_dataProvider setInitialObjects:object.storeAndStatsList ForPage:1];
+                 [weakSelf.tableView reloadData];
+                 hud.hidden = YES;
+             }
+         }];
+    }
 }
 
 #pragma mark - Data controller delegate
 - (void)dataProvider:(DataProvider *)dataProvider didLoadDataAtIndexes:(NSIndexSet *)indexes
 {
-//    NSMutableArray *indexPathsToReload = [NSMutableArray array];
-//    
-//    [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
-//        
-//        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:idx inSection:0];
-//        
-//        if ([self.tableView.indexPathsForVisibleRows containsObject:indexPath])
-//            [indexPathsToReload addObject:indexPath];
-//    }];
-//    
-//    if (indexPathsToReload.count > 0) {
-//        [self.tableView reloadRowsAtIndexPaths:indexPathsToReload withRowAnimation:UITableViewRowAnimationFade];
-//    }
-//    [self.hud hide:YES];
     [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationFade];
 }
 

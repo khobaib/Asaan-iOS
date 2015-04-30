@@ -47,7 +47,7 @@
     
     // Make sure object count is correct
     NSLog(@"Page #: %ld Expected object count per page: %ld received: %ld", (unsigned long)page, (unsigned long)_objectsPerPage, (unsigned long)objects.count);
-    NSAssert((objects.count == _objectsPerPage || page == self.numberOfPages), @"Expected object count per page: %ld received: %ld", (unsigned long)_objectsPerPage, (unsigned long)objects.count);
+//    NSAssert((objects.count == _objectsPerPage || page == self.numberOfPages), @"Expected object count per page: %ld received: %ld", (unsigned long)_objectsPerPage, (unsigned long)objects.count);
     
     _pages[@(page)] = objects;
     _needsUpdateProxiedArray = YES;

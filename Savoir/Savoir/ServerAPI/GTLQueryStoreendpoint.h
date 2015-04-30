@@ -288,7 +288,7 @@
 // Method: storeendpoint.getStoresOrderedByDistanceWithStats
 //  Authorization scope(s):
 //   kGTLAuthScopeStoreendpointUserinfoEmail
-// Fetches a GTLStoreendpointStoreAndStatsCollection.
+// Fetches a GTLStoreendpointStoreAndStatsAndCount.
 + (id)queryForGetStoresOrderedByDistanceWithStatsWithFirstPosition:(NSInteger)firstPosition
                                                                lat:(double)lat
                                                                lng:(double)lng

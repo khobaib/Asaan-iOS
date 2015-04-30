@@ -13,6 +13,8 @@
 #import "GlobalObjectHolder.h"
 #import "NotificationUtils.h"
 #import "BeaconManager.h"
+#import "Reachability.h"
+#import "StoreListTableViewController.h"
 
 @class SWRevealViewControllerDelegate;
 @interface AppDelegate : UIResponder <UIApplicationDelegate, SWRevealViewControllerDelegate>
@@ -27,6 +29,10 @@
 @property (readonly, strong, nonatomic) GlobalObjectHolder *globalObjectHolder;
 @property (readonly, strong, nonatomic) BeaconManager *beaconManager;
 @property (strong, nonatomic) NotificationUtils *notificationUtils;
+@property (strong, nonatomic) Reachability *hostReachability;
+@property (nonatomic) NetworkStatus currentNetworkStatus;
+@property (nonatomic, strong) UIWindow * networkStatusAlertWindow;
+@property (nonatomic, strong) StoreListTableViewController *storeListTableViewController;
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;

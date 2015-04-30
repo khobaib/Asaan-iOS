@@ -39,10 +39,10 @@
             double latInRads = DEG2RAD(appDelegate.globalObjectHolder.location.coordinate.latitude);
             double lngInRads = DEG2RAD(appDelegate.globalObjectHolder.location.coordinate.longitude);
             GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoresOrderedByDistanceWithStatsWithFirstPosition:firstPosition lat:latInRads lng:lngInRads maxResult:maxResult];
-            [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreAndStatsCollection *object,NSError *error)
+            [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreAndStatsAndCount *object,NSError *error)
             {
                 if(!error)
-                    [weakSelf setDataPage:[object.items mutableCopy]];
+                    [weakSelf setDataPage:[object.storeAndStatsList mutableCopy]];
                 else
                     NSLog(@"StoreLoadingOperation Error:%@",[error userInfo][@"error"]);
                 

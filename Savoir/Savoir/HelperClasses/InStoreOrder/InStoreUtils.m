@@ -14,9 +14,13 @@
 #import "InStoreOrderSummaryViewController.h"
 #import "UIView+Toast.h"
 
+@interface InStoreUtils()
+
+@end
+
 @implementation InStoreUtils
 
-+ (void) getStoreForBeaconId:(long)beaconId
++ (void) startInStoreModeForBeaconId:(long)beaconId
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
@@ -29,14 +33,22 @@
      {
          if (!error)
          {
-             [InStoreUtils startInStoreMode:nil ForStore:object];
+             [InStoreUtils startInStoreMode:nil ForStore:object InBeaconMode:true];
          }
          else
              NSLog(@"Savoir Server Call Failed: queryForGetStoreByBeaconId - error:%@", error.userInfo);
      }];
 }
 
-+ (void) startInStoreMode:(UIViewController *)source ForStore:(GTLStoreendpointStore *)store
++ (void) stopInStoreMode
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.subTotal.longLongValue == 0 ||
+        appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.subTotal.longLongValue == appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.alreadyPaidSubtotal.longLongValue)
+        [appDelegate.globalObjectHolder.inStoreOrderDetails leaveGroup:nil];
+}
+
++ (void) startInStoreMode:(UIViewController *)source ForStore:(GTLStoreendpointStore *)store InBeaconMode:(Boolean)isInBeaconMode
 {
     source = nil;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -51,7 +63,7 @@
         }
         else
         {
-            [InStoreUtils startInStoreMode:source];
+            [InStoreUtils startInStoreConsumerMode:source InBeaconMode:isInBeaconMode];
             return;
         }
     }
@@ -64,7 +76,7 @@
     [InStoreUtils displaySource:source Destination:pvc];
 }
 
-+ (void) startInStoreMode:(UIViewController *)source
++ (void) startInStoreConsumerMode:(UIViewController *)source InBeaconMode:(Boolean)isInBeaconMode
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
 
@@ -104,8 +116,15 @@
                  }
                  else
                  {
-                     ExistingGroupsTableViewController* pvc = [mainstoryboard instantiateViewControllerWithIdentifier:@"ExistingGroupsTableViewController"];
-                     [InStoreUtils displaySource:source Destination:pvc];
+                     if (isInBeaconMode == false)
+                     {
+                         ExistingGroupsTableViewController* pvc = [mainstoryboard instantiateViewControllerWithIdentifier:@"ExistingGroupsTableViewController"];
+                         [InStoreUtils displaySource:source Destination:pvc];
+                     }
+                     else
+                     {
+                         [appDelegate.globalObjectHolder.inStoreOrderDetails createGroup:nil];
+                     }
                  }
              }else{
                  NSLog(@"queryForAddMemberToStoreTableGroup Error:%@",[error userInfo][@"error"]);

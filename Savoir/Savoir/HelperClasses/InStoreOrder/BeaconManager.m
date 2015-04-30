@@ -150,6 +150,7 @@ monitoringDidFailForRegion:(CLBeaconRegion *)region
 //                                          otherButtonTitles: nil];
 //    
 //    [alert show];
+    [InStoreUtils stopInStoreMode];
     self.beacon = nil;
 }
 
@@ -167,6 +168,9 @@ monitoringDidFailForRegion:(CLBeaconRegion *)region
             forRegion:(CLBeaconRegion *)region
 {
     NSLog(@"beaconManager didDetermineState %ld forRegion %ld", (long)state, region.major.longValue);
+    
+    if (state == CLRegionStateInside)
+        [self startBeaconRanging];
 }
 
 #pragma mark Ranging Events
@@ -192,7 +196,7 @@ monitoringDidFailForRegion:(CLBeaconRegion *)region
         [self.beaconManager stopRangingBeaconsInRegion:self.beaconRegion];
         self.beacon = nearestBeacon;
         self.beaconRegion = region;
-        [InStoreUtils getStoreForBeaconId:125];
+        [InStoreUtils startInStoreModeForBeaconId:nearestBeacon.major.longValue];
     }
 }
 

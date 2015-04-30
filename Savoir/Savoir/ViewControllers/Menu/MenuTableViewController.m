@@ -168,7 +168,6 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
 #pragma mark -
 
 - (void)setupMenuSegmentController {
-    
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.labelText = @"Please Wait";

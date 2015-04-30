@@ -86,7 +86,7 @@
     {
         if (self.selectedStore.providesDineInAndPay.boolValue == NO)
             return;
-        [InStoreUtils startInStoreMode:self ForStore:self.selectedStore];
+        [InStoreUtils startInStoreMode:self ForStore:self.selectedStore InBeaconMode:false];
     }
     else if (indexPath.row == 1)
     {

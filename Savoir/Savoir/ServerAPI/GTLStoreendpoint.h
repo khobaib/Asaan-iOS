@@ -39,6 +39,7 @@
 #import "GTLStoreendpointSplitOrderArguments.h"
 #import "GTLStoreendpointStore.h"
 #import "GTLStoreendpointStoreAndStats.h"
+#import "GTLStoreendpointStoreAndStatsAndCount.h"
 #import "GTLStoreendpointStoreAndStatsCollection.h"
 #import "GTLStoreendpointStoreChatMemberArray.h"
 #import "GTLStoreendpointStoreChatTeam.h"

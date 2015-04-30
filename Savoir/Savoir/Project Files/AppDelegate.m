@@ -26,6 +26,7 @@
 #import <EstimoteSDK/EstimoteSDK.h>
 
 #import <DBChooser/DBChooser.h>
+#import "NoNetworkViewController.h"
 
 //NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsException";
 
@@ -39,12 +40,50 @@
     [NSException raise:NSGenericException format:@"Everything is ok. This is just a test crash."];
 }
 
+/*
+ * Called by Reachability whenever status changes.
+ */
+- (void) reachabilityChanged:(NSNotification *)note
+{
+    Reachability* curReach = [note object];
+    NSParameterAssert([curReach isKindOfClass:[Reachability class]]);
+    
+    [self handleNetworkStatusChange:[curReach currentReachabilityStatus]];
+}
+
+- (void)handleNetworkStatusChange:(NetworkStatus)status
+{
+    if(status == NotReachable)
+    {
+        //        [[[UIAlertView alloc]initWithTitle:@"Network Unavailable!" message:@"Savoir requires network access to provide our services. Please try again when connectivity becomes available." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+        self.currentNetworkStatus = status;
+        if (self.networkStatusAlertWindow == nil)
+        {
+            CGRect screenBounds = [[UIScreen mainScreen] bounds];
+            self.networkStatusAlertWindow = [[UIWindow alloc] initWithFrame:screenBounds];
+            self.networkStatusAlertWindow.windowLevel = UIWindowLevelAlert;
+        }
+        
+        NoNetworkViewController * myAlert = [[NoNetworkViewController alloc] init];
+        self.networkStatusAlertWindow.rootViewController = myAlert;
+        
+        [self.networkStatusAlertWindow makeKeyAndVisible];
+    }
+    else
+    {
+        self.currentNetworkStatus = status;
+        self.networkStatusAlertWindow.hidden = true;
+        [self globalObjectHolder];
+        if (self.storeListTableViewController != nil)
+            [self.storeListTableViewController viewWillAppear:YES];
+    }
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
     // Override point for customization after application launch.
     // Enable Crash Reporting
     [Fabric with:@[CrashlyticsKit]];
-    [self globalObjectHolder];
-    [_globalObjectHolder findStoreCountFromServer];
     // App ID and App Token should be provided using method below
     // to allow beacons connection and Estimote Cloud requests possible.
     // Both values can be found in Estimote Cloud ( http://cloud.estimote.com )
@@ -103,8 +142,6 @@
     }
     
     self.notificationUtils = [[NotificationUtils alloc]init];
-    [_globalObjectHolder loadSupportedClientVersionFromServer];
-    [_globalObjectHolder loadAllUserObjects];
     
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
     if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
@@ -164,6 +201,18 @@
 //    [window makeKeyAndVisible];
 
 //    [self performSelector:@selector(crash) withObject:nil afterDelay:10.0];
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    /*
+     Observe the kNetworkReachabilityChangedNotification. When that notification is posted, the method reachabilityChanged will be called.
+     */
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
+    //Change the host name here to change the server you want to monitor.
+    NSString *remoteHostName = @"https://blissful-mantis-89513.appspot.com";
+    
+    self.hostReachability = [Reachability reachabilityWithHostName:remoteHostName];
+    [self.hostReachability startNotifier];
+    
+    [self handleNetworkStatusChange:[reachability currentReachabilityStatus]];
     return YES;
 }
 //
@@ -347,7 +396,10 @@
 - (GlobalObjectHolder *)globalObjectHolder {
     
     if(_globalObjectHolder == nil)
+    {
         _globalObjectHolder = [[GlobalObjectHolder alloc]init];
+        [_globalObjectHolder loadAllUserObjects];
+    }
     return _globalObjectHolder;
 }
 

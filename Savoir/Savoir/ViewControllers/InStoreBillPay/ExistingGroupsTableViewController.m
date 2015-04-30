@@ -34,7 +34,6 @@
         //        [appDelegate.notificationUtils getSlidingMenuBarButtonSetupWith:self];
         UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"UINavigationBarBackIndicatorGold"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed)];
         self.navigationItem.leftBarButtonItem = backButton;
-        
     }
 
     [self setupExistingGroupsData];
