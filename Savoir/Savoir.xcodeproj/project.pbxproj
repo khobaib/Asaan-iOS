@@ -416,6 +416,7 @@
 		D49E95C81AF1E5050016EE2C /* GTLStoreendpointStoreAndStatsAndCount.m in Sources */ = {isa = PBXBuildFile; fileRef = D49E95C71AF1E5050016EE2C /* GTLStoreendpointStoreAndStatsAndCount.m */; };
 		D49E95CC1AF1ECA80016EE2C /* NoNetworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D49E95CA1AF1ECA80016EE2C /* NoNetworkViewController.m */; };
 		D49E95CD1AF1ECA80016EE2C /* NoNetworkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D49E95CB1AF1ECA80016EE2C /* NoNetworkViewController.xib */; };
+		D49E95D01AF27FA80016EE2C /* UpdateProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D49E95CF1AF27FA80016EE2C /* UpdateProfileTableViewController.m */; };
 		D49FBA981AC613D600F55360 /* GTLStoreendpointClientVersionMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = D49FBA971AC613D600F55360 /* GTLStoreendpointClientVersionMatch.m */; };
 		D4B602EA1AEAE6590007BA41 /* InStoreUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B602E91AEAE6590007BA41 /* InStoreUtils.m */; };
 		D4B602EB1AEAEA7B0007BA41 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D400F8AC1AAE06F9004D458C /* Fabric.framework */; };
@@ -1203,6 +1204,8 @@
 		D49E95C91AF1ECA80016EE2C /* NoNetworkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoNetworkViewController.h; sourceTree = "<group>"; };
 		D49E95CA1AF1ECA80016EE2C /* NoNetworkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoNetworkViewController.m; sourceTree = "<group>"; };
 		D49E95CB1AF1ECA80016EE2C /* NoNetworkViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoNetworkViewController.xib; sourceTree = "<group>"; };
+		D49E95CE1AF27FA80016EE2C /* UpdateProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateProfileTableViewController.h; sourceTree = "<group>"; };
+		D49E95CF1AF27FA80016EE2C /* UpdateProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateProfileTableViewController.m; sourceTree = "<group>"; };
 		D49FBA961AC613D600F55360 /* GTLStoreendpointClientVersionMatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointClientVersionMatch.h; sourceTree = "<group>"; };
 		D49FBA971AC613D600F55360 /* GTLStoreendpointClientVersionMatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointClientVersionMatch.m; sourceTree = "<group>"; };
 		D4B602E81AEAE6590007BA41 /* InStoreUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InStoreUtils.h; sourceTree = "<group>"; };
@@ -2389,6 +2392,8 @@
 				D4195E811A92A69C00663149 /* StoreMapViewController.m */,
 				D4195E821A92A69C00663149 /* StoreViewController.h */,
 				D4195E831A92A69C00663149 /* StoreViewController.m */,
+				D49E95CE1AF27FA80016EE2C /* UpdateProfileTableViewController.h */,
+				D49E95CF1AF27FA80016EE2C /* UpdateProfileTableViewController.m */,
 			);
 			path = StoreInfo;
 			sourceTree = "<group>";
@@ -3151,6 +3156,7 @@
 				D438AB961A9FA6AC0089E61A /* JSQMessagesCollectionView.m in Sources */,
 				D49FBA981AC613D600F55360 /* GTLStoreendpointClientVersionMatch.m in Sources */,
 				D49E95C81AF1E5050016EE2C /* GTLStoreendpointStoreAndStatsAndCount.m in Sources */,
+				D49E95D01AF27FA80016EE2C /* UpdateProfileTableViewController.m in Sources */,
 				D4195F9C1A92A69C00663149 /* GTLUserendpointConstants.m in Sources */,
 				D406D8321AD5A10E0076D0B6 /* GTLStoreendpointTableGroupsAndOrders.m in Sources */,
 				D445D71A1A96BA3800ED4919 /* ClaimStoreViewController.m in Sources */,

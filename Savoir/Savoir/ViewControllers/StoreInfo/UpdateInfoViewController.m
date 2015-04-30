@@ -107,6 +107,7 @@
     if (!IsEmpty(profilePhotoUrl))
     {
         [_imgPhoto sd_setImageWithURL:[NSURL URLWithString:profilePhotoUrl]];
+        hud.hidden = YES;
     }
     else
     {
@@ -117,7 +118,7 @@
             hud.hidden = YES;
             [file getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error)
             {
-                hud.hidden = NO;
+                hud.hidden = YES;
                 if (!error)
                 {
                     _imgPhoto.image = [UIImage imageWithData:imageData];

@@ -18,10 +18,8 @@
 
 @interface SelectPaymentTableViewController ()
 
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) MBProgressHUD *hud;
 @property (strong, nonatomic) GTLUserendpointUserCardCollection *userCards;
-
 @end
 
 @implementation SelectPaymentTableViewController
@@ -31,7 +29,9 @@
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     self.userCards = appDelegate.globalObjectHolder.userCards;
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    self.tableView.tableHeaderView = [UtilCalls setupStaticHeaderViewForTable:self.tableView WithTitle:@"Select Payment Mode" AndSubTitle:nil];
+    self.tableView.tableHeaderView = [UtilCalls setupStaticHeaderViewForTable:self.tableView WithTitle:@"Available Payment Options" AndSubTitle:@"Add a new card or select to set default."];
+    
+//    self.navigationController.toolbarHidden = NO;
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -66,10 +66,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (self.userCards == nil)
-        return 1;
-    else
-        return self.userCards.items.count + 1;
+    return self.userCards.items.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -77,33 +74,19 @@
     cell.backgroundColor = [UIColor clearColor];
     UIImageView *imgCardType=(UIImageView *)[cell viewWithTag:501];
     UILabel *txtCardLastFour=(UILabel *)[cell viewWithTag:502];
+    GTLUserendpointUserCard *userCard = [self.userCards.items objectAtIndex:indexPath.row];
     
-    if (self.userCards.items.count == indexPath.row)
-    {
-        txtCardLastFour.text = @"Add Payment Info";
-        imgCardType.image = nil;
-    }
-    else
-    {
-        GTLUserendpointUserCard *userCard = [self.userCards.items objectAtIndex:indexPath.row];
-        
-        imgCardType.image = [UIImage imageNamed:userCard.type];
-        txtCardLastFour.text = userCard.last4;
-    }
+    imgCardType.image = [UIImage imageNamed:userCard.type];
+    txtCardLastFour.text = userCard.last4;
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.userCards.items.count == indexPath.row)
-        [self performSegueWithIdentifier:@"segueAddPaymentMethod" sender:self];
-    else
-    {
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-        appDelegate.globalObjectHolder.defaultUserCard = [self.userCards.items objectAtIndex:indexPath.row];
-        [self.navigationController popViewControllerAnimated:YES];
-    }
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    appDelegate.globalObjectHolder.defaultUserCard = [self.userCards.items objectAtIndex:indexPath.row];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Navigation
