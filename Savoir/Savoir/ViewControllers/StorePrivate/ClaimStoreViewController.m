@@ -51,45 +51,13 @@
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     self.allUsers = [[NSMutableArray alloc]init];
-//
-//    __weak __typeof(self) weakSelf = self;
-//    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-//    GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-//    GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetStoreChatMembersWithStoreId:self.selectedStore.identifier.longLongValue];
-//    NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
-//    dic[USER_AUTH_TOKEN_HEADER_NAME]=[UtilCalls getAuthTokenForCurrentUser];
-//    
-//    [query setAdditionalHTTPHeaders:dic];
-//    
-//    [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreChatTeamCollection *object, NSError *error)
-//     {
-//         weakSelf.allUsers = [[NSMutableArray alloc]init];
-//         if (error)
-//             NSLog(@"ClaimStoreViewController getChatTeamMembers Error:%@", [error userInfo][@"error"]);
-//         else
-//         {
-//             if (object.items == nil || object.items.count == 0)
-//             {
-//                 // Add yourself in as the first user
-//                 GTLUserendpointUser *currentuser = appDelegate.globalObjectHolder.currentUser;
-//                 GTLStoreendpointChatUser *chatUser = [[GTLStoreendpointChatUser alloc]init];
-//                 chatUser.name = [NSString stringWithFormat:@"%@ %@", currentuser.firstName, currentuser.lastName];
-//                 chatUser.phone = currentuser.phone;
-//                 chatUser.profilePhotoUrl = currentuser.profilePhotoUrl;
-//                 chatUser.userId = currentuser.identifier;
-//                 chatUser.objectId = currentuser.parseObjectId;
-//                 [weakSelf.allUsers addObject:chatUser];
-//             }
-//             else
-//                 [weakSelf.allUsers addObjectsFromArray:object.items];
-//         }
-//         [weakSelf.tableView reloadData];
-//     }];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    appDelegate.topViewController = self;
 }
 
 - (void)didReceiveMemoryWarning {

@@ -52,6 +52,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    appDelegate.topViewController = self;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:35.0 target:self selector:@selector(setupExistingTablesFromOrders) userInfo:nil repeats:YES];
 }
 

@@ -12,6 +12,7 @@
 #import "InlineCalls.h"
 #import "MBProgressHUD.h"
 #import "Extension.h"
+#import "AppDelegate.h"
 
 @interface SignupViewController () <UITextFieldDelegate>
 
@@ -86,6 +87,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    appDelegate.topViewController = self;
    
     UIColor *color = [UIColor lightTextColor];
     _txtEmail.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"name@example.com" attributes:@{NSForegroundColorAttributeName: color}];

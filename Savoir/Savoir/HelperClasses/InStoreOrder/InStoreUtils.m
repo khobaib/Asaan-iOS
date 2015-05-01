@@ -15,14 +15,15 @@
 #import "SelectPaymentTableViewController.h"
 #import "UIView+Toast.h"
 #import "StripePay.h"
+#import "UIAlertView+Blocks.h"
 
-@interface InStoreUtils()
-
+@interface InStoreUtils()<UIAlertViewDelegate>
+@property (strong, nonatomic) UIViewController *source;
 @end
 
 @implementation InStoreUtils
 
-+ (void) startInStoreModeForBeaconId:(long)beaconId
+- (void) startInStoreModeForBeaconId:(long)beaconId
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
@@ -35,14 +36,14 @@
      {
          if (!error)
          {
-             [InStoreUtils startInStoreMode:nil ForStore:object InBeaconMode:true];
+             [self startInStoreMode:nil ForStore:object InBeaconMode:true];
          }
          else
              NSLog(@"Savoir Server Call Failed: queryForGetStoreByBeaconId - error:%@", error.userInfo);
      }];
 }
 
-+ (void) stopInStoreMode
+- (void) stopInStoreMode
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     NSString *msg = [NSString stringWithFormat:@"Thank you for visiting %@.", appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.store.name];
@@ -52,7 +53,7 @@
         [appDelegate.globalObjectHolder.inStoreOrderDetails leaveGroup:nil];
 }
 
-+ (void) startInStoreMode:(UIViewController *)source ForStore:(GTLStoreendpointStore *)store InBeaconMode:(Boolean)isInBeaconMode
+- (void) startInStoreMode:(UIViewController *)source ForStore:(GTLStoreendpointStore *)store InBeaconMode:(Boolean)isInBeaconMode
 {
     source = nil;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -62,34 +63,39 @@
         appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore = store;
         if ([UtilCalls userBelongsToStoreChatTeamForStore:appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore])
         {
-            [InStoreUtils startServerMode:source];
+            [self startServerMode:source];
             return;
         }
         else
         {
-            [InStoreUtils startInStoreConsumerMode:source InBeaconMode:isInBeaconMode];
+            [self startInStoreConsumerMode:source InBeaconMode:isInBeaconMode];
             return;
         }
     }
 }
 
-+ (void) startServerMode:(UIViewController *)source
+- (void) startServerMode:(UIViewController *)source
 {
     UIStoryboard *mainstoryboard = [UIStoryboard storyboardWithName:@"InStoreServer" bundle:nil];
     TablesViewController* pvc = [mainstoryboard instantiateViewControllerWithIdentifier:@"ServerTablesViewController"];
-    [InStoreUtils displaySource:source Destination:pvc];
+    [self displaySource:source Destination:pvc];
 }
 
-+ (void) startInStoreConsumerMode:(UIViewController *)source InBeaconMode:(Boolean)isInBeaconMode
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    UIStoryboard *mainstoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    SelectPaymentTableViewController* pvc = [mainstoryboard instantiateViewControllerWithIdentifier:@"SelectPaymentTableViewController"];
+    [self displaySource:self.source Destination:pvc];
+}
+
+- (void) startInStoreConsumerMode:(UIViewController *)source InBeaconMode:(Boolean)isInBeaconMode
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     
     if ([StripePay applePayEnabled] == NO && appDelegate.globalObjectHolder.defaultUserCard == nil)
     {
-        [[[UIAlertView alloc]initWithTitle:@"Setup Mobile Pay" message:@"Savoir needs a Mobile Payment method set up before starting an order. Please add a credit/debit card and complete your profile." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
-        UIStoryboard *mainstoryboard = [UIStoryboard storyboardWithName:@"InStorePay" bundle:nil];
-        SelectPaymentTableViewController* pvc = [mainstoryboard instantiateViewControllerWithIdentifier:@"InstoreOrderSummaryViewController"];
-        [InStoreUtils displaySource:source Destination:pvc];
+        [[[UIAlertView alloc]initWithTitle:@"Setup Mobile Pay" message:@"Savoir needs a Mobile Payment method set up before starting an order. Please add a credit/debit card to your profile." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+        self.source = source;
         return;
     }
 
@@ -122,7 +128,7 @@
                          
                          appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore = object.store;
                          if (isInBeaconMode == false)
-                             [InStoreUtils displaySource:source Destination:pvc];
+                             [self displaySource:source Destination:pvc];
                      }
                      else
                      {
@@ -131,7 +137,7 @@
                          
                          appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore = object.store;
                          if (isInBeaconMode == false)
-                             [InStoreUtils displaySource:source Destination:pvc];
+                             [self displaySource:source Destination:pvc];
                      }
                  }
                  else
@@ -139,8 +145,8 @@
                      if (isInBeaconMode == false)
                      {
                          ExistingGroupsTableViewController* pvc = [mainstoryboard instantiateViewControllerWithIdentifier:@"ExistingGroupsTableViewController"];
-                         [InStoreUtils displaySource:source Destination:pvc];
-                    }
+                         [self displaySource:source Destination:pvc];
+                     }
                      else
                      {
                          [appDelegate.globalObjectHolder.inStoreOrderDetails createGroup:nil];
@@ -153,25 +159,20 @@
     }
 }
 
-+ (void) displaySource:(UIViewController *)source Destination:(UIViewController *)destination
+- (void) displaySource:(UIViewController *)source Destination:(UIViewController *)destination
 {
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     if (source == nil)
-    {
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:destination];
-        [[UIViewController currentViewController] presentViewController:navigationController animated:YES completion:nil];
-    }
-    else
-    {
-        UIStoryboardSegue *segue = [UIStoryboardSegue segueWithIdentifier:@"segueStoreListToConsumerOrderView" source:source destination:destination performHandler:^(void) {
-            //view transition/animation
-            [source.navigationController pushViewController:destination animated:YES];
-        }];
-        
-        [source shouldPerformSegueWithIdentifier:segue.identifier sender:source];//optional
-        [source prepareForSegue:segue sender:source];
-        
-        [segue perform];
-    }
+        source = appDelegate.topViewController;
+    UIStoryboardSegue *segue = [UIStoryboardSegue segueWithIdentifier:@"segueStoreListToConsumerOrderView" source:source destination:destination performHandler:^(void) {
+        //view transition/animation
+        [source.navigationController pushViewController:destination animated:YES];
+    }];
+    
+    [source shouldPerformSegueWithIdentifier:segue.identifier sender:source];//optional
+    [source prepareForSegue:segue sender:source];
+    
+    [segue perform];
 }
 
 @end

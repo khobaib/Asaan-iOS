@@ -55,7 +55,9 @@
 - (void)viewWillDisappear:(BOOL)animated
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
-    [super viewWillDisappear:animated];
+    [super viewWillAppear:animated];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    appDelegate.topViewController = self;
     [self.timer invalidate];
 }
 

@@ -33,6 +33,7 @@
 #import "GlobalObjectHolder.h"
 #import "UIView+Toast.h"
 #import <DBChooser/DBChooser.h>
+#import "AppDelegate.h"
 
 
 const NSUInteger MenuFluentPagingTablePreloadMargin = 5;
@@ -112,8 +113,9 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    
     [super viewWillAppear:animated];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    appDelegate.topViewController = self;
 }
 // As of iOS 8 Beta 5 you need to reload the table data on viewDidAppear.  YUK...
 - (void)viewDidAppear:(BOOL)animated

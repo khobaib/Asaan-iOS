@@ -68,6 +68,13 @@
     self.allQueueEntries = [[NSMutableArray alloc]init];
     [self loadWaitlistQueue];
 }
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    appDelegate.topViewController = self;
+}
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidAppear:(BOOL)animated
 //-------------------------------------------------------------------------------------------------------------------------------------------------

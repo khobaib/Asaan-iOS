@@ -70,6 +70,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    appDelegate.topViewController = self;
     
     [self.navigationController setNavigationBarHidden:NO];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
@@ -78,7 +80,6 @@
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     self.orderInProgress = appDelegate.globalObjectHolder.orderInProgress;
     [self.tableView reloadData];
 }

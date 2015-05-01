@@ -13,6 +13,7 @@
 #import "InlineCalls.h"
 #import "UIImageView+WebCache.h"
 #import "SHSPhoneTextField.h"
+#import "AppDelegate.h"
 
 @interface SignupProfileViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *txtLastName;
@@ -92,6 +93,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    appDelegate.topViewController = self;
     
     if (self.txtFirstName.isFirstResponder)
         activeField = self.txtFirstName;

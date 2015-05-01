@@ -46,6 +46,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    appDelegate.topViewController = self;
     
     [self setupExistingGroupsData];
     self.timer = [NSTimer scheduledTimerWithTimeInterval:35.0 target:self selector:@selector(setupExistingGroupsData) userInfo:nil repeats:YES];

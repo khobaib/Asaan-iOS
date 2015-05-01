@@ -60,9 +60,11 @@
     self.XMLOrderStr = appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.orderDetails;
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    appDelegate.topViewController = self;
     
     self.bCloseClicked = false;
     self.bSaveClicked = false;

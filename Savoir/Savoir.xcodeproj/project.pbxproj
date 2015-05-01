@@ -13,11 +13,9 @@
 		D4046FFF1A9C07A40070537B /* UIView+Superview.m in Sources */ = {isa = PBXBuildFile; fileRef = D4046FFE1A9C07A40070537B /* UIView+Superview.m */; };
 		D40470031A9CE83B0070537B /* AddToWaitListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D40470021A9CE83B0070537B /* AddToWaitListViewController.m */; };
 		D406D7ED1AD056220076D0B6 /* InStorePay.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D406D7EB1AD056220076D0B6 /* InStorePay.storyboard */; };
-		D406D7F31AD23ACB0076D0B6 /* UpdateInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D7EF1AD23ACB0076D0B6 /* UpdateInfoViewController.m */; };
 		D406D7F41AD23ACB0076D0B6 /* AddFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D7F11AD23ACB0076D0B6 /* AddFriendViewController.m */; };
 		D406D7F71AD23B510076D0B6 /* ExistingGroupsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D7F61AD23B510076D0B6 /* ExistingGroupsTableViewController.m */; };
 		D406D8001AD23C250076D0B6 /* InstorePaymentOptionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D7FF1AD23C250076D0B6 /* InstorePaymentOptionTableViewController.m */; };
-		D406D8031AD23C5C0076D0B6 /* SplitItemsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D8021AD23C5C0076D0B6 /* SplitItemsTableViewController.m */; };
 		D406D8061AD23C880076D0B6 /* SplitEvenTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D8051AD23C880076D0B6 /* SplitEvenTableViewController.m */; };
 		D406D8091AD23CBC0076D0B6 /* FinalPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D8081AD23CBC0076D0B6 /* FinalPaymentViewController.m */; };
 		D406D80D1AD2E3E80076D0B6 /* InStoreOrderDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D80C1AD2E3E80076D0B6 /* InStoreOrderDetails.m */; };
@@ -440,16 +438,12 @@
 		D40470011A9CE83B0070537B /* AddToWaitListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddToWaitListViewController.h; sourceTree = "<group>"; };
 		D40470021A9CE83B0070537B /* AddToWaitListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddToWaitListViewController.m; sourceTree = "<group>"; };
 		D406D7EC1AD056220076D0B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = InStorePay.storyboard; sourceTree = "<group>"; };
-		D406D7EF1AD23ACB0076D0B6 /* UpdateInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateInfoViewController.m; sourceTree = "<group>"; };
-		D406D7F01AD23ACB0076D0B6 /* UpdateInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateInfoViewController.h; sourceTree = "<group>"; };
 		D406D7F11AD23ACB0076D0B6 /* AddFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendViewController.m; sourceTree = "<group>"; };
 		D406D7F21AD23ACB0076D0B6 /* AddFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendViewController.h; sourceTree = "<group>"; };
 		D406D7F51AD23B510076D0B6 /* ExistingGroupsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExistingGroupsTableViewController.h; sourceTree = "<group>"; };
 		D406D7F61AD23B510076D0B6 /* ExistingGroupsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExistingGroupsTableViewController.m; sourceTree = "<group>"; };
 		D406D7FE1AD23C250076D0B6 /* InstorePaymentOptionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstorePaymentOptionTableViewController.h; sourceTree = "<group>"; };
 		D406D7FF1AD23C250076D0B6 /* InstorePaymentOptionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstorePaymentOptionTableViewController.m; sourceTree = "<group>"; };
-		D406D8011AD23C5C0076D0B6 /* SplitItemsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplitItemsTableViewController.h; sourceTree = "<group>"; };
-		D406D8021AD23C5C0076D0B6 /* SplitItemsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplitItemsTableViewController.m; sourceTree = "<group>"; };
 		D406D8041AD23C880076D0B6 /* SplitEvenTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplitEvenTableViewController.h; sourceTree = "<group>"; };
 		D406D8051AD23C880076D0B6 /* SplitEvenTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplitEvenTableViewController.m; sourceTree = "<group>"; };
 		D406D8071AD23CBC0076D0B6 /* FinalPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinalPaymentViewController.h; sourceTree = "<group>"; };
@@ -1296,8 +1290,6 @@
 				D406D7F61AD23B510076D0B6 /* ExistingGroupsTableViewController.m */,
 				D406D7FE1AD23C250076D0B6 /* InstorePaymentOptionTableViewController.h */,
 				D406D7FF1AD23C250076D0B6 /* InstorePaymentOptionTableViewController.m */,
-				D406D8011AD23C5C0076D0B6 /* SplitItemsTableViewController.h */,
-				D406D8021AD23C5C0076D0B6 /* SplitItemsTableViewController.m */,
 				D406D8041AD23C880076D0B6 /* SplitEvenTableViewController.h */,
 				D406D8051AD23C880076D0B6 /* SplitEvenTableViewController.m */,
 				D406D8071AD23CBC0076D0B6 /* FinalPaymentViewController.h */,
@@ -2374,8 +2366,6 @@
 		D4195E751A92A69C00663149 /* StoreInfo */ = {
 			isa = PBXGroup;
 			children = (
-				D406D7EF1AD23ACB0076D0B6 /* UpdateInfoViewController.m */,
-				D406D7F01AD23ACB0076D0B6 /* UpdateInfoViewController.h */,
 				D406D7F11AD23ACB0076D0B6 /* AddFriendViewController.m */,
 				D406D7F21AD23ACB0076D0B6 /* AddFriendViewController.h */,
 				D4195E761A92A69C00663149 /* InfoViewController.h */,
@@ -2986,7 +2976,6 @@
 				D4195F5C1A92A69C00663149 /* UIImageView+UIActivityIndicatorForSDWebImage.m in Sources */,
 				D4195F7C1A92A69C00663149 /* GTLStoreendpointStore.m in Sources */,
 				D409D7C51AA60A94008FADDF /* STPTestDataTableViewController.m in Sources */,
-				D406D8031AD23C5C0076D0B6 /* SplitItemsTableViewController.m in Sources */,
 				D4195F7E1A92A69C00663149 /* GTLStoreendpointStoreAndStatsCollection.m in Sources */,
 				D4195F911A92A69C00663149 /* GTLStoreendpointStoreOwner.m in Sources */,
 				D409D7C61AA60A94008FADDF /* STPTestPaymentAuthorizationViewController.m in Sources */,
@@ -3137,7 +3126,6 @@
 				D4195F6B1A92A69C00663149 /* GTLStoreendpointChatMessage.m in Sources */,
 				D4195FBF1A92A69C00663149 /* ReserveTableViewController.m in Sources */,
 				D409D7F91AA60A94008FADDF /* STPToken.m in Sources */,
-				D406D7F31AD23ACB0076D0B6 /* UpdateInfoViewController.m in Sources */,
 				D47D3ABE1ABB41EC0099176A /* XMLPOSOrder.m in Sources */,
 				D4195F211A92A69C00663149 /* SDWebImageCompat.m in Sources */,
 				D4195FAA1A92A69C00663149 /* PaymentInfoViewController.m in Sources */,

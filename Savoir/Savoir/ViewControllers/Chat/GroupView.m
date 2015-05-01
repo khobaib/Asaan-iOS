@@ -78,10 +78,11 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    appDelegate.topViewController = self;
     
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     [appDelegate.notificationUtils getSlidingMenuBarButtonSetupWith:self];
 }
 

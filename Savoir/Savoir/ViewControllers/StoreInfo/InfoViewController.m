@@ -12,6 +12,7 @@
 #import "UIColor+SavoirGoldColor.h"
 #import "UIColor+SavoirBackgroundColor.h"
 #import "StoreMapViewController.h"
+#import "AppDelegate.h"
 
 @interface InfoViewController ()
 
@@ -44,6 +45,9 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    appDelegate.topViewController = self;
     
     if (self.selectedStore != nil) {
         

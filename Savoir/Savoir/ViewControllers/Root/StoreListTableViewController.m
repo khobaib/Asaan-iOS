@@ -81,9 +81,11 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    appDelegate.topViewController = self;
+
     self.navigationController.navigationBarHidden = NO;
     
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     [appDelegate.notificationUtils getSlidingMenuBarButtonSetupWith:self];
     
     appDelegate.storeListTableViewController = self;

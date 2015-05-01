@@ -43,15 +43,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-//    
-//    [self.navigationController setNavigationBarHidden:NO];
-//    self.navigationController.navigationBar.translucent = NO;
-//    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
-//                                                  forBarMetrics:UIBarMetricsDefault];
-//    self.navigationController.navigationBar.barTintColor = [UIColor asaanBackgroundColor];
-//    self.navigationController.navigationBar.shadowImage = [UIImage new];
-//    self.navigationController.navigationBar.translucent = NO;
-//    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    appDelegate.topViewController = self;
 }
 
 - (void)didReceiveMemoryWarning {

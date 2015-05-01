@@ -20,6 +20,7 @@
 #import "DropdownView.h"
 #import "MBProgressHUD.h"
 #import "UtilCalls.h"
+#import "AppDelegate.h"
 
 @interface PaymentInfoViewController () <PTKViewDelegate, DropdownViewDelegate>
 
@@ -51,6 +52,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    appDelegate.topViewController = self;
     
     // Prevent keyboard from showing by default
     [self.view endEditing:YES];

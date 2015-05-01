@@ -13,6 +13,7 @@
 #import "InlineCalls.h"
 #import "UIColor+SavoirGoldColor.h"
 #import "SignupProfileViewController.h"
+#import "AppDelegate.h"
 
 @interface StartupViewController ()
 {
@@ -40,8 +41,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-//    self.navigationItem.leftBarButtonItem = nil;
-//    self.navigationItem.hidesBackButton = YES;
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    appDelegate.topViewController = self;
 }
 
 - (void)viewDidAppear:(BOOL)animated {

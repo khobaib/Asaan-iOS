@@ -128,6 +128,13 @@ UIImagePickerControllerDelegate, UITextFieldDelegate>
     }
 }
 
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    appDelegate.topViewController = self;
+}
+
 - (void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];

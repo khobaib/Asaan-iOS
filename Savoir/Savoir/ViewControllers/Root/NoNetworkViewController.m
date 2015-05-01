@@ -7,6 +7,7 @@
 //
 
 #import "NoNetworkViewController.h"
+#import "AppDelegate.h"
 
 @interface NoNetworkViewController ()
 
@@ -17,6 +18,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    appDelegate.topViewController = self;
 }
 
 - (void)didReceiveMemoryWarning {

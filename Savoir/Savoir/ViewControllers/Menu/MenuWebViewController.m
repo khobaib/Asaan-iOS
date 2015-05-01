@@ -8,6 +8,7 @@
 
 #import "MenuWebViewController.h"
 #import "MBProgressHUD.h"
+#import "AppDelegate.h"
 
 @interface MenuWebViewController()<UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
@@ -21,6 +22,12 @@
     NSMutableURLRequest * request =[NSMutableURLRequest requestWithURL:[NSURL URLWithString:self.menuURL]];
     [self.webView loadRequest:request];
     self.navigationItem.title = [NSString stringWithFormat:@"%@ Menu", self.storeName];
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    appDelegate.topViewController = self;
 }
 
 -(void)webViewDidStartLoad:(UIWebView *)webView

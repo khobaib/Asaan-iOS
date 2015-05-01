@@ -31,6 +31,7 @@
 @property (nonatomic) NetworkStatus currentNetworkStatus;
 @property (nonatomic, strong) UIWindow * networkStatusAlertWindow;
 @property (nonatomic, strong) StoreListTableViewController *storeListTableViewController;
+@property (nonatomic, strong) UIViewController *topViewController;
 
 - (void)clearAllGlobalObjects;
 - (void)saveContext;

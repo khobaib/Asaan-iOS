@@ -12,6 +12,7 @@
 #import "StoreLocation.h"
 #import <MapKit/MapKit.h>
 #import "InlineCalls.h"
+#import "AppDelegate.h"
 
 #define METER_DISTANCE  800
 
@@ -33,6 +34,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    appDelegate.topViewController = self;
     
     NSLog(@"Store Showed %@ : lat - %@, lang - %@", self.selectedStore.name, self.selectedStore.lat, self.selectedStore.lng);
     

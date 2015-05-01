@@ -19,6 +19,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *txtCarryout;
 @property (weak, nonatomic) IBOutlet UILabel *txtDelivery;
 @property (weak, nonatomic) IBOutlet UILabel *txtDineIn;
+
+@property (strong, nonatomic) InStoreUtils *inStoreUtils;
+
 @end
 
 @implementation OrderTypeTableViewController
@@ -37,6 +40,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    appDelegate.topViewController = self;
     
     if (self.selectedStore.providesDelivery.boolValue == NO)
     {
@@ -86,7 +91,7 @@
     {
         if (self.selectedStore.providesDineInAndPay.boolValue == NO)
             return;
-        [InStoreUtils startInStoreMode:self ForStore:self.selectedStore InBeaconMode:false];
+        [self.inStoreUtils startInStoreMode:self ForStore:self.selectedStore InBeaconMode:false];
     }
     else if (indexPath.row == 1)
     {

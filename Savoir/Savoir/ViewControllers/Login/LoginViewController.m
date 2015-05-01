@@ -11,6 +11,7 @@
 #import "MBProgressHUD.h"
 #import <Parse/Parse.h>
 #import "InlineCalls.h"
+#import "AppDelegate.h"
 
 @interface LoginViewController () <UITextFieldDelegate>
 
@@ -33,6 +34,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    appDelegate.topViewController = self;
     
     UIColor *color = [UIColor lightTextColor];
     _txtEmail.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"name@example.com" attributes:@{NSForegroundColorAttributeName: color}];

@@ -24,6 +24,8 @@
 // GETTING STARTED INTERFACE ends here
 // ----------------------------------------------------------
 
+@property (strong, nonatomic) InStoreUtils *inStoreUtils;
+
 @end
 
 @implementation BeaconManager
@@ -33,6 +35,7 @@
     if (self = [super init])
     {
         NSLog(@"beaconManager init");
+        self.inStoreUtils = [[InStoreUtils alloc]init];
         self.beaconManager = [[ESTBeaconManager alloc] init];
         [self.beaconManager requestAlwaysAuthorization];
         self.beaconManager.delegate = self;
@@ -150,7 +153,7 @@ monitoringDidFailForRegion:(CLBeaconRegion *)region
 //                                          otherButtonTitles: nil];
 //    
 //    [alert show];
-    [InStoreUtils stopInStoreMode];
+    [self.inStoreUtils stopInStoreMode];
     self.beacon = nil;
 }
 
@@ -196,7 +199,7 @@ monitoringDidFailForRegion:(CLBeaconRegion *)region
         [self.beaconManager stopRangingBeaconsInRegion:self.beaconRegion];
         self.beacon = nearestBeacon;
         self.beaconRegion = region;
-        [InStoreUtils startInStoreModeForBeaconId:nearestBeacon.major.longValue];
+        [self.inStoreUtils startInStoreModeForBeaconId:nearestBeacon.major.longValue];
     }
 }
 
