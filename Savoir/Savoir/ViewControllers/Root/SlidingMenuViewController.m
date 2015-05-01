@@ -122,8 +122,7 @@
     else if ([_menuSegue[indexPath.row] isEqualToString:SEGUE_UnwindToStoreList])
     {
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-        GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
-        [goh clearAllObjects];
+        [appDelegate clearAllGlobalObjects];
         
         [self performSegueWithIdentifier:SEGUE_SMToStoreList sender:self];
     }

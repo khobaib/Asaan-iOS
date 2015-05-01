@@ -40,11 +40,12 @@ NSString *const BackendChargeURLString = nil; // TODO: replace nil with your own
 // To learn how to obtain an Apple Merchant ID, head to https://stripe.com/docs/mobile/apple-pay
 NSString *const AppleMerchantId = @"merchant.com.savoirexp.savoir"; // TODO: replace nil with your own value
 
-- (BOOL)applePayEnabled {
-//    if ([PKPaymentRequest class]) {
-//        PKPaymentRequest *paymentRequest = [Stripe paymentRequestWithMerchantIdentifier:AppleMerchantId];
-//        return [Stripe canSubmitPaymentRequest:paymentRequest];
-//    }
++ (BOOL)applePayEnabled {
+    if ([PKPaymentRequest class])
+    {
+        PKPaymentRequest *paymentRequest = [Stripe paymentRequestWithMerchantIdentifier:AppleMerchantId];
+        return [Stripe canSubmitPaymentRequest:paymentRequest];
+    }
     return NO;
 }
 

@@ -23,7 +23,7 @@ extern NSString *const AppleMerchantId;
 
 @property (strong, nonatomic) STPToken *token;
 
-- (BOOL)applePayEnabled;
++ (BOOL)applePayEnabled;
 - (void)beginApplePay:(UIViewController *)sender Title:(NSString *)title Label:(NSString *)label AndAmount:(NSDecimalNumber *)amount;
 
 @end

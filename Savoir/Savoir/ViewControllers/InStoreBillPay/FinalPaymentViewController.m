@@ -264,7 +264,7 @@
     if ([self finalTotal] == 0)
         return;
     
-    if (self.stripePay.applePayEnabled)
+    if ([StripePay applePayEnabled])
     {
         if (self.stripePay.token == nil)
         {
@@ -326,7 +326,7 @@
     orderArguments.gratuityPercent = [NSNumber numberWithInt:self.tipSlider.value];
     orderArguments.taxPercent = [NSNumber numberWithInt:appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore.taxPercent.intValue];
     
-    if (self.stripePay.applePayEnabled && self.stripePay.token != nil)
+    if ([StripePay applePayEnabled] && self.stripePay.token != nil)
         orderArguments.token = self.stripePay.token.tokenId;
     else
     {

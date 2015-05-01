@@ -91,21 +91,6 @@
         return;
     appDelegate.storeListTableViewController = nil;
     
-    if ([self isVersionSupported] == false)
-    {
-        [UIAlertView showWithTitle:@"Savoir update required" message:@"In order to continue please update the Savoir app. It should only take a few moments." cancelButtonTitle:nil otherButtonTitles:@[@"Update"]
-                          tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex)
-         {
-//             if (buttonIndex != [alertView cancelButtonIndex])
-//             {
-                 NSString *iTunesLink = @"https://itunes.apple.com/us/app/savoir/id967526744?mt=8";
-                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
-//             }
-          }];
-        
-        return;
-    }
-    
     PFUser *currentUser = [PFUser currentUser];
     if (!currentUser)
     {
@@ -128,8 +113,7 @@
                     NSLog(@"The facebook session was invalidated");
                     [PFFacebookUtils unlinkUserInBackground:[PFUser currentUser]];
                     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-                    GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
-                    [goh clearAllObjects];
+                    [appDelegate clearAllGlobalObjects];
                     [self performSegueWithIdentifier:@"segueStartup" sender:self];
                 } else
                 {
@@ -141,7 +125,20 @@
     
     GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
     [goh loadSupportedClientVersionFromServer];
-    if (goh.inStoreOrderDetails == nil && goh.orderInProgress != nil)
+    
+    if ([self isVersionSupported] == false)
+    {
+        [UIAlertView showWithTitle:@"Savoir update required" message:@"In order to continue please update the Savoir app. It should only take a few moments." cancelButtonTitle:nil otherButtonTitles:@[@"Update"]
+                          tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex)
+         {
+             NSString *iTunesLink = @"https://itunes.apple.com/us/app/savoir/id967526744?mt=8";
+             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
+         }];
+        
+        return;
+    }
+
+    if (goh.orderInProgress != nil)
     {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setImage:[UIImage imageNamed:@"cart.png"] forState:UIControlStateNormal];

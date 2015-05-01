@@ -12,7 +12,9 @@
 #import "TablesViewController.h"
 #import "ExistingGroupsTableViewController.h"
 #import "InStoreOrderSummaryViewController.h"
+#import "SelectPaymentTableViewController.h"
 #import "UIView+Toast.h"
+#import "StripePay.h"
 
 @interface InStoreUtils()
 
@@ -43,6 +45,8 @@
 + (void) stopInStoreMode
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSString *msg = [NSString stringWithFormat:@"Thank you for visiting %@.", appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.store.name];
+    [appDelegate.window makeToast:msg];
     if (appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.subTotal.longLongValue == 0 ||
         appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.subTotal.longLongValue == appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.alreadyPaidSubtotal.longLongValue)
         [appDelegate.globalObjectHolder.inStoreOrderDetails leaveGroup:nil];
@@ -79,6 +83,15 @@
 + (void) startInStoreConsumerMode:(UIViewController *)source InBeaconMode:(Boolean)isInBeaconMode
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    
+    if ([StripePay applePayEnabled] == NO && appDelegate.globalObjectHolder.defaultUserCard == nil)
+    {
+        [[[UIAlertView alloc]initWithTitle:@"Setup Mobile Pay" message:@"Savoir needs a Mobile Payment method set up before starting an order. Please add a credit/debit card and complete your profile." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+        UIStoryboard *mainstoryboard = [UIStoryboard storyboardWithName:@"InStorePay" bundle:nil];
+        SelectPaymentTableViewController* pvc = [mainstoryboard instantiateViewControllerWithIdentifier:@"InstoreOrderSummaryViewController"];
+        [InStoreUtils displaySource:source Destination:pvc];
+        return;
+    }
 
     if (self)
     {
@@ -95,23 +108,30 @@
              if(!error)
              {
                  appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails = object;
-                 
+
                  UIStoryboard *mainstoryboard = [UIStoryboard storyboardWithName:@"InStorePay" bundle:nil];
                  if (object.memberMe.identifier.longLongValue > 0)
                  {
                      InStoreOrderSummaryViewController* pvc = [mainstoryboard instantiateViewControllerWithIdentifier:@"InstoreOrderSummaryViewController"];
+                     
                      if (appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore != nil &&
                          appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore.identifier.longLongValue != object.store.identifier.longLongValue)
                      {
+                         NSString *msg = [NSString stringWithFormat:@"Welcome to %@. You have an open order at %@. Please close this order before opening a new one.", appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore.name, object.store.name];
+                         [appDelegate.window makeToast:msg];
+                         
                          appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore = object.store;
-                         [InStoreUtils displaySource:source Destination:pvc];
-                         NSString *msg = [NSString stringWithFormat:@"You have an open order at %@. Please close this order before opening a new one.", object.store.name];
-                         [pvc.view makeToast:msg];
+                         if (isInBeaconMode == false)
+                             [InStoreUtils displaySource:source Destination:pvc];
                      }
                      else
                      {
+                         NSString *msg = [NSString stringWithFormat:@"Welcome to %@.", appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore.name];
+                         [appDelegate.window makeToast:msg];
+                         
                          appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore = object.store;
-                         [InStoreUtils displaySource:source Destination:pvc];
+                         if (isInBeaconMode == false)
+                             [InStoreUtils displaySource:source Destination:pvc];
                      }
                  }
                  else
@@ -120,7 +140,7 @@
                      {
                          ExistingGroupsTableViewController* pvc = [mainstoryboard instantiateViewControllerWithIdentifier:@"ExistingGroupsTableViewController"];
                          [InStoreUtils displaySource:source Destination:pvc];
-                     }
+                    }
                      else
                      {
                          [appDelegate.globalObjectHolder.inStoreOrderDetails createGroup:nil];

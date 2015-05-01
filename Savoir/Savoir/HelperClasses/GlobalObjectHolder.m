@@ -15,6 +15,7 @@
 
 @implementation GlobalObjectHolder
 @synthesize orderInProgress = _orderInProgress;
+@synthesize beaconManager = _beaconManager;
 
 - (OnlineOrderDetails *)createOrderInProgress {
     
@@ -26,6 +27,7 @@
 - (void) clearAllObjects
 {
     self.orderInProgress = nil;
+    self.inStoreOrderDetails = nil;
     self.userAddresses = nil;
     self.userCards = nil;
     self.defaultUserCard = nil;
@@ -33,6 +35,10 @@
     self.currentUser = nil;
     self.usersRoomsAndStores = nil;
     self.storesOwnedByUser = nil;
+    self.locationManager = nil;
+    self.location = nil;
+    self.versionFromServer = nil;
+    _beaconManager = nil;
     // Unsubscribe from push notifications by removing the user association from the current installation.
     PFUser *currentUser = [PFUser currentUser];
     if (currentUser)
@@ -41,6 +47,13 @@
         [[PFInstallation currentInstallation] saveInBackground];
         [PFUser logOut];
     }
+}
+
+- (BeaconManager *)beaconManager {
+    
+    if(_beaconManager == nil)
+        _beaconManager = [[BeaconManager alloc]init];
+    return _beaconManager;
 }
 
 - (void) loadAllUserObjects
@@ -67,6 +80,7 @@
             [self loadUserCardsFromServer];
         if (self.userAddresses == nil)
             [self loadUserAddressesFromServer];
+        [self beaconManager];
     }
 }
 

@@ -102,7 +102,7 @@
     if (self.orderInProgress == nil)
         return;
     
-    if (self.stripePay.applePayEnabled)
+    if ([StripePay applePayEnabled])
     {
         if (self.stripePay.token == nil)
         {
@@ -146,7 +146,7 @@
     
     GTLStoreendpointPlaceOrderArguments *orderArguments = [[GTLStoreendpointPlaceOrderArguments alloc]init];
     
-    if (self.stripePay.applePayEnabled && self.stripePay.token != nil)
+    if ([StripePay applePayEnabled] && self.stripePay.token != nil)
         orderArguments.token = self.stripePay.token.tokenId;
     else
     {
@@ -545,7 +545,7 @@
             cell = [tableView dequeueReusableCellWithIdentifier:@"OtherCell" forIndexPath:indexPath];
             NSString *card = appDelegate.globalObjectHolder.defaultUserCard.last4;
             
-            if (self.stripePay.applePayEnabled)
+            if ([StripePay applePayEnabled])
                 cell.textLabel.text = @"Payment Mode Apple Pay";
             else if (IsEmpty(card))
                 card = @"(Not specified)";

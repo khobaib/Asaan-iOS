@@ -99,7 +99,6 @@
 //    NSLog(@"ESTAppDelegate: Analytics are turned OFF by defaults. You can enable them changing flag");
     [ESTCloudManager enableMonitoringAnalytics:NO];
     [ESTCloudManager enableGPSPositioningForAnalytics:NO];
-    [self beaconManager];
     
     // ****************************************************************************
     // Uncomment and fill in with your Parse credentials:
@@ -339,7 +338,6 @@
 @synthesize gtlStoreService = _gtlStoreService;
 @synthesize gtlUserService = _gtlUserService;
 @synthesize globalObjectHolder = _globalObjectHolder;
-@synthesize beaconManager = _beaconManager;
 
 - (NSURL *)applicationDocumentsDirectory {
     // The directory the application uses to store the Core Data store file. This code uses a directory named "com.asaan.Savoir" in the application's documents directory.
@@ -403,11 +401,10 @@
     return _globalObjectHolder;
 }
 
-- (BeaconManager *)beaconManager {
-    
-    if(_beaconManager == nil)
-        _beaconManager = [[BeaconManager alloc]init];
-    return _beaconManager;
+- (void)clearAllGlobalObjects
+{
+    [_globalObjectHolder clearAllObjects];
+    _globalObjectHolder = nil;
 }
 
 - (GTLServiceUserendpoint *)gtlUserService {

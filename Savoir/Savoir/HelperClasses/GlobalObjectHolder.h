@@ -15,6 +15,7 @@
 #import "GTLUserendpointUserCardCollection.h"
 #import "GTLUserendpointUser.h"
 #import <CoreLocation/CoreLocation.h>
+#import "BeaconManager.h"
 
 @interface GlobalObjectHolder : NSObject
 @property (strong, nonatomic) OnlineOrderDetails *orderInProgress;
@@ -29,6 +30,7 @@
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLLocation* location;
+@property (readonly, strong, nonatomic) BeaconManager *beaconManager;
 
 @property (strong, nonatomic) NSString *versionFromServer;
 
