@@ -36,6 +36,7 @@
     [super viewDidLoad];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.tableView.tableHeaderView = [UtilCalls setupStaticHeaderViewForTable:self.tableView WithTitle:self.selectedStore.name AndSubTitle:@"Please select your order type."];
+    self.inStoreUtils = [[InStoreUtils alloc]init];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

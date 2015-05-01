@@ -16,7 +16,8 @@
 @property (strong, nonatomic) BBBadgeBarButtonItem *barButton;
 @property (strong, nonatomic) ChatView *chatView;
 
-- (void)scheduleLocalNotificationWithString:(NSString *)message;
++ (void)scheduleLocalNotificationWithString:(NSString *)message At:(NSDate *)date;
++ (void)scheduleNotificationForInStorePay:(NSInteger)status message:(NSString *)msg;
 
 - (void)scheduleNotificationWithOrder:(GTLStoreendpointStoreOrder *)order;
 - (void)cancelNotificationWithOrder:(NSNumber *)orderId;

@@ -15,6 +15,7 @@
 #import "UIColor+SavoirGoldColor.h"
 #import "StoreListTableViewController.h"
 #import "BBBadgeBarButtonItem.h"
+#import "InStoreUtils.h"
 
 @interface NotificationUtils()
 
@@ -50,22 +51,49 @@
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
 }
 
-- (void)scheduleLocalNotificationWithString:(NSString *)message
+
++ (void)scheduleNotificationForInStorePay:(NSInteger)status message:(NSString *)msg
 {
     UILocalNotification *localNotif = [[UILocalNotification alloc] init];
     if (localNotif == nil)
         return;
-    NSDate *date = [NSDate date];
-    localNotif.fireDate = [date dateByAddingTimeInterval:30]; // Fire initial review time after one hour.
+    localNotif.fireDate = [NSDate date];
+    localNotif.timeZone = [NSTimeZone defaultTimeZone];
+    
+    localNotif.alertBody = msg;
+    if (status == 1) // Everything is OK
+        localNotif.alertAction = NSLocalizedString(@"Thank you!", nil);
+    else
+        localNotif.alertAction = NSLocalizedString(@"Your Order", nil);
+    
+    localNotif.soundName = UILocalNotificationDefaultSoundName;
+    
+    NSArray *keys = [NSArray arrayWithObjects:@"INSTORE_ORDER_STATUS", nil];
+    NSArray *objects = [NSArray arrayWithObjects:[NSNumber numberWithLong:status], nil];
+    
+    NSDictionary *infoDict = [NSDictionary dictionaryWithObjects:objects forKeys:keys];
+    localNotif.userInfo = infoDict;
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
+}
+
+
++ (void)scheduleLocalNotificationWithString:(NSString *)message At:(NSDate *)date
+{
+    UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+    if (localNotif == nil)
+        return;
+//    localNotif.fireDate = [date dateByAddingTimeInterval:30]; // Fire initial review time after one hour.
+    localNotif.fireDate = date; // Fire initial review time after one hour.
     localNotif.timeZone = [NSTimeZone defaultTimeZone];
     
     localNotif.alertBody = message;
     localNotif.alertAction = NSLocalizedString(@"Ok", nil);
     
     localNotif.soundName = UILocalNotificationDefaultSoundName;
-    
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
-        localNotif.category = @"REVIEW_CATEGORY";
+//    
+//    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
+//        localNotif.category = @"REVIEW_CATEGORY";
     
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
 }
@@ -105,6 +133,13 @@
             [self alertView:alertView didDismissWithButtonIndex:1];
         else
             [alertView show];
+        return;
+    }
+    NSNumber *status = [userInfo objectForKey:@"INSTORE_ORDER_STATUS"];
+    if (status.longValue == 2)
+    {
+        InStoreUtils *utils = [[InStoreUtils alloc]init];
+        [utils startInStoreMode:nil ForStore:nil InBeaconMode:false];
     }
 }
 #pragma mark - UIAlertViewDelegate

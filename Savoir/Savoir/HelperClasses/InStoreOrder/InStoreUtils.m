@@ -16,6 +16,7 @@
 #import "UIView+Toast.h"
 #import "StripePay.h"
 #import "UIAlertView+Blocks.h"
+#import "NotificationUtils.h"
 
 @interface InStoreUtils()<UIAlertViewDelegate>
 @property (strong, nonatomic) UIViewController *source;
@@ -46,16 +47,22 @@
 - (void) stopInStoreMode
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    NSString *msg = [NSString stringWithFormat:@"Thank you for visiting %@.", appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.store.name];
-    [appDelegate.window makeToast:msg];
     if (appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.subTotal.longLongValue == 0 ||
         appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.subTotal.longLongValue == appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.alreadyPaidSubtotal.longLongValue)
+    {
+        NSString *msg = [NSString stringWithFormat:@"Thank you for visiting %@! We look forward to seeing you again soon.", appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.store.name];
+        [NotificationUtils scheduleNotificationForInStorePay:1 message:msg];
         [appDelegate.globalObjectHolder.inStoreOrderDetails leaveGroup:nil];
+    }
+    else
+    {
+        NSString *msg = [NSString stringWithFormat:@"Thank you for visiting %@! Your Order is still open. If you would like to pay before leaving you can check out through the Savoir sidebar menu.", appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.store.name];
+        [NotificationUtils scheduleNotificationForInStorePay:2 message:msg];
+    }
 }
 
 - (void) startInStoreMode:(UIViewController *)source ForStore:(GTLStoreendpointStore *)store InBeaconMode:(Boolean)isInBeaconMode
 {
-    source = nil;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     if ([UtilCalls canStore:store fulfillOrderAt:[NSDate date]] == true)
     {
@@ -129,11 +136,21 @@
                          appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore = object.store;
                          if (isInBeaconMode == false)
                              [self displaySource:source Destination:pvc];
+                         else
+                             [NotificationUtils scheduleLocalNotificationWithString:msg At:[NSDate date]];
                      }
                      else
                      {
-                         NSString *msg = [NSString stringWithFormat:@"Welcome to %@.", appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore.name];
-                         [appDelegate.window makeToast:msg];
+                         if (appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore == nil)
+                         {
+                             NSString *msg = [NSString stringWithFormat:@"Welcome Back."];
+                             [appDelegate.window makeToast:msg];
+                         }
+                         else
+                         {
+                             NSString *msg = [NSString stringWithFormat:@"Welcome to %@.", appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore.name];
+                             [appDelegate.window makeToast:msg];
+                         }
                          
                          appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore = object.store;
                          if (isInBeaconMode == false)
@@ -149,7 +166,9 @@
                      }
                      else
                      {
+                         NSString *msg = [NSString stringWithFormat:@"Welcome to %@. Please let your server know you would like to pay with Savoir. Then sit back and have a great time!", object.store.name];
                          [appDelegate.globalObjectHolder.inStoreOrderDetails createGroup:nil];
+                         [NotificationUtils scheduleLocalNotificationWithString:msg At:[NSDate date]];
                      }
                  }
              }else{
