@@ -114,42 +114,12 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
-    
-    [self.navigationController setNavigationBarHidden:NO];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
-                                                  forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.barTintColor = [UIColor asaanBackgroundColor];
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
-    self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
-    
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
-    if (goh.inStoreOrderDetails == nil && goh.orderInProgress != nil)
-    {
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button setImage:[UIImage imageNamed:@"cart.png"] forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(showOrderSummaryPressed) forControlEvents:UIControlEventTouchUpInside];
-        [button setFrame:CGRectMake(0, 0, 25, 25)];
-        button.backgroundColor = [UIColor clearColor];
-        
-        //        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(3, 5, 50, 20)];
-        //        [label setFont:[UIFont fontWithName:@"Arial-BoldMT" size:13]];
-        //        [label setText:@"Order"];
-        //        label.textAlignment = UITextAlignmentCenter;
-        //        [label setTextColor:[UIColor whiteColor]];
-        //        [label setBackgroundColor:[UIColor clearColor]];
-        //        [button addSubview:label];
-        
-        UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:button];
-        self.navigationItem.rightBarButtonItem = item;
-    }
 }
 // As of iOS 8 Beta 5 you need to reload the table data on viewDidAppear.  YUK...
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self.tableView reloadData];
+//    [self.tableView reloadData];
 }
 
 - (void) showOrderSummaryPressed
@@ -993,11 +963,6 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     }
     else if ([[segue identifier] isEqualToString:@"segueMenuToOrderSummary"])
     {
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-        OnlineOrderDetails *orderInProgress = appDelegate.globalObjectHolder.orderInProgress;
-        orderInProgress.orderType = self.orderType;
-        orderInProgress.orderTime = self.orderTime;
-        orderInProgress.partySize = self.partySize;
     }
 }
 

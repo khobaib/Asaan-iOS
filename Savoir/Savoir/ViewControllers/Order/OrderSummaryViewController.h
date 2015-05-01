@@ -8,7 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "StripePay.h"
+#import "GTLStoreendpoint.h"
 
 @interface OrderSummaryViewController : UIViewController <StripeApplePayReceiver>
+@property (strong, nonatomic) GTLStoreendpointStore *selectedStore;
+@property (nonatomic) int orderType;
+@property (nonatomic) int partySize;
+@property (nonatomic) NSDate *orderTime;
 
 @end

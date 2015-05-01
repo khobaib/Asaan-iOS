@@ -8,7 +8,7 @@
 
 #import "OrderTimeTableViewController.h"
 #import "AppDelegate.h"
-#import "MenuTableViewController.h"
+#import "OrderSummaryViewController.h"
 #import "UtilCalls.h"
 
 @interface OrderTimeTableViewController ()
@@ -101,7 +101,7 @@
 
 -(NSDate *)getDateRoundedTo15Mins:(NSDate *)date
 {
-    NSDateComponents *time = [[NSCalendar currentCalendar] components:NSCalendarUnitHour | NSCalendarUnitMinute fromDate:date];
+    NSDateComponents *time = [[NSCalendar currentCalendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond fromDate:date];
     NSInteger minutes = [time minute];
     NSInteger newMinutes = minutes;
     if (0 < minutes && minutes <= 15)
@@ -125,14 +125,13 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
-    if ([[segue identifier] isEqualToString:@"segueStartOrderToMenu"])
+    if ([[segue identifier] isEqualToString:@"segueOrderTimeToOrder"])
     {
-        MenuTableViewController *controller = [segue destinationViewController];
+        OrderSummaryViewController *controller = [segue destinationViewController];
         [controller setSelectedStore:self.selectedStore];
         [controller setOrderType:self.orderType];
         [controller setPartySize:self.currPartySize];
         [controller setOrderTime:self.currOrderTime];
-        [controller setBMenuIsInOrderMode:YES];
     }
 }
 
