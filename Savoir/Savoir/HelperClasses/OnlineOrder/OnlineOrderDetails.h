@@ -20,4 +20,5 @@
 @property (nonatomic) int partySize;
 @property (strong, nonatomic) NSDate *orderTime;
 @property (strong, nonatomic) NSString *specialInstructions;
+@property (nonatomic) NSUInteger tipPercent;
 @end

@@ -423,6 +423,7 @@
 		D4BDBEFA1AD8D0F90014273B /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D41FF75D1AC3659A00395DE0 /* ParseFacebookUtilsV4.framework */; };
 		D4BDBEFB1AD8D22E0014273B /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4BDBEF71AD8CE590014273B /* Bolts.framework */; };
 		D4BDBF011AE35C590014273B /* GTLStoreendpointStoreOrderAndTeamDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = D4BDBF001AE35C590014273B /* GTLStoreendpointStoreOrderAndTeamDetails.m */; };
+		D4F58ACA1AF47D04001FD5D3 /* PayForOnlineOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F58AC91AF47D04001FD5D3 /* PayForOnlineOrderViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1213,6 +1214,8 @@
 		D4BDBF001AE35C590014273B /* GTLStoreendpointStoreOrderAndTeamDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreOrderAndTeamDetails.m; sourceTree = "<group>"; };
 		D4BDBF021AE5540F0014273B /* GroupSelectionReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupSelectionReceiver.h; sourceTree = "<group>"; };
 		D4F2759F1A0C021800CEC95A /* Savoir.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Savoir.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4F58AC81AF47D04001FD5D3 /* PayForOnlineOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayForOnlineOrderViewController.h; sourceTree = "<group>"; };
+		D4F58AC91AF47D04001FD5D3 /* PayForOnlineOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayForOnlineOrderViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2330,6 +2333,8 @@
 				D409D7FF1AA62E04008FADDF /* StripePay.h */,
 				D409D8001AA62E04008FADDF /* StripePay.m */,
 				D4BDBEFE1AE15B150014273B /* DiscountReceiver.h */,
+				D4F58AC81AF47D04001FD5D3 /* PayForOnlineOrderViewController.h */,
+				D4F58AC91AF47D04001FD5D3 /* PayForOnlineOrderViewController.m */,
 			);
 			path = Order;
 			sourceTree = "<group>";
@@ -3140,6 +3145,7 @@
 				D4195F571A92A69C00663149 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				D4195FA01A92A69C00663149 /* GTLUserendpointUserCard.m in Sources */,
 				D4195F981A92A69C00663149 /* GTLStoreendpointStoreWaitListQueueCollection.m in Sources */,
+				D4F58ACA1AF47D04001FD5D3 /* PayForOnlineOrderViewController.m in Sources */,
 				D4195ED21A92A69C00663149 /* DataLoadingOperation.m in Sources */,
 				D438AB961A9FA6AC0089E61A /* JSQMessagesCollectionView.m in Sources */,
 				D49FBA981AC613D600F55360 /* GTLStoreendpointClientVersionMatch.m in Sources */,

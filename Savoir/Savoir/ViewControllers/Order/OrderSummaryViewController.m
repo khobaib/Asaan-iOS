@@ -34,10 +34,12 @@
 #import "HTMLFaxOrder.h"
 #import "OrderDiscountViewController.h"
 #import "DiscountReceiver.h"
+#import "PayForOnlineOrderViewController.h"
 
 @interface OrderSummaryViewController () <UITableViewDataSource, UITableViewDelegate, DiscountReceiver>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) OnlineOrderDetails *orderInProgress;
+@property (strong, nonatomic) GTLStoreendpointPlaceOrderArguments *orderArguments;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnAdd;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnEdit;
 @property (strong, nonatomic) MenuTableViewController *itemInputController;
@@ -81,6 +83,8 @@
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     self.orderInProgress = appDelegate.globalObjectHolder.orderInProgress;
+    if (self.selectedStore == nil)
+        self.selectedStore = appDelegate.globalObjectHolder.orderInProgress.selectedStore;
     [self.tableView reloadData];
 }
 
@@ -94,130 +98,23 @@
 {
     return false;
 }
-
-- (IBAction)placeOrder:(id)sender
+- (IBAction)btnPayClicked:(id)sender
 {
     self.bInPlaceOrderMode = YES;
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-
+    
     if (self.orderInProgress == nil)
         return;
-    
-    if ([StripePay applePayEnabled])
-    {
-        if (self.stripePay.token == nil)
-        {
-            NSString *amountStr = [UtilCalls doubleAmountToString:[NSNumber numberWithDouble:[self finalAmount]]];
-            NSDecimalNumber *finalAmount = [NSDecimalNumber decimalNumberWithString:amountStr];
-            [self.stripePay beginApplePay:self Title:self.selectedStore.name Label:@"Order" AndAmount:finalAmount];
-            return;
-        }
-    }
-    else
-    {
-        if (appDelegate.globalObjectHolder.defaultUserCard == nil)
-        {
-            [self performSegueWithIdentifier:@"segueOrderSummaryToSelectPaymentMode" sender:self];
-            return;
-        }
-    }
     
     if (![self AreDeliveryRequirementsValid])
         return;
     
-    
-    GTLStoreendpointStoreOrder *order = [[GTLStoreendpointStoreOrder alloc]init];
-    
-    order.guestCount = [NSNumber numberWithInt:self.orderInProgress.partySize];  // intValue
-    order.orderMode = [NSNumber numberWithInt:self.orderInProgress.orderType];  // intValue
-    order.storeId = self.selectedStore.identifier;  // longLongValue
-    order.storeName = self.selectedStore.name;
-    order.subTotal = [UtilCalls doubleAmountToLong:[self subTotal]];
-    order.deliveryFee = [UtilCalls doubleAmountToLong:[self deliveryFee]];
-    order.serviceCharge = [UtilCalls doubleAmountToLong:[self gratuity]];
-    order.tax = [UtilCalls doubleAmountToLong:[self taxAmount]];
-    long long finalTotal = [UtilCalls doubleAmountToLong:[self finalAmount]].longLongValue;
-    order.finalTotal = [NSNumber numberWithLongLong:finalTotal];
-    
-    if ([self discountAmount] > 0)
-    {
-        order.discount = [UtilCalls doubleAmountToLong:[self discountAmount]];
-        order.discountDescription = self.orderInProgress.selectedDiscount.title;
-    }
-    
-    GTLStoreendpointPlaceOrderArguments *orderArguments = [[GTLStoreendpointPlaceOrderArguments alloc]init];
-    
-    if ([StripePay applePayEnabled] && self.stripePay.token != nil)
-        orderArguments.token = self.stripePay.token.tokenId;
-    else
-    {
-        orderArguments.userId = appDelegate.globalObjectHolder.defaultUserCard.userId;  // longLongValue
-        orderArguments.cardid = appDelegate.globalObjectHolder.defaultUserCard.cardId;
-        orderArguments.customerId = appDelegate.globalObjectHolder.defaultUserCard.providerCustomerId;
-    }
-    
-    NSString *strOrder = nil;
-    order.orderHTML = [HTMLFaxOrder buildHTMLOrder:self.orderInProgress gratuity:[self gratuity] discountTitle:self.orderInProgress.selectedDiscount.title discountAmount:[self discountAmount] subTotal:[self subTotal] deliveryFee:[self deliveryFee] taxAmount:[self taxAmount] finalAmount:[self finalAmount] orderEstTime:[self orderDateString]];
-    
-    if (self.selectedStore.providesPosIntegration.boolValue == NO)
-    {
-        strOrder = order.orderHTML;
-        order.orderDetails = [XMLPOSOrder buildPOSResponseXML:self.orderInProgress checkId:0 gratuity:[self gratuity] subTotal:[self subTotal] deliveryFee:[self deliveryFee] taxAmount:[self taxAmount] finalAmount:[self finalAmount] guestCount:order.guestCount.intValue tableNumber:0];
-    }
-    else
-        strOrder = [XMLPOSOrder buildPOSOrder:self.orderInProgress gratuity:[self gratuity]];
-    
-    orderArguments.strOrder = strOrder;
-    orderArguments.order = order;
-    
-    GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForPlaceOrderWithObject:orderArguments];
-    
-    NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
-    dic[USER_AUTH_TOKEN_HEADER_NAME]=[UtilCalls getAuthTokenForCurrentUser];
-    
-    [query setAdditionalHTTPHeaders:dic];
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
     if ([UtilCalls canStore:self.selectedStore fulfillOrderAt:self.orderInProgress.orderTime] == NO)
     {
         NSString *msg = [NSString stringWithFormat:@"%@ cannot accept any online orders at this time.", self.selectedStore.name];
-        [UIAlertView showWithTitle:@"Online Order Failure" message:msg cancelButtonTitle:@"Ok" otherButtonTitles:nil
-                          tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex)
-         {
-         }];
+        [[[UIAlertView alloc]initWithTitle:@"Online Order Failure" message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
     }
     else
-    {
-        __weak __typeof(self) weakSelf = self;
-        GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-        [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreOrder *object,NSError *error)
-        {
-            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-            
-            if(error == nil && object.identifier != nil && object.identifier.longLongValue != 0)
-            {
-                NSString *title = [NSString stringWithFormat:@"Your Order - %@", self.selectedStore.name];
-                NSString *msg = [NSString stringWithFormat:@"Thank you - your order has been placed. If you need to make changes please call %@ immediately at %@.", weakSelf.selectedStore.name, weakSelf.selectedStore.phone];
-                [appDelegate.globalObjectHolder removeOrderInProgress];
-                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:title message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-                [alert show];
-                NotificationUtils *notificationUtils = [[NotificationUtils alloc]init];
-                [notificationUtils scheduleNotificationWithOrder:object];
-                if (self.revealViewController != nil)
-                    [weakSelf performSegueWithIdentifier:@"SWOrderSummaryToStoreList" sender:weakSelf];
-                else
-                    [weakSelf performSegueWithIdentifier:@"segueUnwindOrderSummaryToStoreList" sender:weakSelf];
-            }
-            else
-            {
-                NSLog(@"%@",[error userInfo][@"error"]);
-                NSString *title = @"Something went wrong";
-                NSString *msg = [NSString stringWithFormat:@"We were unable to reach %@ and place your order. We're really sorry. Please call %@ directly at %@ to place your order.", weakSelf.selectedStore.name, weakSelf.selectedStore.name, weakSelf.selectedStore.phone];
-                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:title message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-                [alert show];
-            }
-        }];
-    }
+        [self performSegueWithIdentifier:@"segueOrderSummaryToPay" sender:self];
 }
 
 - (IBAction)cancelOrder:(id)sender
@@ -362,10 +259,6 @@
 
 - (double)taxAmount
 {
-//    NSUInteger taxPercentAmount = 0;
-//    for (OnlineOrderSelectedMenuItem *onlineOrderSelectedMenuItem in self.orderInProgress.selectedMenuItems)
-//        taxPercentAmount += onlineOrderSelectedMenuItem.amount * onlineOrderSelectedMenuItem.selectedItem.tax.longLongValue;
-//    return taxPercentAmount;
     if (self.orderInProgress.orderType == OrderTypeTableViewController.ORDERTYPE_CARRYOUT)
         return ([self subTotal] + [self gratuity])*self.selectedStore.taxPercent.longLongValue/10000.0;
     else
@@ -375,10 +268,9 @@
 - (double)gratuity
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    if (appDelegate.globalObjectHolder.currentUser.defaultTip.longValue == 0)
-        return [self subTotalNoDiscount] * 0.18;
-    else
-        return [self subTotalNoDiscount] * appDelegate.globalObjectHolder.currentUser.defaultTip.longValue/100;
+    NSInteger tipPercent = appDelegate.globalObjectHolder.orderInProgress.tipPercent;
+    
+    return [self subTotalNoDiscount] * tipPercent/100;
 }
 
 - (double)subTotal  // already * by 1000000
@@ -406,6 +298,10 @@
 {
     NSDate *currentTime = [NSDate date];
     NSDate *newTime = self.orderTime;
+    if (newTime == nil)
+        newTime = self.orderInProgress.orderTime;
+    if (newTime == nil)
+        newTime = currentTime;
     
     NSDate *minOrderTime = [[NSDate alloc] initWithTimeInterval:3600
                                                       sinceDate:currentTime];
@@ -677,41 +573,22 @@
         SelectAddressTableViewController *controller = [segue destinationViewController];
         [controller setSelectedStore:self.selectedStore];
     }
-    else if ([[segue identifier] isEqualToString:@"segueInstorePayToOrderDiscountViewController"])
+    else if ([[segue identifier] isEqualToString:@"segueOrderSummaryToAddDiscount"])
     {
         OrderDiscountViewController *controller = [segue destinationViewController];
         [controller setSelectedStore:self.selectedStore];
         [controller setReceiver:self];
     }
-}
-
-- (IBAction)unwindToOrderSummary:(UIStoryboardSegue *)unwindSegue
-{
-    UIViewController *cc = [unwindSegue sourceViewController];
-    
-    //segueunwindSelectPaymentToOrderSummary
-    if ([cc isKindOfClass:[SelectPaymentTableViewController class]])
+    else if ([[segue identifier] isEqualToString:@"segueOrderSummaryToPay"])
     {
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-        if(appDelegate.globalObjectHolder.defaultUserCard == nil)
-            return;
-        
-        if (self.bInPlaceOrderMode)
-        {
-            if (![self AreDeliveryRequirementsValid])
-                return;
-            [self placeOrder:self];
-        }
-    }
-    //segueunwindSelectAddressToOrderSummary
-    if ([cc isKindOfClass:[SelectAddressTableViewController class]])
-    {
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-        if(appDelegate.globalObjectHolder.defaultUserAddress == nil)
-            return;
-        
-        if (self.bInPlaceOrderMode)
-            [self placeOrder:self];
+        PayForOnlineOrderViewController *controller = [segue destinationViewController];
+        [controller setSelectedStore:self.selectedStore];
+        [controller setSubTotalNoDiscount:[self subTotalNoDiscount]];
+        [controller setDiscountAmount:[self discountAmount]];
+        if (self.orderInProgress.orderType == OrderTypeTableViewController.ORDERTYPE_DELIVERY)
+            [controller setDeliveryFee:[self deliveryFee]];
+        [controller setSubTotal:[self subTotal]];
+        [controller setDiscountTitle:self.orderInProgress.selectedDiscount.title];
     }
 }
 @end

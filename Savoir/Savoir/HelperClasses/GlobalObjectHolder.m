@@ -21,6 +21,12 @@
     
     _orderInProgress = [[OnlineOrderDetails alloc]init];
     _orderInProgress.selectedMenuItems = [[NSMutableArray alloc]init];
+
+    PFUser * user = [PFUser currentUser];
+    NSString *tipStr = user[@"tip"];
+    int tip = tipStr.intValue;
+    _orderInProgress.tipPercent = tip;
+    
     return _orderInProgress;
 }
 
