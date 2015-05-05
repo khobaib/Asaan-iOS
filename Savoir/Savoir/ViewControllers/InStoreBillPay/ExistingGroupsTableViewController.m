@@ -18,7 +18,6 @@
 
 @interface ExistingGroupsTableViewController () <InStoreOrderReceiver>
 @property (strong, nonatomic) GTLStoreendpointStoreTableGroupCollection *tableGroups;
-@property (nonatomic, strong) NSTimer *timer;
 @end
 
 @implementation ExistingGroupsTableViewController
@@ -36,6 +35,13 @@
         self.navigationItem.leftBarButtonItem = backButton;
     }
 
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    //    self.refreshControl.backgroundColor = [UIColor goldColor];
+    //    self.refreshControl.tintColor = [UIColor blackColor];
+    [self.refreshControl addTarget:self
+                            action:@selector(setupExistingGroupsData)
+                  forControlEvents:UIControlEventValueChanged];
+
     [self setupExistingGroupsData];
 }
 
@@ -48,9 +54,6 @@
     [super viewWillAppear:animated];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     appDelegate.topViewController = self;
-    
-    [self setupExistingGroupsData];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:35.0 target:self selector:@selector(setupExistingGroupsData) userInfo:nil repeats:YES];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -58,7 +61,6 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
     [super viewWillDisappear:animated];
-    [self.timer invalidate];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -68,27 +70,32 @@
 
 #pragma mark - InStoreOrderReceiver Delegate
 
-- (void)orderChanged
+- (void)orderChanged:(NSError *)error
 {
-    [self performSegueWithIdentifier:@"segueCreateOrJoinGroupAndShowOrder" sender:self];
+    [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+    if (!error)
+        [self performSegueWithIdentifier:@"segueCreateOrJoinGroupAndShowOrder" sender:self];
+    else
+    {
+        NSString *msg = [NSString stringWithFormat:@"Failed to obtain order information. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team. Error: %@", [error userInfo][@"error"]];
+        [[[UIAlertView alloc]initWithTitle:@"Error" message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+    }
 }
 
-- (void) tableGroupMemberChanged
+- (void) tableGroupMemberChanged:(NSError *)error
 {
     // Don't Care.
 }
 
-- (void) openGroupsChanged
+- (void) openGroupsChanged:(NSError *)error
 {
     // Don't Care.
 }
 
 - (void)setupExistingGroupsData
 {
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeIndeterminate;
-    hud.labelText = @"Please Wait";
-    hud.hidden = NO;
+    if (self.refreshControl.isRefreshing == false)
+        [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
     
     if (self)
     {
@@ -110,14 +117,20 @@
                  weakSelf.tableGroups = object;
                  [weakSelf.tableView reloadData];
              }else{
+                 NSString *msg = [NSString stringWithFormat:@"Failed to obtain information on existing groups and tables. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team. Error: %@", [error userInfo][@"error"]];
+                 [[[UIAlertView alloc]initWithTitle:@"Error" message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
                  NSLog(@"setupExistingGroupsData Error:%@",[error userInfo][@"error"]);
              }
-             hud.hidden = YES;
+             if (self.refreshControl.isRefreshing == true)
+                 [self.refreshControl endRefreshing];
+             else
+                 [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
          }];
     }
 }
 - (IBAction)createGroup:(id)sender
 {
+    [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     [appDelegate.globalObjectHolder.inStoreOrderDetails createGroup:self];
 }
@@ -135,18 +148,33 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    
-    if (self.tableGroups == nil)
+    // Display a message when the table is empty
+    if (self.tableGroups.items.count == 0)
+    {
+        UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+        
+        messageLabel.text = @"No groups are available. Please pull down to refresh or create a new group.";
+        messageLabel.textColor = [UIColor whiteColor];
+        messageLabel.numberOfLines = 0;
+        messageLabel.textAlignment = NSTextAlignmentCenter;
+        [messageLabel sizeToFit];
+        
+        self.tableView.backgroundView = messageLabel;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         return 0;
+    }
     else
+    {
+        self.tableView.backgroundView = nil;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         return self.tableGroups.items.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -193,6 +221,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     [appDelegate.globalObjectHolder.inStoreOrderDetails joinGroup:[self.tableGroups.items objectAtIndex:indexPath.row] receiver:self];
 }

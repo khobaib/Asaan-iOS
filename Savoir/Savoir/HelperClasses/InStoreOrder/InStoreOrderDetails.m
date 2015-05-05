@@ -42,7 +42,7 @@
              else
              {
                  self.teamAndOrderDetails = object;
-                 [receiver orderChanged];
+                 [receiver orderChanged:error];
              }
          }];
     }
@@ -71,7 +71,7 @@
              else
              {
                  [self clearCurrentOrder];
-                 [receiver orderChanged];
+                 [receiver orderChanged:error];
              }
          }];
     }
@@ -96,7 +96,7 @@
                  NSLog(@"queryForAddMemberToStoreTableGroup Error:%@",[error userInfo][@"error"]);
              {
                  self.teamAndOrderDetails = object;
-                 [receiver orderChanged];
+                 [receiver orderChanged:error];
              }
          }];
     }
@@ -122,7 +122,7 @@
              if(!error)
              {
                  weakSelf.openGroups = object;
-                 [receiver openGroupsChanged];
+                 [receiver openGroupsChanged:error];
              }else{
                  NSLog(@"getOpenGroups Error:%@",[error userInfo][@"error"]);
              }
@@ -151,7 +151,7 @@
              {
                  weakSelf.teamAndOrderDetails = object;
                  weakSelf.selectedDiscount = [XMLPOSOrder getDiscountFromXML:appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.orderDetails];
-                 [receiver orderChanged];
+                 [receiver orderChanged:error];
              }else{
                  NSLog(@"getStoreOrderDetails Error:%@",[error userInfo][@"error"]);
              }
@@ -178,7 +178,7 @@
          if(error)
              NSLog(@"queryForUpdateStoreTableGroupMemberWithObject Error:%@",[error userInfo][@"error"]);
          else
-             [receiver openGroupsChanged];
+             [receiver openGroupsChanged:error];
      }];
 }
 

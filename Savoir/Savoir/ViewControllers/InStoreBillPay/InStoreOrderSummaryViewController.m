@@ -20,9 +20,9 @@
 @interface InStoreOrderSummaryViewController () <InStoreOrderReceiver, UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) GTLStoreendpointStoreOrder *selectedOrder;
 @property (nonatomic, strong) NSMutableArray *finalItems;
-@property (nonatomic, strong) NSTimer *timer;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnPay;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 
 @end
 
@@ -40,6 +40,12 @@
         UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"UINavigationBarBackIndicatorGold"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed)];
         self.navigationItem.leftBarButtonItem = backButton;
     }
+    // Initialize the refresh control.
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    //    self.refreshControl.backgroundColor = [UIColor goldColor];
+    //    self.refreshControl.tintColor = [UIColor blackColor];
+    [self.refreshControl addTarget:self action:@selector(refreshOrderDetails) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:self.refreshControl];
 }
 
 - (void)backButtonPressed
@@ -67,58 +73,52 @@
     appDelegate.topViewController = self;
     
     [self refreshOrderDetails];
-    [self startTimer];
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------
-- (void)viewWillDisappear:(BOOL)animated
-//-------------------------------------------------------------------------------------------------------------------------------------------------
-{
-    [super viewWillDisappear:animated];
-    [self.timer invalidate];
-}
-
-- (void)startTimer
-{
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:35.0 target:self selector:@selector(refreshOrderDetails) userInfo:nil repeats:YES];
-}
+ }
 
 #pragma mark - InStoreOrderReceiver Delegate
 
-- (void)orderChanged
+- (void)orderChanged:(NSError *)error
 {
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    if (appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.memberMe == nil
-        || appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.orderStatus.intValue == 4 // Fully Paid
-        || appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.orderStatus.intValue == 5) // Paid and Closed
+    [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+    if (!error)
     {
-        [self.timer invalidate];
-        [UtilCalls handleClosedOrderFor:self SegueTo:@"segueUnwindInStoreOrderSummaryToStoreList"];
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+        if (appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.memberMe == nil
+            || appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.orderStatus.intValue == 4 // Fully Paid
+            || appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.orderStatus.intValue == 5) // Paid and Closed
+        {
+            [UtilCalls handleClosedOrderFor:self SegueTo:@"segueUnwindInStoreOrderSummaryToStoreList"];
+        }
+        self.finalItems = [XMLPOSOrder parseOrderDetails:appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.orderDetails];
+        if ([self subTotal] > 0)
+            self.btnPay.enabled = true;
+        else
+            self.btnPay.enabled = false;
+        
+        [self.tableView reloadData];
     }
-    self.finalItems = [XMLPOSOrder parseOrderDetails:appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.orderDetails];
-    if ([self subTotal] > 0)
-        self.btnPay.enabled = true;
     else
-        self.btnPay.enabled = false;
-    
-    [self.tableView reloadData];
+    {
+        NSString *msg = [NSString stringWithFormat:@"Failed to obtain order information. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team. Error: %@", [error userInfo][@"error"]];
+        [[[UIAlertView alloc]initWithTitle:@"Error" message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+    }
 }
 
-- (void) tableGroupMemberChanged
+- (void) tableGroupMemberChanged:(NSError *)error
 {
     [self refreshOrderDetails];
 }
 
-- (void) openGroupsChanged
+- (void) openGroupsChanged:(NSError *)error
 {
     // Don't Care.
 }
 
 - (void)refreshOrderDetails
 {
+    [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     [appDelegate.globalObjectHolder.inStoreOrderDetails getStoreOrderDetails:self];
-    NSLog(@"InStoreOrderSummaryTableViewController refreshOrderDetails");
 }
 
 - (void)didReceiveMemoryWarning {
@@ -138,14 +138,40 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    // Display a message when the table is empty
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.finalItems.count == 0)
+    {
+        UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+        
+        messageLabel.text = @"No order information is currently available. Please pull down to refresh.";
+        messageLabel.textColor = [UIColor whiteColor];
+        messageLabel.numberOfLines = 0;
+        messageLabel.textAlignment = NSTextAlignmentCenter;
+        [messageLabel sizeToFit];
+        
+        self.tableView.backgroundView = messageLabel;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         return 0;
+    }
     else
+    {
+        //        self.tableView.backgroundView = nil;
+        UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+        
+        messageLabel.text = @"Pull list down to refresh.";
+        messageLabel.textColor = [UIColor whiteColor];
+        messageLabel.numberOfLines = 0;
+        messageLabel.textAlignment = NSTextAlignmentCenter;
+        [messageLabel sizeToFit];
+        
+        self.tableView.backgroundView = messageLabel;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         return self.finalItems.count + 2; // Two extra rows for discount and subtotal
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

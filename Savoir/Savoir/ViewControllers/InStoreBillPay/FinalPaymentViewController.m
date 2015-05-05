@@ -31,12 +31,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *txtFinalAmount;
 @property (weak, nonatomic) IBOutlet UILabel *txtTipLabel;
 @property (weak, nonatomic) IBOutlet UIButton *btnPayNow;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 
 @property (nonatomic, strong) NSMutableArray *finalItems;
 
 @property (strong, nonatomic) StripePay *stripePay;
-
-@property (nonatomic, strong) NSTimer *timer;
 
 @end
 
@@ -50,10 +49,10 @@
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     
     int defaultTip = appDelegate.globalObjectHolder.currentUser.defaultTip.intValue;
-    if (defaultTip <= 18)
+    if (defaultTip <= 15)
     {
         self.tipSegmentController.selectedSegmentIndex = 0;
-        self.tipSlider.value = 18;
+        self.tipSlider.value = 15;
     }
     else if (defaultTip == 20)
     {
@@ -71,6 +70,14 @@
         self.tipSlider.value = defaultTip;
     }
     [self refreshOrderDetails];
+    // Initialize the refresh control.
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    //    self.refreshControl.backgroundColor = [UIColor goldColor];
+    //    self.refreshControl.tintColor = [UIColor blackColor];
+    [self.refreshControl addTarget:self
+                            action:@selector(refreshOrderDetails)
+                  forControlEvents:UIControlEventValueChanged];
+    [self.view addSubview:self.refreshControl];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -78,36 +85,30 @@
     [super viewWillAppear:animated];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     appDelegate.topViewController = self;
-    [self startTimer];
-}
-
-- (void)startTimer
-{
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:35.0 target:self selector:@selector(refreshOrderDetails) userInfo:nil repeats:YES];
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------
-- (void)viewWillDisappear:(BOOL)animated
-//-------------------------------------------------------------------------------------------------------------------------------------------------
-{
-    [super viewWillDisappear:animated];
-    [self.timer invalidate];
 }
 
 - (void)refreshOrderDetails
 {
+    if (self.refreshControl.isRefreshing == false)
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    else
+        [self.refreshControl endRefreshing];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     [appDelegate.globalObjectHolder.inStoreOrderDetails getStoreOrderDetails:self];
 }
 
-- (void)orderChanged
+- (void)orderChanged:(NSError *)error
 {
+    if (self.refreshControl.isRefreshing == true)
+        [self.refreshControl endRefreshing];
+    else
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     if (appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.memberMe == nil
         || appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.orderStatus.intValue == 4 // Fully Paid
         || appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.orderStatus.intValue == 5) // Paid and Closed
     {
-        [self.timer invalidate];
         [UtilCalls handleClosedOrderFor:self SegueTo:@"segueUnwindMemberPayToStoreList"];
     }
     
@@ -120,7 +121,7 @@
         self.btnPayNow.enabled = false;
 }
 
-- (void)openGroupsChanged
+- (void)openGroupsChanged:(NSError *)error
 {
     // Don't care
 }
@@ -306,7 +307,6 @@
 
 - (void)finishPayForMember
 {
-    [self.timer invalidate];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     
     GTLStoreendpointSplitOrderArguments *orderArguments = [[GTLStoreendpointSplitOrderArguments alloc]init];
@@ -338,6 +338,7 @@
     
     if (self)
     {
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         __weak __typeof(self) weakSelf = self;
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
         GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
@@ -350,14 +351,12 @@
         
         [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, id object,NSError *error)
          {
-             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-             hud.hidden = YES;
+             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
              if(!error)
              {
                  [UtilCalls handleClosedOrderFor:weakSelf SegueTo:@"segueUnwindMemberPayToStoreList"];
              }else{
                  NSLog(@"queryForPayForMemberWithObject Error:%@",[error userInfo][@"error"]);
-                 [self startTimer];
              }
          }];
     }

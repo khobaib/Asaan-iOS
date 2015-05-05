@@ -66,7 +66,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)orderChanged
+- (void)orderChanged:(NSError *)error
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     if (appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.memberMe == nil
@@ -79,7 +79,7 @@
     [self.tableView reloadData];
 }
 
-- (void)openGroupsChanged
+- (void)openGroupsChanged:(NSError *)error
 {
     [self.timer invalidate];
     [self performSegueWithIdentifier:@"segueSplitEvenlyToPay" sender:self];
@@ -96,7 +96,7 @@
     if (self.changedMembers != nil && self.changedMembers.count > 0)
         [appDelegate.globalObjectHolder.inStoreOrderDetails updateStoreTableGroupMembers:self.changedMembers receiver:self];
     else
-        [self openGroupsChanged];
+        [self openGroupsChanged:nil];
 }
 
 #pragma mark - Table view data source

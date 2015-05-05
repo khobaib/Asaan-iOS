@@ -14,6 +14,7 @@
 #import "UIImageView+WebCache.h"
 #import "SHSPhoneTextField.h"
 #import "AppDelegate.h"
+#import "Branch.h"
 
 @interface SignupProfileViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *txtLastName;
@@ -21,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet SHSPhoneTextField *txtPhone;
 @property (weak, nonatomic) IBOutlet UIImageView *imgPhoto;
 @property (weak, nonatomic) IBOutlet UIScrollView *signupProfileScrollView;
+@property (weak, nonatomic) IBOutlet UITextField *txtReferredBy;
 
 @end
 
@@ -52,6 +54,10 @@
     _txtPhone.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"(***) ***-****" attributes:@{NSForegroundColorAttributeName: color}];
     [_txtPhone.formatter setDefaultOutputPattern:@"(###) ###-####"];
     _txtPhone.formatter.prefix = @"+1 ";
+    
+    NSDictionary *sessionParams = [[Branch getInstance] getLatestReferringParams];
+    NSString *referrerName = [sessionParams valueForKey:@"REFERRER_NAME"];
+    self.txtReferredBy.text = referrerName;
     
     PFUser *user = [PFUser currentUser];
     if (user != nil){
@@ -148,6 +154,7 @@
         user[@"phone"]=_txtPhone.text;
         user[@"firstName"]=_txtFirstName.text;
         user[@"lastName"]=_txtLastName.text;
+        user[@"referredBy"]=_txtReferredBy.text;
         [user saveInBackground];
         
         [self performSegueWithIdentifier:@"segueSignupProfileToStoreList" sender:self];

@@ -22,14 +22,15 @@
 #import "AddToWaitListViewController.h"
 #import "Constants.h"
 #import "UIView+Superview.h"
+#import "MBProgressHUD.h"
 
 
 @interface StoreWaitListViewController ()<UITableViewDataSource, UITableViewDelegate, AddToWaitListReceiver>
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnEdit;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnAdd;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 
-@property (strong, nonatomic) NSTimer *timer;
 @property (nonatomic) BOOL isLoading;
 @property (nonatomic) int partiesOfSize2;
 @property (nonatomic) int partiesOfSize4;
@@ -67,6 +68,12 @@
 
     self.allQueueEntries = [[NSMutableArray alloc]init];
     [self loadWaitlistQueue];
+    // Initialize the refresh control.
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    //    self.refreshControl.backgroundColor = [UIColor goldColor];
+    //    self.refreshControl.tintColor = [UIColor blackColor];
+    [self.refreshControl addTarget:self action:@selector(loadWaitlistQueue) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:self.refreshControl];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -80,15 +87,6 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
     [super viewDidAppear:animated];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(loadWaitlistQueue) userInfo:nil repeats:YES];
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------
-- (void)viewWillDisappear:(BOOL)animated
-//-------------------------------------------------------------------------------------------------------------------------------------------------
-{
-    [super viewWillDisappear:animated];
-    [self.timer invalidate];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -105,7 +103,10 @@
     if (self.isLoading == NO)
     {
         self.isLoading = YES;
-        
+
+        if (self.refreshControl.isRefreshing == false)
+            [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+       
         __weak __typeof(self) weakSelf = self;
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
         GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
@@ -137,8 +138,14 @@
              }
              else
              {
+                 NSString *msg = [NSString stringWithFormat:@"Failed to obtain wait-list information. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team. Error: %@", [error userInfo][@"error"]];
+                 [[[UIAlertView alloc]initWithTitle:@"Error" message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
                  NSLog(@"queryForGetStoreWaitListQueueWithStoreId error:%ld, %@", (long)error.code, error.debugDescription);
              }
+             if (self.refreshControl.isRefreshing == true)
+                 [self.refreshControl endRefreshing];
+             else
+                 [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
              self.isLoading = NO;
          }];
     }
@@ -243,7 +250,7 @@
     NSCalendar *c = [NSCalendar currentCalendar];
     NSDate *d1 = [NSDate date];
     NSDate *d2 = [NSDate dateWithTimeIntervalSince1970:entry.createdDate.longLongValue/1000];//2012-06-22
-    NSDateComponents *components = [c components:NSHourCalendarUnit|NSMinuteCalendarUnit fromDate:d2 toDate:d1 options:0];
+    NSDateComponents *components = [c components:NSCalendarUnitHour|NSCalendarUnitMinute fromDate:d2 toDate:d1 options:0];
     NSInteger diff = components.hour*60 + components.minute;
     
     txtTime.text = [NSString stringWithFormat:@"%d-%d(%ld)", entry.estTimeMin.intValue, entry.estTimeMax.intValue, (long)diff];
@@ -386,6 +393,7 @@
 {
     self.isLoading = YES;
     __weak __typeof(self) weakSelf = self;
+    [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
     GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForSaveStoreWaitlistQueueEntryByStoreEmployeeWithObject:entry queuePosition:self.allQueueEntries.count+1];
@@ -413,6 +421,7 @@
          {
              NSLog(@"%@",[error userInfo][@"error"]);
          }
+         [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
          self.isLoading = NO;
      }];
 }

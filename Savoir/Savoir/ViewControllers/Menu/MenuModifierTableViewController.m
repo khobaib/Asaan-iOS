@@ -62,14 +62,14 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ModifierCell" forIndexPath:indexPath];
     cell.backgroundColor = [UIColor clearColor];
     
-    UILabel *txtTitle=(UILabel *)[cell viewWithTag:501];
+//    UILabel *txtTitle=(UILabel *)[cell viewWithTag:501];
     
     GTLStoreendpointStoreMenuItemModifier *modifier = [self.allModifiers objectAtIndex:indexPath.row];
     
     if (modifier.price.longLongValue > 0)
-        txtTitle.text = [[[modifier.shortDescription stringByAppendingString:@" ("] stringByAppendingString:[UtilCalls amountToString:modifier.price]] stringByAppendingString:@")"];
+        cell.textLabel.text = [[[modifier.shortDescription stringByAppendingString:@" ("] stringByAppendingString:[UtilCalls amountToString:modifier.price]] stringByAppendingString:@")"];
     else
-        txtTitle.text = modifier.shortDescription;
+        cell.textLabel.text = modifier.shortDescription;
     
     if (self.allSelections != nil)
     {

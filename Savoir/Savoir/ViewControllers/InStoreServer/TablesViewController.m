@@ -15,15 +15,16 @@
 #import "Extension.h"
 #import "ServerOrderSummaryViewController.h"
 #import "XMLPOSOrder.h"
+#import "UIColor+SavoirGoldColor.h"
 
 @interface TablesViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnEdit;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnAdd;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 
 @property (strong, nonatomic) GTLStoreendpointTableGroupsAndOrders *ordersAndGroups;
 @property (strong, nonatomic) NSMutableArray *orders;
-@property (nonatomic, strong) NSTimer *timer;
 
 @end
 
@@ -42,6 +43,12 @@
         self.navigationItem.leftBarButtonItem = backButton;
 
     }
+    // Initialize the refresh control.
+    self.refreshControl = [[UIRefreshControl alloc] init];
+//    self.refreshControl.backgroundColor = [UIColor goldColor];
+//    self.refreshControl.tintColor = [UIColor blackColor];
+    [self.refreshControl addTarget:self action:@selector(setupExistingTablesFromOrders) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:self.refreshControl];
 }
 
 - (void)backButtonPressed
@@ -54,7 +61,7 @@
     [super viewWillAppear:animated];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     appDelegate.topViewController = self;
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:35.0 target:self selector:@selector(setupExistingTablesFromOrders) userInfo:nil repeats:YES];
+    [self setupExistingTablesFromOrders];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -62,7 +69,7 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
     [super viewWillDisappear:animated];
-    [self.timer invalidate];
+//    [self.timer invalidate];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -89,13 +96,11 @@
 
 - (void)setupExistingTablesFromOrders
 {
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeIndeterminate;
-    hud.labelText = @"Please Wait";
-    hud.hidden = NO;
-    
     if (self)
     {
+        if (self.refreshControl.isRefreshing == false)
+            [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+
         __weak __typeof(self) weakSelf = self;
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
         GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
@@ -114,10 +119,17 @@
                  weakSelf.ordersAndGroups = object;
                  weakSelf.orders = [[NSMutableArray alloc]initWithArray:weakSelf.ordersAndGroups.orders];
                  [weakSelf.tableView reloadData];
-             }else{
+             }
+             else
+             {
+                 NSString *msg = [NSString stringWithFormat:@"Failed to setup tables and orders. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team. Error: %@", [error userInfo][@"error"]];
+                 [[[UIAlertView alloc]initWithTitle:@"Error" message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
                  NSLog(@"setupExistingTablesFromOrders Error:%@",[error userInfo][@"error"]);
              }
-             hud.hidden = YES;
+             if (self.refreshControl.isRefreshing == true)
+                 [self.refreshControl endRefreshing];
+             else
+                 [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
          }];
     }
 }
@@ -133,15 +145,41 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    // Display a message when the table is empty
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (self.orders == nil)
+    if (self.orders.count == 0)
+    {
+        UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+        
+        messageLabel.text = @"No table information is currently available. Please pull down to refresh.";
+        messageLabel.textColor = [UIColor whiteColor];
+        messageLabel.numberOfLines = 0;
+        messageLabel.textAlignment = NSTextAlignmentCenter;
+        [messageLabel sizeToFit];
+        
+        self.tableView.backgroundView = messageLabel;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         return 0;
+    }
     else
+    {
+        //        self.tableView.backgroundView = nil;
+        UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+        
+        messageLabel.text = @"Pull list down to refresh.";
+        messageLabel.textColor = [UIColor whiteColor];
+        messageLabel.numberOfLines = 0;
+        messageLabel.textAlignment = NSTextAlignmentCenter;
+        [messageLabel sizeToFit];
+        
+        self.tableView.backgroundView = messageLabel;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         return self.orders.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -250,6 +288,8 @@
              {
                  if(error)
                  {
+                     NSString *msg = [NSString stringWithFormat:@"Failed to remove order. Error: %@", [error userInfo][@"error"]];
+                     [[[UIAlertView alloc]initWithTitle:@"Order setup error" message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
                      NSLog(@"ServerOrderSummary: queryForUpdateOrderFromServerWithObject Error:%@",[error userInfo][@"error"]);
                  }
              }];
@@ -283,29 +323,21 @@
 #pragma mark === TableOrderReceiver ===
 #pragma mark -
 
-- (void) changedOrder:(GTLStoreendpointStoreOrder *)order
+- (void) changedOrder:(GTLStoreendpointStoreOrder *)order error:(NSError *)error
 {
-    long long changedOrderId = order.identifier.longLongValue;
-    if (changedOrderId == 0)
-        return;
-    [self setupExistingTablesFromOrders];
-//    int index = 0;
-//    Boolean bFound = false;
-//    for (GTLStoreendpointStoreOrder *oldOrder in self.orders)
-//    {
-//        if(changedOrderId == oldOrder.identifier.longLongValue)
-//        {
-//            if (order.orderStatus.intValue == 5) // Closed
-//                [self.orders removeObjectAtIndex:index];
-//            else
-//                [self.orders replaceObjectAtIndex:index withObject:order];
-//            bFound = true;
-//            break;
-//        }
-//    }
-//    if (bFound == false)
-//        [self.orders addObject:order];
-//    [self.tableView reloadData];
+    [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+    if (!error)
+    {
+        long long changedOrderId = order.identifier.longLongValue;
+        if (changedOrderId == 0)
+            return;
+        [self setupExistingTablesFromOrders];
+    }
+    else
+    {
+        NSString *msg = [NSString stringWithFormat:@"Failed to obtain order information. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team. Error: %@", [error userInfo][@"error"]];
+        [[[UIAlertView alloc]initWithTitle:@"Error" message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+    }
 }
 
 #pragma mark - Navigation

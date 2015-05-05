@@ -10,6 +10,6 @@
 
 @protocol InStoreOrderReceiver <NSObject>
 
-- (void) orderChanged;
-- (void) openGroupsChanged;
+- (void) orderChanged:(NSError *)error;
+- (void) openGroupsChanged:(NSError *)error;
 @end

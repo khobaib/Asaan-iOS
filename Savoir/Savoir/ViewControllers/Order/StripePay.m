@@ -9,8 +9,8 @@
 #import "StripePay.h"
 
 #import "Constants.h"
-#import "STPTestPaymentAuthorizationViewController.h"
-#import "PKPayment+STPTestKeys.h"
+//#import "STPTestPaymentAuthorizationViewController.h"
+//#import "PKPayment+STPTestKeys.h"
 
 @interface StripePay ()<PKPaymentAuthorizationViewControllerDelegate>
 
@@ -68,11 +68,7 @@ NSString *const AppleMerchantId = @"merchant.com.savoirexp.savoir"; // TODO: rep
 //        [paymentRequest setRequiredBillingAddressFields:PKAddressFieldPostalAddress];
 //        paymentRequest.shippingMethods = [self.shippingManager defaultShippingMethods];
         paymentRequest.paymentSummaryItems = [self summaryItemsWithTitle:title Label:label AndAmount:amount];
-#if DEBUG
-        STPTestPaymentAuthorizationViewController *auth = [[STPTestPaymentAuthorizationViewController alloc] initWithPaymentRequest:paymentRequest];
-#else
         PKPaymentAuthorizationViewController *auth = [[PKPaymentAuthorizationViewController alloc] initWithPaymentRequest:paymentRequest];
-#endif
         self.sender = sender;
         auth.delegate = self;
         [sender presentViewController:auth animated:YES completion:nil];

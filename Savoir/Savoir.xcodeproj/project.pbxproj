@@ -30,17 +30,6 @@
 		D406D8291AD57C450076D0B6 /* ServerOrderSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D8281AD57C450076D0B6 /* ServerOrderSummaryViewController.m */; };
 		D406D82C1AD57C980076D0B6 /* ServerSelectGroupTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D82B1AD57C980076D0B6 /* ServerSelectGroupTableViewController.m */; };
 		D406D8321AD5A10E0076D0B6 /* GTLStoreendpointTableGroupsAndOrders.m in Sources */ = {isa = PBXBuildFile; fileRef = D406D8311AD5A10E0076D0B6 /* GTLStoreendpointTableGroupsAndOrders.m */; };
-		D409D7C11AA60A94008FADDF /* ApplePayStubs.podspec in Resources */ = {isa = PBXBuildFile; fileRef = D409D7581AA60A93008FADDF /* ApplePayStubs.podspec */; };
-		D409D7C21AA60A94008FADDF /* PKPayment+STPTestKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = D409D75B1AA60A93008FADDF /* PKPayment+STPTestKeys.m */; };
-		D409D7C31AA60A94008FADDF /* STPTestAddressStore.m in Sources */ = {isa = PBXBuildFile; fileRef = D409D75D1AA60A93008FADDF /* STPTestAddressStore.m */; };
-		D409D7C41AA60A94008FADDF /* STPTestCardStore.m in Sources */ = {isa = PBXBuildFile; fileRef = D409D75F1AA60A93008FADDF /* STPTestCardStore.m */; };
-		D409D7C51AA60A94008FADDF /* STPTestDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D409D7621AA60A93008FADDF /* STPTestDataTableViewController.m */; };
-		D409D7C61AA60A94008FADDF /* STPTestPaymentAuthorizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D409D7641AA60A93008FADDF /* STPTestPaymentAuthorizationViewController.m */; };
-		D409D7C71AA60A94008FADDF /* STPTestPaymentSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D409D7661AA60A93008FADDF /* STPTestPaymentSummaryViewController.m */; };
-		D409D7C81AA60A94008FADDF /* STPTestPaymentSummaryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D409D7671AA60A93008FADDF /* STPTestPaymentSummaryViewController.xib */; };
-		D409D7C91AA60A94008FADDF /* STPTestShippingMethodStore.m in Sources */ = {isa = PBXBuildFile; fileRef = D409D7691AA60A93008FADDF /* STPTestShippingMethodStore.m */; };
-		D409D7CA1AA60A94008FADDF /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = D409D76A1AA60A93008FADDF /* LICENSE.txt */; };
-		D409D7CB1AA60A94008FADDF /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D409D76B1AA60A93008FADDF /* README.md */; };
 		D409D7CC1AA60A94008FADDF /* PTKAddressZip.m in Sources */ = {isa = PBXBuildFile; fileRef = D409D76E1AA60A93008FADDF /* PTKAddressZip.m */; };
 		D409D7CD1AA60A94008FADDF /* PTKCard.m in Sources */ = {isa = PBXBuildFile; fileRef = D409D7701AA60A93008FADDF /* PTKCard.m */; };
 		D409D7CE1AA60A94008FADDF /* PTKCardCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D409D7721AA60A93008FADDF /* PTKCardCVC.m */; };
@@ -329,6 +318,7 @@
 		D41FF7611AC3659A00395DE0 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D41FF75B1AC3659A00395DE0 /* ParseCrashReporting.framework */; };
 		D41FF7661AC3662300395DE0 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D41FF7651AC3662300395DE0 /* FBSDKLoginKit.framework */; };
 		D431B9321AEDE2AB005AEBE3 /* MenuWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D431B9311AEDE2AB005AEBE3 /* MenuWebViewController.m */; };
+		D43565F71AF92A3500F9A096 /* entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = D43565F61AF92A3500F9A096 /* entitlements.plist */; };
 		D438AB011A9F8BF60089E61A /* ChatView.m in Sources */ = {isa = PBXBuildFile; fileRef = D438AAF61A9F8BF60089E61A /* ChatView.m */; };
 		D438AB021A9F8BF60089E61A /* GroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = D438AAF71A9F8BF60089E61A /* GroupView.m */; };
 		D438AB031A9F8BF60089E61A /* camera.m in Sources */ = {isa = PBXBuildFile; fileRef = D438AAFC1A9F8BF60089E61A /* camera.m */; };
@@ -385,7 +375,6 @@
 		D445D71B1A96BA3800ED4919 /* PhoneSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D445D7141A96BA3800ED4919 /* PhoneSearchViewController.m */; };
 		D445D71C1A96BA3800ED4919 /* StoreWaitListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D445D7161A96BA3800ED4919 /* StoreWaitListViewController.m */; };
 		D445D7271A96BB9B00ED4919 /* Savoir.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D445D7201A96BB9B00ED4919 /* Savoir.xcdatamodeld */; };
-		D445D7291A96BB9B00ED4919 /* Savoir.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = D445D7231A96BB9B00ED4919 /* Savoir.entitlements */; };
 		D445D72F1A96BC5C00ED4919 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D445D72C1A96BC5C00ED4919 /* AppDelegate.m */; };
 		D445D7311A96BC5C00ED4919 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D445D72E1A96BC5C00ED4919 /* main.m */; };
 		D46DA7831A92B26B00020313 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D46DA7811A92B26B00020313 /* Info.plist */; };
@@ -424,6 +413,19 @@
 		D4BDBEFB1AD8D22E0014273B /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4BDBEF71AD8CE590014273B /* Bolts.framework */; };
 		D4BDBF011AE35C590014273B /* GTLStoreendpointStoreOrderAndTeamDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = D4BDBF001AE35C590014273B /* GTLStoreendpointStoreOrderAndTeamDetails.m */; };
 		D4F58ACA1AF47D04001FD5D3 /* PayForOnlineOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F58AC91AF47D04001FD5D3 /* PayForOnlineOrderViewController.m */; };
+		D4F58B161AF7C5A0001FD5D3 /* BNCEncodingUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F58AFC1AF7C5A0001FD5D3 /* BNCEncodingUtils.m */; };
+		D4F58B171AF7C5A0001FD5D3 /* BNCError.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F58AFE1AF7C5A0001FD5D3 /* BNCError.m */; };
+		D4F58B181AF7C5A0001FD5D3 /* BNCLinkCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F58B001AF7C5A0001FD5D3 /* BNCLinkCache.m */; };
+		D4F58B191AF7C5A0001FD5D3 /* BNCLinkData.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F58B021AF7C5A0001FD5D3 /* BNCLinkData.m */; };
+		D4F58B1A1AF7C5A0001FD5D3 /* BNCPreferenceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F58B041AF7C5A0001FD5D3 /* BNCPreferenceHelper.m */; };
+		D4F58B1B1AF7C5A0001FD5D3 /* BNCServerInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F58B061AF7C5A0001FD5D3 /* BNCServerInterface.m */; };
+		D4F58B1C1AF7C5A0001FD5D3 /* BNCServerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F58B081AF7C5A0001FD5D3 /* BNCServerRequest.m */; };
+		D4F58B1D1AF7C5A0001FD5D3 /* BNCServerRequestQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F58B0A1AF7C5A0001FD5D3 /* BNCServerRequestQueue.m */; };
+		D4F58B1E1AF7C5A0001FD5D3 /* BNCServerResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F58B0C1AF7C5A0001FD5D3 /* BNCServerResponse.m */; };
+		D4F58B1F1AF7C5A0001FD5D3 /* BNCSystemObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F58B0E1AF7C5A0001FD5D3 /* BNCSystemObserver.m */; };
+		D4F58B201AF7C5A0001FD5D3 /* Branch.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F58B111AF7C5A0001FD5D3 /* Branch.m */; };
+		D4F58B211AF7C5A0001FD5D3 /* BranchActivityItemProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F58B131AF7C5A0001FD5D3 /* BranchActivityItemProvider.m */; };
+		D4F58B221AF7C5A0001FD5D3 /* BranchServerInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F58B151AF7C5A0001FD5D3 /* BranchServerInterface.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -473,25 +475,6 @@
 		D406D8301AD5A10E0076D0B6 /* GTLStoreendpointTableGroupsAndOrders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointTableGroupsAndOrders.h; sourceTree = "<group>"; };
 		D406D8311AD5A10E0076D0B6 /* GTLStoreendpointTableGroupsAndOrders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointTableGroupsAndOrders.m; sourceTree = "<group>"; };
 		D406D8331AD830670076D0B6 /* TableOrderReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableOrderReceiver.h; sourceTree = "<group>"; };
-		D409D7581AA60A93008FADDF /* ApplePayStubs.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ApplePayStubs.podspec; sourceTree = "<group>"; };
-		D409D75A1AA60A93008FADDF /* PKPayment+STPTestKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PKPayment+STPTestKeys.h"; sourceTree = "<group>"; };
-		D409D75B1AA60A93008FADDF /* PKPayment+STPTestKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PKPayment+STPTestKeys.m"; sourceTree = "<group>"; };
-		D409D75C1AA60A93008FADDF /* STPTestAddressStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPTestAddressStore.h; sourceTree = "<group>"; };
-		D409D75D1AA60A93008FADDF /* STPTestAddressStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPTestAddressStore.m; sourceTree = "<group>"; };
-		D409D75E1AA60A93008FADDF /* STPTestCardStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPTestCardStore.h; sourceTree = "<group>"; };
-		D409D75F1AA60A93008FADDF /* STPTestCardStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPTestCardStore.m; sourceTree = "<group>"; };
-		D409D7601AA60A93008FADDF /* STPTestDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPTestDataStore.h; sourceTree = "<group>"; };
-		D409D7611AA60A93008FADDF /* STPTestDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPTestDataTableViewController.h; sourceTree = "<group>"; };
-		D409D7621AA60A93008FADDF /* STPTestDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPTestDataTableViewController.m; sourceTree = "<group>"; };
-		D409D7631AA60A93008FADDF /* STPTestPaymentAuthorizationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPTestPaymentAuthorizationViewController.h; sourceTree = "<group>"; };
-		D409D7641AA60A93008FADDF /* STPTestPaymentAuthorizationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPTestPaymentAuthorizationViewController.m; sourceTree = "<group>"; };
-		D409D7651AA60A93008FADDF /* STPTestPaymentSummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPTestPaymentSummaryViewController.h; sourceTree = "<group>"; };
-		D409D7661AA60A93008FADDF /* STPTestPaymentSummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPTestPaymentSummaryViewController.m; sourceTree = "<group>"; };
-		D409D7671AA60A93008FADDF /* STPTestPaymentSummaryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STPTestPaymentSummaryViewController.xib; sourceTree = "<group>"; };
-		D409D7681AA60A93008FADDF /* STPTestShippingMethodStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPTestShippingMethodStore.h; sourceTree = "<group>"; };
-		D409D7691AA60A93008FADDF /* STPTestShippingMethodStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPTestShippingMethodStore.m; sourceTree = "<group>"; };
-		D409D76A1AA60A93008FADDF /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
-		D409D76B1AA60A93008FADDF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D409D76D1AA60A93008FADDF /* PTKAddressZip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTKAddressZip.h; sourceTree = "<group>"; };
 		D409D76E1AA60A93008FADDF /* PTKAddressZip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTKAddressZip.m; sourceTree = "<group>"; };
 		D409D76F1AA60A93008FADDF /* PTKCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTKCard.h; sourceTree = "<group>"; };
@@ -1021,6 +1004,7 @@
 		D41FF7651AC3662300395DE0 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		D431B9301AEDE2AB005AEBE3 /* MenuWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuWebViewController.h; sourceTree = "<group>"; };
 		D431B9311AEDE2AB005AEBE3 /* MenuWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuWebViewController.m; sourceTree = "<group>"; };
+		D43565F61AF92A3500F9A096 /* entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = entitlements.plist; sourceTree = "<group>"; };
 		D438AAF61A9F8BF60089E61A /* ChatView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatView.m; sourceTree = "<group>"; };
 		D438AAF71A9F8BF60089E61A /* GroupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupView.m; sourceTree = "<group>"; };
 		D438AAF81A9F8BF60089E61A /* ChatView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatView.h; sourceTree = "<group>"; };
@@ -1146,7 +1130,6 @@
 		D445D7151A96BA3800ED4919 /* StoreWaitListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreWaitListViewController.h; sourceTree = "<group>"; };
 		D445D7161A96BA3800ED4919 /* StoreWaitListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreWaitListViewController.m; sourceTree = "<group>"; };
 		D445D7211A96BB9B00ED4919 /* AsaanImprovedUI.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AsaanImprovedUI.xcdatamodel; sourceTree = "<group>"; };
-		D445D7231A96BB9B00ED4919 /* Savoir.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Savoir.entitlements; sourceTree = "<group>"; };
 		D445D7241A96BB9B00ED4919 /* Savoir-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Savoir-Prefix.pch"; sourceTree = "<group>"; };
 		D445D72B1A96BC5C00ED4919 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D445D72C1A96BC5C00ED4919 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -1216,6 +1199,35 @@
 		D4F2759F1A0C021800CEC95A /* Savoir.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Savoir.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4F58AC81AF47D04001FD5D3 /* PayForOnlineOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayForOnlineOrderViewController.h; sourceTree = "<group>"; };
 		D4F58AC91AF47D04001FD5D3 /* PayForOnlineOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayForOnlineOrderViewController.m; sourceTree = "<group>"; };
+		D4F58ACB1AF7B757001FD5D3 /* Branch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Branch.framework; path = "Savoir/library/Branch-iOS-SDK/Branch.framework"; sourceTree = "<group>"; };
+		D4F58AFA1AF7C5A0001FD5D3 /* BNCConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNCConfig.h; sourceTree = "<group>"; };
+		D4F58AFB1AF7C5A0001FD5D3 /* BNCEncodingUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNCEncodingUtils.h; sourceTree = "<group>"; };
+		D4F58AFC1AF7C5A0001FD5D3 /* BNCEncodingUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNCEncodingUtils.m; sourceTree = "<group>"; };
+		D4F58AFD1AF7C5A0001FD5D3 /* BNCError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNCError.h; sourceTree = "<group>"; };
+		D4F58AFE1AF7C5A0001FD5D3 /* BNCError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNCError.m; sourceTree = "<group>"; };
+		D4F58AFF1AF7C5A0001FD5D3 /* BNCLinkCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNCLinkCache.h; sourceTree = "<group>"; };
+		D4F58B001AF7C5A0001FD5D3 /* BNCLinkCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNCLinkCache.m; sourceTree = "<group>"; };
+		D4F58B011AF7C5A0001FD5D3 /* BNCLinkData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNCLinkData.h; sourceTree = "<group>"; };
+		D4F58B021AF7C5A0001FD5D3 /* BNCLinkData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNCLinkData.m; sourceTree = "<group>"; };
+		D4F58B031AF7C5A0001FD5D3 /* BNCPreferenceHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNCPreferenceHelper.h; sourceTree = "<group>"; };
+		D4F58B041AF7C5A0001FD5D3 /* BNCPreferenceHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNCPreferenceHelper.m; sourceTree = "<group>"; };
+		D4F58B051AF7C5A0001FD5D3 /* BNCServerInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNCServerInterface.h; sourceTree = "<group>"; };
+		D4F58B061AF7C5A0001FD5D3 /* BNCServerInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNCServerInterface.m; sourceTree = "<group>"; };
+		D4F58B071AF7C5A0001FD5D3 /* BNCServerRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNCServerRequest.h; sourceTree = "<group>"; };
+		D4F58B081AF7C5A0001FD5D3 /* BNCServerRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNCServerRequest.m; sourceTree = "<group>"; };
+		D4F58B091AF7C5A0001FD5D3 /* BNCServerRequestQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNCServerRequestQueue.h; sourceTree = "<group>"; };
+		D4F58B0A1AF7C5A0001FD5D3 /* BNCServerRequestQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNCServerRequestQueue.m; sourceTree = "<group>"; };
+		D4F58B0B1AF7C5A0001FD5D3 /* BNCServerResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNCServerResponse.h; sourceTree = "<group>"; };
+		D4F58B0C1AF7C5A0001FD5D3 /* BNCServerResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNCServerResponse.m; sourceTree = "<group>"; };
+		D4F58B0D1AF7C5A0001FD5D3 /* BNCSystemObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNCSystemObserver.h; sourceTree = "<group>"; };
+		D4F58B0E1AF7C5A0001FD5D3 /* BNCSystemObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNCSystemObserver.m; sourceTree = "<group>"; };
+		D4F58B0F1AF7C5A0001FD5D3 /* Branch-SDK-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Branch-SDK-Prefix.pch"; sourceTree = "<group>"; };
+		D4F58B101AF7C5A0001FD5D3 /* Branch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Branch.h; sourceTree = "<group>"; };
+		D4F58B111AF7C5A0001FD5D3 /* Branch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Branch.m; sourceTree = "<group>"; };
+		D4F58B121AF7C5A0001FD5D3 /* BranchActivityItemProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BranchActivityItemProvider.h; sourceTree = "<group>"; };
+		D4F58B131AF7C5A0001FD5D3 /* BranchActivityItemProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BranchActivityItemProvider.m; sourceTree = "<group>"; };
+		D4F58B141AF7C5A0001FD5D3 /* BranchServerInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BranchServerInterface.h; sourceTree = "<group>"; };
+		D4F58B151AF7C5A0001FD5D3 /* BranchServerInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BranchServerInterface.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1335,45 +1347,10 @@
 		D409D7561AA60A93008FADDF /* Payments */ = {
 			isa = PBXGroup;
 			children = (
-				D409D7571AA60A93008FADDF /* ApplePayStubs-master */,
 				D409D76C1AA60A93008FADDF /* PaymentKit */,
 				D409D7971AA60A93008FADDF /* Stripe */,
 			);
 			path = Payments;
-			sourceTree = "<group>";
-		};
-		D409D7571AA60A93008FADDF /* ApplePayStubs-master */ = {
-			isa = PBXGroup;
-			children = (
-				D409D7581AA60A93008FADDF /* ApplePayStubs.podspec */,
-				D409D7591AA60A93008FADDF /* Classes */,
-				D409D76A1AA60A93008FADDF /* LICENSE.txt */,
-				D409D76B1AA60A93008FADDF /* README.md */,
-			);
-			path = "ApplePayStubs-master";
-			sourceTree = "<group>";
-		};
-		D409D7591AA60A93008FADDF /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				D409D75A1AA60A93008FADDF /* PKPayment+STPTestKeys.h */,
-				D409D75B1AA60A93008FADDF /* PKPayment+STPTestKeys.m */,
-				D409D75C1AA60A93008FADDF /* STPTestAddressStore.h */,
-				D409D75D1AA60A93008FADDF /* STPTestAddressStore.m */,
-				D409D75E1AA60A93008FADDF /* STPTestCardStore.h */,
-				D409D75F1AA60A93008FADDF /* STPTestCardStore.m */,
-				D409D7601AA60A93008FADDF /* STPTestDataStore.h */,
-				D409D7611AA60A93008FADDF /* STPTestDataTableViewController.h */,
-				D409D7621AA60A93008FADDF /* STPTestDataTableViewController.m */,
-				D409D7631AA60A93008FADDF /* STPTestPaymentAuthorizationViewController.h */,
-				D409D7641AA60A93008FADDF /* STPTestPaymentAuthorizationViewController.m */,
-				D409D7651AA60A93008FADDF /* STPTestPaymentSummaryViewController.h */,
-				D409D7661AA60A93008FADDF /* STPTestPaymentSummaryViewController.m */,
-				D409D7671AA60A93008FADDF /* STPTestPaymentSummaryViewController.xib */,
-				D409D7681AA60A93008FADDF /* STPTestShippingMethodStore.h */,
-				D409D7691AA60A93008FADDF /* STPTestShippingMethodStore.m */,
-			);
-			path = Classes;
 			sourceTree = "<group>";
 		};
 		D409D76C1AA60A93008FADDF /* PaymentKit */ = {
@@ -1528,7 +1505,6 @@
 				D4046FF31A97FD0A0070537B /* Base.lproj */,
 				D445D72A1A96BC5C00ED4919 /* Project Files */,
 				D445D7201A96BB9B00ED4919 /* Savoir.xcdatamodeld */,
-				D445D7231A96BB9B00ED4919 /* Savoir.entitlements */,
 				D445D7241A96BB9B00ED4919 /* Savoir-Prefix.pch */,
 				D4195BFE1A92A69B00663149 /* HelperClasses */,
 				D4195E2F1A92A69B00663149 /* ViewControllers */,
@@ -1687,6 +1663,7 @@
 		D4195C3F1A92A69B00663149 /* library */ = {
 			isa = PBXGroup;
 			children = (
+				D4F58AF81AF7C5A0001FD5D3 /* Branch-SDK */,
 				D49E95C21AF1D9190016EE2C /* Reachability */,
 				D49E95AC1AF069110016EE2C /* APTimeZones */,
 				D409D7561AA60A93008FADDF /* Payments */,
@@ -2601,6 +2578,7 @@
 				D445D72C1A96BC5C00ED4919 /* AppDelegate.m */,
 				D445D72D1A96BC5C00ED4919 /* Info.plist */,
 				D445D72E1A96BC5C00ED4919 /* main.m */,
+				D43565F61AF92A3500F9A096 /* entitlements.plist */,
 			);
 			path = "Project Files";
 			sourceTree = "<group>";
@@ -2662,9 +2640,54 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		D4F58AF81AF7C5A0001FD5D3 /* Branch-SDK */ = {
+			isa = PBXGroup;
+			children = (
+				D4F58AF91AF7C5A0001FD5D3 /* Branch-SDK */,
+			);
+			name = "Branch-SDK";
+			path = "Branch-iOS-SDK/Branch-SDK";
+			sourceTree = "<group>";
+		};
+		D4F58AF91AF7C5A0001FD5D3 /* Branch-SDK */ = {
+			isa = PBXGroup;
+			children = (
+				D4F58AFA1AF7C5A0001FD5D3 /* BNCConfig.h */,
+				D4F58AFB1AF7C5A0001FD5D3 /* BNCEncodingUtils.h */,
+				D4F58AFC1AF7C5A0001FD5D3 /* BNCEncodingUtils.m */,
+				D4F58AFD1AF7C5A0001FD5D3 /* BNCError.h */,
+				D4F58AFE1AF7C5A0001FD5D3 /* BNCError.m */,
+				D4F58AFF1AF7C5A0001FD5D3 /* BNCLinkCache.h */,
+				D4F58B001AF7C5A0001FD5D3 /* BNCLinkCache.m */,
+				D4F58B011AF7C5A0001FD5D3 /* BNCLinkData.h */,
+				D4F58B021AF7C5A0001FD5D3 /* BNCLinkData.m */,
+				D4F58B031AF7C5A0001FD5D3 /* BNCPreferenceHelper.h */,
+				D4F58B041AF7C5A0001FD5D3 /* BNCPreferenceHelper.m */,
+				D4F58B051AF7C5A0001FD5D3 /* BNCServerInterface.h */,
+				D4F58B061AF7C5A0001FD5D3 /* BNCServerInterface.m */,
+				D4F58B071AF7C5A0001FD5D3 /* BNCServerRequest.h */,
+				D4F58B081AF7C5A0001FD5D3 /* BNCServerRequest.m */,
+				D4F58B091AF7C5A0001FD5D3 /* BNCServerRequestQueue.h */,
+				D4F58B0A1AF7C5A0001FD5D3 /* BNCServerRequestQueue.m */,
+				D4F58B0B1AF7C5A0001FD5D3 /* BNCServerResponse.h */,
+				D4F58B0C1AF7C5A0001FD5D3 /* BNCServerResponse.m */,
+				D4F58B0D1AF7C5A0001FD5D3 /* BNCSystemObserver.h */,
+				D4F58B0E1AF7C5A0001FD5D3 /* BNCSystemObserver.m */,
+				D4F58B0F1AF7C5A0001FD5D3 /* Branch-SDK-Prefix.pch */,
+				D4F58B101AF7C5A0001FD5D3 /* Branch.h */,
+				D4F58B111AF7C5A0001FD5D3 /* Branch.m */,
+				D4F58B121AF7C5A0001FD5D3 /* BranchActivityItemProvider.h */,
+				D4F58B131AF7C5A0001FD5D3 /* BranchActivityItemProvider.m */,
+				D4F58B141AF7C5A0001FD5D3 /* BranchServerInterface.h */,
+				D4F58B151AF7C5A0001FD5D3 /* BranchServerInterface.m */,
+			);
+			path = "Branch-SDK";
+			sourceTree = "<group>";
+		};
 		EFEC7E676E0C2F9960DA289C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D4F58ACB1AF7B757001FD5D3 /* Branch.framework */,
 				D4B602EC1AEAEA7B0007BA41 /* Crashlytics.framework */,
 				D4721D381AEACE7600974271 /* CoreBluetooth.framework */,
 				D4BDBEF71AD8CE590014273B /* Bolts.framework */,
@@ -2801,7 +2824,6 @@
 				D409D7E51AA60A94008FADDF /* visa.png in Resources */,
 				D4195FA31A92A69C00663149 /* storeendpoint-v1-rpc.discovery in Resources */,
 				D409D7D51AA60A94008FADDF /* amex.png in Resources */,
-				D409D7C11AA60A94008FADDF /* ApplePayStubs.podspec in Resources */,
 				D438AB7B1A9FA6AC0089E61A /* JSQMessages.strings in Resources */,
 				D4195EBA1A92A69C00663149 /* tab_group@2x.png in Resources */,
 				D4195EB81A92A69C00663149 /* messages_blank@2x.png in Resources */,
@@ -2817,11 +2839,11 @@
 				D4195FA41A92A69C00663149 /* userendpoint-v1-rpc.discovery in Resources */,
 				D409D7DB1AA60A94008FADDF /* diners.png in Resources */,
 				D4195F5F1A92A69C00663149 /* main.js in Resources */,
-				D409D7CA1AA60A94008FADDF /* LICENSE.txt in Resources */,
 				D438AB9B1A9FA6AC0089E61A /* JSQMessagesCollectionViewCellOutgoing.xib in Resources */,
 				D438ABA51A9FA6AC0089E61A /* JSQMessagesTypingIndicatorFooterView.xib in Resources */,
 				D409D7E41AA60A94008FADDF /* placeholder@2x.png in Resources */,
 				D438AB7A1A9FA6AC0089E61A /* JSQMessagesAssets.bundle in Resources */,
+				D43565F71AF92A3500F9A096 /* entitlements.plist in Resources */,
 				D4195FA21A92A69C00663149 /* ServerApiGenerator.rtf in Resources */,
 				D409D7DA1AA60A94008FADDF /* cvc@2x.png in Resources */,
 				D4195EA71A92A69C00663149 /* drop_down.png in Resources */,
@@ -2832,7 +2854,6 @@
 				D409D7DF1AA60A94008FADDF /* jcb.png in Resources */,
 				D4046FF81A97FD0A0070537B /* LaunchScreen.xib in Resources */,
 				D46DA7831A92B26B00020313 /* Info.plist in Resources */,
-				D445D7291A96BB9B00ED4919 /* Savoir.entitlements in Resources */,
 				D4046FF91A97FD0A0070537B /* Main.storyboard in Resources */,
 				D406D8221AD485560076D0B6 /* InStoreServer.storyboard in Resources */,
 				D409D7E31AA60A94008FADDF /* placeholder.png in Resources */,
@@ -2853,7 +2874,6 @@
 				D409D7D61AA60A94008FADDF /* amex@2x.png in Resources */,
 				D4195EBC1A92A69C00663149 /* F_icon.svg.png in Resources */,
 				D4195EB71A92A69C00663149 /* chat_blank@2x.png in Resources */,
-				D409D7C81AA60A94008FADDF /* STPTestPaymentSummaryViewController.xib in Resources */,
 				D409D7E91AA60A94008FADDF /* textfield@2x.png in Resources */,
 				D438AB991A9FA6AC0089E61A /* JSQMessagesCollectionViewCellIncoming.xib in Resources */,
 			);
@@ -2902,6 +2922,7 @@
 				D4195F2A1A92A69C00663149 /* UIImageView+HighlightedWebCache.m in Sources */,
 				D4195FA91A92A69C00663149 /* LoginViewController.m in Sources */,
 				D4195F8C1A92A69C00663149 /* GTLStoreendpointStoreMenuItemModifier.m in Sources */,
+				D4F58B1E1AF7C5A0001FD5D3 /* BNCServerResponse.m in Sources */,
 				D4195F991A92A69C00663149 /* GTLStoreendpointStoreWaitlistSummary.m in Sources */,
 				D438AB011A9F8BF60089E61A /* ChatView.m in Sources */,
 				D4195F251A92A69C00663149 /* SDWebImageManager.m in Sources */,
@@ -2922,6 +2943,7 @@
 				D406D80D1AD2E3E80076D0B6 /* InStoreOrderDetails.m in Sources */,
 				D49E95B71AF069110016EE2C /* CLPlacemark+APTimeZones.m in Sources */,
 				D438AB911A9FA6AC0089E61A /* JSQMessagesAvatarImage.m in Sources */,
+				D4F58B221AF7C5A0001FD5D3 /* BranchServerInterface.m in Sources */,
 				D409D7CD1AA60A94008FADDF /* PTKCard.m in Sources */,
 				D409D7FA1AA60A94008FADDF /* StripeError.m in Sources */,
 				D438AB891A9FA6AC0089E61A /* JSQMessagesToolbarButtonFactory.m in Sources */,
@@ -2930,6 +2952,7 @@
 				D4195EA91A92A69C00663149 /* DropdownView.m in Sources */,
 				D4195ECA1A92A69C00663149 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				D4195FB21A92A69C00663149 /* MenuMWCaptionView.m in Sources */,
+				D4F58B171AF7C5A0001FD5D3 /* BNCError.m in Sources */,
 				D445D71B1A96BA3800ED4919 /* PhoneSearchViewController.m in Sources */,
 				D409D8041AA6D3D2008FADDF /* GTLStoreendpointPlaceOrderArguments.m in Sources */,
 				D40470031A9CE83B0070537B /* AddToWaitListViewController.m in Sources */,
@@ -2980,10 +3003,8 @@
 				D406D8091AD23CBC0076D0B6 /* FinalPaymentViewController.m in Sources */,
 				D4195F5C1A92A69C00663149 /* UIImageView+UIActivityIndicatorForSDWebImage.m in Sources */,
 				D4195F7C1A92A69C00663149 /* GTLStoreendpointStore.m in Sources */,
-				D409D7C51AA60A94008FADDF /* STPTestDataTableViewController.m in Sources */,
 				D4195F7E1A92A69C00663149 /* GTLStoreendpointStoreAndStatsCollection.m in Sources */,
 				D4195F911A92A69C00663149 /* GTLStoreendpointStoreOwner.m in Sources */,
-				D409D7C61AA60A94008FADDF /* STPTestPaymentAuthorizationViewController.m in Sources */,
 				D4195FAE1A92A69C00663149 /* StartupViewController.m in Sources */,
 				D4195F851A92A69C00663149 /* GTLStoreendpointStoreDiscountCollection.m in Sources */,
 				D409D7D01AA60A94008FADDF /* PTKCardNumber.m in Sources */,
@@ -3006,6 +3027,7 @@
 				D46E25881ACC3D9D00AEF681 /* GTLStoreendpointAsaanLongCollection.m in Sources */,
 				D409D7D21AA60A94008FADDF /* PTKTextField.m in Sources */,
 				D4195F651A92A69C00663149 /* GTLQueryUserendpoint.m in Sources */,
+				D4F58B181AF7C5A0001FD5D3 /* BNCLinkCache.m in Sources */,
 				D4195F0A1A92A69C00663149 /* MWTapDetectingImageView.m in Sources */,
 				D4195F5A1A92A69C00663149 /* SZTextView.m in Sources */,
 				D438AB7C1A9FA6AC0089E61A /* JSQSystemSoundPlayer+JSQMessages.m in Sources */,
@@ -3019,11 +3041,13 @@
 				D4195FA11A92A69C00663149 /* GTLUserendpointUserCardCollection.m in Sources */,
 				D4195FC41A92A69C00663149 /* OrderHistorySummaryTableViewController.m in Sources */,
 				D445D72F1A96BC5C00ED4919 /* AppDelegate.m in Sources */,
+				D4F58B1F1AF7C5A0001FD5D3 /* BNCSystemObserver.m in Sources */,
 				D4195ED01A92A69C00663149 /* UIWebView+AFNetworking.m in Sources */,
 				D4195F731A92A69C00663149 /* GTLStoreendpointItemReviewsArray.m in Sources */,
 				D438AB031A9F8BF60089E61A /* camera.m in Sources */,
 				D4195F8E1A92A69C00663149 /* GTLStoreendpointStoreMenuStats.m in Sources */,
 				D4195F641A92A69C00663149 /* GTLQueryStoreendpoint.m in Sources */,
+				D4F58B201AF7C5A0001FD5D3 /* Branch.m in Sources */,
 				D4195F291A92A69C00663149 /* UIImage+MultiFormat.m in Sources */,
 				D4195F0C1A92A69C00663149 /* MWZoomingScrollView.m in Sources */,
 				D4195ECF1A92A69C00663149 /* UIRefreshControl+AFNetworking.m in Sources */,
@@ -3072,15 +3096,12 @@
 				D409D7CF1AA60A94008FADDF /* PTKCardExpiry.m in Sources */,
 				D4195F151A92A69C00663149 /* PSTCollectionViewFlowLayout.m in Sources */,
 				D4195F901A92A69C00663149 /* GTLStoreendpointStoreOrderListAndCount.m in Sources */,
-				D409D7C21AA60A94008FADDF /* PKPayment+STPTestKeys.m in Sources */,
 				D409D7F01AA60A94008FADDF /* STPIOSCheckoutWebViewAdapter.m in Sources */,
 				D4195ECE1A92A69C00663149 /* UIProgressView+AFNetworking.m in Sources */,
 				D49E95B51AF069110016EE2C /* APTimeZones.m in Sources */,
-				D409D7CB1AA60A94008FADDF /* README.md in Sources */,
 				D49E95CC1AF1ECA80016EE2C /* NoNetworkViewController.m in Sources */,
 				D4195F931A92A69C00663149 /* GTLStoreendpointStorePOSConnection.m in Sources */,
 				D4195F171A92A69C00663149 /* PSTCollectionViewLayout.m in Sources */,
-				D409D7C91AA60A94008FADDF /* STPTestShippingMethodStore.m in Sources */,
 				D4195F101A92A69C00663149 /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */,
 				D4195F131A92A69C00663149 /* PSTCollectionViewController.m in Sources */,
 				D4195ED61A92A69C00663149 /* DACircularProgressView.m in Sources */,
@@ -3103,9 +3124,11 @@
 				D4195F721A92A69C00663149 /* GTLStoreendpointItemReview.m in Sources */,
 				D445D7181A96BA3800ED4919 /* StoreListTableViewCell.m in Sources */,
 				D438AB921A9FA6AC0089E61A /* JSQMessagesBubbleImage.m in Sources */,
+				D4F58B1A1AF7C5A0001FD5D3 /* BNCPreferenceHelper.m in Sources */,
 				D4195EC41A92A69C00663149 /* AFSecurityPolicy.m in Sources */,
 				D4195F751A92A69C00663149 /* GTLStoreendpointMenuItemAndStatsCollection.m in Sources */,
 				D4195F231A92A69C00663149 /* SDWebImageDownloader.m in Sources */,
+				D4F58B211AF7C5A0001FD5D3 /* BranchActivityItemProvider.m in Sources */,
 				D4195F881A92A69C00663149 /* GTLStoreendpointStoreMenuHierarchy.m in Sources */,
 				D4195F061A92A69C00663149 /* MWGridViewController.m in Sources */,
 				D49E95C11AF086F70016EE2C /* OrderTimeTableViewController.m in Sources */,
@@ -3124,17 +3147,17 @@
 				D409D7EF1AA60A94008FADDF /* STPColorUtils.m in Sources */,
 				D4195F1F1A92A69C00663149 /* NSData+ImageContentType.m in Sources */,
 				D4195F2F1A92A69C00663149 /* SHSPhoneNumberFormatter+UserConfig.m in Sources */,
+				D4F58B1C1AF7C5A0001FD5D3 /* BNCServerRequest.m in Sources */,
+				D4F58B191AF7C5A0001FD5D3 /* BNCLinkData.m in Sources */,
 				D409D7D31AA60A94008FADDF /* PTKUSAddressZip.m in Sources */,
 				D4195F6E1A92A69C00663149 /* GTLStoreendpointChatRoomsAndStoreChatMemberships.m in Sources */,
 				D4195FC91A92A69C00663149 /* StoreViewController.m in Sources */,
-				D409D7C71AA60A94008FADDF /* STPTestPaymentSummaryViewController.m in Sources */,
 				D4195F6B1A92A69C00663149 /* GTLStoreendpointChatMessage.m in Sources */,
 				D4195FBF1A92A69C00663149 /* ReserveTableViewController.m in Sources */,
 				D409D7F91AA60A94008FADDF /* STPToken.m in Sources */,
 				D47D3ABE1ABB41EC0099176A /* XMLPOSOrder.m in Sources */,
 				D4195F211A92A69C00663149 /* SDWebImageCompat.m in Sources */,
 				D4195FAA1A92A69C00663149 /* PaymentInfoViewController.m in Sources */,
-				D409D7C31AA60A94008FADDF /* STPTestAddressStore.m in Sources */,
 				D4195F1E1A92A69C00663149 /* SDSegmentedControl.m in Sources */,
 				D4195EC71A92A69C00663149 /* AFURLResponseSerialization.m in Sources */,
 				D4195ECB1A92A69C00663149 /* UIAlertView+AFNetworking.m in Sources */,
@@ -3167,18 +3190,20 @@
 				D4195FB81A92A69C00663149 /* OrderDiscountViewController.m in Sources */,
 				D438AB9A1A9FA6AC0089E61A /* JSQMessagesCollectionViewCellOutgoing.m in Sources */,
 				D438AB041A9F8BF60089E61A /* pushnotification.m in Sources */,
+				D4F58B161AF7C5A0001FD5D3 /* BNCEncodingUtils.m in Sources */,
 				D4195ED51A92A69C00663149 /* TDBadgedCell.m in Sources */,
 				D4721D231AEACD1A00974271 /* BeaconManager.m in Sources */,
 				D438ABA41A9FA6AC0089E61A /* JSQMessagesTypingIndicatorFooterView.m in Sources */,
 				D4195FC01A92A69C00663149 /* WaitListStatusTableViewController.m in Sources */,
 				D4195F5D1A92A69C00663149 /* UIAlertView+Blocks.m in Sources */,
-				D409D7C41AA60A94008FADDF /* STPTestCardStore.m in Sources */,
+				D4F58B1B1AF7C5A0001FD5D3 /* BNCServerInterface.m in Sources */,
 				D4195EAC1A92A69C00663149 /* MenuSegmentHolder.m in Sources */,
 				D406D82C1AD57C980076D0B6 /* ServerSelectGroupTableViewController.m in Sources */,
 				D438ABA21A9FA6AC0089E61A /* JSQMessagesToolbarContentView.m in Sources */,
 				D409D8011AA62E04008FADDF /* StripePay.m in Sources */,
 				D4195F6A1A92A69C00663149 /* GTLStoreendpointAsaanLongString.m in Sources */,
 				D445D7191A96BA3800ED4919 /* StoreListTableViewController.m in Sources */,
+				D4F58B1D1AF7C5A0001FD5D3 /* BNCServerRequestQueue.m in Sources */,
 				D406D8001AD23C250076D0B6 /* InstorePaymentOptionTableViewController.m in Sources */,
 				D4195F201A92A69C00663149 /* SDImageCache.m in Sources */,
 				D47D3ABB1ABB36810099176A /* HTMLFaxOrder.m in Sources */,
@@ -3393,6 +3418,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "$SRCROOT/Savoir/Project Files/entitlements.plist";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3400,6 +3426,7 @@
 					"$(PROJECT_DIR)",
 					"~/Documents/FacebookSDK",
 					/Users/niravsaraiya/Documents/FacebookSDK,
+					"$(PROJECT_DIR)/Savoir/library/Branch-iOS-SDK",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Savoir/Savoir-Prefix.pch";
@@ -3426,6 +3453,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "$SRCROOT/Savoir/Project Files/entitlements.plist";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3433,6 +3461,7 @@
 					"$(PROJECT_DIR)",
 					"~/Documents/FacebookSDK",
 					/Users/niravsaraiya/Documents/FacebookSDK,
+					"$(PROJECT_DIR)/Savoir/library/Branch-iOS-SDK",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Savoir/Savoir-Prefix.pch";

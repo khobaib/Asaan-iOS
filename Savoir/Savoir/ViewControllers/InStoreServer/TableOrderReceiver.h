@@ -11,6 +11,6 @@
 
 @protocol TableOrderReceiver <NSObject>
 
-- (void) changedOrder:(GTLStoreendpointStoreOrder *)order;
+- (void) changedOrder:(GTLStoreendpointStoreOrder *)order error:(NSError *)error;
 
 @end

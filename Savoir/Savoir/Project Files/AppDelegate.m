@@ -27,6 +27,7 @@
 
 #import <DBChooser/DBChooser.h>
 #import "NoNetworkViewController.h"
+#import "Branch.h"
 
 //NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsException";
 
@@ -38,45 +39,6 @@
 
 - (void)crash {
     [NSException raise:NSGenericException format:@"Everything is ok. This is just a test crash."];
-}
-
-/*
- * Called by Reachability whenever status changes.
- */
-- (void) reachabilityChanged:(NSNotification *)note
-{
-    Reachability* curReach = [note object];
-    NSParameterAssert([curReach isKindOfClass:[Reachability class]]);
-    
-    [self handleNetworkStatusChange:[curReach currentReachabilityStatus]];
-}
-
-- (void)handleNetworkStatusChange:(NetworkStatus)status
-{
-    if(status == NotReachable)
-    {
-        //        [[[UIAlertView alloc]initWithTitle:@"Network Unavailable!" message:@"Savoir requires network access to provide our services. Please try again when connectivity becomes available." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
-        self.currentNetworkStatus = status;
-        if (self.networkStatusAlertWindow == nil)
-        {
-            CGRect screenBounds = [[UIScreen mainScreen] bounds];
-            self.networkStatusAlertWindow = [[UIWindow alloc] initWithFrame:screenBounds];
-            self.networkStatusAlertWindow.windowLevel = UIWindowLevelAlert;
-        }
-        
-        NoNetworkViewController * myAlert = [[NoNetworkViewController alloc] init];
-        self.networkStatusAlertWindow.rootViewController = myAlert;
-        
-        [self.networkStatusAlertWindow makeKeyAndVisible];
-    }
-    else
-    {
-        self.currentNetworkStatus = status;
-        self.networkStatusAlertWindow.hidden = true;
-        [self globalObjectHolder];
-        if (self.storeListTableViewController != nil)
-            [self.storeListTableViewController viewWillAppear:YES];
-    }
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -118,7 +80,12 @@
 //                  clientKey:@"4cad0RAqv53bvlmgiTgnOScuJVk7IY28XeH4Mes5"];
     [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
     [Stripe setDefaultPublishableKey:StripePublishableKey];
-    
+
+    Branch *branch = [Branch getInstance];
+    [branch initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {
+        // params are the deep linked params associated with the link that the user clicked before showing up.
+        NSLog(@"deep link data: %@", [params description]);
+    }];
     //    [PFUser enableAutomaticUser];
     
     PFACL *defaultACL = [PFACL ACL];
@@ -198,45 +165,85 @@
     }
 //    [window addSubview:viewController.view];
 //    [window makeKeyAndVisible];
-
-//    [self performSelector:@selector(crash) withObject:nil afterDelay:10.0];
-    Reachability *reachability = [Reachability reachabilityForInternetConnection];
     /*
      Observe the kNetworkReachabilityChangedNotification. When that notification is posted, the method reachabilityChanged will be called.
      */
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
+    
     //Change the host name here to change the server you want to monitor.
-    NSString *remoteHostName = @"https://blissful-mantis-89513.appspot.com";
-    
-    self.hostReachability = [Reachability reachabilityWithHostName:remoteHostName];
+    self.hostReachability = [Reachability reachabilityWithHostName:@"www.apple.com"];
+    [self.hostReachability connectionRequired]; // this line was added, and apparently forces a connection requirement..
     [self.hostReachability startNotifier];
+    [self updateInterfaceWithReachability:self.hostReachability];
     
-    [self handleNetworkStatusChange:[reachability currentReachabilityStatus]];
+//    [self handleNetworkStatusChange:[reachability currentReachabilityStatus]];
     return YES;
 }
-//
-//- (BOOL)application:(UIApplication *)application
-//            openURL:(NSURL *)url
-//  sourceApplication:(NSString *)sourceApplication
-//         annotation:(id)annotation {
-//    
-//    if ([[DBChooser defaultChooser] handleOpenURL:url]) {
-//        // This was a Chooser response and handleOpenURL automatically ran the
-//        // completion block
-//        return YES;
-//    }
-//    
-//    return [FBAppCall handleOpenURL:url
-//                  sourceApplication:sourceApplication
-//                        withSession:[PFFacebookUtils session]];
-//}
+
+/*!
+ * Called by Reachability whenever status changes.
+ */
+- (void) reachabilityChanged:(NSNotification *)note
+{
+    Reachability* curReach = [note object];
+    NSParameterAssert([curReach isKindOfClass:[Reachability class]]);
+    [self updateInterfaceWithReachability:curReach];
+}
+
+
+- (void)updateInterfaceWithReachability:(Reachability *)reachability
+{
+    if (reachability == self.hostReachability)
+    {
+        NetworkStatus status = [reachability currentReachabilityStatus];
+//        BOOL connectionRequired = [reachability connectionRequired];
+        if(status == NotReachable)
+        {
+            //        [[[UIAlertView alloc]initWithTitle:@"Network Unavailable!" message:@"Savoir requires network access to provide our services. Please try again when connectivity becomes available." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+            if (self.networkStatusAlertWindow == nil)
+            {
+                CGRect screenBounds = [[UIScreen mainScreen] bounds];
+                self.networkStatusAlertWindow = [[UIWindow alloc] initWithFrame:screenBounds];
+                self.networkStatusAlertWindow.windowLevel = UIWindowLevelAlert;
+            }
+            
+            NoNetworkViewController * myAlert = [[NoNetworkViewController alloc] init];
+            self.networkStatusAlertWindow.rootViewController = myAlert;
+            
+            [self.networkStatusAlertWindow makeKeyAndVisible];
+        }
+        else
+        {
+            self.networkStatusAlertWindow.hidden = true;
+            [self globalObjectHolder];
+            if (self.storeListTableViewController != nil)
+                [self.storeListTableViewController viewWillAppear:YES];
+            
+//            if (connectionRequired)
+//            {
+//                NSString *msg = NSLocalizedString(@"Cellular data network is available.\nInternet traffic will be routed through it after a connection is established.", @"Reachability text if a connection is required");
+//            }
+//            else
+//            {
+//                NSString *msg = NSLocalizedString(@"Cellular data network is active.\nInternet traffic will be routed through it.", @"Reachability text if a connection is not required");
+//            }
+        }
+        self.currentNetworkStatus = status;
+    }
+}
+
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
-    if ([[DBChooser defaultChooser] handleOpenURL:url]) {
+    if ([[DBChooser defaultChooser] handleOpenURL:url])
+    {
         // This was a Chooser response and handleOpenURL automatically ran the
         // completion block
+        return YES;
+    }
+    if ([[Branch getInstance] handleDeepLink:url])
+    {
         return YES;
     }
     return [[FBSDKApplicationDelegate sharedInstance] application:application

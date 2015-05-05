@@ -17,14 +17,13 @@
 #import <ParseUI/ParseUI.h>
 #import "UtilCalls.h"
 #import "Constants.h"
+#import "InlineCalls.h"
 
 @interface OrderHistoryTableViewController ()<DataProviderDelegate>
 @property (nonatomic) int startPosition;
 @property (nonatomic) int maxResult;
-@property (nonatomic, strong) MBProgressHUD *hud;
 @property (nonatomic, strong) GTLStoreendpointStoreOrder *selectedOrder;
 
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
 @end
 
 @implementation OrderHistoryTableViewController
@@ -61,10 +60,7 @@
 
 - (void)setupOrderHistoryData {
     
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeIndeterminate;
-    hud.labelText = @"Please Wait";
-    hud.hidden = NO;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     if (self)
     {
@@ -95,10 +91,12 @@
                     [_dataProvider setInitialObjects:object.orders ForPage:1];
                  }
              }else{
+                 NSString *msg = [NSString stringWithFormat:@"Failed to obtain order history. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team. Error: %@", [error userInfo][@"error"]];
+                 [[[UIAlertView alloc]initWithTitle:@"Error" message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
                  NSLog(@"setupOrderHistoryData Error:%@",[error userInfo][@"error"]);
              }
              [weakSelf.tableView reloadData];
-             hud.hidden = YES;
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
          }];
     }
 }
@@ -125,7 +123,7 @@
 //        [self.tableView reloadRowsAtIndexPaths:indexPathsToReload withRowAnimation:UITableViewRowAnimationFade];
 //    }
     [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationFade];
-    [self.hud hide:YES];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
 
 - (DataLoadingOperation *) getDataLoadingOperationForPage:(NSUInteger)page indexes:(NSIndexSet *)indexes
@@ -144,7 +142,7 @@
 
 - (void)dataProvider:(DataProvider *)dataProvider willLoadDataAtIndexes:(NSIndexSet *)indexes
 {
-    [self.hud hide:NO];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -155,11 +153,31 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    // Display a message when the table is empty
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataProvider.dataObjects.count;
+    if (self.dataProvider.dataObjects.count == 0)
+    {
+        UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+        
+        messageLabel.text = @"No order history information is currently available.";
+        messageLabel.textColor = [UIColor whiteColor];
+        messageLabel.numberOfLines = 0;
+        messageLabel.textAlignment = NSTextAlignmentCenter;
+        [messageLabel sizeToFit];
+        
+        self.tableView.backgroundView = messageLabel;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        return 0;
+    }
+    else
+    {
+        self.tableView.backgroundView = nil;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        return self.dataProvider.dataObjects.count;
+    }
 }
 
 -(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -178,21 +196,25 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"OrderCell" forIndexPath:indexPath];
     cell.tag = indexPath.row;
     cell.backgroundColor = [UIColor clearColor];
-    UILabel *txtTitle=(UILabel *)[cell viewWithTag:501];
-    UILabel *txtSubtitle=(UILabel *)[cell viewWithTag:502];
-    txtTitle.text = nil;
-    txtSubtitle.text = nil;
     GTLStoreendpointStoreOrder *order = self.dataProvider.dataObjects[indexPath.row];
+    long row = (long)indexPath.row;
+    NSLog(@"Order at index: %ld", row);
     if (![order isKindOfClass:[NSNull class]])
     {
-        txtTitle.text = order.storeName;
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
         [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-        
         NSDate *date = [NSDate dateWithTimeIntervalSince1970:order.createdDate.longLongValue/1000];
         
-        txtSubtitle.text = [dateFormatter stringFromDate:date];
+        cell.textLabel.text = order.storeName;
+        cell.detailTextLabel.text = [dateFormatter stringFromDate:date];
+        
+        if (IsEmpty(cell.detailTextLabel.text))
+            NSLog(@"txtSubtitle.text = %@ for row = %ld", cell.detailTextLabel.text, row);
+    }
+    else
+    {
+        NSLog(@"Found nil order at index: %ld", row);
     }
     
     return cell;

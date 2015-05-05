@@ -16,6 +16,7 @@
 #import "UIAlertView+Blocks.h"
 #import "Constants.h"
 #import "StoreListTableViewController.h"
+#import "MBProgressHUD.h"
 
 @interface WaitListStatusTableViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *txtStatus;
@@ -23,7 +24,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *txtEstWaitTime;
 @property (weak, nonatomic) IBOutlet UILabel *txtMsg;
 @property (weak, nonatomic) IBOutlet UIButton *btnLeaveLine;
-@property (strong, nonatomic) NSTimer *timer;
 @property (strong, nonatomic) GTLStoreendpointStoreWaitListQueueAndPosition *queueEntry;
 
 @end
@@ -35,6 +35,11 @@
     [super viewDidLoad];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [self getStoreWaitStatus];
+    // Initialize the refresh control.
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    //    self.refreshControl.backgroundColor = [UIColor goldColor];
+    //    self.refreshControl.tintColor = [UIColor blackColor];
+    [self.refreshControl addTarget:self action:@selector(getStoreWaitStatus) forControlEvents:UIControlEventValueChanged];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -42,23 +47,6 @@
     
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     [appDelegate.notificationUtils getSlidingMenuBarButtonSetupWith:self];
-}
-//-------------------------------------------------------------------------------------------------------------------------------------------------
-- (void)viewDidAppear:(BOOL)animated
-//-------------------------------------------------------------------------------------------------------------------------------------------------
-{
-    [super viewDidAppear:animated];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(getStoreWaitStatus) userInfo:nil repeats:YES];
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------
-- (void)viewWillDisappear:(BOOL)animated
-//-------------------------------------------------------------------------------------------------------------------------------------------------
-{
-    [super viewWillAppear:animated];
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    appDelegate.topViewController = self;
-    [self.timer invalidate];
 }
 
 - (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -69,6 +57,8 @@
 - (void) getStoreWaitStatus
 {
     __weak __typeof(self) weakSelf = self;
+    if (self.refreshControl.isRefreshing == false)
+        [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
     GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetStoreWaitListQueueEntryForCurrentUser];
@@ -78,6 +68,10 @@
     [query setAdditionalHTTPHeaders:dic];
     [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreWaitListQueueAndPosition *object, NSError *error)
      {
+         if (self.refreshControl.isRefreshing == true)
+             [self.refreshControl endRefreshing];
+         else
+             [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
          weakSelf.queueEntry = object;
          weakSelf.tableView.tableHeaderView = [UtilCalls setupStaticHeaderViewForTable:self.tableView WithTitle:object.queueEntry.storeName AndSubTitle:@"Your Wait-list Status"];
          if (object.queueEntry == nil)
@@ -87,7 +81,8 @@
              weakSelf.txtEstWaitTime.text = nil;
              weakSelf.txtMsg.text = nil;
              weakSelf.btnLeaveLine.hidden = true;
-             
+             weakSelf.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+            
              return;
          }
          if (!error)
@@ -101,6 +96,7 @@
                  [weakSelf.txtStatus setAttributedText:attributedString];
                  weakSelf.txtPartiesBefore.text = [NSString stringWithFormat:@"Parties Ahead of You: %d", 0];
                  weakSelf.txtEstWaitTime.text = [NSString stringWithFormat:@"Estimated Wait Time: %d min", 0];
+                 weakSelf.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
                  return;
             }
              else if (object.queueEntry.status.intValue == WAITING)
@@ -122,6 +118,7 @@
                  [weakSelf.txtStatus setAttributedText:attributedString];
                  weakSelf.txtPartiesBefore.text = [NSString stringWithFormat:@"Parties Ahead of You: %d", 0];
                  weakSelf.txtEstWaitTime.text = [NSString stringWithFormat:@"Estimated Wait Time: %d min", 0];
+                 weakSelf.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
                  return;
              }
              
@@ -129,12 +126,17 @@
              NSCalendar *c = [NSCalendar currentCalendar];
              NSDate *d1 = [NSDate date];
              NSDate *d2 = [NSDate dateWithTimeIntervalSince1970:object.queueEntry.createdDate.longLongValue/1000];//2012-06-22
-             NSDateComponents *components = [c components:NSHourCalendarUnit|NSMinuteCalendarUnit fromDate:d2 toDate:d1 options:0];
+             NSDateComponents *components = [c components:NSCalendarUnitHour|NSCalendarUnitMinute fromDate:d2 toDate:d1 options:0];
              NSInteger diff = components.hour*60 + components.minute;
              weakSelf.txtEstWaitTime.text = [NSString stringWithFormat:@"Elapsed Time: %ld min (%d - %d)", (long)diff, (object.queueEntry.estTimeMin.intValue), (object.queueEntry.estTimeMax.intValue)];
+             weakSelf.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
          }
          else
+         {
+             NSString *msg = [NSString stringWithFormat:@"Failed to setup waitlist entry. Please retry in a few minutes or call the restaurant directly. If this error persists please contact Savoir Customer Assistance team. Error: %@", [error userInfo][@"error"]];
+             [[[UIAlertView alloc]initWithTitle:@"Error" message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
              NSLog(@"Savoir Server Call Failed: queryForGetStoreWaitListQueueEntryForCurrentUser - error:%@", error.userInfo);
+         }
      }];
     
 }

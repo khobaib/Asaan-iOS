@@ -87,10 +87,7 @@
 
 - (void) getOrderReview
 {
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeIndeterminate;
-    hud.labelText = @"Please Wait";
-    hud.hidden = NO;
+    [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
     if (self)
     {
         __weak __typeof(self) weakSelf = self;
@@ -121,7 +118,7 @@
              }else{
                  NSLog(@"getOrderReview Error:%@",[error userInfo][@"error"]);
              }
-             hud.hidden = YES;
+             [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
          }];
     }
 }

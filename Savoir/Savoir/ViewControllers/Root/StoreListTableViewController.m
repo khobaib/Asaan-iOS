@@ -71,6 +71,14 @@
 #pragma mark - View Life-cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self startStandardUpdates];
+    // Initialize the refresh control.
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    //    self.refreshControl.backgroundColor = [UIColor goldColor];
+    //    self.refreshControl.tintColor = [UIColor blackColor];
+    [self.refreshControl addTarget:self action:@selector(startStandardUpdates) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:self.refreshControl];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -153,8 +161,6 @@
     }
     else
         self.navigationItem.rightBarButtonItem = nil;
-    
-    [self startStandardUpdates];
 }
 
 - (Boolean) isVersionSupported
@@ -185,10 +191,8 @@
 
 - (void)setupDatastore
 {
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeIndeterminate;
-    hud.labelText = @"Please Wait";
-    hud.hidden = NO;
+    if (self.refreshControl.isRefreshing == false)
+        [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
     if (self)
     {
         __weak __typeof(self) weakSelf = self;
@@ -210,8 +214,11 @@
                  _dataProvider.automaticPreloadMargin = FluentPagingTablePreloadMargin;
                  [_dataProvider setInitialObjects:object.storeAndStatsList ForPage:1];
                  [weakSelf.tableView reloadData];
-                 hud.hidden = YES;
              }
+             if (self.refreshControl.isRefreshing == true)
+                 [self.refreshControl endRefreshing];
+             else
+                 [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
          }];
     }
 }
@@ -227,7 +234,8 @@
 }
 
 - (void)dataProvider:(DataProvider *)dataProvider willLoadDataAtIndexes:(NSIndexSet *)indexes {
-    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    if (self.refreshControl.isRefreshing == false)
+        [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
 }
 
 #pragma mark - UITableViewDataSource
@@ -238,7 +246,12 @@
 -(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if([indexPath row] == ((NSIndexPath*)[[tableView indexPathsForVisibleRows] lastObject]).row)
-        [self.hud hide:YES];
+    {
+        if (self.refreshControl.isRefreshing == true)
+            [self.refreshControl endRefreshing];
+        else
+            [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -479,6 +492,7 @@
     dic[USER_AUTH_TOKEN_HEADER_NAME] = [UtilCalls getAuthTokenForCurrentUser];
     [query setAdditionalHTTPHeaders:dic];
     
+    [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
     [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointChatRoom *object,NSError *error)
      {
          if (!error)
@@ -487,12 +501,11 @@
              [newRoomArray addObject:object];
              usersRoomsAndStores.chatRooms = newRoomArray;
              ChatView *chatView = [[ChatView alloc] initWith:object.identifier.longLongValue isStore:false currentStoreId:self.selectedStore.store.identifier.longLongValue];
-//             chatView.hidesBottomBarWhenPushed = YES;
              [weakSelf.navigationController pushViewController:chatView animated:YES];
-             return;
          }
          else
              NSLog(@"queryForSaveChatRoomWithObject error:%ld, %@", (long)error.code, error.debugDescription);
+         [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
      }];
     
 }

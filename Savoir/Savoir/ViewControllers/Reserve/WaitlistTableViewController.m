@@ -15,6 +15,7 @@
 #import "GTLStoreendpoint.h"
 #import "InlineCalls.h"
 #import "Constants.h"
+#import "MBProgressHUD.h"
 
 @interface WaitlistTableViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *lbl1_2;
@@ -53,6 +54,12 @@
 
     self.minPartySize = self.currPartySize = 1;
     self.partySize.text = [NSString stringWithFormat:@"%d", self.currPartySize];
+    // Initialize the refresh control.
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    //    self.refreshControl.backgroundColor = [UIColor goldColor];
+    //    self.refreshControl.tintColor = [UIColor blackColor];
+    [self.refreshControl addTarget:self action:@selector(getStoreWaitTimes) forControlEvents:UIControlEventValueChanged];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -100,6 +107,8 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
     __weak __typeof(self) weakSelf = self;
+    if (self.refreshControl.isRefreshing == false)
+        [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
     GTLQueryStoreendpoint *query = [GTLQueryStoreendpoint queryForGetStoreWaitListQueueWithStoreId:self.selectedStore.identifier.longLongValue];
@@ -109,6 +118,10 @@
     
     [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreWaitListQueueCollection *object,NSError *error)
      {
+         if (self.refreshControl.isRefreshing == true)
+             [self.refreshControl endRefreshing];
+         else
+             [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
          if (!error)
          {
              int partiesOfSize2 = 0;
@@ -149,6 +162,8 @@
          }
          else
          {
+             NSString *msg = [NSString stringWithFormat:@"Failed to get waitlist entries. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team. Error: %@", [error userInfo][@"error"]];
+             [[[UIAlertView alloc]initWithTitle:@"Error" message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
              NSLog(@"queryForGetStoreWaitListQueueWithStoreId error:%ld, %@", (long)error.code, error.debugDescription);
          }
      }];
@@ -170,6 +185,7 @@
 - (IBAction)getInLine:(id)sender
 {
     // Create a new Wait list queue entry for this user and store
+    [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
     GTLStoreendpointStoreWaitListQueue *newEntry = [[GTLStoreendpointStoreWaitListQueue alloc]init];
     newEntry.storeId = [NSNumber numberWithLongLong:self.selectedStore.identifier.longLongValue];
     newEntry.storeName = self.selectedStore.name;
@@ -190,21 +206,23 @@
     
     [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreWaitListQueue *queueEntry,NSError *error)
      {
-         if (!error && queueEntry != nil && queueEntry.identifier > 0)
-         {
-             NSString *title = [NSString stringWithFormat:@"Your Waitlist Entry at %@", weakSelf.selectedStore.name];
-             NSString *msg = [NSString stringWithFormat:@"Thank you - your wait list request has been sent. If you need to make changes please call %@ immediately at %@.", weakSelf.selectedStore.name, weakSelf.selectedStore.phone];
-             UIAlertView *alert=[[UIAlertView alloc]initWithTitle:title message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-             [alert show];
-             [weakSelf performSegueWithIdentifier:@"segueUnwindWaitlistToStoreList" sender:weakSelf];
-         }
-         else
+         [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+         if (error)
          {
              NSLog(@"%@",[error userInfo][@"error"]);
              NSString *title = @"Something went wrong";
              NSString *msg = [NSString stringWithFormat:@"We were unable to reach %@ and place you on their wait list. We're really sorry. Please call %@ directly at %@.", weakSelf.selectedStore.name, weakSelf.selectedStore.name, weakSelf.selectedStore.phone];
              UIAlertView *alert=[[UIAlertView alloc]initWithTitle:title message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
              [alert show];
+             return;
+         }
+         if (queueEntry != nil && queueEntry.identifier > 0)
+         {
+             NSString *title = [NSString stringWithFormat:@"Your Waitlist Entry at %@", weakSelf.selectedStore.name];
+             NSString *msg = [NSString stringWithFormat:@"Thank you - your wait list request has been sent. If you need to make changes please call %@ immediately at %@.", weakSelf.selectedStore.name, weakSelf.selectedStore.phone];
+             UIAlertView *alert=[[UIAlertView alloc]initWithTitle:title message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+             [alert show];
+             [weakSelf performSegueWithIdentifier:@"segueUnwindWaitlistToStoreList" sender:weakSelf];
          }
      }];
 }

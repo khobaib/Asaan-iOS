@@ -11,6 +11,6 @@
 
 @protocol GroupSelectionReceiver <NSObject>
 
-- (void) changedGroupSelection:(GTLStoreendpointStoreTableGroup *)tableGroup;
+- (void) changedGroupSelection:(GTLStoreendpointStoreTableGroup *)tableGroup error:(NSError *)error;
 
 @end

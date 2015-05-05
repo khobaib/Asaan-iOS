@@ -33,6 +33,20 @@
         self.navigationItem.leftBarButtonItem = nil;
     else
         [appDelegate.notificationUtils getSlidingMenuBarButtonSetupWith:self];
+    [self refreshOpenGroups];
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self
+                            action:@selector(refreshOpenGroups)
+                  forControlEvents:UIControlEventValueChanged];
+//    [self.tableView addSubview:self.refreshControl];
+}
+
+- (void)refreshOpenGroups
+{
+    if (self.refreshControl.isRefreshing == false)
+        [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     [appDelegate.globalObjectHolder.inStoreOrderDetails getOpenGroups:self];
 }
 
@@ -48,17 +62,29 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void) orderChanged
+- (void) orderChanged:(NSError *)error
 {
     // Don't care
 }
-- (void) tableGroupMemberChanged
+- (void) tableGroupMemberChanged:(NSError *)error
 {
     // Don't care
 }
-- (void) openGroupsChanged
+- (void) openGroupsChanged:(NSError *)error
 {
-    [self.tableView reloadData];
+    if (self.refreshControl.isRefreshing == true)
+        [self.refreshControl endRefreshing];
+    else
+        [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+    
+    if (error)
+    {
+        NSString *msg = [NSString stringWithFormat:@"Failed to get available groups. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team. Error: %@", [error userInfo][@"error"]];
+        [[[UIAlertView alloc]initWithTitle:@"Error" message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+        NSLog(@"Server Select Group Error:%@",[error userInfo][@"error"]);
+    }
+    else
+        [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -74,8 +100,37 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
-    return 1;
+    // Display a message when the table is empty
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    if (appDelegate.globalObjectHolder.inStoreOrderDetails.openGroups == nil)
+    {
+        UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+        
+        messageLabel.text = @"No open groups are currently available. Please pull down to refresh.";
+        messageLabel.textColor = [UIColor whiteColor];
+        messageLabel.numberOfLines = 0;
+        messageLabel.textAlignment = NSTextAlignmentCenter;
+        [messageLabel sizeToFit];
+        
+        self.tableView.backgroundView = messageLabel;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        return 0;
+    }
+    else
+    {
+        //        self.tableView.backgroundView = nil;
+        UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+        
+        messageLabel.text = @"Pull list down to refresh.";
+        messageLabel.textColor = [UIColor whiteColor];
+        messageLabel.numberOfLines = 0;
+        messageLabel.textAlignment = NSTextAlignmentCenter;
+        [messageLabel sizeToFit];
+        
+        self.tableView.backgroundView = messageLabel;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        return 1;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -135,15 +190,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeIndeterminate;
-    hud.labelText = @"Please Wait";
-    hud.hidden = NO;
-    
     GTLStoreendpointStoreTableGroup *group = [appDelegate.globalObjectHolder.inStoreOrderDetails.openGroups.items objectAtIndex:indexPath.row];
     
     self.selectedOrder.storeTableGroupId = group.identifier;
-    [self.receiver changedGroupSelection:group];
+    [self.receiver changedGroupSelection:group error:nil];
     
     [self performSegueWithIdentifier:@"segueUnwindSelectGroupToOrderSummary" sender:self];
 }

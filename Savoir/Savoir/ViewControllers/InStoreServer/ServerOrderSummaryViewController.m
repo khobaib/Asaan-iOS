@@ -95,9 +95,18 @@
 #pragma mark === TableOrderReceiver ===
 #pragma mark -
 
-- (void) changedGroupSelection:(GTLStoreendpointStoreTableGroup *)tableGroup
+- (void) changedGroupSelection:(GTLStoreendpointStoreTableGroup *)tableGroup error:(NSError *)error
 {
-    self.selectedTableGroup = tableGroup;
+    [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+    if (!error)
+    {
+        self.selectedTableGroup = tableGroup;
+    }
+    else
+    {
+        NSString *msg = [NSString stringWithFormat:@"Failed to obtain new group information. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team. Error: %@", [error userInfo][@"error"]];
+        [[[UIAlertView alloc]initWithTitle:@"Error" message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+    }
 }
 
 #pragma mark - Table view data source
@@ -405,7 +414,7 @@
          else
          {
              appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order = object;
-             [weakSelf.receiver changedOrder:appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order];
+             [weakSelf.receiver changedOrder:appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order error:error];
              if (weakSelf.bCloseClicked == true || weakSelf.bSaveClicked == true)
                  [weakSelf performSegueWithIdentifier:@"segueUnwindOrderToServerTable" sender:weakSelf];
              [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];

@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>aps-environment</key>
+	<string>Distribution</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -40,7 +42,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -64,9 +66,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Savoir uses your location to notify you about great restaurants around you.</string>
+	<string>Savoir uses your location to find great restaurants near you, obtain wait times and pay the check inside a reatsurant.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Savoir uses your location to notify you about great restaurants around you.</string>
+	<string>Savoir uses your location to find great restaurants near you, obtain wait times and pay the check inside a reatsurant.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>bluetooth-central</string>
@@ -101,5 +103,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>branch_key</key>
+	<string>key_live_eflwJWsWUX5lFMT3823MvengzBpn0vfQ</string>
 </dict>
 </plist>

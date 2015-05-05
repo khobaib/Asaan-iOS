@@ -50,13 +50,13 @@
     if (appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.subTotal.longLongValue == 0 ||
         appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.subTotal.longLongValue == appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.alreadyPaidSubtotal.longLongValue)
     {
-        NSString *msg = [NSString stringWithFormat:@"Thank you for visiting %@! We look forward to seeing you again soon.", appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.store.name];
+        NSString *msg = [NSString stringWithFormat:@"Thank you for visiting %@! We look forward to seeing you again soon.", appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore.name];
         [NotificationUtils scheduleNotificationForInStorePay:1 message:msg];
         [appDelegate.globalObjectHolder.inStoreOrderDetails leaveGroup:nil];
     }
     else
     {
-        NSString *msg = [NSString stringWithFormat:@"Thank you for visiting %@! Your Order is still open. If you would like to pay before leaving you can check out through the Savoir sidebar menu.", appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.store.name];
+        NSString *msg = [NSString stringWithFormat:@"Thank you for visiting %@! Your Order is still open. If you would like to pay before leaving you can check out through the Savoir sidebar menu.", appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore.name];
         [NotificationUtils scheduleNotificationForInStorePay:2 message:msg];
     }
 }
@@ -166,9 +166,10 @@
                      }
                      else
                      {
-                         NSString *msg = [NSString stringWithFormat:@"Welcome to %@. Please let your server know you would like to pay with Savoir. Then sit back and have a great time!", object.store.name];
+                         NSString *title = [NSString stringWithFormat:@"Welcome to %@", appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore.name];
                          [appDelegate.globalObjectHolder.inStoreOrderDetails createGroup:nil];
-                         [NotificationUtils scheduleLocalNotificationWithString:msg At:[NSDate date]];
+                         [[[UIAlertView alloc]initWithTitle:title message:@"Please let your server know you would like to pay with Savoir. Then sit back and have a great time!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+//                         [NotificationUtils scheduleLocalNotificationWithString:msg At:[NSDate date]];
                      }
                  }
              }else{
