@@ -207,8 +207,8 @@
              }
              else
              {
-                 NSLog(@"queryForGetChatRoomsAndMembershipsForUser error:%ld, %@", (long)error.code, error.debugDescription);
-                 [ProgressHUD showError:@"Network error."];
+                 NSString *msg = @"Get Chat Rooms and Memberships Failed. Please try again. If this failure persists please contact Savoir Customer Support.";
+                 [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
              }
              isLoading = NO;
          }];
@@ -296,8 +296,8 @@
          }
          else
          {
-             NSLog(@"queryForSaveChatMessageWithObject error:%ld, %@", (long)error.code, error.debugDescription);
-             [ProgressHUD showError:@"Network error."];
+             NSString *msg = @"Saving Chat Message Failed. Please try again. If this failure persists please contact Savoir Customer Support.";
+             [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
          }
      }];
 }

@@ -15,6 +15,10 @@
 
 @property (strong, nonatomic) BBBadgeBarButtonItem *barButton;
 @property (strong, nonatomic) ChatView *chatView;
+@property (strong, nonatomic) NSDate *askedForNotificationAccessPermission;
+@property (nonatomic) Boolean didRegisterForNotifications;
+
++ (void)registerForNotifications;
 
 + (void)scheduleLocalNotificationWithString:(NSString *)message At:(NSDate *)date;
 + (void)scheduleNotificationForInStorePay:(NSInteger)status message:(NSString *)msg;

@@ -19,7 +19,6 @@
 {
     if (self = [super init])
     {
-        self.locationAccessPermissionDenied = YES;
         self.askedForLocationAccessPermission = 0;
         self.locationManager = [[CLLocationManager alloc] init];
         self.lastLocation = [[CLLocation alloc]initWithLatitude:41.772193 longitude:-88.15099];
@@ -44,7 +43,11 @@
 {
     if ([CLLocationManager locationServicesEnabled] == YES && [CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined)
     {
-        if (self.askedForLocationAccessPermission == nil || [[NSDate dateWithTimeIntervalSinceNow:86400] compare:self.askedForLocationAccessPermission] == NSOrderedDescending)
+        NSDate *compareDate = [NSDate dateWithTimeInterval:60 sinceDate:self.askedForLocationAccessPermission];
+        NSDate *currentDate = [NSDate date];
+        if (self.askedForLocationAccessPermission == nil)
+            return YES;
+        if ([compareDate compare:currentDate] == NSOrderedAscending)
             return YES;
     }
     

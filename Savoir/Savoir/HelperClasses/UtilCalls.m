@@ -312,7 +312,8 @@
      {
          if (error)
          {
-             NSLog(@"%@",[error userInfo][@"error"]);
+             NSString *msg = @"Failed to remove waitlist entry. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+             [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
          }
      }];
 }
@@ -481,6 +482,19 @@
     //                     [weakSelf performSegueWithIdentifier:@"SWOrderSummaryToStoreList" sender:weakSelf];
     //                 else
     [sender performSegueWithIdentifier:segueIdentifier sender:sender];
+}
+
++ (void)handleGAEServerError:(NSError *)error Message:(NSString *)msg Title:(NSString *)title Silent:(Boolean)keepSilent
+{
+    NSString *errMsg = [NSString stringWithFormat:@"%@ Error: %@", msg, [error userInfo][@"error"]];
+    if (keepSilent == false)
+        [[[UIAlertView alloc]initWithTitle:title message:errMsg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+    
+    NSLog(@"GAE Server Error:%@ Message:%@ Title:%@", [error userInfo][@"error"], msg, title);
+
+    PFUser *parseUser = [PFUser currentUser];
+    if (parseUser)
+        [parseUser fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {}];
 }
 
 @end

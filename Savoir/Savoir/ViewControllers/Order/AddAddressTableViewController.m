@@ -232,10 +232,8 @@
                         }
                          else
                          {
-                             NSString *errMsg = [NSString stringWithFormat:@"%@", [error userInfo][@"error"]];
-                             UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"Savoir Server Access Failure" message:errMsg delegate:weakSelf cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-                             
-                             [alert show];
+                             NSString *msg = @"Delivery Address Saved Failed. Please try again. If this failure persists please contact Savoir Customer Support.";
+                             [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
                              return;
                          }
                      }];

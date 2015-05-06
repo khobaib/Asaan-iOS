@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NoNetworkViewController">
@@ -14,20 +14,28 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Network!!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQ8-fJ-AK2">
-                    <rect key="frame" x="16" y="16" width="568" height="568"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="network_unavailable" translatesAutoresizingMaskIntoConstraints="NO" id="ICk-P5-KTS">
+                    <rect key="frame" x="225" y="225" width="150" height="150"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Pp-Si-tGS">
+                    <rect key="frame" x="16" y="539" width="568" height="41"/>
+                    <string key="text">Unable to connect to the Internet. Savoir needs Internet access to provide its services. Please try again when the Internet connection is available.</string>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="dQ8-fJ-AK2" secondAttribute="bottom" constant="16" id="6kV-Lc-D7p"/>
-                <constraint firstItem="dQ8-fJ-AK2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="UdN-mg-yR7"/>
-                <constraint firstItem="dQ8-fJ-AK2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="16" id="YmA-Dk-UNK"/>
-                <constraint firstAttribute="trailing" secondItem="dQ8-fJ-AK2" secondAttribute="trailing" constant="16" id="wrY-yv-vz4"/>
+                <constraint firstAttribute="centerX" secondItem="ICk-P5-KTS" secondAttribute="centerX" id="B17-jx-qaK"/>
+                <constraint firstItem="9Pp-Si-tGS" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="L2c-5L-T0s"/>
+                <constraint firstAttribute="trailing" secondItem="9Pp-Si-tGS" secondAttribute="trailing" constant="16" id="YcP-cS-DV5"/>
+                <constraint firstAttribute="centerY" secondItem="ICk-P5-KTS" secondAttribute="centerY" id="fWd-Ht-A6I"/>
+                <constraint firstAttribute="bottom" secondItem="9Pp-Si-tGS" secondAttribute="bottom" constant="20" id="qz5-oz-0li"/>
             </constraints>
         </view>
     </objects>
+    <resources>
+        <image name="network_unavailable" width="150" height="150"/>
+    </resources>
 </document>

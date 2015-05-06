@@ -118,16 +118,7 @@
     }
     else
     {
-        //        self.tableView.backgroundView = nil;
-        UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
-        
-        messageLabel.text = @"Pull list down to refresh.";
-        messageLabel.textColor = [UIColor whiteColor];
-        messageLabel.numberOfLines = 0;
-        messageLabel.textAlignment = NSTextAlignmentCenter;
-        [messageLabel sizeToFit];
-        
-        self.tableView.backgroundView = messageLabel;
+        self.tableView.backgroundView = nil;
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         return 1;
     }

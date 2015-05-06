@@ -156,43 +156,49 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
         
         [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointMenusAndMenuItems *object,NSError *error)
          {
-             if(!error && object.menuItems.count > 0 && object.menusAndSubmenus.count > 0)
+             if(!error)
              {
-                 GTLStoreendpointMenuItemAndStats *menuItemAndStats = [object.menuItems firstObject];
-                 for (GTLStoreendpointStoreMenuHierarchy *menu in object.menusAndSubmenus)
+                 if (object.menuItems.count > 0 && object.menusAndSubmenus.count > 0)
                  {
-                     if (menu.level.intValue == 0)
+                     GTLStoreendpointMenuItemAndStats *menuItemAndStats = [object.menuItems firstObject];
+                     for (GTLStoreendpointStoreMenuHierarchy *menu in object.menusAndSubmenus)
                      {
-                         MenuSegmentHolder *menuSegmentHolder = [[MenuSegmentHolder alloc]init];
-                         menuSegmentHolder.menu = menu;
-                         menuSegmentHolder.subMenus = [[NSMutableArray alloc] init];
-                         
-                         for (GTLStoreendpointStoreMenuHierarchy *submenu in object.menusAndSubmenus)
+                         if (menu.level.intValue == 0)
                          {
-                             if (submenu.level.intValue == 1 && submenu.menuPOSId.longLongValue == menu.menuPOSId.longLongValue && submenu.menuItemCount.intValue > 0)
+                             MenuSegmentHolder *menuSegmentHolder = [[MenuSegmentHolder alloc]init];
+                             menuSegmentHolder.menu = menu;
+                             menuSegmentHolder.subMenus = [[NSMutableArray alloc] init];
+                             
+                             for (GTLStoreendpointStoreMenuHierarchy *submenu in object.menusAndSubmenus)
                              {
-                                 [menuSegmentHolder.subMenus addObject:submenu];
+                                 if (submenu.level.intValue == 1 && submenu.menuPOSId.longLongValue == menu.menuPOSId.longLongValue && submenu.menuItemCount.intValue > 0)
+                                 {
+                                     [menuSegmentHolder.subMenus addObject:submenu];
+                                 }
                              }
+                             
+                             menuSegmentHolder.provider = [[DataProvider alloc] initWithPageSize:object.menuItems.count itemCount:menu.menuItemCount.integerValue];
+                             menuSegmentHolder.provider.delegate = weakSelf;
+                             menuSegmentHolder.provider.shouldLoadAutomatically = YES;
+                             menuSegmentHolder.provider.automaticPreloadMargin = MenuFluentPagingTablePreloadMargin;
+                             menuSegmentHolder.topRowIndex = [NSIndexPath indexPathForRow:0 inSection:0];
+                             [_menuSegmentHolders addObject:menuSegmentHolder];
+                             if (menu.menuPOSId.longLongValue == menuItemAndStats.menuItem.menuPOSId.longLongValue)
+                                 [menuSegmentHolder.provider setInitialObjects:object.menuItems ForPage:1];
                          }
-                         
-                         menuSegmentHolder.provider = [[DataProvider alloc] initWithPageSize:object.menuItems.count itemCount:menu.menuItemCount.integerValue];
-                         menuSegmentHolder.provider.delegate = weakSelf;
-                         menuSegmentHolder.provider.shouldLoadAutomatically = YES;
-                         menuSegmentHolder.provider.automaticPreloadMargin = MenuFluentPagingTablePreloadMargin;
-                         menuSegmentHolder.topRowIndex = [NSIndexPath indexPathForRow:0 inSection:0];
-                         [_menuSegmentHolders addObject:menuSegmentHolder];
-                         if (menu.menuPOSId.longLongValue == menuItemAndStats.menuItem.menuPOSId.longLongValue)
-                             [menuSegmentHolder.provider setInitialObjects:object.menuItems ForPage:1];
+                     }
+                     for (GTLStoreendpointStoreMenuStats *menuStats in object.menuStats)
+                     {
+                         NSString *key = [NSString stringWithFormat:@"%@_%@", menuStats.menuPOSId, menuStats.subMenuPOSId];
+                         [self.allMenuStats setObject:menuStats forKey:key];
                      }
                  }
-                 for (GTLStoreendpointStoreMenuStats *menuStats in object.menuStats)
-                 {
-                     NSString *key = [NSString stringWithFormat:@"%@_%@", menuStats.menuPOSId, menuStats.subMenuPOSId];
-                     [self.allMenuStats setObject:menuStats forKey:key];
-                 }
                  
-             }else{
-                 NSLog(@"MenusAndMenuItems Error:%@",[error userInfo][@"error"]);
+             }
+             else
+             {
+                 NSString *msg = @"Failed to get menu for this store. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+                 [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
              }
              
              if (_menuSegmentHolders.count == 1)
@@ -891,7 +897,10 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error)
      {
          if (error)
-             NSLog(@"Savoir Server Call Failed: saveStoreMenuItem - error:%@", error.userInfo);
+         {
+             NSString *msg = @"Failed to add this item to the order. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+             [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
+         }
      }];
 }
 

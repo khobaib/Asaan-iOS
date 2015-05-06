@@ -150,7 +150,10 @@
              return;
          }
          else
-             NSLog(@"queryForSaveChatRoomWithObject error:%ld, %@", (long)error.code, error.debugDescription);
+         {
+             NSString *msg = @"Failed to save or create a user's chat room. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+             [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
+         }
      }];
     
 }

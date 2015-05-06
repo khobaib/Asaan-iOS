@@ -38,7 +38,10 @@
         [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreOrderAndTeamDetails *object, NSError *error)
          {
              if(error)
-                 NSLog(@"setupExistingGroupsData Error:%@",[error userInfo][@"error"]);
+             {
+                 NSString *msg = @"Failed to create a table group. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+                 [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:true];
+             }
              else
              {
                  self.teamAndOrderDetails = object;
@@ -65,8 +68,8 @@
          {
              if(error)
              {
-                 [[[UIAlertView alloc]initWithTitle:@"Leave Group/Table Error" message:[error userInfo][@"error"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
-                 NSLog(@"queryForRemoveMemberFromStoreTableGroup Error:%@",[error userInfo][@"error"]);
+                 NSString *msg = @"Failed to leave a table group.";
+                 [UtilCalls handleGAEServerError:error Message:msg Title:@"Leave Group/Table Error" Silent:true];
              }
              else
              {
@@ -93,7 +96,11 @@
         [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreOrderAndTeamDetails *object,NSError *error)
          {
              if(error)
-                 NSLog(@"queryForAddMemberToStoreTableGroup Error:%@",[error userInfo][@"error"]);
+             {
+                 NSString *msg = @"Failed to join a table group.";
+                 [UtilCalls handleGAEServerError:error Message:msg Title:@"Join Group/Table Error" Silent:true];
+             }
+             else
              {
                  self.teamAndOrderDetails = object;
                  [receiver orderChanged:error];
@@ -124,7 +131,8 @@
                  weakSelf.openGroups = object;
                  [receiver openGroupsChanged:error];
              }else{
-                 NSLog(@"getOpenGroups Error:%@",[error userInfo][@"error"]);
+                 NSString *msg = @"Failed to get available groups. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+                 [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:true];
              }
          }];
     }
@@ -153,7 +161,8 @@
                  weakSelf.selectedDiscount = [XMLPOSOrder getDiscountFromXML:appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.orderDetails];
                  [receiver orderChanged:error];
              }else{
-                 NSLog(@"getStoreOrderDetails Error:%@",[error userInfo][@"error"]);
+                 NSString *msg = @"Failed to get order information. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+                 [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:true];
              }
          }];
     }
@@ -176,7 +185,10 @@
     [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, id object,NSError *error)
      {
          if(error)
-             NSLog(@"queryForUpdateStoreTableGroupMemberWithObject Error:%@",[error userInfo][@"error"]);
+         {
+             NSString *msg = @"Failed to save changes. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+             [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:true];
+         }
          else
              [receiver openGroupsChanged:error];
      }];

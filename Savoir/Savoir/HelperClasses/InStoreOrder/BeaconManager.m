@@ -36,7 +36,6 @@
     {
         self.inStoreUtils = [[InStoreUtils alloc]init];
         self.beaconManager = [[ESTBeaconManager alloc] init];
-//        [self.beaconManager requestAlwaysAuthorization];
         self.beaconManager.delegate = self;
         NSUUID *beaconUUID = [[NSUUID alloc]initWithUUIDString:@"B9407F30-F5F8-466E-AFF9-25556B57FE6D"];
         self.beaconRegion = [[CLBeaconRegion alloc]
@@ -45,17 +44,23 @@
         
         self.beaconRegion.notifyOnEntry = YES;
         self.beaconRegion.notifyOnExit = YES;
-        
-        [self.beaconManager startMonitoringForRegion:self.beaconRegion];
+        [self startRegionMonitoring];
     }
     return self;
+}
+
+- (void) startRegionMonitoring
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    
+    if ([appDelegate.globalObjectHolder.locationManager canAccessLocationServices] == YES)
+        [self.beaconManager startMonitoringForRegion:self.beaconRegion];
 }
 
 - (void) startBeaconRanging
 {
     if ([ESTBeaconManager authorizationStatus] == kCLAuthorizationStatusNotDetermined)
     {
-//        [self.beaconManager requestAlwaysAuthorization];
         [self.beaconManager startRangingBeaconsInRegion:self.beaconRegion];
     }
     else if([ESTBeaconManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways)

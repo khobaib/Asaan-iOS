@@ -243,8 +243,7 @@
              NSLog(@"%@",[error userInfo][@"error"]);
              NSString *title = @"Something went wrong";
              NSString *msg = [NSString stringWithFormat:@"We were unable to reach %@ and place your order. We're really sorry. Please call %@ directly at %@ to place your order.", weakSelf.selectedStore.name, weakSelf.selectedStore.name, weakSelf.selectedStore.phone];
-             UIAlertView *alert=[[UIAlertView alloc]initWithTitle:title message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-             [alert show];
+             [UtilCalls handleGAEServerError:error Message:msg Title:title Silent:false];
          }
      }];
 }

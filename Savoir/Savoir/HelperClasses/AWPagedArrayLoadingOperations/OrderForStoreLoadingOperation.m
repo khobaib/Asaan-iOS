@@ -45,8 +45,10 @@
                 if(!error)
                     [weakSelf setDataPage:[object.orders mutableCopy]];
                 else
-                    NSLog(@"OrderForStoreLoadingOperation Error:%@",[error userInfo][@"error"]);
-                
+                {
+                    NSString *msg = @"Failed to get store information. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+                    [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
+                }
                 weakSelf.bDataLoaded = true;
             }];
             

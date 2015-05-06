@@ -122,9 +122,8 @@
              }
              else
              {
-                 NSString *msg = [NSString stringWithFormat:@"Failed to setup tables and orders. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team. Error: %@", [error userInfo][@"error"]];
-                 [[[UIAlertView alloc]initWithTitle:@"Error" message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
-                 NSLog(@"setupExistingTablesFromOrders Error:%@",[error userInfo][@"error"]);
+                 NSString *msg = @"Failed to set up tables and orders. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+                 [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
              }
              if (self.refreshControl.isRefreshing == true)
                  [self.refreshControl endRefreshing];
@@ -167,16 +166,7 @@
     }
     else
     {
-        //        self.tableView.backgroundView = nil;
-        UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
-        
-        messageLabel.text = @"Pull list down to refresh.";
-        messageLabel.textColor = [UIColor whiteColor];
-        messageLabel.numberOfLines = 0;
-        messageLabel.textAlignment = NSTextAlignmentCenter;
-        [messageLabel sizeToFit];
-        
-        self.tableView.backgroundView = messageLabel;
+        self.tableView.backgroundView = nil;
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         return self.orders.count;
     }
@@ -288,9 +278,8 @@
              {
                  if(error)
                  {
-                     NSString *msg = [NSString stringWithFormat:@"Failed to remove order. Error: %@", [error userInfo][@"error"]];
-                     [[[UIAlertView alloc]initWithTitle:@"Order setup error" message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
-                     NSLog(@"ServerOrderSummary: queryForUpdateOrderFromServerWithObject Error:%@",[error userInfo][@"error"]);
+                     NSString *msg = @"Failed to remove order. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+                     [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
                  }
              }];
             [self.orders removeObjectAtIndex:indexPath.row];

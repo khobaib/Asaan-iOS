@@ -31,7 +31,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *txtFinalAmount;
 @property (weak, nonatomic) IBOutlet UILabel *txtTipLabel;
 @property (weak, nonatomic) IBOutlet UIButton *btnPayNow;
-@property (strong, nonatomic) UIRefreshControl *refreshControl;
 
 @property (nonatomic, strong) NSMutableArray *finalItems;
 
@@ -70,14 +69,6 @@
         self.tipSlider.value = defaultTip;
     }
     [self refreshOrderDetails];
-    // Initialize the refresh control.
-    self.refreshControl = [[UIRefreshControl alloc] init];
-    //    self.refreshControl.backgroundColor = [UIColor goldColor];
-    //    self.refreshControl.tintColor = [UIColor blackColor];
-    [self.refreshControl addTarget:self
-                            action:@selector(refreshOrderDetails)
-                  forControlEvents:UIControlEventValueChanged];
-    [self.view addSubview:self.refreshControl];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -89,20 +80,14 @@
 
 - (void)refreshOrderDetails
 {
-    if (self.refreshControl.isRefreshing == false)
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    else
-        [self.refreshControl endRefreshing];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     [appDelegate.globalObjectHolder.inStoreOrderDetails getStoreOrderDetails:self];
 }
 
 - (void)orderChanged:(NSError *)error
 {
-    if (self.refreshControl.isRefreshing == true)
-        [self.refreshControl endRefreshing];
-    else
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     if (appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.memberMe == nil
@@ -356,7 +341,8 @@
              {
                  [UtilCalls handleClosedOrderFor:weakSelf SegueTo:@"segueUnwindMemberPayToStoreList"];
              }else{
-                 NSLog(@"queryForPayForMemberWithObject Error:%@",[error userInfo][@"error"]);
+                 NSString *msg = @"Failed to pay for your order. Please retry in a few minutes or call your server. If this error persists please contact Savoir Customer Assistance team.";
+                 [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
              }
          }];
     }

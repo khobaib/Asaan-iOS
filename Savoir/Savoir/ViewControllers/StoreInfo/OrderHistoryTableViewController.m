@@ -91,9 +91,8 @@
                     [_dataProvider setInitialObjects:object.orders ForPage:1];
                  }
              }else{
-                 NSString *msg = [NSString stringWithFormat:@"Failed to obtain order history. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team. Error: %@", [error userInfo][@"error"]];
-                 [[[UIAlertView alloc]initWithTitle:@"Error" message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
-                 NSLog(@"setupOrderHistoryData Error:%@",[error userInfo][@"error"]);
+                 NSString *msg = @"Failed to get order history. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+                 [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
              }
              [weakSelf.tableView reloadData];
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];

@@ -72,10 +72,7 @@
 
     // Initialize the refresh control.
     self.refreshControl = [[UIRefreshControl alloc] init];
-    //    self.refreshControl.backgroundColor = [UIColor goldColor];
-    //    self.refreshControl.tintColor = [UIColor blackColor];
     [self.refreshControl addTarget:self action:@selector(startStandardUpdates) forControlEvents:UIControlEventValueChanged];
-    [self.tableView addSubview:self.refreshControl];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -96,13 +93,8 @@
     
     if ([appDelegate.globalObjectHolder.locationManager shouldAskForLocationAccessPermission] == YES)
     {
-//        [UIAlertView showWithTitle:@"Let Savoir Access Your Location even in the background?" message:@"This lets you find great restaurants near you, open a tab and pay by phone without waiting for a server." cancelButtonTitle:@"Not Now" otherButtonTitles:@[@"Give Access"] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex)
-//        {
-//            if (buttonIndex != [alertView cancelButtonIndex])
-//                [appDelegate.globalObjectHolder.locationManager requestAuthorization];
-//            else
-//                appDelegate.globalObjectHolder.locationManager.askedForLocationAccessPermission = [NSDate date];
-//        }];
+        if (self.refreshControl.isRefreshing == true)
+            [self.refreshControl endRefreshing];
         UIAlertController * alert=   [UIAlertController
                                       alertControllerWithTitle:@"Let Savoir Access Your Location even in the background?"
                                       message:@"This lets you find great restaurants near you, open a tab and pay by phone without waiting for a server."
@@ -125,8 +117,8 @@
                                     [alert dismissViewControllerAnimated:YES completion:nil];
                                  }];
         
-        [alert addAction:give_access];
         [alert addAction:cancel];
+        [alert addAction:give_access];
         
         [self presentViewController:alert animated:YES completion:nil];
     }
@@ -136,12 +128,15 @@
 
 - (void)locationChanged
 {
+    if (self.refreshControl.isRefreshing == true)
+        [self.refreshControl endRefreshing];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     if (self.location == nil || [appDelegate.globalObjectHolder.locationManager.lastLocation distanceFromLocation:self.location] > 50)
     {
         self.location = appDelegate.globalObjectHolder.locationManager.lastLocation;
         [self setupDatastore];
     }
+    [appDelegate.globalObjectHolder.beaconManager startRegionMonitoring];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -204,6 +199,7 @@
         
         return;
     }
+    [goh loadAllUserObjects];
 
     if (goh.orderInProgress != nil)
     {
@@ -263,16 +259,24 @@
         
         [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreAndStatsAndCount *object,NSError *error)
          {
-             if(!error && object.storeAndStatsList.count > 0)
+             if(!error)
              {
-                 
-                 NSInteger pageSize = FluentPagingTablePageSize < object.storeAndStatsList.count ? FluentPagingTablePageSize : object.storeAndStatsList.count;
-                 _dataProvider = [[DataProvider alloc] initWithPageSize:pageSize itemCount:object.storeCount.longValue];
-                 _dataProvider.delegate = weakSelf;
-                 _dataProvider.shouldLoadAutomatically = YES;
-                 _dataProvider.automaticPreloadMargin = FluentPagingTablePreloadMargin;
-                 [_dataProvider setInitialObjects:object.storeAndStatsList ForPage:1];
-                 [weakSelf.tableView reloadData];
+                 if(object.storeAndStatsList.count > 0)
+                 {
+                     
+                     NSInteger pageSize = FluentPagingTablePageSize < object.storeAndStatsList.count ? FluentPagingTablePageSize : object.storeAndStatsList.count;
+                     _dataProvider = [[DataProvider alloc] initWithPageSize:pageSize itemCount:object.storeCount.longValue];
+                     _dataProvider.delegate = weakSelf;
+                     _dataProvider.shouldLoadAutomatically = YES;
+                     _dataProvider.automaticPreloadMargin = FluentPagingTablePreloadMargin;
+                     [_dataProvider setInitialObjects:object.storeAndStatsList ForPage:1];
+                     [weakSelf.tableView reloadData];
+                 }
+             }
+             else
+             {
+                 NSString *msg = @"Failed to get restaurant information. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+                 [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
              }
              if (self.refreshControl.isRefreshing == true)
                  [self.refreshControl endRefreshing];
@@ -561,7 +565,10 @@
              [weakSelf.navigationController pushViewController:chatView animated:YES];
          }
          else
-             NSLog(@"queryForSaveChatRoomWithObject error:%ld, %@", (long)error.code, error.debugDescription);
+         {
+             NSString *msg = @"Failed to save chat room. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+             [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
+         }
          [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
      }];
     

@@ -162,9 +162,8 @@
          }
          else
          {
-             NSString *msg = [NSString stringWithFormat:@"Failed to get waitlist entries. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team. Error: %@", [error userInfo][@"error"]];
-             [[[UIAlertView alloc]initWithTitle:@"Error" message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
-             NSLog(@"queryForGetStoreWaitListQueueWithStoreId error:%ld, %@", (long)error.code, error.debugDescription);
+             NSString *msg = @"Failed to get wait-list entries. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+             [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
          }
      }];
 }
@@ -209,11 +208,8 @@
          [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
          if (error)
          {
-             NSLog(@"%@",[error userInfo][@"error"]);
-             NSString *title = @"Something went wrong";
              NSString *msg = [NSString stringWithFormat:@"We were unable to reach %@ and place you on their wait list. We're really sorry. Please call %@ directly at %@.", weakSelf.selectedStore.name, weakSelf.selectedStore.name, weakSelf.selectedStore.phone];
-             UIAlertView *alert=[[UIAlertView alloc]initWithTitle:title message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-             [alert show];
+             [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
              return;
          }
          if (queueEntry != nil && queueEntry.identifier > 0)

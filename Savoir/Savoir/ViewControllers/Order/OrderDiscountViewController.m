@@ -92,7 +92,10 @@
          if (!error)
              weakSelf.discounts = object;
          else
-             NSLog(@"Savoir Server Call Failed: getUserAddresses - error:%@", error.userInfo);
+         {
+             NSString *msg = @"Failed to get information on available discounts. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+             [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
+         }
      }];
 }
 

@@ -109,13 +109,7 @@
     
     self.notificationUtils = [[NotificationUtils alloc]init];
     
-    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
-                                                    UIUserNotificationTypeBadge |
-                                                    UIUserNotificationTypeSound);
-    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
-                                                                             categories:[self.notificationUtils createNotificationCategories]];
-//    [application registerUserNotificationSettings:settings];
-//    [application registerForRemoteNotifications];
+    [NotificationUtils registerForNotifications];
     
     [[UINavigationBar appearance] setHidden:NO];
     [UINavigationBar appearance].translucent = NO;
@@ -382,7 +376,6 @@
     if(_globalObjectHolder == nil)
     {
         _globalObjectHolder = [[GlobalObjectHolder alloc]init];
-        [_globalObjectHolder loadAllUserObjects];
     }
     return _globalObjectHolder;
 }

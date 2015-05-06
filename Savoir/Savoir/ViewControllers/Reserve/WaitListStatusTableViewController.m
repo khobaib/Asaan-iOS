@@ -133,9 +133,8 @@
          }
          else
          {
-             NSString *msg = [NSString stringWithFormat:@"Failed to setup waitlist entry. Please retry in a few minutes or call the restaurant directly. If this error persists please contact Savoir Customer Assistance team. Error: %@", [error userInfo][@"error"]];
-             [[[UIAlertView alloc]initWithTitle:@"Error" message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
-             NSLog(@"Savoir Server Call Failed: queryForGetStoreWaitListQueueEntryForCurrentUser - error:%@", error.userInfo);
+             NSString *msg = @"Failed to set up wait-list entry. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+             [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
          }
      }];
     

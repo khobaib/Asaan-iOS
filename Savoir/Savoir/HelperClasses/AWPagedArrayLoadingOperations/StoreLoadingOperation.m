@@ -13,6 +13,7 @@
 #import <Parse/Parse.h>
 #import "InlineCalls.h"
 #import "Constants.h"
+#import "UtilCalls.h"
 
 @interface StoreLoadingOperation()
 @property (nonatomic) Boolean bDataLoaded;
@@ -44,7 +45,10 @@
                 if(!error)
                     [weakSelf setDataPage:[object.storeAndStatsList mutableCopy]];
                 else
-                    NSLog(@"StoreLoadingOperation Error:%@",[error userInfo][@"error"]);
+                {
+                    NSString *msg = @"Failed to load restaurant information. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+                    [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
+                }
                 
                 weakSelf.bDataLoaded = true;
             }];

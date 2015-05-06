@@ -40,7 +40,10 @@
              [self startInStoreMode:nil ForStore:object InBeaconMode:true];
          }
          else
-             NSLog(@"Savoir Server Call Failed: queryForGetStoreByBeaconId - error:%@", error.userInfo);
+         {
+             NSString *msg = @"Failed to obtain a matching store by beacon. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+             [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:true];
+         }
      }];
 }
 
@@ -56,8 +59,9 @@
     }
     else
     {
-        NSString *msg = [NSString stringWithFormat:@"Thank you for visiting %@! Your Order is still open. If you would like to pay before leaving you can check out through the Savoir sidebar menu.", appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore.name];
-        [NotificationUtils scheduleNotificationForInStorePay:2 message:msg];
+        NSString *msg = [NSString stringWithFormat:@"Thank you for visiting %@! Your Order is still open. Please pay and close the order at your earliest convenience.", appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore.name];
+        [[[UIAlertView alloc]initWithTitle:@"Your Order" message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+        [self startInStoreMode:nil ForStore:appDelegate.globalObjectHolder.inStoreOrderDetails.selectedStore InBeaconMode:false]; // setting beaconmode to false so the payment screen shows.
     }
 }
 
@@ -172,8 +176,10 @@
 //                         [NotificationUtils scheduleLocalNotificationWithString:msg At:[NSDate date]];
                      }
                  }
-             }else{
-                 NSLog(@"queryForAddMemberToStoreTableGroup Error:%@",[error userInfo][@"error"]);
+             }else
+             {
+                 NSString *msg = @"Something went wrong. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+                 [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
              }
          }];
     }

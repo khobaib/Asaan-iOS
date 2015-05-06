@@ -116,7 +116,8 @@
                  }
                  [weakSelf.tableView reloadData];
              }else{
-                 NSLog(@"getOrderReview Error:%@",[error userInfo][@"error"]);
+                 NSString *msg = @"Failed to get review information. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+                 [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
              }
              [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
          }];

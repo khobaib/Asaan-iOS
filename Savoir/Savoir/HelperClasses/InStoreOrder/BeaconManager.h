@@ -10,4 +10,6 @@
 
 @interface BeaconManager : NSObject
 
+- (void) startRegionMonitoring;
+
 @end

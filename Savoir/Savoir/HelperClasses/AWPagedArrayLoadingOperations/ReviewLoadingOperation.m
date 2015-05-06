@@ -44,11 +44,15 @@
             dic[USER_AUTH_TOKEN_HEADER_NAME] = [UtilCalls getAuthTokenForCurrentUser];
             [query setAdditionalHTTPHeaders:dic];
             
-            [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointOrderReviewListAndCount *object,NSError *error){
+            [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointOrderReviewListAndCount *object,NSError *error)
+            {
                 if(!error)
                     [weakSelf setDataPage:[object.reviews mutableCopy]];
                 else
-                    NSLog(@"OrderForStoreLoadingOperation Error:%@",[error userInfo][@"error"]);
+                {
+                    NSString *msg = @"Failed to get reviews for store for this item. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+                    [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
+                }
                 
                 weakSelf.bDataLoaded = true;
             }];

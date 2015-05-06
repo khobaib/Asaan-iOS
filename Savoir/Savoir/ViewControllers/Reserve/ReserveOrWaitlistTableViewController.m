@@ -108,7 +108,10 @@
                      [weakSelf performSegueWithIdentifier:@"segueReserveAndWaitlistToWaitlist" sender:weakSelf];
              }
              else
-                 NSLog(@"Savoir Server Call Failed: loadUserQueueEntry - error:%@", error.userInfo);
+             {
+                 NSString *msg = @"Failed to get waitlist information. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+                 [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
+             }
          }];
     }
     

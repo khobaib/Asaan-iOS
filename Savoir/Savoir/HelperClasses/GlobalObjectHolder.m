@@ -71,28 +71,34 @@
 - (void) loadAllUserObjects
 {
     PFUser *parseUser = [PFUser currentUser];
+    
     if (parseUser)
     {
-        // Load GAE Objects on startup
-        PFInstallation *currentInstallation = [PFInstallation currentInstallation];
-        PFUser *user = [currentInstallation objectForKey:@"user"];
-        
-        if (user == nil || [user.objectId isEqualToString:parseUser.objectId] == false)
-        {
-            [[PFInstallation currentInstallation] setObject:[PFUser currentUser] forKey:@"user"];
-            [[PFInstallation currentInstallation] saveEventually];
-        }
-        if (self.currentUser == nil)
-        {
-            [self loadCurrentUserFromServer];
-            [self loadUserRoomsAndStoreChatTeams];
-            [self getStoresOwnedByUser];
-        }
-        if (self.userCards == nil)
-            [self loadUserCardsFromServer];
-        if (self.userAddresses == nil)
-            [self loadUserAddressesFromServer];
-        [self beaconManager];
+        [parseUser fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            if (!error)
+            {
+                PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+                PFUser *user = [currentInstallation objectForKey:@"user"];
+                
+                // Load GAE Objects on startup
+                if (user == nil || [user.objectId isEqualToString:parseUser.objectId] == false)
+                {
+                    [[PFInstallation currentInstallation] setObject:[PFUser currentUser] forKey:@"user"];
+                    [[PFInstallation currentInstallation] saveEventually];
+                }
+                if (self.currentUser == nil)
+                {
+                    [self loadCurrentUserFromServer];
+                    [self loadUserRoomsAndStoreChatTeams];
+                    [self getStoresOwnedByUser];
+                }
+                if (self.userCards == nil)
+                    [self loadUserCardsFromServer];
+                if (self.userAddresses == nil)
+                    [self loadUserAddressesFromServer];
+                [self beaconManager];
+            }
+        }];
     }
 }
 
@@ -117,7 +123,10 @@
              weakSelf.usersRoomsAndStores = object;
          }
          else
-             NSLog(@"queryForGetChatRoomsAndMembershipsForUser error:%ld, %@", (long)error.code, error.debugDescription);
+         {
+             NSString *msg = @"Failed to obtain information on user's chat rooms and memberships. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+             [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:true];
+         }
      }];
 }
 
@@ -136,7 +145,10 @@
          if (!error)
              weakSelf.userAddresses = object;
          else
-             NSLog(@"Savoir Server Call Failed: getUserAddresses - error:%@", error.userInfo);
+         {
+             NSString *msg = @"Failed to obtain user's delivery addresses. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+             [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:true];
+         }
      }];
 }
 
@@ -168,7 +180,8 @@
          }
          else
          {
-             NSLog(@"Savoir Server Call Failed: getUserCards - error:%@", error.userInfo);
+             NSString *msg = @"Failed to obtain information on user's cards. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+             [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:true];
          }
      }];
 }
@@ -187,7 +200,10 @@
          if (!error)
              weakSelf.currentUser = object;
          else
-             NSLog(@"Savoir Server Call Failed: getCurrentUser - error:%@", error.userInfo);
+         {
+             NSString *msg = @"Failed to obtain current user. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+             [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:true];
+         }
      }];
 }
 
@@ -219,7 +235,10 @@
          if (!error)
              weakSelf.storesOwnedByUser = object;
          else
-             NSLog(@"Savoir Server Call Failed: getStoresOwnedByUser - error:%@", error.userInfo);
+         {
+             NSString *msg = @"Failed to obtain information on stores owned by user. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+             [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:true];
+         }
      }];
 }
 

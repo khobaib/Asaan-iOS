@@ -15,7 +15,6 @@
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) NSError *lastError;
 @property (nonatomic) NSUInteger distanceFromLastLocation;
-@property (nonatomic) Boolean locationAccessPermissionDenied;
 @property (strong, nonatomic) NSDate *askedForLocationAccessPermission;
 @property (weak, nonatomic) id <LocationReceiver> locationReceiver;
 

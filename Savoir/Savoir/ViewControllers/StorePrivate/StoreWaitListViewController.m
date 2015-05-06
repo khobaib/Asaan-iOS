@@ -138,9 +138,8 @@
              }
              else
              {
-                 NSString *msg = [NSString stringWithFormat:@"Failed to obtain wait-list information. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team. Error: %@", [error userInfo][@"error"]];
-                 [[[UIAlertView alloc]initWithTitle:@"Error" message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
-                 NSLog(@"queryForGetStoreWaitListQueueWithStoreId error:%ld, %@", (long)error.code, error.debugDescription);
+                 NSString *msg = @"Failed to load wait-list information. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+                 [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
              }
              if (self.refreshControl.isRefreshing == true)
                  [self.refreshControl endRefreshing];
@@ -419,7 +418,8 @@
          }
          else
          {
-             NSLog(@"%@",[error userInfo][@"error"]);
+             NSString *msg = @"Failed to save wait-list information. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+             [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
          }
          [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
          self.isLoading = NO;

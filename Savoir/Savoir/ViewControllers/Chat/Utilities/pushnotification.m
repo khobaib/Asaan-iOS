@@ -93,7 +93,8 @@ void SendPushNotification(long long roomId, long long storeId, NSString *text)
          }
          else
          {
-             NSLog(@"queryForGetChatUsersForRoomWithRoomId error:%ld, %@.", (long)error.code, error.debugDescription);
+             NSString *msg = @"Failed to get users for this room. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+             [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
          }
      }];
 }

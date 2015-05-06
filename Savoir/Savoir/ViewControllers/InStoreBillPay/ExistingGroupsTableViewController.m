@@ -117,9 +117,8 @@
                  weakSelf.tableGroups = object;
                  [weakSelf.tableView reloadData];
              }else{
-                 NSString *msg = [NSString stringWithFormat:@"Failed to obtain information on existing groups and tables. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team. Error: %@", [error userInfo][@"error"]];
-                 [[[UIAlertView alloc]initWithTitle:@"Error" message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
-                 NSLog(@"setupExistingGroupsData Error:%@",[error userInfo][@"error"]);
+                 NSString *msg = @"Failed to obtain information on existing groups and tables. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+                 [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
              }
              if (self.refreshControl.isRefreshing == true)
                  [self.refreshControl endRefreshing];

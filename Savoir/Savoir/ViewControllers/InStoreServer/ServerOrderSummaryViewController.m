@@ -408,8 +408,8 @@
      {
          if(error)
          {
-             [[[UIAlertView alloc]initWithTitle:@"Order Change Error" message:[error userInfo][@"error"] delegate:weakSelf cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
-             NSLog(@"ServerOrderSummary: queryForUpdateOrderFromServerWithObject Error:%@",[error userInfo][@"error"]);
+             NSString *msg = @"Failed to update the order. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+             [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
          }
          else
          {

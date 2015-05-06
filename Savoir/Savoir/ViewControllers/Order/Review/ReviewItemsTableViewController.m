@@ -229,8 +229,10 @@
         [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error)
          {
              if (error)
-                 NSLog(@"saveItemReviews Error:%@",[error userInfo]);
-             else
+             {
+                 NSString *msg = @"Failed to save the review. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+                 [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
+             }else
              {
                  self.reviewAndItems.itemReviews = itemReviewsArray.itemReviews;
                  NSString *reviewText = [NSString stringWithFormat:@"Thank you for reviewing %@.", self.selectedOrder.storeName];

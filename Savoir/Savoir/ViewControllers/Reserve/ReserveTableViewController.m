@@ -184,7 +184,10 @@
          if (!error)
              [self sendMessage:object];
          else
-             NSLog(@"queryForGetChatRoomsAndMembershipsForUser error:%ld, %@", (long)error.code, error.debugDescription);
+         {
+             NSString *msg = @"Failed to get chat room information. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+             [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
+         }
      }];
 }
 
@@ -227,7 +230,10 @@
              return;
          }
          else
-             NSLog(@"queryForSaveChatRoomWithObject error:%ld, %@", (long)error.code, error.debugDescription);
+         {
+             NSString *msg = @"Failed to save chat room. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+             [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
+         }
      }];
 }
 
@@ -264,7 +270,10 @@
              [weakSelf performSegueWithIdentifier:@"segueUnwindReserveToStoreList" sender:weakSelf];
          }
          else
-             NSLog(@"createMessageAndSend queryForSaveChatMessageWithObject error:%ld, %@", (long)error.code, error.debugDescription);
+         {
+             NSString *msg = @"Failed to save chat message. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+             [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
+         }
      }];
 }
 

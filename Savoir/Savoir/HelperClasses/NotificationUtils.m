@@ -25,6 +25,18 @@
 
 @implementation NotificationUtils
 
++ (void)registerForNotifications
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
+                                                    UIUserNotificationTypeBadge |
+                                                    UIUserNotificationTypeSound);
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
+                                                                             categories:[appDelegate.notificationUtils createNotificationCategories]];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+}
+
 - (void)scheduleNotificationWithOrder:(GTLStoreendpointStoreOrder *)order
 {
     UILocalNotification *localNotif = [[UILocalNotification alloc] init];
@@ -180,7 +192,8 @@
                      [alert show];
                  }
              }else{
-                 NSLog(@"getOrderReview Error:%@",[error userInfo][@"error"]);
+                 NSString *msg = @"Failed to obtain review information for this order. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+                 [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
              }
          }];
     }

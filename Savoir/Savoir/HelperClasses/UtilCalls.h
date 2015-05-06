@@ -48,5 +48,6 @@
 + (Boolean)userBelongsToStoreChatTeamForStore:(GTLStoreendpointStore *)store;
 + (Boolean)userIsOwnerOfStore:(GTLStoreendpointStore *)store;
 + (void) handleClosedOrderFor:(id)sender SegueTo:(NSString *)segueIdentifier;
++ (void)handleGAEServerError:(NSError *)error Message:(NSString *)msg Title:(NSString *)title Silent:(Boolean)keepSilent;
 
 @end

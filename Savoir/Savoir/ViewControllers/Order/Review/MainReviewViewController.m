@@ -136,7 +136,10 @@
     [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointOrderReview *object, NSError *error)
      {
          if (error)
-             NSLog(@"saveOrderReview Error:%@",[error userInfo][@"error"]);
+         {
+             NSString *msg = @"Failed to save your review. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+             [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
+         }
          else
              self.reviewAndItems.orderReview = object;
      }];

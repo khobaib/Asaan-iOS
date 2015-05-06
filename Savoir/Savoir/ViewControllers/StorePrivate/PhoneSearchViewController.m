@@ -97,7 +97,10 @@
                  }
              }
              else
-                 NSLog(@"Savoir Server Call Failed: getUserByPhone in PhoneSearchViewController - error:%@", error.userInfo);
+             {
+                 NSString *msg = @"Failed to get search for a user by phone. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+                 [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
+             }
          }];
     }
 }

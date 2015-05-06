@@ -13,6 +13,7 @@
 #import <Parse/Parse.h>
 #import "InlineCalls.h"
 #import "Constants.h"
+#import "UtilCalls.h"
 
 @interface MenuItemLoadingOperation()
 @property (nonatomic) Boolean bDataLoaded;
@@ -42,7 +43,10 @@
                 if(!error)
                     [weakSelf setDataPage:[object.items mutableCopy]];
                 else
-                    NSLog(@"MenuItemLoadingOperation Error:%@",[error userInfo][@"error"]);
+                {
+                    NSString *msg = @"Failed to load menu. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
+                    [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:true];
+                }
                 
                 weakSelf.bDataLoaded = true;
             }];

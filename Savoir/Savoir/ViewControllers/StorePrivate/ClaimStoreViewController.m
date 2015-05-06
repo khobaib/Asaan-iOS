@@ -97,11 +97,8 @@
      {
          if (error)
          {
-             NSLog(@"queryForReplaceStoreChatGroupWithObject Error:%@",[error userInfo][@"error"]);
-             NSString *str = [NSString stringWithFormat:@"Something went wrong - your employees could not be saved. We are really sorry. Please try again. If this failure persists please contact Savoir Customer Support. Server Error: %@", [error userInfo][@"error"]];
-             [UIAlertView showWithTitle:@"Sorry!" message:str cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex)
-              {
-              }];
+             NSString *str = @"Something went wrong - your employees could not be saved. We are really sorry. Please try again. If this failure persists please contact Savoir Customer Support.";
+             [UtilCalls handleGAEServerError:error Message:str Title:@"Savoir Error" Silent:false];
          }
          else
          {
