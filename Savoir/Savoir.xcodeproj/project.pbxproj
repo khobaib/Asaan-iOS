@@ -318,7 +318,6 @@
 		D41FF7611AC3659A00395DE0 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D41FF75B1AC3659A00395DE0 /* ParseCrashReporting.framework */; };
 		D41FF7661AC3662300395DE0 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D41FF7651AC3662300395DE0 /* FBSDKLoginKit.framework */; };
 		D431B9321AEDE2AB005AEBE3 /* MenuWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D431B9311AEDE2AB005AEBE3 /* MenuWebViewController.m */; };
-		D43565F71AF92A3500F9A096 /* entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = D43565F61AF92A3500F9A096 /* entitlements.plist */; };
 		D438AB011A9F8BF60089E61A /* ChatView.m in Sources */ = {isa = PBXBuildFile; fileRef = D438AAF61A9F8BF60089E61A /* ChatView.m */; };
 		D438AB021A9F8BF60089E61A /* GroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = D438AAF71A9F8BF60089E61A /* GroupView.m */; };
 		D438AB031A9F8BF60089E61A /* camera.m in Sources */ = {isa = PBXBuildFile; fileRef = D438AAFC1A9F8BF60089E61A /* camera.m */; };
@@ -377,6 +376,7 @@
 		D445D7271A96BB9B00ED4919 /* Savoir.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D445D7201A96BB9B00ED4919 /* Savoir.xcdatamodeld */; };
 		D445D72F1A96BC5C00ED4919 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D445D72C1A96BC5C00ED4919 /* AppDelegate.m */; };
 		D445D7311A96BC5C00ED4919 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D445D72E1A96BC5C00ED4919 /* main.m */; };
+		D4640EA61AF9720E00B81A19 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D4640EA51AF9720E00B81A19 /* LocationManager.m */; };
 		D46DA7831A92B26B00020313 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D46DA7811A92B26B00020313 /* Info.plist */; };
 		D46DA7861A92B5A400020313 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D46DA7851A92B5A400020313 /* CoreAudio.framework */; };
 		D46E25841ACA333600AEF681 /* DBChooser.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D46E25821ACA333600AEF681 /* DBChooser.bundle */; };
@@ -616,7 +616,7 @@
 		D4195C391A92A69B00663149 /* tab_group@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_group@2x.png"; sourceTree = "<group>"; };
 		D4195C3A1A92A69B00663149 /* tab_messages@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_messages@2x.png"; sourceTree = "<group>"; };
 		D4195C3B1A92A69B00663149 /* F_icon.svg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = F_icon.svg.png; sourceTree = "<group>"; };
-		D4195C3D1A92A69B00663149 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		D4195C3D1A92A69B00663149 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../Images.xcassets; sourceTree = "<group>"; };
 		D4195C421A92A69B00663149 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		D4195C431A92A69B00663149 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		D4195C441A92A69B00663149 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -1004,7 +1004,6 @@
 		D41FF7651AC3662300395DE0 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		D431B9301AEDE2AB005AEBE3 /* MenuWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuWebViewController.h; sourceTree = "<group>"; };
 		D431B9311AEDE2AB005AEBE3 /* MenuWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuWebViewController.m; sourceTree = "<group>"; };
-		D43565F61AF92A3500F9A096 /* entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = entitlements.plist; sourceTree = "<group>"; };
 		D438AAF61A9F8BF60089E61A /* ChatView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatView.m; sourceTree = "<group>"; };
 		D438AAF71A9F8BF60089E61A /* GroupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupView.m; sourceTree = "<group>"; };
 		D438AAF81A9F8BF60089E61A /* ChatView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatView.h; sourceTree = "<group>"; };
@@ -1135,6 +1134,9 @@
 		D445D72C1A96BC5C00ED4919 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		D445D72D1A96BC5C00ED4919 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D445D72E1A96BC5C00ED4919 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D4640EA41AF9720E00B81A19 /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
+		D4640EA51AF9720E00B81A19 /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
+		D4640EA81AF9849F00B81A19 /* LocationReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationReceiver.h; sourceTree = "<group>"; };
 		D46DA7811A92B26B00020313 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D46DA7851A92B5A400020313 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		D46E25821ACA333600AEF681 /* DBChooser.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DBChooser.bundle; sourceTree = "<group>"; };
@@ -1325,6 +1327,9 @@
 				D4721D221AEACD1A00974271 /* BeaconManager.m */,
 				D4B602E81AEAE6590007BA41 /* InStoreUtils.h */,
 				D4B602E91AEAE6590007BA41 /* InStoreUtils.m */,
+				D4640EA41AF9720E00B81A19 /* LocationManager.h */,
+				D4640EA51AF9720E00B81A19 /* LocationManager.m */,
+				D4640EA81AF9849F00B81A19 /* LocationReceiver.h */,
 			);
 			path = InStoreOrder;
 			sourceTree = "<group>";
@@ -1510,7 +1515,6 @@
 				D4195E2F1A92A69B00663149 /* ViewControllers */,
 				D4195BF41A92A69B00663149 /* frameworks */,
 				D4195C341A92A69B00663149 /* images */,
-				D4195C3D1A92A69B00663149 /* Images.xcassets */,
 				D4195C3F1A92A69B00663149 /* library */,
 				D4195DA41A92A69B00663149 /* Parse */,
 				D4195DAF1A92A69B00663149 /* ServerAPI */,
@@ -2574,11 +2578,11 @@
 		D445D72A1A96BC5C00ED4919 /* Project Files */ = {
 			isa = PBXGroup;
 			children = (
+				D4195C3D1A92A69B00663149 /* Images.xcassets */,
 				D445D72B1A96BC5C00ED4919 /* AppDelegate.h */,
 				D445D72C1A96BC5C00ED4919 /* AppDelegate.m */,
 				D445D72D1A96BC5C00ED4919 /* Info.plist */,
 				D445D72E1A96BC5C00ED4919 /* main.m */,
-				D43565F61AF92A3500F9A096 /* entitlements.plist */,
 			);
 			path = "Project Files";
 			sourceTree = "<group>";
@@ -2843,7 +2847,6 @@
 				D438ABA51A9FA6AC0089E61A /* JSQMessagesTypingIndicatorFooterView.xib in Resources */,
 				D409D7E41AA60A94008FADDF /* placeholder@2x.png in Resources */,
 				D438AB7A1A9FA6AC0089E61A /* JSQMessagesAssets.bundle in Resources */,
-				D43565F71AF92A3500F9A096 /* entitlements.plist in Resources */,
 				D4195FA21A92A69C00663149 /* ServerApiGenerator.rtf in Resources */,
 				D409D7DA1AA60A94008FADDF /* cvc@2x.png in Resources */,
 				D4195EA71A92A69C00663149 /* drop_down.png in Resources */,
@@ -3023,6 +3026,7 @@
 				D445D7171A96BA3800ED4919 /* SlidingMenuViewController.m in Sources */,
 				D4195EC21A92A69C00663149 /* AFHTTPSessionManager.m in Sources */,
 				D49E95BE1AF086DE0016EE2C /* OrderTypeTableViewController.m in Sources */,
+				D4640EA61AF9720E00B81A19 /* LocationManager.m in Sources */,
 				D4195EA31A92A69C00663149 /* BaseViewController.m in Sources */,
 				D46E25881ACC3D9D00AEF681 /* GTLStoreendpointAsaanLongCollection.m in Sources */,
 				D409D7D21AA60A94008FADDF /* PTKTextField.m in Sources */,
@@ -3418,7 +3422,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "$SRCROOT/Savoir/Project Files/entitlements.plist";
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3453,7 +3457,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "$SRCROOT/Savoir/Project Files/entitlements.plist";
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (

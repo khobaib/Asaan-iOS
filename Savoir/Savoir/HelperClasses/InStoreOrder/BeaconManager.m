@@ -34,10 +34,9 @@
 {
     if (self = [super init])
     {
-        NSLog(@"beaconManager init");
         self.inStoreUtils = [[InStoreUtils alloc]init];
         self.beaconManager = [[ESTBeaconManager alloc] init];
-        [self.beaconManager requestAlwaysAuthorization];
+//        [self.beaconManager requestAlwaysAuthorization];
         self.beaconManager.delegate = self;
         NSUUID *beaconUUID = [[NSUUID alloc]initWithUUIDString:@"B9407F30-F5F8-466E-AFF9-25556B57FE6D"];
         self.beaconRegion = [[CLBeaconRegion alloc]
@@ -56,18 +55,15 @@
 {
     if ([ESTBeaconManager authorizationStatus] == kCLAuthorizationStatusNotDetermined)
     {
-        NSLog(@"beaconManager kCLAuthorizationStatusNotDetermined");
-        [self.beaconManager requestAlwaysAuthorization];
+//        [self.beaconManager requestAlwaysAuthorization];
         [self.beaconManager startRangingBeaconsInRegion:self.beaconRegion];
     }
     else if([ESTBeaconManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways)
     {
-        NSLog(@"beaconManager kCLAuthorizationStatusAuthorizedAlways");
         [self.beaconManager startRangingBeaconsInRegion:self.beaconRegion];
     }
     else if([ESTBeaconManager authorizationStatus] == kCLAuthorizationStatusDenied)
     {
-        NSLog(@"beaconManager kCLAuthorizationStatusDenied");
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location Access Denied"
                                                         message:@"You have denied access to location services. Change this in app settings."
                                                        delegate:nil
@@ -78,7 +74,6 @@
     }
     else if([ESTBeaconManager authorizationStatus] == kCLAuthorizationStatusRestricted)
     {
-        NSLog(@"beaconManager kCLAuthorizationStatusRestricted");
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location Not Available"
                                                         message:@"You have no access to location services."
                                                        delegate:nil

@@ -37,7 +37,6 @@
 #import "MBProgressHUD.h"
 #import "ProgressHUD.h"
 #import "Constants.h"
-#import <CoreLocation/CoreLocation.h>
 
 #import <ParseFacebookUtilsV4/PFFacebookUtils.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
@@ -45,18 +44,17 @@
 #import "TablesViewController.h"
 #import "ExistingGroupsTableViewController.h"
 #import "MenuWebViewController.h"
+#import "LocationReceiver.h"
+#import "LocationManager.h"
 
-@interface StoreListTableViewController ()<DataProviderDelegate, CLLocationManagerDelegate>
+@interface StoreListTableViewController ()<DataProviderDelegate, LocationReceiver>
 
 @property (nonatomic, strong) MBProgressHUD *hud;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) int startPosition;
 @property (nonatomic) int maxResult;
 @property (weak, nonatomic) GTLStoreendpointStoreAndStats *selectedStore;
-@property (strong, nonatomic) CLLocation *lastLocation;
-@property (nonatomic) NSUInteger distanceFromLastLocation;
-
-- (void)startStandardUpdates;
+@property (strong, nonatomic) CLLocation *location;
 
 - (void)showChatRoomForStore:(long long)storeId WithName:(NSString *)storeName;
 @end
@@ -71,8 +69,7 @@
 #pragma mark - View Life-cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self startStandardUpdates];
+
     // Initialize the refresh control.
     self.refreshControl = [[UIRefreshControl alloc] init];
     //    self.refreshControl.backgroundColor = [UIColor goldColor];
@@ -85,6 +82,66 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)startStandardUpdates
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    
+    if ([appDelegate.globalObjectHolder.locationManager canAccessLocationServices] == YES)
+    {
+        [appDelegate.globalObjectHolder.locationManager startStandardUpdates:self];
+        return;
+    }
+    
+    if ([appDelegate.globalObjectHolder.locationManager shouldAskForLocationAccessPermission] == YES)
+    {
+//        [UIAlertView showWithTitle:@"Let Savoir Access Your Location even in the background?" message:@"This lets you find great restaurants near you, open a tab and pay by phone without waiting for a server." cancelButtonTitle:@"Not Now" otherButtonTitles:@[@"Give Access"] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex)
+//        {
+//            if (buttonIndex != [alertView cancelButtonIndex])
+//                [appDelegate.globalObjectHolder.locationManager requestAuthorization];
+//            else
+//                appDelegate.globalObjectHolder.locationManager.askedForLocationAccessPermission = [NSDate date];
+//        }];
+        UIAlertController * alert=   [UIAlertController
+                                      alertControllerWithTitle:@"Let Savoir Access Your Location even in the background?"
+                                      message:@"This lets you find great restaurants near you, open a tab and pay by phone without waiting for a server."
+                                      preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* give_access = [UIAlertAction
+                             actionWithTitle:@"Give Access"
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action)
+                             {
+                                 [alert dismissViewControllerAnimated:YES completion:nil];
+                                 [appDelegate.globalObjectHolder.locationManager requestAuthorization];
+                             }];
+        UIAlertAction* cancel = [UIAlertAction
+                                 actionWithTitle:@"Not Now"
+                                 style:UIAlertActionStyleDefault
+                                 handler:^(UIAlertAction * action)
+                                 {
+                                     appDelegate.globalObjectHolder.locationManager.askedForLocationAccessPermission = [NSDate date];
+                                    [alert dismissViewControllerAnimated:YES completion:nil];
+                                 }];
+        
+        [alert addAction:give_access];
+        [alert addAction:cancel];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    
+    [self locationChanged];
+}
+
+- (void)locationChanged
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    if (self.location == nil || [appDelegate.globalObjectHolder.locationManager.lastLocation distanceFromLocation:self.location] > 50)
+    {
+        self.location = appDelegate.globalObjectHolder.locationManager.lastLocation;
+        [self setupDatastore];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -161,6 +218,8 @@
     }
     else
         self.navigationItem.rightBarButtonItem = nil;
+    
+    [self startStandardUpdates];
 }
 
 - (Boolean) isVersionSupported
@@ -198,8 +257,8 @@
         __weak __typeof(self) weakSelf = self;
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
         GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
-        double latInRads = DEG2RAD(appDelegate.globalObjectHolder.location.coordinate.latitude);
-        double lngInRads = DEG2RAD(appDelegate.globalObjectHolder.location.coordinate.longitude);
+        double latInRads = DEG2RAD(appDelegate.globalObjectHolder.locationManager.lastLocation.coordinate.latitude);
+        double lngInRads = DEG2RAD(appDelegate.globalObjectHolder.locationManager.lastLocation.coordinate.longitude);
         GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoresOrderedByDistanceWithStatsWithFirstPosition:0 lat:latInRads lng:lngInRads maxResult:FluentPagingTablePageSize];
         
         [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreAndStatsAndCount *object,NSError *error)
@@ -282,8 +341,6 @@
         return cell;
     }
     GTLStoreendpointStoreAndStats *storeAndStats = dataObject;
-    if (indexPath.row == 0)
-        self.distanceFromLastLocation = storeAndStats.distance.intValue * 1609.34;
 
     [cell.callButton addTarget:self action:@selector(callStore:) forControlEvents:UIControlEventTouchUpInside];
     [cell.chatButton addTarget:self action:@selector(chatWithStore:) forControlEvents:UIControlEventTouchUpInside];
@@ -562,98 +619,6 @@
     }
     else
         [self performSegueWithIdentifier:@"segueStoreListToClaimStore" sender:sender];
-}
-
-#pragma mark - Location
-- (void)startStandardUpdates
-{
-    if ([CLLocationManager locationServicesEnabled] == NO || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusRestricted || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied)
-    {
-        NSString *msg = [NSString stringWithFormat:@"Location information is not available."];
-        [self.view makeToast:msg];
-        
-        if (self.lastLocation == nil)
-        {
-            // 41.772193,-88.15099
-            AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-            if (appDelegate.globalObjectHolder.location == nil)
-                self.lastLocation = appDelegate.globalObjectHolder.location = [[CLLocation alloc]initWithLatitude:41.772193 longitude:-88.15099];
-            else
-                self.lastLocation = appDelegate.globalObjectHolder.location;
-            [self setupDatastore];
-        }
-        return;
-    }
-    
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    // Create the location manager if this object does not
-    // already have one.
-    if (nil == appDelegate.globalObjectHolder.locationManager)
-        appDelegate.globalObjectHolder.locationManager = [[CLLocationManager alloc] init];
- 
-    if ([appDelegate.globalObjectHolder.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)])
-        [appDelegate.globalObjectHolder.locationManager requestAlwaysAuthorization];
-    
-    appDelegate.globalObjectHolder.locationManager.delegate = self;
-    appDelegate.globalObjectHolder.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
-    
-    // Set a movement threshold for new events.
-    appDelegate.globalObjectHolder.locationManager.distanceFilter = 50; // meters
-    
-    [appDelegate.globalObjectHolder.locationManager startUpdatingLocation];
-}
-
-- (void)stopStandardUpdates
-{
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    [appDelegate.globalObjectHolder.locationManager stopUpdatingLocation];
-}
-
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
-{
-    [manager stopUpdatingLocation];
-    NSString *msg = [NSString stringWithFormat:@"Location update failed - error: %@", [error userInfo][@"error"]];
-    [self.view makeToast:msg];
-    NSLog(@"Location update failed - error: %@", [error userInfo][@"error"]);
-    
-    if (self.lastLocation == nil)
-    {
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-        if (appDelegate.globalObjectHolder.location == nil)
-            self.lastLocation = appDelegate.globalObjectHolder.location = [[CLLocation alloc]initWithLatitude:41.772193 longitude:-88.15099];
-        else
-            self.lastLocation = appDelegate.globalObjectHolder.location;
-        [self setupDatastore];
-    }
-}
-
-// Delegate method from the CLLocationManagerDelegate protocol.
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
-{
-    [manager stopUpdatingLocation];
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    appDelegate.globalObjectHolder.location = [locations lastObject];
-    
-    if (self.distanceFromLastLocation < 50)
-        self.distanceFromLastLocation = 50;
-    
-    if (self.lastLocation == nil || [self.lastLocation distanceFromLocation:appDelegate.globalObjectHolder.location] > self.distanceFromLastLocation)
-    {
-        self.lastLocation = appDelegate.globalObjectHolder.location;
-        CLLocationCoordinate2D coordinate = [appDelegate.globalObjectHolder.location coordinate];
-        
-        NSLog(@"Location update received - latitude:%f longitude:%f",coordinate.latitude,coordinate.longitude);
-        
-        [self setupDatastore];
-    }
-
-    //    NSDate* eventDate = location.timestamp;
-    //    NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
-    //    if (abs(howRecent) < 15.0)
-    //    {
-    //        // If the event is recent, do something with it.
-    //        NSLog(@"latitude %+.6f, longitude %+.6f\n", location.coordinate.latitude, location.coordinate.longitude);
-    //    }
 }
 
 #pragma mark - Navigation

@@ -36,8 +36,8 @@
             GTLServiceStoreendpoint *gtlStoreService= [appDelegate gtlStoreService];
             NSUInteger firstPosition = indexes.firstIndex;
             NSUInteger maxResult = indexes.count;
-            double latInRads = DEG2RAD(appDelegate.globalObjectHolder.location.coordinate.latitude);
-            double lngInRads = DEG2RAD(appDelegate.globalObjectHolder.location.coordinate.longitude);
+            double latInRads = DEG2RAD(appDelegate.globalObjectHolder.locationManager.lastLocation.coordinate.latitude);
+            double lngInRads = DEG2RAD(appDelegate.globalObjectHolder.locationManager.lastLocation.coordinate.longitude);
             GTLQueryStoreendpoint *query=[GTLQueryStoreendpoint queryForGetStoresOrderedByDistanceWithStatsWithFirstPosition:firstPosition lat:latInRads lng:lngInRads maxResult:maxResult];
             [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket,GTLStoreendpointStoreAndStatsAndCount *object,NSError *error)
             {

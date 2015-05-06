@@ -66,9 +66,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Savoir uses your location to find great restaurants near you, obtain wait times and pay the check inside a reatsurant.</string>
+	<string>Savoir uses your location to find great restaurants near you, obtain wait times and pay the check inside a restaurant.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Savoir uses your location to find great restaurants near you, obtain wait times and pay the check inside a reatsurant.</string>
+	<string>Savoir uses your location to find great restaurants near you, obtain wait times and pay the check inside a restaurant.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>bluetooth-central</string>

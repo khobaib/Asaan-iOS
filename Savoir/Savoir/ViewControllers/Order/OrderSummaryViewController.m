@@ -184,9 +184,9 @@
         return 0;
     
     if (self.orderInProgress.orderType == OrderTypeTableViewController.ORDERTYPE_CARRYOUT)
-        return self.orderInProgress.selectedMenuItems.count + 7;
+        return self.orderInProgress.selectedMenuItems.count + 6;
     else
-        return self.orderInProgress.selectedMenuItems.count + 9;
+        return self.orderInProgress.selectedMenuItems.count + 8;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -437,19 +437,19 @@
             cell.tag = 701;
             break;
         }
-        case 8: // Payment Mode
-        {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"OtherCell" forIndexPath:indexPath];
-            NSString *card = appDelegate.globalObjectHolder.defaultUserCard.last4;
-            
-            if ([StripePay applePayEnabled])
-                cell.textLabel.text = @"Payment Mode Apple Pay";
-            else if (IsEmpty(card))
-                card = @"(Not specified)";
-            cell.textLabel.text = [NSString stringWithFormat:@"Payment Mode %@", card];
-            cell.tag = 702;
-            break;
-        }
+//        case 8: // Payment Mode
+//        {
+//            cell = [tableView dequeueReusableCellWithIdentifier:@"OtherCell" forIndexPath:indexPath];
+//            NSString *card = appDelegate.globalObjectHolder.defaultUserCard.last4;
+//            
+//            if ([StripePay applePayEnabled])
+//                cell.textLabel.text = @"Payment Mode Apple Pay";
+//            else if (IsEmpty(card))
+//                card = @"(Not specified)";
+//            cell.textLabel.text = [NSString stringWithFormat:@"Payment Mode %@", card];
+//            cell.tag = 702;
+//            break;
+//        }
 //        case 9: // Special Instructions
 //        {
 //            cell = [tableView dequeueReusableCellWithIdentifier:@"OtherCell" forIndexPath:indexPath];
@@ -486,8 +486,6 @@
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     if (cell.tag == 701)
         [self performSegueWithIdentifier:@"segueOrderSummaryToSelectAddress" sender:self];
-    else if (cell.tag == 702)
-        [self performSegueWithIdentifier:@"segueOrderSummaryToSelectPaymentMode" sender:self];
     else if (cell.tag == 703)
         [self performSegueWithIdentifier:@"segueOrderSummaryToAddDiscount" sender:self];
 }

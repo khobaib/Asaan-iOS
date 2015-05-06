@@ -109,27 +109,16 @@
     
     self.notificationUtils = [[NotificationUtils alloc]init];
     
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
-    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
-        UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
-                                                        UIUserNotificationTypeBadge |
-                                                        UIUserNotificationTypeSound);
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
-                                                                                 categories:[self.notificationUtils createNotificationCategories]];
-        [application registerUserNotificationSettings:settings];
-        [application registerForRemoteNotifications];
-    } else
-#endif
-    {
-        [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
-                                                         UIRemoteNotificationTypeAlert |
-                                                         UIRemoteNotificationTypeSound)];
-    }
+    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
+                                                    UIUserNotificationTypeBadge |
+                                                    UIUserNotificationTypeSound);
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
+                                                                             categories:[self.notificationUtils createNotificationCategories]];
+//    [application registerUserNotificationSettings:settings];
+//    [application registerForRemoteNotifications];
     
-    if (SYSTEM_VERSION_GREATER_THAN(@"8.0")) {
-        [[UINavigationBar appearance] setHidden:NO];
-        [UINavigationBar appearance].translucent = NO;
-    }
+    [[UINavigationBar appearance] setHidden:NO];
+    [UINavigationBar appearance].translucent = NO;
     
 //    [self.navigationController setNavigationBarHidden:NO];
 //    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
@@ -176,7 +165,6 @@
     [self.hostReachability startNotifier];
     [self updateInterfaceWithReachability:self.hostReachability];
     
-//    [self handleNetworkStatusChange:[reachability currentReachabilityStatus]];
     return YES;
 }
 
@@ -193,42 +181,33 @@
 
 - (void)updateInterfaceWithReachability:(Reachability *)reachability
 {
-    if (reachability == self.hostReachability)
-    {
-        NetworkStatus status = [reachability currentReachabilityStatus];
+    NetworkStatus status = [reachability currentReachabilityStatus];
 //        BOOL connectionRequired = [reachability connectionRequired];
-        if(status == NotReachable)
+    if (self.currentNetworkStatus == status)
+        return;
+    self.currentNetworkStatus = status;
+
+    if(status == NotReachable)
+    {
+        //        [[[UIAlertView alloc]initWithTitle:@"Network Unavailable!" message:@"Savoir requires network access to provide our services. Please try again when connectivity becomes available." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+        if (self.networkStatusAlertWindow == nil)
         {
-            //        [[[UIAlertView alloc]initWithTitle:@"Network Unavailable!" message:@"Savoir requires network access to provide our services. Please try again when connectivity becomes available." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
-            if (self.networkStatusAlertWindow == nil)
-            {
-                CGRect screenBounds = [[UIScreen mainScreen] bounds];
-                self.networkStatusAlertWindow = [[UIWindow alloc] initWithFrame:screenBounds];
-                self.networkStatusAlertWindow.windowLevel = UIWindowLevelAlert;
-            }
-            
-            NoNetworkViewController * myAlert = [[NoNetworkViewController alloc] init];
-            self.networkStatusAlertWindow.rootViewController = myAlert;
-            
-            [self.networkStatusAlertWindow makeKeyAndVisible];
+            CGRect screenBounds = [[UIScreen mainScreen] bounds];
+            self.networkStatusAlertWindow = [[UIWindow alloc] initWithFrame:screenBounds];
+            self.networkStatusAlertWindow.windowLevel = UIWindowLevelAlert;
         }
-        else
-        {
-            self.networkStatusAlertWindow.hidden = true;
-            [self globalObjectHolder];
-            if (self.storeListTableViewController != nil)
-                [self.storeListTableViewController viewWillAppear:YES];
-            
-//            if (connectionRequired)
-//            {
-//                NSString *msg = NSLocalizedString(@"Cellular data network is available.\nInternet traffic will be routed through it after a connection is established.", @"Reachability text if a connection is required");
-//            }
-//            else
-//            {
-//                NSString *msg = NSLocalizedString(@"Cellular data network is active.\nInternet traffic will be routed through it.", @"Reachability text if a connection is not required");
-//            }
-        }
-        self.currentNetworkStatus = status;
+        
+        NoNetworkViewController * myAlert = [[NoNetworkViewController alloc] init];
+        self.networkStatusAlertWindow.rootViewController = myAlert;
+        
+        [self.networkStatusAlertWindow makeKeyAndVisible];
+    }
+    else
+    {
+        self.networkStatusAlertWindow.hidden = true;
+        [self globalObjectHolder];
+        if (self.storeListTableViewController != nil)
+            [self.storeListTableViewController viewWillAppear:YES];
     }
 }
 

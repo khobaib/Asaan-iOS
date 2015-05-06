@@ -16,6 +16,7 @@
 @implementation GlobalObjectHolder
 @synthesize orderInProgress = _orderInProgress;
 @synthesize beaconManager = _beaconManager;
+@synthesize locationManager = _locationManager;
 
 - (OnlineOrderDetails *)createOrderInProgress {
     
@@ -41,8 +42,6 @@
     self.currentUser = nil;
     self.usersRoomsAndStores = nil;
     self.storesOwnedByUser = nil;
-    self.locationManager = nil;
-    self.location = nil;
     self.versionFromServer = nil;
     _beaconManager = nil;
     // Unsubscribe from push notifications by removing the user association from the current installation.
@@ -60,6 +59,13 @@
     if(_beaconManager == nil)
         _beaconManager = [[BeaconManager alloc]init];
     return _beaconManager;
+}
+
+- (LocationManager *)locationManager {
+    
+    if(_locationManager == nil)
+        _locationManager = [[LocationManager alloc]init];
+    return _locationManager;
 }
 
 - (void) loadAllUserObjects

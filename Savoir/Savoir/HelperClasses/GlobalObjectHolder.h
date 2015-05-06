@@ -16,6 +16,7 @@
 #import "GTLUserendpointUser.h"
 #import <CoreLocation/CoreLocation.h>
 #import "BeaconManager.h"
+#import "LocationManager.h"
 
 @interface GlobalObjectHolder : NSObject
 @property (strong, nonatomic) OnlineOrderDetails *orderInProgress;
@@ -28,9 +29,8 @@
 @property (strong, nonatomic) GTLStoreendpointChatRoomsAndStoreChatMemberships *usersRoomsAndStores;
 @property (strong, nonatomic) GTLStoreendpointAsaanLongCollection *storesOwnedByUser;
 
-@property (strong, nonatomic) CLLocationManager *locationManager;
-@property (strong, nonatomic) CLLocation* location;
 @property (readonly, strong, nonatomic) BeaconManager *beaconManager;
+@property (readonly, strong, nonatomic) LocationManager *locationManager;
 
 @property (strong, nonatomic) NSString *versionFromServer;
 

@@ -68,7 +68,7 @@
         NSString *strMsg = [NSString stringWithFormat:@"Dine In: %@ does not provide mobile pay at the table", self.selectedStore.name];
         NSAttributedString* attributedString = [[NSAttributedString alloc] initWithString:strMsg attributes:attributes];
         
-        self.txtDelivery.attributedText = attributedString;
+        self.txtDineIn.attributedText = attributedString;
     }
 }
 
