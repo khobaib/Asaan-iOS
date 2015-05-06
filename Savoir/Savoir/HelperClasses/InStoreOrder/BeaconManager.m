@@ -9,7 +9,6 @@
 #import "BeaconManager.h"
 #import <EstimoteSDK/EstimoteSDK.h>
 #import "AppDelegate.h"
-#import "InStoreUtils.h"
 
 
 @interface BeaconManager ()<ESTBeaconManagerDelegate>
@@ -23,8 +22,6 @@
 // ----------------------------------------------------------
 // GETTING STARTED INTERFACE ends here
 // ----------------------------------------------------------
-
-@property (strong, nonatomic) InStoreUtils *inStoreUtils;
 
 @end
 
@@ -117,15 +114,6 @@ monitoringDidFailForRegion:(CLBeaconRegion *)region
        didEnterRegion:(CLBeaconRegion *)region
 {
     NSLog(@"beaconManager didEnterRegion");
-//    NotificationUtils *notificationUtils = [[NotificationUtils alloc]init];
-//    [notificationUtils scheduleLocalNotificationWithString:@"You have entered the region."];
-//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Entered Region"
-//                                                    message:@"You have entered the region."
-//                                                   delegate:nil
-//                                          cancelButtonTitle:@"OK"
-//                                          otherButtonTitles: nil];
-//    
-//    [alert show];
     [self startBeaconRanging];
 }
 
@@ -197,9 +185,13 @@ monitoringDidFailForRegion:(CLBeaconRegion *)region
     if (nearestBeacon)
     {
         [self.beaconManager stopRangingBeaconsInRegion:self.beaconRegion];
-        self.beacon = nearestBeacon;
-        self.beaconRegion = region;
-        [self.inStoreUtils startInStoreModeForBeaconId:nearestBeacon.major.longValue];
+        
+        if (self.beacon.major.longLongValue != nearestBeacon.major.longLongValue)
+        {
+            self.beacon = nearestBeacon;
+            self.beaconRegion = region;
+            [self.inStoreUtils startInStoreModeForBeaconId:nearestBeacon.major.longValue];
+        }
     }
 }
 

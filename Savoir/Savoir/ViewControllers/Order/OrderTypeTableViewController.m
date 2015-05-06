@@ -34,9 +34,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.tableView.tableHeaderView = [UtilCalls setupStaticHeaderViewForTable:self.tableView WithTitle:self.selectedStore.name AndSubTitle:@"Please select your order type."];
-    self.inStoreUtils = [[InStoreUtils alloc]init];
+    self.inStoreUtils = appDelegate.globalObjectHolder.beaconManager.inStoreUtils;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -24,6 +24,16 @@
 
 @implementation InStoreUtils
 
+- (id)init
+{
+    if (self = [super init])
+    {
+        self.isInStore = false;
+        self.store = nil;
+    }
+    return self;
+}
+
 - (void) startInStoreModeForBeaconId:(long)beaconId
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -37,7 +47,12 @@
      {
          if (!error)
          {
-             [self startInStoreMode:nil ForStore:object InBeaconMode:true];
+             if (object != nil)
+             {
+                 self.isInStore = true;
+                 self.store = object;
+                 [self startInStoreMode:nil ForStore:object InBeaconMode:true];
+             }
          }
          else
          {
@@ -49,6 +64,9 @@
 
 - (void) stopInStoreMode
 {
+    self.isInStore = false;
+    self.store = nil;
+    
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     if (appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.subTotal.longLongValue == 0 ||
         appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.subTotal.longLongValue == appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order.alreadyPaidSubtotal.longLongValue)

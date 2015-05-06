@@ -150,7 +150,8 @@
     NSNumber *status = [userInfo objectForKey:@"INSTORE_ORDER_STATUS"];
     if (status.longValue == 2)
     {
-        InStoreUtils *utils = [[InStoreUtils alloc]init];
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+        InStoreUtils *utils = appDelegate.globalObjectHolder.beaconManager.inStoreUtils;
         [utils startInStoreMode:nil ForStore:nil InBeaconMode:false];
     }
 }

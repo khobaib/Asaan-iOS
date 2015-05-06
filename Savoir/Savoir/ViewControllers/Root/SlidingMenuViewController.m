@@ -14,6 +14,7 @@
 #import "AppDelegate.h"
 #import "UIView+Toast.h"
 #import "GroupView.h"
+#import "UtilCalls.h"
 
 @implementation SMTableViewCell1
 @end
@@ -26,6 +27,9 @@
 #define SEGUE_SMToCart              @"segueSMToOrderSummary"
 #define SEGUE_SMToOrderHistory      @"segueSMToOrderHistory"
 #define SEGUE_UnwindToStoreList     @"UnwindToStoreList"
+
+#define SEGUE_SMToStoreWaitListInServerMode    @"SMToServerWaitList"
+#define SEGUE_SMToStoreDiningInMode    @"FAKE_SMToDiningIn"
 
 @interface SlidingMenuViewController () {
 
@@ -41,19 +45,32 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _menu = @[@"Stores", @"Profile", @"Chat History", @"Wait List Status", @"Pending Online Order", @"Order History", @"Logout"];
-    _menuImage = @[@"stores", @"profile", @"chat_history", @"no_image", @"cart", @"order_history", @"logout"];
-    _menuSegue = @[SEGUE_SMToStoreList, SEGUE_SMToUpdateProfile, SEGUE_SMToChatHistory, SEGUE_SMToWaitListStatus, SEGUE_SMToCart, SEGUE_SMToOrderHistory, SEGUE_UnwindToStoreList];
-    
-    NSAssert(_menu.count == _menuSegue.count, @"Menu and MenuSegue length should be equal.");
-    
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    appDelegate.topViewController = self;
+//    appDelegate.topViewController = self;
+    
+    if (appDelegate.globalObjectHolder.beaconManager.inStoreUtils.isInStore == true &&
+        [UtilCalls userBelongsToStoreChatTeamForStore:appDelegate.globalObjectHolder.beaconManager.inStoreUtils.store])
+    {
+        _menu = @[@"Stores", @"Profile", @"Chat History", @"Wait List Status", @"Tables", @"Logout"];
+        _menuImage = @[@"stores", @"profile", @"chat_history", @"waitlist_table_countdown", @"cart", @"logout"];
+        _menuSegue = @[SEGUE_SMToStoreList, SEGUE_SMToUpdateProfile, SEGUE_SMToChatHistory, SEGUE_SMToStoreWaitListInServerMode, SEGUE_SMToStoreDiningInMode, SEGUE_UnwindToStoreList];
+        
+        NSAssert(_menu.count == _menuSegue.count, @"Menu and MenuSegue length should be equal.");
+    }
+    else
+    {
+        _menu = @[@"Stores", @"Profile", @"Chat History", @"Wait List Status", @"Pending Online Order", @"Dining In Order", @"Order History", @"Logout"];
+        _menuImage = @[@"stores", @"profile", @"chat_history", @"waitlist_table_countdown", @"cart", @"no_image", @"order_history", @"logout"];
+        _menuSegue = @[SEGUE_SMToStoreList, SEGUE_SMToUpdateProfile, SEGUE_SMToChatHistory, SEGUE_SMToWaitListStatus, SEGUE_SMToCart, SEGUE_SMToStoreDiningInMode, SEGUE_SMToOrderHistory, SEGUE_UnwindToStoreList];
+        
+        NSAssert(_menu.count == _menuSegue.count, @"Menu and MenuSegue length should be equal.");
+    }
+    
     [self.tableView reloadData];
 }
 
@@ -65,10 +82,10 @@
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if ([segue.identifier isEqualToString:@"SMToFriendsSegue"]) {
-        AddFriendViewController *vc = (AddFriendViewController *)((UINavigationController *)segue.destinationViewController).topViewController;
-        vc.showSlidingMenuButton = true;
-    }
+//    if ([segue.identifier isEqualToString:@"SMToFriendsSegue"]) {
+//        AddFriendViewController *vc = (AddFriendViewController *)((UINavigationController *)segue.destinationViewController).topViewController;
+//        vc.showSlidingMenuButton = true;
+//    }
 }
 
 
@@ -106,6 +123,14 @@
         else
             cell.userInteractionEnabled = cell.titleLabel.enabled = YES;
     }
+    else if ([_menuSegue[indexPath.row] isEqualToString:SEGUE_SMToStoreDiningInMode])
+    {
+        cell.userInteractionEnabled = cell.titleLabel.enabled = YES;
+        if (appDelegate.globalObjectHolder.beaconManager.inStoreUtils.isInStore == false ||
+            ([UtilCalls userBelongsToStoreChatTeamForStore:appDelegate.globalObjectHolder.beaconManager.inStoreUtils.store] == true &&
+             appDelegate.globalObjectHolder.inStoreOrderDetails == nil))
+            cell.userInteractionEnabled = cell.titleLabel.enabled = NO;
+    }
 
     cell.badgeString = @"";
     if ([_menuSegue[indexPath.row] isEqualToString:SEGUE_SMToChatHistory])
@@ -117,20 +142,19 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 //    NSLog(@"Test %@", _menuSegue[indexPath.row]);
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     if ([_menuSegue[indexPath.row] isEqualToString:@""])
     {
         return;
     }
     else if ([_menuSegue[indexPath.row] isEqualToString:SEGUE_UnwindToStoreList])
     {
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
         [appDelegate clearAllGlobalObjects];
         
         [self performSegueWithIdentifier:SEGUE_SMToStoreList sender:self];
     }
     else if ([_menuSegue[indexPath.row] isEqualToString:SEGUE_SMToCart])
     {
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
         GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
         if (goh.orderInProgress != nil)
             [self performSegueWithIdentifier:_menuSegue[indexPath.row] sender:self];
@@ -146,6 +170,11 @@
 //        ChatTabBarController *frontController = [[ChatTabBarController alloc] init];
         
         [revealController pushFrontViewController:navController animated:YES];
+    }
+    else if ([_menuSegue[indexPath.row] isEqualToString:SEGUE_SMToStoreDiningInMode])
+    {
+        [appDelegate.globalObjectHolder.beaconManager.inStoreUtils startInStoreMode:nil ForStore:appDelegate.globalObjectHolder.beaconManager.inStoreUtils.store InBeaconMode:NO]; //Beaconmode = NO sends control over to new screen.
+        [self.revealViewController revealToggleAnimated:YES];
     }
     else
     {

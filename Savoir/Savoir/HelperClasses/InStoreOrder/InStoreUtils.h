@@ -11,6 +11,9 @@
 
 @interface InStoreUtils : NSObject
 
+@property (nonatomic) Boolean isInStore;
+@property (strong, nonatomic) GTLStoreendpointStore *store;
+
 - (void) startInStoreModeForBeaconId:(long)beaconId;
 - (void) stopInStoreMode;
 - (void) startInStoreMode:(UIViewController *)source ForStore:(GTLStoreendpointStore *)store InBeaconMode:(Boolean)isInBeaconMode;

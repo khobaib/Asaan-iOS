@@ -7,8 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "InStoreUtils.h"
 
 @interface BeaconManager : NSObject
+
+@property (strong, nonatomic) InStoreUtils *inStoreUtils;
 
 - (void) startRegionMonitoring;
 
