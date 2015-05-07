@@ -296,8 +296,9 @@
 
 - (NSString *)orderDateString
 {
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     NSDate *currentTime = [NSDate date];
-    NSDate *newTime = self.orderTime;
+    NSDate *newTime = appDelegate.globalObjectHolder.orderInProgress.orderTime;
     if (newTime == nil)
         newTime = self.orderInProgress.orderTime;
     if (newTime == nil)
@@ -553,11 +554,12 @@
  
     if ([[segue identifier] isEqualToString:@"segueOrderSummaryToMenu"])
     {
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
         MenuTableViewController *controller = [segue destinationViewController];
         [controller setSelectedStore:self.selectedStore];
-        [controller setOrderType:self.orderType];
-        [controller setPartySize:self.partySize];
-        [controller setOrderTime:self.orderTime];
+        [controller setOrderType:appDelegate.globalObjectHolder.orderInProgress.orderType];
+        [controller setPartySize:appDelegate.globalObjectHolder.orderInProgress.partySize];
+        [controller setOrderTime:appDelegate.globalObjectHolder.orderInProgress.orderTime];
         [controller setBMenuIsInOrderMode:YES];
     }
     else if ([[segue identifier] isEqualToString:@"segueOrderSummaryToModifierGroup"])

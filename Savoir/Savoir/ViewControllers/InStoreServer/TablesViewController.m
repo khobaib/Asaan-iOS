@@ -114,6 +114,10 @@
         
         [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointTableGroupsAndOrders *object,NSError *error)
          {
+             if (weakSelf.refreshControl.isRefreshing == true)
+                 [weakSelf.refreshControl endRefreshing];
+             else
+                 [MBProgressHUD hideAllHUDsForView:weakSelf.tableView animated:YES];
              if(!error)
              {
                  weakSelf.ordersAndGroups = object;
@@ -125,10 +129,6 @@
                  NSString *msg = @"Failed to set up tables and orders. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
                  [UtilCalls handleGAEServerError:error Message:msg Title:@"Savoir Error" Silent:false];
              }
-             if (self.refreshControl.isRefreshing == true)
-                 [self.refreshControl endRefreshing];
-             else
-                 [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
          }];
     }
 }

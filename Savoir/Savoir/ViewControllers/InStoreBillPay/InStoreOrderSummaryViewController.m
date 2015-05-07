@@ -79,7 +79,10 @@
 
 - (void)orderChanged:(NSError *)error
 {
-    [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+    if (self.refreshControl.isRefreshing == false)
+        [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+    else
+        [self.refreshControl endRefreshing];
     if (!error)
     {
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
@@ -116,7 +119,8 @@
 
 - (void)refreshOrderDetails
 {
-    [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+    if (self.refreshControl.isRefreshing == false)
+        [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     [appDelegate.globalObjectHolder.inStoreOrderDetails getStoreOrderDetails:self];
 }

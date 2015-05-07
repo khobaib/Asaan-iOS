@@ -8,7 +8,7 @@
 
 #import "OrderTimeTableViewController.h"
 #import "AppDelegate.h"
-#import "OrderSummaryViewController.h"
+#import "MenuTableViewController.h"
 #import "UtilCalls.h"
 
 @interface OrderTimeTableViewController ()
@@ -132,13 +132,14 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
-    if ([[segue identifier] isEqualToString:@"segueOrderTimeToOrder"])
+    if ([[segue identifier] isEqualToString:@"segueOrderTimeToMenu"])
     {
-        OrderSummaryViewController *controller = [segue destinationViewController];
+        MenuTableViewController *controller = [segue destinationViewController];
         [controller setSelectedStore:self.selectedStore];
         [controller setOrderType:self.orderType];
         [controller setPartySize:self.currPartySize];
         [controller setOrderTime:self.currOrderTime];
+        [controller setBMenuIsInOrderMode:YES];
     }
 }
 

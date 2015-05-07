@@ -22,7 +22,7 @@
 #import "InStoreOrderReceiver.h"
 #import "XMLPOSOrder.h"
 
-@interface FinalPaymentViewController ()<InStoreOrderReceiver>
+@interface FinalPaymentViewController ()<InStoreOrderReceiver, UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UISegmentedControl *tipSegmentController;
 @property (weak, nonatomic) IBOutlet UISlider *tipSlider;
 @property (weak, nonatomic) IBOutlet UILabel *txtSubTotal;
@@ -31,6 +31,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *txtFinalAmount;
 @property (weak, nonatomic) IBOutlet UILabel *txtTipLabel;
 @property (weak, nonatomic) IBOutlet UIButton *btnPayNow;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic, strong) NSMutableArray *finalItems;
 
@@ -42,6 +43,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     self.stripePay = [[StripePay alloc]init];
     
@@ -76,6 +79,64 @@
     [super viewWillAppear:animated];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     appDelegate.topViewController = self;
+    [self.tableView reloadData];
+}
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    if (appDelegate.globalObjectHolder.defaultUserCard == nil)
+    {
+        UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+        
+        messageLabel.text = @"No cards have been added. Please add a new card.";
+        messageLabel.textColor = [UIColor whiteColor];
+        messageLabel.numberOfLines = 0;
+        messageLabel.textAlignment = NSTextAlignmentCenter;
+        [messageLabel sizeToFit];
+        
+        self.tableView.backgroundView = messageLabel;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    else
+    {
+        self.tableView.backgroundView = nil;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    }
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PaymentCell" forIndexPath:indexPath];
+    cell.backgroundColor = [UIColor clearColor];
+    UIImageView *imgCardType=(UIImageView *)[cell viewWithTag:501];
+    UILabel *txtCardDetails=(UILabel *)[cell viewWithTag:502];
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    if (appDelegate.globalObjectHolder.defaultUserCard != nil)
+    {
+        imgCardType.image = [UIImage imageNamed:appDelegate.globalObjectHolder.defaultUserCard.type];
+        txtCardDetails.text = [NSString stringWithFormat:@"%@            %ld//%ld", appDelegate.globalObjectHolder.defaultUserCard.last4, appDelegate.globalObjectHolder.defaultUserCard.expMonth.longValue, appDelegate.globalObjectHolder.defaultUserCard.expYear.longValue];
+    }
+    else
+    {
+        imgCardType.image = nil;
+        txtCardDetails.text = @"No card available. Please add a card to proceed.";
+    }
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self showSelectPaymentViewController];
 }
 
 - (void)refreshOrderDetails
@@ -266,18 +327,7 @@
     {
         if (appDelegate.globalObjectHolder.defaultUserCard == nil)
         {
-            UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            SelectPaymentTableViewController *destination = [mainStoryBoard instantiateViewControllerWithIdentifier:@"SelectPaymentTableViewController"];
-            
-            UIStoryboardSegue *segue = [UIStoryboardSegue segueWithIdentifier:@"segueInstorePayToSelectPaymentTableViewController" source:self destination:destination performHandler:^(void) {
-                //view transition/animation
-                [self.navigationController pushViewController:destination animated:YES];
-            }];
-            
-            [self shouldPerformSegueWithIdentifier:segue.identifier sender:self];//optional
-            [self prepareForSegue:segue sender:self];
-            
-            [segue perform];
+            [self showSelectPaymentViewController];
             return;
         }
     }
@@ -288,6 +338,22 @@
     hud.hidden = NO;
     
     [self finishPayForMember];
+}
+
+- (void)showSelectPaymentViewController
+{
+    UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    SelectPaymentTableViewController *destination = [mainStoryBoard instantiateViewControllerWithIdentifier:@"SelectPaymentTableViewController"];
+    
+    UIStoryboardSegue *segue = [UIStoryboardSegue segueWithIdentifier:@"segueInstorePayToSelectPaymentTableViewController" source:self destination:destination performHandler:^(void) {
+        //view transition/animation
+        [self.navigationController pushViewController:destination animated:YES];
+    }];
+    
+    [self shouldPerformSegueWithIdentifier:segue.identifier sender:self];//optional
+    [self prepareForSegue:segue sender:self];
+    
+    [segue perform];
 }
 
 - (void)finishPayForMember

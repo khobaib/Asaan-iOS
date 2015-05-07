@@ -91,7 +91,6 @@
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
-    self.navigationItem.title = _onlineOrderSelectedMenuItem.selectedItem.shortDescription;
     if (_onlineOrderSelectedMenuItem.selectedItem.hasModifiers.boolValue == true)
         [self getModifierGroupsAndModifiers];
     

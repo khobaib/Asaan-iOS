@@ -97,7 +97,6 @@
 
 - (void) changedGroupSelection:(GTLStoreendpointStoreTableGroup *)tableGroup error:(NSError *)error
 {
-    [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
     if (!error)
     {
         self.selectedTableGroup = tableGroup;
@@ -332,7 +331,6 @@
 
 - (void)saveClicked
 {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     
     int tableNumber = [self.txtTable.text intValue];
@@ -344,7 +342,6 @@
     
     if (tableNumber == 0 && guestCount == 0 && poscheckId == 0 && subTotal == 0 && IsEmpty(self.XMLOrderStr))
     {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         return;
     }
     
@@ -404,8 +401,10 @@
     [query setAdditionalHTTPHeaders:dic];
     
     __weak __typeof(self) weakSelf = self;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [gtlStoreService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, GTLStoreendpointStoreOrder *object, NSError *error)
      {
+         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
          if(error)
          {
              NSString *msg = @"Failed to update the order. Please retry in a few minutes. If this error persists please contact Savoir Customer Assistance team.";
@@ -417,7 +416,6 @@
              [weakSelf.receiver changedOrder:appDelegate.globalObjectHolder.inStoreOrderDetails.teamAndOrderDetails.order error:error];
              if (weakSelf.bCloseClicked == true || weakSelf.bSaveClicked == true)
                  [weakSelf performSegueWithIdentifier:@"segueUnwindOrderToServerTable" sender:weakSelf];
-             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
          }
      }];
 }

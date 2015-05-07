@@ -24,7 +24,7 @@
 #import "UIAlertView+Blocks.h"
 #import "HTMLFaxOrder.h"
 
-@interface PayForOnlineOrderViewController ()
+@interface PayForOnlineOrderViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UISegmentedControl *tipSegmentController;
 @property (weak, nonatomic) IBOutlet UISlider *tipSlider;
 @property (weak, nonatomic) IBOutlet UILabel *txtSubTotal;
@@ -33,6 +33,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *txtFinalAmount;
 @property (weak, nonatomic) IBOutlet UILabel *txtTipLabel;
 @property (weak, nonatomic) IBOutlet UIButton *btnPayNow;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic, strong) NSMutableArray *finalItems;
 
@@ -44,6 +45,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     self.stripePay = [[StripePay alloc]init];
     
@@ -59,12 +62,73 @@
     [super viewWillAppear:animated];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     appDelegate.topViewController = self;
+    
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    if (appDelegate.globalObjectHolder.defaultUserCard == nil)
+    {
+        UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+        
+        messageLabel.text = @"No cards have been added. Please add a new card.";
+        messageLabel.textColor = [UIColor whiteColor];
+        messageLabel.numberOfLines = 0;
+        messageLabel.textAlignment = NSTextAlignmentCenter;
+        [messageLabel sizeToFit];
+        
+        self.tableView.backgroundView = messageLabel;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    else
+    {
+        self.tableView.backgroundView = nil;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    }
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PaymentCell" forIndexPath:indexPath];
+    cell.backgroundColor = [UIColor clearColor];
+    UIImageView *imgCardType=(UIImageView *)[cell viewWithTag:501];
+    UILabel *txtCardDetails=(UILabel *)[cell viewWithTag:502];
+
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    if (appDelegate.globalObjectHolder.defaultUserCard != nil)
+    {
+        imgCardType.image = [UIImage imageNamed:appDelegate.globalObjectHolder.defaultUserCard.type];
+        txtCardDetails.text = [NSString stringWithFormat:@"%@            %ld//%ld", appDelegate.globalObjectHolder.defaultUserCard.last4, appDelegate.globalObjectHolder.defaultUserCard.expMonth.longValue, appDelegate.globalObjectHolder.defaultUserCard.expYear.longValue];
+    }
+    else
+    {
+        imgCardType.image = nil;
+        txtCardDetails.text = @"No card available. Please add a card to proceed.";
+    }
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self performSegueWithIdentifier:@"seguePayForOnlineToSelectPayment" sender:self];
+}
+
+#pragma mark - Internal Calls
 
 - (double)gratuity
 {
@@ -91,6 +155,22 @@
     self.txtTipLabel.text = [NSString stringWithFormat:@"Tip (%d%%):", (int)(self.tipSlider.value)];
 }
 
+- (NSString *)orderDateString
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    NSDate *currentTime = [NSDate date];
+    NSDate *newTime = appDelegate.globalObjectHolder.orderInProgress.orderTime;
+    
+    NSDate *minOrderTime = [[NSDate alloc] initWithTimeInterval:3600
+                                                      sinceDate:currentTime];
+    NSDate *orderTime = [newTime laterDate:minOrderTime];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"hh:mm a"];
+    return [dateFormatter stringFromDate: orderTime];
+}
+
+#pragma mark - Actions
+
 - (IBAction)tipSegmentControllerValueChanged:(id)sender
 {
     if (self.tipSegmentController.selectedSegmentIndex == 0)
@@ -115,20 +195,6 @@
         self.tipSegmentController.selectedSegmentIndex = 3;
     
     [self updatePaymentValues];
-}
-
-- (NSString *)orderDateString
-{
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    NSDate *currentTime = [NSDate date];
-    NSDate *newTime = appDelegate.globalObjectHolder.orderInProgress.orderTime;
-    
-    NSDate *minOrderTime = [[NSDate alloc] initWithTimeInterval:3600
-                                                      sinceDate:currentTime];
-    NSDate *orderTime = [newTime laterDate:minOrderTime];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"hh:mm a"];
-    return [dateFormatter stringFromDate: orderTime];
 }
 
 - (IBAction)payNowClicked:(id)sender
