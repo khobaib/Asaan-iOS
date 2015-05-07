@@ -377,6 +377,15 @@
 		D445D72F1A96BC5C00ED4919 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D445D72C1A96BC5C00ED4919 /* AppDelegate.m */; };
 		D445D7311A96BC5C00ED4919 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D445D72E1A96BC5C00ED4919 /* main.m */; };
 		D4640EA61AF9720E00B81A19 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D4640EA51AF9720E00B81A19 /* LocationManager.m */; };
+		D46653E01AFB32040060A357 /* Instabug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D46653DE1AFB32040060A357 /* Instabug.framework */; };
+		D46653E11AFB32040060A357 /* Instabug.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = D46653DF1AFB32040060A357 /* Instabug.bundle */; };
+		D46653E51AFB325C0060A357 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D46653E41AFB325C0060A357 /* MessageUI.framework */; };
+		D46653E71AFB32870060A357 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D46653E61AFB32870060A357 /* CoreTelephony.framework */; };
+		D46653E91AFB32B60060A357 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D46653E81AFB32B60060A357 /* OpenGLES.framework */; };
+		D46653EB1AFB32D50060A357 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D46653EA1AFB32D50060A357 /* GLKit.framework */; };
+		D46653EC1AFB34770060A357 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D46653E21AFB323B0060A357 /* libc++.dylib */; };
+		D46653EE1AFB35A90060A357 /* Instabug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D46653ED1AFB35A90060A357 /* Instabug.framework */; };
+		D46653F01AFB35E10060A357 /* Instabug.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D46653EF1AFB35E10060A357 /* Instabug.bundle */; };
 		D46DA7831A92B26B00020313 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D46DA7811A92B26B00020313 /* Info.plist */; };
 		D46DA7861A92B5A400020313 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D46DA7851A92B5A400020313 /* CoreAudio.framework */; };
 		D46E25841ACA333600AEF681 /* DBChooser.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D46E25821ACA333600AEF681 /* DBChooser.bundle */; };
@@ -563,7 +572,6 @@
 		D4195BF91A92A69B00663149 /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlus.framework; sourceTree = "<group>"; };
 		D4195BFA1A92A69B00663149 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		D4195BFB1A92A69B00663149 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseCrashReporting.framework; sourceTree = "<group>"; };
-		D4195BFC1A92A69B00663149 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		D4195BFD1A92A69B00663149 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		D4195C001A92A69B00663149 /* MenuItemLoadingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuItemLoadingOperation.h; sourceTree = "<group>"; };
 		D4195C011A92A69B00663149 /* MenuItemLoadingOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuItemLoadingOperation.m; sourceTree = "<group>"; };
@@ -1137,6 +1145,15 @@
 		D4640EA41AF9720E00B81A19 /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		D4640EA51AF9720E00B81A19 /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		D4640EA81AF9849F00B81A19 /* LocationReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationReceiver.h; sourceTree = "<group>"; };
+		D46653DE1AFB32040060A357 /* Instabug.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Instabug.framework; path = Savoir/frameworks/Instabug.framework; sourceTree = "<group>"; };
+		D46653DF1AFB32040060A357 /* Instabug.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Instabug.bundle; path = Savoir/frameworks/Instabug.bundle; sourceTree = "<group>"; };
+		D46653E21AFB323B0060A357 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		D46653E41AFB325C0060A357 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		D46653E61AFB32870060A357 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		D46653E81AFB32B60060A357 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		D46653EA1AFB32D50060A357 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		D46653ED1AFB35A90060A357 /* Instabug.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Instabug.framework; sourceTree = "<group>"; };
+		D46653EF1AFB35E10060A357 /* Instabug.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Instabug.bundle; path = Savoir/frameworks/Instabug.bundle; sourceTree = "<group>"; };
 		D46DA7811A92B26B00020313 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D46DA7851A92B5A400020313 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		D46E25821ACA333600AEF681 /* DBChooser.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DBChooser.bundle; sourceTree = "<group>"; };
@@ -1149,7 +1166,6 @@
 		D4721D251AEACE1D00974271 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseCrashReporting.framework; sourceTree = "<group>"; };
 		D4721D261AEACE1D00974271 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		D4721D271AEACE1D00974271 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
-		D4721D281AEACE1D00974271 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		D4721D291AEACE1D00974271 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		D4721D2A1AEACE1D00974271 /* DBChooser.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DBChooser.framework; sourceTree = "<group>"; };
 		D4721D2B1AEACE1D00974271 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
@@ -1237,8 +1253,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D46653EC1AFB34770060A357 /* libc++.dylib in Frameworks */,
+				D46653EB1AFB32D50060A357 /* GLKit.framework in Frameworks */,
+				D46653E91AFB32B60060A357 /* OpenGLES.framework in Frameworks */,
+				D46653E71AFB32870060A357 /* CoreTelephony.framework in Frameworks */,
+				D46653E51AFB325C0060A357 /* MessageUI.framework in Frameworks */,
+				D46653E01AFB32040060A357 /* Instabug.framework in Frameworks */,
+				D46653E11AFB32040060A357 /* Instabug.bundle in Frameworks */,
 				D4B602ED1AEAEA7B0007BA41 /* Crashlytics.framework in Frameworks */,
 				D4B602EB1AEAEA7B0007BA41 /* Fabric.framework in Frameworks */,
+				D46653EE1AFB35A90060A357 /* Instabug.framework in Frameworks */,
 				D4721D2E1AEACE1D00974271 /* EstimoteSDK.framework in Frameworks */,
 				D4721D391AEACE7600974271 /* CoreBluetooth.framework in Frameworks */,
 				D41960021A92ADB300663149 /* CoreLocation.framework in Frameworks */,
@@ -1525,11 +1549,11 @@
 		D4195BF41A92A69B00663149 /* frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D46653ED1AFB35A90060A357 /* Instabug.framework */,
 				D4721D241AEACE1D00974271 /* EstimoteSDK.framework */,
 				D4721D251AEACE1D00974271 /* ParseCrashReporting.framework */,
 				D4721D261AEACE1D00974271 /* ParseUI.framework */,
 				D4721D271AEACE1D00974271 /* ParseFacebookUtilsV4.framework */,
-				D4721D281AEACE1D00974271 /* ParseFacebookUtils.framework */,
 				D4721D291AEACE1D00974271 /* Parse.framework */,
 				D4721D2A1AEACE1D00974271 /* DBChooser.framework */,
 				D4721D2B1AEACE1D00974271 /* Fabric.framework */,
@@ -1542,7 +1566,6 @@
 				D4195BF91A92A69B00663149 /* GooglePlus.framework */,
 				D4195BFA1A92A69B00663149 /* Parse.framework */,
 				D4195BFB1A92A69B00663149 /* ParseCrashReporting.framework */,
-				D4195BFC1A92A69B00663149 /* ParseFacebookUtils.framework */,
 				D4195BFD1A92A69B00663149 /* ParseUI.framework */,
 			);
 			path = frameworks;
@@ -2629,6 +2652,7 @@
 		D4F275961A0C021800CEC95A = {
 			isa = PBXGroup;
 			children = (
+				D46653EF1AFB35E10060A357 /* Instabug.bundle */,
 				D46DA7801A92B26B00020313 /* SavoirTests */,
 				D4195BDB1A92A69B00663149 /* Savoir */,
 				D4F275A01A0C021800CEC95A /* Products */,
@@ -2691,6 +2715,13 @@
 		EFEC7E676E0C2F9960DA289C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D46653EA1AFB32D50060A357 /* GLKit.framework */,
+				D46653E81AFB32B60060A357 /* OpenGLES.framework */,
+				D46653E61AFB32870060A357 /* CoreTelephony.framework */,
+				D46653E41AFB325C0060A357 /* MessageUI.framework */,
+				D46653E21AFB323B0060A357 /* libc++.dylib */,
+				D46653DE1AFB32040060A357 /* Instabug.framework */,
+				D46653DF1AFB32040060A357 /* Instabug.bundle */,
 				D4F58ACB1AF7B757001FD5D3 /* Branch.framework */,
 				D4B602EC1AEAEA7B0007BA41 /* Crashlytics.framework */,
 				D4721D381AEACE7600974271 /* CoreBluetooth.framework */,
@@ -2823,6 +2854,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D46653F01AFB35E10060A357 /* Instabug.bundle in Resources */,
 				D438ABA31A9FA6AC0089E61A /* JSQMessagesToolbarContentView.xib in Resources */,
 				D409D7D71AA60A94008FADDF /* cvc-amex.png in Resources */,
 				D409D7E51AA60A94008FADDF /* visa.png in Resources */,

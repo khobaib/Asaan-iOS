@@ -56,7 +56,7 @@
     if (appDelegate.globalObjectHolder.beaconManager.inStoreUtils.isInStore == true &&
         [UtilCalls userBelongsToStoreChatTeamForStore:appDelegate.globalObjectHolder.beaconManager.inStoreUtils.store])
     {
-        _menu = @[@"Stores", @"Profile", @"Chat History", @"Wait List Status", @"Tables", @"Logout"];
+        _menu = @[@"Stores", @"Profile", @"Chat History", @"Wait List", @"Tables", @"Logout"];
         _menuImage = @[@"stores", @"profile", @"chat_history", @"waitlist_table_countdown", @"cart", @"logout"];
         _menuSegue = @[SEGUE_SMToStoreList, SEGUE_SMToUpdateProfile, SEGUE_SMToChatHistory, SEGUE_SMToStoreWaitListInServerMode, SEGUE_SMToStoreDiningInMode, SEGUE_UnwindToStoreList];
         
@@ -112,6 +112,7 @@
     cell.badgeRightOffset = 70;
     cell.badgeColor = [UIColor redColor];
     cell.badgeTextColor = [UIColor whiteColor];
+    cell.userInteractionEnabled = cell.titleLabel.enabled = YES;
 
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
@@ -120,8 +121,6 @@
     {
         if (goh.orderInProgress == nil)
             cell.userInteractionEnabled = cell.titleLabel.enabled = NO;
-        else
-            cell.userInteractionEnabled = cell.titleLabel.enabled = YES;
     }
     else if ([_menuSegue[indexPath.row] isEqualToString:SEGUE_SMToStoreDiningInMode])
     {

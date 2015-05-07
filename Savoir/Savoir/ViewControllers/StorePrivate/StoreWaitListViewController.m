@@ -45,15 +45,16 @@
 {
     [super viewDidLoad];
     
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    if (self.selectedStore == nil)
+        self.selectedStore = appDelegate.globalObjectHolder.beaconManager.inStoreUtils.store;
+    
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     if (self.navigationController.viewControllers[0] != self)
         self.navigationItem.leftBarButtonItem = nil;
     else
-    {
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
         [appDelegate.notificationUtils getSlidingMenuBarButtonSetupWith:self];
-    }
     
     [self.navigationController setNavigationBarHidden:NO];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]

@@ -28,6 +28,7 @@
 #import <DBChooser/DBChooser.h>
 #import "NoNetworkViewController.h"
 #import "Branch.h"
+#import <Instabug/Instabug.h>
 
 //NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsException";
 
@@ -61,6 +62,8 @@
 //    NSLog(@"ESTAppDelegate: Analytics are turned OFF by defaults. You can enable them changing flag");
     [ESTCloudManager enableMonitoringAnalytics:NO];
     [ESTCloudManager enableGPSPositioningForAnalytics:NO];
+    
+    [Instabug startWithToken:@"ca8e3a7976bd49162019d6645bd864ce" captureSource:IBGCaptureSourceUIKit invocationEvent:IBGInvocationEventShake];
     
     // ****************************************************************************
     // Uncomment and fill in with your Parse credentials:
@@ -168,7 +171,7 @@
 - (void) reachabilityChanged:(NSNotification *)note
 {
     Reachability* curReach = [note object];
-    NSParameterAssert([curReach isKindOfClass:[Reachability class]]);
+//    NSParameterAssert([curReach isKindOfClass:[Reachability class]]);
     [self updateInterfaceWithReachability:curReach];
 }
 
