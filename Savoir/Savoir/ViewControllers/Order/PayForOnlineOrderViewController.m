@@ -112,7 +112,7 @@
     if (appDelegate.globalObjectHolder.defaultUserCard != nil)
     {
         imgCardType.image = [UIImage imageNamed:appDelegate.globalObjectHolder.defaultUserCard.type];
-        txtCardDetails.text = [NSString stringWithFormat:@"%@            %ld//%ld", appDelegate.globalObjectHolder.defaultUserCard.last4, appDelegate.globalObjectHolder.defaultUserCard.expMonth.longValue, appDelegate.globalObjectHolder.defaultUserCard.expYear.longValue];
+        txtCardDetails.text = [NSString stringWithFormat:@"%@            %ld/%ld", appDelegate.globalObjectHolder.defaultUserCard.last4, appDelegate.globalObjectHolder.defaultUserCard.expMonth.longValue, appDelegate.globalObjectHolder.defaultUserCard.expYear.longValue];
     }
     else
     {

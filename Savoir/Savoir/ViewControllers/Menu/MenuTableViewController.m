@@ -8,6 +8,7 @@
 
 #import "MenuTableViewController.h"
 #import "MenuModifierGroupViewController.h"
+#import "OrderSummaryViewController.h"
 #import "MBProgressHUD.h"
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
@@ -979,6 +980,8 @@ static NSString *MenuItemCellIdentifier = @"MenuItemCell";
     }
     else if ([[segue identifier] isEqualToString:@"segueMenuToOrderSummary"])
     {
+        OrderSummaryViewController *controller = [segue destinationViewController];
+        [controller setSelectedStore:self.selectedStore];
     }
 }
 
