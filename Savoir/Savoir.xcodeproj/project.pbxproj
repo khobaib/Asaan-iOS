@@ -248,7 +248,6 @@
 		D4195F961A92A69C00663149 /* GTLStoreendpointStoreWaitListQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = D4195E151A92A69B00663149 /* GTLStoreendpointStoreWaitListQueue.m */; };
 		D4195F971A92A69C00663149 /* GTLStoreendpointStoreWaitListQueueAndPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = D4195E171A92A69B00663149 /* GTLStoreendpointStoreWaitListQueueAndPosition.m */; };
 		D4195F981A92A69C00663149 /* GTLStoreendpointStoreWaitListQueueCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = D4195E191A92A69B00663149 /* GTLStoreendpointStoreWaitListQueueCollection.m */; };
-		D4195F991A92A69C00663149 /* GTLStoreendpointStoreWaitlistSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = D4195E1B1A92A69B00663149 /* GTLStoreendpointStoreWaitlistSummary.m */; };
 		D4195F9B1A92A69C00663149 /* GTLUserendpointChatUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D4195E1F1A92A69B00663149 /* GTLUserendpointChatUser.m */; };
 		D4195F9C1A92A69C00663149 /* GTLUserendpointConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = D4195E211A92A69B00663149 /* GTLUserendpointConstants.m */; };
 		D4195F9D1A92A69C00663149 /* GTLUserendpointUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D4195E231A92A69B00663149 /* GTLUserendpointUser.m */; };
@@ -898,8 +897,6 @@
 		D4195E171A92A69B00663149 /* GTLStoreendpointStoreWaitListQueueAndPosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreWaitListQueueAndPosition.m; sourceTree = "<group>"; };
 		D4195E181A92A69B00663149 /* GTLStoreendpointStoreWaitListQueueCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreWaitListQueueCollection.h; sourceTree = "<group>"; };
 		D4195E191A92A69B00663149 /* GTLStoreendpointStoreWaitListQueueCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreWaitListQueueCollection.m; sourceTree = "<group>"; };
-		D4195E1A1A92A69B00663149 /* GTLStoreendpointStoreWaitlistSummary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLStoreendpointStoreWaitlistSummary.h; sourceTree = "<group>"; };
-		D4195E1B1A92A69B00663149 /* GTLStoreendpointStoreWaitlistSummary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLStoreendpointStoreWaitlistSummary.m; sourceTree = "<group>"; };
 		D4195E1C1A92A69B00663149 /* GTLUserendpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLUserendpoint.h; sourceTree = "<group>"; };
 		D4195E1E1A92A69B00663149 /* GTLUserendpointChatUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLUserendpointChatUser.h; sourceTree = "<group>"; };
 		D4195E1F1A92A69B00663149 /* GTLUserendpointChatUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLUserendpointChatUser.m; sourceTree = "<group>"; };
@@ -2222,8 +2219,6 @@
 				D4195E171A92A69B00663149 /* GTLStoreendpointStoreWaitListQueueAndPosition.m */,
 				D4195E181A92A69B00663149 /* GTLStoreendpointStoreWaitListQueueCollection.h */,
 				D4195E191A92A69B00663149 /* GTLStoreendpointStoreWaitListQueueCollection.m */,
-				D4195E1A1A92A69B00663149 /* GTLStoreendpointStoreWaitlistSummary.h */,
-				D4195E1B1A92A69B00663149 /* GTLStoreendpointStoreWaitlistSummary.m */,
 				D4195E1C1A92A69B00663149 /* GTLUserendpoint.h */,
 				D4195E1E1A92A69B00663149 /* GTLUserendpointChatUser.h */,
 				D4195E1F1A92A69B00663149 /* GTLUserendpointChatUser.m */,
@@ -2958,7 +2953,6 @@
 				D4195FA91A92A69C00663149 /* LoginViewController.m in Sources */,
 				D4195F8C1A92A69C00663149 /* GTLStoreendpointStoreMenuItemModifier.m in Sources */,
 				D4F58B1E1AF7C5A0001FD5D3 /* BNCServerResponse.m in Sources */,
-				D4195F991A92A69C00663149 /* GTLStoreendpointStoreWaitlistSummary.m in Sources */,
 				D438AB011A9F8BF60089E61A /* ChatView.m in Sources */,
 				D4195F251A92A69C00663149 /* SDWebImageManager.m in Sources */,
 				D438AB981A9FA6AC0089E61A /* JSQMessagesCollectionViewCellIncoming.m in Sources */,

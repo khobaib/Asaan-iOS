@@ -56,7 +56,7 @@
                                                 <constraint firstAttribute="width" constant="65" id="jaS-F1-BPW"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                            <state key="normal" title="Send a Note">
+                                            <state key="normal" title="Chat">
                                                 <color key="titleColor" red="0.79607843140000001" green="0.59607843140000005" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -586,7 +586,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gq7-D7-gwP" id="8mZ-7y-aEF">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Create or Join Group for Dining In" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IwM-Xq-Qkp">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Create or Join Group for Dining In" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IwM-Xq-Qkp">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
@@ -604,7 +604,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2Xh-7j-ntL" id="kmg-5H-cE9">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Place your Carryout Order" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="q58-Qy-Aub">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Place your Carryout Order" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="q58-Qy-Aub">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
@@ -621,7 +621,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cPI-qE-clJ" id="4N6-wR-rWG">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Start your Delivery Order" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IVx-wC-H5U">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Start your Delivery Order" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IVx-wC-H5U">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="0.089883207069999999" green="0.0" blue="0.0016664340839999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
@@ -2190,13 +2190,6 @@
                                 <exclude reference="3JH-u9-Smf"/>
                                 <exclude reference="zRY-se-mIg"/>
                                 <exclude reference="lbc-yh-87I"/>
-                                <exclude reference="6h2-nk-Ryn"/>
-                                <exclude reference="E9r-IT-is9"/>
-                                <exclude reference="Fez-BU-D5F"/>
-                                <exclude reference="Q7S-zL-rKB"/>
-                                <exclude reference="U3n-ZG-bT9"/>
-                                <exclude reference="Xaf-qZ-9oa"/>
-                                <exclude reference="ofh-6Z-hLz"/>
                                 <exclude reference="GdD-82-MFh"/>
                                 <exclude reference="dvG-9t-Bhz"/>
                                 <exclude reference="q1y-FV-js4"/>
@@ -2208,6 +2201,13 @@
                                 <exclude reference="Xwb-Dp-10F"/>
                                 <exclude reference="c47-nJ-bwP"/>
                                 <exclude reference="mVL-nK-fg2"/>
+                                <exclude reference="6h2-nk-Ryn"/>
+                                <exclude reference="E9r-IT-is9"/>
+                                <exclude reference="Fez-BU-D5F"/>
+                                <exclude reference="Q7S-zL-rKB"/>
+                                <exclude reference="U3n-ZG-bT9"/>
+                                <exclude reference="Xaf-qZ-9oa"/>
+                                <exclude reference="ofh-6Z-hLz"/>
                             </mask>
                         </variation>
                     </view>
@@ -8018,14 +8018,14 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="SWu-Ow-ZNJ"/>
-        <segue reference="WlB-fv-3dt"/>
-        <segue reference="CqO-Nv-Mfm"/>
-        <segue reference="hDB-zH-iEH"/>
+        <segue reference="g5V-KY-zil"/>
         <segue reference="tfY-MP-7fT"/>
+        <segue reference="F9u-xN-ecY"/>
+        <segue reference="P8O-np-nuj"/>
         <segue reference="Udc-FT-5Vd"/>
+        <segue reference="hDB-zH-iEH"/>
         <segue reference="t2R-Le-XNf"/>
         <segue reference="UrJ-ne-Kfy"/>
-        <segue reference="YYI-Z9-dty"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.79607843140000001" green="0.59607843140000005" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

@@ -76,7 +76,6 @@
 #import "GTLStoreendpointStoreWaitListQueue.m"
 #import "GTLStoreendpointStoreWaitListQueueAndPosition.m"
 #import "GTLStoreendpointStoreWaitListQueueCollection.m"
-#import "GTLStoreendpointStoreWaitlistSummary.m"
 #import "GTLStoreendpointTableGroupsAndOrders.m"
 
 #import "GTLQueryStoreendpoint.m"

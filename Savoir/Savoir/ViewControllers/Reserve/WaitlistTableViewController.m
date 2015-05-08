@@ -32,7 +32,6 @@
 
 @property (nonatomic) int minPartySize;
 @property (nonatomic) int currPartySize;
-@property (strong, nonatomic) GTLStoreendpointStoreWaitlistSummary *storeWaitListSummary;
 
 @end
 
@@ -188,7 +187,7 @@
     GTLStoreendpointStoreWaitListQueue *newEntry = [[GTLStoreendpointStoreWaitListQueue alloc]init];
     newEntry.storeId = [NSNumber numberWithLongLong:self.selectedStore.identifier.longLongValue];
     newEntry.storeName = self.selectedStore.name;
-    int time = (self.storeWaitListSummary.partiesOfSize12.intValue + self.storeWaitListSummary.partiesOfSize34.intValue + self.storeWaitListSummary.partiesOfSize5OrMore.intValue)*2;
+    int time = 0;
     newEntry.estTimeMin = [NSNumber numberWithInt:(time + 15)];
     newEntry.estTimeMax = [NSNumber numberWithInt:(time + 30)];
     newEntry.partySize = [NSNumber numberWithInt:self.currPartySize];

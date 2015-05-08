@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryStoreendpoint (66 custom class methods, 18 custom properties)
+//   GTLQueryStoreendpoint (65 custom class methods, 18 custom properties)
 
 #import "GTLQueryStoreendpoint.h"
 
@@ -67,7 +67,6 @@
 #import "GTLStoreendpointStoreWaitListQueue.h"
 #import "GTLStoreendpointStoreWaitListQueueAndPosition.h"
 #import "GTLStoreendpointStoreWaitListQueueCollection.h"
-#import "GTLStoreendpointStoreWaitlistSummary.h"
 #import "GTLStoreendpointTableGroupsAndOrders.h"
 
 @implementation GTLQueryStoreendpoint
@@ -702,17 +701,6 @@
   query.bodyObject = object;
   query.queuePosition = queuePosition;
   query.expectedObjectClass = [GTLStoreendpointStoreWaitListQueue class];
-  return query;
-}
-
-+ (id)queryForSaveStoreWaitlistSummaryWithObject:(GTLStoreendpointStoreWaitlistSummary *)object {
-  if (object == nil) {
-    GTL_DEBUG_ASSERT(object != nil, @"%@ got a nil object", NSStringFromSelector(_cmd));
-    return nil;
-  }
-  NSString *methodName = @"storeendpoint.saveStoreWaitlistSummary";
-  GTLQueryStoreendpoint *query = [self queryWithMethodName:methodName];
-  query.bodyObject = object;
   return query;
 }
 

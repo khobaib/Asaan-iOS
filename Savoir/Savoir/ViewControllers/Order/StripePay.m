@@ -30,8 +30,8 @@
  */
 
 // This can be found at https://dashboard.stripe.com/account/apikeys
-// NSString *const StripePublishableKey = @"pk_live_4Ns4PhSHMwuwXpCI1nfAdFrZ";
-NSString *const StripePublishableKey = @"pk_test_4Ns4Xp8GtdBUxhiUKDi4RMTa";
+NSString *const StripePublishableKey = @"pk_live_4Ns4PhSHMwuwXpCI1nfAdFrZ";
+//NSString *const StripePublishableKey = @"pk_test_4Ns4Xp8GtdBUxhiUKDi4RMTa";
 
 // To set this up, check out https://github.com/stripe/example-ios-backend
 // This should be in the format https://my-shiny-backend.herokuapp.com

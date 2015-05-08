@@ -13,7 +13,7 @@
 // Description:
 //   This is an API
 // Classes:
-//   GTLQueryStoreendpoint (66 custom class methods, 18 custom properties)
+//   GTLQueryStoreendpoint (65 custom class methods, 18 custom properties)
 
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLQuery.h"
@@ -42,7 +42,6 @@
 @class GTLStoreendpointStorePOSConnection;
 @class GTLStoreendpointStoreTableGroupMemberArray;
 @class GTLStoreendpointStoreWaitListQueue;
-@class GTLStoreendpointStoreWaitlistSummary;
 
 @interface GTLQueryStoreendpoint : GTLQuery
 
@@ -471,11 +470,6 @@
 // Fetches a GTLStoreendpointStoreWaitListQueue.
 + (id)queryForSaveStoreWaitlistQueueEntryByStoreEmployeeWithObject:(GTLStoreendpointStoreWaitListQueue *)object
                                                      queuePosition:(NSInteger)queuePosition;
-
-// Method: storeendpoint.saveStoreWaitlistSummary
-//  Authorization scope(s):
-//   kGTLAuthScopeStoreendpointUserinfoEmail
-+ (id)queryForSaveStoreWaitlistSummaryWithObject:(GTLStoreendpointStoreWaitlistSummary *)object;
 
 // Method: storeendpoint.updateOrderFromServer
 //  Authorization scope(s):

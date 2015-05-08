@@ -73,7 +73,6 @@
 #import "GTLStoreendpointStoreWaitListQueue.h"
 #import "GTLStoreendpointStoreWaitListQueueAndPosition.h"
 #import "GTLStoreendpointStoreWaitListQueueCollection.h"
-#import "GTLStoreendpointStoreWaitlistSummary.h"
 #import "GTLStoreendpointTableGroupsAndOrders.h"
 
 #import "GTLQueryStoreendpoint.h"
