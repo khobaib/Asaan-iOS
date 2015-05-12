@@ -145,8 +145,6 @@
 + (void)slidingMenuSetupWith:(UIViewController *)viewController withItem:(UIBarButtonItem *)revealButtonItem
 {
     SWRevealViewController *revealViewController = viewController.revealViewController;
-    revealViewController.shouldUseFrontViewOverlay = YES;
-    revealViewController.shouldUseDoubleAnimationOnVCChange = NO;
     
     if ( revealViewController && viewController && revealButtonItem )
     {

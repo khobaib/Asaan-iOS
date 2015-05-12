@@ -14,7 +14,7 @@
 #import "UIImageView+WebCache.h"
 #import "SHSPhoneTextField.h"
 #import "AppDelegate.h"
-#import "Branch.h"
+//#import "Branch.h"
 
 @interface SignupProfileViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *txtLastName;
@@ -55,9 +55,9 @@
     [_txtPhone.formatter setDefaultOutputPattern:@"(###) ###-####"];
     _txtPhone.formatter.prefix = @"+1 ";
     
-    NSDictionary *sessionParams = [[Branch getInstance] getLatestReferringParams];
-    NSString *referrerName = [sessionParams valueForKey:@"REFERRER_NAME"];
-    self.txtReferredBy.text = referrerName;
+//    NSDictionary *sessionParams = [[Branch getInstance] getLatestReferringParams];
+//    NSString *referrerName = [sessionParams valueForKey:@"REFERRER_NAME"];
+//    self.txtReferredBy.text = referrerName;
     
     PFUser *user = [PFUser currentUser];
     if (user != nil){

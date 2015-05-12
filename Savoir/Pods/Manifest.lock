@@ -1,0 +1,162 @@
+PODS:
+  - AFNetworking (2.5.3):
+    - AFNetworking/NSURLConnection (= 2.5.3)
+    - AFNetworking/NSURLSession (= 2.5.3)
+    - AFNetworking/Reachability (= 2.5.3)
+    - AFNetworking/Security (= 2.5.3)
+    - AFNetworking/Serialization (= 2.5.3)
+    - AFNetworking/UIKit (= 2.5.3)
+  - AFNetworking/NSURLConnection (2.5.3):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.5.3):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.5.3)
+  - AFNetworking/Security (2.5.3)
+  - AFNetworking/Serialization (2.5.3)
+  - AFNetworking/UIKit (2.5.3):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - APTimeZones (1.1)
+  - AWPagedArray (0.3.0)
+  - Bolts (1.1.5):
+    - Bolts/AppLinks (= 1.1.5)
+    - Bolts/Tasks (= 1.1.5)
+  - Bolts/AppLinks (1.1.5):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.1.5)
+  - DACircularProgress (2.3.1)
+  - DBChooser (1.1)
+  - EstimoteSDK (3.2.2)
+  - Fabric (1.2.3):
+    - Fabric/Core (= 1.2.3)
+  - Fabric/Core (1.2.3)
+  - FBSDKCoreKit (4.1.0):
+    - Bolts (~> 1.1)
+    - FBSDKCoreKit/arc (= 4.1.0)
+    - FBSDKCoreKit/no-arc (= 4.1.0)
+  - FBSDKCoreKit/arc (4.1.0):
+    - Bolts (~> 1.1)
+  - FBSDKCoreKit/no-arc (4.1.0):
+    - Bolts (~> 1.1)
+    - FBSDKCoreKit/arc
+  - FBSDKLoginKit (4.1.0):
+    - FBSDKCoreKit
+  - FBSDKShareKit (4.1.0):
+    - FBSDKCoreKit
+  - Instabug (4.1.4)
+  - JSQMessagesViewController (7.0.2):
+    - JSQSystemSoundPlayer (~> 2.0.1)
+  - JSQSystemSoundPlayer (2.0.1)
+  - MBProgressHUD (0.9.1)
+  - MWPhotoBrowser (1.4.1):
+    - DACircularProgress
+    - MBProgressHUD (~> 0.8)
+    - PSTCollectionView (~> 1.2)
+    - SDWebImage (~> 3.7)
+  - OAuthConsumer (1.0.3)
+  - OrderedDictionary (1.2)
+  - Parse (1.7.2.2):
+    - Bolts/Tasks (>= 1.1.5)
+  - ParseFacebookUtilsV4 (1.7.2.2):
+    - Bolts/Tasks (>= 1.1.5)
+    - FBSDKCoreKit (~> 4.0)
+    - FBSDKLoginKit (~> 4.0)
+    - Parse (~> 1.7.2)
+  - ParseUI (1.1.3):
+    - Parse (~> 1.7)
+  - PaymentKit (1.1.1)
+  - PSTCollectionView (1.2.3)
+  - RaptureXML (1.0.1)
+  - SDSegmentedControl (1.0.4)
+  - SDWebImage (3.7.2):
+    - SDWebImage/Core (= 3.7.2)
+  - SDWebImage/Core (3.7.2)
+  - SHSPhoneComponent (2.15)
+  - Stripe (4.0.2):
+    - Stripe/Checkout (= 4.0.2)
+    - Stripe/Core (= 4.0.2)
+  - Stripe/ApplePay (4.0.2):
+    - Stripe/Core
+  - Stripe/Checkout (4.0.2):
+    - Stripe/Core
+  - Stripe/Core (4.0.2)
+  - SWRevealViewController (2.3.0)
+  - SZTextView (1.2.1)
+  - Toast (2.4)
+  - UIActivityIndicator-for-SDWebImage (1.2):
+    - SDWebImage (~> 3.7)
+  - UIAlertView+Blocks (0.9)
+
+DEPENDENCIES:
+  - AFNetworking (~> 2.5)
+  - APTimeZones (~> 1.1)
+  - AWPagedArray (~> 0.3)
+  - DACircularProgress (~> 2.3)
+  - DBChooser (~> 1.1)
+  - EstimoteSDK (~> 3.2)
+  - Fabric (~> 1.2)
+  - FBSDKCoreKit (~> 4.1)
+  - FBSDKLoginKit (~> 4.1)
+  - FBSDKShareKit (~> 4.1)
+  - Instabug (~> 4.1)
+  - JSQMessagesViewController (~> 7.0)
+  - MBProgressHUD (~> 0.9)
+  - MWPhotoBrowser (~> 1.4)
+  - OAuthConsumer (~> 1.0)
+  - OrderedDictionary (~> 1.2)
+  - Parse (~> 1.7)
+  - ParseFacebookUtilsV4 (~> 1.7)
+  - ParseUI (~> 1.1)
+  - PaymentKit (~> 1.1)
+  - RaptureXML (~> 1.0)
+  - SDSegmentedControl (~> 1.0)
+  - SDWebImage (~> 3.7)
+  - SHSPhoneComponent (~> 2.15)
+  - Stripe (~> 4.0)
+  - Stripe/ApplePay
+  - SWRevealViewController (~> 2.3)
+  - SZTextView (~> 1.2)
+  - Toast (~> 2.4)
+  - UIActivityIndicator-for-SDWebImage (~> 1.2)
+  - UIAlertView+Blocks (~> 0.9)
+
+SPEC CHECKSUMS:
+  AFNetworking: e1d86c2a96bb5d2e7408da36149806706ee122fe
+  APTimeZones: ddb9aca50fff41d6313eb29d86d37b1edf9d2942
+  AWPagedArray: 66db32d015a01d921133a4eb50da1d830271c39a
+  Bolts: aac24961496d504aa56fc267cde95162a71bac39
+  DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
+  DBChooser: 42e804d7529ba051a900433b308a9760a21b6562
+  EstimoteSDK: 357d27143d8cfb3bc7a98cf45d026409c4d0cd7d
+  Fabric: 8a5b89c2131962830d92bbc88d482e80665846b2
+  FBSDKCoreKit: 469ed167195f860dbd2b4c4bbaa33d2e90598db9
+  FBSDKLoginKit: ff6224762732e3698f30942e4544321b8c7a23e6
+  FBSDKShareKit: 8002faf0c564ff3625eadd16e506b0b0fbf3adef
+  Instabug: de19c1b0f89c4e5deda6dd7f1dc3515e54238b08
+  JSQMessagesViewController: bb6649691182b1899dc52b42266ad69efc473510
+  JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
+  MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
+  MWPhotoBrowser: 2531e682860d62b8a7ba8659de02eb9040e431e5
+  OAuthConsumer: 9e99725d1d58d076ed13e6010a2d74f82e25e4cc
+  OrderedDictionary: 9cc5d69c5c5314ad696ed1839190724e83d534c7
+  Parse: 6187586a80eb7b4960d755f85e1353148a611f87
+  ParseFacebookUtilsV4: dce9f14b546cec54ce68df60120424a6e626d316
+  ParseUI: 1a68e9cebc3bd458eed9605ce7b33d7cc082f473
+  PaymentKit: 323c25233af5060880daa0c31366d4b688c34487
+  PSTCollectionView: 6749df92885353521f55279a7ce2b293762e2be4
+  RaptureXML: b5c33c04c1a4adfd8ad0d5463329a31820596e82
+  SDSegmentedControl: 268239cca96710be486efb0ad96d2838a60b90c5
+  SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
+  SHSPhoneComponent: 4cec0653a150ad63cbc52b0c8b29ce2d3c9c26f0
+  Stripe: 22906b47782784f5610190563f066468b441f403
+  SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
+  SZTextView: 906df45afd3c1b24fc5252088d5ef8061513c238
+  Toast: 0773b8fc0e97352ca6054517bec7ebdd4110029d
+  UIActivityIndicator-for-SDWebImage: 7bf7ebbf0ed1747dedc0d6e949c4603a6d0f9e0c
+  UIAlertView+Blocks: a46c99c5144f6c5dbc7d62fd2a0678daceec89a3
+
+COCOAPODS: 0.37.1

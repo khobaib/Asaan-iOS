@@ -1,0 +1,40 @@
+# Uncomment this line to define a global platform for your project
+# platform :ios, '6.0'
+
+workspace 'Savoir-Pods'
+
+target 'Savoir' do
+  pod 'AFNetworking', '~> 2.5'
+  pod 'APTimeZones', '~> 1.1'
+  pod 'Stripe', '~> 4.0'
+  pod 'Stripe/ApplePay'
+  pod 'PaymentKit', '~> 1.1'
+  pod 'JSQMessagesViewController', '~> 7.0'
+  pod 'AWPagedArray', '~> 0.3'
+  pod 'DACircularProgress', '~> 2.3'
+  pod 'MWPhotoBrowser', '~> 1.4'
+  pod 'MBProgressHUD', '~> 0.9'
+  pod 'OrderedDictionary', '~> 1.2'
+  pod 'RaptureXML', '~> 1.0'
+  pod 'SDWebImage', '~> 3.7'
+  pod 'SDSegmentedControl', '~> 1.0'
+  pod 'SHSPhoneComponent', '~> 2.15'
+  pod 'SWRevealViewController', '~> 2.3'
+  pod 'SZTextView', '~> 1.2'
+  pod 'Toast', '~> 2.4'
+  pod 'UIActivityIndicator-for-SDWebImage', '~> 1.2'
+  pod 'UIAlertView+Blocks', '~> 0.9'
+  pod 'Instabug', '~> 4.1'
+  pod 'Parse', '~> 1.7'
+  pod 'ParseFacebookUtilsV4', '~> 1.7'
+  pod 'ParseUI', '~> 1.1'
+  pod 'FBSDKCoreKit', '~> 4.1'
+  pod 'FBSDKLoginKit', '~> 4.1'
+  pod 'FBSDKShareKit', '~> 4.1'
+  pod 'EstimoteSDK', '~> 3.2'
+  pod 'DBChooser', '~> 1.1'
+  pod 'Fabric', '~> 1.2'
+  pod 'OAuthConsumer', '~> 1.0'
+
+end
+

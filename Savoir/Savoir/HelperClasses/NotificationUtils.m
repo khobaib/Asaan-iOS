@@ -372,8 +372,6 @@
 {
     SWRevealViewController *revealViewController = viewController.revealViewController;
     revealViewController.delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    revealViewController.shouldUseFrontViewOverlay = YES;
-    revealViewController.shouldUseDoubleAnimationOnVCChange = NO;
     
     if ( revealViewController && viewController )
     {

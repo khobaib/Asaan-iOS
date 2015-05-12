@@ -13,7 +13,6 @@
 #import "Stripe.h"
 #import <QuartzCore/QuartzCore.h>
 #import <CoreData/CoreData.h>
-#import <ParseCrashReporting/ParseCrashReporting.h>
 
 #import "UIColor+SavoirBackgroundColor.h"
 #import "UIColor+SavoirGoldColor.h"
@@ -27,7 +26,7 @@
 
 #import <DBChooser/DBChooser.h>
 #import "NoNetworkViewController.h"
-#import "Branch.h"
+//#import "Branch.h"
 #import <Instabug/Instabug.h>
 
 //NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsException";
@@ -73,7 +72,7 @@
     // described here: https://developers.facebook.com/docs/getting-started/facebook-sdk-for-ios/
     // [PFFacebookUtils initializeFacebook];
     // ****************************************************************************
-    [ParseCrashReporting enable];
+//    [ParseCrashReporting enable];
     // Test
     [Parse setApplicationId:@"GXtJ9wg7fm1oMLt36zD5GvbsXyXJW6atbQjQKnin"
                   clientKey:@"1MXmqCsvaOKWs2ilTGOL2wvugGrasbZMwukIvn1Q"];
@@ -84,11 +83,11 @@
     [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
     [Stripe setDefaultPublishableKey:StripePublishableKey];
 
-    Branch *branch = [Branch getInstance];
-    [branch initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {
-        // params are the deep linked params associated with the link that the user clicked before showing up.
-        NSLog(@"deep link data: %@", [params description]);
-    }];
+//    Branch *branch = [Branch getInstance];
+//    [branch initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {
+//        // params are the deep linked params associated with the link that the user clicked before showing up.
+//        NSLog(@"deep link data: %@", [params description]);
+//    }];
     //    [PFUser enableAutomaticUser];
     
     PFACL *defaultACL = [PFACL ACL];
@@ -218,10 +217,10 @@
         // completion block
         return YES;
     }
-    if ([[Branch getInstance] handleDeepLink:url])
-    {
-        return YES;
-    }
+//    if ([[Branch getInstance] handleDeepLink:url])
+//    {
+//        return YES;
+//    }
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                                           openURL:url
                                                 sourceApplication:sourceApplication
