@@ -177,12 +177,21 @@
                     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
                     [appDelegate clearAllGlobalObjects];
                     [self performSegueWithIdentifier:@"segueStartup" sender:self];
+                    return;
                 } else
                 {
                     NSLog(@"Some other error: %@", error);
                 }
             }];
         }
+    }
+    
+    if ((IsEmpty(currentUser[@"phone"]) == true) ||
+         (IsEmpty(currentUser[@"firstName"]) == true && IsEmpty(currentUser[@"lastName"]) == true))
+    {
+        [self.view makeToast:@"Please complete your profile."];
+        [self performSegueWithIdentifier:@"segueStorelistToSignupProfile" sender:self];
+        return;
     }
     
     GlobalObjectHolder *goh = appDelegate.globalObjectHolder;
