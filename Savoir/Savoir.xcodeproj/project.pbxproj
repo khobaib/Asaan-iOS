@@ -208,6 +208,7 @@
 		D445D7271A96BB9B00ED4919 /* Savoir.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D445D7201A96BB9B00ED4919 /* Savoir.xcdatamodeld */; };
 		D445D72F1A96BC5C00ED4919 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D445D72C1A96BC5C00ED4919 /* AppDelegate.m */; };
 		D445D7311A96BC5C00ED4919 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D445D72E1A96BC5C00ED4919 /* main.m */; };
+		D453C7971B06A08F00240D81 /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D453C7961B06A08F00240D81 /* CardView.xib */; };
 		D4640EA61AF9720E00B81A19 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D4640EA51AF9720E00B81A19 /* LocationManager.m */; };
 		D46653E51AFB325C0060A357 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D46653E41AFB325C0060A357 /* MessageUI.framework */; };
 		D46653E71AFB32870060A357 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D46653E61AFB32870060A357 /* CoreTelephony.framework */; };
@@ -239,6 +240,12 @@
 		D4B602ED1AEAEA7B0007BA41 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B602EC1AEAEA7B0007BA41 /* Crashlytics.framework */; };
 		D4BDBF011AE35C590014273B /* GTLStoreendpointStoreOrderAndTeamDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = D4BDBF001AE35C590014273B /* GTLStoreendpointStoreOrderAndTeamDetails.m */; };
 		D4E0DFA11B026DB400AFF268 /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E0DFA01B026DB400AFF268 /* ProgressHUD.m */; };
+		D4E0DFA51B0273F800AFF268 /* NSURLRequest+OAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E0DFA41B0273F800AFF268 /* NSURLRequest+OAuth.m */; };
+		D4E0DFA81B02740B00AFF268 /* YelpUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E0DFA71B02740B00AFF268 /* YelpUtils.m */; };
+		D4E0DFB01B04344500AFF268 /* DraggableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E0DFAB1B04344500AFF268 /* DraggableView.m */; };
+		D4E0DFB11B04344500AFF268 /* DraggableViewBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E0DFAD1B04344500AFF268 /* DraggableViewBackground.m */; };
+		D4E0DFB51B043BE200AFF268 /* StoreListSwipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E0DFB41B043BE200AFF268 /* StoreListSwipeViewController.m */; };
+		D4E0DFC01B06655000AFF268 /* CardView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E0DFBF1B06655000AFF268 /* CardView.m */; };
 		D4F58ACA1AF47D04001FD5D3 /* PayForOnlineOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F58AC91AF47D04001FD5D3 /* PayForOnlineOrderViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -608,6 +615,7 @@
 		D445D72C1A96BC5C00ED4919 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		D445D72D1A96BC5C00ED4919 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D445D72E1A96BC5C00ED4919 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D453C7961B06A08F00240D81 /* CardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardView.xib; sourceTree = "<group>"; };
 		D4640EA41AF9720E00B81A19 /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		D4640EA51AF9720E00B81A19 /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		D4640EA81AF9849F00B81A19 /* LocationReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationReceiver.h; sourceTree = "<group>"; };
@@ -661,6 +669,18 @@
 		D4BDBF021AE5540F0014273B /* GroupSelectionReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupSelectionReceiver.h; sourceTree = "<group>"; };
 		D4E0DF9F1B026DB400AFF268 /* ProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressHUD.h; sourceTree = "<group>"; };
 		D4E0DFA01B026DB400AFF268 /* ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressHUD.m; sourceTree = "<group>"; };
+		D4E0DFA31B0273F800AFF268 /* NSURLRequest+OAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLRequest+OAuth.h"; sourceTree = "<group>"; };
+		D4E0DFA41B0273F800AFF268 /* NSURLRequest+OAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLRequest+OAuth.m"; sourceTree = "<group>"; };
+		D4E0DFA61B02740B00AFF268 /* YelpUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YelpUtils.h; sourceTree = "<group>"; };
+		D4E0DFA71B02740B00AFF268 /* YelpUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YelpUtils.m; sourceTree = "<group>"; };
+		D4E0DFAA1B04344500AFF268 /* DraggableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DraggableView.h; sourceTree = "<group>"; };
+		D4E0DFAB1B04344500AFF268 /* DraggableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DraggableView.m; sourceTree = "<group>"; };
+		D4E0DFAC1B04344500AFF268 /* DraggableViewBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DraggableViewBackground.h; sourceTree = "<group>"; };
+		D4E0DFAD1B04344500AFF268 /* DraggableViewBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DraggableViewBackground.m; sourceTree = "<group>"; };
+		D4E0DFB31B043BE200AFF268 /* StoreListSwipeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreListSwipeViewController.h; sourceTree = "<group>"; };
+		D4E0DFB41B043BE200AFF268 /* StoreListSwipeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreListSwipeViewController.m; sourceTree = "<group>"; };
+		D4E0DFBE1B06655000AFF268 /* CardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardView.h; sourceTree = "<group>"; };
+		D4E0DFBF1B06655000AFF268 /* CardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardView.m; sourceTree = "<group>"; };
 		D4F2759F1A0C021800CEC95A /* Savoir.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Savoir.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4F58AC81AF47D04001FD5D3 /* PayForOnlineOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayForOnlineOrderViewController.h; sourceTree = "<group>"; };
 		D4F58AC91AF47D04001FD5D3 /* PayForOnlineOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayForOnlineOrderViewController.m; sourceTree = "<group>"; };
@@ -822,6 +842,7 @@
 		D4195BFE1A92A69B00663149 /* HelperClasses */ = {
 			isa = PBXGroup;
 			children = (
+				D4E0DFA21B0273F800AFF268 /* Yelp */,
 				D406D80A1AD2E3AB0076D0B6 /* InStoreOrder */,
 				D4195BFF1A92A69B00663149 /* AWPagedArrayLoadingOperations */,
 				D4195C0E1A92A69B00663149 /* ContainerViewContoller */,
@@ -938,6 +959,7 @@
 		D4195C3F1A92A69B00663149 /* library */ = {
 			isa = PBXGroup;
 			children = (
+				D4E0DFA91B04344500AFF268 /* SimpleSwipeCards */,
 				D4E0DF9E1B026D6700AFF268 /* ProgressHUD */,
 				D49E95C21AF1D9190016EE2C /* Reachability */,
 				D4195C671A92A69B00663149 /* AWPagedArray */,
@@ -1326,6 +1348,8 @@
 		D445D7081A96BA3800ED4919 /* Root */ = {
 			isa = PBXGroup;
 			children = (
+				D4E0DFB31B043BE200AFF268 /* StoreListSwipeViewController.h */,
+				D4E0DFB41B043BE200AFF268 /* StoreListSwipeViewController.m */,
 				D445D7091A96BA3800ED4919 /* SlidingMenuViewController.h */,
 				D445D70A1A96BA3800ED4919 /* SlidingMenuViewController.m */,
 				D445D70B1A96BA3800ED4919 /* StoreListTableViewCell.h */,
@@ -1389,6 +1413,31 @@
 				D4E0DFA01B026DB400AFF268 /* ProgressHUD.m */,
 			);
 			path = ProgressHUD;
+			sourceTree = "<group>";
+		};
+		D4E0DFA21B0273F800AFF268 /* Yelp */ = {
+			isa = PBXGroup;
+			children = (
+				D4E0DFA31B0273F800AFF268 /* NSURLRequest+OAuth.h */,
+				D4E0DFA41B0273F800AFF268 /* NSURLRequest+OAuth.m */,
+				D4E0DFA61B02740B00AFF268 /* YelpUtils.h */,
+				D4E0DFA71B02740B00AFF268 /* YelpUtils.m */,
+			);
+			path = Yelp;
+			sourceTree = "<group>";
+		};
+		D4E0DFA91B04344500AFF268 /* SimpleSwipeCards */ = {
+			isa = PBXGroup;
+			children = (
+				D4E0DFAA1B04344500AFF268 /* DraggableView.h */,
+				D4E0DFAB1B04344500AFF268 /* DraggableView.m */,
+				D4E0DFAC1B04344500AFF268 /* DraggableViewBackground.h */,
+				D4E0DFAD1B04344500AFF268 /* DraggableViewBackground.m */,
+				D4E0DFBE1B06655000AFF268 /* CardView.h */,
+				D4E0DFBF1B06655000AFF268 /* CardView.m */,
+				D453C7961B06A08F00240D81 /* CardView.xib */,
+			);
+			path = SimpleSwipeCards;
 			sourceTree = "<group>";
 		};
 		D4F275961A0C021800CEC95A = {
@@ -1546,6 +1595,7 @@
 			files = (
 				D4195FA31A92A69C00663149 /* storeendpoint-v1-rpc.discovery in Resources */,
 				D4195EBA1A92A69C00663149 /* tab_group@2x.png in Resources */,
+				D453C7971B06A08F00240D81 /* CardView.xib in Resources */,
 				D4195EB81A92A69C00663149 /* messages_blank@2x.png in Resources */,
 				D4195EB91A92A69C00663149 /* profile_blank@2x.png in Resources */,
 				D4195EBB1A92A69C00663149 /* tab_messages@2x.png in Resources */,
@@ -1640,6 +1690,7 @@
 				D4195FA91A92A69C00663149 /* LoginViewController.m in Sources */,
 				D4195F8C1A92A69C00663149 /* GTLStoreendpointStoreMenuItemModifier.m in Sources */,
 				D438AB011A9F8BF60089E61A /* ChatView.m in Sources */,
+				D4E0DFB11B04344500AFF268 /* DraggableViewBackground.m in Sources */,
 				D4195F871A92A69C00663149 /* GTLStoreendpointStoreMenuCombined.m in Sources */,
 				D4195F801A92A69C00663149 /* GTLStoreendpointStoreChatTeam.m in Sources */,
 				D4195EA21A92A69C00663149 /* StoreLoadingOperation.m in Sources */,
@@ -1653,12 +1704,14 @@
 				D4195EA91A92A69C00663149 /* DropdownView.m in Sources */,
 				D4195FB21A92A69C00663149 /* MenuMWCaptionView.m in Sources */,
 				D445D71B1A96BA3800ED4919 /* PhoneSearchViewController.m in Sources */,
+				D4E0DFA81B02740B00AFF268 /* YelpUtils.m in Sources */,
 				D409D8041AA6D3D2008FADDF /* GTLStoreendpointPlaceOrderArguments.m in Sources */,
 				D40470031A9CE83B0070537B /* AddToWaitListViewController.m in Sources */,
 				D4195FC31A92A69C00663149 /* InfoViewController.m in Sources */,
 				D406D8181AD2F2C10076D0B6 /* GTLStoreendpointStoreTableGroupMember.m in Sources */,
 				D4195F6F1A92A69C00663149 /* GTLStoreendpointChatUser.m in Sources */,
 				D4195FB11A92A69C00663149 /* MenuModifierTableViewController.m in Sources */,
+				D4E0DFC01B06655000AFF268 /* CardView.m in Sources */,
 				D4195F691A92A69C00663149 /* GTLStoreendpointAsaanLong.m in Sources */,
 				D4195F771A92A69C00663149 /* GTLStoreendpointMenusAndMenuItems.m in Sources */,
 				D4195FD31A92A90E00663149 /* UIColor+SavoirBackgroundColor.m in Sources */,
@@ -1708,11 +1761,13 @@
 				D46E25881ACC3D9D00AEF681 /* GTLStoreendpointAsaanLongCollection.m in Sources */,
 				D4195F651A92A69C00663149 /* GTLQueryUserendpoint.m in Sources */,
 				D4195F7B1A92A69C00663149 /* GTLStoreendpointOrderReviewListAndCount.m in Sources */,
+				D4E0DFB51B043BE200AFF268 /* StoreListSwipeViewController.m in Sources */,
 				D4195FC51A92A69C00663149 /* OrderHistoryTableViewController.m in Sources */,
 				D4195FA11A92A69C00663149 /* GTLUserendpointUserCardCollection.m in Sources */,
 				D4195FC41A92A69C00663149 /* OrderHistorySummaryTableViewController.m in Sources */,
 				D445D72F1A96BC5C00ED4919 /* AppDelegate.m in Sources */,
 				D4195F731A92A69C00663149 /* GTLStoreendpointItemReviewsArray.m in Sources */,
+				D4E0DFA51B0273F800AFF268 /* NSURLRequest+OAuth.m in Sources */,
 				D438AB031A9F8BF60089E61A /* camera.m in Sources */,
 				D4195F8E1A92A69C00663149 /* GTLStoreendpointStoreMenuStats.m in Sources */,
 				D4195F641A92A69C00663149 /* GTLQueryStoreendpoint.m in Sources */,
@@ -1739,6 +1794,7 @@
 				D406D81F1AD463180076D0B6 /* GTLStoreendpointSplitOrderArguments.m in Sources */,
 				D4195EB01A92A69C00663149 /* OnlineOrderSelectedModifierGroup.m in Sources */,
 				D4195EA01A92A69C00663149 /* OrderLoadingOperation.m in Sources */,
+				D4E0DFB01B04344500AFF268 /* DraggableView.m in Sources */,
 				D4195FBA1A92A69C00663149 /* ReviewItemsTableViewController.m in Sources */,
 				D4195ED31A92A69C00663149 /* DataProvider.m in Sources */,
 				D4195EA11A92A69C00663149 /* ReviewLoadingOperation.m in Sources */,

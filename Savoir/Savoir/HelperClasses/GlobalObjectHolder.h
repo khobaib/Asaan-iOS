@@ -17,6 +17,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "BeaconManager.h"
 #import "LocationManager.h"
+#import "YelpUtils.h"
 
 @interface GlobalObjectHolder : NSObject
 @property (strong, nonatomic) OnlineOrderDetails *orderInProgress;
@@ -31,6 +32,8 @@
 
 @property (readonly, strong, nonatomic) BeaconManager *beaconManager;
 @property (readonly, strong, nonatomic) LocationManager *locationManager;
+
+@property (strong, nonatomic) YelpUtils *yelpUtils;
 
 @property (strong, nonatomic) NSString *versionFromServer;
 

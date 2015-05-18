@@ -46,8 +46,9 @@
 #import "MenuWebViewController.h"
 #import "LocationReceiver.h"
 #import "LocationManager.h"
+#import "YelpUtils.h"
 
-@interface StoreListTableViewController ()<DataProviderDelegate, LocationReceiver>
+@interface StoreListTableViewController ()<DataProviderDelegate, LocationReceiver, YelpReceiver>
 
 @property (nonatomic, strong) MBProgressHUD *hud;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -74,11 +75,31 @@
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(startStandardUpdates) forControlEvents:UIControlEventValueChanged];
 
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    
+    YelpUtils *yelpUtils = appDelegate.globalObjectHolder.yelpUtils;
+    
+    [yelpUtils queryBusinessInfoForBusinessId:@"topaz-café-burr-ridge" Receiver:self];
+    [yelpUtils queryBusinessInfoForBusinessId:@"wok-n-fire-burr-ridge" Receiver:self];
+    [yelpUtils queryBusinessInfoForBusinessId:@"coopers-hawk-winery-and-restaurant-burr-ridge" Receiver:self];
+    [yelpUtils queryBusinessInfoForBusinessId:@"capri-ristorante-burr-ridge" Receiver:self];
+    [yelpUtils queryBusinessInfoForBusinessId:@"prasino-la-grange-2" Receiver:self];
+    [yelpUtils queryBusinessInfoForBusinessId:@"kama-indian-bistro-la-grange-2" Receiver:self];
+    [yelpUtils queryBusinessInfoForBusinessId:@"nicksons-eatery-la-grange-2" Receiver:self];
+    [yelpUtils queryBusinessInfoForBusinessId:@"tango-naperville" Receiver:self];
+    [yelpUtils queryBusinessInfoForBusinessId:@"kumas-asian-bistro-naperville-2" Receiver:self];
+    [yelpUtils queryBusinessInfoForBusinessId:@"girl-and-the-goat-chicago" Receiver:self];
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-(void)receivedBusinessInfoForBusinessId:(NSString *)businessID Rating:(NSNumber *)rating ReviewCount:(NSNumber *)reviewCount Deals:(NSArray *)deals Error:(NSError *)error;
+{
+    NSLog(@"%@ %@ %@ %@ %@", businessID, rating, reviewCount, deals, error);
 }
 
 - (void)startStandardUpdates

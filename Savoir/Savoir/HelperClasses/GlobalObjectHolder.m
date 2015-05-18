@@ -18,6 +18,15 @@
 @synthesize beaconManager = _beaconManager;
 @synthesize locationManager = _locationManager;
 
+- (id) init
+{
+    if (self = [super init])
+    {
+        self.yelpUtils = [[YelpUtils alloc]init];
+    }
+    return self;
+}
+
 - (OnlineOrderDetails *)createOrderInProgress {
     
     _orderInProgress = [[OnlineOrderDetails alloc]init];
